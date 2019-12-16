@@ -1,0 +1,166 @@
+.{newAppName}-product-card
+  border-radius 10px
+  color white
+  min-height: 364px
+  max-height: calc((1340px / 4))
+  width: 100%
+  background-color: #313a49
+  &--white
+    background-color: white
+    box-shadow: 0 0 5px 0 rgba(16, 24, 40, 0.2)
+    color main-color
+  &--purple
+    background-color: b2c-purple
+  &--purple-low
+    background-color: b2c-purple-low
+  &--purple-high
+    background-color: b2c-purple-high
+  &--red
+    background-color: b2c-red
+  &--red-low
+    background-color: b2c-red-low
+  &--red-high
+    background-color: b2c-red-high
+  &--dark-blue
+    background-color: b2c-dark-blue
+  &--dark-blue-low
+    background-color: b2c-dark-blue-low
+  &--dark-blue-high
+    background-color: b2c-dark-blue-high
+  &--light-blue
+    background-color: b2c-light-blue
+  &--light-blue-low
+    background-color: b2c-light-blue-low
+  &--light-blue-high
+    background-color: b2c-light-blue-high
+  &--yellow
+    background-color: b2c-yellow
+  &--yellow-low
+    background-color: b2c-yellow-low
+  &--yellow-high
+    background-color: b2c-yellow-high
+  &--orange
+    background-color: b2c-orange
+  &--orange-low
+    background-color: b2c-orange-low
+  &--orange-high
+    background-color: b2c-orange-high
+  &--pink
+    background-color: b2c-pink
+  &--pink-low
+    background-color: b2c-pink-low
+  &--pink-high
+    background-color: b2c-pink-high
+  &--green
+    background-color: b2c-green
+  &--green-low
+    background-color: b2c-green-low
+  &--green-high
+    background-color: b2c-green-high
+  &--cool-grey
+    background-color: b2c-cool-grey
+  &--state
+    background-color: b2b-state
+  &--dark-state
+    background-color: b2b-dark-state
+  &--burgundy
+    background-color: b2b-burgundy
+
+  @media (max-width: tablet-upper-limit)
+    min-height: 300px
+  &.{newAppName}-product-card--has-fixed-height
+    max-height: 364px
+    min-height: 364px
+    @media (max-width: tablet-upper-limit)
+      max-height: 300px
+      min-height: 300px
+  @supports (display: grid)
+    display: grid
+    grid-template-columns: 1fr 1fr
+
+
+
+
+
+
+
+  @media (max-width: mobile-upper-limit)
+    flex-direction: column-reverse
+    @supports (display: grid)
+      display: grid
+      grid-template-columns: 2fr
+      grid-template-rows: 1fr 1fr
+      grid-template-areas "header"\
+                          "footer"
+      &.{newAppName}-product-card--has-static-image-with-fix-height
+        grid-template-rows: 0fr 0fr
+        overflow: hidden
+  @media (max-width: mobile-upper-limit)
+    min-height: 500px
+    &.{newAppName}-product-card--has-fixed-height
+      min-height: 300px
+    &.{newAppName}-product-card--has-static-image-with-fix-height
+      min-height: initial
+      max-height: initial
+
+
+.{newAppName}-product-card__content
+  flex: 1 1 auto
+  display: flex
+  flex-direction column
+  align-items: flex-start
+  padding 40px
+  @media (max-width: tablet-upper-limit)
+    padding: 20px
+
+.{newAppName}-product-card__image
+  flex: 1 1 auto
+  padding 20px
+  background-size: cover
+  background-position: center center
+  background-repeat: no-repeat
+  min-height: 50%
+
+  @media (min-width: tablet-lower-limit)
+    border-radius 0 10px 10px 0
+    overflow: hidden;
+  @media (max-width: mobile-upper-limit)
+    border-radius  10px 10px 0 0
+    overflow: hidden;
+    @supports (display: grid)
+      grid-area: header
+
+.{newAppName}-product-card__image-tag
+  min-height: initial
+  padding: 0
+
+  @media (max-width: mobile-upper-limit)
+    width: 100%
+    border-radius 10px 10px 0 0
+
+.{newAppName}-product-card__image--hide-animate
+    animation 0.4s hideCardImage linear
+
+.{newAppName}-product-card__image--show-animate
+    animation 0.4s showCardImage linear
+
+.{newAppName}-product-card__body
+  flex: 1 1 auto
+  display: flex
+  flex-direction column
+  .{newAppName}-product-card--has-bottom-orient &
+    justify-content: flex-end;
+  @media (max-width: mobile-upper-limit)
+    @supports (display: grid)
+      grid-area: footer
+
+@keyframes hideCardImage
+  0%
+    opacity 1
+  100%
+    opacity 0
+@keyframes showCardImage
+  0%
+    opacity 0
+  100%
+    opacity 1

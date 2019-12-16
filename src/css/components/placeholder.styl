@@ -1,0 +1,90 @@
+.floating-placeholder
+  max-width 100%
+  overflow hidden
+  color main-color07
+  text-overflow ellipsis
+  white-space nowrap
+  position absolute
+  top 22px
+  z-index 1
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property background, font-size, top, color
+
+  .{newAppName}-dark-theme
+    .{newAppName}-card &
+      color main-color05
+
+  .{newAppName}-dark-theme &
+    color b2c-white07
+
+  .{newAppName}-input--white
+    &
+      color b2c-white07
+
+    .{newAppName}-card &
+      color main-color05
+
+  .{newAppName}-card--has-white-color &
+    color b2c-white07
+
+  .textarea--static &
+    left 20px
+
+  .input-element:focus+.text-field__line+&,
+  .input-element:focus+&,
+  &--go-top
+    font-size 14px
+    top 0
+
+  .select--disabled+.text-field__line+ &,
+  .input-element[disabled]+.text-field__line+ &,
+  .textarea--disabled+.text-field__line+ &,
+  .input-element[disabled] + &
+    color main-color03
+
+  .text-field--error &
+    color error-color !important
+
+  .textarea-element:focus+.text-field__line+&
+    top 0
+
+// .{newAppName}-dark-theme
+// .{b2bAppName}-input
+// .floating-placeholder
+// color main-color07
+.text-field--purple
+  .input-element:focus + .text-field__line + .floating-placeholder,
+  .input-element:focus + .text-field__border + .floating-placeholder,
+  .input-element:focus + .floating-placeholder,
+  .textarea-element:focus + .text-field__line + .floating-placeholder,
+  .textarea-element:focus + .text-field__border + .floating-placeholder,
+  .textarea-element:focus + .floating-placeholder
+    color b2c-purple
+
+  .input-element:focus+.text-field__line:before
+    background-color b2c-purple
+
+.text-field--orange
+  .input-element:focus + .text-field__line + .floating-placeholder,
+  .input-element:focus + .text-field__border + .floating-placeholder,
+  .input-element:focus + .floating-placeholder,
+  .textarea-element:focus + .text-field__line + .floating-placeholder,
+  .textarea-element:focus + .text-field__border + .floating-placeholder,
+  .textarea-element:focus + .floating-placeholder
+    color b2c-orange
+
+  .input-element:focus+.text-field__line:before
+    background-color b2c-orange
+
+.{b2bAppName}-input,
+.{b2bAppName}-textarea
+  .input-element:focus + .text-field__line + .floating-placeholder,
+  .input-element:focus + .text-field__border + .floating-placeholder,
+  .input-element:focus+.floating-placeholder,
+  .textarea-element:focus + .text-field__line + .floating-placeholder,
+  .textarea-element:focus + .text-field__border + .floating-placeholder,
+  .textarea-element:focus + .floating-placeholder,
+  .floating-placeholder--go-top
+    font-size 14px
+    top 10px !important

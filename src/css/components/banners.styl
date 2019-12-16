@@ -1,0 +1,1109 @@
+.grid-center
+  display none
+  width 1px
+  height 100vh
+  background-color red
+  margin-left auto
+  margin-right auto
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  right 0
+  z-index 1000
+
+.{newAppName}-banner
+  height 500px
+  position relative
+  z-index 3
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property background-color, color
+  &--mobile-gradient
+    @media (max-width: mobile-upper-limit)
+      &:after
+        content ''
+        position absolute
+        height 60%
+        width 100%
+        top 40%
+        left 0
+        right 0
+        bottom 0
+        background linear-gradient(to bottom, rgba(main-color, 0) 0%,  rgba(main-color, .75) 100%)
+        z-index 2
+
+  &--has-absolute-position
+    position absolute
+
+  & .rt-banner__item--is-active
+    // opacity: 0
+    // visibility hidden
+    @media (min-width: desktop-lower-limit)
+      z-index 100
+      animation-name hideShowContent
+      animation-duration .8s
+      animation-timing-function ease-in-out
+
+  &--hide-content .rt-banner__item--is-active
+    opacity 0
+
+  &--full-screen
+    height auto
+
+  &-video
+    &__content
+      width 100%
+      height 100%
+      object-fit cover
+
+      .rt-banner--full-screen &
+        width 100%
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+
+  &--fill-height
+    height 100vh
+
+    .rt-banner-content
+      height 100vh
+
+  &--background
+    &-dark-state
+      width 100%
+      background-color b2b-dark-state
+
+    &-purple
+      width 100%
+      background-color b2c-purple
+
+    &-purple-low
+      width 100%
+      background-color b2c-purple-low
+
+    &-purple-high
+      width 100%
+      background-color b2c-purple-high
+
+    &-red
+      width 100%
+      background-color b2c-red
+
+    &-red-low
+      width 100%
+      background-color b2c-red-low
+
+    &-red-high
+      width 100%
+      background-color b2c-red-high
+
+    &-dark-blue
+      width 100%
+      background-color b2c-dark-blue
+
+    &-dark-blue-low
+      width 100%
+      background-color b2c-dark-blue-low
+
+    &-dark-blue-high
+      width 100%
+      background-color b2c-dark-blue-high
+
+    &-light-blue
+      width 100%
+      background-color b2c-light-blue
+
+    &-light-blue-low
+      width 100%
+      background-color b2c-light-blue-low
+
+    &-light-blue-high
+      width 100%
+      background-color b2c-light-blue-high
+
+    &-yellow
+      width 100%
+      background-color b2c-yellow
+
+    &-yellow-low
+      width 100%
+      background-color b2c-yellow-low
+
+    &-yellow-high
+      width 100%
+      background-color b2c-yellow-high
+
+    &-orange
+      width 100%
+      background-color b2c-orange
+
+    &-orange-low
+      width 100%
+      background-color b2c-orange-low
+
+    &-orange-high
+      width 100%
+      background-color b2c-orange-high
+
+    &-pink
+      width 100%
+      background-color b2c-pink
+
+    &-pink-low
+      width 100%
+      background-color b2c-pink-low
+
+    &-pink-high
+      width 100%
+      background-color b2c-pink-high
+
+    &-green
+      width 100%
+      background-color b2c-green
+
+    &-green-low
+      width 100%
+      background-color b2c-green-low
+
+    &-green-high
+      width 100%
+      background-color b2c-green-high
+
+    &-black
+      width 100%
+      background-color main-color
+
+    &-main-color
+      width 100%
+      background-color main-color
+
+    &-b2b-dark-state
+      width 100%
+      background-color b2b-dark-state
+
+    &-undefined
+      .rt-banner-image
+        max-width none !important
+        overflow hidden
+        width 60vw
+        left 40vw
+        @media (max-width: tablet-upper-limit)
+          width 75vw
+          left 25vw
+        @media (max-width: mobile-upper-limit)
+          width 100vw
+          left 0
+
+  &-triangle
+
+    height 100%
+    margin-left 0
+    position absolute
+    top 0
+    left -1px
+    z-index 10
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property fill
+    fill transparent
+
+    @media (max-width: mobile-upper-limit)
+      display none
+
+    .{newAppName}-banner--background-dark-state &
+      fill b2b-dark-state
+
+    .{newAppName}-banner--background-purple &
+      fill b2c-purple
+
+    .{newAppName}-banner--background-purple-low &
+      fill b2c-purple-low
+
+    .{newAppName}-banner--background-purple-high &
+      fill b2c-purple-high
+
+    .{newAppName}-banner--background-red &
+      fill b2c-red
+
+    .{newAppName}-banner--background-red-low &
+      fill b2c-red-low
+
+    .{newAppName}-banner--background-red-high &
+      fill b2c-red-high
+
+    .{newAppName}-banner--background-dark-blue &
+      fill b2c-dark-blue
+
+    .{newAppName}-banner--background-dark-blue-low &
+      fill b2c-dark-blue-low
+
+    .{newAppName}-banner--background-dark-blue-high &
+      fill b2c-dark-blue-high
+
+    .{newAppName}-banner--background-light-blue &
+      fill b2c-light-blue
+
+    .{newAppName}-banner--background-light-blue-low &
+      fill b2c-light-blue-low
+
+    .{newAppName}-banner--background-light-blue-high &
+      fill b2c-light-blue-high
+
+    .{newAppName}-banner--background-yellow &
+      fill b2c-yellow
+
+    .{newAppName}-banner--background-yellow-low &
+      fill b2c-yellow-low
+
+    .{newAppName}-banner--background-yellow-high &
+      fill b2c-yellow-high
+
+    .{newAppName}-banner--background-orange &
+      fill b2c-orange
+
+    .{newAppName}-banner--background-orange-low &
+      fill b2c-orange-low
+
+    .{newAppName}-banner--background-orange-high &
+      fill b2c-orange-high
+
+    .{newAppName}-banner--background-pink &
+      fill b2c-pink
+
+    .{newAppName}-banner--background-pink-low &
+      fill b2c-pink-low
+
+    .{newAppName}-banner--background-pink-high &
+      fill b2c-pink-high
+
+    .{newAppName}-banner--background-green &
+      fill b2c-green
+
+    .{newAppName}-banner--background-green-low &
+      fill b2c-green-low
+
+    .{newAppName}-banner--background-green-high &
+      fill b2c-green-high
+
+    .{newAppName}-banner--background-black &
+      fill main-color
+
+    .{newAppName}-banner--background-main-color &
+      fill main-color
+
+    .{newAppName}-banner--game-promo-color &
+      fill game-promo-color
+
+  &-right-triangle
+    display none
+    width 185px
+    height 100%
+    position absolute
+    top 0
+    right -1px
+    z-index 10
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property fill
+    fill transparent
+
+    .{newAppName}-banner--background-dark-state &
+      fill b2b-dark-state
+
+    .{newAppName}-banner--background-purple &
+      fill b2c-purple
+
+    .{newAppName}-banner--background-purple-low &
+      fill b2c-purple-low
+
+    .{newAppName}-banner--background-purple-high &
+      fill b2c-purple-high
+
+    .{newAppName}-banner--background-red &
+      fill b2c-red
+
+    .{newAppName}-banner--background-red-low &
+      fill b2c-red-low
+
+    .{newAppName}-banner--background-red-high &
+      fill b2c-red-high
+
+    .{newAppName}-banner--background-dark-blue &
+      fill b2c-dark-blue
+
+    .{newAppName}-banner--background-dark-blue-low &
+      fill b2c-dark-blue-low
+
+    .{newAppName}-banner--background-dark-blue-high &
+      fill b2c-dark-blue-high
+
+    .{newAppName}-banner--background-light-blue &
+      fill b2c-light-blue
+
+    .{newAppName}-banner--background-light-blue-low &
+      fill b2c-light-blue-low
+
+    .{newAppName}-banner--background-light-blue-high &
+      fill b2c-light-blue-high
+
+    .{newAppName}-banner--background-yellow &
+      fill b2c-yellow
+
+    .{newAppName}-banner--background-yellow-low &
+      fill b2c-yellow-low
+
+    .{newAppName}-banner--background-yellow-high &
+      fill b2c-yellow-high
+
+    .{newAppName}-banner--background-orange &
+      fill b2c-orange
+
+    .{newAppName}-banner--background-orange-low &
+      fill b2c-orange-low
+
+    .{newAppName}-banner--background-orange-high &
+      fill b2c-orange-high
+
+    .{newAppName}-banner--background-pink &
+      fill b2c-pink
+
+    .{newAppName}-banner--background-pink-low &
+      fill b2c-pink-low
+
+    .{newAppName}-banner--background-pink-high &
+      fill b2c-pink-high
+
+    .{newAppName}-banner--background-green &
+      fill b2c-green
+
+    .{newAppName}-banner--background-green-low &
+      fill b2c-green-low
+
+    .{newAppName}-banner--background-green-high &
+      fill b2c-green-high
+
+    .{newAppName}-banner--background-black &
+      fill main-color
+
+    .{newAppName}-banner--background-main-color &
+      fill main-color
+
+    .{newAppName}-banner--game-promo-color &
+      fill game-promo-color
+
+    transform rotate(180deg)
+
+    @media (min-width: 1550px) and (max-width: 1920px)
+      display block
+      right calc(80vw - 1550px)
+
+    @media (min-width: 1920px)
+      display block
+      right -2px
+
+  &--color-white
+    color white
+
+  &-content
+    display flex
+    align-items center
+    height 500px
+    line-height 1.5
+    opacity 0
+    visibility hidden
+    position absolute
+    top 0
+    bottom 0
+    left 10px
+    right 10px
+    z-index 3
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property opacity, visibility
+    justify-items center
+
+    &__link
+      width 100%
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 15
+
+    .rt-col-4 &
+      min-width 430px
+      max-width 500px
+
+      @media (max-width: tablet-upper-limit)
+        min-width 100%
+
+      @media (max-width: mobile-upper-limit)
+        min-width initial // calc(100% - 50px)?
+        max-width initial // calc(100% - 50px)?
+
+    //.{newAppName}-button
+    //  @media (max-width: mobile-upper-limit)
+    //    font-size 14px
+    //    height 34px
+    //    min-width 138px
+
+    @media (max-width: mobile-upper-limit)
+      width auto
+
+      .{newAppName}-banner--full-screen &
+        justify-content center
+
+      .{newAppName}-banner--full-screen.justify-left &
+        justify-content left
+
+    &--active
+      opacity 1
+      visibility visible
+
+    &__inner
+      width 100%
+
+  &-logo
+    text-align right
+    position absolute
+    bottom 30px
+    left 0
+    right 0
+    z-index 2
+
+    @media (max-width: mobile-upper-limit)
+      display none
+
+  &-image
+    width 55vw
+    height 100%
+    overflow hidden
+    background-position center center
+    background-size cover
+    position absolute
+    top 0
+    bottom 0
+    left 45vw
+    z-index 1
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property background-image, left
+    animation-name showImage
+    animation-duration 2s
+    animation-timing-function linear
+    @media (max-width: tablet-upper-limit)
+      width 60vw
+      left 40vw
+
+    &--next
+      position absolute
+      z-index 2
+      animation-duration 0
+
+    &--left
+      background-position-x left
+
+    &--stop-transition
+      transition none !important
+      transition-duration 0 !important
+
+    &--contain
+      background-size: contain
+      background-repeat: no-repeat
+      @media (max-width: mobile-upper-limit)
+        .rt-banner-image--mobile-gradient
+          display none!important
+
+    &:before
+      content ""
+      display block
+      width 4px
+      height 100%
+      position absolute
+      left -4px
+
+    &:after
+      content ""
+      display block
+      width 4px
+      height 100%
+      position absolute
+      right -4px
+
+    &:before,
+    &:after
+      .{newAppName}-banner--background-purple &
+        background-color b2c-purple
+
+      .{newAppName}-banner--background-purple-low &
+        background-color b2c-purple-low
+
+      .{newAppName}-banner--background-purple-high &
+        background-color b2c-purple-high
+
+      .{newAppName}-banner--background-red &
+        background-color b2c-red
+
+      .{newAppName}-banner--background-red-low &
+        background-color b2c-red-low
+
+      .{newAppName}-banner--background-red-high &
+        background-color b2c-red-high
+
+      .{newAppName}-banner--background-dark-blue &
+        background-color b2c-dark-blue
+
+      .{newAppName}-banner--background-dark-blue-low &
+        background-color b2c-dark-blue-low
+
+      .{newAppName}-banner--background-dark-blue-high &
+        background-color b2c-dark-blue-high
+
+      .{newAppName}-banner--background-light-blue &
+        background-color b2c-light-blue
+
+      .{newAppName}-banner--background-light-blue-low &
+        background-color b2c-light-blue-low
+
+      .{newAppName}-banner--background-light-blue-high &
+        background-color b2c-light-blue-high
+
+      .{newAppName}-banner--background-yellow &
+        background-color b2c-yellow
+
+      .{newAppName}-banner--background-yellow-low &
+        background-color b2c-yellow-low
+
+      .{newAppName}-banner--background-yellow-high &
+        background-color b2c-yellow-high
+
+      .{newAppName}-banner--background-orange &
+        background-color b2c-orange
+
+      .{newAppName}-banner--background-orange-low &
+        background-color b2c-orange-low
+
+      .{newAppName}-banner--background-orange-high &
+        background-color b2c-orange-high
+
+      .{newAppName}-banner--background-pink &
+        background-color b2c-pink
+
+      .{newAppName}-banner--background-pink-low &
+        background-color b2c-pink-low
+
+      .{newAppName}-banner--background-pink-high &
+        background-color b2c-pink-high
+
+      .{newAppName}-banner--background-green &
+        background-color b2c-green
+
+      .{newAppName}-banner--background-green-low &
+        background-color b2c-green-low
+
+      .{newAppName}-banner--background-green-high &
+        background-color b2c-green-high
+
+      .{newAppName}-banner--background-black &
+        background-color main-color
+
+      .{newAppName}-banner--background-dark-state &
+        background-color b2b-dark-state
+
+      .{newAppName}-banner--game-promo-color &
+        background-color game-promo-color
+
+    .{newAppName}-banner--full-screen &
+      width 100vw
+      overflow-y hidden
+      left 0
+      right 0
+      @media (max-width: tablet-upper-limit)
+        background-position-x 55%
+      @media (max-width: mobile-upper-limit)
+        background-position-x 65%
+
+      &:before,
+      &:after
+        display none
+
+    @media (max-width: mobile-upper-limit)
+      display none
+
+      .{newAppName}-banner--full-screen &
+        display block
+
+    @media (min-width: 1500px)
+      max-width 1024px
+
+      .{newAppName}-banner--full-screen &
+        max-width 100vw
+
+    &--mobile-visible
+      @media (max-width: mobile-upper-limit)
+        display block
+        width 100vw
+        left 0
+        background-position-x 25%
+
+    &--color-fill
+      @media (max-width: mobile-upper-limit)
+        display none!important
+
+  &--pattern
+    @media (max-width: tablet-upper-limit) and (min-width: tablet-lower-limit)
+      height 400px
+
+      .{newAppName}-banner
+        &-image
+          width 60vw
+          left 40vw
+
+        &-content
+          height 400px
+
+  &--image-ontop
+    @media (max-width: tablet-upper-limit)
+      height 350px
+      .{newAppName}-banner-content
+        height 350px
+      .{newAppName}-banner-image
+        width 50vw
+        left 50vw
+    @media (max-width: mobile-upper-limit)
+      display flex
+      flex-direction column-reverse
+      height auto
+      .{newAppName}-banner-image
+        position relative
+        top auto
+        bottom auto
+        left auto
+        right auto
+        height calc(65vw/6*5)
+        width 100vw
+        background-position-x 50%
+      .{newAppName}-banner-container
+        min-height 300px
+      .{newAppName}-banner-content
+        height auto
+        min-height 250px
+        left 0
+        right 0
+        &--active
+          position relative
+        &__inner
+          text-align: center
+      .rt-container > .rt-col-12 > .row > .rt-col-6 > div:after
+        content: ""
+        display: table
+        clear: both
+
+  &--image-half-top
+    @media (max-width: mobile-upper-limit)
+      .rt-banner-image
+        height 224px
+        &--mobile-gradient
+          position absolute
+          top 0
+          width 100%
+          height 100%
+          background linear-gradient(to bottom, rgba(main-color, 0),  rgba(main-color, 1))
+      .rt-banner-content
+        align-items flex-end
+
+.circle-switcher
+  text-align center
+  position absolute
+  bottom 30px
+  left 0
+  right 0
+  z-index 40
+
+  &--top
+    top 30px
+    bottom inherit
+
+  &-container
+    display inline-block
+
+  &__item
+    display inline-block
+    width 20px
+    height 20px
+    box-sizing border-box
+    position relative
+    z-index 3
+    cursor pointer
+
+    &:before
+      content ""
+      width 10px
+      height 10px
+      box-sizing border-box
+      border 1px solid #fff
+      border-radius 50%
+      margin auto
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      transition-timing-function ease-in-out
+      transition-duration .3s
+      transition-property background-color, width, height, border, margin, left, right
+
+    & + &
+      margin-left horizontal-space
+
+  &__icon
+    width inherit
+    height inherit
+    transform rotate(-90deg)
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property stroke-dasharray, stroke-width
+    stroke #fff
+    stroke-dasharray 0
+    stroke-width 0
+
+    .circle-switcher__item:hover &
+      stroke-dasharray 60
+      stroke-width .5px
+
+    .{newAppName}-banner--run-timer &
+      stroke-dasharray 60
+      stroke-width .5px
+
+    .{newAppName}-banner--pause &
+      stroke-dashoffset 120 !important
+
+      &.{newAppName}-banner--run-timer
+        cursor default
+        stroke-width .5px
+
+.rt-banner-arrow
+  height 63px
+  margin-top auto
+  margin-bottom auto
+  opacity .7
+  position absolute
+  top 0
+  bottom 0
+  z-index 10
+  cursor pointer
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property opacity
+
+  @media (max-width: tablet-upper-limit)
+    display none
+
+  &--next
+    right 30px
+
+  &--preview
+    left 30px
+
+  &:hover
+    opacity 1
+
+.circle-switcher__item.{newAppName}-banner--run-timer.{newAppName}-banner--pause
+  cursor default
+
+  &:before
+    content ""
+    width 2px
+    height 8px
+    background-color #fff
+    border-width 0
+    border-radius 0
+    margin-top auto
+    margin-bottom auto
+    position absolute
+    top 0
+    bottom 0
+    left inherit
+    left 7px
+    right inherit
+
+  &:after
+    content ""
+    width 2px
+    height 8px
+    background-color #fff
+    border-radius 0
+    margin-top auto
+    margin-bottom auto
+    position absolute
+    top 0
+    bottom 0
+    right 7px
+
+@keyframes hideShowContent
+  0%
+    max-height 0
+    overflow hidden
+    line-height 0
+    opacity 0
+    visibility hidden
+    z-index 1000
+
+  80%
+    line-height 1.5
+    opacity 0
+    visibility hidden
+
+  100%
+    max-height 400vh
+    overflow hidden
+    line-height 1.5
+    opacity 1
+    visibility visible
+    z-index 1000
+
+@keyframes hideShowContentBottomContent
+  0%
+    max-height 0
+    overflow hidden
+    font-size 0
+    line-height 0
+    opacity 0
+    visibility hidden
+    z-index 1000
+
+  100%
+    max-height 400vh
+    overflow hidden
+    line-height 1.5
+    opacity 1
+    visibility visible
+    z-index 1000
+
+.rt-banner__top-content
+  @media (min-width: desktop-lower-limit)
+    animation-name hideShowContent
+    animation-duration .8s
+    animation-timing-function ease-in-out
+
+.rt-banner__bottom-content
+  @media (min-width: desktop-lower-limit)
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property max-height
+    animation-name hideShowContentBottomContent
+    animation-duration 1s
+    animation-timing-function ease-in-out
+
+@keyframes showContent
+  0%
+    // opacity  0
+    // z-index 1000
+    // visibility: hidden
+    // overflow: hidden
+    max-height 0
+    line-height 0
+    opacity 0
+
+  40%
+    max-height 0
+    line-height 0
+    opacity 0
+
+  99%
+    max-height 45%
+    overflow hidden
+    opacity 1
+    visibility visible
+    z-index 1000
+
+  100%
+    max-height 45%
+    overflow visible
+    opacity 1
+    visibility visible
+    z-index 1000
+
+.rt-banner__item
+  display flex
+  flex 0 0 auto
+  flex-wrap wrap
+  flex-flow column
+  width 100%
+  min-height 0
+  box-sizing border-box
+  opacity 0
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  z-index 2
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property opacity
+
+.rt-banner__item--is-active
+  display flex
+  min-height 100%
+  opacity 1
+  position relative
+  z-index 3
+
+.rt-banner-container
+  min-height 100%
+  position relative
+  z-index 11
+  height 100%
+  .row,
+  .rt-col,
+  .rt-col-1,
+  .rt-col-2,
+  .rt-col-3,
+  .rt-col-4,
+  .rt-col-5,
+  .rt-col-6,
+  .rt-col-7,
+  .rt-col-8,
+  .rt-col-9,
+  .rt-col-10,
+  .rt-col-11,
+  .rt-col-12,
+  .rt-banner-content
+    height 100%
+    min-height 100%
+
+.rt-banner--for-game:before
+  content ""
+  background-color rgba(0, 0, 0, .3)
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  z-index 3
+
+.rt-banner--for-game
+  .rt-col-12
+    width 100%
+    height 100%
+
+  .rt-banner__item-wrapper-game
+    width 100%
+
+  .rt-banner-content
+    width 100%
+    left 0
+
+.banner__video-controls
+  width 129px
+  height 129px
+  margin-top auto
+  margin-bottom auto
+  margin-left auto
+  margin-right auto
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  cursor pointer
+
+.banner__video-time-line,
+.banner__video-time-line-active
+  width 132px
+  height 132px
+  margin-top auto
+  margin-bottom auto
+  margin-left auto
+  margin-right auto
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  stroke-width 3px
+
+.banner__video-time-line-active
+  z-index 2
+  transform rotate(-90deg)
+  stroke-dashoffset 380
+  stroke-dasharray 380px
+
+.banner__video-button-status
+  width 0
+  height 0
+  border-width 29px 0 29px 45px
+  border-style solid
+  border-color transparent transparent transparent #ffffff
+  margin-top auto
+  margin-bottom auto
+  margin-left auto
+  margin-right auto
+  position absolute
+  top 0
+  bottom 0
+  left 20px
+  right 0
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property background-color, border, width, height, left, top
+
+  .banner__video-controls:hover &
+    border-color transparent transparent transparent #FF4F12
+
+  &:before
+    content ""
+    width 10px
+    height 50px
+    background-color #fff
+    opacity 0
+    visibility hidden
+    position absolute
+    top -40px
+    left -20px
+    transition-timing-function ease-in-out
+    transition-duration .3s
+    transition-property background-color, border-width, width, height, left, top, opacity, visibility
+
+    .banner__video-controls:hover &
+      background-color #FF4F12
+
+  .banner__video-controls--is-pause:hover &
+    background-color #FF4F12
+
+  .banner__video-controls--is-pause &
+    width 10px
+    height 50px
+    background-color #fff
+    border-width 0
+    border-color transparent
+    top 0
+    left -20px
+
+    &:before
+      content ""
+      opacity 1
+      visibility visible
+      top 0
+      left 20px
+.rt-banner--fixed-image
+  .rt-banner-image
+    @media (min-width: tablet-lower-limit)
+      background-attachment: fixed
+.rt-banner-image--mobile-gradient
+  @media (max-width: mobile-upper-limit)
+    position absolute
+    height 60%
+    width 100%
+    top 40%
+    left 0
+    right 0
+    bottom 0
+    background linear-gradient(to bottom, rgba(main-color, 0) 0%,  rgba(main-color, .75) 100%)
+
+

@@ -1,0 +1,106 @@
+.test-access
+  position relative
+  &--reverse
+    .test-access__image
+      right 53%
+      left auto
+      top 0
+      height 100%
+      background-size: cover
+      max-width 862px
+      background-image: url('/static/images/B2B/test-access-2.png');
+      &--mobile
+        display none
+        @media (max-width: mobile-upper-limit)
+          display block
+          position: relative
+          left: auto
+          right: auto
+          top: auto
+          bottom: auto
+          width: 60vw
+          height: 42vw
+          margin: 0 auto
+          background-size: contain
+    .rt-row-list__item
+      &+.rt-row-list__item
+        border-top none
+      .rt-row-list__icon
+        align-self center
+    @media (max-width: mobile-upper-limit)
+      .rt-row-list__header
+        flex-direction row
+
+  @media (max-width: mobile-upper-limit)
+    text-align center
+
+  .rt-ordered-list__item
+    text-align left !important
+    //padding-left 20px
+
+    &:before
+      background-color b2c-white
+      position absolute
+      top 10px
+      left 2px
+
+      @media (max-width: tablet-upper-limit)
+        top 7px
+
+  .rt-col-10
+    margin-left -10px
+
+    @media (max-width: mobile-upper-limit)
+      margin-left 0
+
+.download-button--dashed
+  display inline-block
+  border 2px dashed b2c-white07
+  border-radius 5px
+  padding 15px 20px 15px 40px
+  position relative
+
+  @media (max-width: mobile-upper-limit)
+    display block
+
+  .rt-font-control
+    color b2c-white07
+
+.stretcher
+  margin-top 20px
+  margin-bottom 30px
+
+.mobile-none
+  @media (max-width: mobile-upper-limit)
+    display none
+
+.text--underlined
+  border-bottom 1px solid b2c-white05
+
+.test-access__image
+  width 50%
+  height calc(100% - 100px)
+  background-position 100% 50%
+  background-size contain
+  background-repeat no-repeat
+  position absolute
+  top 50px
+  right 0
+  z-index 2
+  background-image: url('/static/images/B2B/test-access-2.png');
+
+
+.list-title
+  margin-left -10px
+
+.pl0
+  .rt-annotation__title,
+  .rt-annotation__content
+    padding-left 0
+  .rt-annotation__arrow
+    left -20px
+  @media (max-width: tablet-upper-limit)
+    .rt-annotation__title
+      padding-left 20px
+    .rt-annotation__arrow
+      left 0

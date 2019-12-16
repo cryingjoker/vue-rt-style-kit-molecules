@@ -1,0 +1,226 @@
+.{newAppName}-row-list
+  &__header
+    display flex
+
+    &--has-more-content
+      cursor pointer
+
+    @media (max-width: iphone8)
+      flex-direction column
+
+  &__body
+    max-height 0
+    overflow hidden
+    opacity 0
+    top -40px
+    transition-timing-function ease-in-out
+    transition-duration .4s
+    transition-property height, max-height, padding, opacity, top
+
+    &--has-icon-padding
+      padding-left 76px
+
+  .{newAppName}-row-list__item--active
+    max-height 200vh
+    padding-top vertical-space * 1.5
+    opacity 1
+    top 0
+
+  &__item
+    display flex
+    flex-direction column
+    padding-top vertical-space * .5
+    padding-bottom vertical-space * .5
+
+    @media (max-width: iphone8)
+      flex-direction column
+
+    &+&
+      border-top 1px solid card-list-border
+    &--block-type
+      width calc(100% - 20px)
+      padding 40px 0
+      margin-left 10px
+
+  &__icon
+    display flex
+
+    @media (max-width: iphone8)
+      flex-direction column
+      justify-content left
+      align-items start
+      min-height fit-content
+      padding-top vertical-space * .5
+      padding-bottom vertical-space * .5
+
+    align-items center
+
+    &--baseline
+      //align-items baseline
+      width 50px
+      height 50px
+      margin-right vertical-space
+      align-items center
+
+  &__content
+    display flex
+
+    @media (max-width: iphone8)
+      flex-direction column
+      justify-content left
+      align-items start
+      min-height fit-content
+
+    align-items center
+
+    &--column
+      flex-direction column
+      align-items unset
+
+  &__option
+    display flex
+
+    @media (max-width: iphone8)
+      flex-direction column
+      justify-content left
+      align-items start
+      min-height fit-content
+
+  &__value
+    display flex
+    justify-content flex-end
+    align-items center
+
+    @media (max-width: mobile-upper-limit)
+      justify-content flex-start
+      align-items start
+
+    @media (max-width: iphone8)
+      flex-direction column
+      min-height fit-content
+      padding-top vertical-space * .5
+
+  &__image
+    width 100%
+    height calc((100vw - 160px) / 4 * .6)
+    background-repeat: no-repeat
+    background-position center
+    background-color b2c-cool-grey
+    margin-bottom vertical-space
+    max-height 200px
+    background-size contain
+    @media (max-width: laptop-upper-limit)
+      height 190px
+    @media (max-width: tablet-upper-limit)
+      height calc((100vw - 40px) / 2 * .6)
+    @media (max-width: mobile-upper-limit)
+      height calc((100vw - 40px) * .6)
+      max-height none
+
+.{b2bAppName}
+  &-profit
+    .{newAppName}-row-list__header
+      width 70%
+      max-width 500px
+      margin 0 auto
+      padding-top 15px
+      padding-bottom 15px
+      @media (max-width: laptop-upper-limit)
+        width 85%
+      @media (max-width: tablet-upper-limit)
+        width 90%
+      @media (max-width: mobile-upper-limit)
+        flex-direction row
+        width 100%
+        max-width none
+
+    &+&
+      border-top none
+
+    .{newAppName}-row-list__icon
+      flex-shrink 0
+      flex-basis 80px
+      align-items initial
+      width 80px
+      height 80px
+      text-align center
+      background-position 50% 0
+      background-size contain
+      background-repeat no-repeat
+      margin-right 20px
+
+    .{newAppName}-font-paragraph
+      margin-bottom 5px
+
+  &-services
+    .{newAppName}-row-list__header
+      width 100%
+      align-items center
+      max-width none
+      padding 0
+    .{newAppName}-row-list__icon
+      flex-basis 50px
+      width 50px
+      height 50px
+      background-position-y 50%
+
+  &-company-profits
+    .{newAppName}-row-list__header
+      flex-direction column
+      text-align: center
+      width 100%
+    .{newAppName}-row-list__icon
+      margin-right 0
+      align-self center
+      margin-bottom vertical-space
+    &--left
+      .{newAppName}-row-list__header
+        text-align start
+        width calc(100% / 6 * 5)
+        margin 0
+      .{newAppName}-row-list__icon
+        align-self flex-start
+
+  &-how-it-works
+    .{newAppName}-row-list__header
+      text-align left
+
+  &-help-block
+    padding-bottom vertical-space * 3
+    @media (max-width: tablet-upper-limit)
+      padding-bottom vertical-space * .5
+    .{newAppName}-row-list__header
+      text-align left
+      flex-direction column
+    .{newAppName}-row-list__icon
+      width 80px
+      height 80px
+      background-repeat: no-repeat
+      background-position center
+    &+&
+      border-top none
+
+.ovh
+  overflow hidden
+
+.{b2bAppName}-profit-list
+  padding 25px 70px
+  //@media (max-width: tablet-upper-limit)
+  //  padding 30px 20px
+  //@media (max-width: mobile-upper-limit)
+  //  padding 30px 40px
+  .rt-container
+    padding 0
+    max-width 1320px
+
+.help-soft-and-hard
+  &__title,
+  &__weight
+    transition color .3s linear
+  &__weight
+    color main-color03
+  &:hover
+    .help-soft-and-hard__weight
+      color main-color06
+    .help-soft-and-hard__title
+      color b2c-purple

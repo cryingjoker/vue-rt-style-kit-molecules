@@ -1,0 +1,307 @@
+.{newAppName}-table
+  display table
+  width 100%
+  text-align left
+  table-layout fixed
+
+  @media (max-width: tablet-upper-limit)
+    width 100%
+    padding-bottom 15px
+
+  &-colgroup
+    display table-column-group
+
+    @media (max-width: tablet-lower-limit)
+      display none
+
+  &-col
+    display table-column
+
+  &-head
+    display table-header-group
+
+    &--fill
+      background-color rgba(b2c-purple, .2)
+
+    &__item
+      display table-cell
+      color main-color05
+      padding-bottom vertical-space
+      padding-left horizontal-space * .5
+      padding-right horizontal-space * .5
+      vertical-align top
+
+      .rt-dark-theme &
+        color b2c-white06
+
+      &:first-child
+        padding-left 0
+
+        @media (max-width: mobile-upper-limit)
+          display none
+
+      @media (max-width: mobile-upper-limit)
+        display block
+        width auto !important
+        text-align left !important
+        padding-left 0
+        padding-right 0
+
+      & + &
+        @media (max-width: mobile-upper-limit)
+          display none
+
+  &-body
+    &__row
+      display table-row
+
+      @media (max-width: mobile-upper-limit)
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        width 100%
+        padding-bottom 10px
+
+      &--fill
+        background-color rgba(b2c-purple, .2)
+
+      & + &
+        @media (max-width: tablet-upper-limit)
+          border-top 2px solid b2c-cool-grey05
+
+          .{newAppName}-dark-theme &
+            border-top 2px solid b2c-white05
+
+        .{newAppName}-table-body__item
+          .{newAppName}-dark-theme &
+            @media (min-width: tablet-lower-limit)
+              border-top 2px solid b2c-white05
+
+          @media (min-width: desktop-lower-limit)
+            border-top 2px solid b2c-cool-grey05
+
+    &__content
+      @media (max-width: mobile-upper-limit)
+        flex 0 0 50%
+        max-width 50%
+        padding-left horizontal-space
+        padding-right 0
+
+      @media (max-width: mobile-upper-limit)
+        font-size 14px
+        line-height 18px
+        padding-left 0
+        padding-right 0
+
+    &__item
+      display table-cell
+      border-top 2px solid b2c-cool-grey05
+      padding-top 15px
+      padding-bottom vertical-space
+      padding-left horizontal-space * .5
+      padding-right horizontal-space * .5
+      vertical-align top
+
+      @media (max-width: mobile-upper-limit)
+        display flex
+        flex 0 0 100%
+        flex-direction row
+        justify-content space-around
+        align-self stretch
+        width 100%
+        width auto !important
+        max-width 100%
+        min-height fit-content
+        text-align left !important
+        border none
+        padding-top 10px
+        padding-bottom 10px
+        padding-left 0
+        padding-right 0
+
+      @media (max-width: mobile-upper-limit)
+        padding-bottom 10px
+        padding-left 0
+        padding-right 0
+
+      &:first-child
+        padding-left 0
+
+        @media (max-width: mobile-upper-limit)
+          padding-top 15px
+
+        .rt-table-body__content
+          @media (max-width: tablet-upper-limit)
+            flex 0 1 100%
+            width 100%
+            max-width 100%
+            color main-color
+            font-size 20px
+            line-height 26px
+            font-weight 500
+            padding-left 0
+            padding-right 0
+
+            .rt-dark-theme &
+              color b2c-white
+
+          @media (max-width: mobile-upper-limit)
+            font-size 16px
+            line-height 22px
+
+        @media (max-width: tablet-upper-limit)
+          display block
+          flex 0 1 100%
+          width 100%
+          padding-bottom 20px
+
+          &:before
+            display none
+
+      &:before
+        @media (max-width: tablet-upper-limit)
+          .rt-dark-theme &
+            color b2c-white06
+
+        @media (max-width: mobile-upper-limit)
+          content attr(label)
+          display block
+          flex 0 0 50%
+          max-width 50%
+          box-sizing border-box
+          color main-color06
+          font-size 14px
+          line-height 18px
+          padding-bottom horizontal-space * .25
+          padding-left 0
+
+      &--half-mobile-width
+        @media (max-width: mobile-upper-limit)
+          flex 0 0 50%
+          max-width 50%
+
+      &--inactive
+        .{newAppName}-table-body__content
+          opacity .5
+
+  &--list
+    .{newAppName}-table
+      &-head__item
+        @media (max-width: tablet-upper-limit)
+          display none
+
+      &-body
+        &__row
+          @media (max-width: tablet-upper-limit)
+            display flex
+            flex-direction row
+            flex-wrap wrap
+            width 100%
+            padding-top 5px
+            padding-bottom 10px
+
+        &__content
+          @media (max-width: tablet-upper-limit)
+            flex 0 0 50%
+            max-width 50%
+            padding-left horizontal-space
+            padding-right 0
+
+        &__item
+          @media (max-width: tablet-upper-limit)
+            display flex
+            flex 0 0 100%
+            flex-direction row
+            justify-content space-around
+            align-self stretch
+            width 100%
+            width auto !important
+            max-width 100%
+            min-height fit-content
+            text-align left !important
+            border none
+            padding-top 10px
+            padding-bottom 10px
+            padding-left 0
+            padding-right 0
+
+          &:before
+            @media (max-width: tablet-upper-limit)
+              content attr(label)
+              display block
+              flex 0 0 50%
+              max-width 50%
+              box-sizing border-box
+              color main-color06
+              font-size 14px
+              padding-bottom horizontal-space * .25
+              padding-left 0
+              padding-right 18px
+
+          &:first-child:before
+            @media (max-width: tablet-upper-limit)
+              display none
+
+  &-title
+    font-size 28px
+    line-height 36px
+    font-weight 500
+
+    @media (max-width: laptop-upper-limit)
+      font-size 24px
+      line-height 32px
+
+    @media (max-width: mobile-upper-limit)
+      font-size 18px
+      line-height 24px
+      font-weight 200
+
+  &--no-borders
+    display: flex
+    flex-direction: column
+    .{newAppName}-table
+      &-body
+        &__item
+          border-top none
+          padding-bottom: 0
+          padding-top 30px
+          display flex
+          align-items flex-end
+          @media (max-width: tablet-upper-limit)
+            display block
+            padding 10px 0
+          &:nth-child(1)
+            padding-right: 0
+            min-width 80%
+            border-top none
+            @media (max-width: tablet-upper-limit)
+              padding-bottom 0
+            .border-element
+              border-bottom 1px dashed main-color05
+              flex-grow 1
+              margin-bottom 5px
+              margin-left 10px
+              @media (max-width: tablet-upper-limit)
+                display none
+            .rt-table-body__content
+              max-width 50%
+              @media (max-width: tablet-upper-limit)
+                max-width 100%
+                font-weight 400
+                opacity .5
+          &:not(:nth-child(1))
+            @media (max-width: tablet-upper-limit)
+              padding-top: 0
+          &+.{newAppName}-table-body__item
+            border-top none
+        &__content
+          display inline-block
+        &__row
+          display flex
+          @media (max-width: tablet-upper-limit)
+            display block
+          &+.{newAppName}-table-body__row
+            border-top none
+        &-title
+          @media (max-width: tablet-upper-limit)
+            font-weight 500

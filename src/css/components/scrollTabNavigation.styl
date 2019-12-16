@@ -1,0 +1,33 @@
+.{newAppName}-scroll-tab
+  &-nav
+    display flex
+    justify-content space-between
+    height 100%
+    font-size 14px
+    white-space nowrap
+
+  &-header
+    flex-direction row
+    height 60px
+    margin-left -1 * horizontal-space * .5
+
+    @media (max-width: mobile-upper-limit)
+      display none
+
+    &__item
+      display flex
+      flex-direction column
+      justify-content center
+      align-items center
+      height 100%
+      box-sizing border-box
+      border-bottom 2px solid transparent
+      margin-left horizontal-space * .5
+      margin-right horizontal-space * .5
+      padding-top 2px
+      transition-timing-function ease-in-out
+      transition-duration .3s
+      transition-property border
+
+      &--active
+        border-bottom 2px solid

@@ -1,0 +1,117 @@
+{
+  "default": {
+    "width": "56px",
+    "height": "94px",
+    "color": "#101828",
+    "captionColor": "#48b2f1"
+  },
+  "dr-web": {
+    "width": "150px",
+    "height": "50px",
+    "background": "none",
+    "color" : "#69B548"
+  },
+  "eset": {
+    "width": "90px",
+    "height": "50px",
+    "background": "#00717F",
+    "color": "#FFFFFF"
+  },
+  "kaspersky": {
+    "width": "179px",
+    "height": "50px"
+  },
+  "wargaming": {
+    "width": "179px",
+    "height": "50px",
+    "color": "#000000"
+  },
+  "world-of-tanks": {
+    "width": "95px",
+    "height": "40px",
+    "color": "#000000"
+  },
+  "world-of-warships": {
+    "width": "67px",
+    "height": "65px",
+    "color": "#000000"
+  },
+  "world-of-warplanets": {
+    "width": "79px",
+    "height": "60px",
+    "color": "#000000"
+  },
+  "4-game-main": {
+    "width": "153px",
+    "height": "30px",
+    "color": "#000000"
+  },
+  "warface": {
+    "width": "104px",
+    "height": "50px",
+    "color": "#000000"
+  },
+  "warface-in-line": {
+    "width": "136px",
+    "height": "30px",
+    "color": "#000000"
+  },
+  "skype": {
+    "width": "70px",
+    "height": "71px"
+  },
+  "cloud": {
+    "width": "94px",
+    "height": "55px"
+  },
+  "word": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "excel": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "p-point": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "o-note": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "outlook": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "access": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "publisher": {
+    "width": "70px",
+    "height": "65px"
+  },
+  "foxford": {
+    "width": "139px",
+    "height": "35px"
+  },
+  "onlime": {
+    "width": "70px",
+    "height": "70px"
+  },
+  "wink": {
+    "width": "227px",
+    "height": "100px"
+  },
+  "game-logo": {
+    "color": "#FFFFFF",
+    "width": "433px",
+    "height": "125px"
+  },
+  "user-silhouette": {
+    "color": "main-color",
+    "width": "16px",
+    "height": "16px"
+  }
+}
