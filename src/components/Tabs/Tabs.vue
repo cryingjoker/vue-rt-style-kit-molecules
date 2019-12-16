@@ -1,6 +1,6 @@
 <script type="text/jsx">
   import { tabsStore } from "./TabsStore.tsx";
-  import variables from "../../../variables.json";
+  import variables from "../../variables.json";
 
   const componentsList = {};
 

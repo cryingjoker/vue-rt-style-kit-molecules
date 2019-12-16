@@ -1,8 +1,8 @@
 {
   "name": "vue-rt-style-kit-molecules",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
-  "main": "lib/vue-rt-style.js",
+  "main": "lib/vue-rt-style-kit-molecules.js",
   "scripts": {
     "start": "node bin/local/index.js",
     "optimize": "node node_modules/rt-image-optimizer --orig=/tmp/ --dist=/dist/ --max-width=1600",

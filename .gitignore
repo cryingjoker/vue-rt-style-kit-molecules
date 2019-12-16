@@ -29,3 +29,6 @@ libs/
 
 # Test coverage
 coverage
+
+
+package-lock
