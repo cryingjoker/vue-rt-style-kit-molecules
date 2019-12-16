@@ -31,4 +31,4 @@ libs/
 coverage
 
 
-package-lock
+/package-lock.json
