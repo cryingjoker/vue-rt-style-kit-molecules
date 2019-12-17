@@ -77,13 +77,14 @@ import {
 } from "./components";
 
 // console.info('OptionsList',OptionsList)
-import { SwipeLeft, SwipeRight } from "./directives/Swipe/swipe";
-import { OutsideClickDirective } from "./directives/OudsideClick/OudsideClick";
-import { SlideContentVerticalDirective } from "./directives/SlideContent/SlideContentVertical";
-import { ScrollToOnClickDirective } from "./directives/ScrollToOnClick/ScrollToOnClick";
+import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
+import {OutsideClickDirective} from "./directives/OudsideClick/OudsideClick";
+import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
+import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
 import 'element-closest-polyfill';
 import 'nodelist-foreach-polyfill';
 import 'element-remove';
+
 const VueRtStyle = {
   install(Vue, config) {
     if (!Vue.RtStyle) {
@@ -187,7 +188,7 @@ const VueRtStyle = {
   }
 };
 // VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
-VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective };
+VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 
 // if(localStorage && localStorage.getItem('dev_mode')){
 //   localStorage.setItem('dev_mode__version',version);
@@ -211,3 +212,79 @@ window.RTK_STYLE_KIT_MOLECULES_VER = version;
 VueRtStyle.version = version;
 
 export default VueRtStyle;
+export {
+  ScrollTabs,
+  Banner,
+  BannerItem,
+  BannerPaginatorItem,
+  Carousel,
+  CarouselSlide,
+  Card,
+  CardB2o,
+  CardBuy,
+  CardImage,
+  CardImageList,
+  FullscreenImage,
+  RowList,
+  RowListItem,
+  Table,
+  TableCol,
+  TableHeadItem,
+  TableItem,
+  TableRow,
+  DownloadContent,
+  InlineDropdown,
+  InlineDropdownItem,
+  Tag,
+  TagsList,
+  Filter,
+  FilterWatcher,
+  FilterCaller,
+  Youtube,
+  Sticky,
+  StickyBottomLine,
+  ResizeContentHeight,
+  Popup,
+  LinksBlock,
+  Hint,
+  BannerVideoGameControl,
+  SlideContent,
+  SlideContentDottedContent,
+  SlideContentDottedHeader,
+  Slide,
+  Swiper,
+  Pattern,
+  Opportunity,
+  OpportunityItem,
+  UnWrapper,
+  RealPopup,
+  Tabs,
+  TabsNavigationItem,
+  TabsContentItem,
+  UseCase,
+  ProductCard,
+  TariffCard,
+  BenefitItem,
+  BenefitBlock,
+  PortraitTile,
+  PortraitTileItem,
+  Timeline,
+  TimelineItem,
+  ScrollBar,
+  VerticalScrollBar,
+  ReplacementLink,
+  CardCarousel,
+  CardLayout,
+  GalleryCarousel,
+  GalleryCarouselItem,
+  OptionsList,
+  OptionsListInfoItem,
+  GameArrow,
+  CheckboxTabs,
+  CountdownTimer,
+
+  // need to change name dirrectives
+  SwipeLeft,
+  SwipeRight,
+  OutsideClickDirective
+}

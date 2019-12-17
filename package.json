@@ -1,6 +1,6 @@
 {
   "name": "vue-rt-style-kit-molecules",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "",
   "main": "lib/vue-rt-style-kit-molecules.js",
   "scripts": {
@@ -29,15 +29,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cryingjoker/vue-rt-style-kit-molecules.git"
+    "url": "git+https://github.com/vue-rt-style/vue-rt-style-kit-molecules.git"
   },
   "keywords": [],
   "author": "Alex Nikolaev / cryingjoker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cryingjoker/vue-rt-style-kit-molecules/issues"
+    "url": "https://github.com/vue-rt-style/vue-rt-style-kit-molecules/issues"
   },
-  "homepage": "https://github.com/cryingjoker/vue-rt-style-kit-molecules",
+  "homepage": "https://github.com/vue-rt-style/vue-rt-style-kit-molecules",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.5.5",
@@ -80,6 +80,8 @@
     "cross-env": "^5.2.1",
     "css-loader": "^3.2.0",
     "debounce": "^1.2.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.0.1",
     "file-loader": "^4.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fstream": "^1.0.12 ",
@@ -109,6 +111,7 @@
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-property-decorator": "^8.2.1",
+    "vue-rt-style-kit-atoms": "^0.2.3",
     "vue-svgicon": "^3.2.6",
     "vue-template-compiler": "^2.6.10",
     "webpack": "4.39.1",
