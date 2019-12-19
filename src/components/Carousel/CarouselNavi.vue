@@ -7,7 +7,6 @@ export default {
   name: name,
   props: {
     overlayEl: null,
-    §
     containerName: {
       type: String,
       default: ''

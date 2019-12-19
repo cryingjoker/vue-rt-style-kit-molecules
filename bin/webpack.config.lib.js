@@ -13,6 +13,13 @@ const config = {
   entry: {
     'vue-rt-style-kit-molecules':[path.join(local_dirname, `src`, `index.js`)],
   },
+
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@projectMolecules': path.join(local_dirname, 'package.json'),
+    }
+  },
   mode: env,
   externals:['vue','vue-rt-style-kit-atoms','vee-validate'],
   output: {

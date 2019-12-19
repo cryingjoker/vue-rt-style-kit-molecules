@@ -2,7 +2,7 @@ import Vue from "vue";
 import VeeValidate from "vee-validate";
 import styles from "./css/vue-rt-style-kit-molecules.styl";
 import Global from "./variables.json";
-import Project from "../package.json";
+import Project from "@projectMolecules";
 
 import {
   ScrollTabs,
