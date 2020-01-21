@@ -55,16 +55,16 @@
   "b2c-cool-grey07": "rgba(227,232,236,0.7)",
   "b2c-cool-grey05": "rgba(227,232,236,0.5)",
   "b2c-cool-grey03": "rgba(227,232,236,0.3)",
-  "b2b-cool-grey05-no-opacity": "#F1F3F5",
+  "b2c-cool-grey05-no-opacity": "#F1F3F5",
 
   "b2c-purple-high05": "rgba(131,72,252,0.5)",
   "b2c-purple-high02": "rgba(131,72,252,0.2)",
   "b2c-orange-high05": "rgba(255,130,24,0.5)",
   "b2c-orange-high02": "rgba(255,130,24,0.2)",
 
-  "b2b-state": "#7B939B",
-  "b2b-dark-state": "#313A49",
-  "b2b-burgundy": "#431625",
+  "b2c-state": "#7B939B",
+  "b2c-dark-state": "#313A49",
+  "b2c-burgundy": "#431625",
 
   "b2c-white": "#ffffff",
   "b2c-white09": "rgba(255,255,255, 0.9)",
