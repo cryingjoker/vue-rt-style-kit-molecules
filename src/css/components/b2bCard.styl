@@ -917,6 +917,18 @@
   left -20px
 
 .card
+  &-layout
+    .rt-col-3
+      max-width calc(100% / 3)
+      flex-basis calc(100% / 3)
+    .rt-col-4
+      max-width calc(100% / 9 * 4)
+      flex-basis calc(100% / 9 * 4)
+  &-layout-12
+    width 100%
+  &-layout--nowrap
+    .row
+      flex-wrap nowrap
   &-layout-6
     width 50%
     @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
@@ -939,20 +951,8 @@
     @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
       min-width 75%
       width calc(322px * 3)
-      //.rt-card
-      //  min-width calc(275px + 10px)
-  &-layout
-    .rt-col-3
-      max-width calc(100% / 3)
-      flex-basis calc(100% / 3)
-    .rt-col-4
-      max-width calc(100% / 9 * 4)
-      flex-basis calc(100% / 9 * 4)
-  &-layout-12
-    width 100%
-  &-layout--nowrap
-    .row
-      flex-wrap nowrap
+  //.rt-card
+  //  min-width calc(275px + 10px)
 
 .rt-col-ld-12
   @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
