@@ -1,6 +1,6 @@
 {
   "name": "vue-rt-style-kit-molecules",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "",
   "main": "lib/vue-rt-style-kit-molecules.js",
   "scripts": {
@@ -54,6 +54,7 @@
     "reset-css": "^4.0.1",
     "vue-fragment": "^1.5.1",
     "vue-router": "^3.1.1",
+    "vue-rt-style-kit-atoms": "^0.2.3",
     "vue-tsx-support": "^2.3.1"
   },
   "devDependencies": {
@@ -111,7 +112,6 @@
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-property-decorator": "^8.2.1",
-    "vue-rt-style-kit-atoms": "^0.2.3",
     "vue-svgicon": "^3.2.6",
     "vue-template-compiler": "^2.6.10",
     "webpack": "4.39.1",
