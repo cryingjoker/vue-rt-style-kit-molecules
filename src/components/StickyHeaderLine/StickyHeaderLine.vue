@@ -33,10 +33,18 @@
                 type: Boolean,
                 default: false
             },
-            topOffsetHeightElemementSelector:{
+            topOffsetHeightElemementSelector: {
                 type: String,
                 default: ''
             },
+            isInvisible: {
+                type: Boolean,
+                default: false
+            },
+            rightContent: {
+                type: Boolean,
+                default: false
+            }
         },
         data: () => ({
             active: false,
@@ -48,7 +56,7 @@
             offsetTopHeight: 0
         }),
         watch: {
-            isActive: function() {
+            isActive: function () {
                 this.active = this.isActive;
             }
         },
@@ -74,18 +82,23 @@
             }
         },
         methods: {
-            setOffsetElementHeight(){
-                if(this.topOffsetHeightElemementSelector && this.topOffsetHeightElemementSelector.length > 0 ){
+            setOffsetElementHeight() {
+                if (this.topOffsetHeightElemementSelector && this.topOffsetHeightElemementSelector.length > 0) {
                     const topOffsetElemement = document.querySelector(this.topOffsetHeightElemementSelector);
-                    if(topOffsetElemement){
+                    if (topOffsetElemement) {
                         this.offsetTopHeight = parseInt(topOffsetElemement.clientHeight);
                     }
                 }
             },
-            setLineHeight(){
-              if(this.$refs['line']){
-                  this.lineHeight = this.$refs['line'].clientHeight;
-              }
+            setLineHeight() {
+                if (this.$refs['line']) {
+                    if (this.isInvisible) {
+                        this.lineHeight = this.$refs['line'].childNodes[0].clientHeight;
+                        ;
+                    } else {
+                        this.lineHeight = this.$refs['line'].clientHeight;
+                    }
+                }
             },
             setDeviceType() {
                 var width = window.innerWidth;
@@ -129,17 +142,19 @@
                 });
             },
             compareArr(arrA, arrB, delta) {
-                for(let endIndex = 0; endIndex < arrB.length; endIndex++){
+                for (let endIndex = 0; endIndex < arrB.length; endIndex++) {
                     let endPoint = arrB[endIndex]
-                    for(let startIndex = 0; startIndex < arrB.length; startIndex++){
+                    for (let startIndex = 0; startIndex < arrB.length; startIndex++) {
                         let startPoint = arrA[startIndex];
                         if (startPoint >= endPoint && Math.abs(startPoint - endPoint) <= this.deltaBetweenBlocks) {
                             arrA.splice(startIndex, 1);
                             arrB.splice(endIndex, 1);
-                            endIndex --;
+                            endIndex--;
                         }
-                    };
-                };
+                    }
+                    ;
+                }
+                ;
                 arrA = arrA.filter((i) => {
                     return !i;
                 });
@@ -158,7 +173,7 @@
                 this.startStopPoints.forEach((id) => {
                     const el = document.getElementById(id);
                     if (el) {
-                        const { top, height } = el.getBoundingClientRect();
+                        const {top, height} = el.getBoundingClientRect();
                         this.pointsStart.push(top - bodyRect.top - this.lineHeight);
                         this.pointsEnd.push(top + height - bodyRect.top - this.lineHeight);
 
@@ -176,13 +191,13 @@
                 let hasNotFound = true;
                 const windowHeight = window.innerHeight;
                 this.pointsStart.forEach((startPoint, index) => {
-                    if (top >= startPoint - this.lineHeight   && top <= this.pointsEnd[index] + this.lineHeight) {
+                    if (top >= startPoint - this.lineHeight && top <= this.pointsEnd[index] + this.lineHeight) {
                         hasNotFound = false;
-                        if(this.activeIndex === -1){
-                            setTimeout(()=>{
-                              this.setLineHeight();
-                              this.checkOffsetLine()
-                            },100)
+                        if (this.activeIndex === -1) {
+                            setTimeout(() => {
+                                this.setLineHeight();
+                                this.checkOffsetLine()
+                            }, 100)
                         }
                         this.activeIndex = index;
                         return false;
@@ -197,33 +212,48 @@
             },
             checkOffsetLine(top) {
                 if (this.$refs["line"]) {
-                    const start = this.pointsStart[this.activeIndex] - this.lineHeight ;
+                    const start = this.pointsStart[this.activeIndex] - this.lineHeight;
                     const end = this.pointsEnd[this.activeIndex] - this.lineHeight + 15;
-                    if (start + this.offsetTopHeight + this.lineHeight> top) {
+                    if (start + this.offsetTopHeight + this.lineHeight > top) {
 
-                        let topPosition =   top - start - this.lineHeight;
+                        let topPosition = top - start - this.lineHeight;
 
                         if (topPosition > 0) {
                             topPosition = 0;
                         }
 
-
-                        this.$refs["line"].style.top = topPosition + this.offsetTopHeight + "px";
+                        if (this.isInvisible) {
+                            this.$refs["line"].style.marginTop = topPosition + this.offsetTopHeight + "px";
+                        } else {
+                            this.$refs["line"].style.top = topPosition + this.offsetTopHeight + "px";
+                        }
 
                     } else {
 
-                        let offset = end  - top;
+                        let offset = end - top;
                         if (offset > 0) {
                             offset = 0;
                         }
+                        if (this.isInvisible) {
+                            this.$refs["line"].style.marginTop = offset + this.offsetTopHeight + "px";
+                        } else {
+                            this.$refs["line"].style.top = offset + this.offsetTopHeight + "px";
+                        }
 
-                        this.$refs["line"].style.top = offset+this.offsetTopHeight + "px";
                     }
                 }
 
             }
         },
-        computed: {},
+        computed: {
+            lineClass() {
+                const classNames = ['rt-sticky-header-line'];
+                if (this.isInvisible) {
+                    classNames.push('rt-sticky-header-line--is-invisible')
+                }
+                return classNames.join(' ')
+            }
+        },
         render(h) {
             if (this.deviceType === "desktop" && this.hideOnDesktop
                 || this.deviceType === "tablet" && this.hideOnTablet
@@ -231,13 +261,31 @@
                 return null;
             }
             if (this.activeIndex >= 0) {
-                return <div ref="line" class="rt-sticky-header-line" style={{zIndex:this.zIndex}}>
-                    <div class="rt-container">
-                        <div class="rt-col-12">
+                if (this.isInvisible) {
+                    if (this.rightContent) {
+                        return <div ref="line" class={this.lineClass} style={{zIndex: this.zIndex}}>
+                            <div class="flex-end-center">
+                                <div class="rt-sticky-header-line__right-content d-inline-block">
+                                    {this.$slots.default}
+                                </div>
+                            </div>
+                        </div>;
+
+                    } else {
+                        return <div ref="line" class={this.lineClass} style={{zIndex: this.zIndex}}>
                             {this.$slots.default}
+                        </div>;
+                    }
+                } else {
+                    return <div ref="line" class={this.lineClass} style={{zIndex: this.zIndex}}>
+                        <div class="rt-container">
+                            <div class="rt-col-12">
+                                {this.$slots.default}
+                            </div>
                         </div>
-                    </div>
-                </div>;
+                    </div>;
+                }
+
             }
 
 
