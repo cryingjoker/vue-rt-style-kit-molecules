@@ -1,51 +1,63 @@
 <script type="text/jsx">
     import debounce from "debounce";
     import variables from "../../variables.json";
+    import {
+        backgroundColorPropsNames,
+        backgroundColorProps,
+        getBackgroundClassByProps,
+        getBackgroundClass
+    } from "vue-rt-style-kit-atoms";
+    import * as test from "vue-rt-style-kit-atoms";
 
+    const localComponentProps = {
+        isActive: {
+            type: Boolean,
+            default: true
+        },
+        zIndex: {
+            type: Number,
+            default: 2
+        },
+        startStopPoints: {
+            type: Array,
+            default: []
+        },
+        deltaBetweenBlocks: {
+            type: Number,
+            default: 0
+        },
+        hideOnDesktop: {
+            type: Boolean,
+            default: false
+        },
+        hideOnTablet: {
+            type: Boolean,
+            default: false
+        },
+        hideOnMobile: {
+            type: Boolean,
+            default: false
+        },
+        topOffsetHeightElemementSelector: {
+            type: String,
+            default: ''
+        },
+        isInvisible: {
+            type: Boolean,
+            default: false
+        },
+        rightContent: {
+            type: Boolean,
+            default: false
+        }
+    }
+    const componentProps = {...localComponentProps, ...backgroundColorProps};
+    if(componentProps['backgroundColor']){
+        componentProps['backgroundColor'].default = 'white';
+    }
     export default {
         name: "RtStickyHeaderLine",
-        props: {
-            isActive: {
-                type: Boolean,
-                default: true
-            },
-            zIndex: {
-                type: Number,
-                default: 2
-            },
-            startStopPoints: {
-                type: Array,
-                default: []
-            },
-            deltaBetweenBlocks: {
-                type: Number,
-                default: 0
-            },
-            hideOnDesktop: {
-                type: Boolean,
-                default: false
-            },
-            hideOnTablet: {
-                type: Boolean,
-                default: false
-            },
-            hideOnMobile: {
-                type: Boolean,
-                default: false
-            },
-            topOffsetHeightElemementSelector: {
-                type: String,
-                default: ''
-            },
-            isInvisible: {
-                type: Boolean,
-                default: false
-            },
-            rightContent: {
-                type: Boolean,
-                default: false
-            }
-        },
+        props: componentProps,
         data: () => ({
             active: false,
             pointsStart: [],
@@ -62,6 +74,7 @@
         },
         mounted() {
             if (this.startStopPoints.length > 0) {
+                backgroundColorPropsNames
                 this.setOffsetElementHeight();
                 this.setStartStopPoints();
 
@@ -247,11 +260,11 @@
         },
         computed: {
             lineClass() {
-                const classNames = ['rt-sticky-header-line'];
+                const className = ['rt-sticky-header-line',  ...(getBackgroundClassByProps.bind(this)())];
                 if (this.isInvisible) {
-                    classNames.push('rt-sticky-header-line--is-invisible')
+                    className.push('rt-sticky-header-line--is-invisible')
                 }
-                return classNames.join(' ')
+                return className.join(' ')
             }
         },
         render(h) {
