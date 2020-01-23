@@ -111,7 +111,7 @@
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-property-decorator": "^8.2.1",
-    "vue-rt-style-kit-atoms": "^0.2.3",
+    "vue-rt-style-kit-atoms": "^0.2.12",
     "vue-svgicon": "^3.2.6",
     "vue-template-compiler": "^2.6.10",
     "webpack": "4.39.1",
