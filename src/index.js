@@ -73,7 +73,8 @@ import {
   OptionsListInfoItem,
   GameArrow,
   CheckboxTabs,
-  CountdownTimer
+  CountdownTimer,
+  StickyHeaderLine
 } from "./components";
 
 // console.info('OptionsList',OptionsList)
@@ -151,6 +152,7 @@ const VueRtStyle = {
       Vue.component(CardB2o.name, CardB2o);
       Vue.component(CardLayout.name, CardLayout);
       Vue.component(CountdownTimer.name, CountdownTimer);
+      Vue.component(StickyHeaderLine.name, StickyHeaderLine);
 
       // tsx components
 
@@ -282,6 +284,7 @@ export {
   GameArrow,
   CheckboxTabs,
   CountdownTimer,
+  StickyHeaderLine,
 
   // need to change name dirrectives
   SwipeLeft,

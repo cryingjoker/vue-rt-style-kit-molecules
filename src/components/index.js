@@ -38,6 +38,7 @@
  export { default as SlideContentDottedContent } from './SlideContent/SlideContentDottedContent.tsx';
  export { default as SlideContentDottedHeader } from './SlideContent/SlideContentDottedHeader.tsx';
  export { default as Popup } from './Popup/Popup.vue';
+ export { default as StickyHeaderLine } from './StickyHeaderLine/StickyHeaderLine.vue';
 
  export { default as LinksBlock } from './Card/LinksBlock.vue';
  export { default as Hint } from './Card/Hint.vue';
