@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "name": "rt-sticky-header-line",
+      "property":":start-stop-points",
+      "type": ["String Array"],
+      "description":"Перечисление ids где отображается",
+      "value" : "[]",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":":delta-between-blocks",
+      "type": ["Number"],
+      "description":"дельта разницы между блоками",
+      "value" :"0",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":":hide-on-desktop",
+      "type": ["Boolean"],
+      "description":"Флаг скрытия на декстопе",
+      "value" :"false",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":":hide-on-tablet",
+      "type": ["Boolean"],
+      "description":"Флаг скрытия на планшете",
+      "value" :"false",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":":hide-on-mobile",
+      "type": ["Boolean"],
+      "description":"Флаг скрытия на мобильном девайсе",
+      "value" :"false",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":"backgroundColor",
+      "type": ["String"],
+      "description":"Установление цвета заливки на desktop",
+      "value" :"white",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":"tabletBackgroundColor",
+      "type": ["String"],
+      "description":"Установление цвета заливки на tablet",
+      "value" :"",
+      "version": "0.2.12"
+    },
+    {
+      "name": "rt-sticky-header-line",
+      "property":"mobileBackgroundColor",
+      "type": ["String"],
+      "description":"Установление цвета заливки на mobile",
+      "value" :"",
+      "version": "0.2.12"
+    }
+  ]
+}
