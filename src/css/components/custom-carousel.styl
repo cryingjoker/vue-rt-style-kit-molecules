@@ -25,6 +25,9 @@
     &+&
       margin-left: 20px
   &.rt-card-b2o
+    @media(max-width: mobile-upper-limit)
+      background-color: b2c-dark-blue-high
+      opacity: 1
     transition-property transform, opacity, background-color
 
 
@@ -35,6 +38,7 @@
       z-index 99
     &.rt-card-b2o
       background-color: b2c-dark-blue-high
+
   &--next
     transform translateX(50%) scale(.9)
     opacity .5
@@ -63,7 +67,8 @@
       transform translateX(-30%) scale(.9)
     @media(max-width: mobile-upper-limit)
       transform none
-
+.custom-carousel-wrapper
+  min-width 100%
 .custom-carousel
   -webkit-overflow-scrolling: touch
   scroll-behavior: smooth

@@ -37,6 +37,14 @@ export default {
       type: Boolean,
       default: false
     },
+    desktopNotReasize: {
+      type: Boolean,
+      default: false
+    },
+    tabletNotReasize: {
+      type: Boolean,
+      default: false
+    },
     reactive: {
       type: Boolean
     }
@@ -85,10 +93,11 @@ export default {
     calculateMaxHeight() {
 
       const isMobile = window.innerWidth <= parseInt(variables["mobile-upper-limit"]);
-      const isTablet = window.innerWidth <= parseInt(variables["tablet-upper-limit"]);
+      const isTablet = window.innerWidth <= parseInt(variables["tablet-upper-limit"]) && window.innerWidth > parseInt(variables["mobile-upper-limit"]);
+
       this.isMobile = isMobile;
       this.isTablet = isTablet;
-      if (isMobile && this.mobileNotResize) {
+      if (isMobile && this.mobileNotResize || isTablet && this.tabletNotReasize || !isMobile && !isTablet && this.desktopNotReasize) {
         this.querySelectorsNames.forEach((selectorName) => {
           this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
             if (node.style.height) {
@@ -139,6 +148,7 @@ export default {
           });
 
         } else {
+
           this.querySelectorsNames.forEach((selectorName) => {
             let maxHeight = 0;
             this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
