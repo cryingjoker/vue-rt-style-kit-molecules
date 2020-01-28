@@ -74,7 +74,8 @@ import {
   GameArrow,
   CheckboxTabs,
   CountdownTimer,
-  StickyHeaderLine
+  StickyHeaderLine,
+  ResizeTypeStore
 } from "./components";
 
 // console.info('OptionsList',OptionsList)
@@ -289,5 +290,6 @@ export {
   // need to change name dirrectives
   SwipeLeft,
   SwipeRight,
-  OutsideClickDirective
+  OutsideClickDirective,
+  ResizeTypeStore
 }

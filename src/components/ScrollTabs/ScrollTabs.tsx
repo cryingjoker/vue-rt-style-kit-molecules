@@ -38,7 +38,8 @@ class ScrollTabs extends Vue {
     const scrollTop =
       window.pageYOffset || document.documentElement.scrollTop;
     const container: any = this.$refs.tabsContainer;
-    const activeEl = container.querySelector("." + this.activeTabsClassname);
+
+    const activeEl = container && container.querySelector("." + this.activeTabsClassname);
     let hasFound = false;
     Object.keys(this.anchorObejects).forEach(key => {
       if (
@@ -116,20 +117,24 @@ class ScrollTabs extends Vue {
     e.preventDefault();
   };
 
-  removeFixedElementStyle(){
-    this.fixedNode.style.removeProperty('position');
-    this.fixedNode.style.removeProperty('width');
-    this.fixedNode.style.removeProperty('top');
+  removeFixedElementStyle(needToRemoveStyles:boolean = true){
+    if(needToRemoveStyles) {
+      this.fixedNode.style.removeProperty('position');
+      this.fixedNode.style.removeProperty('width');
+      this.fixedNode.style.removeProperty('top');
+    }
     const parentNode:any= this.fixedNode.parentNode
     const fixedNodeTop = parentNode.getBoundingClientRect().top - this.fixedNode.offsetHeight + (window.pageYOffset || document.documentElement.scrollTop) - this.fixedNodeTop;
-    if(document.documentElement.scrollTop > fixedNodeTop) {
-      this.fixedNode.style.height = '0px';
-    }else{
-      this.fixedNode.style.removeProperty('height');
+    if(needToRemoveStyles) {
+      if (document.documentElement.scrollTop > fixedNodeTop) {
+        this.fixedNode.style.height = '0px';
+      } else {
+        this.fixedNode.style.removeProperty('height');
+      }
     }
     this.fixedNode.style.overflow = 'hidden';
 
-    this.fixedNodeParent.style.removeProperty('padding-top');
+    // this.fixedNodeParent.style.removeProperty('padding-top');
   }
   showElement(){
     this.fixedNode.style.opacity = '1';
@@ -149,13 +154,14 @@ class ScrollTabs extends Vue {
       const parentNode:any= this.fixedNode.parentNode
       const fixedNodeTop =parentNode.getBoundingClientRect().top - this.fixedNode.offsetHeight + (window.pageYOffset || document.documentElement.scrollTop) - this.fixedNodeTop;
       if(window.pageYOffset || document.documentElement.scrollTop > fixedNodeTop){
-        this.removeFixedElementStyle()
+        this.removeFixedElementStyle(false)
       }
       this.fixedNodeHeight = this.fixedNode.offsetHeight;
-      if(this.fixedNodeParent.style.paddingTop){
-        this.fixedNodeHeight += parseInt(this.fixedNodeParent.style.paddingTop)
-      }
-      this.fixedNodeWidth = this.fixedNode.offsetWidth;
+      // if(this.fixedNodeParent.style.paddingTop){
+      //   this.fixedNodeHeight += parseInt(this.fixedNodeParent.style.paddingTop)
+      // }
+
+      this.fixedNodeWidth = this.fixedNodeParent.offsetWidth;
       window.dispatchEvent(new CustomEvent('scroll'))
 
     },50)
@@ -181,7 +187,7 @@ class ScrollTabs extends Vue {
         this.fixedNode.style.removeProperty('height');
         this.fixedNode.style.removeProperty('overflow');
 
-        this.fixedNodeParent.style.paddingTop = (this.fixedNodeHeight) + 'px'
+        // this.fixedNodeParent.style.paddingTop = (this.fixedNodeHeight) + 'px'
       }else{
         if(this.hideIfNotInViewport){
           this.hideElement();
@@ -194,21 +200,17 @@ class ScrollTabs extends Vue {
     this.fixedNode = container.parentNode;
     this.fixedNodeParent = container.parentNode.parentNode;
     this.fixedNodeHeight = this.fixedNode.offsetHeight;
-    if(this.fixedNodeParent.style.paddingTop){
-      this.fixedNodeHeight += parseInt(this.fixedNodeParent.style.paddingTop)
-    }
+    // if(this.fixedNodeParent.style.paddingTop){
+    //   this.fixedNodeHeight += parseInt(this.fixedNodeParent.style.paddingTop)
+    // }
     this.fixedNodeWidth = this.fixedNode.offsetWidth;
 
     // this.fixedNodeTop = parentNode.getBoundingClientRect().top - this.fixedNode.offsetHeight + (window.pageYOffset || document.documentElement.scrollTop) - this.fixedNodeTop;
     getFixedJsScrollPosition();
     setTimeout(()=>{
 
-    window.addEventListener("scroll", getFixedJsScrollPosition, {
-     passive: false
-    })
-    window.addEventListener("resize", resizeSize, {
-     passive: false
-    })
+    window.addEventListener("scroll", getFixedJsScrollPosition, )
+    window.addEventListener("resize", resizeSize, )
     },50)
 
   }
