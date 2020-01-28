@@ -138,7 +138,7 @@ export default {
                     if (node.style.height) {
                       node.style.height = null;
                     }
-                    maxHeight = maxHeight > node.clientHeight ? maxHeight : node.clientHeight;
+                    maxHeight = maxHeight > node.offsetHeight ? maxHeight : node.offsetHeight;
                   });
                   nodeGroup.forEach((node) => {
                     node.style.height = `${maxHeight}px`;
@@ -155,7 +155,7 @@ export default {
               if (node.style.height) {
                 node.style.height = null;
               }
-              maxHeight = maxHeight > node.clientHeight ? maxHeight : node.clientHeight;
+              maxHeight = maxHeight > node.offsetHeight ? maxHeight : node.offsetHeight;
             });
             this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
               node.style.height = `${maxHeight}px`;
