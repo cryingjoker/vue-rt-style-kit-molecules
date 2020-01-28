@@ -209,6 +209,21 @@ offsetCalcOverlay = "calc((100vw - (%s - (%s * 3.5 * 2))) / 2)" % (container-upp
           .{carouselSel}__spacer
             min-width offsetCalcOverlay
 
+    &:not(.is-inner-block)
+      width 100vw
+      margin-left 0
+      margin-right 0
+      @media (min-width: container-upper-limit)
+        .{carouselSel}__inner
+          max-width none
+          margin-left 0
+          margin-right 0
+          padding-left offsetCalcOverlay
+          padding-right offsetCalcOverlay
+          scroll-padding-inline-start offsetCalcOverlay
+          .{carouselSel}__spacer
+            min-width offsetCalcOverlay
+
   &.is-animating,
   &.is-disabled-scrolling
     .{carouselSel}__overlay
