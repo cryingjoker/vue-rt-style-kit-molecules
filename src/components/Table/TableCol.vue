@@ -47,27 +47,19 @@
         if (this.isTablet) {
           this.containerWidth = window.innerWidth - 80;
           this.singleColumn = (this.containerWidth - 100) * 0.1666666;
-//          this.tabletColumnsWidth.forEach(i => {
-            let blockWidth = this.widthInColsTablet * this.singleColumn + (this.widthInColsTablet - 1) *20;
-            style = `${blockWidth}px`;
-//          });
+          let blockWidth = this.widthInColsTablet * this.singleColumn + (this.widthInColsTablet - 1) *20;
+          style = `${blockWidth}px`;
         } else if (this.isMobile) {
           this.containerWidth = window.innerWidth - 40;
           this.singleColumn = (this.containerWidth - 40) * 0.3333333;
-//          this.mobileColumnsWidth.forEach(i => {
-            let blockWidth = this.widthInColsMobile * this.singleColumn + (this.widthInColsMobile - 1) * 20;
-            style = `${blockWidth}px`;
-//          });
+          let blockWidth = this.widthInColsMobile * this.singleColumn + (this.widthInColsMobile - 1) * 20;
+          style = `${blockWidth}px`;
         } else {
           this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 160 : 1320;
           this.singleColumn = (this.containerWidth - 220) * 0.0833333;
-//          this.columnsWidth.forEach(i => {
-            let blockWidth = this.widthInColsDesktop * this.singleColumn + (this.widthInColsDesktop - 1) * 20;
-            style = `${blockWidth}px`;
-//          });
-        }
-        console.log(style);
-        console.log(this.$el.style.width)
+          let blockWidth = this.widthInColsDesktop * this.singleColumn + (this.widthInColsDesktop - 1) * 20;
+          style = `${blockWidth}px`;
+        };
         this.$el.style.width = style;
       }
     },
