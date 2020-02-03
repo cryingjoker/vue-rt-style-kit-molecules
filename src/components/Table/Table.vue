@@ -42,7 +42,7 @@ export default {
     },
     setTableItemRowspanIndex(index,rowspan, rowUid) {
        this.rowspanIndexBeforeRow = index
-       this.rowspanSizeBeforeRow = rowspan
+       this.rowspanSizeBeforeRow = rowspan - 1;
        this.rowspanUidRow = rowUid;
     },
 

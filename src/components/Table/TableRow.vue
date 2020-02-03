@@ -42,13 +42,9 @@ export default {
           // if(, )
             if(this.checkTableItemIndex(indexNode, this._uid)){
                 slotVNode.componentOptions.propsData.hasRowSpanBefore = true;
-                console.info('slotVNode.componentOptions',slotVNode.componentOptions,slotVNode)
             }else{
 
                 slotVNode.componentOptions.propsData.hasRowSpanBefore = false;
-            }
-            if(slotVNode.componentOptions.propsData.hasRowSpanBefore){
-                console.info('slotVNode.componentOptions.propsData.hasRowSpanBefore')
             }
             if(slotVNode.componentOptions.propsData.rowspan) {
               this.setTableItemRowspanIndex(indexNode, parseInt(slotVNode.componentOptions.propsData.rowspan), this._uid)
@@ -59,7 +55,6 @@ export default {
 
               rowspanIndexBeforeRow = indexNode;
               rowspanSizeBeforeRow = parseInt(slotVNode.componentOptions.propsData.rowspan)
-              console.error('!!!',rowspanIndexBeforeRow,rowspanSizeBeforeRow)
           }
 
         }

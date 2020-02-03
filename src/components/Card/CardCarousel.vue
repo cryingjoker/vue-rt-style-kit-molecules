@@ -52,8 +52,8 @@
         methods: {
             getCarouselItemsLength() {
                 this.itemClassNormalized = this.carouselItemClass[0] === '.' ? this.carouselItemClass : '.' + this.carouselItemClass;
-                console.info('this.$refs.carousel', this.$refs.carousel, this.itemClassNormalized);
-                console.info('this.$refs.carousel', this.$refs.carousel.querySelectorAll(this.itemClassNormalized), this.$refs.carousel.querySelectorAll(this.itemClassNormalized).length);
+                // console.info('this.$refs.carousel', this.$refs.carousel, this.itemClassNormalized);
+                // console.info('this.$refs.carousel', this.$refs.carousel.querySelectorAll(this.itemClassNormalized), this.$refs.carousel.querySelectorAll(this.itemClassNormalized).length);
                 this.itemsLength = this.$refs.carousel.querySelectorAll(this.itemClassNormalized).length
             },
             getCarouselItems(index) {
