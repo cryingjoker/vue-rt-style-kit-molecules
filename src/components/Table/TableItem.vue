@@ -2,9 +2,10 @@
 export default {
   name: "RtTableItem",
   components: {},
-  inject: {
-    tableLabels: {}
-  },
+  inject: ['tableLabels'],
+    data: () => ({
+        hasRowSpanBefore: 0
+    }),
   props: {
     mobileWidth: {
       type: String,
@@ -26,9 +27,17 @@ export default {
       type: [Number, String],
       default: 1
     },
+    rowspan: {
+      type: [Number, String],
+      default: 1
+    },
     slotIndex: {
       type: Number,
       default: null
+    },
+    hasRowSpanBefore: {
+      type: Boolean,
+      default: false
     },
     inactive: {
       type: Boolean,
@@ -60,6 +69,10 @@ export default {
     if(this.inactive) {
       classList += " rt-table-body__item--inactive";
     }
+    console.error('this.hasRowSpanBefore',this.hasRowSpanBefore);
+    if(this.hasRowSpanBefore){
+        classList += " rt-table-body__item--has-rowspan-before";
+    }
 
     let slotLabel = '';
     if(this.colspan == 1){
@@ -74,6 +87,7 @@ export default {
       <td
         style={style}
         colspan={this.colspan}
+        rowspan={this.rowspan}
         class={classList}
         label={slotLabel}
       >

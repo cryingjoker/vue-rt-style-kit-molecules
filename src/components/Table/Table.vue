@@ -13,13 +13,40 @@ export default {
     }
   },
   data: () => ({
-    tableLabels: []
+    tableLabels: [],
+    rowspanIndexBeforeRow: -1,
+    rowspanSizeBeforeRow: 0
   }),
   provide() {
     const tableLabels = this["tableLabels"];
-    return { tableLabels };
+    const checkTableItemIndex = this.checkTableItemIndex;
+    const setTableItemRowspanIndex = this.setTableItemRowspanIndex;
+    return { tableLabels, checkTableItemIndex, setTableItemRowspanIndex};
   },
+  methods: {
 
+    checkTableItemIndex(index, rowUid) {
+
+        if(rowUid != this.rowspanUidRow) {
+
+            if (this.rowspanIndexBeforeRow >= 0 && this.rowspanSizeBeforeRow > 0 && this.rowspanIndexBeforeRow === index) {
+
+                this.rowspanSizeBeforeRow--;
+                if(this.rowspanSizeBeforeRow === 0){
+                    this.rowspanUidRow = null;
+                }
+                return true
+            }
+        }
+        return false
+    },
+    setTableItemRowspanIndex(index,rowspan, rowUid) {
+       this.rowspanIndexBeforeRow = index
+       this.rowspanSizeBeforeRow = rowspan
+       this.rowspanUidRow = rowUid;
+    },
+
+  },
   render: function(h) {
     const columns = () => {
       if (!this.$slots.columns) {

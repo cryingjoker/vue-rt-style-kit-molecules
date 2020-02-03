@@ -2,9 +2,14 @@
 export default {
   name: "RtTableRow",
   components: {},
-  inject: {
-    tableLabels: {}
-  },
+
+  inject: ['tableLabels','checkTableItemIndex', 'setTableItemRowspanIndex'],
+  // provide() {
+  //     const hasRowSpanBefore = 1;
+  //     return {  hasRowSpanBefore };
+  // },
+
+
   props: {
     fill: {
       type: Boolean,
@@ -20,14 +25,13 @@ export default {
   render: function(h) {
     const renderSlots = () => {
       let counter = 0;
-      return this.$slots.default.map(slotVNode => {
+      let rowspanIndexBeforeRow = -1;
+      let rowspanSizeBeforeRow = 0;
+      return this.$slots.default.map((slotVNode, indexNode) => {
         if (slotVNode.tag && slotVNode.tag.search(/RtTableItem/gi) >= 0) {
           slotVNode.componentOptions = slotVNode.componentOptions || {};
           slotVNode.componentOptions.propsData =
             slotVNode.componentOptions.propsData || {};
-          // for(let i in Object.keys(slotVNode)){
-          //   console.info('++',Object.keys(slotVNode)[i],slotVNode[Object.keys(slotVNode)[i]])
-          // }
 
           slotVNode.componentOptions.propsData.slotIndex = counter;
           if(slotVNode.componentOptions.propsData.colspan){
@@ -35,6 +39,29 @@ export default {
           }else {
             counter++;
           }
+          // if(, )
+            if(this.checkTableItemIndex(indexNode, this._uid)){
+                slotVNode.componentOptions.propsData.hasRowSpanBefore = true;
+                console.info('slotVNode.componentOptions',slotVNode.componentOptions,slotVNode)
+            }else{
+
+                slotVNode.componentOptions.propsData.hasRowSpanBefore = false;
+            }
+            if(slotVNode.componentOptions.propsData.hasRowSpanBefore){
+                console.info('slotVNode.componentOptions.propsData.hasRowSpanBefore')
+            }
+            if(slotVNode.componentOptions.propsData.rowspan) {
+              this.setTableItemRowspanIndex(indexNode, parseInt(slotVNode.componentOptions.propsData.rowspan), this._uid)
+          }
+
+
+          if(slotVNode.componentOptions.propsData.rowspan){
+
+              rowspanIndexBeforeRow = indexNode;
+              rowspanSizeBeforeRow = parseInt(slotVNode.componentOptions.propsData.rowspan)
+              console.error('!!!',rowspanIndexBeforeRow,rowspanSizeBeforeRow)
+          }
+
         }
         return slotVNode;
       });

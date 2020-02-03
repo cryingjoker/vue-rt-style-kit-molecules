@@ -2,14 +2,16 @@
 export default {
   name: "RtTableHeadItem",
   components: {},
-  inject: ["tableLabels"],
+  inject: [
+      "tableLabels",
+  ],
   props: {
     fill: {
       type: Boolean,
       default: false
     },
     colspan: {
-      type: Number, String,
+      type: [Number, String],
       default: 1
     },
     verticalAlign: {
