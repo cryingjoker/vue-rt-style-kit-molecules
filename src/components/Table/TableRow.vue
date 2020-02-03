@@ -16,12 +16,6 @@ export default {
       default: false
     }
   },
-  mounted(){
-    // return this.$slots.default.map(slotVNode => {
-    //   console.info('!!',slotVNode.elm);
-    // })
-
-  },
   render: function(h) {
     const renderSlots = () => {
       let counter = 0;
@@ -62,11 +56,7 @@ export default {
       });
     };
     return (
-      <tr
-        class={
-          "rt-table-body__row" + (this.fill ? " rt-table-body__row--fill" : "")
-        }
-      >
+      <tr class={"rt-table-body__row" + (this.fill ? " rt-table-body__row--fill" : "")}>
         {renderSlots()}
       </tr>
     );

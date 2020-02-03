@@ -26,22 +26,19 @@ export default {
   methods: {
 
     checkTableItemIndex(index, rowUid) {
-
-        if(rowUid != this.rowspanUidRow) {
-
-            if (this.rowspanIndexBeforeRow >= 0 && this.rowspanSizeBeforeRow > 0 && this.rowspanIndexBeforeRow === index) {
-
-                this.rowspanSizeBeforeRow--;
-                if(this.rowspanSizeBeforeRow === 0){
-                    this.rowspanUidRow = null;
-                }
-                return true
-            }
+      if(rowUid != this.rowspanUidRow) {
+        if (this.rowspanIndexBeforeRow >= 0 && this.rowspanSizeBeforeRow > 0 && this.rowspanIndexBeforeRow === index) {
+          this.rowspanSizeBeforeRow--;
+          if(this.rowspanSizeBeforeRow === 0){
+              this.rowspanUidRow = null;
+          }
+          return true
         }
-        return false
+      }
+      return false
     },
     setTableItemRowspanIndex(index,rowspan, rowUid) {
-       this.rowspanIndexBeforeRow = index
+       this.rowspanIndexBeforeRow = index;
        this.rowspanSizeBeforeRow = rowspan - 1;
        this.rowspanUidRow = rowUid;
     },

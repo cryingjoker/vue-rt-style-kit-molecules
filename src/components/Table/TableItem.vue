@@ -3,9 +3,9 @@ export default {
   name: "RtTableItem",
   components: {},
   inject: ['tableLabels'],
-    data: () => ({
-        hasRowSpanBefore: 0
-    }),
+//    data: () => ({
+//        hasRowSpanBefore: 0
+//    }),
   props: {
     mobileWidth: {
       type: String,
@@ -69,7 +69,6 @@ export default {
     if(this.inactive) {
       classList += " rt-table-body__item--inactive";
     }
-    console.error('this.hasRowSpanBefore',this.hasRowSpanBefore);
     if(this.hasRowSpanBefore){
         classList += " rt-table-body__item--has-rowspan-before";
     }
