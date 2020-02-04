@@ -17,15 +17,15 @@
       },
       widthInColsDesktop: {
         type: Number,
-        dafault: null
+        default: null
       },
       widthInColsTablet: {
         type: Number,
-        dafault: null
+        default: null
       },
       widthInColsMobile: {
         type: Number,
-        dafault: null
+        default: null
       }
     },
 
