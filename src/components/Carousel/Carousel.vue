@@ -172,6 +172,7 @@ export default {
       pages: [], // Набор слайдов с позицией для ускорителя
       activeMCId: null,
       activePage: 0,
+      bodyWidth: undefined,
       toggleSlidesTimer: null,
       scrollingTimer: null,
       canAdvanceForward: false,
@@ -206,7 +207,9 @@ export default {
         marginTop: -this.offsetTop + 'px',
         marginBottom: -this.offsetBottom + 'px',
         width: this.isInnerBlock && !this.isTouch ? `${document.body.clientWidth}px` : null,
-        marginLeft: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null
+        marginLeft: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null,
+        marginRight: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null,
+        maxWidth: this.bodyWidth
       }
     },
     innerStylesState () {
@@ -259,6 +262,9 @@ export default {
       window.addEventListener('resize', this.createMoves, { passive: true })
       if (this.overlayEl)
         this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
+    } else {
+      window.addEventListener('resize', this.fitCarouselWidth, { passive: true })
+      this.fitCarouselWidth()
     }
   },
   destroyed() {
@@ -284,6 +290,8 @@ export default {
       clearTimeout(this.toggleSlidesTimer)
 
       this.isPending = true
+
+      this.fitCarouselWidth()
 
       if (this.isInnerBlock)
         this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
@@ -374,6 +382,10 @@ export default {
             '\n isInnerBlock ', this.isInnerBlock
           )
       })
+    },
+
+    fitCarouselWidth () {
+      this.bodyWidth = getComputedStyle(window.document.body).width
     },
 
     /**
