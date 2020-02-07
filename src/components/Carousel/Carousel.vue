@@ -172,6 +172,7 @@ export default {
       pages: [], // Набор слайдов с позицией для ускорителя
       activeMCId: null,
       activePage: 0,
+      bodyWidth: undefined,
       toggleSlidesTimer: null,
       scrollingTimer: null,
       canAdvanceForward: false,
@@ -206,7 +207,9 @@ export default {
         marginTop: -this.offsetTop + 'px',
         marginBottom: -this.offsetBottom + 'px',
         width: this.isInnerBlock && !this.isTouch ? `${document.body.clientWidth}px` : null,
-        marginLeft: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null
+        marginLeft: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null,
+        marginRight: this.isInnerBlock && !this.isTouch ? `-${this.innerBlockOffset}px` : null,
+        maxWidth: this.bodyWidth
       }
     },
     innerStylesState () {
@@ -259,6 +262,9 @@ export default {
       window.addEventListener('resize', this.createMoves, { passive: true })
       if (this.overlayEl)
         this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
+    } else {
+      window.addEventListener('resize', this.fitCarouselWidth, { passive: true })
+      this.fitCarouselWidth()
     }
   },
   destroyed() {
@@ -284,6 +290,8 @@ export default {
       clearTimeout(this.toggleSlidesTimer)
 
       this.isPending = true
+
+      this.fitCarouselWidth()
 
       if (this.isInnerBlock)
         this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
@@ -376,6 +384,10 @@ export default {
       })
     },
 
+    fitCarouselWidth () {
+      this.bodyWidth = getComputedStyle(window.document.body).width
+    },
+
     /**
      * Простая навигация зоны просмотра по слайдам (Навигаторы, стрелочки)
      */
@@ -384,6 +396,10 @@ export default {
         this.perfStart = performance.now()
 
         let currPage = this.activePage + (direction === 'next' ? 1 : -1)
+
+        // Обработка ситуации свайпинга с последующим кликом на навигатор назад #RTRU-6136
+        if (currPage < 0 && this.$refs.overlay.scrollLeft > 0)
+          currPage = 0
 
         if (!this.pages[currPage])
           return
@@ -461,8 +477,16 @@ export default {
      * @param {Number} slideId
      */
     moveTo (slideId) {
-      if (slideId !== undefined && this.slides[slideId])
-        this.move(this.slides[slideId].move).then(() => { this.updateNavs() })
+      if (slideId !== undefined && this.slides[slideId] && !this.isAnimating) {
+        this.move(
+          this.isTouch
+            ?
+              this.slides.filter(
+                (slide, i) => (i === parseInt(slideId) && slide.$el)
+              )[0].$el.getBoundingClientRect().left
+            : this.slides[slideId].move
+        ).then(() => this.updateNavs())
+      }
     },
 
     /**
