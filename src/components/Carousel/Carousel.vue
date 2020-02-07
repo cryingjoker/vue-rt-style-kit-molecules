@@ -397,6 +397,10 @@ export default {
 
         let currPage = this.activePage + (direction === 'next' ? 1 : -1)
 
+        // Обработка ситуации свайпинга с последующим кликом на навигатор назад #RTRU-6136
+        if (currPage < 0 && this.$refs.overlay.scrollLeft > 0)
+          currPage = 0
+
         if (!this.pages[currPage])
           return
 
@@ -473,8 +477,16 @@ export default {
      * @param {Number} slideId
      */
     moveTo (slideId) {
-      if (slideId !== undefined && this.slides[slideId])
-        this.move(this.slides[slideId].move).then(() => { this.updateNavs() })
+      if (slideId !== undefined && this.slides[slideId] && !this.isAnimating) {
+        this.move(
+          this.isTouch
+            ?
+              this.slides.filter(
+                (slide, i) => (i === parseInt(slideId) && slide.$el)
+              )[0].$el.getBoundingClientRect().left
+            : this.slides[slideId].move
+        ).then(() => this.updateNavs())
+      }
     },
 
     /**
