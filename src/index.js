@@ -193,7 +193,7 @@ const VueRtStyle = {
 // VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
 VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 
-// if(localStorage && localStorage.getItem('dev_mode')){
+// if(localStorage && localStorage.getItem('dev_Zmode')){
 //   localStorage.setItem('dev_mode__version',version);
 // }
 
@@ -212,6 +212,9 @@ if (settingsKey) {
 
 // @Deprecated
 window.RTK_STYLE_KIT_MOLECULES_VER = version;
+window.addEventListener('getVueRtStyleVersion', function () {
+  window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
+})
 VueRtStyle.version = version;
 
 export default VueRtStyle;
