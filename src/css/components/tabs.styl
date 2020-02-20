@@ -271,7 +271,8 @@
       padding-top 8px
       padding-bottom 8px
   .{newAppName}-tabs-navigation
-    overflow: hidden
+    overflow: auto
+    max-width 100%
     &:after
       display none
   .{newAppName}-tabs-navigation-wrapper
@@ -282,6 +283,8 @@
     left 0
     width auto
     background-color: b2c-purple
+    @media (max-width mobile-upper-limit)
+      margin-left: 0px
   .{newAppName}-tabs-navigation__item
     background-color: white
     &+&
@@ -386,6 +389,7 @@
     border-bottom-color b2c-orange
   .rt-tabs--round-tablet-view .rt-tabs-navigation-wrapper
     border-color b2c-orange
+    max-width 100%
   .rt-tabs--round-tablet-view .rt-tabs-navigation__item--is-active
     background-color b2c-orange
   .rt-tabs--round-tablet-view
