@@ -49,10 +49,22 @@
         rightContent: {
             type: Boolean,
             default: false
+        },
+        checkAfterTime: {
+            type: Number,
+            default: 0
+        },
+        showSecondHeaderContentAfter: {
+            type: Number,
+            default: 0
+        },
+        stockId: {
+            type: String,
+            default: ''
         }
     }
     const componentProps = {...localComponentProps, ...backgroundColorProps};
-    if(componentProps['backgroundColor']){
+    if (componentProps['backgroundColor']) {
         componentProps['backgroundColor'].default = 'white';
     }
     export default {
@@ -65,7 +77,9 @@
             activeIndex: -1,
             deviceType: "",
             lineHeight: 57,
-            offsetTopHeight: 0
+            offsetTopHeight: 0,
+            showSecondHeaderContentAfterIsActive: false,
+            stockIdIndex: 0
         }),
         watch: {
             isActive: function () {
@@ -91,6 +105,14 @@
                 }
 
                 this.detectActiveIndex();
+                if (this.checkAfterTime > 0) {
+                    setTimeout(() => {
+                        this.setOffsetElementHeight();
+                        this.setStartStopPoints();
+                        this.setLineHeight();
+                        this.detectActiveIndex()
+                    }, this.checkAfterTime)
+                }
 
             }
         },
@@ -189,7 +211,9 @@
                         const {top, height} = el.getBoundingClientRect();
                         this.pointsStart.push(top - bodyRect.top - this.lineHeight);
                         this.pointsEnd.push(top + height - bodyRect.top - this.lineHeight);
-
+                        if (this.stockId === id) {
+                            this.stockIdIndex = this.pointsStart.length - 1;
+                        }
 
                     }
                 });
@@ -203,7 +227,7 @@
                 const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
                 let hasNotFound = true;
                 const windowHeight = window.innerHeight;
-                this.pointsStart.forEach((startPoint, index) => {
+                this.pointsStart.find((startPoint, index) => {
                     if (top >= startPoint - this.lineHeight && top <= this.pointsEnd[index] + this.lineHeight) {
                         hasNotFound = false;
                         if (this.activeIndex === -1) {
@@ -213,8 +237,17 @@
                             }, 100)
                         }
                         this.activeIndex = index;
-                        return false;
+                        if (this.showSecondHeaderContentAfter > 0) {
+                            if ((this.showSecondHeaderContentAfter < top - startPoint || this.activeIndex > 0) && this.stockIdIndex !== this.activeIndex) {
+                                this.showSecondHeaderContentAfterIsActive = true;
+                            } else {
+                                this.showSecondHeaderContentAfterIsActive = false;
+                            }
+                        }
+                        return true;
                     }
+                    return false
+
                 });
                 if (hasNotFound) {
                     this.activeIndex = -1;
@@ -260,9 +293,15 @@
         },
         computed: {
             lineClass() {
-                const className = ['rt-sticky-header-line',  ...(getBackgroundClassByProps.bind(this)())];
+                const className = ['rt-sticky-header-line', ...(getBackgroundClassByProps.bind(this)())];
                 if (this.isInvisible) {
                     className.push('rt-sticky-header-line--is-invisible')
+                }
+                if (this.showSecondHeaderContentAfter > 0) {
+                    className.push('rt-sticky-header-line--has-switched-content')
+                    if (this.showSecondHeaderContentAfterIsActive) {
+                        className.push('rt-sticky-header-line--switched-content-is-active')
+                    }
                 }
                 return className.join(' ')
             }

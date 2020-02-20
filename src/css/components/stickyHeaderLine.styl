@@ -27,3 +27,11 @@
 .rt-sticky-header-line__right-content
   position: relative;
   left: -100%
+  
+.rt-sticky-header-line--switched-content+.rt-sticky-header-line--switched-content
+  display: none
+.rt-sticky-header-line--switched-content-is-active
+  .rt-sticky-header-line--switched-content
+    display: none
+  .rt-sticky-header-line--switched-content+.rt-sticky-header-line--switched-content
+    display: block
