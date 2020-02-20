@@ -78,7 +78,7 @@ export default {
       slotLabel = this.tableLabels[this.slotIndex]
     }else{
       for(let i = 0;  i <= this.colspan; i++){
-          if(this.tableLabels[i].trim().length === 0) {
+          if(this.tableLabels[i].trim().length > 0) {
               slotLabel += this.tableLabels[i] + ', '
           }
       }
