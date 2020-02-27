@@ -68,7 +68,7 @@
             setTimeout(() => {
               this.detectActiveIndex();
               this.checkOffsetLine();
-            }, 0);z
+            }, 0);
           }
         } else {
           if (width <= parseInt(variables["tablet-upper-limit"])) {
