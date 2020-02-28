@@ -265,7 +265,6 @@
                 return bannerItemWrapperClass;
             },
             bannerStyle() {
-                console.info('bannerStyle', this.RtBanners.deviceType)
                 const styles = {};
 
                 if (this.contentMinWidth !== null) {
@@ -300,16 +299,13 @@
                         break;
                     default:
                         if (this.contentMinHeight) {
-                            console.info('&& this.contentMinHeight')
                             styles.minHeight = this.normalizeVariable(this.contentMinHeight);
                         }
                         if (this.contentHeight) {
-                            console.info('&& this.contentHeight')
                             styles.height = this.normalizeVariable(this.contentHeight);
                         }
 
                 }
-                console.info('styles',styles);
 
                 return styles;
             },

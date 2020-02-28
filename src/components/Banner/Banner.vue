@@ -254,7 +254,6 @@
             },
             bannerStyle() {
                 const styles = {};
-                console.info('-->>>  this.RtBanners.deviceType',this.RtBanners.deviceType)
                 switch (this.RtBanners.deviceType) {
                     case 'mobile':
                         if (this.contentMobileMinHeight !== null) {
