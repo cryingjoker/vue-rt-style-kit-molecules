@@ -111,6 +111,17 @@
       "value": "null"
     },
     {
+      "name": " rt-banner",
+      "property": "(:)content-tablet-min-height",
+      "type": [
+        "Number",
+        "String"
+      ],
+      "description": "Устанавливает минимальную высоту банера для разрешения планшета \n number - любое число становится px \n string - любые значения",
+      "value": "null",
+      "version": "0.2.18"
+    },
+    {
       "name": "rt-banner",
       "property": "(:)content-mobile-height",
       "type": [
@@ -119,6 +130,17 @@
       ],
       "description": "Устанавливает высоту банера для мобильного разрешения \n number - любое число становится px \n string - любые значения",
       "value": "null"
+    },
+    {
+      "name": "rt-banner",
+      "property": "(:)content-tablet-height",
+      "type": [
+        "Number",
+        "String"
+      ],
+      "description": "Устанавливает высоту банера для разрешения планшета \n number - любое число становится px \n string - любые значения",
+      "value": "null",
+      "version": "0.2.18"
     },
     {
       "name": "rt-banner",
@@ -250,6 +272,17 @@
       "value": "null"
     },
     {
+      "name": " rt-banner-item",
+      "property": "(:)content-tablet-min-height",
+      "type": [
+        "Number",
+        "String"
+      ],
+      "description": "Устанавливает минимальную высоту слайда для планшетов \n number - любое число становится px \n string - любые значения",
+      "value": "null",
+      "version": "0.2.18"
+    },
+    {
       "name": "rt-banner-item",
       "property": "(:)content-mobile-height",
       "type": [
@@ -258,6 +291,17 @@
       ],
       "description": "Устанавливает высоту слайда для мобильного разрешения \n number - любое число становится px \n string - любые значения",
       "value": "null"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "(:)content-tablet-height",
+      "type": [
+        "Number",
+        "String"
+      ],
+      "description": "Устанавливает высоту слайда для разрешения планшета \n number - любое число становится px \n string - любые значения",
+      "value": "null",
+      "version": "0.2.18"
     },
     {
       "name": "rt-banner-item",
