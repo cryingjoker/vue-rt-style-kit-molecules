@@ -512,6 +512,9 @@
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const el = this.$el;
                 const deltaY = Math.max(window.innerHeight, el.offsetHeight);
+                if (this.RtBanners.activeIndex < 0 && this.RtBanners.items.length) {
+                  this.RtBanners.activeIndex = 0
+                }
                 if (
                     el && typeof el.getBoundingClientRect === "function" && (
                         el.getBoundingClientRect().top > deltaY ||
