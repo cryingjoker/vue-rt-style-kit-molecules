@@ -334,6 +334,9 @@
             }
         },
         mounted() {
+            if (this.RtBanners.activeIndex < 0 && this.RtBanners.items.length) {
+              this.RtBanners.activeIndex = 0
+            }
             if (this.ga) {
                 this.activateEventToLink('b2c', this.ga);
             }
