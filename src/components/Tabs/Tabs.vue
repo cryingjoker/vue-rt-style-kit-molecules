@@ -148,6 +148,7 @@
       }
     },
     render(h){
+      
       let id = 'tabs-'+this._uid;
       const renderContent = ()=>{
         return <div class="rt-tabs-content">
@@ -155,6 +156,16 @@
             </div>
       }
       const renderNavigation = ()=>{
+      
+        if(this.roundTabletView){
+         
+          return <div class="rt-tabs-navigation-round-wrapper"> 
+                <div style={this.navigationStyle} class="rt-tabs-navigation">
+                  {this.$slots.navigation}
+                </div>
+              </div>
+         
+        }
           return <div style={this.navigationStyle} class="rt-tabs-navigation">
                 {this.$slots.navigation}
               </div>
@@ -166,14 +177,14 @@
         </div>;
       } else {
         if(!this.reverseView) {
-          return <div id={id} class={classNames}>
+          return <div id={id} class={this.tabsClassNames}>
             <div class="rt-tabs-navigation-wrapper">
             {renderNavigation()}
             </div>
             {renderContent()}
           </div>;
         }else{
-          return <div id={id} class={classNames}>
+          return <div id={id} class={this.tabsClassNames}>
             {renderContent()}
             <div class="rt-tabs-navigation-wrapper">
               {renderNavigation()}
