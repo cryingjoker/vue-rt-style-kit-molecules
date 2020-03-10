@@ -71,7 +71,37 @@
         this.checkDeviceType();
       }
     },
+    computed: {
+        tabsClassNames(){
+          const classes = ['rt-tabs'];
+           
+      if (this.vertical && window.innerWidth <= this.mobileSize) {
+        classes.push("rt-tabs--vertical");
+      } else {
+        if (this.roundTabletView) {
+          classes.push("rt-tabs--round-tablet-view");
+        }
+        if (this.deviceType && !this.dontUseAdaptive) {
+          classes.push("rt-tabs-" + this.deviceType);
+        }
+      }
+      if (this.positionCenter) {
+        classes.push("rt-tabs--centered");
+      }
+      if (this.fillContent) {
+        classes.push("rt-tabs--fill");
+        if (this.justifyAllWidth) {
+          classes.push("rt-tabs--justify-all-width");
+        }
+      }
+      if(this.showAsTags){
+        classes.push("rt-tabs--tag-mode");
+      }
+      return classes.join(' ')
+      // fillContent
 
+        }
+    },
     updated() {
       window.removeEventListener("resize", this.checkDeviceType);
       window.addEventListener("resize", this.checkDeviceType);
@@ -118,58 +148,35 @@
       }
     },
     render(h){
-      let classNames = "rt-tabs";
-      if (this.vertical && window.innerWidth <= this.mobileSize) {
-        classNames += " rt-tabs--vertical";
-      } else {
-        if (this.roundTabletView) {
-          classNames += " rt-tabs--round-tablet-view";
-        }
-        if (this.deviceType && !this.dontUseAdaptive) {
-          classNames += " rt-tabs-" + this.deviceType;
-        }
-      }
-      if (this.positionCenter) {
-        classNames += " rt-tabs--centered";
-      }
-      if (this.fillContent) {
-        classNames += " rt-tabs--fill";
-        if (this.justifyAllWidth) {
-          classNames += " rt-tabs--justify-all-width";
-        }
-      }
-      if(this.showAsTags){
-        classNames += " rt-tabs--tag-mode";
-      }
-      // fillContent
       let id = 'tabs-'+this._uid;
+      const renderContent = ()=>{
+        return <div class="rt-tabs-content">
+              {this.$slots.content}
+            </div>
+      }
+      const renderNavigation = ()=>{
+          return <div style={this.navigationStyle} class="rt-tabs-navigation">
+                {this.$slots.navigation}
+              </div>
+            
+      }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
-        return <div id={id} class={classNames}>
-          <div class="rt-tabs-navigation">
-            {this.$slots.navigation}
-          </div>
+        return <div id={id} class={this.tabsClassNames}>
+          {renderNavigation()}
         </div>;
       } else {
         if(!this.reverseView) {
           return <div id={id} class={classNames}>
             <div class="rt-tabs-navigation-wrapper">
-              <div style={this.navigationStyle} class="rt-tabs-navigation">
-                {this.$slots.navigation}
-              </div>
+            {renderNavigation()}
             </div>
-            <div class="rt-tabs-content">
-              {this.$slots.content}
-            </div>
+            {renderContent()}
           </div>;
         }else{
           return <div id={id} class={classNames}>
-            <div class="rt-tabs-content">
-              {this.$slots.content}
-            </div>
+            {renderContent()}
             <div class="rt-tabs-navigation-wrapper">
-              <div style={this.navigationStyle} class="rt-tabs-navigation">
-                {this.$slots.navigation}
-              </div>
+              {renderNavigation()}
             </div>
           </div>;
         }
