@@ -202,7 +202,12 @@
       bottom 0
       background-color b2c-cool-grey
       height 2px
-
+.rt-tabs--tag-mode
+  &.rt-tabs-mobile,
+  &.rt-tabs-tablet,
+    .{newAppName}-tabs-navigation__item
+      &:after
+        display: none;
 .{newAppName}-tabs-navigation__item-name
   box-sizing border-box
   text-align inherit
