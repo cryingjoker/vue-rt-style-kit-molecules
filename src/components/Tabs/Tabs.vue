@@ -158,7 +158,6 @@
       const renderNavigation = ()=>{
       
         if(this.roundTabletView){
-         
           return <div class="rt-tabs-navigation-round-wrapper"> 
                 <div style={this.navigationStyle} class="rt-tabs-navigation">
                   {this.$slots.navigation}
