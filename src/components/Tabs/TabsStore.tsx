@@ -56,6 +56,9 @@ const addWatcher = (fn) => {
   tabsStore.watcherFunction.push(fn);
 };
 const setTabWidth = (parentUiid:number, width:number)=>{
+  if(!tabsStore.tabsParents[parentUiid]){
+    tabsStore.tabsParents[parentUiid] = {}
+  }
   if(!tabsStore.tabsParents[parentUiid].width) {
     tabsStore.tabsParents[parentUiid].width = width;
     tabsStore.tabsParents[parentUiid].lastUpdateTime = (new Date()).getTime();
