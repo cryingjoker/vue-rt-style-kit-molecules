@@ -1,6 +1,7 @@
 <script type="text/jsx">
     import variables from "../../variables.json";
     import browser from "../../utils/browser";
+    import {deviceTypeStore} from "@vue-rt-style-kit-atoms-local/stores/deviceTypeStoreMixin.ts";
 
     const componentsList = {};
 
@@ -136,26 +137,6 @@
                 type: Object,
                 default: null
             },
-            patternBackground: {
-                type: Boolean,
-                default: false
-            },
-            patternTopColor: {
-                type: String,
-                default: ''
-            },
-            patternLeftColor: {
-                type: String,
-                default: ''
-            },
-            patternRightColor: {
-                type: String,
-                default: ''
-            },
-            patternType: {
-                type: Number,
-                default: 1
-            },
             hasImageOnMobile: {
                 type: Boolean,
                 default: false
@@ -176,11 +157,22 @@
         data() {
             return {
                 id: this._uid,
-                index: null
+                index: null,
+                deviceType: 'desktop'
             };
         },
+        beforeUpdate() {
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions)
 
+        },
+        updated() {
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+        },
+        beforeDestroy: function () {
+            deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions)
+        },
         beforeMount: function () {
+            this.calculateMobileOptions();
             if (this.RtBanners) {
                 this.index = this.RtBanners.items.length;
                 const bannerItemData = {
@@ -198,13 +190,7 @@
                 if (this.backgroundColor) {
                     bannerItemData.backgroundColor = this.backgroundColor
                 }
-                if (this.patternBackground) {
-                    bannerItemData.patternBackground = this.patternBackground,
-                        bannerItemData.patternType = this.patternType,
-                        bannerItemData.patternTopColor = this.patternTopColor,
-                        bannerItemData.patternLeftColor = this.patternLeftColor,
-                        bannerItemData.patternRightColor = this.patternRightColor
-                }
+
                 if (this.hasImageOnMobile) {
                     bannerItemData.imageOnMobile = this.hasImageOnMobile;
                 }
@@ -273,7 +259,7 @@
                 if (this.contentMaxWidth !== null) {
                     styles.maxWidth = this.normalizeVariable(this.contentMaxWidth);
                 }
-                switch (this.RtBanners.deviceType) {
+                switch (this.deviceType) {
                     case 'mobile':
                         if (this.contentMobileMinHeight !== null) {
                             styles.minHeight = this.normalizeVariable(
@@ -323,9 +309,9 @@
             },
             computedLazyImage() {
                 let result
-                if (this.RtBanners.deviceType === 'mobile' && this.lazyImageMobile) {
+                if (this.deviceType === 'mobile' && this.lazyImageMobile) {
                     result = this.lazyImageMobile
-                } else if (this.RtBanners.deviceType === 'tablet' && this.lazyImageTablet) {
+                } else if (this.deviceType === 'tablet' && this.lazyImageTablet) {
                     result = this.lazyImageTablet
                 } else {
                     result = this.lazyImage
@@ -334,6 +320,8 @@
             }
         },
         mounted() {
+            deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+            this.calculateMobileOptions();
             if (this.RtBanners.activeIndex < 0 && this.RtBanners.items.length) {
               this.RtBanners.activeIndex = 0
             }
@@ -343,6 +331,7 @@
             if (this.gaB2b) {
                 this.activateEventToLink('b2b', this.gaB2b);
             }
+
             window.addEventListener('resize', () => {
                 let computedBackgroundImage = this.computedBackgroundImageFn();
                 if (computedBackgroundImage) {
@@ -362,13 +351,16 @@
 
         },
         methods: {
-
+            calculateMobileOptions() {
+                const type = deviceTypeStore.getStatus();
+                this.deviceType = type;
+            },
             computedBackgroundImageFn() {
                 let result
 
-                if (this.RtBanners.deviceType === 'mobile' && this.backgroundImageMobile) {
+                if (this.deviceType === 'mobile' && this.backgroundImageMobile) {
                     result = this.backgroundImageMobile
-                } else if (this.RtBanners.deviceType === 'tablet' && this.backgroundImageTablet) {
+                } else if (this.deviceType === 'tablet' && this.backgroundImageTablet) {
                     result = this.backgroundImageTablet
                 } else if (browser.supportedWebP && this.backgroundImageWebp) {
                     result = this.backgroundImageWebp
