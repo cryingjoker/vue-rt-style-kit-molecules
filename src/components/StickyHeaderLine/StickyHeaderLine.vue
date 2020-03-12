@@ -7,7 +7,6 @@
         getBackgroundClassByProps,
         getBackgroundClass
     } from "vue-rt-style-kit-atoms";
-    import * as test from "vue-rt-style-kit-atoms";
 
     const localComponentProps = {
         isActive: {
