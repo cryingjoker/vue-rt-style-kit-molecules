@@ -2,7 +2,7 @@
     import BannerPaginatorItem from "./BannerPaginatorItem.vue";
     // import debounce from "debounce";
     import variables from "../../variables.json";
-    import {deviceTypeStore} from "@vue-rt-style-kit-atoms-local/stores/deviceTypeStoreMixin.ts";
+    import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 
     const componentsList = {};
 
