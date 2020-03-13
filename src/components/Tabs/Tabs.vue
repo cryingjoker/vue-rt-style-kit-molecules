@@ -2,6 +2,7 @@
   import { tabsStore } from "./TabsStore.tsx";
   import variables from "../../variables.json";
 
+
   const componentsList = {};
 
 
@@ -74,7 +75,7 @@
     computed: {
         tabsClassNames(){
           const classes = ['rt-tabs'];
-           
+
       if (this.vertical && window.innerWidth <= this.mobileSize) {
         classes.push("rt-tabs--vertical");
       } else {
@@ -148,7 +149,7 @@
       }
     },
     render(h){
-      
+
       let id = 'tabs-'+this._uid;
       const renderContent = ()=>{
         return <div class="rt-tabs-content">
@@ -156,19 +157,19 @@
             </div>
       }
       const renderNavigation = ()=>{
-      
+
         if(this.roundTabletView){
-          return <div class="rt-tabs-navigation-round-wrapper"> 
+          return <div class="rt-tabs-navigation-round-wrapper">
                 <div style={this.navigationStyle} class="rt-tabs-navigation">
                   {this.$slots.navigation}
                 </div>
               </div>
-         
+
         }
           return <div style={this.navigationStyle} class="rt-tabs-navigation">
                 {this.$slots.navigation}
               </div>
-            
+
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
         return <div id={id} class={this.tabsClassNames}>
