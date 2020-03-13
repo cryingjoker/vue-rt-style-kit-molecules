@@ -481,7 +481,7 @@ export default {
         this.move(
           this.isTouch
             ?
-              this.slides.filter(
+              this.$refs.overlay.scrollLeft + this.slides.filter(
                 (slide, i) => (i === parseInt(slideId) && slide.$el)
               )[0].$el.getBoundingClientRect().left
             : this.slides[slideId].move
