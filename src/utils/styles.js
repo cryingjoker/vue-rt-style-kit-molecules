@@ -1,6 +1,7 @@
 /**
- * ВНИМАНИЕ, ЭТО ЭКСПЕРИМЕНТАЛЬНЫЕ МЕТОДЫ
- * @TODO - Добавить при необходимости глобальный триггер
+ * Утили для работы со стилями
+ * 
+ * @TODO - Добавить, при необходимости, глобальный метод при загрузки CSS-стилей библиотеки
  */
 
 const isLoadedCSS = document.body.className.indexOf('is-init-rt-molecules') !== -1
@@ -14,11 +15,10 @@ const isLoadedCSS = document.body.className.indexOf('is-init-rt-molecules') !== 
 const waitCSSByCond = ($el, propertyCss, needleValue) => {
   return new Promise((resolve, reject) => {
     let call = 0
-    let maxCall = 20
-    let delayCall = 500
+    let maxCall = 40
+    let delayCall = 250
     let checkCondition = () => {
-      let stylesList = getComputedStyle($el)
-      return stylesList && stylesList[propertyCss] && stylesList[propertyCss] === needleValue
+      return getComputedStyle($el)[propertyCss] === needleValue
     }
     if (checkCondition()) {
       resolve()
@@ -28,11 +28,10 @@ const waitCSSByCond = ($el, propertyCss, needleValue) => {
           clearInterval(timer)
           resolve()
         }
-        if (call === maxCall) {
+        if (++call >= maxCall) {
           clearInterval(timer)
           reject()
         }
-        void call++
       }, delayCall)
     }
   })
