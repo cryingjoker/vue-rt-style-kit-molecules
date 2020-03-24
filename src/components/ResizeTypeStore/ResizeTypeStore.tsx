@@ -2,7 +2,7 @@ import Vue from "vue";
 import debounce from "debounce";
 let resizeComponentsIdsArray = [];
 const resizeComponentsWatchers = {};
-import variables from "vue-rt-style-kit-atoms/src/variables.json";
+import variables from "../../variables.json";
 let eventResizeIsWatched: boolean = false;
 let deviceWidthType = '';
 

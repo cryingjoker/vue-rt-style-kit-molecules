@@ -1,11 +1,10 @@
 import Vue from "vue";
-import VeeValidate from "vee-validate";
-import styles from "./css/vue-rt-style-kit-molecules.styl";
+import "./css/vue-rt-style-kit-molecules.styl";
 import Global from "./variables.json";
-import Project from "@projectMolecules";
+import Project from "../package.json";
 
 import {
-  ScrollTabs,
+  // ScrollTabs,
   Banner,
   BannerItem,
   BannerPaginatorItem,
@@ -40,9 +39,9 @@ import {
   LinksBlock,
   Hint,
   BannerVideoGameControl,
-  SlideContent,
-  SlideContentDottedContent,
-  SlideContentDottedHeader,
+  // SlideContent,
+  // SlideContentDottedContent,
+  // SlideContentDottedHeader,
   Slide,
   Swiper,
   Pattern,
@@ -54,8 +53,8 @@ import {
   TabsNavigationItem,
   TabsContentItem,
   UseCase,
-  ProductCard,
-  TariffCard,
+  // ProductCard,
+  // TariffCard,
   BenefitItem,
   BenefitBlock,
   PortraitTile,
@@ -67,8 +66,8 @@ import {
   ReplacementLink,
   CardCarousel,
   CardLayout,
-  GalleryCarousel,
-  GalleryCarouselItem,
+  // GalleryCarousel,
+  // GalleryCarouselItem,
   OptionsList,
   OptionsListInfoItem,
   GameArrow,
@@ -83,9 +82,9 @@ import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
 import {OutsideClickDirective} from "./directives/OudsideClick/OudsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
-import 'element-closest-polyfill';
-import 'nodelist-foreach-polyfill';
-import 'element-remove';
+// import 'element-closest-polyfill';
+// import 'nodelist-foreach-polyfill';
+// import 'element-remove';
 
 const VueRtStyle = {
   install(Vue, config) {
@@ -95,7 +94,7 @@ const VueRtStyle = {
         Vue.use(VeeValidate)
       }
 
-      Vue.component(ScrollTabs.name, ScrollTabs.component);
+      // Vue.component(ScrollTabs.name, ScrollTabs.component);
       Vue.component(Card.name, Card);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
@@ -164,13 +163,13 @@ const VueRtStyle = {
       Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
-      Vue.component(GalleryCarousel.name, GalleryCarousel.component);
-      Vue.component(GalleryCarouselItem.name, GalleryCarouselItem.component);
-      Vue.component(ProductCard.name, ProductCard.component);
-      Vue.component(TariffCard.name, TariffCard.component);
-      Vue.component(SlideContent.name, SlideContent.component);
-      Vue.component(SlideContentDottedContent.name, SlideContentDottedContent.component);
-      Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader.component);
+      // Vue.component(GalleryCarousel.name, GalleryCarousel.component);
+      // Vue.component(GalleryCarouselItem.name, GalleryCarouselItem.component);
+      // Vue.component(ProductCard.name, ProductCard.component);
+      // Vue.component(TariffCard.name, TariffCard.component);
+      // Vue.component(SlideContent.name, SlideContent.component);
+      // Vue.component(SlideContentDottedContent.name, SlideContentDottedContent.component);
+      // Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader.component);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -219,7 +218,7 @@ VueRtStyle.version = version;
 
 export default VueRtStyle;
 export {
-  ScrollTabs,
+  // ScrollTabs,
   Banner,
   BannerItem,
   BannerPaginatorItem,
@@ -254,9 +253,9 @@ export {
   LinksBlock,
   Hint,
   BannerVideoGameControl,
-  SlideContent,
-  SlideContentDottedContent,
-  SlideContentDottedHeader,
+  // SlideContent,
+  // SlideContentDottedContent,
+  // SlideContentDottedHeader,
   Slide,
   Swiper,
   Pattern,
@@ -268,8 +267,8 @@ export {
   TabsNavigationItem,
   TabsContentItem,
   UseCase,
-  ProductCard,
-  TariffCard,
+  // ProductCard,
+  // TariffCard,
   BenefitItem,
   BenefitBlock,
   PortraitTile,
@@ -281,8 +280,8 @@ export {
   ReplacementLink,
   CardCarousel,
   CardLayout,
-  GalleryCarousel,
-  GalleryCarouselItem,
+  // GalleryCarousel,
+  // GalleryCarouselItem,
   OptionsList,
   OptionsListInfoItem,
   GameArrow,

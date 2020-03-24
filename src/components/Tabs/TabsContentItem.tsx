@@ -1,6 +1,6 @@
 import Vue, { CreateElement, VNode } from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { tabsStore } from "./TabsStore.tsx";
+import { tabsStore } from "./TabsStore";
 
 @Component
 class RtTabsContentItem extends Vue {
