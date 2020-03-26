@@ -1,5 +1,5 @@
 <script type="text/jsx">
-  import { optionsListStore } from "./OptionsListStore.tsx";
+  import { optionsListStore } from "./OptionsListStore.js";
 
   export default {
     name: "RtOptionsListInfoItem",

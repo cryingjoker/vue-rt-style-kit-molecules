@@ -1,10 +1,10 @@
 import Vue from "vue";
 
-const setActiveTabName = (tabsName:string, tabAnchore:string = '', dontResize:boolean = false) => {
-  if(!tabsStore.tabsNames){
+const setActiveTabName = (tabsName, tabAnchore = '', dontResize = false) => {
+  if (!tabsStore.tabsNames) {
     tabsStore.tabsNames = []
   }
-  if(tabsStore.tabsNames[tabsName]) {
+  if (tabsStore.tabsNames[tabsName]) {
     const parentId = tabsStore.tabsNames[tabsName];
     const parentArray = tabsStore.tabsParents[parentId];
     for (let key in parentArray) {
@@ -22,9 +22,9 @@ const setActiveTabName = (tabsName:string, tabAnchore:string = '', dontResize:bo
       window.dispatchEvent(new Event("resize"));
     } else {
 
-      let resizeEvent : any = window.document.createEvent('UIEvents');
+      let resizeEvent = window.document.createEvent('UIEvents');
       resizeEvent['initUIEvent']('resize', true, false, window, 0);
-     window.dispatchEvent(resizeEvent);
+      window.dispatchEvent(resizeEvent);
     }
   }
   if (tabAnchore && tabAnchore.length > 0) {
@@ -32,22 +32,22 @@ const setActiveTabName = (tabsName:string, tabAnchore:string = '', dontResize:bo
   }
   runWatchers();
 };
-const runWatchers = ()=>{
+const runWatchers = () => {
   for (let fnIndex in tabsStore.watcherFunction) {
     tabsStore.watcherFunction[fnIndex]();
   }
 }
-const addTabUuid = (tabsContainerId: number, tabsName: string) => {
+const addTabUuid = (tabsContainerId, tabsName) => {
 
   if (!tabsStore.tabsParents[tabsContainerId]) {
     tabsStore.tabsParents[tabsContainerId] = {};
-    if(tabsStore.tabsParents[tabsContainerId][tabsName]){
+    if (tabsStore.tabsParents[tabsContainerId][tabsName]) {
       console.error('tabs name must be unique')
-    }else {
-      tabsStore.tabsParents[tabsContainerId][tabsName] = { isActive: true };
+    } else {
+      tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: true};
     }
   } else {
-    tabsStore.tabsParents[tabsContainerId][tabsName] = { isActive: false };
+    tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: false};
   }
   tabsStore.tabsNames[tabsName] = tabsContainerId;
   runWatchers();
@@ -55,29 +55,28 @@ const addTabUuid = (tabsContainerId: number, tabsName: string) => {
 const addWatcher = (fn) => {
   tabsStore.watcherFunction.push(fn);
 };
-const setTabWidth = (parentUiid:number, width:number)=>{
-  if(!tabsStore.tabsParents[parentUiid]){
+const setTabWidth = (parentUiid, width) => {
+  if (!tabsStore.tabsParents[parentUiid]) {
     tabsStore.tabsParents[parentUiid] = {}
   }
-  if(!tabsStore.tabsParents[parentUiid].width) {
+  if (!tabsStore.tabsParents[parentUiid].width) {
     tabsStore.tabsParents[parentUiid].width = width;
     tabsStore.tabsParents[parentUiid].lastUpdateTime = (new Date()).getTime();
-  }
-  else{
-    if(tabsStore.tabsParents[parentUiid].width < width){
+  } else {
+    if (tabsStore.tabsParents[parentUiid].width < width) {
       tabsStore.tabsParents[parentUiid].width = width;
       tabsStore.tabsParents[parentUiid].lastUpdateTime = (new Date()).getTime();
       tabsStore.tabsParents[parentUiid].centerText = true;
     }
   }
-  setTimeout(()=>{
+  setTimeout(() => {
     checkMaxWidth(parentUiid);
-  },400)
+  }, 400)
   // runWatchers();
 }
-const checkMaxWidth = (parentUiid)=>{
-  const time =(new Date()).getTime();
-  if(time - tabsStore.tabsParents[parentUiid].lastUpdateTime >= 400 ){
+const checkMaxWidth = (parentUiid) => {
+  const time = (new Date()).getTime();
+  if (time - tabsStore.tabsParents[parentUiid].lastUpdateTime >= 400) {
     tabsStore.tabsParents[parentUiid].lastUpdateTime = (new Date()).getTime();
     runWatchers();
   }

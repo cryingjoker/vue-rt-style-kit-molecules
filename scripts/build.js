@@ -39,23 +39,18 @@ function buildEntry (config) {
 
     const { file, banner } = output
     const isProd = /(min|prod)\.js$/.test(file)
-    console.info('###config',file,Object.keys(output),output);
     return rollup.rollup(config)
         .then((bundle) => {
             return bundle.generate(output)
         })
         .then((output) => {
-            // console.info('-->> ',Object.keys(output.output))
             const primises = []
             output.output.forEach((o)=>{
                 if(o.isAsset){
-                    // console.info('***',config.assetPath+'/'+o.fileName)
                     primises.push(write(opts.assetPath+'/'+o.fileName, o.source, true))
                 }
-                console.info('**',Object.keys(o))
             })
             const code = output.output[0].code;
-
             if (isProd) {
                 const minified = (banner ? banner + '\n' : '') + terser.minify(code, {
                     toplevel: true,
@@ -71,7 +66,7 @@ function buildEntry (config) {
             } else {
                 primises.push(write(file, code))
             }
-            console.info('file',file)
+
             return Promise.all(primises);
         })
 }

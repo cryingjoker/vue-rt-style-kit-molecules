@@ -1,5 +1,5 @@
 <script type="text/jsx">
-    import {tabsStore} from "../Tabs/TabsStore.tsx";
+    import {tabsStore} from "../Tabs/TabsStore.js";
 
 
     export default {

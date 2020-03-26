@@ -3,7 +3,7 @@ import debounce from "debounce";
 let resizeComponentsIdsArray = [];
 const resizeComponentsWatchers = {};
 import variables from "../../variables.json";
-let eventResizeIsWatched: boolean = false;
+let eventResizeIsWatched = false;
 let deviceWidthType = '';
 
 const detectDeviceWidthType = () =>{
@@ -38,13 +38,13 @@ const startWatchers = ()=>{
 };
 
 
-const removeWatchers = (id: number| string) =>{
+const removeWatchers = (id) =>{
   delete resizeComponentsWatchers[id];
   const index = resizeComponentsIdsArray.indexOf(id);
   resizeComponentsIdsArray.splice(index,1)
 };
 
-const addWatcher = (id: number | string, fn)=>{
+const addWatcher = (id, fn)=>{
   startWatchers();
   if(!resizeComponentsWatchers[id]){
     resizeComponentsWatchers[id] = {
@@ -60,7 +60,7 @@ const runAllWatchers = () => {
   });
 };
 
-const runWatchers = (id: number | string) => {
+const runWatchers = (id) => {
   const watchers = resizeComponentsWatchers[id].watchers;
   for (let wKey in watchers) {
     watchers[wKey]();

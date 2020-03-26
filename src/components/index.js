@@ -1,13 +1,13 @@
 
- export { default as ScrollTabs } from './ScrollTabs/ScrollTabs.tsx';
+ export { default as ScrollTabs } from './ScrollTabs/ScrollTabs.vue';
  export { default as Tabs } from './Tabs/Tabs.vue';
  export { default as CheckboxTabs } from './CheckboxTabs/CheckboxTabs.vue';
  export { default as TabsNavigationItem } from './Tabs/TabsNavigationItem.vue';
  export { default as TabsContentItem } from './Tabs/TabsContentItem.vue';
  export { default as Card} from './Card/Card.vue';
  export { default as CardB2o} from './Card/CardB2o.vue';
- export { default as ProductCard} from './ProductCard/ProductCard.tsx';
- export { default as TariffCard} from './TariffCard/TariffCard.tsx';
+ export { default as ProductCard} from './ProductCard/ProductCard.vue';
+ export { default as TariffCard} from './TariffCard/TariffCard.vue';
  export { default as CardBuy} from './Card/CardBuy.vue';
  export { default as CardImage} from './Card/CardImage.vue';
  export { default as CardImageList} from './Card/CardImageList.vue';
@@ -34,9 +34,9 @@
  export { default as Youtube } from './Youtube/Youtube.vue';
  export { default as Sticky } from './Sticky/Sticky.vue';
  export { default as ResizeContentHeight } from './ResizeContentHeight/ResizeContentHeight.vue';
- export { default as SlideContent } from './SlideContent/SlideContent.tsx';
- export { default as SlideContentDottedContent } from './SlideContent/SlideContentDottedContent.tsx';
- export { default as SlideContentDottedHeader } from './SlideContent/SlideContentDottedHeader.tsx';
+ export { default as SlideContent } from './SlideContent/SlideContent.vue';
+ export { default as SlideContentDottedContent } from './SlideContent/SlideContentDottedContent.vue';
+ export { default as SlideContentDottedHeader } from './SlideContent/SlideContentDottedHeader.vue';
  export { default as Popup } from './Popup/Popup.vue';
  export { default as StickyHeaderLine } from './StickyHeaderLine/StickyHeaderLine.vue';
 
@@ -69,10 +69,10 @@
  export { default as BannerItem } from './Banner/BannerItem.vue';
  export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
  export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';
- export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.tsx';
- export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.tsx';
+ export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.vue';
+ export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.vue';
  export { default as CountdownTimer } from './CountdownTimer/CountdownTimer.vue';
- export { default as ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.tsx';
+ export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 
 
  export { default as StickyBottomLine } from './StickyBottomLine/StickyBottomLine.vue';

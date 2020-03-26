@@ -19,15 +19,12 @@ module.exports = function (options = {}) {
             }
         },
         load(id) {
-          console.info('load -->>>  ',id)
             if (compiledCache[id+'.css']) {
                 return compiledCache[id]
             }
         },
         transform(code, id) {
-          console.info('-->>>  ',id)
             if (!filter(id)) return
-
             return new Promise(function (resolve, reject) {
                 const relativePath = path.relative(process.cwd(), id)
                 stylus(code, options.compiler)

@@ -1,8 +1,7 @@
 <script type="text/jsx">
 const componentsList = {};
-import browser from '../../utils/browser' 
+import browser from '../../utils/browser'
 import variables from "../../variables.json";
-import colors from "../../color.json";
 
 
 export default {
