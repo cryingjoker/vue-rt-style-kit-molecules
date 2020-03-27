@@ -2,8 +2,8 @@ import Vue from "vue";
 
 const optionsListArray = [];
 const optionsListStatuses = {};
-let hasHash: boolean = false;
-const setOptionsListArray = (id: number | string, hash?: string, needSave?: boolean, closeOther?: boolean) => {
+let hasHash = false;
+const setOptionsListArray = (id, hash = '', needSave = false, closeOther = false) => {
 
   if (optionsListArray.indexOf(id) < 0) {
     optionsListArray.push(optionsListArray);
@@ -14,7 +14,7 @@ const setOptionsListArray = (id: number | string, hash?: string, needSave?: bool
       needSave: needSave,
       closeOther: closeOther
     };
-    if (hash) {
+    if (hash && hash.length > 0) {
       if(!hasHash) {
         hasHash = true;
       }
@@ -24,7 +24,7 @@ const setOptionsListArray = (id: number | string, hash?: string, needSave?: bool
 };
 
 
-const addWatcher = (id: number | string, fn: void) => {
+const addWatcher = (id, fn) => {
   optionsListStatuses[id].watchers.push(fn);
   const needSave = optionsListStatuses[id].needSave
   if (needSave) {
@@ -38,7 +38,7 @@ const addWatcher = (id: number | string, fn: void) => {
   }
 };
 
-const runWatcher = (id: number | string) => {
+const runWatcher = (id) => {
 
   const watchers = optionsListStatuses[id].watchers;
   for (let wKey in watchers) {
@@ -46,9 +46,9 @@ const runWatcher = (id: number | string) => {
   }
 };
 
-const saveToLocalStorage = (id: number | string, status: boolean) => {
+const saveToLocalStorage = (id, status) => {
 
-  let rtSettings: any = localStorage.getItem("rt-settings");
+  let rtSettings = localStorage.getItem("rt-settings");
   if(!rtSettings){
     rtSettings = {}
   }else {
@@ -61,9 +61,9 @@ const saveToLocalStorage = (id: number | string, status: boolean) => {
   localStorage.setItem("rt-settings", JSON.stringify( rtSettings));
 };
 
-const getLocalStatus = (id: number | string) => {
+const getLocalStatus = (id) => {
 
-  let rtSettings: any = localStorage.getItem("rt-settings");
+  let rtSettings = localStorage.getItem("rt-settings");
   if (rtSettings) {
     rtSettings = JSON.parse(rtSettings);
     if (rtSettings.optionContent) {
@@ -75,7 +75,7 @@ const getLocalStatus = (id: number | string) => {
   }
 };
 
-const changeStatus = (id: number | string, status?: boolean) => {
+const changeStatus = (id, status = false) => {
 
   const closeOther = optionsListStatuses[id].closeOther;
   const needSave = optionsListStatuses[id].needSave;
@@ -110,7 +110,7 @@ const changeStatus = (id: number | string, status?: boolean) => {
   runWatcher(id);
 };
 
-const getOptionStatus = (id: number | string) => {
+const getOptionStatus = (id) => {
 
   return optionsListStatuses[id];
 };

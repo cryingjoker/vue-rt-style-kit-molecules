@@ -1,5 +1,5 @@
 <script type="text/jsx">
-    import {tabsStore} from "./TabsStore.tsx";
+    import {tabsStore} from "./TabsStore";
 
     export default {
         name: "RtTabsNavItem",

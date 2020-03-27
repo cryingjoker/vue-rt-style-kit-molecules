@@ -1,8 +1,7 @@
 import Vue from "vue";
-import VeeValidate from "vee-validate";
-import styles from "./css/vue-rt-style-kit-molecules.styl";
+import "./css/vue-rt-style-kit-molecules.styl";
 import Global from "./variables.json";
-import Project from "@projectMolecules";
+import Project from "../package.json";
 
 import {
   ScrollTabs,
@@ -91,11 +90,8 @@ const VueRtStyle = {
   install(Vue, config) {
     if (!Vue.RtStyle) {
 
-      if (window && window[Global.globalSettingsKey] && window[Global.globalSettingsKey].useValidator) {
-        Vue.use(VeeValidate)
-      }
 
-      Vue.component(ScrollTabs.name, ScrollTabs.component);
+      Vue.component(ScrollTabs.name, ScrollTabs);
       Vue.component(Card.name, Card);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
@@ -155,22 +151,18 @@ const VueRtStyle = {
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
 
-      // tsx components
-
-      // Vue.component(Carousel.name, Carousel.component);
-      // Vue.component(CarouselSlide.name, CarouselSlide.component);
 
       Vue.component(Tabs.name, Tabs);
       Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
-      Vue.component(GalleryCarousel.name, GalleryCarousel.component);
-      Vue.component(GalleryCarouselItem.name, GalleryCarouselItem.component);
-      Vue.component(ProductCard.name, ProductCard.component);
-      Vue.component(TariffCard.name, TariffCard.component);
-      Vue.component(SlideContent.name, SlideContent.component);
-      Vue.component(SlideContentDottedContent.name, SlideContentDottedContent.component);
-      Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader.component);
+      Vue.component(GalleryCarousel.name, GalleryCarousel);
+      Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
+      Vue.component(ProductCard.name, ProductCard);
+      Vue.component(TariffCard.name, TariffCard);
+      Vue.component(SlideContent.name, SlideContent);
+      Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
+      Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
