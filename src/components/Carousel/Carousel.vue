@@ -39,6 +39,7 @@
         :advancePage="advancePage"
         :canAdvanceForward="canAdvanceForward"
         :canAdvanceBackward="canAdvanceBackward"
+        :navigationContainer="navigationContainer"
         :navsPosStart="navsPosStart"
         :navsPosEnd="navsPosEnd"
       />
@@ -87,10 +88,13 @@
 import Navigation from './CarouselNavi.vue'
 import Mobile from '../../utils/mobile'
 import Animate from '../../utils/animate'
+import StylesUtil from '../../utils/styles'
+import debounce from "debounce"
 
 const name = 'RtCarousel'
 const autoScrollingTimeout = 100 // Длительность задержки автоскроллинга
 const slideSwipingMinDistance = 40 // Минимальное значение сдвига для автоскроллинга
+const defaultPositionState = 'relative' // Использется для определения подгрузки CSS-стилей
 
 let boostedIndex = 0
 
@@ -106,6 +110,9 @@ export default {
     },
     decorated: {
       type: Boolean // Технический параметр для обворачивания карусели в другой компонент
+    },
+    navigationContainer: {
+      type: String // Позволяет вынести навигатор в отдельный блок (#RTRUB2B-1583)
     },
     hideArrows: {
       type: Boolean,
@@ -259,21 +266,24 @@ export default {
     this.isInnerBlock = document.querySelector(`.${this.cssContainer} .${this.cssSelector}[data-uid="${this._uid}"]`) !== null
     if (!this.isTouch) {
       this.createMoves()
-      window.addEventListener('resize', this.createMoves, { passive: true })
+      window.addEventListener('resize', debounce(this.createMoves, 1), { passive: true })
       if (this.overlayEl)
         this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
     } else {
-      window.addEventListener('resize', this.fitCarouselWidth, { passive: true })
+      window.addEventListener('resize', debounce(this.fitCarouselWidth, 1), { passive: true })
       this.fitCarouselWidth()
     }
+    StylesUtil.waitCSSByCond(this.$el, 'position', defaultPositionState).then(() => this.updateNavs())
   },
-  destroyed() {
+  destroyed () {
     this.isAnimating = false
     this.isPending = true
     if (!this.isTouch) {
-      window.removeEventListener("resize", this.createMoves)
+      window.removeEventListener("resize", debounce(this.createMoves, 1))
       clearTimeout(this.scrollingTimer)
       clearTimeout(this.toggleSlidesTimer)
+    } else {
+      window.removeEventListener("resize", debounce(this.fitCarouselWidth, 1))
     }
   },
   methods: {

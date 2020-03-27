@@ -9,7 +9,6 @@ export default {
   //     return {  hasRowSpanBefore };
   // },
 
-
   props: {
     fill: {
       type: Boolean,
@@ -29,19 +28,19 @@ export default {
 
           slotVNode.componentOptions.propsData.slotIndex = counter;
           if(slotVNode.componentOptions.propsData.colspan){
-           counter +=  slotVNode.componentOptions.propsData.colspan - 0 ;
+           counter += slotVNode.componentOptions.propsData.colspan - 0;
           }else {
             counter++;
           }
           // if(, )
-            if(this.checkTableItemIndex(indexNode, this._uid)){
-                slotVNode.componentOptions.propsData.hasRowSpanBefore = true;
-            }else{
+          if(this.checkTableItemIndex(indexNode, this._uid)){
+              slotVNode.componentOptions.propsData.hasRowSpanBefore = true;
+          }else{
 
-                slotVNode.componentOptions.propsData.hasRowSpanBefore = false;
-            }
-            if(slotVNode.componentOptions.propsData.rowspan) {
-              this.setTableItemRowspanIndex(indexNode, parseInt(slotVNode.componentOptions.propsData.rowspan), this._uid)
+              slotVNode.componentOptions.propsData.hasRowSpanBefore = false;
+          }
+          if(slotVNode.componentOptions.propsData.rowspan) {
+            this.setTableItemRowspanIndex(indexNode, parseInt(slotVNode.componentOptions.propsData.rowspan), this._uid)
           }
 
 

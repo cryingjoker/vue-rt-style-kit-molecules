@@ -1,12 +1,17 @@
-<script type="text/jsx">
+<script>
+import debounce from "debounce"
+
 const name = 'RtCarouselNavi'
 const cssSelector = 'rt-carousel__navi'
-let navContainerChanged = false
 
 export default {
   name: name,
   props: {
     overlayEl: null,
+    hSpace: {
+      type: Number,
+      default: 0
+    },
     containerName: {
       type: String,
       default: ''
@@ -39,6 +44,10 @@ export default {
       type: Number,
       default: 0
     },
+    navContainerChanged: {
+      type: Boolean,
+      default: false
+    },
     navigationContainer: {
       type: String,
       default: ''
@@ -60,34 +69,24 @@ export default {
     return {
       position: 'absolute',
       topPos: null,
-      bottomPos: null
+      bottomPos: null,
+      offset: null
     }
   },
   mounted() {
-    if (this.$el.scrollHeight > (this.navsPosStart + this.navsPosEnd)) {
-      this.$nextTick(() => {
-        window.addEventListener('scroll', this.stickNavs, { passive: true })
-        window.addEventListener('resize', this.stickNavs, { passive: true })
-      })
-      this.stickNavs()
-    } else {
-      // Если заданная высота отступа выше зоны просмотра, то центрируем стрелочки
-      this.topPos = '0px'
-      this.bottomPos = '0px'
-    }
+    this.activateNavi()
   },
   updated() {
-    if (!navContainerChanged && this.navigationContainer !== '') {
+    if (!this.navContainerChanged && this.navigationContainer !== '') {
       let els = document.querySelectorAll(this.navigationContainer)
       if (els.length) {
         els[0].insertBefore(this.$el, els[0].firstChild)
       }
-      navContainerChanged = true
+      this.navContainerChanged = true
     }
   },
   destroyed () {
-    window.removeEventListener('scroll', this.stickNavs)
-    window.removeEventListener('resize', this.stickNavs)
+    this.deactivateNavi()
   },
   methods: {
     stickNavs () {
@@ -118,6 +117,23 @@ export default {
       let el = e && e.target ? e.target : null
       if (el && el.getAttribute('data-pos'))
         this.advancePage(el.getAttribute('data-pos'))
+    },
+    activateNavi () {
+      if (this.$parent.$el.scrollHeight > (this.navsPosStart + this.navsPosEnd)) {
+        this.offset = null
+        window.addEventListener('scroll', debounce(this.stickNavs, 1), { passive: true })
+        window.addEventListener('resize', debounce(this.stickNavs, 1), { passive: true })
+        this.stickNavs()
+      } else {
+        // Если заданная высота отступа выше зоны просмотра, то центрируем стрелочки
+        this.offset = 'auto'
+        this.topPos = '0px'
+        this.bottomPos = '0px'
+      }
+    },
+    deactivateNavi () {
+      window.removeEventListener('scroll', debounce(this.stickNavs, 1))
+      window.removeEventListener('resize', debounce(this.stickNavs, 1))
     }
   },
   render (h) {
@@ -182,7 +198,9 @@ export default {
             position: this.position,
             height: this.buttonSize + 'px',
             top: this.topPos,
-            bottom: this.bottomPos
+            bottom: this.bottomPos,
+            marginTop: this.offset,
+            marginBottom: this.offset,
           }}
         >
           { btnRender('prev') }

@@ -149,12 +149,16 @@
   .rt-tabs-tablet &,
   .rt-tabs-mobile &
     width: 100vw
-    margin-left calc((100% - 100vw)/2)
+    //margin-left calc((100% - 100vw)/2)
     position: relative
     left 0
     overflow: auto
     &::-webkit-scrollbar
       display: none
+  .rt-tabs-tablet &
+    margin-left -40px
+  .rt-tabs-mobile &
+    margin-left -20px
 
 .{newAppName}-tabs-navigation__item
   //padding-left vertical-space

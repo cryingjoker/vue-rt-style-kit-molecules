@@ -70,7 +70,10 @@ export default {
       classList += " rt-table-body__item--inactive";
     }
     if(this.hasRowSpanBefore){
-        classList += " rt-table-body__item--has-rowspan-before";
+      classList += " rt-table-body__item--has-rowspan-before";
+      if(window.innerWidth <= 1024) {
+        classList += " td-d-none"
+      }
     }
 
     let slotLabel = '';
@@ -78,11 +81,11 @@ export default {
       slotLabel = this.tableLabels[this.slotIndex]
     }else{
       for(let i = 0;  i <= this.colspan; i++){
-          if(this.tableLabels[i].trim().length > 0) {
-              slotLabel += this.tableLabels[i] + ', '
-          }
+        if(this.tableLabels[i] !== undefined && this.tableLabels[i].trim().length > 0) {
+          slotLabel += this.tableLabels[i] + ', '
+        }
       }
-
+      slotLabel = slotLabel.substr(0, (slotLabel.length - 2));
     }
     return (
       <td
@@ -95,6 +98,7 @@ export default {
         {this.html ? <div domPropsInnerHTML={this.html} class="rt-table-body__content"></div> : <div class="rt-table-body__content">{this.$slots.default}</div>}
       </td>
     );
+
   }
 };
 </script>

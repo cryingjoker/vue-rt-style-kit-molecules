@@ -42,7 +42,6 @@ export default {
        this.rowspanSizeBeforeRow = rowspan - 1;
        this.rowspanUidRow = rowUid;
     },
-
   },
   render: function(h) {
     const columns = () => {
@@ -59,9 +58,7 @@ export default {
         if (slotVNode.tag && slotVNode.tag.search(/RtTableRow/gi) >= 0) {
           slotVNode.componentOptions = slotVNode.componentOptions || {};
           slotVNode.componentOptions.propsData = slotVNode.componentOptions.propsData || {};
-          slotVNode.componentOptions.propsData.tableLabels = JSON.stringify(
-            this.tableLabels
-          );
+          slotVNode.componentOptions.propsData.tableLabels = JSON.stringify(this.tableLabels);
         }
         return slotVNode;
       });
