@@ -49,6 +49,21 @@ const builds = {
         assetPath: resolve('lib'),
 
     },
+    'web-es-full-prod': {
+        entry: resolve('src/index.js'),
+        // entry: [resolve('src/index.js'),resolve('src/css/vue-rt-style-atoms.styl')],
+        dest: resolve('lib/vue-rt-style-kit-molecules.esm.js'),
+        // dest: [resolve('lib/vue-rt-style-kit-atoms.js'),resolve('lib/vue-rt-style-kit-atoms.js')],
+        destCss: resolve('lib/vue-rt-style-kit-molecules.css'),
+        destCssPath: resolve('lib/'),
+        format: 'umd',
+        env: 'production',
+        sourcemap: true,
+        banner,
+        external: ['vee-validate'],
+        assetPath: resolve('lib'),
+
+    },
 }
 
 function genConfig(name = 'web-full-prod') {
@@ -155,4 +170,4 @@ function genConfig(name = 'web-full-prod') {
     }
 }
 
-module.exports = genConfig(process.env.TARGET)
+module.exports = genConfig

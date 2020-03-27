@@ -8,12 +8,25 @@ if (!fs.existsSync('dist')) {
     fs.mkdirSync('dist')
 }
 
-let {config, opts} = require('./config')
+let genConfig = require('./config')
 
 // filter builds via command line arg
+const keysBuild = ['web-es-full-prod','web-full-prod'];
+function build(buildIndex = 0) {
+
+    if(buildIndex < keysBuild.length) {
+        const next = () => {
+            build(buildIndex + 1)
+        }
+        buildEntry(genConfig(keysBuild[buildIndex])).then(() => {
+            next()
+        })
+    }
 
 
-buildEntry(config)
+}
+build();
+// buildEntry(config)
 
 // function build (builds) {
 //     let built = 0
@@ -33,8 +46,9 @@ buildEntry(config)
 //     // next()
 // }
 
-function buildEntry (config) {
-
+function buildEntry (configData) {
+    const config = configData.config;
+    const opts = configData.opts;
     const output = config.output
 
     const { file, banner } = output
