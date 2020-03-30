@@ -10,6 +10,30 @@
     },
     {
       "name" : "rt-carousel",
+      "property" : "loaded",
+      "type" : ["Boolean"],
+      "description" : "Флаг для активации лоадера. Если loaded=true лоадер не отображается",
+      "value" : "true",
+      "version": "0.3.2"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" : "loader",
+      "type" : ["String, {type: String, count: Number, rows: Number, sub: Number}"],
+      "description" : "Настройки лоадера. \b\nЗдесь можно задать скелет карточек. \b\ncount - количество карточек, rows - количество строк, sub - количество подстрок",
+      "value" : "spinner",
+      "version": "0.3.2"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" : "loaded",
+      "type" : ["Boolean"],
+      "description" : "Флаг для активации лоадера",
+      "value" : "false",
+      "version": "0.3.2"
+    },
+    {
+      "name" : "rt-carousel",
       "property" : "disabled-scrolling",
       "type" : ["Boolean"],
       "description" : "Позволяет заблокировать горизонтальный свайпинг и скроллинг карусели",
