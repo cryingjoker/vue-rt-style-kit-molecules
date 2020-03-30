@@ -29,7 +29,7 @@
       </div>
 
       <RtCarouselNavi
-        v-if="!hideNavigation && !isTouch && !disabledScrolling"
+        v-if="loaded && !hideNavigation && !isTouch && !disabledScrolling"
         :hSpace="isInnerBlock && innerBlockOffset > 10 ? innerBlockOffset - 10 : hSpace"
         :isPending="isPending"
         :hideArrows="hideArrows"
@@ -54,8 +54,32 @@
           :class="cssSelector + '__inner ' + cssContainer"
           :style="innerStylesState"
         >
-          <slot></slot>
           <div
+            v-if="!loaded && loader === 'spinner'"
+            :class="cssSelector + '__loader'"
+          >
+            <RtSpinner
+              class="spinner_m"
+            />
+          </div>
+          <template
+            v-if="!loaded && loader && loader.type === 'skeleton'"
+          >
+            <div
+              v-for="(card, key) in loader.count"
+              :key="key"
+              :class="slidesClasses"
+            >
+              <RtCardSkeleton
+                :rows=loader.rows
+                :sub=loader.sub
+              />
+            </div>
+          </template>
+          <slot></slot>
+
+          <div
+            v-if="loaded"
             :class="cssSelector + '__spacer'"
             :style="spacerStylesState"
           >
@@ -64,7 +88,7 @@
       </div>
 
       <div
-        v-else
+        v-if="isTouch"
         ref="overlay"
         :class="cssSelector + '__overlay ' + cssSelector + '__inner ' + cssContainer"
         :style="overlayStyleState"
@@ -104,12 +128,13 @@ export default {
     [Navigation.name]: Navigation
   },
   props: {
-    debug: {
+    loaded: {
       type: Boolean,
-      default: false
+      default: true
     },
-    decorated: {
-      type: Boolean // Технический параметр для обворачивания карусели в другой компонент
+    loader: {
+      type: String|Object,
+      default: 'spinner'
     },
     navigationContainer: {
       type: String // Позволяет вынести навигатор в отдельный блок (#RTRUB2B-1583)
@@ -165,7 +190,14 @@ export default {
     scrollOnClick: {
       type: Boolean,
       default: false
-    }
+    },
+    decorated: {
+      type: Boolean // Технический параметр для обворачивания карусели в другой компонент
+    },
+    debug: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -176,6 +208,7 @@ export default {
       isInnerBlock: false, // Позволяет вынести блок карусели за контейнер
       innerBlockOffset: 0,
       hSpace: 0,
+      slides: [],
       pages: [], // Набор слайдов с позицией для ускорителя
       activeMCId: null,
       activePage: 0,
@@ -201,6 +234,7 @@ export default {
         {
           'is-touch-device': this.isTouch,
           'is-inner-block': this.isInnerBlock,
+          'is-loading': !this.loaded,
           'is-pending': this.isPending,
           'is-animating': this.isAnimating,
           'is-hide-navs': this.hideNavigation,
@@ -239,63 +273,67 @@ export default {
     },
     slidedEl () {
       return this.$refs.inner
-    },
-    slides () {
-      let slideName = 'CarouselSlide'
-      if (this.decorated) {
-        let list = []
-        this.$children
-          .filter(vn => vn.$vnode && vn.$vnode.tag && vn.$vnode.tag.indexOf('slide') > -1)
-          .forEach(ch => {
-            if (ch.$children && ch.$children.length > 0) {
-              ch.$children.forEach((child) => {
-                if (child.$vnode && child.$vnode.tag && child.$vnode.tag.indexOf(slideName) > -1)
-                  list.push(child)
-              })
-            }
-          })
-        return list
+    }
+  },
+  mounted () {
+    this.isInnerBlock = document.querySelector(`.${this.cssContainer} .${this.cssSelector}[data-uid="${this._uid}"]`) !== null
+    if (this.isInnerBlock)
+      this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
+    if (this.loaded) {
+      this.getSlides()
+      this.initNavi()
+    }
+    StylesUtil.waitCSSByCond(this.$el, 'position', defaultPositionState)
+      .then(() => {
+        this.fitCarouselWidth()
+        this.updateNavs()
+      })
+  },
+  watch: {
+    loaded (isLoaded) {
+      if (isLoaded) {
+        this.$nextTick(() => {
+          this.getSlides()
+          this.initNavi()
+        })
       } else {
-        return this.$children.filter(
-          slide => slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
-        )
+        this.unsetNavi()
       }
     }
   },
-  mounted() {
-    this.isInnerBlock = document.querySelector(`.${this.cssContainer} .${this.cssSelector}[data-uid="${this._uid}"]`) !== null
-    if (!this.isTouch) {
-      this.createMoves()
-      window.addEventListener('resize', debounce(this.createMoves, 1), { passive: true })
-      if (this.overlayEl)
-        this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
-    } else {
-      window.addEventListener('resize', debounce(this.fitCarouselWidth, 1), { passive: true })
-      this.fitCarouselWidth()
-    }
-    StylesUtil.waitCSSByCond(this.$el, 'position', defaultPositionState).then(() => this.updateNavs())
-  },
   destroyed () {
-    this.isAnimating = false
-    this.isPending = true
-    if (!this.isTouch) {
-      window.removeEventListener("resize", debounce(this.createMoves, 1))
-      clearTimeout(this.scrollingTimer)
-      clearTimeout(this.toggleSlidesTimer)
-    } else {
-      window.removeEventListener("resize", debounce(this.fitCarouselWidth, 1))
-    }
-  },
+    this.unsetNavi()
+  }, 
   methods: {
+    initNavi () {
+      if (!this.slidedEl || !this.overlayEl) return
+      if (!this.isTouch) {
+        this.createMoves()
+        window.addEventListener('resize', debounce(this.createMoves, 1), { passive: true })
+        if (this.overlayEl)
+          this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
+      } else {
+        window.addEventListener('resize', debounce(this.fitCarouselWidth, 1), { passive: true })
+        this.fitCarouselWidth()
+      }
+    },
+    unsetNavi () {
+      this.isAnimating = false
+      this.isPending = true
+      if (!this.isTouch) {
+        window.removeEventListener("resize", debounce(this.createMoves, 1))
+        clearTimeout(this.scrollingTimer)
+        clearTimeout(this.toggleSlidesTimer)
+      } else {
+        window.removeEventListener("resize", debounce(this.fitCarouselWidth, 1))
+      }
+    },
     /**
      * Основной метод для навигации по слайдам
      * + Формирует постраничную навигацию
      * + Собирает диапозоны широт в виде массива
      */
     createMoves () {
-      if (!this.slidedEl || !this.overlayEl)
-        return
-
       this.autoScrollerRemove()
       clearTimeout(this.toggleSlidesTimer)
 
@@ -303,14 +341,11 @@ export default {
 
       this.fitCarouselWidth()
 
-      if (this.isInnerBlock)
-        this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
-
       this.activePage = 0
       this.pages = []
 
-      this.overlayEl.scrollLeft = 0
       this.isPending = false
+      this.overlayEl.scrollLeft = 0
 
       let wrapStyles = getComputedStyle(this.slidedEl)
       let leftPadding = parseFloat(wrapStyles.paddingLeft)
@@ -389,7 +424,8 @@ export default {
             '\n hSpace', this.hSpace,
             '\n wrapperWidth', wrapperWidth,
             '\n pages ', this.pages,
-            '\n isInnerBlock ', this.isInnerBlock
+            '\n isInnerBlock ', this.isInnerBlock,
+            '\n slides length', this.slides.length
           )
       })
     },
@@ -547,7 +583,27 @@ export default {
       this.scrollingTimer = null
       this.scrollingAutoEnd = true
     },
-
+    getSlides () {
+      let slideName = 'CarouselSlide'
+      if (this.decorated) {
+        let list = []
+        this.$children
+          .filter(vn => vn.$vnode && vn.$vnode.tag && vn.$vnode.tag.indexOf('slide') > -1)
+          .forEach(ch => {
+            if (ch.$children && ch.$children.length > 0) {
+              ch.$children.forEach((child) => {
+                if (child.$vnode && child.$vnode.tag && child.$vnode.tag.indexOf(slideName) > -1)
+                  list.push(child)
+              })
+            }
+          })
+        this.slides = list
+      } else {
+        this.slides = this.$children.filter(
+          slide => slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
+        )
+      }
+    },
     /**
      * Определяет ближайший слайд для автоскролла и сэттит страницу
      */
