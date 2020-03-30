@@ -31,6 +31,11 @@ offsetCalcOverlay = "calc((100vw - (%s - (%s * 3.5 * 2))) / 2)" % (container-upp
     -webkit-box-direction normal
     white-space normal
 
+  &__loader
+    display flex
+    padding 140px 0
+    width 100%
+
   &__slide
     backface-visibility hidden
     opacity 1
@@ -225,6 +230,7 @@ offsetCalcOverlay = "calc((100vw - (%s - (%s * 3.5 * 2))) / 2)" % (container-upp
             min-width offsetCalcOverlay
 
   &.is-animating,
+  &.is-loading,
   &.is-disabled-scrolling
     .{carouselSel}__overlay
       overflow-x hidden

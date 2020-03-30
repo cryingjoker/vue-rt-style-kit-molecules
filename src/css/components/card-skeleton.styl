@@ -1,0 +1,95 @@
+$colorStart = rgba(241, 243, 245, 255)
+$colorEnd = rgba(227, 232, 236, 255)
+$cardOffset = 20px
+$waveDuration = 3s
+$waveSize = 250px
+
+.{newAppName}-skeleton
+  &__wrap
+    margin 0
+
+  &__card
+    border-radius 10px
+    box-shadow 0 5px 10px 0 rgba(16, 24, 40, .15)
+    padding $cardOffset
+    position relative
+
+    &-top,
+    &-row p,
+    &-price,
+    &-btn,
+    &-more
+      border-radius 3px
+
+    hr
+      border 1px solid $colorStart
+      margin 3px (- $cardOffset) 6px (- $cardOffset)
+
+    &-top
+      background $colorStart
+      height 25px
+      margin 0 30px 23px 0
+
+    &-row
+      display flex
+      padding 14px 0
+
+      i
+        background $colorEnd
+        border-radius 50%
+        width 35px
+        height 35px
+
+      div
+        flex auto
+        margin 0 40px 0 20px
+
+        p
+          background $colorStart
+          display block
+          height 13px
+
+          & + p
+            margin-top 9px
+
+    &-price
+      background $colorEnd
+      margin-left auto
+      width 120px
+      height 40px
+
+    &-btn
+      margin 20px 0 15px
+      background $colorStart
+      width 100%
+      height 50px
+
+    &-more
+      background $colorStart
+      margin 0 auto
+      width 144px
+      height 12px
+
+    &-end
+      margin-top 50px
+
+  &__wave
+    overflow hidden
+    position relative
+
+    &:after
+      content ''
+      animation wave $waveDuration ease-in-out infinite
+      background $colorEnd
+      border-radius 50%
+      position absolute
+      width $waveSize
+      height $waveSize
+      top - $waveSize
+      left - $waveSize
+
+@keyframes wave
+  0%
+    transform translate( 0, 0 )
+  100%
+    transform translate( $waveSize * 2, $waveSize )

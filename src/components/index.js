@@ -11,6 +11,7 @@
  export { default as CardBuy} from './Card/CardBuy.vue';
  export { default as CardImage} from './Card/CardImage.vue';
  export { default as CardImageList} from './Card/CardImageList.vue';
+ export { default as CardSkeleton } from './Card/CardSkeleton.vue';
  export { default as Carousel } from './Carousel/Carousel.vue';
  export { default as CarouselSlide } from './Carousel/CarouselSlide.vue';
  export { default as FullscreenImage } from './FullscreenImage/FullscreenImage.vue';

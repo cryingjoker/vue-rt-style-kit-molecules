@@ -16,6 +16,7 @@ import {
   CardBuy,
   CardImage,
   CardImageList,
+  CardSkeleton,
   FullscreenImage,
   RowList,
   RowListItem,
@@ -152,6 +153,7 @@ const VueRtStyle = {
       Vue.component(CardCarousel.name, CardCarousel);
       Vue.component(CardB2o.name, CardB2o);
       Vue.component(CardLayout.name, CardLayout);
+      Vue.component(CardSkeleton.name, CardSkeleton);
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
 
@@ -230,6 +232,7 @@ export {
   CardBuy,
   CardImage,
   CardImageList,
+  CardSkeleton,
   FullscreenImage,
   RowList,
   RowListItem,
