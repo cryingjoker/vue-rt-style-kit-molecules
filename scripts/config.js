@@ -11,6 +11,8 @@ const postcssEnv = require('postcss-preset-env');
 const externals = require('rollup-plugin-node-externals')
 // const typescript = require('@rollup/plugin-typescript');
 // const typescript = require('rollup-plugin-typescript2');
+const alias = require('@rollup/plugin-alias');
+
 const stylusCompilerPlugin = require('./rollup-plugin-stylus-compiler');
 const stylusMixin = require('./stylus-mixin')
 const terser = require("rollup-plugin-terser").terser;
@@ -75,6 +77,10 @@ function genConfig(name = 'web-full-prod') {
 
             flow(),
 
+            alias({
+              entries: [
+                { find: '@projectMolecules', replacement: '../package.json' },
+            ]}),
             json(),
             externals({
                 include: [
