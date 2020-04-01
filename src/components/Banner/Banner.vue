@@ -812,6 +812,7 @@
                 if (!this.isFullscreenImage && !this.noTriangle) {
                     return <svg
                         class="rt-banner-triangle"
+                        preserveAspectRatio="xMinYMin meet"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 185 500"
                         style="transform: translate(-50% 0)">
@@ -825,6 +826,7 @@
                 if (!this.isFullscreenImage && !this.noTriangle) {
                     return <svg
                         class="rt-banner-right-triangle"
+                        preserveAspectRatio="xMinYMin meet"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 185 500">
                         <polygon points="0 500,185 0,0 0"/>
