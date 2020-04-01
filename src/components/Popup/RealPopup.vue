@@ -23,11 +23,21 @@
       popupType: {
         type: Number,
         default: 1
+      },
+      triggerElementClass: {
+        type: String,
+        default: ''
+      },
+      mainWrapperClass: {
+        type: String,
+        default: ''
       }
     },
 
     data: () => ({
-      missClick: true
+      missClick: true,
+      beforePopupScrollPosition : null,
+      wrapperElement : null
     }),
     computed: {
       popupClasses(){
@@ -62,7 +72,11 @@
       close(){
         this.$refs.popupWrapper.classList.remove('rtb-popup-wrapper--active');
         document.body.style.removeProperty('overflow-y');
-        document.documentElement.style.removeProperty('overflow-y');
+        document.documentElement.style.overflowY = "auto";
+        this.wrapperElement.style.overflowY = "auto";
+        this.wrapperElement.style.top = "";
+        this.wrapperElement.style.position = "relative";
+        window.scrollTo(0, this.beforePopupScrollPosition);
       },
       countOffset(){
         setTimeout(() => {
@@ -75,15 +89,32 @@
     },
 
     mounted(){
+      let that = this;
       window.addEventListener('resize', () => {
         this.countOffset()
       });
       this.countOffset();
       document.querySelector('body').addEventListener('open-popup', (e) => {
         if(this.$el.querySelector('.rtb-popup').classList.contains(e.detail[1])) {
-          this.$el.querySelector('.popup-content').innerHTML = e.detail[0].closest('.rt-card').querySelector('.rt-card__popup-benefits').innerHTML;
+          if(e.detail[0].closest('.rt-card')) {
+            this.$el.querySelector('.popup-content').innerHTML = e.detail[0].closest('.rt-card').querySelector('.rt-card__popup-benefits').innerHTML;
+          }
           this.$el.classList.add('rtb-popup-wrapper--active');
         }
+      });
+      let trigger = '.' + this.triggerElementClass;
+      this.wrapperElement = document.querySelector('.' + this.mainWrapperClass);
+      document.querySelectorAll(trigger).forEach(function(item){
+        item.addEventListener('click', function(){
+          this.beforePopupScrollPosition = window.pageYOffset;
+          var topPosition = (-this.beforePopupScrollPosition).toString() + "px";
+          document.documentElement.style.overflowY = "hidden";
+          this.wrapperElement.style.overflowY = "hidden";
+          document.documentElement.style.position = "relative";
+          this.wrapperElement.style.width = "100vw";
+          this.wrapperElement.style.position = "fixed";
+          this.wrapperElement.style.top = topPosition;
+        }.bind(that))
       })
     },
     render: function(h) {
