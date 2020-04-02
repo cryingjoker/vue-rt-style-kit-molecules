@@ -71,7 +71,7 @@
             },
             noTriangle: {
                 type: Boolean,
-                default: true
+                default: false
             },
             roundAngles: {
                 type: Boolean,
@@ -294,7 +294,6 @@
             imageClass() {
                 let className = "rt-banner-image rt-banner-image--main";
                 const activeIndex = this.RtBanners.activeIndex;
-
                 if (this.transparentBackgroundImage) {
                     className += " rt-banner-image--contain";
                 }

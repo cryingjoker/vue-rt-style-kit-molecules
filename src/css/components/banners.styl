@@ -197,213 +197,6 @@
           width 100%
           left 0
 
-  &-triangle
-
-    height 100%
-    margin-left 0
-    position absolute
-    top 0
-    left -1px
-    z-index 10
-    transition-timing-function ease-in-out
-    transition-duration .3s
-    transition-property fill
-    fill transparent
-
-    @media (max-width: mobile-upper-limit)
-      display none
-
-    .{newAppName}-banner--background-dark-state &
-      fill b2c-dark-state
-
-    .{newAppName}-banner--background-purple &
-      fill b2c-purple
-
-    .{newAppName}-banner--background-purple-low &
-      fill b2c-purple-low
-
-    .{newAppName}-banner--background-purple-high &
-      fill b2c-purple-high
-
-    .{newAppName}-banner--background-red &
-      fill b2c-red
-
-    .{newAppName}-banner--background-red-low &
-      fill b2c-red-low
-
-    .{newAppName}-banner--background-red-high &
-      fill b2c-red-high
-
-    .{newAppName}-banner--background-dark-blue &
-      fill b2c-dark-blue
-
-    .{newAppName}-banner--background-dark-blue-low &
-      fill b2c-dark-blue-low
-
-    .{newAppName}-banner--background-dark-blue-high &
-      fill b2c-dark-blue-high
-
-    .{newAppName}-banner--background-light-blue &
-      fill b2c-light-blue
-
-    .{newAppName}-banner--background-light-blue-low &
-      fill b2c-light-blue-low
-
-    .{newAppName}-banner--background-light-blue-high &
-      fill b2c-light-blue-high
-
-    .{newAppName}-banner--background-yellow &
-      fill b2c-yellow
-
-    .{newAppName}-banner--background-yellow-low &
-      fill b2c-yellow-low
-
-    .{newAppName}-banner--background-yellow-high &
-      fill b2c-yellow-high
-
-    .{newAppName}-banner--background-orange &
-      fill b2c-orange
-
-    .{newAppName}-banner--background-orange-low &
-      fill b2c-orange-low
-
-    .{newAppName}-banner--background-orange-high &
-      fill b2c-orange-high
-
-    .{newAppName}-banner--background-pink &
-      fill b2c-pink
-
-    .{newAppName}-banner--background-pink-low &
-      fill b2c-pink-low
-
-    .{newAppName}-banner--background-pink-high &
-      fill b2c-pink-high
-
-    .{newAppName}-banner--background-green &
-      fill b2c-green
-
-    .{newAppName}-banner--background-green-low &
-      fill b2c-green-low
-
-    .{newAppName}-banner--background-green-high &
-      fill b2c-green-high
-
-    .{newAppName}-banner--background-black &
-      fill main-color
-
-    .{newAppName}-banner--background-main-color &
-      fill main-color
-
-    .{newAppName}-banner--game-promo-color &
-      fill game-promo-color
-
-  &-right-triangle
-    display none
-    width 185px
-    height 100%
-    position absolute
-    top 0
-    right -1px
-    z-index 10
-    transition-timing-function ease-in-out
-    transition-duration .3s
-    transition-property fill
-    fill transparent
-
-    .{newAppName}-banner--background-dark-state &
-      fill b2c-dark-state
-
-    .{newAppName}-banner--background-purple &
-      fill b2c-purple
-
-    .{newAppName}-banner--background-purple-low &
-      fill b2c-purple-low
-
-    .{newAppName}-banner--background-purple-high &
-      fill b2c-purple-high
-
-    .{newAppName}-banner--background-red &
-      fill b2c-red
-
-    .{newAppName}-banner--background-red-low &
-      fill b2c-red-low
-
-    .{newAppName}-banner--background-red-high &
-      fill b2c-red-high
-
-    .{newAppName}-banner--background-dark-blue &
-      fill b2c-dark-blue
-
-    .{newAppName}-banner--background-dark-blue-low &
-      fill b2c-dark-blue-low
-
-    .{newAppName}-banner--background-dark-blue-high &
-      fill b2c-dark-blue-high
-
-    .{newAppName}-banner--background-light-blue &
-      fill b2c-light-blue
-
-    .{newAppName}-banner--background-light-blue-low &
-      fill b2c-light-blue-low
-
-    .{newAppName}-banner--background-light-blue-high &
-      fill b2c-light-blue-high
-
-    .{newAppName}-banner--background-yellow &
-      fill b2c-yellow
-
-    .{newAppName}-banner--background-yellow-low &
-      fill b2c-yellow-low
-
-    .{newAppName}-banner--background-yellow-high &
-      fill b2c-yellow-high
-
-    .{newAppName}-banner--background-orange &
-      fill b2c-orange
-
-    .{newAppName}-banner--background-orange-low &
-      fill b2c-orange-low
-
-    .{newAppName}-banner--background-orange-high &
-      fill b2c-orange-high
-
-    .{newAppName}-banner--background-pink &
-      fill b2c-pink
-
-    .{newAppName}-banner--background-pink-low &
-      fill b2c-pink-low
-
-    .{newAppName}-banner--background-pink-high &
-      fill b2c-pink-high
-
-    .{newAppName}-banner--background-green &
-      fill b2c-green
-
-    .{newAppName}-banner--background-green-low &
-      fill b2c-green-low
-
-    .{newAppName}-banner--background-green-high &
-      fill b2c-green-high
-
-    .{newAppName}-banner--background-black &
-      fill main-color
-
-    .{newAppName}-banner--background-main-color &
-      fill main-color
-
-    .{newAppName}-banner--game-promo-color &
-      fill game-promo-color
-
-    transform rotate(180deg)
-
-    @media (min-width: 1550px) and (max-width: 1920px)
-      display block
-      right calc(80% - 1550px)
-
-    @media (min-width: 1920px)
-      display block
-      right -2px
-
   &--color-white
     color white
 
@@ -494,7 +287,7 @@
     transition-property background-image, left
     animation-name showImage
     animation-duration 2s
-    animation-timing-function linear
+    animation-timing-function ease-in-out
     @media (max-width: tablet-upper-limit)
       width 60%
       left 40%
@@ -1095,4 +888,223 @@
     bottom 0
     background linear-gradient(to bottom, rgba(main-color, 0) 0%,  rgba(main-color, .75) 100%)
 
+@keyframes showImage
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+@keyframes showTriangle
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 
+.rt-banner-triangle
+
+  height 100%
+  margin-left 0
+  position absolute
+  top 0
+  left -1px
+  z-index 10
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property fill
+  fill transparent
+  //animation showTriangle  0.35s cubic-bezier(0,.74,.75,.16) 0.05s
+  animation showTriangle  0.3s ease-in-out
+
+
+  @media (max-width: mobile-upper-limit)
+    display none
+
+  .{newAppName}-banner--background-dark-state &
+    fill b2c-dark-state
+
+  .{newAppName}-banner--background-purple &
+    fill b2c-purple
+
+  .{newAppName}-banner--background-purple-low &
+    fill b2c-purple-low
+
+  .{newAppName}-banner--background-purple-high &
+    fill b2c-purple-high
+
+  .{newAppName}-banner--background-red &
+    fill b2c-red
+
+  .{newAppName}-banner--background-red-low &
+    fill b2c-red-low
+
+  .{newAppName}-banner--background-red-high &
+    fill b2c-red-high
+
+  .{newAppName}-banner--background-dark-blue &
+    fill b2c-dark-blue
+
+  .{newAppName}-banner--background-dark-blue-low &
+    fill b2c-dark-blue-low
+
+  .{newAppName}-banner--background-dark-blue-high &
+    fill b2c-dark-blue-high
+
+  .{newAppName}-banner--background-light-blue &
+    fill b2c-light-blue
+
+  .{newAppName}-banner--background-light-blue-low &
+    fill b2c-light-blue-low
+
+  .{newAppName}-banner--background-light-blue-high &
+    fill b2c-light-blue-high
+
+  .{newAppName}-banner--background-yellow &
+    fill b2c-yellow
+
+  .{newAppName}-banner--background-yellow-low &
+    fill b2c-yellow-low
+
+  .{newAppName}-banner--background-yellow-high &
+    fill b2c-yellow-high
+
+  .{newAppName}-banner--background-orange &
+    fill b2c-orange
+
+  .{newAppName}-banner--background-orange-low &
+    fill b2c-orange-low
+
+  .{newAppName}-banner--background-orange-high &
+    fill b2c-orange-high
+
+  .{newAppName}-banner--background-pink &
+    fill b2c-pink
+
+  .{newAppName}-banner--background-pink-low &
+    fill b2c-pink-low
+
+  .{newAppName}-banner--background-pink-high &
+    fill b2c-pink-high
+
+  .{newAppName}-banner--background-green &
+    fill b2c-green
+
+  .{newAppName}-banner--background-green-low &
+    fill b2c-green-low
+
+  .{newAppName}-banner--background-green-high &
+    fill b2c-green-high
+
+  .{newAppName}-banner--background-black &
+    fill main-color
+
+  .{newAppName}-banner--background-main-color &
+    fill main-color
+
+  .{newAppName}-banner--game-promo-color &
+    fill game-promo-color
+
+.rt-banner-right-triangle
+  display none
+  width 185px
+  height 100%
+  position absolute
+  top 0
+  right -1px
+  z-index 10
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property fill
+  fill transparent
+
+  .{newAppName}-banner--background-dark-state &
+    fill b2c-dark-state
+
+  .{newAppName}-banner--background-purple &
+    fill b2c-purple
+
+  .{newAppName}-banner--background-purple-low &
+    fill b2c-purple-low
+
+  .{newAppName}-banner--background-purple-high &
+    fill b2c-purple-high
+
+  .{newAppName}-banner--background-red &
+    fill b2c-red
+
+  .{newAppName}-banner--background-red-low &
+    fill b2c-red-low
+
+  .{newAppName}-banner--background-red-high &
+    fill b2c-red-high
+
+  .{newAppName}-banner--background-dark-blue &
+    fill b2c-dark-blue
+
+  .{newAppName}-banner--background-dark-blue-low &
+    fill b2c-dark-blue-low
+
+  .{newAppName}-banner--background-dark-blue-high &
+    fill b2c-dark-blue-high
+
+  .{newAppName}-banner--background-light-blue &
+    fill b2c-light-blue
+
+  .{newAppName}-banner--background-light-blue-low &
+    fill b2c-light-blue-low
+
+  .{newAppName}-banner--background-light-blue-high &
+    fill b2c-light-blue-high
+
+  .{newAppName}-banner--background-yellow &
+    fill b2c-yellow
+
+  .{newAppName}-banner--background-yellow-low &
+    fill b2c-yellow-low
+
+  .{newAppName}-banner--background-yellow-high &
+    fill b2c-yellow-high
+
+  .{newAppName}-banner--background-orange &
+    fill b2c-orange
+
+  .{newAppName}-banner--background-orange-low &
+    fill b2c-orange-low
+
+  .{newAppName}-banner--background-orange-high &
+    fill b2c-orange-high
+
+  .{newAppName}-banner--background-pink &
+    fill b2c-pink
+
+  .{newAppName}-banner--background-pink-low &
+    fill b2c-pink-low
+
+  .{newAppName}-banner--background-pink-high &
+    fill b2c-pink-high
+
+  .{newAppName}-banner--background-green &
+    fill b2c-green
+
+  .{newAppName}-banner--background-green-low &
+    fill b2c-green-low
+
+  .{newAppName}-banner--background-green-high &
+    fill b2c-green-high
+
+  .{newAppName}-banner--background-black &
+    fill main-color
+
+  .{newAppName}-banner--background-main-color &
+    fill main-color
+
+  .{newAppName}-banner--game-promo-color &
+    fill game-promo-color
+
+  transform rotate(180deg)
+
+  @media (min-width: 1550px) and (max-width: 1920px)
+    display block
+    right calc(80% - 1550px)
+
+  @media (min-width: 1920px)
+    display block
+    right -2px
