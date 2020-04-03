@@ -34,11 +34,11 @@ export default {
       type: Boolean,
       default: false
     },
-    desktopNotReasize: {
+    desktopNotResize: {
       type: Boolean,
       default: false
     },
-    tabletNotReasize: {
+    tabletNotResize: {
       type: Boolean,
       default: false
     },

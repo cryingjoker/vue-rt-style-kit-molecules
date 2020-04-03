@@ -13,6 +13,18 @@
         name: "RtBanner",
         components: componentsList,
         props: {
+            resizeQuerySelectorsNames:{
+                type: Array,
+                default: []
+            },
+            mobileNotResizeQuerySelectors:{
+                type: Boolean,
+                default: true
+            },
+            tabletNotResizeQuerySelectors:{
+                type: Boolean,
+                default: false
+            },
             scrollToNextImage: {
                 type: Boolean,
                 default: false
@@ -904,7 +916,13 @@
                 }
             };
 
-            return <div class={this.bannerClass} style={this.bannerStyle}>
+            const resizeData = {
+                querySelectorsNames:this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames : [] ,
+                notRun: this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames.length === 0 : true,
+                mobileNotResize : this.mobileNotResizeQuerySelectors,
+                tabletNotResize:  this.tabletNotReasizeQuerySelectors
+            }
+            return <div class={this.bannerClass} style={this.bannerStyle} v-rt-resize-content-height={resizeData}>
                 <div class="rt-container rt-banner-container">
                     {link()}
                     {bannerContent()}
