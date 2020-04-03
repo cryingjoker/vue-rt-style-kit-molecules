@@ -71,7 +71,6 @@
       },
       close(){
         this.$refs.popupWrapper.classList.remove('rtb-popup-wrapper--active');
-        document.body.style.removeProperty('overflow-y');
         document.documentElement.style.overflowY = "auto";
         this.wrapperElement.style.overflowY = "auto";
         this.wrapperElement.style.top = "";
@@ -109,6 +108,7 @@
           this.beforePopupScrollPosition = window.pageYOffset;
           var topPosition = (-this.beforePopupScrollPosition).toString() + "px";
           document.documentElement.style.overflowY = "hidden";
+          document.body.style.overflowY = "auto";
           this.wrapperElement.style.overflowY = "hidden";
           document.documentElement.style.position = "relative";
           this.wrapperElement.style.width = "100vw";
