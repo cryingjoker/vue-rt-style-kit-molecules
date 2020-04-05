@@ -393,6 +393,30 @@
       "description": "Используется для сбора Google-аналитики. \n\n`:ga=\"{\n  name: Заголовок слайда баннера,\n  section: Раздел сайта (main_page, /bonus, /smarthouse - по-умолчанию location.pathname)\n}\"`",
       "value": "null",
       "version": " >= 0.0.30"
+    },
+    {
+      "name": "rt-banner",
+      "property": "resize-query-selectors-names",
+      "type": "Array",
+      "description": "Список query селекторов для выравнивания по высоте",
+      "value": "[]",
+      "version": "0.3.6"
+    },
+    {
+      "name": "rt-banner",
+      "property": "mobile-not-resize-query-selectors",
+      "type": "Boolean",
+      "description": "Флаг запрета выравнивания селекторов  по высоте на mobile",
+      "value": "true",
+      "version": "0.3.6"
+    },
+    {
+      "name": "rt-banner",
+      "property": "tablet-not-resize-query-selectors",
+      "type": "Boolean",
+      "description": "Флаг запрета выравнивания селекторов  по высоте на tablet",
+      "value": "false",
+      "version": "0.3.6"
     }
   ]
 }
