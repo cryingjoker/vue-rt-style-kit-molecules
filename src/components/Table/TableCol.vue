@@ -11,19 +11,7 @@
                 type: [String, Number],
                 default: null
             },
-            columnWidth: {
-                type: Boolean,
-                default: false
-            },
             widthInColsDesktop: {
-                type: Number,
-                default: null
-            },
-            widthInColsTablet: {
-                type: Number,
-                default: null
-            },
-            widthInColsMobile: {
                 type: Number,
                 default: null
             }
@@ -36,9 +24,10 @@
             singleColumn: null
         }),
         mounted() {
+            this.calculateMobileOptions();
             this.columnsTemplate();
             deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
-            window.addEventListener('resize', debounce(this.columnsTemplate, 10));
+            window.addEventListener('resize', debounce(this.columnsTemplate, 35));
         },
         beforeUpdate() {
             deviceTypeStore.removeWatcher(this._uid, this.calculateMobileOptions);
@@ -54,29 +43,26 @@
                 const type = deviceTypeStore.getStatus();
                 this.isTablet = type == 'tablet';
                 this.isMobile = type == 'mobile';
-
             },
             columnsTemplate() {
 
-                let style = '';
-                if (this.isTablet) {
-                    this.containerWidth = window.innerWidth - 80;
-                    this.singleColumn = (this.containerWidth - 100) * 0.1666666;
-                    let blockWidth = this.widthInColsTablet * this.singleColumn + (this.widthInColsTablet - 1) * 20;
-                    style = `${blockWidth}px`;
-                } else if (this.isMobile) {
-                    this.containerWidth = window.innerWidth - 40;
-                    this.singleColumn = (this.containerWidth - 40) * 0.3333333;
-                    let blockWidth = this.widthInColsMobile * this.singleColumn + (this.widthInColsMobile - 1) * 20;
-                    style = `${blockWidth}px`;
-                } else {
-                    this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 160 : 1320;
-                    this.singleColumn = (this.containerWidth - 220) * 0.0833333;
-                    let blockWidth = this.widthInColsDesktop * this.singleColumn + (this.widthInColsDesktop - 1) * 20;
-                    style = `${blockWidth}px`;
+                if(this.widthInColsDesktop) {
+                    let style = '';
+                    let thisParent = this.$el.closest('.rt-table-colgroup');
+                    let blockWidth;
+                    if (!(this.isTablet || this.isMobile)) {
+                        this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 140 : 1320;
+                        this.singleColumn = this.containerWidth / 12;
+                        blockWidth = this.widthInColsDesktop * this.singleColumn;
+                        if(this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
+                          blockWidth -= 10;
+                        }
+                        style = `${blockWidth}px`;
+                        this.$el.style.width = style;
+                    } else {
+                        this.$el.style.width = '';
+                    }
                 }
-                ;
-                this.$el.style.width = style;
             }
         },
 
