@@ -1,6 +1,8 @@
 <script type="text/jsx">
 const componentsList = {};
 import variables from "../../variables.json";
+import debounce from "debounce";
+
 
 export default {
   name: "RtUseCase",
@@ -12,12 +14,8 @@ export default {
     }
   },
   mounted(){
-    window.addEventListener('load', () => {
-      this.setCardHeight();
-      document.addEventListener('resize', ()=> {
-        this.setCardHeight();
-      })
-    });
+    this.setCardHeight();
+    window.addEventListener('resize', debounce(this.setCardHeight, 35))
 
   },
   computed: {},
