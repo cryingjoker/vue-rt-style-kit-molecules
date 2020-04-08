@@ -232,7 +232,6 @@
             }
         },
         data: () => ({
-            viewportWasClosely: false,
             index: null,
             mobileLayout: browser.isMobile(),
             tabletLayout: browser.isTablet(),
@@ -427,88 +426,81 @@
             },
             cardBackgroundStyle() {
                 const styles = {};
-                if(this.viewportWasClosely) {
-                    if (this.backgroundImage && !this.backgroundImageStandAlone && this.localBackgroundImage) {
-                        styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                    }
-                    if (this.productIcon && this.localProductIcon) {
-                        styles.backgroundImage = "url(" + this.localProductIcon + ")";
-                    }
-                    if (this.backgroundSizeWidth && this.backgroundSizeHeight) {
+                if (this.backgroundImage && !this.backgroundImageStandAlone && this.localBackgroundImage) {
+                    styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
+                }
+                if (this.productIcon && this.localProductIcon) {
+                    styles.backgroundImage = "url(" + this.localProductIcon + ")";
+                }
+                if (this.backgroundSizeWidth && this.backgroundSizeHeight) {
+                    const backgroundSizeWidth = this.normalizeSize(
+                        this.backgroundSizeWidth
+                    );
+                    const backgroundSizeHeight = this.normalizeSize(
+                        this.backgroundSizeHeight
+                    );
+                    styles.backgroundSize =
+                        backgroundSizeWidth + " " + backgroundSizeHeight;
+                } else {
+                    if (this.backgroundSizeWidth) {
                         const backgroundSizeWidth = this.normalizeSize(
                             this.backgroundSizeWidth
                         );
+                        styles.backgroundSize = backgroundSizeWidth;
+                    }
+                    if (this.backgroundSizeHeight) {
                         const backgroundSizeHeight = this.normalizeSize(
                             this.backgroundSizeHeight
                         );
-                        styles.backgroundSize =
-                            backgroundSizeWidth + " " + backgroundSizeHeight;
-                    } else {
-                        if (this.backgroundSizeWidth) {
-                            const backgroundSizeWidth = this.normalizeSize(
-                                this.backgroundSizeWidth
-                            );
-                            styles.backgroundSize = backgroundSizeWidth;
-                        }
-                        if (this.backgroundSizeHeight) {
-                            const backgroundSizeHeight = this.normalizeSize(
-                                this.backgroundSizeHeight
-                            );
-                            styles.backgroundSize = backgroundSizeHeight;
-                        }
+                        styles.backgroundSize = backgroundSizeHeight;
                     }
-                    if (this.backgroundImage) {
-                        if (this.backgroundBlur) {
-                            styles.filter =
-                                "blur(" + this.normalizeSize(this.backgroundBlur) + ")";
-                        }
-                        if (this.backgroundOpacity) {
-                            styles.opacity = this.backgroundOpacity;
-                        }
+                }
+                if (this.backgroundImage) {
+                    if (this.backgroundBlur) {
+                        styles.filter =
+                            "blur(" + this.normalizeSize(this.backgroundBlur) + ")";
+                    }
+                    if (this.backgroundOpacity) {
+                        styles.opacity = this.backgroundOpacity;
                     }
                 }
                 return styles;
             },
             standAloneBackgroundStyle() {
-                if (this.viewportWasClosely) {
-                    if (this.backgroundImageStandAlone && this.backgroundImage) {
-                        const styles = {};
-                        if (this.backroundIsDownloaded) {
-                            if (this.localBackgroundImage) {
-                                styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                            }
-                        }
-                        styles.width =
-                            this.normalizeSize(this.backgroundSizeWidth) ||
-                            this.normalizeSize(this.backgroundSizeHeight);
-                        styles.height =
-                            this.normalizeSize(this.backgroundSizeHeight) ||
-                            this.normalizeSize(this.backgroundSizeWidth);
-                        styles.top = this.normalizeSize(this.backgroundPositionTop);
-                        styles.bottom = this.normalizeSize(this.backgroundPositionBottom);
-                        styles.right = this.normalizeSize(this.backgroundPositionRight);
-                        styles.left = this.normalizeSize(this.backgroundPositionLeft);
+                if (this.backgroundImageStandAlone && this.backgroundImage) {
+                    const styles = {};
 
-                        return styles;
+                    if (this.localBackgroundImage) {
+                        styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
                     }
+                    styles.width =
+                        this.normalizeSize(this.backgroundSizeWidth) ||
+                        this.normalizeSize(this.backgroundSizeHeight);
+                    styles.height =
+                        this.normalizeSize(this.backgroundSizeHeight) ||
+                        this.normalizeSize(this.backgroundSizeWidth);
+                    styles.top = this.normalizeSize(this.backgroundPositionTop);
+                    styles.bottom = this.normalizeSize(this.backgroundPositionBottom);
+                    styles.right = this.normalizeSize(this.backgroundPositionRight);
+                    styles.left = this.normalizeSize(this.backgroundPositionLeft);
+
+                    return styles;
                 }
                 return {};
             },
             categoryImage() {
                 const styles = {};
-                if (this.viewportWasClosely) {
-                    if (this.backgroundImage && this.localBackgroundImage) {
-                        styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                    }
+
+                if (this.backgroundImage && this.localBackgroundImage) {
+                    styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
                 }
                 return styles;
             },
             categoryIcon() {
                 const styles = {};
-                if(this.viewportWasClosely) {
-                    if (this.categoryIconMobile && this.localCategoryIconMobile) {
-                        styles.backgroundImage = "url(" + this.localCategoryIconMobile + ")";
-                    }
+
+                if (this.categoryIconMobile && this.localCategoryIconMobile) {
+                    styles.backgroundImage = "url(" + this.localCategoryIconMobile + ")";
                 }
                 return styles;
             },
@@ -532,22 +524,34 @@
             }
         },
         updated() {
-            this.removeViewportPositionWatchers();
-            this.addViewPortPositionWatchers();
+            const id = this._uid;
+            viewportPositionStore.removeWatcher(id);
+            viewportPositionStore.removeWatchEl(id)
+            viewportPositionStore.addWatchEl(id, this.$el)
+            viewportPositionStore.addWatcher(id, () => {
+                console.info('&&&*&*&*', viewportPositionStore.getElPosition(id))
+            });
         },
         beforeDestroy() {
-            this.removeViewportPositionWatchers()
+            const id = this._uid;
+            viewportPositionStore.removeWatcher(id);
+            viewportPositionStore.removeWatchEl(id)
         },
         mounted() {
             const id = this._uid;
-            this.addViewPortPositionWatchers()
-
+            viewportPositionStore.addWatchEl(id, this.$el);
+            viewportPositionStore.addWatcher(id, () => {
+                console.info('test')
+                viewportPositionStore.getElPosition(id)
+            })
             window.addEventListener('resize', () => {
                 this.mobileLayout = browser.isMobile()
                 this.tabletLayout = browser.isTablet()
                 if (this.inTabsWImage)
                     this.redrawSvg();
+                this.setMainImage()
             })
+            this.setMainImage()
 
             if (this.inTabsWImage)
                 this.redrawSvg();
@@ -578,25 +582,6 @@
             }
         },
         methods: {
-            addViewPortPositionWatchers() {
-                if (!this.viewportWasClosely) {
-                    const id = this._uid;
-                    viewportPositionStore.addWatchEl(id, this.$el);
-                    viewportPositionStore.addWatcher(id, () => {
-                        const position = viewportPositionStore.getElPosition(id)
-                        if (position <= 1.5) {
-                            this.viewportWasClosely = true;
-                            this.setMainImage();
-                            this.removeViewportPositionWatchers()
-                        }
-                    })
-                }
-            },
-            removeViewportPositionWatchers() {
-                const id = this._uid;
-                viewportPositionStore.removeWatcher(id);
-                viewportPositionStore.removeWatchEl(id)
-            },
             loadImageAsync(src, resolve, reject = () => {
             }) {
                 let image = new Image();
