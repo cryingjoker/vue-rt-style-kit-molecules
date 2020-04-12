@@ -37,7 +37,8 @@
     data: () => ({
       missClick: true,
       beforePopupScrollPosition : null,
-      wrapperElement : null
+      wrapperElement : null,
+      isSafari : navigator.userAgent.indexOf("Safari") > -1
     }),
     computed: {
       popupClasses(){
@@ -73,9 +74,11 @@
         this.$refs.popupWrapper.classList.remove('rtb-popup-wrapper--active');
         document.documentElement.style.overflowY = "auto";
         this.wrapperElement.style.overflowY = "auto";
-        this.wrapperElement.style.top = "";
-        this.wrapperElement.style.position = "relative";
-        window.scrollTo(0, this.beforePopupScrollPosition);
+        if(this.isSafari) {
+          this.wrapperElement.style.top = "";
+          this.wrapperElement.style.position = "relative";
+          window.scrollTo(0, this.beforePopupScrollPosition);
+        }
       },
       countOffset(){
         setTimeout(() => {
@@ -107,13 +110,15 @@
         item.addEventListener('click', function(){
           this.beforePopupScrollPosition = window.pageYOffset;
           var topPosition = (-this.beforePopupScrollPosition).toString() + "px";
-          document.documentElement.style.overflowY = "hidden";
-          document.body.style.overflowY = "auto";
+          document.body.style.overflowY = "hidden";
           this.wrapperElement.style.overflowY = "hidden";
-          document.documentElement.style.position = "relative";
-          this.wrapperElement.style.width = "100vw";
-          this.wrapperElement.style.position = "fixed";
-          this.wrapperElement.style.top = topPosition;
+          navigator.userAgent.indexOf("Windows") > -1 ? document.documentElement.style.overflowY = "scroll" : document.documentElement.style.overflowY = "hidden";
+          if(this.isSafari) {
+            document.documentElement.style.position = "relative";
+            this.wrapperElement.style.width = "100vw";
+            this.wrapperElement.style.position = "fixed";
+            this.wrapperElement.style.top = topPosition;
+          }
         }.bind(that))
       })
     },
