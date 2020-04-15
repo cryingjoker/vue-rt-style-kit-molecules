@@ -168,6 +168,7 @@ offsetCalcOverlay = "calc((100vw - (%s - (%s * 3.5 * 2))) / 2)" % (container-upp
       -webkit-scroll-snap-type-x mandatory
       scroll-snap-type mandatory
       scroll-snap-type x mandatory
+      scroll-padding-left scrollHSpace
 
     .{carouselSel}__slide
       -webkit-scroll-snap-align start
@@ -181,6 +182,7 @@ offsetCalcOverlay = "calc((100vw - (%s - (%s * 3.5 * 2))) / 2)" % (container-upp
     @media (min-width: tablet-lower-limit)
       .{carouselSel}__inner
         scroll-padding-inline-start scrollHSpaceTablet
+        scroll-padding-left scrollHSpaceTablet
 
       .{carouselSel}__spacer
         min-width scrollHSpaceTablet
