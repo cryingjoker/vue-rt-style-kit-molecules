@@ -14,6 +14,14 @@
             widthInColsDesktop: {
                 type: Number,
                 default: null
+            },
+            widthInColsTablet: {
+                type: Number,
+                default: null
+            },
+            widthInColsMobile: {
+                type: Number,
+                default: null
             }
         },
 
@@ -21,9 +29,11 @@
             isTablet: false,
             isMobile: false,
             containerWidth: null,
-            singleColumn: null
+            singleColumn: null,
+            columnWidth: null
         }),
         mounted() {
+            this.columnWidth = this.$parent._props.columnWidth;
             this.calculateMobileOptions();
             this.columnsTemplate();
             deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
@@ -45,24 +55,40 @@
                 this.isMobile = type == 'mobile';
             },
             columnsTemplate() {
-
-                if(this.widthInColsDesktop) {
+                if(this.columnWidth) {
                     let style = '';
                     let thisParent = this.$el.closest('.rt-table-colgroup');
                     let blockWidth;
-                    if (!(this.isTablet || this.isMobile)) {
-                        this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 140 : 1320;
+                    if(this.isTablet && this.widthInColsTablet) {
+                        this.containerWidth = window.innerWidth - 60;
+                        this.singleColumn = this.containerWidth / 6;
+                        blockWidth = this.widthInColsTablet * this.singleColumn;
+                        if(this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
+                          blockWidth -= 10;
+                        }
+                        style = `${blockWidth}px`;
+                        this.$el.style.width = style;
+                    } else if(this.isMobile && this.widthInColsMobile) {
+                        this.containerWidth = window.innerWidth - 20;
                         this.singleColumn = this.containerWidth / 12;
-                        blockWidth = this.widthInColsDesktop * this.singleColumn;
+                        blockWidth = this.widthInColsMobile * this.singleColumn;
                         if(this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
                           blockWidth -= 10;
                         }
                         style = `${blockWidth}px`;
                         this.$el.style.width = style;
                     } else {
-                        this.$el.style.width = '';
+                        this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 140 : 1320;
+                        this.singleColumn = this.containerWidth / 12;
+                        blockWidth = this.widthInColsDesktop * this.singleColumn;
+                        if(this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
+                            blockWidth -= 10;
+                        }
+                        style = `${blockWidth}px`;
+                        this.$el.style.width = style;
                     }
                 }
+
             }
         },
 
