@@ -44,6 +44,18 @@
             },
             onUpdateTabsStore() {
                 this.$forceUpdate()
+            },
+            setGlobalAnalytics () {
+                if (tabsStore.globalAnalyticsSegment) {
+                    if (!window.dataLayer) {
+                        window.dataLayer = [];
+                    }
+                    window.dataLayer.push({
+                        event: tabsStore.globalAnalyticsSegment,
+                        type: 'main_tab',
+                        value: this.name
+                    });
+                }
             }
         },
         mounted() {
@@ -55,6 +67,7 @@
             }
             this.$refs['tabItem'].addEventListener('click', () => {
                 this.setActiveTabName()
+                this.setGlobalAnalytics()
             }, true);
             if (this.removeBaseTag) {
                 let baseNode = document.querySelector("base");
