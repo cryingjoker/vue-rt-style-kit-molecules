@@ -162,7 +162,7 @@
       "name": "rt-banner",
       "property": "background-color",
       "type": "String",
-      "description": "Устанавливает цвет фона банера \n возможные значения \n `dark-state` `yellow` `red` `dark-blue` `light-blue` `orange` `pink` `green`",
+      "description": "Устанавливает цвет фона банера \n возможные значения \n `dark-slate` `yellow` `red` `dark-blue` `light-blue` `orange` `pink` `green`",
       "value": "null"
     },
     {

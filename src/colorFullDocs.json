@@ -250,12 +250,12 @@
     "value": "rgba(255,130,24,0.2)"
   },
   {
-    "code_variable_name": "b2b-state",
+    "code_variable_name": "b2b-slate",
     "label": "Rostelecom Slate",
     "value": "#7B939B"
   },
   {
-    "code_variable_name": "b2b-dark-state",
+    "code_variable_name": "b2b-dark-slate",
     "label": "Rostelecom Dark Slate",
     "value": "#313A49"
   },

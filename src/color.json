@@ -62,8 +62,8 @@
   "b2c-orange-high05": "rgba(255,130,24,0.5)",
   "b2c-orange-high02": "rgba(255,130,24,0.2)",
 
-  "b2c-state": "#7B939B",
-  "b2c-dark-state": "#313A49",
+  "b2c-slate": "#7B939B",
+  "b2c-dark-slate": "#313A49",
   "b2c-burgundy": "#431625",
 
   "b2c-white": "#ffffff",
