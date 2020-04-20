@@ -81,6 +81,9 @@ const checkMaxWidth = (parentUiid) => {
     runWatchers();
   }
 }
+const setGlobalAnalyticsSegment = (segment) => {
+  tabsStore.globalAnalyticsSegment = segment;
+}
 export const tabsStore = Vue.observable({
   setActiveTabName: setActiveTabName,
   addTabUuid: addTabUuid,
@@ -88,6 +91,8 @@ export const tabsStore = Vue.observable({
   tabsNames: {},
   addWatcher: addWatcher,
   watcherFunction: [],
-  setTabWidth: setTabWidth
+  setTabWidth: setTabWidth,
+  globalAnalyticsSegment: '',
+  setGlobalAnalyticsSegment: setGlobalAnalyticsSegment,
 
 });
