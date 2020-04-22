@@ -15,7 +15,7 @@
         props: {
             resizeQuerySelectorsNames:{
                 type: Array,
-                default: []
+                default: () => []
             },
             mobileNotResizeQuerySelectors:{
                 type: Boolean,
@@ -468,7 +468,7 @@
                     if (this.$refs.video) {
                         const playPromise = this.$refs.video.play();
                         playPromise.catch(function (error) {
-
+                          console.info('error',error)
                         });
                     } else {
                         setTimeout(() => {
@@ -851,6 +851,8 @@
                 if (this.backgroundVideo) {
                     return <video
                         ref="video"
+                        playsinline
+                        loop
                         src={this.backgroundVideo}
 
                         muted

@@ -46,9 +46,9 @@
                     window.pageYOffset || document.documentElement.scrollTop;
                 return scrollTop + position.top;
             },
-            debounceCalculateScroll: debounce(() => {
+            debounceCalculateScroll: debounce(function () {
                 this.calculateScroll();
-            }, 5),
+            }.bind(this), 5),
             calculateScroll() {
                 const scrollTop =
                     window.pageYOffset || document.documentElement.scrollTop;
