@@ -39,6 +39,14 @@
             fixedNodeWidth: null,
             fixedNodeTop: null,
         }),
+        created() {
+            this.debounceCalculateScroll = debounce(() => {
+                this.calculateScroll();
+            }, 5);
+            this.debounceInitAnchorsList = debounce(() => {
+                this.initAnchorsList(true);
+            }, 150)
+        },
         methods: {
             getOffsetTop(el) {
                 const position = el.getBoundingClientRect();
@@ -46,9 +54,6 @@
                     window.pageYOffset || document.documentElement.scrollTop;
                 return scrollTop + position.top;
             },
-            debounceCalculateScroll: debounce(function () {
-                this.calculateScroll();
-            }.bind(this), 5),
             calculateScroll() {
                 const scrollTop =
                     window.pageYOffset || document.documentElement.scrollTop;
@@ -122,10 +127,6 @@
                 }
                 this.calculateScroll();
             },
-            debounceInitAnchorsList: debounce(() => {
-
-                this.initAnchorsList(true);
-            }, 150),
             scrollBind(e) {
                 const anchor = e.target.getAttribute("href").replace("#", "");
                 scrollIt(this.anchorObejects[anchor].y_start + 40);

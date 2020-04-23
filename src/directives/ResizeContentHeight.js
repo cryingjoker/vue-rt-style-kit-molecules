@@ -18,13 +18,13 @@ class ResizeContentHeight {
         this.initReactiveWaiter();
       } else {
         setTimeout(() => {
-          if (this.querySelectorsNames.length > 0) {
+          if (Array.isArray(this.querySelectorsNames) && this.querySelectorsNames.length > 0) {
             this.bindResize();
             this.calculateMaxHeight();
           }
         }, 0);
         setTimeout(() => {
-          if (this.querySelectorsNames.length > 0) {
+          if (Array.isArray(this.querySelectorsNames) && this.querySelectorsNames.length > 0) {
             this.calculateMaxHeight();
           }
         }, 500);
