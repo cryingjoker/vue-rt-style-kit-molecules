@@ -21,7 +21,7 @@
                 type: String,
                 default: ''
             },
-            tabsClassname: {
+            topPadding: {
                 type: Number,
                 default: 80
             },

@@ -917,7 +917,6 @@
                     </div>;
                 }
             };
-
             const resizeData = {
                 querySelectorsNames:this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames : [] ,
                 notRun: this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames.length === 0 : true,
