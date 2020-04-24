@@ -26,8 +26,8 @@
                 default: 80
             },
             hideIfNotInViewport: {
-                type: Number,
-                default: 80
+                type: Boolean,
+                default: false
             }
         },
         data: () => ({
