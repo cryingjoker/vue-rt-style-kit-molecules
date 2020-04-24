@@ -78,7 +78,6 @@ import {
   ResizeTypeStore
 } from "./components";
 
-// console.info('OptionsList',OptionsList)
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OudsideClick/OudsideClick";

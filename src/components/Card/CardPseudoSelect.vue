@@ -76,7 +76,7 @@
         this.localPackageCost = this.packageCost[index];
         let fullCost = this.localPackageCost + (+this.subscriptionFee)
         fullCost = fullCost.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        console.log(fullCost)
+        // console.log(fullCost)
         chosenFee.closest('.rt-card').querySelector('.rt-price__value').innerText = fullCost
         this.toggleOpen();
       },

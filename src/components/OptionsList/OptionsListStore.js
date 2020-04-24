@@ -76,7 +76,6 @@ const getLocalStatus = (id) => {
 };
 
 const changeStatus = (id) => {
-  console.info('changeStatus',id)
   const closeOther = optionsListStatuses[id].closeOther;
   const needSave = optionsListStatuses[id].needSave;
 
