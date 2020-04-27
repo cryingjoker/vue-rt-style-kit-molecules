@@ -83,11 +83,7 @@
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
   "error-color": "#FF0C0C",
-  "error-color-text": "rgba(255,12,12,0.58)",
   "box-shadow-background": "rgba(16,24,40,0.1)",
   "dark-theme-dropdown-background": "#202432",
   "light-grey": "#fafafa",
-  "rule-color": "#272F3D",
-  "switcher-color": "#404653",
-  "game-promo-color": "#001424"
 }
