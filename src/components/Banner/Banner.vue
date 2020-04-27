@@ -468,7 +468,7 @@
                     if (this.$refs.video) {
                         const playPromise = this.$refs.video.play();
                         playPromise.catch(function (error) {
-                          console.info('error',error)
+
                         });
                     } else {
                         setTimeout(() => {

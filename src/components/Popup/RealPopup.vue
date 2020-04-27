@@ -73,7 +73,7 @@
       close(){
         this.$refs.popupWrapper.classList.remove('rtb-popup-wrapper--active');
         document.documentElement.style.overflowY = "auto";
-        this.wrapperElement.style.overflowY = "auto";
+        this.wrapperElement.style.overflowY = "unset";
         if(this.isSafari) {
           this.wrapperElement.style.top = "";
           this.wrapperElement.style.position = "relative";
