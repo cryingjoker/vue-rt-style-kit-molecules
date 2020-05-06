@@ -1,6 +1,8 @@
 <script type="text/jsx">
 const componentsList = {};
 import variables from "../../variables.json";
+import debounce from "debounce";
+
 
 export default {
   name: "RtUseCase",
@@ -12,12 +14,8 @@ export default {
     }
   },
   mounted(){
-    window.addEventListener('load', () => {
-      this.setCardHeight();
-      document.addEventListener('resize', ()=> {
-        this.setCardHeight();
-      })
-    });
+    this.setCardHeight();
+    window.addEventListener('resize', debounce(this.setCardHeight, 35))
 
   },
   computed: {},
@@ -25,7 +23,11 @@ export default {
     setCardHeight() {
       if(!this.mobileLayout) {
         for(let i = 0; i < this.$children.length; i++) {
-          this.$children[i].$el.style.height = this.$children[i].$el.querySelector('.rtb-card__reverse').scrollHeight + 'px';
+          this.$children[i].$el.style.height = this.$children[i].$el.querySelector('.rtb-card__reverse').scrollHeight + 20 + 'px';
+        }
+      } else {
+        for(let j = 0; j < this.$children.length; j++) {
+          this.$children[j].$el.style.height = this.$children[j].$el.querySelector('.rt-card__content').scrollHeight + 20 + 'px';
         }
       }
       this.equalizeCardsHeight();

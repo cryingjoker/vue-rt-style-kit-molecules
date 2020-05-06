@@ -1,7 +1,7 @@
 import Vue from "vue";
 import "./css/vue-rt-style-kit-molecules.styl";
 import Global from "./variables.json";
-import Project from "../package.json";
+import Project from "@projectMolecules";
 
 import {
   ScrollTabs,
@@ -80,8 +80,8 @@ import {
   FunctionItem
 } from "./components";
 
-// console.info('OptionsList',OptionsList)
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
+import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OudsideClick/OudsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
@@ -171,6 +171,8 @@ const VueRtStyle = {
       Vue.component(FunctionList.name, FunctionList);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
+
+      Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
 
 
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);

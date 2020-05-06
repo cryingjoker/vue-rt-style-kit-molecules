@@ -54,7 +54,7 @@
         }
       },
       specifyCardClass() {
-        if(this.$slots.cards && window.innerWidth <= parseInt(variables["tablet-upper-limit"])){
+        if(this.$slots.cards && window.innerWidth <= parseInt(variables["tablet-upper-limit"]) && this.$el.childNodes[0].childNodes[4] === document.querySelector('.rt-carousel__overlay')){
           this.$el.childNodes[0].childNodes[4].childNodes.forEach(el => {
             el.classList !== undefined && el.classList.contains('card-layout__slide') ? el.classList.add('rt-carousel__slide') : null;
           });

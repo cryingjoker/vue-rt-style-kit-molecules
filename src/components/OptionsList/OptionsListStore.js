@@ -75,15 +75,11 @@ const getLocalStatus = (id) => {
   }
 };
 
-const changeStatus = (id, status = false) => {
-
+const changeStatus = (id) => {
   const closeOther = optionsListStatuses[id].closeOther;
   const needSave = optionsListStatuses[id].needSave;
-  if (typeof status === "boolean") {
-    optionsListStatuses[id].isActive = status;
-  } else {
-    optionsListStatuses[id].isActive = !optionsListStatuses[id].isActive;
-  }
+
+  optionsListStatuses[id].isActive = !optionsListStatuses[id].isActive;
 
   if (needSave) {
     saveToLocalStorage(id, optionsListStatuses[id].isActive);

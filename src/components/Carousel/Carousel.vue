@@ -303,7 +303,7 @@ export default {
   },
   destroyed () {
     this.unsetNavi()
-  }, 
+  },
   methods: {
     initNavi () {
       if (!this.slidedEl || !this.overlayEl) return

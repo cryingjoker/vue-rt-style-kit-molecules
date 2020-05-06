@@ -62,8 +62,8 @@
   "b2c-orange-high05": "rgba(255,130,24,0.5)",
   "b2c-orange-high02": "rgba(255,130,24,0.2)",
 
-  "b2c-state": "#7B939B",
-  "b2c-dark-state": "#313A49",
+  "b2c-slate": "#7B939B",
+  "b2c-dark-slate": "#313A49",
   "b2c-burgundy": "#431625",
 
   "b2c-white": "#ffffff",
@@ -83,11 +83,7 @@
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
   "error-color": "#FF0C0C",
-  "error-color-text": "rgba(255,12,12,0.58)",
   "box-shadow-background": "rgba(16,24,40,0.1)",
   "dark-theme-dropdown-background": "#202432",
-  "light-grey": "#fafafa",
-  "rule-color": "#272F3D",
-  "switcher-color": "#404653",
-  "game-promo-color": "#001424"
+  "light-grey": "#fafafa"
 }

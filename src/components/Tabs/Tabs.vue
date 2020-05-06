@@ -53,6 +53,11 @@
       positionCenter: {
         type: Boolean,
         default: false
+      },
+      ga: {
+        type: String,
+        default: '',
+        validator: val => ['b2c', 'b2b'].includes(val)
       }
     },
     data: () => ({
@@ -71,6 +76,7 @@
         window.addEventListener("resize", this.checkDeviceType);
         this.checkDeviceType();
       }
+      tabsStore.setGlobalAnalyticsSegment(this.ga);
     },
     computed: {
         tabsClassNames(){

@@ -10,6 +10,10 @@ export default {
     noBorders: {
       type: Boolean,
       default: false
+    },
+    columnWidth: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -71,7 +75,7 @@ export default {
             {this.$slots.label}
           </p>
           {this.$slots.description}
-          <table class={"rt-table" + (this.tabletListType ? " rt-table--list" : "") + (this.noBorders ? " rt-table--no-borders" : "")}>
+          <table class={"rt-table" + (this.tabletListType ? " rt-table--list" : "") + (this.noBorders ? " rt-table--no-borders" : "") + (this.columnWidth ? " rt-table--columned" : "")}>
             {columns()}
             <thead class="rt-table-head" ref="head">
               {this.$slots.header}

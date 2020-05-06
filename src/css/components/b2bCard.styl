@@ -558,54 +558,91 @@
     right 10px
   &__text
     box-sizing border-box
-    color b2c-state
+    color main-color
     text-align left
-    padding 10px
+    padding 20px
     position relative
-    top -50%
-    right -40px
+    top auto
+    bottom auto
+    right auto
+    left auto
     z-index 9
     transform translateY(-50%)
     font-size 14px
     line-height 18px
-    @media (max-width: tablet-upper-limit)
-      right auto
-      left 10px
+    box-shadow 0 5px 10px 5px rgba(main-color, 0.2)
+    .rtb-hint__text-triangle
+      content ""
+      width 0
+      height 0
+      border-style solid
+      position absolute
       top auto
+      left auto
+      right auto
       bottom auto
-      transform translateX(-50%) translateY(30px)
+    &--top
+      transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
+      .rtb-hint__text-triangle
+        border-width 10px 10px 0 10px
+        border-style solid
+        border-color #fff transparent transparent transparent
+        position absolute
+        bottom -9px
+        right calc(50% - 10px)
+    &--bottom
+      transform translateX(calc(-50% + 10px)) translateY(30px)
+      .rtb-hint__text-triangle
+        border-width 0 10px 10px 10px
+        border-style solid
+        border-color transparent transparent #fff transparent
+        position absolute
+        top -9px
+        right calc(50% - 10px)
+    &--top-left
+      transform translateX(calc(-100% + 40px)) translateY(calc(-100% - 10px))
+      .rtb-hint__text-triangle
+        border-width 10px 10px 0 10px
+        border-style solid
+        border-color #fff transparent transparent transparent
+        position absolute
+        bottom -9px
+        right 20px
+    &--top-right
+      transform translateX(-20px) translateY(-100% - 10px)
+      .rtb-hint__text-triangle
+        border-width 10px 10px 0 10px
+        border-style solid
+        border-color #fff transparent transparent transparent
+        position absolute
+        bottom -9px
+        left 20px
+    &--bottom-left
+      transform translateX(calc(-100% + 40px)) translateY(30px)
+      .rtb-hint__text-triangle
+        border-width 0 10px 10px 10px
+        border-style solid
+        border-color transparent transparent #fff transparent
+        position absolute
+        top -9px
+        right 20px
+    &--bottom-right
+      transform translateX(-20px) translateY(30px)
+      .rtb-hint__text-triangle
+        border-width 0 10px 10px 10px
+        border-style solid
+        border-color transparent transparent #fff transparent
+        position absolute
+        top -9px
+        left 20px
   &--tooltip
-    color b2c-state
+    color main-color
     text-align center
     background-color b2c-cool-grey05-no-opacity
     width 20px
     height 20px
     .{b2bAppName}-hint__text
-      background-color b2c-cool-grey05-no-opacity
-      min-width 180px
-      max-width 250px
-      min-height 70px
-      border-radius 5px
-      right -30px
-      top 50%
-      @media (max-width: tablet-upper-limit)
-        min-width 250px
-        max-width none
-      &:before
-        content ""
-        width 0
-        height 0
-        border-width 5px 5px 5px 0
-        border-style solid
-        border-color transparent #f1f3f5 transparent transparent
-        position absolute
-        top calc(50% - 5px)
-        left -5px
-        @media (max-width: tablet-upper-limit)
-          border-width 0 5px 5px 5px
-          border-color transparent transparent #f1f3f5 transparent
-          left calc(50% - 5px)
-          top -5px
+      background-color b2c-white
   &--confirmed
     .{b2bAppName}-hint__text
       background-color b2c-green
@@ -855,10 +892,10 @@
 
   &.{newAppName}-card-state
     .{b2bAppName}-category__text-content
-      background-color b2c-state
+      background-color b2c-slate
 
     .{b2bAppName}-category__triangle
-      fill b2c-state
+      fill b2c-slate
 
   &.{newAppName}-card-burgundy
     .{b2bAppName}-category__text-content
@@ -867,12 +904,12 @@
     .{b2bAppName}-category__triangle
       fill b2c-burgundy
 
-  &.{newAppName}-card-dark-state
+  &.{newAppName}-card-dark-slate
     .{b2bAppName}-category__text-content
-      background-color b2c-dark-state
+      background-color b2c-dark-slate
 
     .{b2bAppName}-category__triangle
-      fill b2c-dark-state
+      fill b2c-dark-slate
 
   &.{newAppName}-card-error-color
     .{b2bAppName}-category__text-content

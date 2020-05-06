@@ -13,6 +13,18 @@
         name: "RtBanner",
         components: componentsList,
         props: {
+            resizeQuerySelectorsNames:{
+                type: Array,
+                default: () => []
+            },
+            mobileNotResizeQuerySelectors:{
+                type: Boolean,
+                default: true
+            },
+            tabletNotResizeQuerySelectors:{
+                type: Boolean,
+                default: false
+            },
             scrollToNextImage: {
                 type: Boolean,
                 default: false
@@ -71,7 +83,7 @@
             },
             noTriangle: {
                 type: Boolean,
-                default: true
+                default: false
             },
             roundAngles: {
                 type: Boolean,
@@ -294,7 +306,6 @@
             imageClass() {
                 let className = "rt-banner-image rt-banner-image--main";
                 const activeIndex = this.RtBanners.activeIndex;
-
                 if (this.transparentBackgroundImage) {
                     className += " rt-banner-image--contain";
                 }
@@ -812,6 +823,7 @@
                 if (!this.isFullscreenImage && !this.noTriangle) {
                     return <svg
                         class="rt-banner-triangle"
+                        preserveAspectRatio="xMinYMin meet"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 185 500"
                         style="transform: translate(-50% 0)">
@@ -825,6 +837,7 @@
                 if (!this.isFullscreenImage && !this.noTriangle) {
                     return <svg
                         class="rt-banner-right-triangle"
+                        preserveAspectRatio="xMinYMin meet"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 185 500">
                         <polygon points="0 500,185 0,0 0"/>
@@ -838,6 +851,8 @@
                 if (this.backgroundVideo) {
                     return <video
                         ref="video"
+                        playsinline
+                        loop
                         src={this.backgroundVideo}
 
                         muted
@@ -902,8 +917,13 @@
                     </div>;
                 }
             };
-
-            return <div class={this.bannerClass} style={this.bannerStyle}>
+            const resizeData = {
+                querySelectorsNames:this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames : [] ,
+                notRun: this.resizeQuerySelectorsNames ? this.resizeQuerySelectorsNames.length === 0 : true,
+                mobileNotResize : this.mobileNotResizeQuerySelectors,
+                tabletNotResize:  this.tabletNotReasizeQuerySelectors
+            }
+            return <div class={this.bannerClass} style={this.bannerStyle} v-rt-resize-content-height={resizeData}>
                 <div class="rt-container rt-banner-container">
                     {link()}
                     {bannerContent()}
