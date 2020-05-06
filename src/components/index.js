@@ -73,6 +73,8 @@
  export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.vue';
  export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.vue';
  export { default as CountdownTimer } from './CountdownTimer/CountdownTimer.vue';
+ export { default as FunctionItem } from './FunctionList/FunctionItem.vue';
+ export { default as FunctionList } from './FunctionList/FunctionList.vue';
  export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 
 

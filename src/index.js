@@ -75,7 +75,9 @@ import {
   CheckboxTabs,
   CountdownTimer,
   StickyHeaderLine,
-  ResizeTypeStore
+  ResizeTypeStore,
+  FunctionList,
+  FunctionItem
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -165,6 +167,8 @@ const VueRtStyle = {
       Vue.component(SlideContent.name, SlideContent);
       Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
+      Vue.component(FunctionItem.name, FunctionItem);
+      Vue.component(FunctionList.name, FunctionList);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
