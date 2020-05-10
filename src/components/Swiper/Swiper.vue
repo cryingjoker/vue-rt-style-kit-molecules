@@ -203,21 +203,34 @@ export default {
       touchObject: defaultTouch,
       verticalScrolling: true,
       isDisableCarousel: this.disableCarousel,
-      styleIfCarouselOverride: '' //стили, если карусель на некоторых разрешениях должна быть выключена
+      styleIfCarouselOverride: '', //стили, если карусель на некоторых разрешениях должна быть выключена
+      children: this.$children,
+      slides: []
     };
   },
-  computed: {
-    slides() {
-      return (
-        this.$children &&
-        this.$children.filter(
+  watch: {
+    children (newVal) {
+      this.isFinalSlide = this.$refs.overlay.scrollLeft + this.overlayContainerWidth() + 2 >= this.$refs.overlay.scrollWidth;
+      this.canAdvanceForward = !this.isFinalSlide
+
+      this.slides = (
+        newVal &&
+        newVal.filter(
           slide =>
           slide.$vnode &&
           slide.$vnode.tag &&
           slide.$vnode.tag.indexOf("RtSlide") > -1
         )
-      );
-    },
+      )
+      this.slides.forEach((slide, i) => {
+          this.movesArr.push({
+            width: slide.width(),
+            key: i
+          });
+        });
+    }
+  },
+  computed: {
     styleInnerCarousel() {
       let result = `${this.cmpName}__inner ${this.containerName}`
       let styleDisableCarousel = ` ${this.cmpName}__inner-default`
@@ -239,11 +252,9 @@ export default {
     //   this.$refs.slidedBlock.addEventListener('touchmove', this.swipeHandler, false)
     //   this.$refs.slidedBlock.addEventListener('touchend', this.swipeHandler, false)
     // }
-    if(window.innerWidth <= parseInt(variables["tablet-upper-limit"])){
-      this.isTouch = true
-    }
+    this.isTouch = window.innerWidth <= parseInt(variables["tablet-upper-limit"])
     window.addEventListener('resize', () => {
-      this.isTouch = window.innerWidth <= parseInt(variables["tablet-upper-limit"]) ? true : false;
+      this.isTouch = window.innerWidth <= parseInt(variables["tablet-upper-limit"])
     })
     // для включения стилей, если карусель на некоторых разрешениях должна быть выключена
     this.overideCarouselStyles()
@@ -354,11 +365,7 @@ export default {
 
     controlDisableCarousel() {
       if (this.disableCarousel) {
-        if (window.innerWidth < this.minScreenWidthDisable) {
-          this.isDisableCarousel = false
-        } else {
-          this.isDisableCarousel = true
-        }
+        this.isDisableCarousel = window.innerWidth >= this.minScreenWidthDisable
       }
     },
     /**
