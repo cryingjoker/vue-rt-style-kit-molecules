@@ -43,7 +43,7 @@
     transition-property transform
 
 
-    .rt-slide--is-active &
+    .rt-slide--is-active >.rt-slide__header &
       transform rotate(90deg)
 
   &__content
@@ -57,8 +57,10 @@
     transition-duration .5s
     transition-property max-height, opacity, visibility, padding-bottom
 
-    .rt-slide--is-active &
+    .rt-slide--is-active > .rt-slide__header+&
       max-height 3000px
+      @supports (max-height: max-content)
+        max-height max-content
       padding-bottom 10px
       opacity 1
       visibility visible
