@@ -22,6 +22,14 @@
             arrowPosition: {
                 type: String,
                 default: 'left-right'
+            },
+            openCallback:{
+                type: Function,
+                default: ()=>1
+            },
+            closeCallback:{
+                type: Function,
+                default: ()=>1
             }
         },
         data: () => ({
@@ -31,6 +39,11 @@
         methods: {
             toggleOpen() {
                 this.isOpenLocal = !this.isOpenLocal;
+                if(this.isOpenLocal){
+                    this.openCallback()
+                }else{
+                    this.closeCallback()
+                }
 
             }
         },
