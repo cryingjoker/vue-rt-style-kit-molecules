@@ -1,1020 +1,1022 @@
 <script type="text/jsx">
-    import {viewportPositionStore} from "vue-rt-style-kit-atoms";
+  import {viewportPositionStore} from "vue-rt-style-kit-atoms";
 
-    const componentsList = {};
-    import browser from '../../utils/browser'
-    import variables from "../../variables.json";
+  const componentsList = {};
+  import browser from '../../utils/browser'
+  import variables from "../../variables.json";
 
 
-    export default {
-        name: "RtCard",
-        components: componentsList,
-        props: {
-            resetMinHeight: {
-                type: Boolean,
-                default: false
-            },
-            staticBodyHeight: {
-                type: Boolean,
-                default: false
-            },
-            hideBackgroundOnMobile: {
-                type: Boolean,
-                default: false
-            },
-            backgroundSizeWidth: {
-                type: [Number, String],
-                default: null
-            },
-            backgroundImageStandAlone: {
-                type: Boolean,
-                default: false
-            },
-            backgroundSizeHeight: {
-                type: [Number, String],
-                default: null
-            },
-            backgroundColorType: {
-                type: String,
-                default: null
-            },
-            backgroundImage: {
-                type: String,
-                default: null
-            },
-            backgroundImageTablet: {
-                type: String,
-                default: null
-            },
-            backgroundImageMobile: {
-                type: String,
-                default: null
-            },
-            backgroundImageWebp: {
-                type: String,
-                default: null
-            },
-            lazyLoad: {
-                type: Boolean,
-                default: true
-            },
-            lazyBackgroundImage: {
-                type: String,
-                default: null
-            },
-            lazyImage: {
-                type: String,
-                default: null
-            },
-            lazyImageTablet: {
-                type: String,
-                default: null
-            },
-            lazyImageMobile: {
-                type: String,
-                default: null
-            },
-            backgroundCover: {
-                type: Boolean,
-                default: false
-            },
-            backgroundRepeat: {
-                type: Boolean,
-                default: false
-            },
-            backgroundBlur: {
-                type: Number,
-                default: null
-            },
-            backgroundSmoke: {
-                type: Number,
-                default: null
-            },
-            backgroundOpacity: {
-                type: Number,
-                default: null
-            },
-            isWhiteColor: {
-                type: Boolean,
-                default: false
-            },
-            backgroundPosition: {
-                type: String, // [top, left, bottom, right, top-left, top-right, bottom-left, bottom-right]
-                default: null
-            },
-            backgroundPositionTop: {
-                type: [String, Number],
-                default: null
-            },
-            backgroundPositionBottom: {
-                type: [String, Number],
-                default: null
-            },
-            backgroundPositionRight: {
-                type: [String, Number],
-                default: null
-            },
-            backgroundPositionLeft: {
-                type: [String, Number],
-                default: null
-            },
-            offsetTop: {
-                type: Boolean,
-                default: false
-            },
-            colSize: {
-                type: Number,
-                default: null
-            },
-            cardHeight: {
-                type: Number,
-                default: null
-            },
-            cardHeaderHeight: {
-                type: Number,
-                default: null
-            },
-            cardBodyHeight: {
-                type: Number,
-                default: null
-            },
-            equalPadding: {
-                type: Boolean,
-                default: false
-            },
-            hasDiscount: {
-                type: Boolean,
-                default: false
-            },
-            discountLines: {
-                type: Number,
-                default: null
-            },
-            isB2bPackage: {
-                type: Boolean,
-                default: false
-            },
-            isB2bCategory: {
-                type: Boolean,
-                default: false
-            },
-            categoryCardSize: {
-                type: Number,
-                default: 1
-            },
-            categoryIconMobile: {
-                type: String,
-                default: null
-            },
-            hasLabel: {
-                type: Boolean,
-                default: false
-            },
-            showLabelWhenHover: {
-                type: Boolean,
-                default: false
-            },
-            productCard: {
-                type: Boolean,
-                default: false
-            },
-            doubleSided: {
-                type: Boolean,
-                default: false
-            },
-            productIcon: {
-                type: String,
-                default: ''
-            },
-            labelMainColor: {
-                type: String,
-                default: 'b2c-red'
-            },
-            labelAdditionalColor: {
-                type: String,
-                default: 'b2c-yellow'
-            },
-            labelFontSize: {
-                type: String,
-                default: ''
-            },
+  export default {
+    name: "RtCard",
+    components: componentsList,
+    props: {
+      resetMinHeight: {
+        type: Boolean,
+        default: false
+      },
+      staticBodyHeight: {
+        type: Boolean,
+        default: false
+      },
+      hideBackgroundOnMobile: {
+        type: Boolean,
+        default: false
+      },
+      backgroundSizeWidth: {
+        type: [Number, String],
+        default: null
+      },
+      backgroundImageStandAlone: {
+        type: Boolean,
+        default: false
+      },
+      backgroundSizeHeight: {
+        type: [Number, String],
+        default: null
+      },
+      backgroundColorType: {
+        type: String,
+        default: null
+      },
+      backgroundImage: {
+        type: String,
+        default: null
+      },
+      backgroundImageTablet: {
+        type: String,
+        default: null
+      },
+      backgroundImageMobile: {
+        type: String,
+        default: null
+      },
+      backgroundImageWebp: {
+        type: String,
+        default: null
+      },
+      lazyLoad: {
+        type: Boolean,
+        default: true
+      },
+      lazyBackgroundImage: {
+        type: String,
+        default: null
+      },
+      lazyImage: {
+        type: String,
+        default: null
+      },
+      lazyImageTablet: {
+        type: String,
+        default: null
+      },
+      lazyImageMobile: {
+        type: String,
+        default: null
+      },
+      backgroundCover: {
+        type: Boolean,
+        default: false
+      },
+      backgroundRepeat: {
+        type: Boolean,
+        default: false
+      },
+      backgroundBlur: {
+        type: Number,
+        default: null
+      },
+      backgroundSmoke: {
+        type: Number,
+        default: null
+      },
+      backgroundOpacity: {
+        type: Number,
+        default: null
+      },
+      isWhiteColor: {
+        type: Boolean,
+        default: false
+      },
+      backgroundPosition: {
+        type: String, // [top, left, bottom, right, top-left, top-right, bottom-left, bottom-right]
+        default: null
+      },
+      backgroundPositionTop: {
+        type: [String, Number],
+        default: null
+      },
+      backgroundPositionBottom: {
+        type: [String, Number],
+        default: null
+      },
+      backgroundPositionRight: {
+        type: [String, Number],
+        default: null
+      },
+      backgroundPositionLeft: {
+        type: [String, Number],
+        default: null
+      },
+      offsetTop: {
+        type: Boolean,
+        default: false
+      },
+      colSize: {
+        type: Number,
+        default: null
+      },
+      cardHeight: {
+        type: Number,
+        default: null
+      },
+      cardHeaderHeight: {
+        type: Number,
+        default: null
+      },
+      cardBodyHeight: {
+        type: Number,
+        default: null
+      },
+      equalPadding: {
+        type: Boolean,
+        default: false
+      },
+      hasDiscount: {
+        type: Boolean,
+        default: false
+      },
+      discountLines: {
+        type: Number,
+        default: null
+      },
+      isB2bPackage: {
+        type: Boolean,
+        default: false
+      },
+      isB2bCategory: {
+        type: Boolean,
+        default: false
+      },
+      categoryCardSize: {
+        type: Number,
+        default: 1
+      },
+      categoryIconMobile: {
+        type: String,
+        default: null
+      },
+      hasLabel: {
+        type: Boolean,
+        default: false
+      },
+      showLabelWhenHover: {
+        type: Boolean,
+        default: false
+      },
+      productCard: {
+        type: Boolean,
+        default: false
+      },
+      doubleSided: {
+        type: Boolean,
+        default: false
+      },
+      productIcon: {
+        type: String,
+        default: ''
+      },
+      labelMainColor: {
+        type: String,
+        default: 'b2c-red'
+      },
+      labelAdditionalColor: {
+        type: String,
+        default: 'b2c-yellow'
+      },
+      labelFontSize: {
+        type: String,
+        default: ''
+      },
 //    backgroundPosition: {
 //      type: String,
 //      default: ''
 //    },
-            discountText: {
-                type: String,
-                default: ''
-            },
-            inTabsWImage: {
-                type: Boolean,
-                default: false
-            },
-            unfoldButtonText: {
-                type: String,
-                default: ''
-            },
-            ga: {
-                type: Object,
-                default: null
-            },
-            hasExpandedBlock: {
-                type: Boolean,
-                default: false
-            },
-            fullWidthTopImage: {
-                type: Boolean,
-                default: false
-            },
-            hasGradientOverImage: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data: () => ({
-            viewportWasClosely: false,
-            index: null,
-            mobileLayout: browser.isMobile(),
-            tabletLayout: browser.isTablet(),
-            localBackgroundImage: null,
-            localProductIcon: null,
-            localCategoryIconMobile: null,
-            lazyImageLoaded: false,
-            mobileSvgWidth: window.innerWidth - 40
-        }),
-        computed: {
-            cardClass() {
-                let cardClass = "";
+      discountText: {
+        type: String,
+        default: ''
+      },
+      inTabsWImage: {
+        type: Boolean,
+        default: false
+      },
+      unfoldButtonText: {
+        type: String,
+        default: ''
+      },
+      ga: {
+        type: Object,
+        default: null
+      },
+      hasExpandedBlock: {
+        type: Boolean,
+        default: false
+      },
+      fullWidthTopImage: {
+        type: Boolean,
+        default: false
+      },
+      hasGradientOverImage: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data: () => ({
+      viewportWasClosely: false,
+      index: null,
+      mobileLayout: browser.isMobile(),
+      tabletLayout: browser.isTablet(),
+      localBackgroundImage: null,
+      localProductIcon: null,
+      localCategoryIconMobile: null,
+      lazyImageLoaded: false,
+      mobileSvgWidth: window.innerWidth - 40
+    }),
+    computed: {
+      cardClass() {
+        let cardClass = "";
 
-                if (this.backgroundCover) {
-                    cardClass += " rt-card--has-bg-cover";
-                }
-                if (this.isWhiteColor) {
-                    cardClass += " rt-card--has-white-color";
-                }
-
-                if (this.backgroundColorType) {
-                    cardClass += " rt-card-" + this.backgroundColorType;
-                }
-                if (this.backgroundImage) {
-                    if (this.backgroundRepeat) {
-                        cardClass += " rt-card--has-bg-repeat";
-                    }
-                    if (!this.backgroundColorType) {
-                        if (this.backgroundSmoke === 0.5) {
-                            cardClass += " rt-card--has-smoke";
-                        }
-                        if (this.backgroundSmoke === 0.3) {
-                            cardClass += " rt-card--has-smoke03";
-                        }
-                        if (this.backgroundSmoke === 0.2) {
-                            cardClass += " rt-card--has-smoke02";
-                        }
-                    }
-                }
-                if (this.hideBackgroundOnMobile) {
-                    cardClass += " rt-card--hide-background-on-mobile";
-                }
-                if (this.resetMinHeight) {
-                    cardClass += " rt-card--custom-height";
-                }
-                if (this.equalPadding) {
-                    cardClass += " rtb-card";
-                }
-                if (this.isB2bPackage) {
-                    cardClass += " rtb-card--package";
-                }
-                if (this.isB2bCategory) {
-                    if (this.categoryCardSize === 1) {
-                        cardClass += " rtb-category--small";
-                    }
-                    if (this.categoryCardSize === 2) {
-                        cardClass += " rtb-category--medium";
-                    }
-                    if (this.categoryCardSize === 3) {
-                        cardClass += " rtb-category--large";
-                    }
-                    cardClass += " rtb-category";
-                }
-                if (this.productCard) {
-                    cardClass += " rtb-card--product";
-                }
-                if (this.doubleSided) {
-                    cardClass += " rtb-card--double-sided"
-                }
-                if (this.backgroundPosition) {
-                    if (this.backgroundPosition === 'left') {
-                        cardClass += " rtb-card--bgp-left"
-                    } else {
-                        cardClass += " rtb-card--bgp-right"
-                    }
-                }
-                if (this.inTabsWImage) {
-                    cardClass += " rt-card--half-white-plus-image"
-                }
-                if (this.hasDiscount) {
-                    cardClass += " rt-card--has-discount"
-                }
-                if (this.fullWidthTopImage) {
-                    cardClass += " rtb-card--img-full-width"
-                }
-                return cardClass;
-            },
-            cardContentClass() {
-                let cardContentClass = "";
-                if (this.cardHeight !== null) {
-                    cardContentClass += " rt-card__content--has-custom-height";
-                }
-                if (this.offsetTop) {
-                    cardContentClass += " rt-card__content--has-offset-top";
-                }
-                if (this.colSize) {
-                    if (this.colSize === 2) {
-                        cardContentClass += " rt-col-6 rt-col-md-3";
-                    }
-                }
-                if (this.backgroundColorType && this.productCard) {
-                    cardContentClass += " color-block color-block--" + this.backgroundColorType;
-                }
-                return cardContentClass;
-            },
-            cardBodyClass() {
-                let cardBodyClass = "";
-                if (this.cardBodyHeight !== null) {
-                    cardBodyClass += " flex-center-center flex-fill";
-                }
-                if (!this.$slots.content) {
-                    cardBodyClass += " rt-card__body--is-empty";
-                }
-                if (this.staticBodyHeight) {
-                    cardBodyClass += " rt-card__body--is-static";
-                }
-                return cardBodyClass;
-            },
-            cardStyle() {
-                const styles = {};
-                if (this.cardHeight !== null) {
-                    styles.height = this.normalizeSize(this.cardHeight);
-                    styles.minHeight = "auto";
-                }
-                return styles;
-            },
-            cardContentStyle() {
-                const styles = {};
-                if (this.cardHeight !== null) {
-                    styles.height = this.normalizeSize(this.cardHeight);
-                    styles.minHeight = "auto";
-                }
-                return styles;
-            },
-            bodyStyle() {
-                const styles = {};
-                if (this.cardBodyHeight !== null) {
-                    styles.minHeight = this.normalizeSize(this.cardBodyHeight);
-                }
-                return styles;
-            },
-            cardHeaderStyle() {
-                const styles = {};
-                if (typeof this.cardHeaderHeight !== "undefined") {
-                    styles.maxHeight = this.normalizeSize(this.cardHeaderHeight);
-                }
-                return styles;
-            },
-            cardBackgroundClass() {
-                let cardBackgroundClass = "";
-                if (this.backgroundPosition) {
-                    if (
-                        this.backgroundPosition.search(
-                            /(top)|(left)|(bottom)|(right)|(bottom-left)|(top-right)|(bottom-left)|(bottom-right)/
-                        ) === 0
-                    ) {
-                        switch (this.backgroundPosition) {
-                            case "top":
-                                cardBackgroundClass += " rt-card__background--position-background-top";
-                                break;
-                            case "right":
-                                cardBackgroundClass += " rt-card__background--position-background-right";
-                                break;
-                            case "bottom":
-                                cardBackgroundClass += " rt-card__background--position-background-bottom";
-                                break;
-                            case "left":
-                                cardBackgroundClass += " rt-card__background--position-background-left";
-                                break;
-                            case "top-right":
-                                cardBackgroundClass += " rt-card__background--position-background-top-right";
-                                break;
-                            case "bottom-right":
-                                cardBackgroundClass += " rt-card__background--position-background-bottom-right";
-                                break;
-                            case "bottom-left":
-                                cardBackgroundClass += " rt-card__background--position-background-bottom-left";
-                                break;
-                            case "top-left":
-                                cardBackgroundClass += " rt-card__background--position-background-top-left";
-                                break;
-                        }
-                    }
-                }
-                if (this.productCard) {
-                    cardBackgroundClass += " rtb-card__product-image"
-                }
-                if (this.productIcon) {
-                    cardBackgroundClass += " rtb-card__product-icon"
-                }
-                return cardBackgroundClass;
-            },
-            cardBackgroundStyle() {
-                const styles = {};
-                if(this.viewportWasClosely) {
-                    if (this.backgroundImage && !this.backgroundImageStandAlone && this.localBackgroundImage) {
-                        styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                    }
-                    if (this.productIcon && this.localProductIcon) {
-                        styles.backgroundImage = "url(" + this.localProductIcon + ")";
-                    }
-                    if (this.backgroundSizeWidth && this.backgroundSizeHeight) {
-                        const backgroundSizeWidth = this.normalizeSize(
-                            this.backgroundSizeWidth
-                        );
-                        const backgroundSizeHeight = this.normalizeSize(
-                            this.backgroundSizeHeight
-                        );
-                        styles.backgroundSize =
-                            backgroundSizeWidth + " " + backgroundSizeHeight;
-                    } else {
-                        if (this.backgroundSizeWidth) {
-                            const backgroundSizeWidth = this.normalizeSize(
-                                this.backgroundSizeWidth
-                            );
-                            styles.backgroundSize = backgroundSizeWidth;
-                        }
-                        if (this.backgroundSizeHeight) {
-                            const backgroundSizeHeight = this.normalizeSize(
-                                this.backgroundSizeHeight
-                            );
-                            styles.backgroundSize = backgroundSizeHeight;
-                        }
-                    }
-                    if (this.backgroundImage) {
-                        if (this.backgroundBlur) {
-                            styles.filter =
-                                "blur(" + this.normalizeSize(this.backgroundBlur) + ")";
-                        }
-                        if (this.backgroundOpacity) {
-                            styles.opacity = this.backgroundOpacity;
-                        }
-                    }
-                }
-                return styles;
-            },
-            standAloneBackgroundStyle() {
-                if (this.viewportWasClosely) {
-                    if (this.backgroundImageStandAlone && this.backgroundImage) {
-                        const styles = {};
-                        if (this.backroundIsDownloaded) {
-                            if (this.localBackgroundImage) {
-                                styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                            }
-                        }
-                        styles.width =
-                            this.normalizeSize(this.backgroundSizeWidth) ||
-                            this.normalizeSize(this.backgroundSizeHeight);
-                        styles.height =
-                            this.normalizeSize(this.backgroundSizeHeight) ||
-                            this.normalizeSize(this.backgroundSizeWidth);
-                        styles.top = this.normalizeSize(this.backgroundPositionTop);
-                        styles.bottom = this.normalizeSize(this.backgroundPositionBottom);
-                        styles.right = this.normalizeSize(this.backgroundPositionRight);
-                        styles.left = this.normalizeSize(this.backgroundPositionLeft);
-
-                        return styles;
-                    }
-                }
-                return {};
-            },
-            categoryImage() {
-                const styles = {};
-                if (this.viewportWasClosely) {
-                    if (this.backgroundImage && this.localBackgroundImage) {
-                        styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
-                    }
-                }
-                return styles;
-            },
-            categoryIcon() {
-                const styles = {};
-                if(this.viewportWasClosely) {
-                    if (this.categoryIconMobile && this.localCategoryIconMobile) {
-                        styles.backgroundImage = "url(" + this.localCategoryIconMobile + ")";
-                    }
-                }
-                return styles;
-            },
-            categoryBackgroundColor() {
-                const styles = {};
-                if (this.isB2bCategory) {
-                    styles.backgroundColor = this.backgroundColorType;
-                }
-                return styles;
-            },
-            computedLazyImage() {
-                let result
-                if (this.mobileLayout && this.lazyImageMobile) {
-                    result = this.lazyImageMobile
-                } else if (this.tabletLayout && this.lazyImageTablet) {
-                    result = this.lazyImageTablet
-                } else {
-                    result = this.lazyImage || this.lazyBackgroundImage
-                }
-                return result
-            }
-        },
-        updated() {
-            this.removeViewportPositionWatchers();
-            this.addViewPortPositionWatchers();
-        },
-        beforeDestroy() {
-            this.removeViewportPositionWatchers()
-        },
-        mounted() {
-            const id = this._uid;
-            this.addViewPortPositionWatchers()
-
-            window.addEventListener('resize', () => {
-                this.mobileLayout = browser.isMobile()
-                this.tabletLayout = browser.isTablet()
-                if (this.inTabsWImage)
-                    this.redrawSvg();
-            })
-
-            if (this.inTabsWImage)
-                this.redrawSvg();
-            let anchor = this.$el.querySelector('a, button')
-            if (anchor && this.ga && this.$el) {
-                let parentIsLink = this.$el.parentElement.tagName === 'A'
-                let clickableEl = parentIsLink ? this.$el.parentElement : anchor
-                clickableEl.addEventListener('click', Event => {
-                    let el = Event.target
-                    if (this.$el.getAttribute('data-ga-pushed') || !this.ga) return
-                    Event.preventDefault()
-                    if (!window.dataLayer) window.dataLayer = []
-                    window.dataLayer.push(Object.assign({
-                        event: window[variables.globalSettingsKey].segment,
-                        type: 'card_click'
-                    }, this.ga))
-                    this.$el.setAttribute('data-ga-pushed', 'true');
-                    el.click()
-                }, false)
-            }
-
-            if (this.hasExpandedBlock) {
-                window.addEventListener('timeToExpand', () => {
-                    this.$el.querySelector('.rtb-card__expanding-button').classList.contains('rtb-card__expanding-button--active') ?
-                        this.$el.querySelector('.rtb-card__expanding-button').classList.remove('rtb-card__expanding-button--active') :
-                        this.$el.querySelector('.rtb-card__expanding-button').classList.add('rtb-card__expanding-button--active')
-                })
-            }
-        },
-        methods: {
-            addViewPortPositionWatchers() {
-                if (!this.viewportWasClosely) {
-                    const id = this._uid;
-                    viewportPositionStore.addWatchEl(id, this.$el);
-                    viewportPositionStore.addWatcher(id, () => {
-                        const position = viewportPositionStore.getElPosition(id)
-                        if (position <= 1.5) {
-                            this.viewportWasClosely = true;
-                            this.setMainImage();
-                            this.removeViewportPositionWatchers()
-                        }
-                    })
-                }
-            },
-            removeViewportPositionWatchers() {
-                const id = this._uid;
-                viewportPositionStore.removeWatcher(id);
-                viewportPositionStore.removeWatchEl(id)
-            },
-            loadImageAsync(src, resolve, reject = () => {
-            }) {
-                let image = new Image();
-                image.src = src;
-                image.onload = function () {
-                    resolve({
-                        naturalHeight: image.naturalHeight,
-                        naturalWidth: image.naturalWidth,
-                        src: image.src
-                    });
-                };
-                image.onerror = function (e) {
-                    reject(e);
-                };
-            },
-
-            /**
-             * Возвращает основной src для фона, опираясь на поддержку браузером и BP
-             */
-            getMainImage() {
-                let mainImage
-                if (browser.isMobile() && this.backgroundImageMobile) {
-                    mainImage = this.backgroundImageMobile
-                } else if (browser.isTablet() && this.backgroundImageTablet) {
-                    mainImage = this.backgroundImageTablet
-                } else if (browser.supportedWebP && this.backgroundImageWebp) {
-                    mainImage = this.backgroundImageWebp
-                } else {
-                    mainImage = this.backgroundImage
-                }
-                return mainImage
-            },
-
-            /**
-             * Сеттит основной src для фона, опираясь на загруженность Lazy, поддержку браузером и BP
-             */
-            setMainImage() {
-                // Игнорируем если lazy включен и не подгружен
-                if (!this.checkLazy()) return
-                this.localBackgroundImage = this.getMainImage()
-            },
-
-            /**
-             * Заменяем фон на lazy, если есть параметр с её src
-             */
-            checkLazy() {
-                // Выключена lazy или уже загружена
-                if (!this.lazyLoad || this.lazyImageLoaded) return true
-
-                let mainImage = this.getMainImage()
-
-                if (this.lazyLoad) {
-                    if (mainImage) {
-                        // Заменяем основную картинку на lazy
-                        this.localBackgroundImage = this.computedLazyImage
-                        // Подписываемся на загрузку основной
-                        this.loadImageAsync(mainImage, img => {
-                            this.lazyImageLoaded = true
-                            this.localBackgroundImage = mainImage
-                        })
-                    }
-                    if (this.productIcon) {
-                        this.loadImageAsync(this.productIcon, img => {
-                            this.localProductIcon = this.productIcon
-                        })
-                    }
-                    if (this.categoryIconMobile) {
-                        this.loadImageAsync(this.categoryIconMobile, img => {
-                            this.localCategoryIconMobile = this.categoryIconMobile
-                        })
-                    }
-                } else {
-                    if (mainImage) {
-                        this.localBackgroundImage = mainImage
-                    }
-                    if (this.productIcon) {
-                        this.localProductIcon = this.productIcon
-                    }
-                    if (this.categoryIconMobile) {
-                        this.localCategoryIconMobile = this.categoryIconMobile
-                    }
-                }
-            },
-            normalizeSize(size) {
-                if (typeof size === "number") {
-                    return size + "px";
-                }
-                if (typeof size === "string") {
-                    return size;
-                }
-                return size;
-            },
-            flipCard() {
-                if (this.$el.classList.contains('rtb-card--double-sided')) {
-                    if (this.$el.classList.contains('is-flipped')) {
-                        this.$el.classList.toggle('is-flipped');
-                    } else {
-                        for (let i = 0; i < this.$parent.$children.length; i++) {
-                            this.$parent.$children[i].$el.classList.remove('is-flipped');
-                        }
-                        this.$el.classList.toggle('is-flipped');
-                    }
-                    if ((this.tabletLayout || this.mobileLayout) && document.querySelector('.popup-content')) {
-
-                        document.querySelector('.popup-content').innerHTML = this.$el.querySelector('.rtb-card__reverse').innerHTML;
-                        setTimeout(() => {
-                            document.querySelector('.rtb-popup-wrapper').classList.add('rtb-popup-wrapper--active');
-                            document.body.style.overflow = 'hidden';
-                            document.documentElement.style.overflow = 'hidden';
-                        }, 300)
-                    }
-                }
-            },
-            unfoldFeatures() {
-                this.$el.querySelector('.equipment__full-description').classList.contains('equipment__full-description--shown') ?
-                    this.$el.querySelector('.equipment__full-description').classList.remove('equipment__full-description--shown') :
-                    this.$el.querySelector('.equipment__full-description').classList.add('equipment__full-description--shown');
-                this.$el.querySelector('.equipment__unfold-button-arrow').classList.contains('equipment__unfold-button-arrow--reverse') ?
-                    this.$el.querySelector('.equipment__unfold-button-arrow').classList.remove('equipment__unfold-button-arrow--reverse') :
-                    this.$el.querySelector('.equipment__unfold-button-arrow').classList.add('equipment__unfold-button-arrow--reverse')
-            },
-            redrawSvg() {
-                if (this.$el.querySelector('.rt-card__content')) {
-                    this.mobileSvgWidth = +(getComputedStyle(this.$el.querySelector('.rt-card__content')).width.slice(0, -2));
-                }
-            },
-            expandBlock() {
-                window.dispatchEvent(new CustomEvent('timeToExpand'));
-            }
-        },
-        render(h) {
-            const categoryCard = (() => {
-                if (this.isB2bCategory) {
-                    if (this.categoryCardSize === 3) {
-                        return <div class="rtb-category__content">
-                            <div class="rtb-category__text-content">
-                                <div class="rtb-category__content-top">
-                                    {this.$slots.content}
-                                </div>
-                                <div class="rtb-category__content-bottom">
-                                    {this.$slots.footer}
-                                </div>
-                            </div>
-                            <div class="rtb-category__triangle">
-                                <svg class="rtb-category-triangle" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 76 364">
-                                    <polygon points="0 364,76 0,0 0"/>
-                                </svg>
-                            </div>
-                            <div class="rtb-category__image" style={this.categoryImage}></div>
-                        </div>;
-                    }
-                    if (this.categoryCardSize === 2) {
-                        return <div class="rtb-category__content">
-                            <div class="rtb-category__text-content">
-                                <div class="rtb-category__content-top">
-                                    <div class="rtb-category__mobile-header" style={this.categoryIcon}></div>
-                                    {this.$slots.content}
-                                </div>
-                                <div class="rtb-category__content-bottom">
-                                    {this.$slots.footer}
-                                </div>
-                            </div>
-                            <div class="rtb-category__triangle">
-                                <svg class="rtb-category__triangle-image" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 76 364">
-                                    <polygon points="0 364,76 0,0 0"/>
-                                </svg>
-                            </div>
-                            <div class="rtb-category__image" style={this.categoryImage}></div>
-                        </div>;
-                    }
-                    if (this.categoryCardSize === 1) {
-                        return <div class="rtb-category__content">
-                            <div class="rtb-category__text-content">
-                                <div class="rtb-category__content-top">
-                                    <div class="rtb-category__mobile-header" style={this.categoryIcon}></div>
-                                    {this.$slots.content}
-                                </div>
-                                <div class="rtb-category__content-bottom">
-                                    {this.$slots.footer}
-                                </div>
-                            </div>
-                        </div>;
-                    }
-                } else {
-                    return null;
-                }
-            })();
-            const label = (() => {
-                if (this.hasLabel) {
-                    return <div
-                        class={this.showLabelWhenHover ? 'rtb-card__label-hover rtb-card__label' : 'rtb-card__label'}>
-                        <div class="rtb-card__label-content" style={"font-size:" + this.labelFontSize}>
-                            <p class={"rtb-card__label-text color-block--" + this.labelMainColor.replace(/^(b2b\-)|(b2c\-)/i, '')}
-                               style={"background-color:" + this.labelMainColor}>
-                                {this.$slots.label}
-                            </p>
-                        </div>
-                        <svg width="80" height="48" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="none" fill-rule="evenodd">
-                                <path class={"svg-fill--" + this.labelAdditionalColor}
-                                      d="M79.153 35.741l-.007.012a2.955 2.955 0 0 1-.373.538c-.02.024-.039.05-.06.072l-.041.047-11.426 11.196V31.304h9.118a3.251 3.251 0 0 1 .438.033h.005a2.977 2.977 0 0 1 .253.046c.152.035.302.08.448.137l.017.006c.07.028.14.058.207.091l.03.015c.069.033.137.07.203.108l.004.003c.065.038.128.08.19.122l.03.021a2.99 2.99 0 0 1 .21.164 2.962 2.962 0 0 1 .341.335l.026.028c.05.06.098.12.143.182l.022.03c.046.065.09.13.13.197l.004.008c.042.07.08.14.116.213l.004.008a3.082 3.082 0 0 1 .104.237 3.014 3.014 0 0 1 .202.99v.03c.004.159-.005.318-.027.475l-.006.03c-.02.138-.05.275-.091.41l-.007.019a2.765 2.765 0 0 1-.086.241l-.011.025a2.93 2.93 0 0 1-.11.233z"/>
-                                <path class={"svg-fill--" + this.labelMainColor}
-                                      d="M79.777 14.674v11.41l-.001 7.415c-.004.071-.013.141-.02.212l-.018.174c-.129 1.016-.596 1.921-1.268 2.638l.087-.103a2.919 2.919 0 0 0 .627-2.206 3.018 3.018 0 0 0-.895-1.799 3.335 3.335 0 0 0-.604-.463 3.145 3.145 0 0 0-.446-.216 3.185 3.185 0 0 0-1.16-.222h-5.73L0 31.512V0h74.962c2.661-.008 4.812 2.167 4.813 4.788l.002 9.886zm-1.665 22.214c.044-.038.082-.083.125-.123l-.125.123z"/>
-                            </g>
-                        </svg>
-                    </div>;
-                }
-            })();
-            const discount = (() => {
-                if (this.hasDiscount) {
-                    if (this.discountLines === 1) {
-                        return <div class="rtb-card__discount">
-                            <div class="rtb-card__discount-line rtb-card__discount-line-1">
-                                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
-                                <div class="rtb-card__discount-line__flag">
-                                    <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#FCD500" fill-rule="evenodd"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>;
-                    }
-                    if (this.discountLines === 2) {
-                        return <div class="rtb-card__discount">
-                            <div class="rtb-card__discount-line rtb-card__discount-line-1">
-                                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
-                                <div class="rtb-card__discount-line__flag">
-                                    <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#54D3B1" fill-rule="evenodd"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="rtb-card__discount-line rtb-card__discount-line-2"></div>
-                        </div>;
-                    }
-                    if (this.discountLines === 3) {
-                        return <div class="rtb-card__discount triple">
-                            <div class="rtb-card__discount-line rtb-card__discount-line-1">
-                                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
-                                <div class="rtb-card__discount-line__flag">
-                                    <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#64DDEC" fill-rule="evenodd"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="rtb-card__discount-line rtb-card__discount-line-2"></div>
-                            <div class="rtb-card__discount-line rtb-card__discount-line-3"></div>
-                        </div>;
-                    }
-                } else {
-                    return null;
-                }
-            })();
-            const header = (() => {
-                if (this.$slots.header) {
-                    return <div style={this.cardHeaderStyle} class="rt-card__header">
-                        {this.$slots["header"]}
-                    </div>;
-                } else {
-                    return null;
-                }
-            })();
-            const bottomList = (() => {
-                if (this.$slots["bottom-list"]) {
-                    return <div class="rt-card__bottom-list">
-                        {this.$slots["bottom-list"]}
-                    </div>;
-                } else {
-                    return null;
-                }
-            })();
-            const contentWithoutWrapper = (() => {
-                if (this.$slots['content-without-wrapper']) {
-                    return this.$slots['content-without-wrapper'];
-                } else {
-                    return null;
-                }
-            })();
-            const productTriangle = (() => {
-                if (this.productCard && !this.productIcon) {
-                    return <div class="rtb-product__triangle">
-                        <svg class="rtb-product__triangle-image" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 364 40">
-                            <polygon points="0 38,0 40,364 40,364 0"/>
-                        </svg>
-                    </div>
-                }
-            })();
-            const doubleSided = (() => {
-                if (this.doubleSided) {
-                    return <div class="rtb-card__reverse">
-                        <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg" class="rtb-card-close"
-                             viewBox="-10 -10 35 35">
-                            <path d="M15 1.5L13.5 0l-6 6-6-6L0 1.5l6 6-6 6L1.5 15l6-6 6 6 1.5-1.5-6-6z" fill="#101828"
-                                  fill-rule="evenodd" fill-opacity=".5"/>
-                        </svg>
-                        {this.$slots.reverse}
-                    </div>
-                }
-            })();
-            const hiddenPopupBenefits = (() => {
-                if (this.$slots['popup-special-benefits']) {
-                    return <div class="rt-card__popup-benefits">{this.$slots['popup-special-benefits']}</div>;
-                } else {
-                    return null;
-                }
-            })();
-            const hiddenPopupCosts = (() => {
-                if (this.$slots['popup-special-costs']) {
-                    return <div class="rt-card__popup-costs">{this.$slots['popup-special-costs']}</div>;
-                } else {
-                    return null;
-                }
-            })();
-            const triangle = (() => {
-                if (this.inTabsWImage) {
-                    if (this.tabletLayout || this.mobileLayout) {
-                        return <svg width="100%" height="100" class="rt-card__content-triangle">
-                            <polygon points={"0,100 " + this.mobileSvgWidth + ",0 " + this.mobileSvgWidth + ",100"}
-                                     fill="rgb(255, 255, 255)"/>
-                        </svg>
-                    } else {
-                        return <svg width="100" height="490" class="rt-card__content-triangle">
-                            <polygon points="0,0 100,0 0,490" fill="rgb(255, 255, 255)"/>
-                        </svg>
-                    }
-                }
-            })();
-            const unfoldButton = (() => {
-                if (this.unfoldButtonText) {
-                    if (this.mobileLayout) {
-                        return <div class="equipment__unfold-button color-purple" onClick={this.unfoldFeatures}>
-                            {this.unfoldButtonText}
-                            <div class="equipment__unfold-button-arrow">
-                                <svg width="20" height="20">
-                                    <polyline points="2,6 10,14 18,6" fill="none" stroke="#e3e8ec" stroke-width="2"/>
-                                </svg>
-                            </div>
-                        </div>
-                    } else {
-                        return null;
-                    }
-                }
-            })();
-            const expandBlock = (() => {
-                if (this.hasExpandedBlock) {
-                    return <div class="rtb-card__expanding-block rt-space-top05 rt-space-bottom15"
-                                onClick={this.expandBlock}>
-                        {this.$slots['expanding-block']}
-                    </div>
-                } else {
-                    return null;
-                }
-            })();
-            const headerImage = (() => {
-                if (this.fullWidthTopImage) {
-                    if (this.hasGradientOverImage) {
-                        return <div
-                            class="rtb-card__image-wrapper rtb-card__image-wrapper--has-gradient rt-font-center">
-                            <img class="additional-possibilities__card-image"
-                                 src={this.backgroundImage}/>
-                        </div>
-                    } else {
-                        return <div class="rtb-card__image-wrapper rt-font-center">
-                            <img class="additional-possibilities__card-image"
-                                 src={this.backgroundImage}/>
-                        </div>
-                    }
-                } else {
-                    return null;
-                }
-            })();
-            if (this.doubleSided) {
-                return <div class={"rt-card " + this.cardClass} style={this.cardStyle} onClick={this.flipCard}>
-                    <div class={"rt-card__content" + this.cardContentClass} style={this.cardBackgroundStyle}>
-                        <div class={"rt-card__body" + this.cardBodyClass} style={this.bodyStyle}>
-                            {this.$slots["content"]}
-                        </div>
-                        <div class="rt-card__footer">
-                            {this.$slots["footer"]}
-                        </div>
-                    </div>
-                    {doubleSided}
-                </div>;
-            } else if (!this.isB2bCategory) {
-                return <div class={"rt-card" + this.cardClass} style={this.cardStyle}>
-                    {this.backgroundImageStandAlone ?
-                        <div style={this.standAloneBackgroundStyle} class="rt-card__stand-alone-background"/> : null}
-                    {discount}
-                    {label}
-                    {!this.fullWidthTopImage ? <div style={this.cardBackgroundStyle}
-                                                    class={"rt-card__background" + this.cardBackgroundClass}/> : null}
-                    <div class={"rt-card__content" + this.cardContentClass}>
-                        {header}
-                        {productTriangle}
-                        {headerImage}
-                        <div class={"rt-card__body" + this.cardBodyClass} style={this.bodyStyle}>
-                            {unfoldButton}
-                            {this.$slots["content"]}
-                            {expandBlock}
-                        </div>
-                        {bottomList}
-                        {contentWithoutWrapper}
-                        <div class="rt-card__footer">
-                            {this.$slots["footer"]}
-                        </div>
-                        {hiddenPopupBenefits}
-                        {hiddenPopupCosts}
-                        {triangle}
-                    </div>
-                </div>;
-            } else {
-                return <div class={"rt-card" + this.cardClass} style={this.cardStyle}>
-                    {categoryCard}
-                </div>;
-            }
+        if (this.backgroundCover) {
+          cardClass += " rt-card--has-bg-cover";
         }
-    };
+        if (this.isWhiteColor) {
+          cardClass += " rt-card--has-white-color";
+        }
+
+        if (this.backgroundColorType) {
+          cardClass += " rt-card-" + this.backgroundColorType;
+        }
+        if (this.backgroundImage) {
+          if (this.backgroundRepeat) {
+            cardClass += " rt-card--has-bg-repeat";
+          }
+          if (!this.backgroundColorType) {
+            if (this.backgroundSmoke === 0.5) {
+              cardClass += " rt-card--has-smoke";
+            }
+            if (this.backgroundSmoke === 0.3) {
+              cardClass += " rt-card--has-smoke03";
+            }
+            if (this.backgroundSmoke === 0.2) {
+              cardClass += " rt-card--has-smoke02";
+            }
+          }
+        }
+        if (this.hideBackgroundOnMobile) {
+          cardClass += " rt-card--hide-background-on-mobile";
+        }
+        if (this.resetMinHeight) {
+          cardClass += " rt-card--custom-height";
+        }
+        if (this.equalPadding) {
+          cardClass += " rtb-card";
+        }
+        if (this.isB2bPackage) {
+          cardClass += " rtb-card--package";
+        }
+        if (this.isB2bCategory) {
+          if (this.categoryCardSize === 1) {
+            cardClass += " rtb-category--small";
+          }
+          if (this.categoryCardSize === 2) {
+            cardClass += " rtb-category--medium";
+          }
+          if (this.categoryCardSize === 3) {
+            cardClass += " rtb-category--large";
+          }
+          cardClass += " rtb-category";
+        }
+        if (this.productCard) {
+          cardClass += " rtb-card--product";
+        }
+        if (this.doubleSided) {
+          cardClass += " rtb-card--double-sided"
+        }
+        if (this.backgroundPosition) {
+          if (this.backgroundPosition === 'left') {
+            cardClass += " rtb-card--bgp-left"
+          } else {
+            cardClass += " rtb-card--bgp-right"
+          }
+        }
+        if (this.inTabsWImage) {
+          cardClass += " rt-card--half-white-plus-image"
+        }
+        if (this.hasDiscount) {
+          cardClass += " rt-card--has-discount"
+        }
+        if (this.fullWidthTopImage) {
+          cardClass += " rtb-card--img-full-width"
+        }
+        return cardClass;
+      },
+      cardContentClass() {
+        let cardContentClass = "";
+        if (this.cardHeight !== null) {
+          cardContentClass += " rt-card__content--has-custom-height";
+        }
+        if (this.offsetTop) {
+          cardContentClass += " rt-card__content--has-offset-top";
+        }
+        if (this.colSize) {
+          if (this.colSize === 2) {
+            cardContentClass += " rt-col-6 rt-col-md-3";
+          }
+        }
+        if (this.backgroundColorType && this.productCard) {
+          cardContentClass += " color-block color-block--" + this.backgroundColorType;
+        }
+        return cardContentClass;
+      },
+      cardBodyClass() {
+        let cardBodyClass = "";
+        if (this.cardBodyHeight !== null) {
+          cardBodyClass += " flex-center-center flex-fill";
+        }
+        if (!this.$slots.content) {
+          cardBodyClass += " rt-card__body--is-empty";
+        }
+        if (this.staticBodyHeight) {
+          cardBodyClass += " rt-card__body--is-static";
+        }
+        return cardBodyClass;
+      },
+      cardStyle() {
+        const styles = {};
+        if (this.cardHeight !== null) {
+          styles.height = this.normalizeSize(this.cardHeight);
+          styles.minHeight = "auto";
+        }
+        return styles;
+      },
+      cardContentStyle() {
+        const styles = {};
+        if (this.cardHeight !== null) {
+          styles.height = this.normalizeSize(this.cardHeight);
+          styles.minHeight = "auto";
+        }
+        return styles;
+      },
+      bodyStyle() {
+        const styles = {};
+        if (this.cardBodyHeight !== null) {
+          styles.minHeight = this.normalizeSize(this.cardBodyHeight);
+        }
+        return styles;
+      },
+      cardHeaderStyle() {
+        const styles = {};
+        if (typeof this.cardHeaderHeight !== "undefined") {
+          styles.maxHeight = this.normalizeSize(this.cardHeaderHeight);
+        }
+        return styles;
+      },
+      cardBackgroundClass() {
+        let cardBackgroundClass = "";
+        if (this.backgroundPosition) {
+          if (
+              this.backgroundPosition.search(
+                  /(top)|(left)|(bottom)|(right)|(bottom-left)|(top-right)|(bottom-left)|(bottom-right)/
+              ) === 0
+          ) {
+            switch (this.backgroundPosition) {
+              case "top":
+                cardBackgroundClass += " rt-card__background--position-background-top";
+                break;
+              case "right":
+                cardBackgroundClass += " rt-card__background--position-background-right";
+                break;
+              case "bottom":
+                cardBackgroundClass += " rt-card__background--position-background-bottom";
+                break;
+              case "left":
+                cardBackgroundClass += " rt-card__background--position-background-left";
+                break;
+              case "top-right":
+                cardBackgroundClass += " rt-card__background--position-background-top-right";
+                break;
+              case "bottom-right":
+                cardBackgroundClass += " rt-card__background--position-background-bottom-right";
+                break;
+              case "bottom-left":
+                cardBackgroundClass += " rt-card__background--position-background-bottom-left";
+                break;
+              case "top-left":
+                cardBackgroundClass += " rt-card__background--position-background-top-left";
+                break;
+            }
+          }
+        }
+        if (this.productCard) {
+          cardBackgroundClass += " rtb-card__product-image"
+        }
+        if (this.productIcon) {
+          cardBackgroundClass += " rtb-card__product-icon"
+        }
+        return cardBackgroundClass;
+      },
+      cardBackgroundStyle() {
+        const styles = {};
+        if (this.viewportWasClosely) {
+          if (this.backgroundImage && !this.backgroundImageStandAlone && this.localBackgroundImage) {
+            styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
+          }
+          if (this.productIcon && this.localProductIcon) {
+            styles.backgroundImage = "url(" + this.localProductIcon + ")";
+          }
+          if (this.backgroundSizeWidth && this.backgroundSizeHeight) {
+            const backgroundSizeWidth = this.normalizeSize(
+                this.backgroundSizeWidth
+            );
+            const backgroundSizeHeight = this.normalizeSize(
+                this.backgroundSizeHeight
+            );
+            styles.backgroundSize =
+                backgroundSizeWidth + " " + backgroundSizeHeight;
+          } else {
+            if (this.backgroundSizeWidth) {
+              const backgroundSizeWidth = this.normalizeSize(
+                  this.backgroundSizeWidth
+              );
+              styles.backgroundSize = backgroundSizeWidth;
+            }
+            if (this.backgroundSizeHeight) {
+              const backgroundSizeHeight = this.normalizeSize(
+                  this.backgroundSizeHeight
+              );
+              styles.backgroundSize = backgroundSizeHeight;
+            }
+          }
+          if (this.backgroundImage) {
+            if (this.backgroundBlur) {
+              styles.filter =
+                  "blur(" + this.normalizeSize(this.backgroundBlur) + ")";
+            }
+            if (this.backgroundOpacity) {
+              styles.opacity = this.backgroundOpacity;
+            }
+          }
+        }
+        return styles;
+      },
+      standAloneBackgroundStyle() {
+        if (this.viewportWasClosely) {
+          if (this.backgroundImageStandAlone && this.backgroundImage) {
+            const styles = {};
+            if (this.backroundIsDownloaded) {
+              if (this.localBackgroundImage) {
+                styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
+              }
+            }
+            styles.width =
+                this.normalizeSize(this.backgroundSizeWidth) ||
+                this.normalizeSize(this.backgroundSizeHeight);
+            styles.height =
+                this.normalizeSize(this.backgroundSizeHeight) ||
+                this.normalizeSize(this.backgroundSizeWidth);
+            styles.top = this.normalizeSize(this.backgroundPositionTop);
+            styles.bottom = this.normalizeSize(this.backgroundPositionBottom);
+            styles.right = this.normalizeSize(this.backgroundPositionRight);
+            styles.left = this.normalizeSize(this.backgroundPositionLeft);
+
+            return styles;
+          }
+        }
+        return {};
+      },
+      categoryImage() {
+        const styles = {};
+        if (this.viewportWasClosely) {
+          if (this.backgroundImage && this.localBackgroundImage) {
+            styles.backgroundImage = "url(" + this.localBackgroundImage + ")";
+          }
+        }
+        return styles;
+      },
+      categoryIcon() {
+        const styles = {};
+        if (this.viewportWasClosely) {
+          if (this.categoryIconMobile && this.localCategoryIconMobile) {
+            styles.backgroundImage = "url(" + this.localCategoryIconMobile + ")";
+          }
+        }
+        return styles;
+      },
+      categoryBackgroundColor() {
+        const styles = {};
+        if (this.isB2bCategory) {
+          styles.backgroundColor = this.backgroundColorType;
+        }
+        return styles;
+      },
+      computedLazyImage() {
+        let result
+        if (this.mobileLayout && this.lazyImageMobile) {
+          result = this.lazyImageMobile
+        } else if (this.tabletLayout && this.lazyImageTablet) {
+          result = this.lazyImageTablet
+        } else {
+          result = this.lazyImage || this.lazyBackgroundImage
+        }
+        return result
+      }
+    },
+    updated() {
+      this.removeViewportPositionWatchers();
+      this.addViewPortPositionWatchers();
+    },
+    beforeDestroy() {
+      this.removeViewportPositionWatchers()
+    },
+    mounted() {
+      const id = this._uid;
+      this.addViewPortPositionWatchers()
+      this.checkPosition();
+      window.addEventListener('resize', () => {
+        this.mobileLayout = browser.isMobile()
+        this.tabletLayout = browser.isTablet()
+        if (this.inTabsWImage)
+          this.redrawSvg();
+      })
+
+      if (this.inTabsWImage)
+        this.redrawSvg();
+      let anchor = this.$el.querySelector('a, button')
+      if (anchor && this.ga && this.$el) {
+        let parentIsLink = this.$el.parentElement.tagName === 'A'
+        let clickableEl = parentIsLink ? this.$el.parentElement : anchor
+        clickableEl.addEventListener('click', Event => {
+          let el = Event.target
+          if (this.$el.getAttribute('data-ga-pushed') || !this.ga) return
+          Event.preventDefault()
+          if (!window.dataLayer) window.dataLayer = []
+          window.dataLayer.push(Object.assign({
+            event: window[variables.globalSettingsKey].segment,
+            type: 'card_click'
+          }, this.ga))
+          this.$el.setAttribute('data-ga-pushed', 'true');
+          el.click()
+        }, false)
+      }
+
+      if (this.hasExpandedBlock) {
+        window.addEventListener('timeToExpand', () => {
+          this.$el.querySelector('.rtb-card__expanding-button').classList.contains('rtb-card__expanding-button--active') ?
+              this.$el.querySelector('.rtb-card__expanding-button').classList.remove('rtb-card__expanding-button--active') :
+              this.$el.querySelector('.rtb-card__expanding-button').classList.add('rtb-card__expanding-button--active')
+        })
+      }
+    },
+    methods: {
+      checkPosition() {
+        const id = this._uid;
+        const position = viewportPositionStore.getElPosition(id);
+        if (position <= 1.5) {
+          this.viewportWasClosely = true;
+          this.setMainImage();
+          this.removeViewportPositionWatchers()
+        }
+      },
+      addViewPortPositionWatchers() {
+        if (!this.viewportWasClosely) {
+          const id = this._uid;
+          viewportPositionStore.addWatchEl(id, this.$el);
+          viewportPositionStore.addWatcher(id, this.checkPosition)
+        }
+      },
+      removeViewportPositionWatchers() {
+        const id = this._uid;
+        viewportPositionStore.removeWatcher(id);
+        viewportPositionStore.removeWatchEl(id)
+      },
+      loadImageAsync(src, resolve, reject = () => {
+      }) {
+        let image = new Image();
+        image.src = src;
+        image.onload = function () {
+          resolve({
+            naturalHeight: image.naturalHeight,
+            naturalWidth: image.naturalWidth,
+            src: image.src
+          });
+        };
+        image.onerror = function (e) {
+          reject(e);
+        };
+      },
+
+      /**
+       * Возвращает основной src для фона, опираясь на поддержку браузером и BP
+       */
+      getMainImage() {
+        let mainImage
+        if (browser.isMobile() && this.backgroundImageMobile) {
+          mainImage = this.backgroundImageMobile
+        } else if (browser.isTablet() && this.backgroundImageTablet) {
+          mainImage = this.backgroundImageTablet
+        } else if (browser.supportedWebP && this.backgroundImageWebp) {
+          mainImage = this.backgroundImageWebp
+        } else {
+          mainImage = this.backgroundImage
+        }
+        return mainImage
+      },
+
+      /**
+       * Сеттит основной src для фона, опираясь на загруженность Lazy, поддержку браузером и BP
+       */
+      setMainImage() {
+        // Игнорируем если lazy включен и не подгружен
+        if (!this.checkLazy()) return
+        this.localBackgroundImage = this.getMainImage()
+      },
+
+      /**
+       * Заменяем фон на lazy, если есть параметр с её src
+       */
+      checkLazy() {
+        // Выключена lazy или уже загружена
+        if (!this.lazyLoad || this.lazyImageLoaded) return true
+
+        let mainImage = this.getMainImage()
+
+        if (this.lazyLoad) {
+          if (mainImage) {
+            // Заменяем основную картинку на lazy
+            this.localBackgroundImage = this.computedLazyImage
+            // Подписываемся на загрузку основной
+            this.loadImageAsync(mainImage, img => {
+              this.lazyImageLoaded = true
+              this.localBackgroundImage = mainImage
+            })
+          }
+          if (this.productIcon) {
+            this.loadImageAsync(this.productIcon, img => {
+              this.localProductIcon = this.productIcon
+            })
+          }
+          if (this.categoryIconMobile) {
+            this.loadImageAsync(this.categoryIconMobile, img => {
+              this.localCategoryIconMobile = this.categoryIconMobile
+            })
+          }
+        } else {
+          if (mainImage) {
+            this.localBackgroundImage = mainImage
+          }
+          if (this.productIcon) {
+            this.localProductIcon = this.productIcon
+          }
+          if (this.categoryIconMobile) {
+            this.localCategoryIconMobile = this.categoryIconMobile
+          }
+        }
+      },
+      normalizeSize(size) {
+        if (typeof size === "number") {
+          return size + "px";
+        }
+        if (typeof size === "string") {
+          return size;
+        }
+        return size;
+      },
+      flipCard() {
+        if (this.$el.classList.contains('rtb-card--double-sided')) {
+          if (this.$el.classList.contains('is-flipped')) {
+            this.$el.classList.toggle('is-flipped');
+          } else {
+            for (let i = 0; i < this.$parent.$children.length; i++) {
+              this.$parent.$children[i].$el.classList.remove('is-flipped');
+            }
+            this.$el.classList.toggle('is-flipped');
+          }
+          if ((this.tabletLayout || this.mobileLayout) && document.querySelector('.popup-content')) {
+
+            document.querySelector('.popup-content').innerHTML = this.$el.querySelector('.rtb-card__reverse').innerHTML;
+            setTimeout(() => {
+              document.querySelector('.rtb-popup-wrapper').classList.add('rtb-popup-wrapper--active');
+              document.body.style.overflow = 'hidden';
+              document.documentElement.style.overflow = 'hidden';
+            }, 300)
+          }
+        }
+      },
+      unfoldFeatures() {
+        this.$el.querySelector('.equipment__full-description').classList.contains('equipment__full-description--shown') ?
+            this.$el.querySelector('.equipment__full-description').classList.remove('equipment__full-description--shown') :
+            this.$el.querySelector('.equipment__full-description').classList.add('equipment__full-description--shown');
+        this.$el.querySelector('.equipment__unfold-button-arrow').classList.contains('equipment__unfold-button-arrow--reverse') ?
+            this.$el.querySelector('.equipment__unfold-button-arrow').classList.remove('equipment__unfold-button-arrow--reverse') :
+            this.$el.querySelector('.equipment__unfold-button-arrow').classList.add('equipment__unfold-button-arrow--reverse')
+      },
+      redrawSvg() {
+        if (this.$el.querySelector('.rt-card__content')) {
+          this.mobileSvgWidth = +(getComputedStyle(this.$el.querySelector('.rt-card__content')).width.slice(0, -2));
+        }
+      },
+      expandBlock() {
+        window.dispatchEvent(new CustomEvent('timeToExpand'));
+      }
+    },
+    render(h) {
+      const categoryCard = (() => {
+        if (this.isB2bCategory) {
+          if (this.categoryCardSize === 3) {
+            return <div class="rtb-category__content">
+              <div class="rtb-category__text-content">
+                <div class="rtb-category__content-top">
+                  {this.$slots.content}
+                </div>
+                <div class="rtb-category__content-bottom">
+                  {this.$slots.footer}
+                </div>
+              </div>
+              <div class="rtb-category__triangle">
+                <svg class="rtb-category-triangle" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 76 364">
+                  <polygon points="0 364,76 0,0 0"/>
+                </svg>
+              </div>
+              <div class="rtb-category__image" style={this.categoryImage}></div>
+            </div>;
+          }
+          if (this.categoryCardSize === 2) {
+            return <div class="rtb-category__content">
+              <div class="rtb-category__text-content">
+                <div class="rtb-category__content-top">
+                  <div class="rtb-category__mobile-header" style={this.categoryIcon}></div>
+                  {this.$slots.content}
+                </div>
+                <div class="rtb-category__content-bottom">
+                  {this.$slots.footer}
+                </div>
+              </div>
+              <div class="rtb-category__triangle">
+                <svg class="rtb-category__triangle-image" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 76 364">
+                  <polygon points="0 364,76 0,0 0"/>
+                </svg>
+              </div>
+              <div class="rtb-category__image" style={this.categoryImage}></div>
+            </div>;
+          }
+          if (this.categoryCardSize === 1) {
+            return <div class="rtb-category__content">
+              <div class="rtb-category__text-content">
+                <div class="rtb-category__content-top">
+                  <div class="rtb-category__mobile-header" style={this.categoryIcon}></div>
+                  {this.$slots.content}
+                </div>
+                <div class="rtb-category__content-bottom">
+                  {this.$slots.footer}
+                </div>
+              </div>
+            </div>;
+          }
+        } else {
+          return null;
+        }
+      })();
+      const label = (() => {
+        if (this.hasLabel) {
+          return <div
+              class={this.showLabelWhenHover ? 'rtb-card__label-hover rtb-card__label' : 'rtb-card__label'}>
+            <div class="rtb-card__label-content" style={"font-size:" + this.labelFontSize}>
+              <p class={"rtb-card__label-text color-block--" + this.labelMainColor.replace(/^(b2b\-)|(b2c\-)/i, '')}
+                 style={"background-color:" + this.labelMainColor}>
+                {this.$slots.label}
+              </p>
+            </div>
+            <svg width="80" height="48" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" fill-rule="evenodd">
+                <path class={"svg-fill--" + this.labelAdditionalColor}
+                      d="M79.153 35.741l-.007.012a2.955 2.955 0 0 1-.373.538c-.02.024-.039.05-.06.072l-.041.047-11.426 11.196V31.304h9.118a3.251 3.251 0 0 1 .438.033h.005a2.977 2.977 0 0 1 .253.046c.152.035.302.08.448.137l.017.006c.07.028.14.058.207.091l.03.015c.069.033.137.07.203.108l.004.003c.065.038.128.08.19.122l.03.021a2.99 2.99 0 0 1 .21.164 2.962 2.962 0 0 1 .341.335l.026.028c.05.06.098.12.143.182l.022.03c.046.065.09.13.13.197l.004.008c.042.07.08.14.116.213l.004.008a3.082 3.082 0 0 1 .104.237 3.014 3.014 0 0 1 .202.99v.03c.004.159-.005.318-.027.475l-.006.03c-.02.138-.05.275-.091.41l-.007.019a2.765 2.765 0 0 1-.086.241l-.011.025a2.93 2.93 0 0 1-.11.233z"/>
+                <path class={"svg-fill--" + this.labelMainColor}
+                      d="M79.777 14.674v11.41l-.001 7.415c-.004.071-.013.141-.02.212l-.018.174c-.129 1.016-.596 1.921-1.268 2.638l.087-.103a2.919 2.919 0 0 0 .627-2.206 3.018 3.018 0 0 0-.895-1.799 3.335 3.335 0 0 0-.604-.463 3.145 3.145 0 0 0-.446-.216 3.185 3.185 0 0 0-1.16-.222h-5.73L0 31.512V0h74.962c2.661-.008 4.812 2.167 4.813 4.788l.002 9.886zm-1.665 22.214c.044-.038.082-.083.125-.123l-.125.123z"/>
+              </g>
+            </svg>
+          </div>;
+        }
+      })();
+      const discount = (() => {
+        if (this.hasDiscount) {
+          if (this.discountLines === 1) {
+            return <div class="rtb-card__discount">
+              <div class="rtb-card__discount-line rtb-card__discount-line-1">
+                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
+                <div class="rtb-card__discount-line__flag">
+                  <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#FCD500" fill-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+            </div>;
+          }
+          if (this.discountLines === 2) {
+            return <div class="rtb-card__discount">
+              <div class="rtb-card__discount-line rtb-card__discount-line-1">
+                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
+                <div class="rtb-card__discount-line__flag">
+                  <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#54D3B1" fill-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="rtb-card__discount-line rtb-card__discount-line-2"></div>
+            </div>;
+          }
+          if (this.discountLines === 3) {
+            return <div class="rtb-card__discount triple">
+              <div class="rtb-card__discount-line rtb-card__discount-line-1">
+                <span class="rtb-card__discount-line__flag-text">{this.discountText}</span>
+                <div class="rtb-card__discount-line__flag">
+                  <svg width="30" height="29" viewBox="0 0 83 80" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h83v80l-41.45-6.884L0 80z" fill="#64DDEC" fill-rule="evenodd"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="rtb-card__discount-line rtb-card__discount-line-2"></div>
+              <div class="rtb-card__discount-line rtb-card__discount-line-3"></div>
+            </div>;
+          }
+        } else {
+          return null;
+        }
+      })();
+      const header = (() => {
+        if (this.$slots.header) {
+          return <div style={this.cardHeaderStyle} class="rt-card__header">
+            {this.$slots["header"]}
+          </div>;
+        } else {
+          return null;
+        }
+      })();
+      const bottomList = (() => {
+        if (this.$slots["bottom-list"]) {
+          return <div class="rt-card__bottom-list">
+            {this.$slots["bottom-list"]}
+          </div>;
+        } else {
+          return null;
+        }
+      })();
+      const contentWithoutWrapper = (() => {
+        if (this.$slots['content-without-wrapper']) {
+          return this.$slots['content-without-wrapper'];
+        } else {
+          return null;
+        }
+      })();
+      const productTriangle = (() => {
+        if (this.productCard && !this.productIcon) {
+          return <div class="rtb-product__triangle">
+            <svg class="rtb-product__triangle-image" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 364 40">
+              <polygon points="0 38,0 40,364 40,364 0"/>
+            </svg>
+          </div>
+        }
+      })();
+      const doubleSided = (() => {
+        if (this.doubleSided) {
+          return <div class="rtb-card__reverse">
+            <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg" class="rtb-card-close"
+                 viewBox="-10 -10 35 35">
+              <path d="M15 1.5L13.5 0l-6 6-6-6L0 1.5l6 6-6 6L1.5 15l6-6 6 6 1.5-1.5-6-6z" fill="#101828"
+                    fill-rule="evenodd" fill-opacity=".5"/>
+            </svg>
+            {this.$slots.reverse}
+          </div>
+        }
+      })();
+      const hiddenPopupBenefits = (() => {
+        if (this.$slots['popup-special-benefits']) {
+          return <div class="rt-card__popup-benefits">{this.$slots['popup-special-benefits']}</div>;
+        } else {
+          return null;
+        }
+      })();
+      const hiddenPopupCosts = (() => {
+        if (this.$slots['popup-special-costs']) {
+          return <div class="rt-card__popup-costs">{this.$slots['popup-special-costs']}</div>;
+        } else {
+          return null;
+        }
+      })();
+      const triangle = (() => {
+        if (this.inTabsWImage) {
+          if (this.tabletLayout || this.mobileLayout) {
+            return <svg width="100%" height="100" class="rt-card__content-triangle">
+              <polygon points={"0,100 " + this.mobileSvgWidth + ",0 " + this.mobileSvgWidth + ",100"}
+                       fill="rgb(255, 255, 255)"/>
+            </svg>
+          } else {
+            return <svg width="100" height="490" class="rt-card__content-triangle">
+              <polygon points="0,0 100,0 0,490" fill="rgb(255, 255, 255)"/>
+            </svg>
+          }
+        }
+      })();
+      const unfoldButton = (() => {
+        if (this.unfoldButtonText) {
+          if (this.mobileLayout) {
+            return <div class="equipment__unfold-button color-purple" onClick={this.unfoldFeatures}>
+              {this.unfoldButtonText}
+              <div class="equipment__unfold-button-arrow">
+                <svg width="20" height="20">
+                  <polyline points="2,6 10,14 18,6" fill="none" stroke="#e3e8ec" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+          } else {
+            return null;
+          }
+        }
+      })();
+      const expandBlock = (() => {
+        if (this.hasExpandedBlock) {
+          return <div class="rtb-card__expanding-block rt-space-top05 rt-space-bottom15"
+                      onClick={this.expandBlock}>
+            {this.$slots['expanding-block']}
+          </div>
+        } else {
+          return null;
+        }
+      })();
+      const headerImage = (() => {
+        if (this.fullWidthTopImage) {
+          if (this.hasGradientOverImage) {
+            return <div
+                class="rtb-card__image-wrapper rtb-card__image-wrapper--has-gradient rt-font-center">
+              <img class="additional-possibilities__card-image"
+                   src={this.backgroundImage}/>
+            </div>
+          } else {
+            return <div class="rtb-card__image-wrapper rt-font-center">
+              <img class="additional-possibilities__card-image"
+                   src={this.backgroundImage}/>
+            </div>
+          }
+        } else {
+          return null;
+        }
+      })();
+      if (this.doubleSided) {
+        return <div class={"rt-card " + this.cardClass} style={this.cardStyle} onClick={this.flipCard}>
+          <div class={"rt-card__content" + this.cardContentClass} style={this.cardBackgroundStyle}>
+            <div class={"rt-card__body" + this.cardBodyClass} style={this.bodyStyle}>
+              {this.$slots["content"]}
+            </div>
+            <div class="rt-card__footer">
+              {this.$slots["footer"]}
+            </div>
+          </div>
+          {doubleSided}
+        </div>;
+      } else if (!this.isB2bCategory) {
+        return <div class={"rt-card" + this.cardClass} style={this.cardStyle}>
+          {this.backgroundImageStandAlone ?
+              <div style={this.standAloneBackgroundStyle} class="rt-card__stand-alone-background"/> : null}
+          {discount}
+          {label}
+          {!this.fullWidthTopImage ? <div style={this.cardBackgroundStyle}
+                                          class={"rt-card__background" + this.cardBackgroundClass}/> : null}
+          <div class={"rt-card__content" + this.cardContentClass}>
+            {header}
+            {productTriangle}
+            {headerImage}
+            <div class={"rt-card__body" + this.cardBodyClass} style={this.bodyStyle}>
+              {unfoldButton}
+              {this.$slots["content"]}
+              {expandBlock}
+            </div>
+            {bottomList}
+            {contentWithoutWrapper}
+            <div class="rt-card__footer">
+              {this.$slots["footer"]}
+            </div>
+            {hiddenPopupBenefits}
+            {hiddenPopupCosts}
+            {triangle}
+          </div>
+        </div>;
+      } else {
+        return <div class={"rt-card" + this.cardClass} style={this.cardStyle}>
+          {categoryCard}
+        </div>;
+      }
+    }
+  };
 </script>
