@@ -399,13 +399,12 @@
 .{newAppName}-card-buy__form
   width 100%
   background-color b2c-white
-  opacity 0
   visibility hidden
   position absolute
   top -50%
   left 0
   right 0
-  z-index 2
+  z-index -1
   transition-timing-function ease-in-out
   transition-duration .2s
   transition-property top, opacity, visibility, max-height
@@ -438,6 +437,7 @@
     visibility visible
     position relative
     top 0
+    z-index 2
     animation .4s showCardForm linear
 
   .{newAppName}-card-buy--show-form.rt-card-buy--is-horizontal &
