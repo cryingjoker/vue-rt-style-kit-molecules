@@ -39,6 +39,7 @@ import {
   Popup,
   LinksBlock,
   Hint,
+  HintBody,
   BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
@@ -128,6 +129,7 @@ const VueRtStyle = {
       Vue.component(Popup.name, Popup);
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(Hint.name, Hint);
+      Vue.component(HintBody.name, HintBody);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
       Vue.component(Slide.name, Slide);
