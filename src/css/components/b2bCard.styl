@@ -561,16 +561,17 @@
     color main-color
     text-align left
     padding 20px
-    position relative
+    position fixed
     top auto
     bottom auto
     right auto
     left auto
-    z-index 9
+    z-index 999
     transform translateY(-50%)
     font-size 14px
     line-height 18px
     box-shadow 0 5px 10px 5px rgba(main-color, 0.2)
+    background-color b2c-white
     .rtb-hint__text-triangle
       content ""
       width 0
@@ -583,6 +584,8 @@
       bottom auto
     &--top
       transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
+      @media (max-width: mobile-upper-limit)
+        transform translateX(0) translateY(calc(-100% - 10px))
       .rtb-hint__text-triangle
         border-width 10px 10px 0 10px
         border-style solid
@@ -592,6 +595,8 @@
         right calc(50% - 10px)
     &--bottom
       transform translateX(calc(-50% + 10px)) translateY(30px)
+      @media (max-width: mobile-upper-limit)
+        transform translateX(0) translateY(30px)
       .rtb-hint__text-triangle
         border-width 0 10px 10px 10px
         border-style solid
@@ -635,6 +640,11 @@
         position absolute
         top -9px
         left 20px
+    &--small
+      &.{b2bAppName}-hint__text--top
+        transform translateX(calc(-50% + 10px)) translateY(calc(-100% - 10px))
+      &.{b2bAppName}-hint__text--bottom
+        transform translateX(calc(-50% + 10px)) translateY(30px)
   &--tooltip
     color main-color
     text-align center
@@ -890,7 +900,7 @@
     .{b2bAppName}-category__triangle
       fill b2c-cool-grey
 
-  &.{newAppName}-card-state
+  &.{newAppName}-card-slate
     .{b2bAppName}-category__text-content
       background-color b2c-slate
 

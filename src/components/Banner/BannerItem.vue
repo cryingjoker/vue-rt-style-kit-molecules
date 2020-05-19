@@ -89,10 +89,6 @@
                 type: String,
                 default: null
             },
-            backgroundImageTablet: {
-                type: String,
-                default: null
-            },
             backgroundImageWebp: {
                 type: String,
                 default: null

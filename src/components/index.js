@@ -43,6 +43,7 @@
 
  export { default as LinksBlock } from './Card/LinksBlock.vue';
  export { default as Hint } from './Card/Hint.vue';
+ export { default as HintBody } from './Card/HintBody.vue';
  export { default as Pattern } from './Pattern/Pattern.vue';
 
 
