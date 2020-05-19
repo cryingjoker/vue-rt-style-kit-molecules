@@ -82,7 +82,7 @@ import {
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
-import {OutsideClickDirective} from "./directives/OutsideClick/OudsideClick";
+import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
 // import 'element-closest-polyfill';

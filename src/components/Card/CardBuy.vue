@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import {OutsideClickDirective} from "../../directives/OutsideClick/OudsideClick";
+import {OutsideClickDirective} from "../../directives/OutsideClick/OutsideClick";
 import {scrollIt} from "../../utils";
 import debounce from "debounce";
 const componentsList = {};
