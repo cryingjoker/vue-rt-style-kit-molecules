@@ -1,12 +1,35 @@
 import variables from "../../variables.json";
+import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 class OutsideClick {
   constructor(element, action, vnode){
     this.$el = element;
-    this.action = action;
+    
+    if(typeof action.value === 'function') {
+      this.action = action;
+    }
+    this.workOnDesktop = true;
+    this.workOnMobile = false;
+    this.workOnTablet = false;
+    if(typeof action.value === 'object') {
+      this.action = {}
+      
+      this.action.value = action.value.fn
+      if('workOnMobile' in action) {
+        this.workOnMobile = action.value.workOnMobile;
+      }
+      if('workOnTablet' in action.value) {
+        this.workOnTablet = action.value.workOnTablet;
+      }
+      if('workOnDesktop' in action.value){
+        this.workOnDesktop = action.value.workOnDesktop;
+      }
+    }
     this.bind();
     this.vnode = vnode;
+    this.setDeviceType()
   }
   bind = ()=>{
+    deviceTypeStore.addWatcher(this._uid,this.setDeviceType.bind(this));
     if(this.$el && (!this.vnode || !this.vnode.OutsideClick)) {
       window.addEventListener('click',this.triggerAction, {passive: true});
       this.$el.addEventListener('mouseenter', this.mouseenter, {passive: true});
@@ -15,11 +38,14 @@ class OutsideClick {
   }
 
   update = (el) => {
+    deviceTypeStore.removeWatcher(this._uid)
+    deviceTypeStore.addWatcher(this._uid,this.setDeviceType.bind(this));
     this.unbind();
     this.$el = el;
     this.bind();
   }
   unbind = () => {
+    deviceTypeStore.removeWatcher(this._uid)
     window.removeEventListener('click',this.triggerAction);
     this.$el.removeEventListener('mouseenter', this.mouseenter);
     this.$el.removeEventListener('mouseleave', this.mouseleave);
@@ -30,12 +56,17 @@ class OutsideClick {
   mouseenter = ()=>{
     this.hover = true
   }
+  setDeviceType() {
+    const type = deviceTypeStore.getStatus();
+    this.deviceType = type;
+  }
   triggerAction = ()=>{
 
-    const isTablet =
-      window.innerWidth <= parseInt(variables["tablet-upper-limit"]);
-    if(!this.hover && !isTablet){
-      this.action.value();
+    
+    if(!this.hover){
+      if(this.workOnMobile && this.deviceType === 'mobile' || this.workOnTablet && this.deviceType ===  'tablet' || this.workOnDesktop && this.deviceType ===  'desktop'){
+        this.action.value();
+      }
     }
   }
 }

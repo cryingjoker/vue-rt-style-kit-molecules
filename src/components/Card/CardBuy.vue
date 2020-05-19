@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import {OutsideClickDirective} from "../../directives/OudsideClick/OudsideClick";
+import {OutsideClickDirective} from "../../directives/OutsideClick/OudsideClick";
 import {scrollIt} from "../../utils";
 import debounce from "debounce";
 const componentsList = {};
@@ -21,6 +21,18 @@ export default {
     customButtonClass: {
       type: String,
       default: null
+    },
+    outsideclickDesktop:{
+      type: Boolean,
+      default: true
+    },
+    outsideclickTablet:{
+      type: Boolean,
+      default: false
+    },
+    outsideclickMobile:{
+      type: Boolean,
+      default: false
     }
   },
   data(){
@@ -128,7 +140,14 @@ export default {
         }
       }
     };
-    return <div ref="card" v-rt-out-side-click={this.hideShow}>
+    return <div ref="card" v-rt-out-side-click={
+      {
+        workOnDesktop: this.outsideclickDesktop,
+        workOnTablet: this.outsideclickTablet,
+        workOnMobile: this.outsideclickMobile,
+        fn:this.hideShow
+      }
+    }>
       <div class={'rt-card rt-card-buy'+(this.showForm ? ' rt-card-buy--show-form' : '') + (this.isHorizontalCard ? ' rt-card-buy--is-horizontal' : '')}>
         <div class="row rt-card-buy__info">
           <div class={"rt-card-buy__form rt-space-vertical"+(this.isHorizontalCard ? " rt-card-buy__form-horizontal":"")}>
