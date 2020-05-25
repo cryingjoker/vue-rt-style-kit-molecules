@@ -9,7 +9,7 @@
   },
   "lint-staged": {
     "*.styl": [
-      "stylus-supremacy format src/**/*.styl --replace --options stylus-supremacy.config.jљson",
+      "stylus-supremacy format src/**/*.styl --replace --options stylus-supremacy.config.json",
       "git add"
     ],
     "*.{js,json,vue}": [
