@@ -7,12 +7,12 @@ export default {
   props: {
     backgroundImage: {
       type: String,
-      default: null,
+      default: '',
       required: true
     },
     backgroundPosition: {
       type: String,
-      default: null
+      default: ''
     }
   },
 

@@ -65,10 +65,10 @@
                 type: String,
                 default: null
             },
-            justify: {
-                type: String,
-                default: null
-            },
+//            justify: {
+//                type: String,
+//                default: ''
+//            },
             contentMinHeight: {
                 type: [Number, String],
                 default: null
@@ -91,19 +91,19 @@
             },
             backgroundColor: {
                 type: String,
-                default: "none"
+                default: ""
             },
-            isWhiteColor: {
-                type: Boolean,
-                default: false
-            },
+//            isWhiteColor: {
+//                type: Boolean,
+//                default: false
+//            },
             sleepTime: {
                 type: Number,
                 default: 5000
             },
             bannerLogo: {
                 type: String,
-                default: null
+                default: ''
             },
             setStopOnClick: {
                 type: Boolean,
@@ -113,25 +113,25 @@
                 type: Boolean,
                 default: false
             },
-            bannerItemsWithCustomContent: {
-                type: Boolean,
-                default: false
-            },
+//            bannerItemsWithCustomContent: {
+//                type: Boolean,
+//                default: false
+//            },
             mobileImageHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             mobileImageMaxHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             tabletImageHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             tabletImageMaxHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             isBackgroundBanner: {
                 type: Boolean,
@@ -139,7 +139,7 @@
             },
             hasCustomHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             hidePaginatorOnMobile: {
                 type: Boolean,
@@ -230,13 +230,11 @@
                         className.push("rt-banner--background-" + this.RtBanners.items[activeIndex].backgroundColor);
                     }
 
-
-
                     if (this.isFullscreenImage) {
                         className.push("rt-banner--full-screen");
-                        if (this.justify) {
-                            className.push("justify-" + this.justify);
-                        }
+//                        if (this.justify) {
+//                            className.push("justify-" + this.justify);
+//                        }
                     }
 
                     if (this.RtBanners.items[activeIndex].isWhiteColor) {
@@ -255,13 +253,9 @@
                         className.push("rt-banner--image-ontop");
                     }
 
-
-
                     if (this.RtBanners.items[activeIndex] && this.RtBanners.items[activeIndex].halfHeightImage) {
                         className.push("rt-banner--image-half-top");
                     }
-
-
                 }
                 return className.join(' ');
             },
@@ -360,7 +354,6 @@
                         }
                         break
                 }
-
 
                 return styles;
             }
@@ -514,7 +507,6 @@
                             }, 400);
                         }
                     }
-
                     this.stopAnimation = false;
                 }
                 this.playVideo();
@@ -573,7 +565,6 @@
                     if (!this.$options.animationHasBeenStart) {
                         this.$options.drawOrientation = "previous";
                         this.$options.animationHasBeenStart = true;
-
                         this.setNextActiveIndex(index);
                         this.createNewBannerImage().then(() => {
                             this.moveBannerImages().then();
@@ -607,7 +598,6 @@
                     this.$set(this.RtBanners, "activeIndex", index);
                     this.setStartTimer();
                 }
-
             },
             createNewBannerImage() {
                 return new Promise((resolve, reject) => {
@@ -615,13 +605,11 @@
                     let nextBannerImage = document.createElement("div");
                     nextBannerImage.classList.add("rt-banner-image", "rt-banner-image--next");
                     if (this.deviceType == 'mobile' && this.mobileImageMaxHeight) {
-
                         nextBannerImage.style.height = this.mobileImageMaxHeight;
                         nextBannerImage.style.maxHeight = this.mobileImageMaxHeight;
                     }
 
                     const nextImageIndex = this.$options.nextImageIndex;
-
                     if (nextBannerImage) {
                         if (this.$options.drawOrientation === "next") {
                             nextBannerImage.style.left = "100vw";
@@ -691,7 +679,6 @@
                             nextImage.classList.remove("rt-banner-image--stop-transition");
                         }
                         mainImage.classList.remove("rt-banner-image--stop-transition");
-
                         setTimeout(() => {
                             resolve();
                         }, 100);

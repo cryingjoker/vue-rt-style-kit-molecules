@@ -28,10 +28,6 @@
         type: Boolean,
         default: false
       },
-      smallIcon: {
-        type: Boolean,
-        default: false
-      },
       step: {
         type: Boolean,
         default: false

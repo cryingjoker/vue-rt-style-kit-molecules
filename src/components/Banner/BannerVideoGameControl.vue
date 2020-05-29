@@ -22,13 +22,9 @@ export default {
     RtBanners: {}
   },
 
-
   mounted: function() {
     setTimeout(()=>{
       this.video = this.$el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.rt-banner-video__content');
-
-
-
       this.video.addEventListener('play',(e)=>{
         this.playInterval = setInterval(()=>{
           this.video.style.strokeDashoffset =  ((1 - this.video.currentTime/(this.video.duration*1000)) * 380) %380;
@@ -64,7 +60,6 @@ export default {
         this.isPlaying = false;
         clearInterval(this.playInterval);
       });
-
     },100);
   },
 
@@ -89,7 +84,6 @@ export default {
         <circle r="60" cx="63" cy="63" fill="transparent" />
       </svg>
       <div class="banner__video-button-status"></div>
-
     </div>;
   }
 };

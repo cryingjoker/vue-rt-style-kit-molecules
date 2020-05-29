@@ -7,7 +7,7 @@ export default {
   props: {
     backgroundImage: {
       type: String,
-      default: null,
+      default: '',
       required: true
     }
   },

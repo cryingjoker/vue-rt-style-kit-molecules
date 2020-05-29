@@ -14,9 +14,9 @@
             nextSlide() {
                 if (!this.stopAnimation) {
                     this.stopAnimation = true;
-                    let corousel = this.$refs.carousel;
-                    let corouselItems = corousel.querySelectorAll(".rt-gallery-carousel-item");
-                    let firstItem = corouselItems[0];
+                    let carousel = this.$refs.carousel;
+                    let carouselItems = carousel.querySelectorAll(".rt-gallery-carousel-item");
+                    let firstItem = carouselItems[0];
                     let innerWidth = window.innerWidth;
                     if (innerWidth <= parseInt(variables["mobile-upper-limit"])) {
                         firstItem.style.marginLeft = "-47vw";
@@ -27,7 +27,7 @@
                     }
                     setTimeout(() => {
                         firstItem.removeAttribute("style");
-                        corousel.appendChild(firstItem);
+                        carousel.appendChild(firstItem);
                         setTimeout(() => {
                             this.stopAnimation = false;
                         }, 10);
@@ -38,9 +38,9 @@
             previousSlide() {
                 if (!this.stopAnimation) {
                     this.stopAnimation = true;
-                    let corousel = this.$refs.carousel;
-                    let corouselItems = corousel.querySelectorAll(".rt-gallery-carousel-item");
-                    let lastItem = corouselItems[corouselItems.length - 1];
+                    let carousel = this.$refs.carousel;
+                    let carouselItems = carousel.querySelectorAll(".rt-gallery-carousel-item");
+                    let lastItem = carouselItems[carouselItems.length - 1];
                     let innerWidth = window.innerWidth;
                     if (innerWidth <= parseInt(variables["mobile-upper-limit"])) {
                         lastItem.style.marginLeft = "-47vw";
@@ -50,7 +50,7 @@
                         lastItem.style.marginLeft = "-12.5%";
                     }
 
-                    corousel.prepend(lastItem);
+                    carousel.prepend(lastItem);
                     setTimeout(() => {
                         lastItem.removeAttribute("style");
                     },50)

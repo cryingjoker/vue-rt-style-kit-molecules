@@ -1,9 +1,8 @@
 {
   "items" : [
     {
-
       "name" : "rt-inline-dropdown",
-      "property" : "resize-steps",
+      "property" : ":resize-steps",
       "type" : ["Number[]"],
       "description" : "Ширина пересчета размеров",
       "value" : "[]"
@@ -11,8 +10,8 @@
     {
 
       "name" : "rt-inline-dropdown",
-      "property" : "dropdown-min-width",
-      "type" : ["Number"],
+      "property" : ":dropdown-min-width",
+      "type" : "Number",
       "description" : "Минимальная ширина выпадающего списка",
       "value" : "null"
     },
@@ -20,8 +19,8 @@
 
       "name" : "rt-inline-dropdown-item",
       "property" : "is-active",
-      "type" : ["Boolean"],
-      "description" : "Активный элемент в выпадающем списке по default",
+      "type" : "Boolean",
+      "description" : "Активный элемент в выпадающем списке по умолчанию",
       "value" : "false"
     }
   ]

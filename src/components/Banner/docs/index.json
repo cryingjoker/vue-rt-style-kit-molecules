@@ -1,81 +1,57 @@
 {
   "items": [
+
     {
       "name": "rt-banner",
-      "property": "(:)content-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту банера \n number - любое число становится px \n string - любые значения",
-      "value": "null"
+      "property": "resize-query-selectors-names",
+      "type": "Array",
+      "description": "Список селекторов для выравнивания по высоте",
+      "value": "[]",
+      "version": "0.3.6"
     },
     {
       "name": "rt-banner",
-      "property": ":hide-paginator-on-mobile",
-      "type": [
-        "Boolean"
-      ],
-      "version": "0.1.69",
-      "description": "Скрытие пагинатора при мобильном отображении",
-      "value": "false"
+      "property": ":mobile-not-resize-query-selectors",
+      "type": "Boolean",
+      "description": "Флаг запрета выравнивания селекторов по высоте на мобильном разрешении",
+      "value": "true",
+      "version": "0.3.6"
     },
     {
       "name": "rt-banner",
-      "property": ":hide-paginator-on-tablet",
-      "type": [
-        "Boolean"
-      ],
-      "version": "0.1.69",
-      "description": "Скрытие пагинатора при планшетном отображении",
-      "value": "false"
-    },
-    {
-      "name": "rt-banner",
-      "property": "(:)content-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту банера \n number - любое число становится px \n string - любые значения",
-      "value": "null"
-    },
-    {
-      "name": "rt-banner",
-      "property": ":dont-pause-on-hover",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Флаг выключения паузы при наведении на бенеры",
+      "property": ":tablet-not-resize-query-selectors",
+      "type": "Boolean",
+      "description": "Флаг, отключающий выравнивание селекторов по высоте в планшетном разрешении",
       "value": "false",
-      "version": "0.0.29"
+      "version": "0.3.6"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":scroll-to-next-image",
+      "type": "Boolean",
+      "description": "Флаг, отвечающий за автопереключение баннеров",
+      "value": "false"
     },
     {
       "name": "rt-banner",
       "property": ":auto-next-only-on-desktop",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Флаг выключения автопереключения слайдов не на дектопе",
+      "type": "Boolean",
+      "description": "Флаг, отвечающий за автопереключение баннеров только для десктопной версии",
       "value": "false",
       "version": "0.1.43"
     },
     {
       "name": "rt-banner",
       "property": ":has-custom-content",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Флаг для создания кастомных элементов банеров",
+      "type": "Boolean",
+      "description": "Флаг для создания кастомных элементов баннеров",
       "value": "false",
       "version": "0.0.29"
     },
     {
       "name": "rt-banner",
       "property": ":without-empty-column",
-      "type": [
-        "Boolean"
-      ],
+      "type": "Boolean",
       "description": "Флаг удаления отступа в колонку слева от контента",
       "value": "false",
       "version": "0.0.29"
@@ -83,340 +59,465 @@
     {
       "name": "rt-banner",
       "property": ":without-second-empty-column",
-      "type": [
-        "Boolean"
-      ],
+      "type": "Boolean",
       "description": "Флаг удаления отступа в колонку справа от контента",
-      "value": "false",
-      "version": ""
+      "value": "false"
     },
     {
       "name": "rt-banner",
-      "property": "mobile-image-height",
-      "type": [
-        "String"
-      ],
-      "description": "Устанавливает высоту background для мобильного разрешения",
-      "value": "null",
-      "version": "0.0.29"
-    },
-    {
-      "name": " rt-banner",
-      "property": "(:)content-mobile-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту банера для мобильного разрешения \n number - любое число становится px \n string - любые значения",
+      "property": "(:)content-min-height",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
-    },
-    {
-      "name": " rt-banner",
-      "property": "(:)content-tablet-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту банера для разрешения планшета \n number - любое число становится px \n string - любые значения",
-      "value": "null",
-      "version": "0.2.18"
     },
     {
       "name": "rt-banner",
       "property": "(:)content-mobile-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту банера для мобильного разрешения \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера для мобильного разрешения `number` - любое число становится `px`, `string` - любые значения",
+      "value": "null"
+    },
+    {
+      "name": " rt-banner",
+      "property": "(:)content-mobile-min-height",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера для мобильного разрешения `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
       "name": "rt-banner",
       "property": "(:)content-tablet-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту банера для разрешения планшета \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера для планшетного разрешения. `number` - любое число становится `px`, `string` - любые значения",
+      "value": "null",
+      "version": "0.2.18"
+    },
+    {
+      "name": " rt-banner",
+      "property": "(:)content-tablet-min-height",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера для планшетого разрешения. `number` - любое число становится `px`, `string` - любые значения",
       "value": "null",
       "version": "0.2.18"
     },
     {
       "name": "rt-banner",
-      "property": ":is-fullscreen-image",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Флаг установки фулскрин картинки",
-      "value": "false"
-    },
-    {
-      "name": "rt-banner",
-      "property": "justify",
-      "type": "String",
-      "description": "Сейчас принимает left - указывает на направление контанта слева",
-      "value": "null"
-    },
-    {
-      "name": "rt-banner",
-      "property": "background-color",
-      "type": "String",
-      "description": "Устанавливает цвет фона банера \n возможные значения \n `dark-slate` `yellow` `red` `dark-blue` `light-blue` `orange` `pink` `green`",
-      "value": "null"
-    },
-    {
-      "name": "rt-banner",
-      "property": ":background-repeat",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Устанавливает background-repeat опцию на картинке фона",
-      "value": "false"
-    },
-    {
-      "name": "rt-banner",
-      "property": ":sleep-time",
-      "type": [
-        "Number"
-      ],
-      "description": "Устанавливает время продолжительности слайда",
-      "value": "5000"
-    },
-    {
-      "name": "rt-banner",
-      "property": ":fixed-image",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Фиксация изображения слайда `background-attachment`",
-      "value": "false",
-      "version": "0.1.20"
-    },
-    {
-      "name": "rt-banner",
-      "property": "banner-logo",
-      "type": [
-        "String"
-      ],
-      "description": "Ссылка на логотип справа внизу",
-      "value": "null"
-    },
-    {
-      "name": "rt-banner",
-      "property": "set-stop-on-click",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Остановка автоперехода на следующий слайд после первого клика по банеру",
-      "value": "false",
-      "version": " >= 0.0.25"
-    },
-    {
-      "name": "rt-banner",
-      "property": "no-triangle",
-      "type": [
-        "Boolean"
-      ],
-      "description": "Убирает скосы справа и слева от изображения",
-      "value": "false",
-      "version": ""
-    },
-    {
-      "name": "rt-banner",
       "property": "paginator-position",
-      "type": [
-        "String"
-      ],
+      "type": "String",
       "description": "Устанавливает позицию пагинатора. Сейчас принимая `top` переносит пагинатор наверх",
-      "value": "null",
-      "version": ""
-    },
-    {
-      "name": "rt-banner-item",
-      "property": "background-position",
-      "type": [
-        "String"
-      ],
-      "description": "Настройки background-position \n передается css значение",
       "value": "null"
     },
     {
       "name": "rt-banner-item",
       "property": "(:)content-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту слайда \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера. `number` - любое число становится `px`, `string` - любые значения",
+      "value": "null"
+    },
+    {
+      "name": "rt-banner",
+      "property": "(:)content-height",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера. `number` - любое число становится `px`, `string` - любые значения",
+      "value": "null"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":is-fullscreen-image",
+      "type": "Boolean",
+      "description": "Флаг установки изображения во всю ширину баннера",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": "no-triangle",
+      "type": "Boolean",
+      "description": "Убирает скосы справа и слева от изображения",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":round-angles",
+      "type": "Boolean",
+      "description": "Флаг для установки закруглённых углов у баннера и добавления стилей для сегмента b2b",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": "background-color",
+      "type": "String",
+      "description": "Устанавливает цвет фона баннера. Возможные значения `dark-slate` `yellow` `red` `dark-blue` `light-blue` `orange` `pink` `green`",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": ":sleep-time",
+      "type": "Number",
+      "description": "Задаёт промежуток времени между переключениями баннеров",
+      "value": "5000"
+    },
+    {
+      "name": "rt-banner",
+      "property": "banner-logo",
+      "type": "String",
+      "description": "Ссылка на логотип, находящийся справа внизу баннера",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": ":set-stop-on-click",
+      "type": "Boolean",
+      "description": "Остановка автоперехода на следующий слайд после клика по баннеру",
+      "value": "false",
+      "version": " >= 0.0.25"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":dont-pause-on-hover",
+      "type": "Boolean",
+      "description": "Флаг отключения паузы при наведении на баннеры",
+      "value": "false",
+      "version": "0.0.29"
+    },
+    {
+      "name": "rt-banner",
+      "property": "mobile-image-height",
+      "type": "String",
+      "description": "Устанавливает высоту изображения для мобильного разрешения",
+      "value": "",
+      "version": "0.0.29"
+    },
+    {
+      "name": "rt-banner",
+      "property": "mobile-image-max-height",
+      "type": "String",
+      "description": "Устанавливает максимальную высоту изображения для мобильного разрешения",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": "tablet-image-height",
+      "type": "String",
+      "description": "Устанавливает высоту изображения для планшетного разрешения",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": "tablet-image-max-height",
+      "type": "String",
+      "description": "Устанавливает максимальную высоту изображения для планшетного разрешения",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": ":is-background-banner",
+      "type": "Boolean",
+      "description": "Задаёт баннеру абсолютное позиционирование (?)",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": "has-custom-height",
+      "type": "String",
+      "description": "Устанавливает фиксированную высоту баннера для всех разрешений",
+      "value": ""
+    },
+    {
+      "name": "rt-banner",
+      "property": ":hide-paginator-on-mobile",
+      "type": "Boolean",
+      "version": "0.1.69",
+      "description": "Скрытие пагинатора при мобильном разрешении",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":hide-paginator-on-tablet",
+      "type": "Boolean",
+      "version": "0.1.69",
+      "description": "Скрытие пагинатора при планшетном разрешении",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":has-image-on-mobile",
+      "type": "Boolean",
+      "description": "Флаг включающий отображение изображения в мобильной версии",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":background-repeat",
+      "type": "Boolean",
+      "description": "Устанавливает свойство `background-repeat` для фонового изображения",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":fixed-image",
+      "type": "Boolean",
+      "description": "Фиксация фонового изображения. Добавление свойства `background-attachment`",
+      "value": "false",
+      "version": "0.1.20"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":transparent-background-image",
+      "type": "Boolean",
+      "description": "Устанавливает свойство `contain` для фонового изображения",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":mobile-image-on-top",
+      "type": "Boolean",
+      "description": "Флаг, устанавливающий отображение изображения над текстовым контентом в мобильной версии",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":switch-off-timer",
+      "type": "Boolean",
+      "description": "Флаг, отключающий автопереключение баннеров",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner",
+      "property": ":background-image-left",
+      "type": "Boolean",
+      "description": "Флаг, включающий выравнивание изображения по левому краю",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "link",
+      "type": "String",
+      "description": "Оборачивает контент баннера в ссылку. Задаёт атрибут `href`",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "mobile-image-max-height",
+      "type": "String",
+      "description": "Устанавливает максимальную высоту изображения для мобильного разрешения. (2)",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "tablet-image-max-height",
+      "type": "String",
+      "description": "Устанавливает максимальную высоту изображения для мобильного разрешения. (2)",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "link-target",
+      "type": "String",
+      "description": "Оборачивает контент баннера в ссылку. Задаёт атрибут `target`",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "anchor-hash-link",
+      "type": "String",
+      "description": "Ставит баннер при переходе на страницу по ссылке содержащей данный hash",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "anchor-get-params",
+      "type": "String",
+      "description": "Ставит баннер при переходе на страницу по ссылке содержащей данный query-параметр",
+      "value": ""
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "(:)content-min-height",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
       "name": "rt-banner-item",
       "property": "(:)content-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту слайда \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера. `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
       "name": " rt-banner-item",
       "property": "(:)content-mobile-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту слайда \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера для мобильного разрешения `number` - любое число становится `px`, `string` - любые значения",
+      "value": "null"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "(:)content-mobile-height",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера для мобильного разрешения `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
       "name": " rt-banner-item",
       "property": "(:)content-tablet-min-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную высоту слайда для планшетов \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную высоту баннера для планшетого разрешения. `number` - любое число становится `px`, `string` - любые значения",
       "value": "null",
       "version": "0.2.18"
     },
     {
       "name": "rt-banner-item",
-      "property": "(:)content-mobile-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту слайда для мобильного разрешения \n number - любое число становится px \n string - любые значения",
-      "value": "null"
-    },
-    {
-      "name": "rt-banner-item",
       "property": "(:)content-tablet-height",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает высоту слайда для разрешения планшета \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает высоту баннера для планшетного разрешения. `number` - любое число становится `px`, `string` - любые значения",
       "value": "null",
       "version": "0.2.18"
     },
     {
       "name": "rt-banner-item",
       "property": "(:)content-min-width",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает минимальную ширину слайда для мобильного разрешения\n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает минимальную ширину слайда для мобильного разрешения `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
       "name": "rt-banner-item",
       "property": "(:)content-max-width",
-      "type": [
-        "Number",
-        "String"
-      ],
-      "description": "Устанавливает максимальную ширину слайда \n number - любое число становится px \n string - любые значения",
+      "type": "Number | String",
+      "description": "Устанавливает максимальную ширину слайда `number` - любое число становится `px`, `string` - любые значения",
       "value": "null"
     },
     {
-      "name": "rt-banner-item",
-      "property": "background-сolor",
-      "type": [
-        "String"
-      ],
-      "description": "Устанавливает цвет фона слайда",
-      "value": "null"
+      "name" : "rt-banner-item",
+      "property" : "background-video",
+      "type" : "String",
+      "description" : "URL-адрес видео, воспроизводимого в баннере",
+      "value" : ""
     },
     {
       "name": "rt-banner-item",
-      "property": ":is-white-color",
-      "type": "Boolean",
-      "description": "Устанавливает белый цвет текста слайда",
-      "value": "false"
+      "property": "background-color",
+      "type": "String",
+      "description": "Устанавливает цвет фона баннера. Возможные значения `dark-slate` `yellow` `red` `dark-blue` `light-blue` `orange` `pink` `green`",
+      "value": ""
     },
     {
       "name" : "rt-banner-item",
       "property" : "background-image",
       "type" : "String",
-      "description" : "url-адрес картинки для Desktop,Tablet,Mobile",
-      "value" : "null"
-    },
-    {
-      "name" : "rt-banner-item",
-      "property" : "background-image-tablet",
-      "type" : "String",
-      "description" : "url-адрес картинки для Tablet",
-      "value" : "null",
-      "version": " >= 0.0.86"
+      "description" : "URL-адрес изображения для всех разрешений",
+      "value" : ""
     },
     {
       "name" : "rt-banner-item",
       "property" : "background-image-mobile",
       "type" : "String",
-      "description" : "url-адрес картинки для Mobile",
-      "value" : "null",
-      "version": " >= 0.0.86"
+      "description" : "url-адрес изображения для мобильного разрешения(если указано, перекрывает значение `background-image`)",
+      "value" : ""
+    },
+    {
+      "name" : "rt-banner-item",
+      "property" : "background-image-tablet",
+      "type" : "String",
+      "description" : "URL-адрес изображения для планшетного разрешения(если указано, перекрывает значение `background-image`)",
+      "value" : ""
+    },
+    {
+      "name" : "rt-banner-item",
+      "property" : "background-image-webp",
+      "type" : "String",
+      "description" : "URL-адрес изображения в формате `webp`",
+      "value" : ""
     },
     {
       "name": "rt-banner-item",
       "property": "lazy-image",
       "type": "String",
-      "description": "Устанавливает для слайда фон в виде прелоадера, пока не загрузится основное изображение \n string - ссылка на внутренний или внешний файл",
-      "value": "null",
+      "description": "URL-адрес изображения-заглушки, пока не загрузится основное изображение",
+      "value": "",
       "version": " >= 0.0.30"
     },
     {
-      "name" : "rt-card",
-      "property" : "lazy-image-tablet",
+      "name" : "rt-banner-item",
+      "property" : "lazy-image-mobile",
       "type" : "String",
-      "description" : "Ссылка на картинку заглушку для Tablet",
-      "value" : "null",
+      "description" : "URL-адрес изображения-заглушки для мобильного разрешения",
+      "value" : "",
       "version": " >= 0.0.86"
     },
     {
-      "name" : "rt-card",
-      "property" : "lazy-image-mobile",
+      "name" : "rt-banner-item",
+      "property" : "lazy-image-tablet",
       "type" : "String",
-      "description" : "Ссылка на картинку заглушку для Mobile",
-      "value" : "null",
+      "description" : "URL-адрес изображения-заглушки для планшетного разрешения",
+      "value" : "",
       "version": " >= 0.0.86"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": ":preload-image",
+      "type": "Boolean",
+      "description": "Флаг для предварительной загрузки изображения",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": ":is-white-color",
+      "type": "Boolean",
+      "description": "Устанавливает белый цвет текста баннера",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": "(:)slide-time",
+      "type": "String | Number",
+      "description": "Задаёт промежуток времени, через который произойдёт преключение на следующий баннер",
+      "value": "null"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": ":is-game-banner-item",
+      "type": "Boolean",
+      "description": "Флаг для кастомного баннера 4game",
+      "value": "false"
     },
     {
       "name": "rt-banner-item",
       "property": ":ga",
       "type": "Object",
-      "description": "Используется для сбора Google-аналитики. \n\n`:ga=\"{\n  name: Заголовок слайда баннера,\n  section: Раздел сайта (main_page, /bonus, /smarthouse - по-умолчанию location.pathname)\n}\"`",
+      "description": "Используется для сбора Google-аналитики сегмент b2c. `:ga=\"{name: Заголовок слайда баннера, section: Раздел сайта (main_page, /bonus, /smarthouse - по-умолчанию location.pathname)}\"`",
       "value": "null",
       "version": " >= 0.0.30"
     },
     {
-      "name": "rt-banner",
-      "property": "resize-query-selectors-names",
-      "type": "Array",
-      "description": "Список query селекторов для выравнивания по высоте",
-      "value": "[]",
-      "version": "0.3.6"
+      "name": "rt-banner-item",
+      "property": ":ga-b2b",
+      "type": "Object",
+      "description": "Используется для сбора Google-аналитики сегмент b2b. `:ga=\"{name: Заголовок слайда баннера, section: Раздел сайта (main_page, /bonus, /smarthouse - по-умолчанию location.pathname)}\"`",
+      "value": "null",
+      "version": " >= 0.0.30"
     },
     {
-      "name": "rt-banner",
-      "property": "mobile-not-resize-query-selectors",
+      "name": "rt-banner-item",
+      "property": ":has-image-on-mobile",
       "type": "Boolean",
-      "description": "Флаг запрета выравнивания селекторов  по высоте на mobile",
-      "value": "true",
-      "version": "0.3.6"
+      "description": "Флаг, включающий отображение изображения в мобильной версии",
+      "value": "false"
     },
     {
-      "name": "rt-banner",
-      "property": "tablet-not-resize-query-selectors",
+      "name": "rt-banner-item",
+      "property": ":color-fill-on-mobile",
       "type": "Boolean",
-      "description": "Флаг запрета выравнивания селекторов  по высоте на tablet",
-      "value": "false",
-      "version": "0.3.6"
+      "description": "Флаг, отключающий отображение изображения в мобильной версии, происходит заливка фоновым цветом",
+      "value": "false"
+    },
+    {
+      "name": "rt-banner-item",
+      "property": ":color-fill-on-mobile",
+      "type": "Boolean",
+      "description": "Флаг, для включения кастомного вида баннера с изображением занимающим верхнюю половину баннера в мобильной версии",
+      "value": "false"
     }
   ]
 }

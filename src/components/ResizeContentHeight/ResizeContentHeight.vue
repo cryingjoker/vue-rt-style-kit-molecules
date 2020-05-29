@@ -18,18 +18,18 @@ export default {
       type: Number,
       default: null
     },
-    desctopItem: {
-      type: Number,
-      default: null
-    },
-    tabletItem: {
-      type: Number,
-      default: null
-    },
-    mobileItem: {
-      type: Number,
-      default: null
-    },
+//    desktopItem: {
+//      type: Number,
+//      default: null
+//    },
+//    tabletItem: {
+//      type: Number,
+//      default: null
+//    },
+//    mobileItem: {
+//      type: Number,
+//      default: null
+//    },
     mobileNotResize: {
       type: Boolean,
       default: false
@@ -52,12 +52,12 @@ export default {
           groupSize: this.groupSize,
           tabletGroupSize: this.tabletGroupSize,
           mobileGroupSize: this.mobileGroupSize,
-          desctopItem: this.desctopItem,
-          tabletItem: this.tabletItem,
-          mobileItem: this.mobileItem,
+//          desktopItem: this.desktopItem,
+//          tabletItem: this.tabletItem,
+//          mobileItem: this.mobileItem,
           mobileNotResize: this.mobileNotResize,
-          desktopNotReasize: this.desktopNotReasize,
-          tabletNotReasize: this.tabletNotReasize,
+          desktopNotResize: this.desktopNotResize,
+          tabletNotResize: this.tabletNotResize,
           reactive: this.reactive,
       }
     return <div v-rt-resize-content-height={data}>{this.$slots.default}</div>;

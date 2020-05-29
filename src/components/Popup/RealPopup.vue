@@ -20,10 +20,10 @@
         type: Boolean,
         default: true
       },
-      popupType: {
-        type: Number,
-        default: 1
-      },
+//      popupType: {
+//        type: Number,
+//        default: 1
+//      },
       triggerElementClass: {
         type: String,
         default: ''
@@ -52,9 +52,9 @@
         if(this.positionCenter){
           classList += ' rtb-popup--center-center';
         }
-        if(this.popupType) {
-          classList += ` rtb-popup-type-${this.popupType}`
-        }
+//        if(this.popupType) {
+//          classList += ` rtb-popup-type-${this.popupType}`
+//        }
         return classList;
       },
     },

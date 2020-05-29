@@ -15,27 +15,27 @@
             },
             link: {
                 type: String,
-                default: null
+                default: ''
             },
             mobileImageMaxHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             tabletImageMaxHeight: {
                 type: String,
-                default: null
+                default: ''
             },
             linkTarget: {
                 type: String,
-                default: null
+                default: ''
             },
-            ancorHashLink: {
+            anchorHashLink: {
                 type: String,
-                default: null
+                default: ''
             },
-            ancorGetParamsLink: {
+            anchorGetParamsLink: {
                 type: String,
-                default: null
+                default: ''
             },
             contentMinHeight: {
                 type: [Number, String],
@@ -71,39 +71,39 @@
             },
             backgroundVideo: {
                 type: String,
-                default: null
+                default: ''
             },
             backgroundColor: {
                 type: String,
-                default: null
+                default: ''
             },
             backgroundImage: {
                 type: String,
-                default: null
+                default: ''
             },
             backgroundImageMobile: {
                 type: String,
-                default: null
+                default: ''
             },
             backgroundImageTablet: {
                 type: String,
-                default: null
+                default: ''
             },
             backgroundImageWebp: {
                 type: String,
-                default: null
+                default: ''
             },
             lazyImage: {
                 type: String,
-                default: null
+                default: ''
             },
             lazyImageMobile: {
                 type: String,
-                default: null
+                default: ''
             },
             lazyImageTablet: {
                 type: String,
-                default: null
+                default: ''
             },
             preloadImage: {
                 type: Boolean,
@@ -113,10 +113,10 @@
                 type: Boolean,
                 default: false
             },
-            backgroundPosition: {
-                type: String,
-                default: null
-            },
+//            backgroundPosition: {
+//                type: String,
+//                default: ''
+//            },
             slideTime: {
                 type: [String, Number],
                 default: null
@@ -196,11 +196,11 @@
                 if (this.slideTime) {
                     bannerItemData.slideTime = this.slideTime;
                 }
-                if (this.ancorHashLink) {
-                    bannerItemData.ancorHashLink = this.ancorHashLink;
+                if (this.anchorHashLink) {
+                    bannerItemData.anchorHashLink = this.anchorHashLink;
                 }
-                if (this.ancorGetParamsLink) {
-                    bannerItemData.ancorGetParamsLink = this.ancorGetParamsLink;
+                if (this.anchorGetParamsLink) {
+                    bannerItemData.anchorGetParamsLink = this.anchorGetParamsLink;
                 }
                 if (this.link) {
                     bannerItemData.link = this.link;
@@ -219,15 +219,15 @@
                 }
 
                 this.RtBanners.items.push(bannerItemData);
-                if (this.ancorHashLink && location.hash) {
-                    if (location.hash.replace(/#/, "") === this.ancorHashLink) {
+                if (this.anchorHashLink && location.hash) {
+                    if (location.hash.replace(/#/, "") === this.anchorHashLink) {
                         this.RtBanners.activeIndex = this.RtBanners.items.length - 1;
                     }
                 }
-                if (this.ancorGetParamsLink) {
+                if (this.anchorGetParamsLink) {
                     let getParams = location.href.split("?");
                     if (getParams.length > 1) {
-                        if (getParams[1].search(this.ancorGetParamsLink) >= 0) {
+                        if (getParams[1].search(this.anchorGetParamsLink) >= 0) {
                             this.RtBanners.activeIndex = this.RtBanners.items.length - 1;
                         }
                     }
@@ -418,14 +418,11 @@
                 }
                 return null;
             };
-            //return <div style={this.bannerStyle} class={"rt-banner__item" + (this.RtBanners.activeIndex === this.index ? " rt-banner__item--is-active" : "")} >{this.$slots.default}</div>
             if (this.hasCustomContent) {
                 let bannerClass = "rt-banner__item";
                 if (this.RtBanners.activeIndex) {
                     bannerClass += " rt-banner__item--is-active";
                 }
-
-                //return <div style={this.bannerStyle} class={"rt-banner__item" + (this.RtBanners.activeIndex === this.index ? " rt-banner__item--is-active" : "")} >{this.$slots.default}</div>
                 return <div
                     class={"rt-banner__item" + (this.RtBanners.activeIndex === this.index ? " rt-banner__item--is-active" : "")}
                     style={this.bannerStyle}>

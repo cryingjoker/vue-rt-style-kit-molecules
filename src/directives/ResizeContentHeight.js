@@ -63,12 +63,12 @@ class ResizeContentHeight {
       });
     } else {
       if (this.groupSize && !isTablet  && !isMobile || isTablet && this.tabletGroupSize || isMobile && this.mobileGroupSize) {
-        let gropSize = this.groupSize;
+        let groupSize = this.groupSize;
         if(isTablet && this.tabletGroupSize){
-          gropSize = this.tabletGroupSize;
+          groupSize = this.tabletGroupSize;
         }
         if(isMobile && this.mobileGroupSize){
-          gropSize = this.mobileGroupSize;
+          groupSize = this.mobileGroupSize;
         }
 
         this.querySelectorsNames.forEach((selectorName) => {
@@ -82,7 +82,7 @@ class ResizeContentHeight {
               if (!Array.isArray(res)) {
                 res = [[res]];
               }
-              if (res[res.length - 1].length < gropSize) {
+              if (res[res.length - 1].length < groupSize) {
                 res[res.length - 1].push(item);
               } else {
                 res.push([item]);
