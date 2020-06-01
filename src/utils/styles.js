@@ -21,7 +21,7 @@ const waitCSSByCond = ($el, propertyCss, needleValue) => {
       let maxCall = 40
       let delayCall = 250
       let checkCondition = () => {
-        return getComputedStyle($el)[propertyCss] === needleValue
+        return getComputedStyle($el) && getComputedStyle($el)[propertyCss] === needleValue
       }
       if (checkCondition()) {
         resolve()
