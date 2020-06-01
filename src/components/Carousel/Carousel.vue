@@ -68,7 +68,7 @@
             <div
               v-for="(card, key) in loader.count"
               :key="key"
-              :class="slidesClasses"
+              :class="['rt-carousel__slide', slidesClasses]"
             >
               <RtCardSkeleton
                 :rows=loader.rows
@@ -93,6 +93,28 @@
         :class="cssSelector + '__overlay ' + cssSelector + '__inner ' + cssContainer"
         :style="overlayStyleState"
       >
+        <div
+          v-if="!loaded && loader === 'spinner'"
+          :class="cssSelector + '__loader'"
+        >
+          <RtSpinner
+            class="spinner_m"
+          />
+        </div>
+        <template
+          v-if="!loaded && loader && loader.type === 'skeleton'"
+        >
+          <div
+            v-for="(card, key) in loader.count"
+            :key="key"
+            :class="['rt-carousel__slide', slidesClasses]"
+          >
+            <RtCardSkeleton
+              :rows=loader.rows
+              :sub=loader.sub
+            />
+          </div>
+        </template>
         <slot></slot>
         <div
           :class="cssSelector + '__spacer'"
@@ -293,6 +315,7 @@ export default {
     loaded (isLoaded) {
       if (isLoaded) {
         this.$nextTick(() => {
+          this.overlayEl.scrollLeft = 0
           this.getSlides()
           this.initNavi()
         })
