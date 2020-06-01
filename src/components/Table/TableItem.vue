@@ -9,19 +9,19 @@ export default {
   props: {
     mobileWidth: {
       type: String,
-      default: null
+      default: ''
     },
     html: {
       type: String,
-      default: null
+      default: ''
     },
     verticalAlign: {
       type: String,
-      default: null
+      default: ''
     },
     align: {
       type: String,
-      default: null
+      default: ''
     },
     colspan: {
       type: [Number, String],

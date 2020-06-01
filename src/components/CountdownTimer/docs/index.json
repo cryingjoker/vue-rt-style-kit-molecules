@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "name": "rt-countdown-timer",
+      "property": "duration",
+      "type": "String",
+      "description": "Задаёт длительность в минутах",
+      "value": ""
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "name": "rt-opportunity-item",
+      "property": "image",
+      "type": "String",
+      "description": "URL-адрес изображения в блоке",
+      "value": ""
+    },
+    {
+      "name": "rt-opportunity-item",
+      "property": "title",
+      "type": "String",
+      "description": "Заголовок, который будет использован в табах и аккордеоне",
+      "value": ""
+    },
+    {
+      "name": "rt-opportunity-item",
+      "property": "anchor",
+      "type": "String",
+      "description": "Якорь, используемый в табах для установки активным определённого таба, при переходе по ссылке",
+      "value": ""
+    }
+  ]
+}

@@ -4,15 +4,15 @@ export default {
   props: {
     expansion: {
       type: String,
-      default: null
+      default: ''
     },
     fileSize: {
       type: String,
-      default: null
+      default: ''
     },
     link: {
       type: String,
-      default: null
+      default: ''
     }
   },
   computed: {},

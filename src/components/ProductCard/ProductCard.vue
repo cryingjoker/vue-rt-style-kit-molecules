@@ -105,9 +105,9 @@
       if (this.fixedImageHeight && this.safeImageRate) {
         className += " rt-product-card--has-static-image-with-fix-height";
       }
-      if(this.contentOrientation === 'bottom'){
-        className += ' rt-product-card--has-bottom-orient'
-      }
+//      if(this.contentOrientation === 'bottom'){
+//        className += ' rt-product-card--has-bottom-orient'
+//      }
       if(this.color){
         className += ` rt-product-card--${this.color}`
       }

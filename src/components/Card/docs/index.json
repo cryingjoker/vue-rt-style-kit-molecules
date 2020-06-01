@@ -5,35 +5,35 @@
       "property" : "lazy-background-image, lazy-image",
       "type" : "String",
       "description" : "Ссылка на картинку заглушку для lazy-load (обычно это легкая замыленная версия исходного фото)",
-      "value" : "null"
+      "value" : ""
     },
     {
       "name" : "rt-card",
       "property" : "lazy-image-tablet",
       "type" : "String",
       "description" : "Ссылка на картинку заглушку для Tablet",
-      "value" : "null"
+      "value" : ""
     },
     {
       "name" : "rt-card",
       "property" : "lazy-image-mobile",
       "type" : "String",
       "description" : "Ссылка на картинку заглушку для Mobile",
-      "value" : "null"
+      "value" : ""
     },
     {
       "name" : "rt-card",
       "property" : "background-image",
       "type" : "String",
       "description" : "url-адрес картинки карточки",
-      "value" : "null"
+      "value" : ""
     },
     {
       "name" : "rt-card",
       "property" : "background-image-tablet",
       "type" : "String",
       "description" : "url-адрес картинки карточки для Tablet",
-      "value" : "null",
+      "value" : "",
       "version": " >= 0.0.86"
     },
     {
@@ -41,7 +41,7 @@
       "property" : "background-image-mobile",
       "type" : "String",
       "description" : "url-адрес картинки карточки для Mobile",
-      "value" : "null",
+      "value" : "",
       "version": " >= 0.0.86"
     },
     {
@@ -61,14 +61,14 @@
     {
       "name" : "rt-card",
       "property" : "(:)background-size-width",
-      "type" : ["String", "Number"],
+      "type" : "String | Number",
       "description" : "Задает ширину картинки карточки `number` - любое число становится px, `string` - любые значения",
       "value" : "null"
     },
     {
       "name" : "rt-card",
       "property" : "(:)background-size-height",
-      "type" : ["String", "Number"],
+      "type" : "String | Number",
       "description" : "Задает высоту картинки карточки `number` - любое число становится px, `string` - любые значения",
       "value" : "false"
     },
@@ -139,28 +139,28 @@
       "name" : "rt-card",
       "property" : "(:)background-position-top",
       "type" : ["String", "Number"],
-      "description" : "Устанавливает отступ картинки сверху `number - любое число становится px, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
+      "description" : "Устанавливает отступ картинки сверху `number - любое число становится `px`, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
       "value" : "null"
     },
     {
       "name" : "rt-card",
       "property" : "(:)background-position-left",
       "type" : ["String", "Number"],
-      "description" : "Устанавливает отступ картинки слева `number - любое число становится px, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
+      "description" : "Устанавливает отступ картинки слева `number - любое число становится `px`, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
       "value" : "null"
     },
     {
       "name" : "rt-card",
       "property" : "(:)background-position-right",
       "type" : ["String", "Number"],
-      "description" : "Устанавливает отступ картинки справа `number - любое число становится px, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
+      "description" : "Устанавливает отступ картинки справа `number - любое число становится `px`, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
       "value" : "null"
     },
     {
       "name" : "rt-card",
       "property" : "(:)background-position-bottom",
       "type" : ["String", "Number"],
-      "description" : "Устанавливает отступ картинки снизу `number - любое число становится px, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
+      "description" : "Устанавливает отступ картинки снизу `number - любое число становится `px`, `string` - любые значения. `Работает только при background-image-stand-alone и background-image`",
       "value" : "null"
     },
     {

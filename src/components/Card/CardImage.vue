@@ -15,7 +15,7 @@ export default {
   props: {
     cardImage: {
       type: String,
-      default: null,
+      default: '',
       required: true
     }
   },

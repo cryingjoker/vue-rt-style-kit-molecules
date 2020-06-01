@@ -9,10 +9,10 @@
     } from "vue-rt-style-kit-atoms";
 
     const localComponentProps = {
-        isActive: {
-            type: Boolean,
-            default: true
-        },
+//        isActive: {
+//            type: Boolean,
+//            default: true
+//        },
         zIndex: {
             type: Number,
             default: 2
@@ -37,7 +37,7 @@
             type: Boolean,
             default: false
         },
-        topOffsetHeightElemementSelector: {
+        topOffsetHeightElementSelector: {
             type: String,
             default: ''
         },
@@ -70,7 +70,7 @@
         name: "RtStickyHeaderLine",
         props: componentProps,
         data: () => ({
-            active: false,
+//            active: false,
             pointsStart: [],
             pointsEnd: [],
             activeIndex: -1,
@@ -80,11 +80,11 @@
             showSecondHeaderContentAfterIsActive: false,
             stockIdIndex: 0
         }),
-        watch: {
-            isActive: function () {
-                this.active = this.isActive;
-            }
-        },
+//        watch: {
+//            isActive: function () {
+//                this.active = this.isActive;
+//            }
+//        },
         mounted() {
             if (this.startStopPoints.length > 0) {
                 backgroundColorPropsNames
@@ -117,10 +117,10 @@
         },
         methods: {
             setOffsetElementHeight() {
-                if (this.topOffsetHeightElemementSelector && this.topOffsetHeightElemementSelector.length > 0) {
-                    const topOffsetElemement = document.querySelector(this.topOffsetHeightElemementSelector);
-                    if (topOffsetElemement) {
-                        this.offsetTopHeight = parseInt(topOffsetElemement.clientHeight);
+                if (this.topOffsetHeightElementSelector && this.topOffsetHeightElementSelector.length > 0) {
+                    const topOffsetElement = document.querySelector(this.topOffsetHeightElementSelector);
+                    if (topOffsetElement) {
+                        this.offsetTopHeight = parseInt(topOffsetElement.clientHeight);
                     }
                 }
             },

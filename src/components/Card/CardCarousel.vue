@@ -22,13 +22,13 @@
                 type: Array,
                 default: () => ['.rt-card__content']
             },
+//            carouselItemActiveClass: {
+//                type: String,
+//                default: '.carousel-card--active'
+//            },
             carouselItemClass: {
                 type: String,
                 default: '.carousel-card'
-            },
-            carouselItemActiiveClass: {
-                type: String,
-                default: '.carousel-card--active'
             }
         },
 
@@ -268,8 +268,8 @@
             }
             return <rt-resize-content-height query-selectors-names={this.resizeCardsClass}
                                              mobile-not-resize={!this.resizeCardsOnMobile}
-                                             tablet-not-reasize={!this.resizeCardsOnTablet}
-                                             desktop-not-reasize={!this.resizeCardsOnDesktop}
+                                             tablet-not-resize={!this.resizeCardsOnTablet}
+                                             desktop-not-resize={!this.resizeCardsOnDesktop}
                                              class="custom-carousel-wrapper">
                 {content()}
             </rt-resize-content-height>

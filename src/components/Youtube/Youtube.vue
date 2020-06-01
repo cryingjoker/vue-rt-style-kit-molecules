@@ -21,16 +21,16 @@ export default {
     },
     height:{
       type: String,
-      default: null
+      default: ''
     },
-    isFullscreen:{
-      type: Boolean,
-      default: false
-    },
-    realTimePlay:{
-      type: Boolean,
-      default: false
-    },
+//    isFullscreen:{
+//      type: Boolean,
+//      default: false
+//    },
+//    realTimePlay:{
+//      type: Boolean,
+//      default: false
+//    },
     playlistId : {
       type: Array,
       default: null
@@ -41,7 +41,7 @@ export default {
     },
     pauseImage: {
       type: String,
-      default: null
+      default: ''
     },
     disableButtons: {
       type: Boolean,
@@ -479,12 +479,12 @@ export default {
       if(this.touchCount > 0){
         youtubeClass+=' rt-youtube--is-hover';
       }
-      if(this.isFullscreen){
-        youtubeClass+=' rt-youtube--is-fullscreen';
-      }
-      if(this.realTimePlay){
-        youtubeClass+=' rt-youtube--real-time-play';
-      }
+//      if(this.isFullscreen){
+//        youtubeClass+=' rt-youtube--is-fullscreen';
+//      }
+//      if(this.realTimePlay){
+//        youtubeClass+=' rt-youtube--real-time-play';
+//      }
     }
 
     if(this.isPlaying){

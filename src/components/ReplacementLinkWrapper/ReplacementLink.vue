@@ -4,17 +4,17 @@
     props: {
       linkText: {
         type: String,
-        default: null,
+        default: '',
         required: true
       },
       macosLink: {
         type: String,
-        default: null,
+        default: '',
         required: true
       },
       windowsLink: {
         type: String,
-        default: null,
+        default: '',
         required: true
       },
       preLinkText: {

@@ -1,22 +1,18 @@
 {
   "items": [
     {
-      "name": "is-active",
+      "name": "rt-checkbox-tabs",
       "version": "0.1.65",
-      "property": "type",
-      "type": [
-        "Boolean"
-      ],
+      "property": ":is-active",
+      "type": "Boolean",
       "description": "Активное состояние по умолчанию",
       "value": "false"
     },
     {
-      "name": "hide-not-active",
+      "name": "rt-checkbox-tabs",
       "version": "0.1.65",
-      "property": "type",
-      "type": [
-        "Boolean"
-      ],
+      "property": ":hide-not-active",
+      "type": "Boolean",
       "description": "Флаг на отключение рендеринга не активной вкладки",
       "value": "false"
     }

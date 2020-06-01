@@ -5,10 +5,10 @@
   export default {
     name: "RtStickyBottomLine",
     props: {
-      isActive: {
-        type: Boolean,
-        default: true
-      },
+//      isActive: {
+//        type: Boolean,
+//        default: true
+//      },
       zIndex: {
         type: Number,
         default: 2
@@ -35,17 +35,17 @@
       }
     },
     data: () => ({
-      active: false,
+//      active: false,
       pointsStart: [],
       pointsEnd: [],
       activeIndex: -1,
       deviceType: ""
     }),
-    watch: {
-      isActive: function() {
-        this.active = this.isActive;
-      }
-    },
+//    watch: {
+//      isActive: function() {
+//        this.active = this.isActive;
+//      }
+//    },
     mounted() {
       if (this.startStopPoints.length > 0) {
         this.setStartStopPoints();

@@ -36,23 +36,23 @@
       },
       backgroundColorType: {
         type: String,
-        default: null
+        default: ''
       },
       backgroundImage: {
         type: String,
-        default: null
+        default: ''
       },
       backgroundImageTablet: {
         type: String,
-        default: null
+        default: ''
       },
       backgroundImageMobile: {
         type: String,
-        default: null
+        default: ''
       },
       backgroundImageWebp: {
         type: String,
-        default: null
+        default: ''
       },
       lazyLoad: {
         type: Boolean,
@@ -60,19 +60,19 @@
       },
       lazyBackgroundImage: {
         type: String,
-        default: null
+        default: ''
       },
       lazyImage: {
         type: String,
-        default: null
+        default: ''
       },
       lazyImageTablet: {
         type: String,
-        default: null
+        default: ''
       },
       lazyImageMobile: {
         type: String,
-        default: null
+        default: ''
       },
       backgroundCover: {
         type: Boolean,
@@ -100,7 +100,7 @@
       },
       backgroundPosition: {
         type: String, // [top, left, bottom, right, top-left, top-right, bottom-left, bottom-right]
-        default: null
+        default: ''
       },
       backgroundPositionTop: {
         type: [String, Number],
@@ -164,7 +164,7 @@
       },
       categoryIconMobile: {
         type: String,
-        default: null
+        default: ''
       },
       hasLabel: {
         type: Boolean,
@@ -198,10 +198,6 @@
         type: String,
         default: ''
       },
-//    backgroundPosition: {
-//      type: String,
-//      default: ''
-//    },
       discountText: {
         type: String,
         default: ''

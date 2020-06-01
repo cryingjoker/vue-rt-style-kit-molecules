@@ -2,7 +2,7 @@
   "items": [
     {
       "name": "rt-benefit-block",
-      "property": "columns-quantity",
+      "property": ":columns-quantity",
       "type": "Number",
       "description": "Устанавливает во сколько колонок будут располагаться дочерние элементы",
       "value": "null"
@@ -10,16 +10,13 @@
     {
       "name": "rt-benefit-block",
       "property": "(:)icon-size",
-      "type": [
-        "Number",
-        "String"
-      ],
+      "type": "Number | String",
       "description": "Устанавливает размер иконок дочерних элементов",
       "value": "null"
     },
     {
       "name": "rt-benefit-block",
-      "property": "align-сenter",
+      "property": ":align-center",
       "type": "Boolean",
       "description": "Устанавливает горизонтальное выравнивание текста и картинок в дочерних элементах по центру",
       "value": "false"
@@ -29,7 +26,7 @@
       "property": "background-color-class",
       "type": "String",
       "description": "Устанавливает класс для задания фонового цвета блока. Используются классы из `color-block--...`",
-      "value": "null"
+      "value": ""
     },
     {
       "name": "rt-benefit-block",
@@ -71,15 +68,12 @@
       "property": "icon-backing-color",
       "type": "String",
       "description": "Устанавливает цвет подложки для иконок",
-      "value": "null"
+      "value": ""
     },
     {
       "name": "rt-benefit-block",
       "property": "icon-backing-size",
-      "type": [
-        "Number",
-        "String"
-      ],
+      "type": "Number | String",
       "description": "Устанавливает размер подложки под иконкой",
       "value": "null"
     },
@@ -95,6 +89,12 @@
       "property": "no-transparency-description",
       "type": "Boolean",
       "description": "Флаг установки непрозрачности для текста описания в дочерних элементах",
+      "value": "false"
+    },
+    {"name": "rt-benefit-block",
+      "property": "three-column-tablet",
+      "type": "Boolean",
+      "description": "Флаг отвечающий за распределение контента в 3 колонки в планшетном разрешении",
       "value": "false"
     }
   ]
