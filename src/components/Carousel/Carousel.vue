@@ -226,6 +226,7 @@ export default {
       isAnimating: false,
       isFinalSlide: false,
       isPending: true,
+      isLoaded: true,
       isTouch: Mobile.isTouch,
       isInnerBlock: false, // Позволяет вынести блок карусели за контейнер
       innerBlockOffset: 0,
@@ -256,7 +257,7 @@ export default {
         {
           'is-touch-device': this.isTouch,
           'is-inner-block': this.isInnerBlock,
-          'is-loading': !this.loaded,
+          'is-loading': !this.isLoaded,
           'is-pending': this.isPending,
           'is-animating': this.isAnimating,
           'is-hide-navs': this.hideNavigation,
@@ -314,6 +315,7 @@ export default {
   watch: {
     loaded (isLoaded) {
       if (isLoaded) {
+        this.isLoaded = true
         this.$nextTick(() => {
           this.overlayEl.scrollLeft = 0
           this.getSlides()
@@ -321,6 +323,10 @@ export default {
         })
       } else {
         this.unsetNavi()
+        this.$nextTick(() => {
+          this.overlayEl.scrollLeft = 0
+          this.isLoaded = false
+        })
       }
     }
   },
