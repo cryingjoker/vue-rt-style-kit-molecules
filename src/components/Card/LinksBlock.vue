@@ -131,9 +131,3 @@
     }
   };
 </script>
-<!--return <div class="links-block">-->
-  <!--<div class="rtb-card__links-block" ref="inner">-->
-    <!--{content}-->
-  <!--</div>-->
-  <!--{button}-->
-<!--</div>;-->

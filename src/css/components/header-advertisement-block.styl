@@ -1,0 +1,42 @@
+.{newAppName}-header
+  &__advertisement-block
+    display flex
+    flex-direction row
+    padding 20px
+    border-top 1px solid main-color01
+    border-radius 0 0 5px 5px
+    background-color #fff
+    @media (max-width: tablet-upper-limit)
+      flex-direction column
+  &__ab-image-wrapper
+    size(176px, 112px)
+    @media (max-width: tablet-upper-limit)
+      size(100%, auto)
+      display flex
+  &__ab-image
+    object-fit cover
+    size(100%)
+  &__ab-content-block
+    max-width 344px
+    margin-left 20px
+    display flex
+    flex-direction column
+    justify-content space-between
+    @media (max-width: tablet-upper-limit)
+      margin-left 0
+      margin-top 12px
+      max-width none
+    &-top
+      margin-bottom 16px
+      @media (max-width: tablet-upper-limit)
+        margin-bottom 12px
+    .p1
+      margin-bottom 12px
+      &:hover
+        color main-color08
+      @media (max-width: tablet-upper-limit)
+        margin-bottom 8px
+    //.p3
+    //  margin-bottom 16px
+    .rt-link
+      color #6605C6

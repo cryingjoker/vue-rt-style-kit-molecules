@@ -70,10 +70,10 @@
     }),
 
     computed: {
-      transparencyClass(){
+      wrapperClass(){
         let className = 'rt-benefit-block';
         if(this.backgroundColorClass){
-          className += (' ' + this.backgroundColorClass);
+          className += (' color-block--' + this.backgroundColorClass);
         }
         if(this.noTransparencyDescription) {
           className += ' rt-benefit-block--no-transparency';
@@ -99,7 +99,7 @@
       if(this.layout === 'swiper'){
         return <rt-swiper>{this.$slots.default}</rt-swiper>
       } else {
-        return <div class={this.transparencyClass}>
+        return <div class={this.wrapperClass}>
           <div class="rt-container">
             <div class="rt-col">
               <div class="row">

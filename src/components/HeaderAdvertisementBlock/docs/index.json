@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "name": "rt-header-advertisement-block",
+      "property": "image",
+      "type": "String",
+      "description": "URL-адрес изображения, отображаемого в блоке",
+      "value": ""
+    },
+    {
+      "name": "rt-header-advertisement-block",
+      "property": "link-target",
+      "type": "String",
+      "description": "URL-адрес, куда совершается переход с данного блока",
+      "value": ""
+    },
+    {
+      "name": "rt-header-advertisement-block",
+      "property": "link-text",
+      "type": "String",
+      "description": "Текст ссылки",
+      "value": ""
+    }
+  ]
+}

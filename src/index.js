@@ -38,8 +38,6 @@ import {
   ResizeContentHeight,
   Popup,
   LinksBlock,
-  Hint,
-  HintBody,
   BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
@@ -78,7 +76,8 @@ import {
   StickyHeaderLine,
   ResizeTypeStore,
   FunctionList,
-  FunctionItem
+  FunctionItem,
+  HeaderAdvertisementBlock
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -128,8 +127,6 @@ const VueRtStyle = {
       Vue.component(Youtube.name, Youtube);
       Vue.component(Popup.name, Popup);
       Vue.component(LinksBlock.name, LinksBlock);
-      Vue.component(Hint.name, Hint);
-      Vue.component(HintBody.name, HintBody);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
       Vue.component(Slide.name, Slide);
@@ -156,6 +153,7 @@ const VueRtStyle = {
       Vue.component(CardSkeleton.name, CardSkeleton);
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
+      Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -258,7 +256,6 @@ export {
   ResizeContentHeight,
   Popup,
   LinksBlock,
-  Hint,
   BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
@@ -295,8 +292,9 @@ export {
   CheckboxTabs,
   CountdownTimer,
   StickyHeaderLine,
+  HeaderAdvertisementBlock,
 
-  // need to change name dirrectives
+  // need to change name directives
   SwipeLeft,
   SwipeRight,
   OutsideClickDirective,
