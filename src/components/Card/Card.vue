@@ -577,7 +577,7 @@
       checkPosition() {
         const id = this._uid;
         const position = viewportPositionStore.getElPosition(id);
-        if (position <= 1.5) {
+        if (position <= 1.5 || !position) {
           this.viewportWasClosely = true;
           this.setMainImage();
           this.removeViewportPositionWatchers()
