@@ -43,7 +43,7 @@
 
  export { default as LinksBlock } from './Card/LinksBlock.vue';
  export { default as Pattern } from './Pattern/Pattern.vue';
- 
+
  export { default as Swiper } from './Swiper/Swiper.vue';
  export { default as Slide } from './Swiper/Slide.vue';
  export { default as Opportunity } from './Opportunity/Opportunity.vue';
@@ -73,6 +73,7 @@
  export { default as FunctionItem } from './FunctionList/FunctionItem.vue';
  export { default as FunctionList } from './FunctionList/FunctionList.vue';
  export { default as HeaderAdvertisementBlock } from './HeaderAdvertisementBlock/HeaderAdvertisementBlock.vue';
+ export { default as HeaderNavigation } from './HeaderNavigation/HeaderNavigation.vue';
  export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 
 

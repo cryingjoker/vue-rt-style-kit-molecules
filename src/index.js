@@ -77,7 +77,8 @@ import {
   ResizeTypeStore,
   FunctionList,
   FunctionItem,
-  HeaderAdvertisementBlock
+  HeaderAdvertisementBlock,
+  HeaderNavigation
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -154,6 +155,7 @@ const VueRtStyle = {
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
       Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
+      Vue.component(HeaderNavigation.name, HeaderNavigation);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -205,7 +207,7 @@ VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 const settingsKey = Global.globalSettingsKey;
 const version = Project.version;
 if (typeof window !== 'undefined') {
-  
+
   if (settingsKey) {
     if (!window[settingsKey]) window[settingsKey] = {}
     if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
@@ -293,6 +295,7 @@ export {
   CountdownTimer,
   StickyHeaderLine,
   HeaderAdvertisementBlock,
+  HeaderNavigation,
 
   // need to change name directives
   SwipeLeft,
