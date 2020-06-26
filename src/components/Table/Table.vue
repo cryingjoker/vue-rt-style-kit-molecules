@@ -71,7 +71,7 @@ export default {
     if (this.$slots.label) {
       return (
         <div>
-          <p class="rt-table-title rt-space-bottom rt-td-space-bottom">
+          <p class="rt-table-title rt-space-bottom rt-md-space-bottom0-half">
             {this.$slots.label}
           </p>
           {this.$slots.description}

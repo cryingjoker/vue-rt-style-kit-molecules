@@ -544,6 +544,7 @@
         if (this.inTabsWImage)
           this.redrawSvg();
       })
+      window.dispatchEvent(new Event('resize'));
 
       if (this.inTabsWImage)
         this.redrawSvg();

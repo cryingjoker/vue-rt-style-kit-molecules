@@ -1,7 +1,8 @@
 <script type="text/jsx">
+    const componentsList = {};
     export default {
         name: "RtHeaderNavigation",
-        components: {},
+        components: componentsList,
         props: {
             navTree: {
                 type: Array,
@@ -12,7 +13,12 @@
             return {
                 activeNode: this.navTree,
                 activeNodeTitle: null,
-                activeNodePath: '0'
+                activeNodePath: '0',
+                adTitle: null,
+                adImage: null,
+                adText: null,
+                adLink: null,
+                adLinkText: null
             };
         },
         computed: {
@@ -34,6 +40,11 @@
                 } else {
                     this.activeNodeTitle = this.navTree[targetNodeIndex].label;
                     this.activeNode = this.navTree[targetNodeIndex].items;
+                    this.adTitle = this.navTree[targetNodeIndex].adTitle;
+                    this.adImage = this.navTree[targetNodeIndex].image;
+                    this.adText = this.navTree[targetNodeIndex].adText;
+                    this.adLink = this.navTree[targetNodeIndex].linkTarget;
+                    this.adLinkText = this.navTree[targetNodeIndex].linkText;
                 }
                 this.activeNodePath = this.activeNodePath.length !== 0 ? this.activeNodePath.join('/') : null;
             }
@@ -56,6 +67,11 @@
                         this.activeNode = item.items;
                         this.activeNodeTitle = item.label;
                         this.activeNodePath += '/' + index;
+                        this.adTitle = item.adTitle;
+                        this.adImage = item.image;
+                        this.adText = item.adText;
+                        this.adLink = item.linkTarget;
+                        this.adLinkText = item.linkText;
                     }
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-control" onClick={navigate}>
@@ -76,9 +92,21 @@
                 });
             }
 
+            const navigationAdvertisement = () => {
+                if(this.activeNodePath.length === 3) {
+                    return <rt-header-advertisement-block image={this.adImage}
+                                                          link-target={this.adLink}
+                                                          link-text={this.adLinkText}>
+                        <template slot="title">{this.adTitle}</template>
+                        <template slot="paragraph">{this.adText}</template>
+                    </rt-header-advertisement-block>
+                }
+            }
+
             return <div class={this.navigationClasses}>
                 {navigationTitle()}
                 {navigationWrapper()}
+                {navigationAdvertisement()}
             </div>
         }
     };
