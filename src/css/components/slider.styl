@@ -1,0 +1,69 @@
+.slider-image
+  width 100%
+  user-select: none
+.slider-image-container
+  max-width 100%
+.slider-content
+  position: relative;
+  width: 100%
+.slider-image-container,
+.slider-content-container
+  left: 0
+  right: 0
+  position absolute
+  top: 0
+  opacity: 0
+  visibility: hidden
+  transition-timing-function ease-in-out
+  transition-duration .5s
+  transition-property opacity, visibility
+.slider-image-container--active,
+.slider-content-container--active
+  opacity: 1
+  visibility: visible
+.slider-image-tag
+  position absolute
+  z-index 10
+.slider-image-tag
+  max-width 100%
+.slider-body
+  width:100%
+.slider-arrow-icon
+  user-select: none
+  -webkit-tap-highlight-color: transparent
+  cursor pointer
+  width: 52px
+  height: 52px
+  border-radius 50%
+  box-shadow 0 4px 16px rgba(0,0,0,0.15)
+  position relative
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property box-shadow
+  @media (hover: hover)
+    &:hover
+      box-shadow 0 4px 20px rgba(0,0,0,0.24)
+.slider-arrow-svg
+  position absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  margin auto
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property left, right
+.slider-arrow-icon+.slider-arrow-icon
+  margin-left: 20px
+.slider-arrow-icon__prev
+  @media (hover: hover)
+    &:hover
+      .slider-arrow-svg
+        right 4px
+        left -4px
+.slider-arrow-icon__next
+  @media (hover: hover)
+    &:hover
+      .slider-arrow-svg
+        right -4px
+        left 4px

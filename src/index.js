@@ -77,7 +77,9 @@ import {
   ResizeTypeStore,
   FunctionList,
   FunctionItem,
-  HeaderAdvertisementBlock
+  HeaderAdvertisementBlock,
+  Slider,
+  SliderItem
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -164,6 +166,8 @@ const VueRtStyle = {
       Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(ProductCard.name, ProductCard);
       Vue.component(TariffCard.name, TariffCard);
+      Vue.component(Slider.name, Slider);
+      Vue.component(SliderItem.name, SliderItem);
       Vue.component(SlideContent.name, SlideContent);
       Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
@@ -205,7 +209,7 @@ VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 const settingsKey = Global.globalSettingsKey;
 const version = Project.version;
 if (typeof window !== 'undefined') {
-  
+
   if (settingsKey) {
     if (!window[settingsKey]) window[settingsKey] = {}
     if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
@@ -293,7 +297,8 @@ export {
   CountdownTimer,
   StickyHeaderLine,
   HeaderAdvertisementBlock,
-
+  Slider,
+  SliderItem,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
