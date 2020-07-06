@@ -137,12 +137,12 @@
     render(h) {
 
 
-      return <rt-row class="slider md-align-end" mobile-reverse-direction={true} ref="slider">
+      return <rt-row class="slider md-align-end" mobile-reverse-direction={true} ref="slider" onTouchstart={this.touchstart} onTouchmove={this.touchmove}>
 
         {this.$slots.default}
         <rt-col size="1" tablet-size="0" mobile-size="0"></rt-col>
         <rt-col size="4" tablet-size="3" mobile-size="3" class="d-flex align-center">
-          <div class="slider-body" onTouchstart={this.touchstart} onTouchmove={this.touchmove}>
+          <div class="slider-body">
             <div class="slider-content" style={this.contentStyle}>
               {this.customSlotsSort.map((key, index) => {
                 return <rt-slider-content index={index}
@@ -174,11 +174,13 @@
         </rt-col>
         <rt-col size="6" tablet-size="3" mobile-size="2" class="md-sp-b-1-1">
           <div class="slider-image" style={this.imageStyle}>
+            <div class="relative">
             {this.customSlotsSort.map((key, index) => {
               return <rt-slider-image index={index}
                                       active-index={this.activeIndexLocal}
                                       data={this.customSlots[key]}></rt-slider-image>
             })}
+            </div>
           </div>
         </rt-col>
       </rt-row>

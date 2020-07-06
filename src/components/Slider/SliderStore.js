@@ -130,7 +130,6 @@ class SliderStore extends StorePrototype{
     this.slots = {}
   }
   getSlot = (id) => {
-    console.info('getSlot',id)
     if (this.slots[id]) {
       return this.slots[id]
     }

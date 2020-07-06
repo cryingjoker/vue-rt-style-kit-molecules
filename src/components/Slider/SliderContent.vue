@@ -25,7 +25,7 @@
       },
       renderTitle(){
         if(this.data.title){
-          return <p class="rt-font-h2 sp-b-1-1 rt-sp-b-1">{this.data.title}</p>
+          return <p class="rt-font-h2 sp-b-1-1 td-sp-b-1">{this.data.title}</p>
         }
         return null
       },
