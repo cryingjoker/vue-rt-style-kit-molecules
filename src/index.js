@@ -78,6 +78,7 @@ import {
   FunctionList,
   FunctionItem,
   HeaderAdvertisementBlock,
+  HeaderNavigation,
   Slider,
   SliderItem
 } from "./components";
@@ -156,6 +157,7 @@ const VueRtStyle = {
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
       Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
+      Vue.component(HeaderNavigation.name, HeaderNavigation);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -297,6 +299,7 @@ export {
   CountdownTimer,
   StickyHeaderLine,
   HeaderAdvertisementBlock,
+  HeaderNavigation,
   Slider,
   SliderItem,
   // need to change name directives

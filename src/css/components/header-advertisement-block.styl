@@ -8,11 +8,16 @@
     background-color #fff
     @media (max-width: tablet-upper-limit)
       flex-direction column
+    @media (max-width: mobile-upper-limit)
+      padding 0
+      margin-top 34px
   &__ab-image-wrapper
     size(176px, 112px)
     @media (max-width: tablet-upper-limit)
       size(100%, auto)
       display flex
+    @media (max-width: mobile-upper-limit)
+      height 42.5vw
   &__ab-image
     object-fit cover
     size(100%)
