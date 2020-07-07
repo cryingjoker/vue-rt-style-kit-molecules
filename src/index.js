@@ -80,7 +80,8 @@ import {
   HeaderAdvertisementBlock,
   HeaderNavigation,
   Slider,
-  SliderItem
+  SliderItem,
+  TextImageBlock
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -158,6 +159,7 @@ const VueRtStyle = {
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
       Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
       Vue.component(HeaderNavigation.name, HeaderNavigation);
+      Vue.component(TextImageBlock.name, TextImageBlock);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -302,6 +304,8 @@ export {
   HeaderNavigation,
   Slider,
   SliderItem,
+  TextImageBlock,
+
   // need to change name directives
   SwipeLeft,
   SwipeRight,
