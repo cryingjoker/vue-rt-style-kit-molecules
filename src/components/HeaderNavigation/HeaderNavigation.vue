@@ -93,7 +93,7 @@
             }
 
             const navigationAdvertisement = () => {
-                if(this.activeNodePath.length === 3) {
+                if(this.activeNodePath.length === 3 && this.adTitle) {
                     return <rt-header-advertisement-block image={this.adImage}
                                                           link-target={this.adLink}
                                                           link-text={this.adLinkText}>
