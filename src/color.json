@@ -82,7 +82,7 @@
   "disable-button-color-dark-theme": "rgba(255,255,255,0.1)",
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
-  "error-color": "#FF0C0C",
+  "error-color": "#D30606",
   "box-shadow-background": "rgba(16,24,40,0.1)",
   "dark-theme-dropdown-background": "#202432",
   "light-grey": "#fafafa"
