@@ -121,7 +121,8 @@ import Vue from "vue";
 // });
 
 
-import StorePrototype from "@vue-rt-style-kit-atoms-local/stores/storePrototype.class";
+// import StorePrototype from "@vue-rt-style-kit-atoms-local/stores/storePrototype.class";
+import StorePrototype from "vue-rt-style-kit-atoms/stores/storePrototype.class";
 
 class SliderStore extends StorePrototype{
   constructor() {
