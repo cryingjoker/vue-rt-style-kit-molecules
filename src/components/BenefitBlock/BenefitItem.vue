@@ -83,7 +83,6 @@
       this.iconBackingSize = this.$parent._props.iconBackingSize;
       this.threeColumnTablet = this.$parent._props.threeColumnTablet;
       this.isNested = this.$parent._props.isNested;
-      console.log(this.threeColumnTablet);
     },
     updated(){
       if(this.$parent.$data.layout !== 'benefit' || this.$parent._props.swiperOnMobile) {

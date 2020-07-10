@@ -85,6 +85,7 @@ import {
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
+import {TooltipDirective} from "./directives/Tooltip/tooltip";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
@@ -181,6 +182,7 @@ const VueRtStyle = {
       Vue.directive(SwipeRight.name, SwipeRight);
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
+      Vue.directive(TooltipDirective.name, TooltipDirective);
 
 
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
