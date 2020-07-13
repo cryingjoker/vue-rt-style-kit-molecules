@@ -96,6 +96,9 @@ class Tooltip {
       const toolTip = global.document.createElement("div");
       this.toolTip = toolTip;
       toolTip.classList.add('rt-tooltip')
+      if(this.value.bright){
+        toolTip.classList.add('rt-tooltip-bright')
+      }
       toolTip.classList.add('rt-tooltip-' + this.orientation)
       toolTip.innerHTML = this.value.text
       toolTip.style.left = this.pageX + 'px'
