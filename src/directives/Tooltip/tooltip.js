@@ -6,7 +6,7 @@ class Tooltip {
     this.bind();
     this.vnode = vnode;
     this.active = false
-    this.orientation = 'top'
+    this.orientation = 'bottom'
 
   }
 
@@ -28,29 +28,30 @@ class Tooltip {
     }
     this.timeout = setTimeout(() => {
       this.mouseenterAction()
-    }, 3000)
+    }, 300)
   }
   mouseenterAction = () => {
     this.active = true;
     let {y, x, height, width, right, left, top} = this.$el.getBoundingClientRect();
     const screenHeight = global.innerHeight
+    const screenWidth = global.innerWidth
     const bottom = screenHeight - y
-    if (y < 100) {
-      this.orientation = 'bottom'
-
-      if (bottom < 100) {
-        this.orientation = 'left'
-        if (left < 100) {
-          this.orientation = 'right'
-        }
+    if (screenHeight - y < 100) {
+      this.orientation = 'top'
+    }
+    if (bottom < 100 || left < 150 || screenWidth-left-width < 200) {
+      this.orientation = 'left'
+      if (left < 150) {
+        this.orientation = 'right'
       }
     }
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (getComputedStyle(this.$el, null).display == 'block') {
+    var style = getComputedStyle(this.$el, null);
+    if (style.display == 'block') {
       const span = global.document.createElement("span");
       span.innerText = this.$el.innerText
+
       this.$el.appendChild(span)
 
       span.style.position = 'absolute'
@@ -58,7 +59,7 @@ class Tooltip {
       span.style.visibility = 'hidden'
       span.style.display = 'inline-block'
       span.style.left = 0
-      width = span.clientWidth;
+      width = span.clientWidth + parseInt(style.paddingLeft);
       height = span.clientHeight;
       span.remove();
     }
@@ -77,7 +78,7 @@ class Tooltip {
         this.pageY = y + scrollTop + 4 + height
         break
       case 'left':
-        this.pageX = parseInt(x) - 4
+        this.pageX = parseInt(x) - 4 + parseInt(style.paddingLeft)
         this.pageY = y + scrollTop + height / 2
         break
 
