@@ -70,7 +70,7 @@ class Tooltip {
         this.pageY = y + scrollTop - 4
         break
       case 'right':
-        this.pageX =x + width +8
+        this.pageX =x + width +4
         this.pageY = y + scrollTop + height / 2
         break
       case 'bottom':
