@@ -50,17 +50,18 @@
       transition-timing-function ease-in-out
       transition-duration .4s
       transition-property stroke
-  &:hover
-    color white
-    background-color: b2c-dark-blue-high
-    .rt-button
+  @media (hover:hover)
+    &:hover
       color white
-    .rt-card-b2o-icon-fill
-      path, rect, polygon
-        fill white
-    .rt-card-b2o-icon-stroke
-      path, rect, polygon
-        stroke white
+      background-color: b2c-dark-blue-high
+      .rt-button
+        color white
+      .rt-card-b2o-icon-fill
+        path, rect, polygon
+          fill white
+      .rt-card-b2o-icon-stroke
+        path, rect, polygon
+          stroke white
   .rt-card__body
     padding-top: 120px
 .rt-card-b2o-footer
