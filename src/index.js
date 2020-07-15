@@ -81,7 +81,8 @@ import {
   HeaderNavigation,
   Slider,
   SliderItem,
-  TextImageBlock
+  TextImageBlock,
+  HelpBlock
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -148,6 +149,7 @@ const VueRtStyle = {
       Vue.component(Timeline.name, Timeline);
       Vue.component(TimelineItem.name, TimelineItem);
       Vue.component(ScrollBar.name, ScrollBar);
+      Vue.component(HelpBlock.name, HelpBlock);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
       Vue.component(ReplacementLink.name, ReplacementLink);
       Vue.component(Carousel.name, Carousel);
@@ -246,6 +248,7 @@ export {
   CardSkeleton,
   FullscreenImage,
   RowList,
+  HelpBlock,
   RowListItem,
   Table,
   TableCol,

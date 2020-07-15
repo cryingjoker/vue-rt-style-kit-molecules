@@ -77,4 +77,7 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
  export {default as Slider} from './Slider/Slider.vue'
  export {default as SliderItem} from './Slider/SliderItem.vue'
-export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
+ export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
+
+
+ export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
