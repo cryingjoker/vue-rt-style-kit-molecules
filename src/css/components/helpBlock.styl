@@ -1,10 +1,24 @@
 .{newAppName}-help-block
   display: inline-block
   vertical-align top
+  padding-right: 16px
+  padding-left: 16px
+  padding-top: 16px
+  padding-bottom: 16px
+  border-radius 4px
+  background-color: #F8F8F8
 
 .rt-help-footer
   color b2c-purple
   cursor: pointer;
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property color
+  @media(hover: hover)
+    &:hover
+      color: b2c-purple-button-hover
+      .rt-help-icon
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.4345 6.74994H12C8.41015 6.74994 5.5 9.66009 5.5 13.2499C5.5 16.8398 8.41015 19.7499 12 19.7499C15.5899 19.7499 18.5 16.8398 18.5 13.2499H20C20 17.6682 16.4183 21.2499 12 21.2499C7.58172 21.2499 4 17.6682 4 13.2499C4 8.83166 7.58172 5.24994 12 5.24994H14.4393L12.2195 3.03008L13.2801 1.96942L16.7779 5.46719C17.0708 5.76008 17.0708 6.23496 16.7779 6.52785L13.2801 10.0256L12.2195 8.96494L14.4345 6.74994Z' fill='%235B09C0'/%3E%3C/svg%3E%0A");
 
 
 .rt-help-icon
@@ -12,12 +26,16 @@
   box-sizing content-box
   width: 24px
   height: 24px
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property background-image
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.4345 6.74994H12C8.41015 6.74994 5.5 9.66009 5.5 13.2499C5.5 16.8398 8.41015 19.7499 12 19.7499C15.5899 19.7499 18.5 16.8398 18.5 13.2499H20C20 17.6682 16.4183 21.2499 12 21.2499C7.58172 21.2499 4 17.6682 4 13.2499C4 8.83166 7.58172 5.24994 12 5.24994H14.4393L12.2195 3.03008L13.2801 1.96942L16.7779 5.46719C17.0708 5.76008 17.0708 6.23496 16.7779 6.52785L13.2801 10.0256L12.2195 8.96494L14.4345 6.74994Z' fill='%237700FF'/%3E%3C/svg%3E%0A");
   background-position: left center
   background-repeat: no-repeat
   top: -2px
   left: -4px
   margin-right -4px
+
 
 
 
