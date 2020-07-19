@@ -5,10 +5,12 @@
     &-wrapper
       size(100%, calc(((100vw - 280px) / 2) * 2 / 3))
       overflow hidden
+      max-height 400px
       @media(min-width laptop-lower-limit)
         padding-left 50px
       @media (max-width tablet-upper-limit)
-        size(100%, calc((100vw - 40px) * 2 / 3))
+        size(100%, calc((100vw - 80px) / 3 * 2))
+        max-height none
   &__content
     min-height 100%
   &__inner
