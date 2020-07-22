@@ -63,6 +63,8 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export { default as CardLayout } from './Card/CardLayout.vue';
  export { default as GameArrow } from './Game/Arrow/GameArrow.vue'
  export { default as Banner } from './Banner/Banner.vue';
+ export { default as BannerV2 } from './BannerV2/Banner.vue';
+ export { default as BannerItemV2 } from './BannerV2/BannerItem.vue';
  export { default as BannerItem } from './Banner/BannerItem.vue';
  export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
  export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';

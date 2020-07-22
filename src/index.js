@@ -82,7 +82,9 @@ import {
   Slider,
   SliderItem,
   TextImageBlock,
-  HelpBlock
+  HelpBlock,
+  BannerV2,
+  BannerItemV2
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -106,6 +108,8 @@ const VueRtStyle = {
       Vue.component(CardImage.name, CardImage);
       Vue.component(CardImageList.name, CardImageList);
       Vue.component(Banner.name, Banner);
+      Vue.component(BannerV2.name, BannerV2);
+      Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
       Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
@@ -310,7 +314,8 @@ export {
   Slider,
   SliderItem,
   TextImageBlock,
-
+  BannerV2,
+  BannerItemV2,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
