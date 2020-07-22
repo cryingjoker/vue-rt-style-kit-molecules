@@ -15,6 +15,7 @@
                 activeNodeTitle: null,
                 activeNodePath: '0',
                 adTitle: null,
+                adSubTitle: null,
                 adImage: null,
                 adText: null,
                 adLink: null,
@@ -60,7 +61,7 @@
                         {this.activeNodeTitle}
                     </div>
                 }
-            }
+            };
             const navigationWrapper = () => {
                 return this.activeNode.map((item, index) => {
                     const navigate = () => {
@@ -72,10 +73,11 @@
                         this.adText = item.adText;
                         this.adLink = item.linkTarget;
                         this.adLinkText = item.linkText;
-                    }
+                    };
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-control" onClick={navigate}>
-                            {item.label}
+                            <p>{item.label}</p>
+                            <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle ? item.subTitle : null}</p>
                             <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="header-navigation__item-arrow header-navigation__item-arrow--next">
                                 <path d="M1 8L4.5 4.5L1 1" stroke="#101828"/>
