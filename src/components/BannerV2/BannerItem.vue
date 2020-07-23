@@ -91,19 +91,19 @@
           if(this.$slots['image-x2']) {
             const image = this.$slots['image-x2'];
             if(image) {
-              bannerStore.setSlot(parentId, 'image-x2', footer, itemId)
+              bannerStore.setSlot(parentId, 'image-x2', image, itemId)
             }
           }
           if(this.$slots['image-tablet']) {
             const image = this.$slots['image-tablet'];
             if(image) {
-              bannerStore.setSlot(parentId, 'image-tablet', footer, itemId)
+              bannerStore.setSlot(parentId, 'image-tablet', image, itemId)
             }
           }
           if(this.$slots['image-mobile']) {
             const image = this.$slots['image-mobile'];
             if(image) {
-              bannerStore.setSlot(parentId, 'image-mobile', footer, itemId)
+              bannerStore.setSlot(parentId, 'image-mobile', image, itemId)
             }
           }
         },

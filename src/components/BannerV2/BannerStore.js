@@ -6,9 +6,9 @@ import {StorePrototype} from "vue-rt-style-kit-atoms";
 class BannerStore extends StorePrototype {
   constructor() {
     super();
-    this.slidesArray = {}
+    this.bannersArray = {}
     this.slots = {}
-    this.slidesActiveIndex = {}
+    this.bannerActiveIds = {}
   }
 
   getSlot = (id) => {
@@ -18,31 +18,39 @@ class BannerStore extends StorePrototype {
   }
 
   setSlot = (sliderUid, name, slot, id) => {
+    let setActive = false
     if (!this.slots[sliderUid]) {
-      this.slidesArray[sliderUid] = [];
+      this.bannersArray[sliderUid] = [];
       this.slots[sliderUid] = {};
+      setActive = true;
     }
-    let index = this.slidesArray[sliderUid].indexOf(id);
+    let index = this.bannersArray[sliderUid].indexOf(id);
+
     if (index == -1) {
-      index = this.slots[sliderUid]?.length || 0
-      if (index < 5) {
-        this.slots[sliderUid][id] = {}
-        this.slidesArray[sliderUid].push(id)
+      if (setActive) {
+        this.setActiveId(sliderUid, id)
       }
+      index = this.slots[sliderUid]?.length || 0
+      // if (index < 5) {
+      this.slots[sliderUid][id] = {}
+      this.bannersArray[sliderUid].push(id)
+      // }
     }
-    if (index < 5) {
-      this.slots[sliderUid][id][name] = slot;
-    }
+
+    // if (index < 5) {
+    this.slots[sliderUid][id][name] = slot;
+    // }
+    console.info('!!!  this.bannersArray', this.slots)
   }
   getSlotSort = (sliderUid) => {
-    return this.slidesArray[sliderUid]
+    return this.bannersArray[sliderUid]
   }
-  setActiveIndex = (sliderUid, index) => {
-    this.slidesActiveIndex[sliderUid] = index
+  setActiveId = (sliderUid, id) => {
+    this.bannerActiveIds[sliderUid] = id
     this.runWatchersById(sliderUid)
   }
-  getActiveIndex = (sliderUid)=>{
-    return this.slidesActiveIndex[sliderUid]
+  getActiveId = (sliderUid) => {
+    return this.bannerActiveIds[sliderUid]
   }
 }
 
@@ -54,6 +62,6 @@ export const bannerStore = Vue.observable({
   getSlotSort: bannerStoreObject.getSlotSort,
   removeWatcher: bannerStoreObject.removeWatcher,
   addWatcher: bannerStoreObject.addWatcher,
-  setActiveIndex: bannerStoreObject.setActiveIndex,
-  getActiveIndex:bannerStoreObject.getActiveIndex
+  setActiveId: bannerStoreObject.setActiveId,
+  getActiveId: bannerStoreObject.getActiveId
 });
