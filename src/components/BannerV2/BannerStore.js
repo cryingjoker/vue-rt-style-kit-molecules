@@ -9,6 +9,8 @@ class BannerStore extends StorePrototype {
     this.bannersArray = {}
     this.slots = {}
     this.bannerActiveIds = {}
+    this.nextOrientation = {}
+    this.bannerNextActiveIds = {}
   }
 
   getSlot = (id) => {
@@ -17,40 +19,49 @@ class BannerStore extends StorePrototype {
     }
   }
 
-  setSlot = (sliderUid, name, slot, id) => {
+  setSlot = (bannerUid, name, slot, id) => {
     let setActive = false
-    if (!this.slots[sliderUid]) {
-      this.bannersArray[sliderUid] = [];
-      this.slots[sliderUid] = {};
+    if (!this.slots[bannerUid]) {
+      this.bannersArray[bannerUid] = [];
+      this.slots[bannerUid] = {};
       setActive = true;
     }
-    let index = this.bannersArray[sliderUid].indexOf(id);
+    let index = this.bannersArray[bannerUid].indexOf(id);
 
     if (index == -1) {
       if (setActive) {
-        this.setActiveId(sliderUid, id)
+        this.setActiveId(bannerUid, id)
       }
-      index = this.slots[sliderUid]?.length || 0
-      // if (index < 5) {
-      this.slots[sliderUid][id] = {}
-      this.bannersArray[sliderUid].push(id)
-      // }
+      index = this.slots[bannerUid]?.length || 0
+      this.slots[bannerUid][id] = {}
+      this.bannersArray[bannerUid].push(id)
     }
 
-    // if (index < 5) {
-    this.slots[sliderUid][id][name] = slot;
-    // }
-    console.info('!!!  this.bannersArray', this.slots)
+    this.slots[bannerUid][id][name] = slot;
+
   }
-  getSlotSort = (sliderUid) => {
-    return this.bannersArray[sliderUid]
+  getSlotSort = (bannerUid) => {
+    return this.bannersArray[bannerUid]
   }
-  setActiveId = (sliderUid, id) => {
-    this.bannerActiveIds[sliderUid] = id
-    this.runWatchersById(sliderUid)
+  setActiveId = (bannerUid, id) => {
+    if(!this.bannerNextActiveIds[bannerUid]) {
+      this.bannerNextActiveIds[bannerUid] = id;
+      this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id)  ? 1 : -1
+      this.runWatchersById(bannerUid)
+      this.bannerActiveIds[bannerUid] = id
+      setTimeout(() => {
+        delete this.bannerNextActiveIds[bannerUid]
+        delete this.nextOrientation[bannerUid]
+        this.runWatchersById(bannerUid)
+      }, 500)
+    }
   }
-  getActiveId = (sliderUid) => {
-    return this.bannerActiveIds[sliderUid]
+  getActiveId = (bannerUid) => {
+    return {
+      activeId: this.bannerActiveIds[bannerUid],
+      nextActiveId: this.bannerNextActiveIds[bannerUid],
+      nextOrientation: this.nextOrientation[bannerUid],
+    }
   }
 }
 
@@ -64,4 +75,5 @@ export const bannerStore = Vue.observable({
   addWatcher: bannerStoreObject.addWatcher,
   setActiveId: bannerStoreObject.setActiveId,
   getActiveId: bannerStoreObject.getActiveId
+
 });

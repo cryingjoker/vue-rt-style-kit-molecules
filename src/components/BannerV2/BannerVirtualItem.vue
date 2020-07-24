@@ -23,9 +23,18 @@
           return {}
         }
       },
+      nextId: {
+        type: Number
+      },
+      id: {
+        type: Number
+      },
       activeId: {
         type: Number
-      }
+      },
+      orientation: {
+        type: Number
+      },
     },
 
 
@@ -84,33 +93,55 @@
             </rt-col>
           </rt-row>
         }
-      }
+      },
+      bannerClass() {
+        const classNames = ['rt-n-banner-item', 'd-flex'];
+        if (this.activeId == this.id) {
+          classNames.push('rt-n-banner-item--active')
+          if (this.nextId) {
+            if (this.orientation === 1) {
+              classNames.push('rt-n-banner-item--go-left')
+            }
+            if (this.orientation === -1) {
+              classNames.push('rt-n-banner-item--go-right')
+            }
+          }
+        }
 
+        if (this.nextId == this.id) {
+          if (this.orientation === 1) {
+            classNames.push('rt-n-banner-item--next-right')
+          }
+          if (this.orientation === -1) {
+            classNames.push('rt-n-banner-item--next-left')
+          }
+
+        }
+        return classNames.join(' ')
+      }
     },
     render(h) {
-      console.info(this.data)
-
-      return <div class="rt-n-banner-item rt-container d-flex">
-
-        <rt-row class="flex-fill rt-n-banner-content">
-          <rt-col size="1"></rt-col>
-          <rt-col size="5" class="d-flex flex-fill">
-            <div class="d-flex flex-start-center">
-              <div>
-                {this.header}
-                {this.label}
-                {this.description}
-                {this.footer}
+      return <div class={this.bannerClass}>
+        <div class="rt-container flex-fill d-flex">
+          <rt-row class="flex-fill rt-n-banner-content">
+            <rt-col size="1"></rt-col>
+            <rt-col size="5" class="d-flex flex-fill">
+              <div class="d-flex flex-start-center">
+                <div>
+                  {this.header}
+                  {this.label}
+                  {this.description}
+                  {this.footer}
+                </div>
               </div>
-            </div>
-          </rt-col>
-        </rt-row>
-        <rt-banner-virtual-image-v2 image={this.data?.image}
-                                   image-x2={this.data['image-x2']}
-                                   image-tablet={this.data?.imageTablet}
-                                   image-mobile={this.data?.imageMobile}>
-
-        </rt-banner-virtual-image-v2>
+            </rt-col>
+          </rt-row>
+          <rt-banner-virtual-image-v2 image={this.data?.image}
+                                      image-x2={this.data['image-x2']}
+                                      image-tablet={this.data?.imageTablet}
+                                      image-mobile={this.data?.imageMobile}>
+          </rt-banner-virtual-image-v2>
+        </div>
 
 
       </div>

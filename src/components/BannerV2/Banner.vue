@@ -4,9 +4,11 @@
   import {deviceTypeStore} from "vue-rt-style-kit-atoms";
   import {bannerStore} from "./BannerStore";
   import RtBannerVirtualItemV2 from './BannerVirtualItem.vue'
+  import BannerPaginator from "./BannerPaginator.vue";
 
   const componentsList = {};
   componentsList[RtBannerVirtualItemV2.name] = RtBannerVirtualItemV2
+  componentsList[BannerPaginator.name] = BannerPaginator
 
   //dark-slate
   //gray
@@ -23,17 +25,31 @@
       name: {
         type: String,
         default: ''
+      },
+      time: {
+        type: Number,
+        default: 3000
+      },
+      fps: {
+        type: Number,
+        default: 60
+      },
+      pauseOnHover:{
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
       customSlots: {},
       customSlotsSort: [],
-      bannerActiveId: null
+      bannerActiveId: null,
+      isHover: false,
+      bannerNextOrientation: null,
+      bannerNextActiveId: null
     }),
 
 
     mounted: function () {
-      console.info('this.bannerName', this.bannerName)
       this.updateSlots()
       bannerStore.addWatcher(this.bannerName, this.updateSlots)
     },
@@ -54,14 +70,22 @@
         this.getActiveSlotIndex()
       },
       getActiveSlotIndex(){
-        this.bannerActiveId = bannerStore.getActiveId(this.bannerName)
+        const data = bannerStore.getActiveId(this.bannerName);
+        this.bannerActiveId = data.activeId
+        this.bannerNextActiveId = data.nextActiveId
+        this.bannerNextOrientation = data.nextOrientation
       },
       getSlots() {
         this.customSlotsSort  = bannerStore.getSlotSort(this.bannerName)
       },
       getSlotSort() {
         this.customSlots = bannerStore.getSlot(this.bannerName)
-
+      },
+      mouseenter(){
+        this.isHover = true
+      },
+      mouseleave(){
+        this.isHover = false
       }
     },
     computed: {
@@ -84,19 +108,27 @@
         return this.customSlotsSort?.map((key)=>{
           const slide = this.customSlots[key];
           const isActive = key == this.bannerActiveId
-          return <rt-banner-virtual-item-v2 active-id={this.bannerActiveId} data={slide}/>
+          return <rt-banner-virtual-item-v2
+            next-id={this.bannerNextActiveId}
+            id={key}
+            active-id={this.bannerActiveId}
+            orientation={this.bannerNextOrientation}
+            data={slide} id={key}/>
         })
       }
     },
     render(h) {
-      return <div class="rt-container">
-        <div class={this.bannerClass}>
-
+      return <div class={this.bannerClass} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
           {this.bannerItems}
           {this.$slots.default}
-
+          <rt-banner-paginator-v2 pause-on-hover={this.pauseOnHover}
+                                  pause={this.isHover}
+                                  fps={this.fps}
+                                  active-id={this.bannerActiveId}
+                                  items={this.customSlotsSort}
+                                  banner-name={this.bannerName}
+                                  time={this.time}></rt-banner-paginator-v2>
         </div>
-      </div>
 
     }
   }

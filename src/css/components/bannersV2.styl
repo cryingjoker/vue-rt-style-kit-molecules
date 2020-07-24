@@ -3,12 +3,61 @@
   border-radius 8px
   height: 422px
   overflow hidden
+  position: relative;
 .rt-n-banner-content
   position: relative;
   z-index 2
+
 .rt-n-banner-item
-  position: relative;
+  position: absolute;
   min-height 100%
+  display: none
+  left: 0
+  right: 0
+
+@keyframes BannergoFromLeft
+  0%
+    transform translateX(-100vw)
+  100%
+    transform translateX(0vw)
+
+@keyframes BannergoFromRigth
+  0%
+    transform translateX(100vw)
+  100%
+    transform translateX(0vw)
+
+.rt-n-banner-item--next-left
+  display: flex
+  transform translateX(-100vw)
+  animation-name BannergoFromLeft
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+
+.rt-n-banner-item--next-right
+  display: flex
+  transform translateX(100vw)
+  animation-name BannergoFromRigth
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+
+
+
+.rt-n-banner-item--active
+  transform translateX(0)
+  display: flex
+  transition-timing-function ease-in-out
+  transition-duration 0.5s
+  transition-property transform
+
+.rt-n-banner-item--go-left
+  display: flex
+  transform translateX(-100vw)
+
+.rt-n-banner-item--go-right
+  display: flex
+  transform translateX(100vw)
+
 .rt-n-banner-image
   position: absolute;
   top: 0
@@ -22,4 +71,53 @@
     width: 100%;
     max-height 422px
     font-family: 'object-fit: contain; object-position: right center;'
+
+.rt-n-banner-paginator
+  z-index 2
+  position: absolute;
+  bottom: 36px
+  left: 0
+  right: 0
+
+.rt-n-banner-paginator-item
+  width: 24px
+  height: 24px
+  padding-top: 3px
+  padding-left: 3px
+  padding-bottom: 3px
+  padding-right: 3px
+  position: relative;
+  cursor: pointer;
+  &:before
+    content: ''
+    display: block
+    width: 10px
+    height: 10px
+    position: absolute;
+    margin auto
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    background-color: #B0B2B7
+    border-radius 50%
+    transition-timing-function ease-in-out
+    transition-duration .2s
+    transition-property background-color
+  @media (hover:hover)
+    &:hover
+      &:before
+        background-color: b2c-orange
+
+.rt-n-banner-paginator-item--active
+  &:before
+    background-color: b2c-orange
+
+.rt-n-banner-paginator-round
+  stroke-dasharray: 45;
+  stroke-dashoffset: 45;
+  transform: rotate(275deg)
+
+
+
 
