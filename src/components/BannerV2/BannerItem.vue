@@ -25,23 +25,13 @@
           isActive:{
             type: Boolean,
             default: false
-          }
+          },
         },
         data: () => ({
 
         }),
 
 
-        computed: {
-          bannerClass(){
-            const classList = ['rt-n-banner']
-            classList.push('color-block--'+this.colorType)
-            if(this.colorType != 'gray'){
-              classList.push('color-white')
-            }
-            return classList.join(' ')
-          }
-        },
 
         mounted: function () {
           let parentId;
@@ -106,6 +96,8 @@
               bannerStore.setSlot(parentId, 'image-mobile', image, itemId)
             }
           }
+          bannerStore.setSlot(parentId, 'background', this.colorType, itemId)
+
         },
         beforeMount() {
 

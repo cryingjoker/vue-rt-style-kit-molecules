@@ -1,9 +1,14 @@
 
 .rt-n-banner
-  border-radius 8px
   height: 422px
   overflow hidden
   position: relative;
+.rt-n-banner-wrapper
+  border-radius 8px
+  overflow: hidden;
+  position: relative;
+  @media (max-width tablet-upper-limit)
+    border-radius 0;
 .rt-n-banner-content
   position: relative;
   z-index 2
@@ -66,11 +71,13 @@
   bottom: 0
 .rt-n-banner-image-container
   img
-    object-fit contain
-    object-position right center
-    width: 100%;
+    object-fit cover
+    object-position left center
+    width: calc(100%  + 2px);
+    min-height 422px
     max-height 422px
-    font-family: 'object-fit: contain; object-position: right center;'
+    font-family: 'object-fit: cover; object-position: left center;'
+
 
 .rt-n-banner-paginator
   z-index 2
@@ -78,6 +85,8 @@
   bottom: 36px
   left: 0
   right: 0
+
+
 
 .rt-n-banner-paginator-item
   width: 24px
@@ -112,6 +121,22 @@
 .rt-n-banner-paginator-item--active
   &:before
     background-color: b2c-orange
+.rt-n-banner-paginator-oval
+  stroke b2c-orange
+
+.rt-n-banner-paginator-invert
+  .rt-n-banner-paginator-oval
+    stroke b2c-white
+  .rt-n-banner-paginator-item
+    &:before
+      background-color: b2c-white07
+    @media (hover:hover)
+      &:hover
+        &:before
+          background-color: b2c-white
+  .rt-n-banner-paginator-item--active
+      &:before
+        background-color: b2c-white
 
 .rt-n-banner-paginator-round
   stroke-dasharray: 45;

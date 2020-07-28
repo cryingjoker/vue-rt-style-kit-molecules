@@ -57,11 +57,13 @@ class BannerStore extends StorePrototype {
     }
   }
   getActiveId = (bannerUid) => {
-    return {
+    const data ={
       activeId: this.bannerActiveIds[bannerUid],
       nextActiveId: this.bannerNextActiveIds[bannerUid],
       nextOrientation: this.nextOrientation[bannerUid],
     }
+    data.activeColor = this.slots[bannerUid][data.activeId].background
+    return data;
   }
 }
 

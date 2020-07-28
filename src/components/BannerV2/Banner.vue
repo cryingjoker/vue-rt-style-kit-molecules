@@ -18,10 +18,7 @@
     name: "RtBannerV2",
     components: componentsList,
     props: {
-      colorType: {
-        default: 'gray',
-        type: String
-      },
+
       name: {
         type: String,
         default: ''
@@ -45,7 +42,8 @@
       bannerActiveId: null,
       isHover: false,
       bannerNextOrientation: null,
-      bannerNextActiveId: null
+      bannerNextActiveId: null,
+      activeSlideColor: null
     }),
 
 
@@ -74,6 +72,7 @@
         this.bannerActiveId = data.activeId
         this.bannerNextActiveId = data.nextActiveId
         this.bannerNextOrientation = data.nextOrientation
+        this.activeSlideColor = data.activeColor
       },
       getSlots() {
         this.customSlotsSort  = bannerStore.getSlotSort(this.bannerName)
@@ -98,10 +97,6 @@
       },
       bannerClass() {
         const classList = ['rt-n-banner']
-        classList.push('color-block--' + this.colorType)
-        if (this.colorType != 'gray') {
-          classList.push('color-white')
-        }
         return classList.join(' ')
       },
       bannerItems(){
@@ -115,19 +110,27 @@
             orientation={this.bannerNextOrientation}
             data={slide} id={key}/>
         })
+      },
+      paginator(){
+        if(this.customSlotsSort.length > 1) {
+          return <rt-banner-paginator-v2 pause-on-hover={this.pauseOnHover}
+                                         color={this.activeSlideColor}
+                                         pause={this.isHover}
+                                         fps={this.fps}
+                                         active-id={this.bannerActiveId}
+                                         items={this.customSlotsSort}
+                                         banner-name={this.bannerName}
+                                         time={this.time}></rt-banner-paginator-v2>
+        }
+        return null
       }
+
     },
     render(h) {
       return <div class={this.bannerClass} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
           {this.bannerItems}
           {this.$slots.default}
-          <rt-banner-paginator-v2 pause-on-hover={this.pauseOnHover}
-                                  pause={this.isHover}
-                                  fps={this.fps}
-                                  active-id={this.bannerActiveId}
-                                  items={this.customSlotsSort}
-                                  banner-name={this.bannerName}
-                                  time={this.time}></rt-banner-paginator-v2>
+          {this.paginator}
         </div>
 
     }

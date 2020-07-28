@@ -34,6 +34,9 @@
       },
       bannerName:{
         type: Number|String
+      },
+      color:{
+        type: String
       }
 
     },
@@ -63,7 +66,8 @@
         if(a!=b){
           this.step = 0;
         }
-      }
+      },
+
     },
     methods: {
       tick() {
@@ -105,6 +109,10 @@
     computed: {
       paginatorClass() {
         const classList = ['rt-n-banner-paginator'];
+        console.info('this.color',this.color);
+        if(this.color == 'orange'){
+          classList.push('rt-n-banner-paginator-invert')
+        }
         return classList.join(' ')
       },
       roundStyle() {
@@ -119,7 +127,7 @@
             return <div class={classNames.join(' ')}>
               <svg class="rt-n-banner-paginator-round" width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
                    xmlns="http://www.w3.org/2000/svg" style={this.roundStyle}>
-                <circle id="Oval" stroke="#FF4F12" stroke-width="1.5" cx="9" cy="9" r="7" fill="none"></circle>
+                <circle class="rt-n-banner-paginator-oval" stroke-width="1.5" cx="9" cy="9" r="7" fill="none"></circle>
               </svg>
             </div>
           } else {

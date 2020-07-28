@@ -70,7 +70,13 @@
       },
       description() {
         if (this.data.description) {
-          return <p class="rt-n-banner-description sp-t-0-4 color-main08">
+          const classList = ['rt-n-banner-description', 'sp-t-0-4'];
+          if(this.data.background != 'gray'){
+            classList.push('color-white')
+          }else{
+            classList.push('color-main08')
+          }
+          return <p class={classList.join(' ')}>
             {this.data.description}
           </p>
         }
@@ -118,29 +124,39 @@
 
         }
         return classNames.join(' ')
+      },
+      bannerWrapperClass() {
+        const classNames = ['rt-n-banner-wrapper', 'd-flex','flex-fill'];
+        classNames.push('color-block--' + this.data.background)
+        if (this.data.background != 'gray') {
+          classNames.push('color-white')
+        }
+        return classNames.join(' ')
       }
     },
     render(h) {
       return <div class={this.bannerClass}>
-        <div class="rt-container flex-fill d-flex">
-          <rt-row class="flex-fill rt-n-banner-content">
-            <rt-col size="1"></rt-col>
-            <rt-col size="5" class="d-flex flex-fill">
-              <div class="d-flex flex-start-center">
-                <div>
-                  {this.header}
-                  {this.label}
-                  {this.description}
-                  {this.footer}
+        <div class="rt-container flex-fill d-flex td-sp-h-none">
+          <div class={this.bannerWrapperClass}>
+            <rt-row class="flex-fill rt-n-banner-content">
+              <rt-col size="1"></rt-col>
+              <rt-col size="5" class="d-flex flex-fill">
+                <div class="d-flex flex-start-center">
+                  <div>
+                    {this.header}
+                    {this.label}
+                    {this.description}
+                    {this.footer}
+                  </div>
                 </div>
-              </div>
-            </rt-col>
-          </rt-row>
-          <rt-banner-virtual-image-v2 image={this.data?.image}
-                                      image-x2={this.data['image-x2']}
-                                      image-tablet={this.data?.imageTablet}
-                                      image-mobile={this.data?.imageMobile}>
-          </rt-banner-virtual-image-v2>
+              </rt-col>
+            </rt-row>
+            <rt-banner-virtual-image-v2 image={this.data?.image}
+                                        image-x2={this.data['image-x2']}
+                                        image-tablet={this.data?.imageTablet}
+                                        image-mobile={this.data?.imageMobile}>
+            </rt-banner-virtual-image-v2>
+          </div>
         </div>
 
 
