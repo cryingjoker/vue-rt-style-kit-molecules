@@ -9,6 +9,10 @@
       hideIcon: {
         type: Boolean,
         default: false
+      },
+      bright:{
+        type: Boolean,
+        default: false
       }
 
     },
@@ -25,8 +29,17 @@
         }
       }
     },
+    computed:{
+      helpBlockClass(){
+        const classNames = ['rt-help-block','d-inline-block'];
+        if(this.bright){
+          classNames.push('rt-help-block-bright')
+        }
+        return classNames.join(' ')
+      }
+    },
     render(h) {
-      return <div class="rt-help-block d-inline-block">
+      return <div class={this.helpBlockClass}>
         <div class="rt-help-block-content sp-b-0-2">
           {this.$slots.content}
         </div>
