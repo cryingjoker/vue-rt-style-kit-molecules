@@ -10,27 +10,27 @@
     components: componentsList,
     props: {
       image: {
-        type: Object,
+        type: Array,
         default: () => {
           return {}
         }
       },
       imageX2:{
-        type: Object,
+        type: Array,
         default: () => {
-          return {}
+          return []
         }
       },
       imageTablet:{
-        type: Object,
+        type: Array,
         default: () => {
-          return {}
+          return []
         }
       },
       imageMobile:{
-        type: Object,
+        type: Array,
         default: () => {
-          return {}
+          return []
         }
       }
     },

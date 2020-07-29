@@ -30,7 +30,7 @@
         default: () => ([])
       },
       activeId: {
-        type: String,
+        type: String | Number,
       },
       bannerName:{
         type: Number|String
