@@ -65,8 +65,8 @@
     },
     render(h) {
       return <rt-row class="flex-fill rt-n-banner-image">
-        <rt-col size="5"></rt-col>
-        <rt-col size="7">
+        <rt-col size={5} tablet-size={3} t-hide={true} m-hide={true}></rt-col>
+        <rt-col size={7} tablet-size={3} mobile-size={3}>
           {this.imageRender}
           {this.imageX2Render}
         </rt-col>

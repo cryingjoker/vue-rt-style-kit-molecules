@@ -126,7 +126,7 @@
         return classNames.join(' ')
       },
       bannerWrapperClass() {
-        const classNames = ['rt-n-banner-wrapper', 'd-flex','flex-fill'];
+        const classNames = ['rt-n-banner-wrapper', 'd-flex','flex-fill','td-sp-h-1'];
         classNames.push('color-block--' + this.data.background)
         if (this.data.background != 'gray') {
           classNames.push('color-white')
@@ -139,8 +139,8 @@
         <div class="rt-container flex-fill d-flex td-sp-h-none">
           <div class={this.bannerWrapperClass}>
             <rt-row class="flex-fill rt-n-banner-content">
-              <rt-col size="1"></rt-col>
-              <rt-col size="5" class="d-flex flex-fill">
+              <rt-col size={1} t-hide={true}></rt-col>
+              <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
                 <div class="d-flex flex-start-center">
                   <div>
                     {this.header}

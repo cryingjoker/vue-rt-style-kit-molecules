@@ -143,9 +143,9 @@
     },
     render(h) {
       return <div class={this.paginatorClass}>
-        <div class="rt-container">
+        <div class="rt-container td-sp-h-1">
           <rt-row>
-            <rt-col size="1"></rt-col>
+            <rt-col size="1" t-hide={true} m-hide={true}></rt-col>
             <rt-col size="10">
               <div class="rt-n-banner-paginator-container d-flex">
                 {this.paginatorItems}

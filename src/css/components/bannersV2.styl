@@ -3,12 +3,19 @@
   height: 422px
   overflow hidden
   position: relative;
+  @media (max-width tablet-upper-limit)
+    height 341px
+  @media (max-width mobile-upper-limit)
+    height: 400px
 .rt-n-banner-wrapper
   border-radius 8px
   overflow: hidden;
   position: relative;
   @media (max-width tablet-upper-limit)
     border-radius 0;
+  @media (max-width mobile-upper-limit)
+    padding-top: 204px
+
 .rt-n-banner-content
   position: relative;
   z-index 2
@@ -77,6 +84,12 @@
     min-height 422px
     max-height 422px
     font-family: 'object-fit: cover; object-position: left center;'
+    @media (max-width tablet-upper-limit)
+      min-height 341px
+      max-height 341px
+    @media (max-width tablet-upper-limit)
+      min-height 204px
+      max-height 204px
 
 
 .rt-n-banner-paginator
@@ -85,6 +98,8 @@
   bottom: 36px
   left: 0
   right: 0
+  @media (max-width tablet-upper-limit)
+    bottom 18px
 
 
 
