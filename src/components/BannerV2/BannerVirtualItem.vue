@@ -17,11 +17,18 @@
     name: "RtBannerVirtualItemV2",
     components: componentsList,
     props: {
+      height:{
+        type: Number,
+        default: 0
+      },
       data: {
         type: Object,
         default: () => {
           return {}
         }
+      },
+      bannerName:{
+        type: String|Number,
       },
       nextId: {
         type: Number
@@ -36,10 +43,12 @@
         type: Number
       },
     },
-
+    data: () => ({
+      type: null
+    }),
 
     mounted: function () {
-
+      deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
     },
     beforeMount() {
 
@@ -47,10 +56,43 @@
     beforeUpdate() {
     },
     updated() {
+      if(this.type == 'mobile'){
+        this.removeWatcher();
+        this.setWatcher();
+      }
     },
     beforeDestroy: function () {
+      if(this.type == 'mobile'){
+        this.removeWatcher()
+      }
     },
-    methods: {},
+    methods: {
+      setWatcher(){
+        this.getHeight();
+        window.addEventListener('resize',this.getHeight)
+      },
+      removeWatcher(){
+        window.removeEventListener('resize',this.getHeight)
+      },
+      calculateMobileOptions(){
+        const type = deviceTypeStore.getStatus()
+        if(this.type != type){
+          this.type = type;
+          if(type == 'mobile'){
+            this.setWatcher();
+          }else{
+            this.removeWatcher();
+          }
+        }
+      },
+      getHeight(){
+        const thisHeight = this.$refs['bannerItem']?.clientHeight
+        if(thisHeight) {
+          bannerStore.setHeight(this.bannerName,thisHeight);
+        }
+
+      }
+    },
     computed: {
       header() {
         if (this.data.header) {
@@ -132,17 +174,24 @@
           classNames.push('color-white')
         }
         return classNames.join(' ')
+      },
+      bannerStyle(){
+        if(this.type == 'mobile'){
+          return {minHeight : this.height+'px'}
+        }else{
+          return {}
+        }
       }
     },
     render(h) {
-      return <div class={this.bannerClass}>
+      return <div class={this.bannerClass} ref="bannerItem" style={this.bannerStyle}>
         <div class="rt-container flex-fill d-flex td-sp-h-none">
           <div class={this.bannerWrapperClass}>
             <rt-row class="flex-fill rt-n-banner-content">
-              <rt-col size={1} t-hide={true}></rt-col>
+              <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
               <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
                 <div class="d-flex flex-start-center">
-                  <div>
+                  <div class="md-sp-t-1-2 d-flex flex-column">
                     {this.header}
                     {this.label}
                     {this.description}

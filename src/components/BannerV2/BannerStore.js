@@ -11,6 +11,7 @@ class BannerStore extends StorePrototype {
     this.bannerActiveIds = {}
     this.nextOrientation = {}
     this.bannerNextActiveIds = {}
+    this.height = {}
   }
 
   getSlot = (id) => {
@@ -18,7 +19,17 @@ class BannerStore extends StorePrototype {
       return this.slots[id]
     }
   }
-
+  setHeight = (bannerUid, height) => {
+    if (!this.height[bannerUid]) {
+      this.height[bannerUid] = height
+    }
+    if (this.height[bannerUid] < height) {
+      this.height[bannerUid] = height;
+    }
+  }
+  getHeight = (bannerUid)=>{
+    return this.height[bannerUid]
+  }
   setSlot = (bannerUid, name, slot, id) => {
     let setActive = false
     if (!this.slots[bannerUid]) {
@@ -32,11 +43,9 @@ class BannerStore extends StorePrototype {
       if (setActive) {
         this.setActiveId(bannerUid, id)
       }
-      index = this.slots[bannerUid]?.length || 0
       this.slots[bannerUid][id] = {}
       this.bannersArray[bannerUid].push(id)
     }
-
     this.slots[bannerUid][id][name] = slot;
 
   }
@@ -44,9 +53,9 @@ class BannerStore extends StorePrototype {
     return this.bannersArray[bannerUid]
   }
   setActiveId = (bannerUid, id) => {
-    if(!this.bannerNextActiveIds[bannerUid]) {
+    if (!this.bannerNextActiveIds[bannerUid]) {
       this.bannerNextActiveIds[bannerUid] = id;
-      this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id)  ? 1 : -1
+      this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
       this.runWatchersById(bannerUid)
       this.bannerActiveIds[bannerUid] = id
       setTimeout(() => {
@@ -57,7 +66,7 @@ class BannerStore extends StorePrototype {
     }
   }
   getActiveId = (bannerUid) => {
-    const data ={
+    const data = {
       activeId: this.bannerActiveIds[bannerUid],
       nextActiveId: this.bannerNextActiveIds[bannerUid],
       nextOrientation: this.nextOrientation[bannerUid],
@@ -76,6 +85,7 @@ export const bannerStore = Vue.observable({
   removeWatcher: bannerStoreObject.removeWatcher,
   addWatcher: bannerStoreObject.addWatcher,
   setActiveId: bannerStoreObject.setActiveId,
-  getActiveId: bannerStoreObject.getActiveId
-
+  getActiveId: bannerStoreObject.getActiveId,
+  setHeight: bannerStoreObject.setHeight,
+  getHeight: bannerStoreObject.getHeight
 });

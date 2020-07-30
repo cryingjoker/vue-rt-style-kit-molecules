@@ -1,24 +1,29 @@
 
 .rt-n-banner
-  height: 422px
   overflow hidden
   position: relative;
-  @media (max-width tablet-upper-limit)
+
+  @media (min-width tablet-lower-limit)
     height 341px
-  @media (max-width mobile-upper-limit)
-    height: 400px
+  @media (min-width laptop-lower-limit)
+    height: 422px
+
 .rt-n-banner-wrapper
   border-radius 8px
   overflow: hidden;
   position: relative;
+  max-width 100%
   @media (max-width tablet-upper-limit)
     border-radius 0;
   @media (max-width mobile-upper-limit)
     padding-top: 204px
+    padding-bottom: 24px
+    box-sizing content-box
 
 .rt-n-banner-content
   position: relative;
   z-index 2
+  max-width 100%
 
 .rt-n-banner-item
   position: absolute;
@@ -26,18 +31,30 @@
   display: none
   left: 0
   right: 0
+  @media (max-width mobile-upper-limit)
+    display: flex
+    opacity: 0
+    visibility: hidden
 
 @keyframes BannergoFromLeft
   0%
     transform translateX(-100vw)
+    opacity 1
+    visibility visible
   100%
     transform translateX(0vw)
+    opacity 1
+    visibility visible
 
 @keyframes BannergoFromRigth
   0%
     transform translateX(100vw)
+    opacity 1
+    visibility visible
   100%
     transform translateX(0vw)
+    opacity 1
+    visibility visible
 
 .rt-n-banner-item--next-left
   display: flex
@@ -61,6 +78,9 @@
   transition-timing-function ease-in-out
   transition-duration 0.5s
   transition-property transform
+  @media (max-width mobile-upper-limit)
+    opacity: 1
+    visibility: visible;
 
 .rt-n-banner-item--go-left
   display: flex
@@ -75,7 +95,8 @@
   top: 0
   left: 0
   right: 0
-  bottom: 0
+  @media (min-width tablet-lower-limit)
+    bottom: 0
 .rt-n-banner-image-container
   img
     object-fit cover
@@ -91,16 +112,17 @@
       min-height 204px
       max-height 204px
 
-
+.rt-n-banner-description
+  max-width 100%
 .rt-n-banner-paginator
   z-index 2
   position: absolute;
-  bottom: 36px
+  bottom: 29px
   left: 0
   right: 0
   @media (max-width tablet-upper-limit)
     bottom 18px
-
+    position: static;
 
 
 .rt-n-banner-paginator-item
@@ -158,6 +180,40 @@
   stroke-dashoffset: 45;
   transform: rotate(275deg)
 
+.rt-n-banner-paginator-line
+  position: absolute;
+  top: 204px
+  left: -10px
+  right: -10px
+  height: 2px
+  background-color: rgba(16, 24, 40, .15)
+.rt-n-banner-paginator-line-inner
+  height: 2px
+  background-color: b2c-orange
+  .rt-n-banner-paginator-line-white &
+    background-color: b2c-white
 
-
-
+.rt-n-banner-paginator-container
+  @media (max-width mobile-upper-limit)
+    position static
+.rt-n-banner-paginator-inner
+  display: flex
+  align-self flex-end
+  position: absolute;
+  bottom: 24px
+  right:0
+.rt-n-banner-paginator-button
+  width: 36px
+  height: 36px
+  border-radius 50%
+  background-color: b2c-white
+  display: flex
+  align-items center
+  justify-content center
+  cursor: pointer;
+  user-select none
+  touch-callout: none
+  outline: none
+  -webkit-tap-highlight-color: transparent
+  &+&
+    margin-left: 12px

@@ -21,6 +21,10 @@
         type: Boolean,
         default: false
       },
+      height: {
+        type: Number,
+        default: 0
+      },
       pauseOnHover: {
         type: Boolean,
         default: true
@@ -41,11 +45,12 @@
 
     },
     data: () => ({
-
+      type: '',
       step: 0,
     }),
 
     mounted: function () {
+      deviceTypeStore.addWatcher(this._uid,this.setType);
       this.tick();
     },
     beforeUpdate() {
@@ -70,6 +75,12 @@
 
     },
     methods: {
+      setType(){
+        const type = deviceTypeStore.getStatus()
+        if(this.type != type){
+          this.type = type;
+        }
+      },
       tick() {
         if (!this.pause && this.pauseOnHover) {
           this.step += 100 / (this.time / 1000 * this.fps)
@@ -109,7 +120,6 @@
     computed: {
       paginatorClass() {
         const classList = ['rt-n-banner-paginator'];
-        console.info('this.color',this.color);
         if(this.color == 'orange'){
           classList.push('rt-n-banner-paginator-invert')
         }
@@ -118,26 +128,62 @@
       roundStyle() {
         return {strokeDashoffset: 45 - 45 * this.step / 100}
       },
+      lineStyle(){
+        return {width: ( 100 * this.step / 100)+'%'}
+      },
       paginatorItems() {
-        return this.items.map((i) => {
-          const classNames = ['rt-n-banner-paginator-item'];
-          const isActive = i == this.activeId;
-          if (isActive) {
-            classNames.push('rt-n-banner-paginator-item--active')
-            return <div class={classNames.join(' ')}>
-              <svg class="rt-n-banner-paginator-round" width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
-                   xmlns="http://www.w3.org/2000/svg" style={this.roundStyle}>
-                <circle class="rt-n-banner-paginator-oval" stroke-width="1.5" cx="9" cy="9" r="7" fill="none"></circle>
-              </svg>
-            </div>
-          } else {
-            const setActive = ()=>{
-              this.setActive(i)
+        if(this.type != 'mobile') {
+          return this.items.map((i) => {
+            const classNames = ['rt-n-banner-paginator-item'];
+            const isActive = i == this.activeId;
+            if (isActive) {
+              classNames.push('rt-n-banner-paginator-item--active')
+              return <div class={classNames.join(' ')}>
+                <svg class="rt-n-banner-paginator-round" width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" style={this.roundStyle}>
+                  <circle class="rt-n-banner-paginator-oval" stroke-width="1.5" cx="9" cy="9" r="7"
+                          fill="none"></circle>
+                </svg>
+              </div>
+            } else {
+              const setActive = () => {
+                this.setActive(i)
+              }
+              return <div onClick={setActive} class={classNames.join(' ')}></div>
             }
-            return <div onClick={setActive} class={classNames.join(' ')}></div>
-          }
 
-        })
+          })
+        }
+        const activeIndex = this.items.indexOf(this.activeId);
+        const size = this.items.length;
+        const prev = (activeIndex - 1 + size) %size;
+        const next = (activeIndex + 1) %size;
+        const setPrevActive = () => {
+          this.setActive(this.items[prev])
+        }
+        const setNextActive = () => {
+          this.setActive(this.items[next])
+        }
+        const lineClassList = ['rt-n-banner-paginator-line']
+        if(this.color == 'orange'){
+          lineClassList.push('rt-n-banner-paginator-line-white')
+        }
+        return <div>
+          <div class={lineClassList.join(' ')}>
+            <div class="rt-n-banner-paginator-line-inner" style={this.lineStyle}></div>
+          </div>
+          <div class='rt-n-banner-paginator-inner' style={{top: (this.height-60)+'px'}}>
+          <div class="rt-n-banner-paginator-button" onClick={setPrevActive}>
+            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M0.471149 5.46945L5.97115 0L7.02885 1.06361L2.06363 6.00126L7.02885 10.9389L5.97115 12.0025L0.471149 6.53306C0.329592 6.39229 0.25 6.2009 0.25 6.00126C0.25 5.80162 0.329592 5.61023 0.471149 5.46945Z" fill="#101828"/>
+            </svg>
+          </div>
+          <div class="rt-n-banner-paginator-button" onClick={setNextActive}>
+            <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M6.55815 5.46945L1.05815 0L0.000445366 1.06361L4.96567 6.00126L0.000445366 10.9389L1.05815 12.0025L6.55815 6.53306C6.6997 6.39229 6.7793 6.2009 6.7793 6.00126C6.7793 5.80162 6.6997 5.61023 6.55815 5.46945Z" fill="#101828"/>
+            </svg>
+          </div>
+        </div></div>
       }
 
     },
@@ -146,7 +192,7 @@
         <div class="rt-container td-sp-h-1">
           <rt-row>
             <rt-col size="1" t-hide={true} m-hide={true}></rt-col>
-            <rt-col size="10">
+            <rt-col size="10" mobile-size={3}>
               <div class="rt-n-banner-paginator-container d-flex">
                 {this.paginatorItems}
               </div>

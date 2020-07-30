@@ -43,13 +43,16 @@
       isHover: false,
       bannerNextOrientation: null,
       bannerNextActiveId: null,
-      activeSlideColor: null
+      activeSlideColor: null,
+      slotHeight: null,
+      type: null
     }),
 
 
     mounted: function () {
       this.updateSlots()
       bannerStore.addWatcher(this.bannerName, this.updateSlots)
+      deviceTypeStore.addWatcher(this._uid,this.setDeviceType);
     },
     beforeMount() {
 
@@ -62,10 +65,18 @@
     },
 
     methods: {
+      setDeviceType(){
+        const type = deviceTypeStore.getStatus()
+        if(this.type != type){
+          this.type = type;
+        }
+      },
+
       updateSlots() {
         this.getSlots();
         this.getSlotSort();
         this.getActiveSlotIndex()
+        this.getSlotHeight();
       },
       getActiveSlotIndex(){
         const data = bannerStore.getActiveId(this.bannerName);
@@ -79,6 +90,9 @@
       },
       getSlotSort() {
         this.customSlots = bannerStore.getSlot(this.bannerName)
+      },
+      getSlotHeight(){
+        this.slotHeight = bannerStore.getHeight(this.bannerName)
       },
       mouseenter(){
         this.isHover = true
@@ -106,6 +120,8 @@
           return <rt-banner-virtual-item-v2
             next-id={this.bannerNextActiveId}
             id={key}
+            height={this.slotHeight}
+            banner-name={this.bannerName}
             active-id={this.bannerActiveId}
             orientation={this.bannerNextOrientation}
             data={slide} id={key}/>
@@ -115,6 +131,7 @@
         if(this.customSlotsSort.length > 1) {
           return <rt-banner-paginator-v2 pause-on-hover={this.pauseOnHover}
                                          color={this.activeSlideColor}
+                                         height={this.slotHeight}
                                          pause={this.isHover}
                                          fps={this.fps}
                                          active-id={this.bannerActiveId}
@@ -123,11 +140,20 @@
                                          time={this.time}></rt-banner-paginator-v2>
         }
         return null
+      },
+      bannerStyle(){
+        if(this.type == 'mobile'){
+          return {
+            minHeight : (this.slotHeight)+'px'
+          }
+        }
+        return {}
+
       }
 
     },
     render(h) {
-      return <div class={this.bannerClass} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
+      return <div class={this.bannerClass} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave} style={this.bannerStyle}>
           {this.bannerItems}
           {this.$slots.default}
           {this.paginator}
