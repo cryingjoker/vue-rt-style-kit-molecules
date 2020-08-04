@@ -202,7 +202,7 @@
             <rt-row class="flex-fill rt-n-banner-content">
               <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
               <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
-                <div class="d-flex flex-start-center md-flex-start-top">
+                <div class="d-flex flex-start-center md-flex-start-top rt-n-banner-inner">
                   <div class="md-sp-t-1-2 d-flex flex-column rt-n-banner-inner-content">
                     <div class="md-flex-fill">
                       {this.header}

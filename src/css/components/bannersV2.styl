@@ -19,6 +19,8 @@
     padding-top: 204px
     padding-bottom: 24px
     box-sizing content-box
+.rt-n-banner-inner
+  min-width 100%
 .rt-n-banner-header
   @media (max-width mobile-upper-limit)
     max-height 32px
@@ -30,6 +32,7 @@
   max-width 100%
 .rt-n-banner-inner-content
   @media (max-width mobile-upper-limit)
+    min-width 100%
     min-height 100%
 .rt-n-banner-item
   position: absolute;
@@ -120,6 +123,8 @@
 
 .rt-n-banner-description
   max-width 100%
+  @media (max-width mobile-upper-limit)
+    max-width: calc(100% - 20px)
 .rt-n-banner-paginator
   z-index 2
   position: absolute;
