@@ -17,7 +17,7 @@
     name: "RtBannerVirtualItemV2",
     components: componentsList,
     props: {
-      height:{
+      height: {
         type: Number,
         default: 0
       },
@@ -27,8 +27,8 @@
           return {}
         }
       },
-      bannerName:{
-        type: String|Number,
+      bannerName: {
+        type: String | Number,
       },
       nextId: {
         type: Number
@@ -48,7 +48,7 @@
     }),
 
     mounted: function () {
-      deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+      deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
     },
     beforeMount() {
 
@@ -56,39 +56,39 @@
     beforeUpdate() {
     },
     updated() {
-      if(this.type == 'mobile'){
+      if (this.type == 'mobile') {
         this.removeWatcher();
         this.setWatcher();
       }
     },
     beforeDestroy: function () {
-      if(this.type == 'mobile'){
+      if (this.type == 'mobile') {
         this.removeWatcher()
       }
     },
     methods: {
-      setWatcher(){
+      setWatcher() {
         this.getHeight();
-        window.addEventListener('resize',this.getHeight)
+        window.addEventListener('resize', this.getHeight)
       },
-      removeWatcher(){
-        window.removeEventListener('resize',this.getHeight)
+      removeWatcher() {
+        window.removeEventListener('resize', this.getHeight)
       },
-      calculateMobileOptions(){
+      calculateMobileOptions() {
         const type = deviceTypeStore.getStatus()
-        if(this.type != type){
+        if (this.type != type) {
           this.type = type;
-          if(type == 'mobile'){
+          if (type == 'mobile') {
             this.setWatcher();
-          }else{
+          } else {
             this.removeWatcher();
           }
         }
       },
-      getHeight(){
+      getHeight() {
         const thisHeight = this.$refs['bannerItem']?.clientHeight
-        if(thisHeight) {
-          bannerStore.setHeight(this.bannerName,thisHeight);
+        if (thisHeight) {
+          bannerStore.setHeight(this.bannerName, thisHeight);
         }
 
       }
@@ -96,8 +96,20 @@
     computed: {
       header() {
         if (this.data.header) {
-          return <div class="sp-b-0-4 d-flex">
-            {this.data.header}
+          const classList = ['sp-b-0-4'];
+          if(this.data.mobileHeader){
+            classList.push('md-d-none')
+          }
+          return <div class={classList.join(' ')}>
+              {this.data.header}
+          </div>
+        }
+        return null
+      },
+      mobileHeader() {
+        if (this.data.mobileHeader) {
+          return <div class="sp-b-0-4 md-d-block d-none">
+              {this.data.mobileHeader}
           </div>
         }
         return null
@@ -113,9 +125,9 @@
       description() {
         if (this.data.description) {
           const classList = ['rt-n-banner-description', 'sp-t-0-4'];
-          if(this.data.background != 'gray'){
+          if (this.data.background != 'gray') {
             classList.push('color-white')
-          }else{
+          } else {
             classList.push('color-main08')
           }
           return <p class={classList.join(' ')}>
@@ -168,17 +180,17 @@
         return classNames.join(' ')
       },
       bannerWrapperClass() {
-        const classNames = ['rt-n-banner-wrapper', 'd-flex','flex-fill','td-sp-h-1'];
+        const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1'];
         classNames.push('color-block--' + this.data.background)
         if (this.data.background != 'gray') {
           classNames.push('color-white')
         }
         return classNames.join(' ')
       },
-      bannerStyle(){
-        if(this.type == 'mobile'){
-          return {minHeight : this.height+'px'}
-        }else{
+      bannerStyle() {
+        if (this.type == 'mobile') {
+          return {minHeight: this.height + 'px'}
+        } else {
           return {}
         }
       }
@@ -191,10 +203,13 @@
               <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
               <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
                 <div class="d-flex flex-start-center md-flex-start-top">
-                  <div class="md-sp-t-1-2 d-flex flex-column">
-                    {this.header}
-                    {this.label}
-                    {this.description}
+                  <div class="md-sp-t-1-2 d-flex flex-column rt-n-banner-inner-content">
+                    <div class="md-flex-fill">
+                      {this.header}
+                      {this.mobileHeader}
+                      {this.label}
+                      {this.description}
+                    </div>
                     {this.footer}
                   </div>
                 </div>

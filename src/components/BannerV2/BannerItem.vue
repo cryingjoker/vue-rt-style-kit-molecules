@@ -54,10 +54,10 @@
               bannerStore.setSlot(parentId, 'header', header, itemId)
             }
           }
-          if(this.$slots['description']) {
-            const description = this.$slots['description'];
-            if(description) {
-              bannerStore.setSlot(parentId, 'description', description, itemId)
+          if(this.$slots['mobile-header']) {
+            const header = this.$slots['mobile-header'];
+            if(header) {
+              bannerStore.setSlot(parentId, 'mobileHeader', header, itemId)
             }
           }
           if(this.$slots['description']) {
