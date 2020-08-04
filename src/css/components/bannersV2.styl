@@ -16,7 +16,7 @@
   @media (max-width tablet-upper-limit)
     border-radius 0;
   @media (max-width mobile-upper-limit)
-    padding-top: 204px
+    padding-top: 56vw
     padding-bottom: 24px
     box-sizing content-box
 .rt-n-banner-inner
@@ -40,6 +40,7 @@
   display: none
   left: 0
   right: 0
+  animation-iteration-count: 1
   @media (max-width mobile-upper-limit)
     display: flex
     opacity: 0
@@ -67,14 +68,12 @@
 
 .rt-n-banner-item--next-left
   display: flex
-  transform translateX(-100vw)
   animation-name BannergoFromLeft
   animation-duration 0.5s
   animation-timing-function ease-in-out
 
 .rt-n-banner-item--next-right
   display: flex
-  transform translateX(100vw)
   animation-name BannergoFromRigth
   animation-duration 0.5s
   animation-timing-function ease-in-out
@@ -117,9 +116,9 @@
     @media (max-width tablet-upper-limit)
       min-height 341px
       max-height 341px
-    @media (max-width tablet-upper-limit)
-      min-height 204px
-      max-height 204px
+    @media (max-width mobile-upper-limit)
+      min-height 56vw
+      max-height 56vw
 
 .rt-n-banner-description
   max-width 100%
@@ -194,7 +193,7 @@
 
 .rt-n-banner-paginator-line
   position: absolute;
-  top: 204px
+  top: 56vw
   left: -10px
   right: -10px
   height: 2px

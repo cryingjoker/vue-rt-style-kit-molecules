@@ -95,10 +95,14 @@
         this.slotHeight = bannerStore.getHeight(this.bannerName)
       },
       mouseenter(){
-        this.isHover = true
+        if (this.type != 'mobile') {
+          this.isHover = true
+        }
       },
-      mouseleave(){
-        this.isHover = false
+      mouseleave() {
+        if (this.type != 'mobile') {
+          this.isHover = false
+        }
       }
     },
     computed: {
