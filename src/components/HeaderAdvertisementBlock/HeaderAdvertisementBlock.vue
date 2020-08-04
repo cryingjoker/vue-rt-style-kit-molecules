@@ -28,7 +28,7 @@
     computed: {},
     methods: {},
     render(h) {
-      return <div class="rt-header__advertisement-block">
+      return <div class="rt-header__promo-block">
         <a href={this.linkTarget} class="rt-header__ab-image-wrapper">
           <img src={this.image} class="rt-header__ab-image"/>
         </a>

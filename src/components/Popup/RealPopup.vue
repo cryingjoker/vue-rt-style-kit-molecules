@@ -97,7 +97,7 @@
       });
       this.countOffset();
       document.querySelector('body').addEventListener('open-popup', (e) => {
-        if(this.$el.querySelector('.rtb-popup').classList.contains(e.detail[1])) {
+        if(this.$el.querySelector('.rtb-popup').classList.contains(e.detail[1]) || this.$el.classList.contains(e.detail[1])) {
           if(e.detail[0].closest('.rt-card')) {
             this.$el.querySelector('.popup-content').innerHTML = e.detail[0].closest('.rt-card').querySelector('.rt-card__popup-benefits').innerHTML;
           }
