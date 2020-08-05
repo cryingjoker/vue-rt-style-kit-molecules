@@ -45,7 +45,10 @@
       bannerNextActiveId: null,
       activeSlideColor: null,
       slotHeight: null,
-      type: null
+      type: null,
+      xDown: null,
+      yDown: null
+
     }),
 
 
@@ -103,7 +106,40 @@
         if (this.type != 'mobile') {
           this.isHover = false
         }
-      }
+      },
+      touchstart(event) {
+        this.xDown = event.touches[0].clientX;
+        this.yDown = event.touches[0].clientY;
+      },
+      touchmove(event) {
+        if (!this.xDown || !this.yDown) {
+          return;
+        }
+        var xUp = event.touches[0].clientX;
+        var yUp = event.touches[0].clientY;
+
+        var xDiff = this.xDown - xUp;
+        var yDiff = this.yDown - yUp;
+
+
+        const activeIndex = this.customSlotsSort.indexOf(this.bannerActiveId);
+        const size = this.customSlotsSort.length;
+        const prev = (activeIndex - 1 + size) %size;
+        const next = (activeIndex + 1) %size;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+          if (xDiff > 0) {
+            bannerStore.setActiveId(this.bannerName,this.customSlotsSort[next])
+
+          } else {
+            bannerStore.setActiveId(this.bannerName,this.customSlotsSort[prev])
+          }
+        }
+
+        this.xDown = null;
+        this.yDown = null;
+      },
+
     },
     computed: {
       bannerName() {
@@ -117,8 +153,8 @@
         const classList = ['rt-n-banner']
         return classList.join(' ')
       },
-      bannerItems(){
-        return this.customSlotsSort?.map((key)=>{
+      bannerItems() {
+        return this.customSlotsSort?.map((key) => {
           const slide = this.customSlots[key];
           const isActive = key == this.bannerActiveId
           return <rt-banner-virtual-item-v2
@@ -131,8 +167,8 @@
             data={slide} id={key}/>
         })
       },
-      paginator(){
-        if(this.customSlotsSort.length > 1) {
+      paginator() {
+        if (this.customSlotsSort.length > 1) {
           return <rt-banner-paginator-v2 pause-on-hover={this.pauseOnHover}
                                          color={this.activeSlideColor}
                                          height={this.slotHeight}
@@ -145,19 +181,23 @@
         }
         return null
       },
-      bannerStyle(){
-        if(this.type == 'mobile'){
+      bannerStyle() {
+        if (this.type == 'mobile') {
           return {
-            minHeight : (this.slotHeight)+'px'
+            minHeight: (this.slotHeight) + 'px'
           }
         }
         return {}
 
-      }
-
+      },
     },
     render(h) {
-      return <div class={this.bannerClass} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave} style={this.bannerStyle}>
+      return <div class={this.bannerClass}
+                  onMouseenter={this.mouseenter}
+                  onMouseleave={this.mouseleave}
+                  onTouchstart={this.touchstart}
+                  onTouchmove={this.touchmove}
+                  style={this.bannerStyle}>
           {this.bannerItems}
           {this.$slots.default}
           {this.paginator}
