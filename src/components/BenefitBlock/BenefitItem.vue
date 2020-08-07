@@ -11,7 +11,8 @@
       step: null,
       alignCenter: false,
       inlineLayout: false,
-      layout: ''
+      layout: '',
+      isNested: false
     }),
     computed: {
       iconImage() {
@@ -80,7 +81,8 @@
       this.inlineLayout = this.$parent._props.inlineLayout;
       this.iconBackingColor = this.$parent._props.iconBackingColor;
       this.iconBackingSize = this.$parent._props.iconBackingSize;
-      this.threeColumnTablet = this.$parent._props.threeColumnTablet
+      this.threeColumnTablet = this.$parent._props.threeColumnTablet;
+      this.isNested = this.$parent._props.isNested;
     },
     updated(){
       if(this.$parent.$data.layout !== 'benefit' || this.$parent._props.swiperOnMobile) {
@@ -111,17 +113,26 @@
         }
       })();
       const columnClass = (() => {
-        if(this.columnsQuantity === 2) {
-          return 'rt-col-6 rbi-pr1c'
-        }
-        if(this.columnsQuantity === 3) {
-          return 'rt-col-4 rbi-pr70'
-        }
-        if(this.columnsQuantity === 4) {
-          return 'rt-col-3 rt-space-right15 rt-td-space-right05'
-        }
-        if(this.layout === 'swiper'){
-          return 'rtk-carousel-slide'
+        if(this.isNested) {
+          if(this.columnsQuantity === 2) {
+            return 'rt-col-6'
+          }
+          if(this.columnsQuantity === 3) {
+            return 'rt-col-4'
+          }
+        } else {
+          if(this.columnsQuantity === 2) {
+            return 'rt-col-6 rbi-pr1c'
+          }
+          if(this.columnsQuantity === 3) {
+            return 'rt-col-4 rbi-pr70'
+          }
+          if(this.columnsQuantity === 4) {
+            return 'rt-col-3 rt-space-right15 rt-td-space-right05'
+          }
+          if(this.layout === 'swiper'){
+            return 'rtk-carousel-slide'
+          }
         }
       })();
 

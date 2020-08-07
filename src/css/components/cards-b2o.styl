@@ -8,11 +8,17 @@
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property background-color, color, box-shadow
-  color white
   box-sizing border-box
   background-color: b2c-cool-grey
   display: flex
   flex-direction row
+  @media (min-width: 768px)
+    min-height 212px
+  @media (hover:hover)
+    &:hover
+      box-shadow 0px 20px 30px main-color02
+  &.color-white
+    color white
 .rt-card-b2o-inner
   display: flex
   flex-direction column
@@ -44,21 +50,22 @@
       transition-timing-function ease-in-out
       transition-duration .4s
       transition-property stroke
-  &:hover
-    color white
-    background-color: b2c-dark-blue-high
-    .rt-button
+  @media (hover:hover)
+    &:hover
       color white
-    .rt-card-b2o-icon-fill
-      path, rect, polygon
-        fill white
-    .rt-card-b2o-icon-stroke
-      path, rect, polygon
-        stroke white
+      background-color: b2c-dark-blue-high
+      .rt-button
+        color white
+      .rt-card-b2o-icon-fill
+        path, rect, polygon
+          fill white
+      .rt-card-b2o-icon-stroke
+        path, rect, polygon
+          stroke white
   .rt-card__body
     padding-top: 120px
 .rt-card-b2o-footer
-  padding-top: 10px
+  padding-top: 20px
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property opacity, visibility

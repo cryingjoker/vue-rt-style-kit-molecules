@@ -63,6 +63,10 @@
       threeColumnTablet: {
         type: Boolean,
         default: false
+      },
+      isNested: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -77,6 +81,9 @@
         }
         if(this.noTransparencyDescription) {
           className += ' rt-benefit-block--no-transparency';
+        }
+        if(this.isNested) {
+          className += ' rt-benefit-block--nested'
         }
         return className;
       }
@@ -96,19 +103,28 @@
       }
     },
     render(h){
-      if(this.layout === 'swiper'){
-        return <rt-swiper>{this.$slots.default}</rt-swiper>
-      } else {
+      if(this.isNested) {
         return <div class={this.wrapperClass}>
-          <div class="rt-container">
-            <div class="rt-col">
-              <div class="row">
-                {this.$slots.default}
-              </div>
-            </div>
+          <div class="row">
+            {this.$slots.default}
           </div>
         </div>;
+      } else {
+        if(this.layout === 'swiper'){
+          return <rt-swiper>{this.$slots.default}</rt-swiper>
+        } else {
+          return <div class={this.wrapperClass}>
+            <div class="rt-container">
+              <div class="rt-col">
+                <div class="row">
+                  {this.$slots.default}
+                </div>
+              </div>
+            </div>
+          </div>;
+        }
       }
+
     }
   };
 </script>

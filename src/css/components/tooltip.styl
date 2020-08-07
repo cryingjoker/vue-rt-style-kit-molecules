@@ -1,0 +1,42 @@
+.rt-tooltip
+  position: absolute;
+  background-color: b2c-dark-blue
+  border-radius 4px
+  color b2c-white
+  font-size 12px
+  padding-top: 4px
+  padding-bottom: 2px
+  padding-left: 8px
+  padding-right: 8px
+  opacity: 0
+  visibility: hidden
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property: transform, opacity, visibility
+  max-width 300px
+  .{newAppName}-dark-theme &,
+  &.rt-tooltip-bright
+    background-color: #F8F8F8
+    color main-color
+
+
+.rt-tooltip-top
+  transform translateX(-50%) translateY(calc(-100%))
+.rt-tooltip-left
+  transform translateY(-50%) translateX(calc(-100%))
+.rt-tooltip-right
+  transform translateY(-50% )
+.rt-tooltip-bottom
+  margin-top -4px
+  transform translateX(-50%)
+.rt-tooltip-active
+  opacity: 1
+  visibility: visible
+  &.rt-tooltip-top
+    transform translateX(-50%) translateY(-100%)
+  &.rt-tooltip-left
+    transform translateY(-50%) translateX(-100%)
+  &.rt-tooltip-right
+    transform translateY(-50%)
+  &.rt-tooltip-bottom
+    transform translateX(-50%)

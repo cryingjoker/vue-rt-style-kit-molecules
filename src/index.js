@@ -78,10 +78,17 @@ import {
   FunctionList,
   FunctionItem,
   HeaderAdvertisementBlock,
-  HeaderNavigation
+  HeaderNavigation,
+  Slider,
+  SliderItem,
+  TextImageBlock,
+  HelpBlock,
+  BannerV2,
+  BannerItemV2
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
+import {TooltipDirective} from "./directives/Tooltip/tooltip";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
@@ -101,6 +108,8 @@ const VueRtStyle = {
       Vue.component(CardImage.name, CardImage);
       Vue.component(CardImageList.name, CardImageList);
       Vue.component(Banner.name, Banner);
+      Vue.component(BannerV2.name, BannerV2);
+      Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
       Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
@@ -144,6 +153,7 @@ const VueRtStyle = {
       Vue.component(Timeline.name, Timeline);
       Vue.component(TimelineItem.name, TimelineItem);
       Vue.component(ScrollBar.name, ScrollBar);
+      Vue.component(HelpBlock.name, HelpBlock);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
       Vue.component(ReplacementLink.name, ReplacementLink);
       Vue.component(Carousel.name, Carousel);
@@ -156,6 +166,7 @@ const VueRtStyle = {
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
       Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
       Vue.component(HeaderNavigation.name, HeaderNavigation);
+      Vue.component(TextImageBlock.name, TextImageBlock);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -166,6 +177,8 @@ const VueRtStyle = {
       Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(ProductCard.name, ProductCard);
       Vue.component(TariffCard.name, TariffCard);
+      Vue.component(Slider.name, Slider);
+      Vue.component(SliderItem.name, SliderItem);
       Vue.component(SlideContent.name, SlideContent);
       Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
@@ -175,6 +188,7 @@ const VueRtStyle = {
       Vue.directive(SwipeRight.name, SwipeRight);
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
+      Vue.directive(TooltipDirective.name, TooltipDirective);
 
 
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
@@ -238,6 +252,7 @@ export {
   CardSkeleton,
   FullscreenImage,
   RowList,
+  HelpBlock,
   RowListItem,
   Table,
   TableCol,
@@ -296,7 +311,11 @@ export {
   StickyHeaderLine,
   HeaderAdvertisementBlock,
   HeaderNavigation,
-
+  Slider,
+  SliderItem,
+  TextImageBlock,
+  BannerV2,
+  BannerItemV2,
   // need to change name directives
   SwipeLeft,
   SwipeRight,

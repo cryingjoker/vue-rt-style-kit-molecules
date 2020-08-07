@@ -25,6 +25,10 @@
       hasHiddenFooter: {
         type: Boolean,
         default: false
+      },
+      isWhiteColor:{
+        type: Boolean,
+        default: false
       }
 
     },
@@ -42,8 +46,11 @@
         if (this.hasBottomContent) {
           classCard.push("rt-card-b2o--bottom-content");
         }
-        if (this.hasHiddenFooter) {
-          classCard.push("rt-card-b2o--has-hidden-footer");
+        // if (this.hasHiddenFooter) {
+        //   classCard.push("rt-card-b2o--has-hidden-footer");
+        // }
+        if (this.isWhiteColor) {
+          classCard.push("color-white");
         }
         return classCard.join(" ");
       }

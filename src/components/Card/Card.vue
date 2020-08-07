@@ -990,7 +990,7 @@
           {label}
           {!this.fullWidthTopImage ? <div style={this.cardBackgroundStyle}
                                           class={"rt-card__background" + this.cardBackgroundClass}/> : null}
-          <div class={"rt-card__content" + this.cardContentClass}>
+          <div class={"rt-card__content" + this.cardContentClass} style={this.cardContentStyle}>
             {header}
             {productTriangle}
             {headerImage}

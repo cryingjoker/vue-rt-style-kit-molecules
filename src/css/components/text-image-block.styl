@@ -1,0 +1,24 @@
+.text-image-block
+  &__image
+    object-fit cover
+    width 100%
+    &-wrapper
+      size(100%, calc(((100vw - 280px) / 2) * 2 / 3))
+      overflow hidden
+      max-height 400px
+      @media(min-width laptop-lower-limit)
+        padding-left 50px
+      @media (max-width tablet-upper-limit)
+        size(100%, calc((100vw - 80px) / 3 * 2))
+        max-height none
+  &__content
+    min-height 100%
+  &__inner
+    @media (max-width tablet-upper-limit)
+      flex-direction column-reverse
+    &--reversed
+      @media(min-width laptop-lower-limit)
+        flex-direction row-reverse
+        .text-image-block__image-wrapper
+          padding-left 0
+          padding-right 50px
