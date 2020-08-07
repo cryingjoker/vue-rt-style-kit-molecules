@@ -53,7 +53,7 @@
         render(h) {
             const navigationTitle = () => {
                 if(this.activeNodeTitle) {
-                    return <div class="header-navigation__item-label rt-font-control rt-font-bold" onClick={this.navigateBack}>
+                    return <div class="header-navigation__item-label rt-font-small-paragraph rt-font-bold" onClick={this.navigateBack}>
                         <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                              class="header-navigation__item-arrow header-navigation__item-arrow--back">
                             <path d="M4.5 1L1 4.5L4.5 8" stroke="#101828"/>
@@ -75,7 +75,7 @@
                         this.adLinkText = item.linkText;
                     };
                     if(item.items && item.items.length > 0) {
-                        return <div class="header-navigation__item rt-font-control" onClick={navigate}>
+                        return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
                             <p>{item.label}</p>
                             {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
                             <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@
 
                     } else {
                         return <a href={item.path}>
-                            <div class="header-navigation__item rt-font-control">
+                            <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
                                 {item.label}
                                 {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
                             </div>
