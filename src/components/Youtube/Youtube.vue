@@ -383,13 +383,13 @@ export default {
     },
     toggleFullscreen() {
       if(!this.isFullscreen) {
-        document.documentElement.style.overflowY = 'hidden';
+        this.$refs['ytp-wrapper'].requestFullscreen();
         this.isFullscreen = !this.isFullscreen;
         this.isMute = false;
         this.setMuteParams(this.isMute);
         this.$el.querySelector('.rt-youtube__sound-control').classList.remove('rt-youtube__sound-control--mute');
       } else {
-        document.documentElement.style.overflowY = 'auto';
+        document.exitFullscreen();
         this.isFullscreen = !this.isFullscreen;
       }
     },
