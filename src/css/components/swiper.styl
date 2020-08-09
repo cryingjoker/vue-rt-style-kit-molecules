@@ -36,13 +36,14 @@ scrollHSpacePC = 70px
     flex-direction row
     white-space normal
     padding-bottom 10px
-    width calc(100vw - (100vw - 100%) - 140px)
-    max-width 1340px
+    padding-top 10px
+    //width calc(100vw - (100vw - 100%) - 140px)
+    //max-width 1340px
     align-items stretch
-    //@media (max-width: laptop-upper-limit)
-    //  width calc(100vw - (100vw - 100%) - 60px)
-    //@media (max-width: tablet-upper-limit)
-    //  width calc(100vw - (100vw - 100%))
+    @media (max-width: laptop-upper-limit)
+      width calc(100vw - (100vw - 100%) - 60px)
+    @media (max-width: tablet-upper-limit)
+      width calc(100vw - (100vw - 100%))
 
   &__spacer
     display flex
@@ -101,7 +102,7 @@ scrollHSpacePC = 70px
         @media (max-width: tablet-upper-limit)
           margin-left scrollHSpace * 3
         @media (max-width: mobile-upper-limit)
-          margin-left scrollHSpace
+          margin-left 0//scrollHSpace
 
     .{swiperName}__spacer
       @media (max-width: tablet-upper-limit)

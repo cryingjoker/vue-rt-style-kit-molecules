@@ -4,7 +4,7 @@
   height 56.25%
   background-color main-color
   box-shadow 0 0 10px 0 main-color
-  padding-top 25px
+  //padding-top 25px
   padding-bottom 56.25%
   position relative
 
@@ -14,6 +14,14 @@
     position absolute
     top 0
     left 0
+  &--is-fullscreen
+    position fixed
+    top 0
+    left 0
+    width 100vw
+    height 100vh
+    padding-top 0
+    padding-bottom 0
 
 // .rt-youtube--real-time-play
 .rt-youtube__controls
@@ -373,3 +381,14 @@
 
   .rt-youtube__change-video:hover &
     fill b2c-orange
+
+.{newAppName}-youtube__fullscreen
+  position absolute
+  size(20px)
+  //background-color b2c-yellow
+  right 20px
+  padding 2px
+  box-sizing border-box
+  transition transform .3s linear
+  &:hover
+    transform scale(1.1)

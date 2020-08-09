@@ -1,5 +1,6 @@
 <script type="text/jsx">
     import variables from "../../variables.json";
+
     export default {
         name: "RtTextImageBlock",
         props: {
@@ -18,6 +19,10 @@
             reversed: {
                 type: Boolean,
                 default: false
+            },
+            video: {
+                type: String,
+                default: ''
             }
         },
         data: () => ({
@@ -54,6 +59,19 @@
                     return null;
                 }
             };
+            const visualContent = () => {
+                if(!!this.video) {
+                    let ytId = [];
+                    ytId = this.video.split(',');
+                    return <div class="text-image-block__video-wrapper d-flex">
+                        <rt-youtube video-id={ytId} disable-buttons={true} let-fullscreen={true} auto-play={true} pause-image={this.image}/>
+                    </div>
+                } else {
+                    return <div class="text-image-block__image-wrapper d-flex">
+                        <img class="text-image-block__image" src={this.image}/>
+                    </div>
+                }
+            };
             return <div class={this.blockClass}>
                 <div class="rt-container sp-v-4 td-sp-v-3 md-sp-v-2">
                     <div class="rt-col">
@@ -68,9 +86,7 @@
                                 </div>
                             </div>
                             <div class="rt-col-6 rt-col-td-6">
-                                <div class="text-image-block__image-wrapper d-flex">
-                                    <img class="text-image-block__image" src={this.image}/>
-                                </div>
+                                {visualContent()}
                             </div>
                         </div>
                     </div>

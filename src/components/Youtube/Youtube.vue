@@ -1,6 +1,8 @@
 <script type="text/jsx">
 import YoutubeVolume from './YoutubeVolume.vue';
 import YoutubeFraction from './YoutubeFraction.vue';
+import debounce from "debounce";
+
 const components = {};
 components[YoutubeVolume.name] = YoutubeVolume;
 components[YoutubeFraction.name] = YoutubeFraction;
@@ -46,6 +48,14 @@ export default {
     disableButtons: {
       type: Boolean,
       default: false
+    },
+    letFullscreen: {
+      type: Boolean,
+      default: false
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -61,9 +71,32 @@ export default {
     videoIdsArray: [],
     videoSize: 0,
     touchCount: 0,
-    isTouchDevice: false
+    isTouchDevice: false,
+    isFullscreen: false,
+    isMute: false,
+    secondAppearance: false
   }),
-
+  computed:{
+    playerClasses() {
+      let youtubeClass = 'rt-youtube';
+      if(this.isTouchDevice){
+        youtubeClass+=' rt-youtube--touch-detected';
+        if(this.touchCount > 0){
+            youtubeClass+=' rt-youtube--is-hover';
+        }
+//      if(this.realTimePlay){
+//        youtubeClass+=' rt-youtube--real-time-play';
+//      }
+      }
+      if(this.isFullscreen){
+          youtubeClass+=' rt-youtube--is-fullscreen';
+      }
+      if(this.isPlaying){
+          youtubeClass += " rt-youtube--is-active";
+      }
+      return youtubeClass;
+    }
+  },
   mounted: function() {
     if(this.utmSources){
       if(location.search){
@@ -90,6 +123,10 @@ export default {
     }
     this.init();
     this.bindKeyboardEvents();
+    if(this.autoPlay) {
+      this.checkPlayer();
+      window.addEventListener("scroll", debounce(this.checkPosition, 100))
+    }
   },
   beforeDestroy(){
     this.unbindKeyboardEvents();
@@ -99,6 +136,15 @@ export default {
     this.bindKeyboardEvents();
   },
   methods: {
+    checkPlayer() {
+      if(this.player) {
+        this.checkPosition();
+      } else {
+        setTimeout(() => {
+          this.checkPlayer();
+        },150);
+      }
+    },
     keyPressHolder(event){
       if(this.duration && !this.buttonControlDisabled()){
         switch(event.keyCode) {
@@ -233,12 +279,11 @@ export default {
       this.playerState = '-1';
     },
     previousVideo() {
-
-        if (this.activeIndexVideo - 1 < 0) {
-          this.activeIndexVideo = this.videoSize - 1;
-        } else {
-          this.activeIndexVideo--;
-        }
+      if (this.activeIndexVideo - 1 < 0) {
+        this.activeIndexVideo = this.videoSize - 1;
+      } else {
+        this.activeIndexVideo--;
+      }
       if (this.playlistId) {
         this.player.previousVideo();
       }else {
@@ -255,7 +300,6 @@ export default {
         this.player.nextVideo();
       } else {
         this.player.loadVideoById(this.videoId[this.activeIndexVideo]);
-
       }
     },
     setMuteParams(isMute){
@@ -290,13 +334,12 @@ export default {
             this.playVideo();
           }
         }
-      });
+      },0);
     },
     getLoadedFraction(){
       if(this.loadedFraction !== this.player.getVideoLoadedFraction()) {
         this.loadedFraction = this.player.getVideoLoadedFraction();
       }
-
       if(this.loadedFraction < 1){
         setTimeout(()=>{
           this.getLoadedFraction();
@@ -310,8 +353,8 @@ export default {
         this.isPlaying = true;
       },10);
     },
-    changeTime(procentOfDuration){
-      this.player.seekTo(this.duration*procentOfDuration);
+    changeTime(percentOfDuration){
+      this.player.seekTo(this.duration*percentOfDuration);
     },
     changeVolume(newVolume){
       this.volume = newVolume*100;
@@ -334,10 +377,37 @@ export default {
           },2000);
         }
       },2000);
-
     },
     buttonControlDisabled() {
       return this.disableButtons && (this.$el.getBoundingClientRect().bottom < 0 || this.$el.getBoundingClientRect().top > window.innerHeight)
+    },
+    toggleFullscreen() {
+      if(!this.isFullscreen) {
+        document.documentElement.style.overflowY = 'hidden';
+        this.isFullscreen = !this.isFullscreen;
+        this.isMute = false;
+        this.setMuteParams(this.isMute);
+        this.$el.querySelector('.rt-youtube__sound-control').classList.remove('rt-youtube__sound-control--mute');
+      } else {
+        document.documentElement.style.overflowY = 'auto';
+        this.isFullscreen = !this.isFullscreen;
+      }
+    },
+    checkPosition() {
+      let playerTop = this.$refs['ytp-wrapper'].getBoundingClientRect().top;
+      let playerBottom = this.$refs['ytp-wrapper'].getBoundingClientRect().bottom;
+      if(playerTop > 0 && playerBottom < window.innerHeight) {
+        setTimeout(() => {
+          if(!this.secondAppearance) {
+            this.isMute = true;
+            this.setMuteParams(this.isMute);
+          }
+          this.playVideo();
+          this.secondAppearance = true;
+        },900);
+      } else {
+        this.isPlaying ? this.pauseVideo() : false;
+      }
     }
   },
   render(){
@@ -384,26 +454,21 @@ export default {
     })();
     const videoControls = (()=>{
       if(this.videoIsReady) {
-
         let min = parseInt(this.playTime/60);
         let sec = parseInt(this.playTime%60);
-
         if(min<10){
           min = '0'+min;
         }
         if(sec<10){
           sec = '0'+sec;
         }
-
         let minD = parseInt(this.duration/60);
         let secD = parseInt(this.duration%60);
-
         if(minD<10){
           minD = '0'+minD;
         }
         if(secD<10){
           secD = '0'+secD;
-
         }
         const procentPlayed = this.playTime/this.duration*100;
         const time = (()=>{
@@ -413,6 +478,19 @@ export default {
             return null;
           }
         })();
+        const fullScreen = () => {
+          if(this.letFullscreen) {
+            return <div class="rt-youtube__fullscreen" onClick={this.toggleFullscreen}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" heihgt="16" viewBox="0 0 20 20">
+                <g>
+                  <path stroke="#fff" stroke-width="1.5" d="M 5 0 V 5 H 0 M 0 15 H 5 V 20 M 15 20 V 15 H 20 M 20 5 H 15 V 0"/>
+                </g>
+              </svg>
+            </div>
+          } else {
+            return null;
+          }
+        };
         let playControlClass = 'rt-youtube__play-control';
         return <div class={playControlClass} ref="playControl">
           <div class="rt-youtube__pause-space" onClick={this.togglePause} onTouchstart={this.touchTogglePause}></div>
@@ -421,6 +499,7 @@ export default {
             {playButton}
             {time}
             {this.duration ? <rt-youtube-volume default-volume={this.volume} is-mute={this.isMute} onMutetoggle={this.setMuteParams} onChangevolume={this.changeVolume}></rt-youtube-volume> : null}
+            {fullScreen()}
           </div> : null}
           <div class={"rt-youtube__start-video"+ ((!this.isPlaying || this.playerState != '-1') && this.duration ? ' rt-youtube__start-video--not-active' : '')} onClick={this.playVideo}>
             <svg width="34px" height="47px" viewBox="0 0 34 47" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -449,7 +528,6 @@ export default {
               </g>
             </g>
           </svg>
-
         </div>;
       }
       else{
@@ -466,36 +544,17 @@ export default {
               </g>
             </g>
           </svg>
-
         </div>;
       }
       else{
         return null;
       }
     })();
-    let youtubeClass = 'rt-youtube';
-    if(this.isTouchDevice){
-      youtubeClass+=' rt-youtube--touch-detected';
-      if(this.touchCount > 0){
-        youtubeClass+=' rt-youtube--is-hover';
-      }
-//      if(this.isFullscreen){
-//        youtubeClass+=' rt-youtube--is-fullscreen';
-//      }
-//      if(this.realTimePlay){
-//        youtubeClass+=' rt-youtube--real-time-play';
-//      }
-    }
-
-    if(this.isPlaying){
-      youtubeClass += " rt-youtube--is-active";
-    }
-    return <div class={youtubeClass}>
+    return <div class={this.playerClasses} ref="ytp-wrapper">
       <div id={"player-"+this._uid}></div>
       <div class="rt-youtube__controls">
         {backgroundImage}
         {videoControls}
-
       </div>
       {nextVideoButton}
       {previousVideoButton}
