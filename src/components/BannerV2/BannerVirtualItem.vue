@@ -108,7 +108,7 @@
       },
       mobileHeader() {
         if (this.data.mobileHeader) {
-          return <div class="sp-b-0-4 md-d-block d-none">
+          return <div class="sp-b-0-3 md-d-flex d-none">
               {this.data.mobileHeader}
           </div>
         }
