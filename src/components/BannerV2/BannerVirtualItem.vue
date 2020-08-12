@@ -124,7 +124,7 @@
       },
       description() {
         if (this.data.description) {
-          const classList = ['rt-n-banner-description', 'sp-t-0-4'];
+          const classList = ['rt-n-banner-description', 'sp-t-0-4', 'td-sp-t-0-3'];
           if (this.data.background != 'gray') {
             classList.push('color-white')
           } else {
@@ -138,7 +138,13 @@
       },
       footer() {
         if (this.data.footer) {
-          return <div class="sp-t-1-2">
+          const classList = ['td-sp-t-0-4','md-sp-t-1-1'];
+          if(this.data.header && this.data.label && this.data.description){
+            classList.push('sp-t-1-1')
+          }else{
+            classList.push('sp-t-1-2')
+          }
+          return <div class={classList.join(' ')}>
             {this.data.footer}
           </div>
         }
