@@ -217,8 +217,8 @@
             </rt-row>
             <rt-banner-virtual-image-v2 image={this.data?.image}
                                         image-x2={this.data['image-x2']}
-                                        image-tablet={this.data?.imageTablet}
-                                        image-mobile={this.data?.imageMobile}>
+                                        image-tablet={this.data['image-tablet']}
+                                        image-mobile={this.data['image-mobile']}>
             </rt-banner-virtual-image-v2>
           </div>
         </div>
