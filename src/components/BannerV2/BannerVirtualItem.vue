@@ -186,7 +186,7 @@
         return classNames.join(' ')
       },
       bannerWrapperClass() {
-        const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1'];
+        const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1', 'height-fill'];
         classNames.push('color-block--' + this.data.background)
         if (this.data.background != 'gray') {
           classNames.push('color-white')
@@ -204,7 +204,8 @@
     render(h) {
       return <div class={this.bannerClass} ref="bannerItem" style={this.bannerStyle}>
         <div class="rt-container flex-fill d-flex td-sp-h-none">
-          <div class={this.bannerWrapperClass}>
+          <rt-col class="height-fill td-sp-h-none" size={12}>
+            <div class={this.bannerWrapperClass}>
             <rt-row class="flex-fill rt-n-banner-content">
               <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
               <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
@@ -227,6 +228,7 @@
                                         image-mobile={this.data['image-mobile']}>
             </rt-banner-virtual-image-v2>
           </div>
+          </rt-col>
         </div>
 
 
