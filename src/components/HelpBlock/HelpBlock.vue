@@ -43,7 +43,7 @@
         <div class="rt-help-block-content sp-b-0-2">
           {this.$slots.content}
         </div>
-        <div class="rt-help-footer  d-flex align-center" onClick={this.runAction}>
+        <div class="rt-help-footer  d-flex flex-v-center" onClick={this.runAction}>
           {!this.hideIcon ? <div class="rt-help-icon d-inline-block sp-r-0-2"></div> : null}
           {this.$slots['action-text']}
         </div>

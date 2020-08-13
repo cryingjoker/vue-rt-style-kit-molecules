@@ -146,7 +146,7 @@
     },
     computed: {
       spaceClasses() {
-        const classList = ['slider', 'md-align-end'];
+        const classList = ['slider', 'md-flex-v-end'];
         if (this.lgSpaceVertical) {
           classList.push('lg-' + this.getSpacePartOfClass(this.lgSpaceVertical))
         }
@@ -192,7 +192,7 @@
 
         {this.$slots.default}
         <rt-col size="1" tablet-size="0" mobile-size="0"></rt-col>
-        <rt-col size="4" tablet-size="3" mobile-size="3" class="d-flex align-center">
+        <rt-col size="4" tablet-size="3" mobile-size="3" class="d-flex flex-v-center">
           <div class="slider-body">
             <div class="slider-content" style={this.contentStyle}>
               {this.customSlotsSort.map((key, index) => {
