@@ -227,7 +227,7 @@
         </rt-col>
         <rt-col size="6" tablet-size="3" mobile-size="2" class="md-sp-b-1-1">
           <div class="slider-image" style={this.imageStyle}>
-            <div class="relative">
+            <div class="slider-image-inner">
               {this.customSlotsSort.map((key, index) => {
                 return <rt-slider-image index={index}
                                         active-index={this.activeIndexLocal}
