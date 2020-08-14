@@ -27,7 +27,7 @@ class BannerStore extends StorePrototype {
       this.height[bannerUid] = height;
     }
   }
-  getHeight = (bannerUid)=>{
+  getHeight = (bannerUid) => {
     return this.height[bannerUid]
   }
   setSlot = (bannerUid, name, slot, id) => {
@@ -54,8 +54,11 @@ class BannerStore extends StorePrototype {
   }
   setActiveId = (bannerUid, id) => {
     if (!this.bannerNextActiveIds[bannerUid]) {
+
       this.bannerNextActiveIds[bannerUid] = id;
-      this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
+      if (this.bannersArray[bannerUid].indexOf(id) >= 0 && this.bannerActiveIds[bannerUid] != id) {
+        this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
+      }
       this.runWatchersById(bannerUid)
       this.bannerActiveIds[bannerUid] = id
       setTimeout(() => {
@@ -63,6 +66,7 @@ class BannerStore extends StorePrototype {
         delete this.nextOrientation[bannerUid]
         this.runWatchersById(bannerUid)
       }, 500)
+
     }
   }
   getActiveId = (bannerUid) => {

@@ -13,6 +13,8 @@
   overflow: hidden;
   position: relative;
   max-width 100%
+  :root &
+    height: 100%
   @media (max-width tablet-upper-limit)
     border-radius 0;
   @media (max-width mobile-upper-limit)
@@ -41,6 +43,13 @@
   left: 0
   right: 0
   animation-iteration-count: 1
+  :root &
+    height 100%
+  &:after
+    content:'';
+    min-height:inherit;
+    font-size:0;
+
   @media (max-width mobile-upper-limit)
     display: flex
     opacity: 0
