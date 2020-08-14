@@ -12,6 +12,9 @@ class BannerStore extends StorePrototype {
     this.nextOrientation = {}
     this.bannerNextActiveIds = {}
     this.height = {}
+    this.watchers = {}
+    this.lastWindowWidth = {}
+    // this.lastWindowWidthOrient = {}
   }
 
   getSlot = (id) => {
@@ -19,13 +22,37 @@ class BannerStore extends StorePrototype {
       return this.slots[id]
     }
   }
+  clearHeight = (bannerUid)=> {
+    this.height[bannerUid] = 0
+  }
   setHeight = (bannerUid, height) => {
-    if (!this.height[bannerUid]) {
+    const width = window.innerWidth;
+    const slots = this.getSlot(bannerUid)
+    if(Object.keys(slots).length == 1){
       this.height[bannerUid] = height
+
+    }else {
+      if (!this.lastWindowWidth[bannerUid]) {
+        this.lastWindowWidth[bannerUid] = width
+      }
+      if(this.lastWindowWidth[bannerUid] > width){
+        this.height[bannerUid] = null;
+      }
+
+      if (typeof this.height[bannerUid] != 'number') {
+        this.height[bannerUid] = height
+      }
+      //
+
+        if (this.height[bannerUid] < height) {
+          this.height[bannerUid] = height;
+        }
+
+
+      this.lastWindowWidth[bannerUid] = width
     }
-    if (this.height[bannerUid] < height) {
-      this.height[bannerUid] = height;
-    }
+    this.runWatchersById(bannerUid)
+
   }
   getHeight = (bannerUid) => {
     return this.height[bannerUid]
@@ -78,11 +105,29 @@ class BannerStore extends StorePrototype {
     data.activeColor = this.slots[bannerUid][data.activeId].background
     return data;
   }
+
+  runWatcher = (bannerUid) => {
+    if(this.watchers) {
+      if (!this.watchers[bannerUid]) {
+        this.watchers[bannerUid] = true
+        return true
+      }
+    }
+    return false
+  }
+  stopWatcher = (bannerUid) => {
+    if(this.watchers) {
+      if (this.watchers[bannerUid]) {
+        this.watchers[bannerUid] = false
+      }
+    }
+  }
 }
 
 const bannerStoreObject = new BannerStore();
 
 export const bannerStore = Vue.observable({
+
   setSlot: bannerStoreObject.setSlot,
   getSlot: bannerStoreObject.getSlot,
   getSlotSort: bannerStoreObject.getSlotSort,
@@ -91,5 +136,8 @@ export const bannerStore = Vue.observable({
   setActiveId: bannerStoreObject.setActiveId,
   getActiveId: bannerStoreObject.getActiveId,
   setHeight: bannerStoreObject.setHeight,
-  getHeight: bannerStoreObject.getHeight
+  getHeight: bannerStoreObject.getHeight,
+  runWatcher: bannerStoreObject.runWatcher,
+  stopWatcher: bannerStoreObject.stopWatcher,
+  clearHeight: bannerStoreObject.clearHeight
 });

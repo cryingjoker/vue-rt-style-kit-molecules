@@ -1,214 +1,227 @@
 <script type="text/jsx">
 
-  // import debounce from "debounce";
-  import {deviceTypeStore} from "vue-rt-style-kit-atoms";
-  import {bannerStore} from "./BannerStore";
-  import BannerVirtualImage from "./BannerVirtualImage.vue";
+// import debounce from "debounce";
+import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import {bannerStore} from "./BannerStore";
+import BannerVirtualImage from "./BannerVirtualImage.vue";
 
 
-  const componentsList = {};
-  componentsList[BannerVirtualImage.name] = BannerVirtualImage
+const componentsList = {};
+componentsList[BannerVirtualImage.name] = BannerVirtualImage
 
-  //dark-slate
-  //gray
-  //orange
+//dark-slate
+//gray
+//orange
 
-  export default {
-    name: "RtBannerVirtualItemV2",
-    components: componentsList,
-    props: {
-      height: {
-        type: Number,
-        default: 0
-      },
-      data: {
-        type: Object,
-        default: () => {
-          return {}
-        }
-      },
-      bannerName: {
-        type: String | Number,
-      },
-      nextId: {
-        type: Number
-      },
-      id: {
-        type: Number
-      },
-      activeId: {
-        type: Number
-      },
-      orientation: {
-        type: Number
-      },
+export default {
+  name: "RtBannerVirtualItemV2",
+  components: componentsList,
+  props: {
+    height: {
+      type: Number,
+      default: 0
     },
-    data: () => ({
-      type: null
-    }),
-
-    mounted: function () {
-      deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
-    },
-    beforeMount() {
-
-    },
-    beforeUpdate() {
-    },
-    updated() {
-      if (this.type == 'mobile') {
-        this.removeWatcher();
-        this.setWatcher();
+    data: {
+      type: Object,
+      default: () => {
+        return {}
       }
     },
-    beforeDestroy: function () {
-      if (this.type == 'mobile') {
-        this.removeWatcher()
-      }
+    bannerName: {
+      type: String | Number,
     },
-    methods: {
-      setWatcher() {
+    nextId: {
+      type: Number
+    },
+    id: {
+      type: Number
+    },
+    activeId: {
+      type: Number
+    },
+    orientation: {
+      type: Number
+    },
+  },
+  data: () => ({
+    type: null,
+    hideHeight: false
+  }),
+
+  mounted: function () {
+    deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
+  },
+  beforeMount() {
+
+  },
+  beforeUpdate() {
+  },
+
+  beforeDestroy: function () {
+    if (this.type == 'mobile') {
+      this.removeWatcher()
+    }
+  },
+  methods: {
+    setWatcher() {
+
+      if (bannerStore.runWatcher(this._uid)) {
         this.getHeight();
         window.addEventListener('resize', this.getHeight)
-      },
-      removeWatcher() {
-        window.removeEventListener('resize', this.getHeight)
-      },
-      calculateMobileOptions() {
-        const type = deviceTypeStore.getStatus()
-        if (this.type != type) {
-          this.type = type;
-          if (type == 'mobile') {
-            this.setWatcher();
-          } else {
-            this.removeWatcher();
-          }
+      }
+    },
+    removeWatcher() {
+      bannerStore.stopWatcher(this._uid)
+      window.removeEventListener('resize', this.getHeight)
+    },
+    calculateMobileOptions() {
+      const type = deviceTypeStore.getStatus()
+      if (this.type != type) {
+        this.type = type;
+        if (type == 'mobile') {
+          this.setWatcher();
+        } else {
+          this.removeWatcher();
         }
-      },
-      getHeight() {
-        const thisHeight = this.$refs['bannerItem']?.clientHeight
+      }
+    },
+    getHeight() {
+      this.hideHeight = true;
+      this.$nextTick(() => {
+        this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
+        const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
         if (thisHeight) {
           bannerStore.setHeight(this.bannerName, thisHeight);
         }
+        this.hideHeight = false;
+      })
 
+      // this.$refs['bannerItemWrapper'].style.minHeigth = null
+
+    }
+  },
+  computed: {
+    header() {
+      if (this.data.header) {
+        const classList = ['sp-b-0-4'];
+        if (this.data.mobileHeader) {
+          classList.push('md-d-none')
+        }
+        return <div class={classList.join(' ')}>
+          {this.data.header}
+        </div>
+      }
+      return null
+    },
+    mobileHeader() {
+      if (this.data.mobileHeader) {
+        return <div class="sp-b-0-3 md-d-flex d-none">
+          {this.data.mobileHeader}
+        </div>
+      }
+      return null
+    },
+    label() {
+      if (this.data.label) {
+        return <h2 class="rt-font-h2">
+          {this.data.label}
+        </h2>
+      }
+      return null
+    },
+    description() {
+      if (this.data.description) {
+        const classList = ['rt-n-banner-description', 'sp-t-0-4', 'td-sp-t-0-3'];
+        if (this.data.background != 'gray') {
+          classList.push('color-white')
+        } else {
+          classList.push('color-main08')
+        }
+        return <p class={classList.join(' ')}>
+          {this.data.description}
+        </p>
+      }
+      return null
+    },
+    footer() {
+      if (this.data.footer) {
+        const classList = ['td-sp-t-0-4', 'md-sp-t-1-1'];
+        if (this.data.header && this.data.label && this.data.description) {
+          classList.push('sp-t-1-1')
+        } else {
+          classList.push('sp-t-1-2')
+        }
+        return <div class={classList.join(' ')}>
+          {this.data.footer}
+        </div>
+      }
+      return null
+    },
+    image() {
+      if (this.data.image) {
+        return <rt-row class="flex-fill rt-n-banner-image">
+          <rt-col size="5"></rt-col>
+          <rt-col size="7">
+            {this.data.image}
+          </rt-col>
+        </rt-row>
       }
     },
-    computed: {
-      header() {
-        if (this.data.header) {
-          const classList = ['sp-b-0-4'];
-          if(this.data.mobileHeader){
-            classList.push('md-d-none')
-          }
-          return <div class={classList.join(' ')}>
-              {this.data.header}
-          </div>
-        }
-        return null
-      },
-      mobileHeader() {
-        if (this.data.mobileHeader) {
-          return <div class="sp-b-0-3 md-d-flex d-none">
-              {this.data.mobileHeader}
-          </div>
-        }
-        return null
-      },
-      label() {
-        if (this.data.label) {
-          return <h2 class="rt-font-h2">
-            {this.data.label}
-          </h2>
-        }
-        return null
-      },
-      description() {
-        if (this.data.description) {
-          const classList = ['rt-n-banner-description', 'sp-t-0-4', 'td-sp-t-0-3'];
-          if (this.data.background != 'gray') {
-            classList.push('color-white')
-          } else {
-            classList.push('color-main08')
-          }
-          return <p class={classList.join(' ')}>
-            {this.data.description}
-          </p>
-        }
-        return null
-      },
-      footer() {
-        if (this.data.footer) {
-          const classList = ['td-sp-t-0-4','md-sp-t-1-1'];
-          if(this.data.header && this.data.label && this.data.description){
-            classList.push('sp-t-1-1')
-          }else{
-            classList.push('sp-t-1-2')
-          }
-          return <div class={classList.join(' ')}>
-            {this.data.footer}
-          </div>
-        }
-        return null
-      },
-      image() {
-        if (this.data.image) {
-          return <rt-row class="flex-fill rt-n-banner-image">
-            <rt-col size="5"></rt-col>
-            <rt-col size="7">
-              {this.data.image}
-            </rt-col>
-          </rt-row>
-        }
-      },
-      bannerClass() {
-        const classNames = ['rt-n-banner-item', 'd-flex'];
-        if (this.activeId == this.id) {
-          classNames.push('rt-n-banner-item--active')
-          if (this.nextId) {
-            if (this.orientation === 1) {
-              classNames.push('rt-n-banner-item--go-left')
-            }
-            if (this.orientation === -1) {
-              classNames.push('rt-n-banner-item--go-right')
-            }
-          }
-        }
-
-        if (this.nextId == this.id) {
+    bannerClass() {
+      const classNames = ['rt-n-banner-item', 'd-flex'];
+      if (this.activeId == this.id) {
+        classNames.push('rt-n-banner-item--active')
+        if (this.nextId) {
           if (this.orientation === 1) {
-            classNames.push('rt-n-banner-item--next-right')
+            classNames.push('rt-n-banner-item--go-left')
           }
           if (this.orientation === -1) {
-            classNames.push('rt-n-banner-item--next-left')
+            classNames.push('rt-n-banner-item--go-right')
           }
-
-        }
-        return classNames.join(' ')
-      },
-      bannerWrapperClass() {
-        const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1', 'height-fill'];
-        classNames.push('color-block--' + this.data.background)
-        if (this.data.background != 'gray') {
-          classNames.push('color-white')
-        }
-        return classNames.join(' ')
-      },
-      bannerStyle() {
-        if (this.type == 'mobile') {
-          return {minHeight: this.height + 'px'}
-        } else {
-          return {}
         }
       }
+
+      if (this.nextId == this.id) {
+        if (this.orientation === 1) {
+          classNames.push('rt-n-banner-item--next-right')
+        }
+        if (this.orientation === -1) {
+          classNames.push('rt-n-banner-item--next-left')
+        }
+
+      }
+      return classNames.join(' ')
     },
-    render(h) {
-      return <div class={this.bannerClass} ref="bannerItem" style={this.bannerStyle}>
-        <div class="rt-container flex-fill d-flex td-sp-h-none">
-          <rt-col class="height-fill td-sp-h-none" size={12}>
-            <div class={this.bannerWrapperClass}>
-            <rt-row class="flex-fill rt-n-banner-content">
+    bannerWrapperClass() {
+      const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1', 'height-fill'];
+      classNames.push('color-block--' + this.data.background)
+      if (this.data.background != 'gray') {
+        classNames.push('color-white')
+      }
+      return classNames.join(' ')
+    },
+    bannerStyle() {
+      if (this.type == 'mobile') {
+        return {minHeight: this.height + 'px'}
+      } else {
+        return {}
+      }
+    },
+    wrapperStyle() {
+      if (this.type == 'mobile' && this.hideHeight) {
+        return {minHeight: 'auto'}
+      }
+      return null
+    }
+  },
+  render(h) {
+    return <div class={this.bannerClass} ref="bannerItem" style={this.bannerStyle}>
+      <div class="rt-container flex-fill d-flex td-sp-h-none">
+        <rt-col class="height-fill td-sp-h-none" size={12}>
+          <div class={this.bannerWrapperClass} style={this.wrapperStyle} ref="bannerItemWrapper">
+            <rt-row class="flex-fill rt-n-banner-content md-d-block">
               <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
-              <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill">
+              <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill md-height-fill">
                 <div class="d-flex flex-start-center md-flex-start-top rt-n-banner-inner">
                   <div class="md-sp-t-1-2 d-flex flex-column rt-n-banner-inner-content">
                     <div class="md-flex-fill">
@@ -228,12 +241,12 @@
                                         image-mobile={this.data['image-mobile']}>
             </rt-banner-virtual-image-v2>
           </div>
-          </rt-col>
-        </div>
-
-
+        </rt-col>
       </div>
-    }
+
+
+    </div>
   }
-  ;
+}
+;
 </script>
