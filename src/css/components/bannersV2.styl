@@ -13,12 +13,14 @@
   overflow: hidden;
   position: relative;
   max-width 100%
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+    height: 100%
   @media (max-width tablet-upper-limit)
     border-radius 0;
   @media (max-width mobile-upper-limit)
     padding-top: 56vw
     padding-bottom: 24px
-    box-sizing content-box
+    box-sizing border-box
 .rt-n-banner-inner
   min-width 100%
 .rt-n-banner-header
@@ -41,6 +43,13 @@
   left: 0
   right: 0
   animation-iteration-count: 1
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+    height 100%
+  &:after
+    content:'';
+    min-height:inherit;
+    font-size:0;
+
   @media (max-width mobile-upper-limit)
     display: flex
     opacity: 0
