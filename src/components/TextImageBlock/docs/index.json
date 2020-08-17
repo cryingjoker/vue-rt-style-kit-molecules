@@ -1,0 +1,39 @@
+{
+  "items" : [
+    {
+      "name" : "rt-text-image-block",
+      "property" : "bg-color",
+      "type" : "String",
+      "description" : "Задаёт фоновый цвет блока",
+      "value" : "b2c-white"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "image",
+      "type" : "String",
+      "description" : "Задаёт URL-адрес изображения для блока с изображением и изображения, отображаемого при постановке видео на паузу, для блока с видео",
+      "value" : ""
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "title",
+      "type" : "String",
+      "description" : "Заголовок блока",
+      "value" : ""
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "reversed",
+      "type" : "Boolean",
+      "description" : "Флаг, указывающий, что текстовое содержимое блока и изображение меняются местами в десктопном разрешении",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "video",
+      "type" : "String",
+      "description" : "Идентификатор видео на youtube.com",
+      "value" : ""
+    }
+  ]
+}

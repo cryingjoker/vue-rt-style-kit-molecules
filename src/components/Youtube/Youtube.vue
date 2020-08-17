@@ -146,7 +146,7 @@ export default {
       }
     },
     keyPressHolder(event){
-      if(this.duration && !this.buttonControlDisabled()){
+      if(this.duration && !this.buttonControlDisabled() && document.activeElement === document.body){
         switch(event.keyCode) {
           case 32:
             if (this.isPlaying) {

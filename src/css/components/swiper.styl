@@ -98,17 +98,17 @@ scrollHSpacePC = 70px
       -webkit-scroll-snap-align start
       scroll-snap-align start
 
-      &:first-child
-        @media (max-width: tablet-upper-limit)
-          margin-left scrollHSpace * 3
-        @media (max-width: mobile-upper-limit)
-          margin-left 0//scrollHSpace
+      //&:first-child
+      //  @media (max-width: tablet-upper-limit)
+      //    margin-left 0
+      //  @media (max-width: mobile-upper-limit)
+      //    margin-left 0//scrollHSpace
 
     .{swiperName}__spacer
       @media (max-width: tablet-upper-limit)
-        min-width scrollHSpace * 3
-      @media (max-width: mobile-upper-limit)
         min-width scrollHSpace
+      //@media (max-width: mobile-upper-limit)
+      //  min-width scrollHSpace
 
   &.is-animating,
   &.is-disabled-scrolling
