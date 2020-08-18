@@ -392,3 +392,15 @@
   transition transform .3s linear
   &:hover
     transform scale(1.1)
+
+_:-ms-fullscreen, :root .rt-youtube__volume
+  top 50%
+  transform translateY(-50%)
+
+_:-ms-fullscreen, :root .rt-youtube__fullscreen
+  top 50%
+  transform translateY(-50%) scale(1)
+
+_:-ms-fullscreen, :root .rt-youtube__fullscreen:hover
+  transform translateY(-50%) scale(1.1)
+
