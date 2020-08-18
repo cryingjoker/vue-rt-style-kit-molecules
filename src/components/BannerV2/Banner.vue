@@ -96,7 +96,7 @@ export default {
       this.activeSlideColor = data.activeColor
     },
     getSlots() {
-      this.customSlotsSort = bannerStore.getSlotSort(this.bannerName)
+      this.customSlotsSort = bannerStore.getSlotSort(this.bannerName) || []
     },
     getSlotSort() {
       this.customSlots = bannerStore.getSlot(this.bannerName)
