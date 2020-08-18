@@ -1,6 +1,6 @@
 <script type="text/jsx">
 
-// import debounce from "debounce";
+import debounce from "debounce";
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 import {bannerStore} from "./BannerStore";
 import BannerVirtualImage from "./BannerVirtualImage.vue";
@@ -67,12 +67,12 @@ export default {
 
       if (bannerStore.runWatcher(this._uid)) {
         this.getHeight();
-        window.addEventListener('resize', this.getHeight)
+        window.addEventListener("resize", debounce(this.getHeight, 10));
       }
     },
     removeWatcher() {
       bannerStore.stopWatcher(this._uid)
-      window.removeEventListener('resize', this.getHeight)
+      window.removeEventListener("resize", debounce(this.getHeight, 10));
     },
     calculateMobileOptions() {
       const type = deviceTypeStore.getStatus()
@@ -87,14 +87,22 @@ export default {
     },
     getHeight() {
       this.hideHeight = true;
-      this.$nextTick(() => {
-        this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
-        const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
-        if (thisHeight) {
-          bannerStore.setHeight(this.bannerName, thisHeight);
-        }
-        this.hideHeight = false;
-      })
+      if (this.$refs['bannerItemWrapper']) {
+        this.$nextTick(() => {
+          this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
+          const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
+          if (thisHeight) {
+            bannerStore.setHeight(this.bannerName, thisHeight);
+          }
+          this.hideHeight = false;
+
+        })
+      } else {
+        this.removeWatcher();
+        setTimeout(()=>{
+          this.setWatcher();
+        },1000)
+      }
 
       // this.$refs['bannerItemWrapper'].style.minHeigth = null
 

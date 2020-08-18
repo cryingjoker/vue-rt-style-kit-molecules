@@ -96,7 +96,11 @@
               bannerStore.setSlot(parentId, 'image-mobile', image, itemId)
             }
           }
+          if(this.isActive){
+            bannerStore.setActiveSlot(parentId,itemId)
+          }
           bannerStore.setSlot(parentId, 'background', this.colorType, itemId)
+          bannerStore.setActiveId(parentId, itemId)
 
         },
         beforeMount() {
@@ -107,6 +111,15 @@
         updated() {
         },
         beforeDestroy: function () {
+          let parentId;
+          if(this.bannerName.length > 0){
+            parentId = this.bannerName;
+          }
+          else{
+            parentId = this.$parent._uid
+          }
+          const itemId = this._uid
+          bannerStore.removeSlots(parentId,itemId)
         },
         methods: {
 

@@ -76,12 +76,26 @@ class BannerStore extends StorePrototype {
     this.slots[bannerUid][id][name] = slot;
 
   }
+  removeSlots = (bannerUid, id)=>{
+    delete this.slots[bannerUid][id];
+    this.runWatchersById(bannerUid)
+    const indexInArray = this.bannersArray[bannerUid].indexOf(id)
+    if(indexInArray >= 0){
+      this.bannersArray[bannerUid].splice(indexInArray,1)
+    }
+
+    if(this.bannerActiveIds[bannerUid] == id){
+      this.bannerActiveIds[bannerUid] = null
+    }
+  }
   getSlotSort = (bannerUid) => {
     return this.bannersArray[bannerUid]
   }
+  setActiveSlot = (bannerUid, id) =>{
+    this.bannerActiveIds[bannerUid] =   id
+  }
   setActiveId = (bannerUid, id) => {
     if (!this.bannerNextActiveIds[bannerUid]) {
-
       this.bannerNextActiveIds[bannerUid] = id;
       if (this.bannersArray[bannerUid].indexOf(id) >= 0 && this.bannerActiveIds[bannerUid] != id) {
         this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
@@ -93,7 +107,6 @@ class BannerStore extends StorePrototype {
         delete this.nextOrientation[bannerUid]
         this.runWatchersById(bannerUid)
       }, 500)
-
     }
   }
   getActiveId = (bannerUid) => {
@@ -102,7 +115,9 @@ class BannerStore extends StorePrototype {
       nextActiveId: this.bannerNextActiveIds[bannerUid],
       nextOrientation: this.nextOrientation[bannerUid],
     }
-    data.activeColor = this.slots[bannerUid][data.activeId].background
+    if(this.slots[bannerUid][data.activeId]) {
+      data.activeColor = this.slots[bannerUid][data.activeId].background
+    }
     return data;
   }
 
@@ -130,10 +145,12 @@ export const bannerStore = Vue.observable({
 
   setSlot: bannerStoreObject.setSlot,
   getSlot: bannerStoreObject.getSlot,
+  removeSlots: bannerStoreObject.removeSlots,
   getSlotSort: bannerStoreObject.getSlotSort,
   removeWatcher: bannerStoreObject.removeWatcher,
   addWatcher: bannerStoreObject.addWatcher,
   setActiveId: bannerStoreObject.setActiveId,
+  setActiveSlot: bannerStoreObject.setActiveSlot,
   getActiveId: bannerStoreObject.getActiveId,
   setHeight: bannerStoreObject.setHeight,
   getHeight: bannerStoreObject.getHeight,
