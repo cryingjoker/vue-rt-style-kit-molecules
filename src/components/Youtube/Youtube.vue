@@ -74,7 +74,10 @@ export default {
     isTouchDevice: false,
     isFullscreen: false,
     isMute: false,
-    secondAppearance: false
+    secondAppearance: false,
+    isSafari: /constructor/i.test(window.HTMLElement) || (function (p) {
+        return p.toString() === "[object SafariRemoteNotification]";
+    })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
   }),
   computed:{
     playerClasses() {
@@ -383,13 +386,17 @@ export default {
     },
     toggleFullscreen() {
       if(!this.isFullscreen) {
-        this.$refs['ytp-wrapper'].requestFullscreen();
+        if(!this.isSafari) {
+          this.$refs['ytp-wrapper'].requestFullscreen();
+        } else {
+          this.$refs['ytp-wrapper'].webkitRequestFullscreen();
+        }
         this.isFullscreen = !this.isFullscreen;
         this.isMute = false;
         this.setMuteParams(this.isMute);
         this.$el.querySelector('.rt-youtube__sound-control').classList.remove('rt-youtube__sound-control--mute');
       } else {
-        document.exitFullscreen();
+        !this.isSafari ? document.exitFullscreen() : document.webkitExitFullscreen();
         this.isFullscreen = !this.isFullscreen;
       }
     },
