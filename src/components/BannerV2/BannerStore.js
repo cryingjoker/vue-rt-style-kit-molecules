@@ -115,7 +115,7 @@ class BannerStore extends StorePrototype {
       nextActiveId: this.bannerNextActiveIds[bannerUid],
       nextOrientation: this.nextOrientation[bannerUid],
     }
-    if(this.slots[bannerUid][data.activeId]) {
+    if(this.slots[bannerUid] && this.slots[bannerUid][data.activeId]) {
       data.activeColor = this.slots[bannerUid][data.activeId].background
     }
     return data;
