@@ -1,6 +1,9 @@
 <script type="text/jsx">
+  const componentsList = {};
+  import variables from "../../variables.json";
   export default {
     name: "RtPhoneNumberInput",
+    components: componentsList,
     props: {
       prefix: {
         type: Number,
@@ -37,6 +40,15 @@
       startCode: '',
       areaCodeLength: null
     }),
+    computed: {
+      prefixClass() {
+        let classList = '';
+        if(this.prefix.toString().length > 1 && window.innerWidth <= parseInt(variables["mobile-upper-limit"])) {
+          classList += ' rt-phone-input__prefix--separated'
+        }
+        return classList;
+      }
+    },
     mounted(){
       if(!isNaN(this.areaCode[0].value)) {
         this.areaCodeLength = this.areaCode[0].value.toString().length;
@@ -206,13 +218,15 @@
         }
       }
       return <div class="rt-phone-input">
-        {this.prefix.toLocaleString()}
+        <div class={"rt-phone-input__prefix" + this.prefixClass}>{this.prefix.toLocaleString()}</div>
         {codeDropdown()}
-        <div class="inputs-wrapper" ref="inputsWrapper">
+        <div class="inputs-wrapper md-d-block" ref="inputsWrapper">
           {inputs()}
         </div>
-        <rt-button class="rt-button-orange" onClick={this.emitOrder} ref="submitBtn">{this.submitButtonText}</rt-button>
-        {clearForm()}
+        <div class="rt-phone-input__buttons-wrapper">
+          <rt-button class="rt-button-orange" onClick={this.emitOrder} ref="submitBtn">{this.submitButtonText}</rt-button>
+          {clearForm()}
+        </div>
       </div>;
     }
   };

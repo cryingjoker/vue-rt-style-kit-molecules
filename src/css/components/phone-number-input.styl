@@ -5,6 +5,8 @@
   flex-direction row
   flex-wrap wrap
   align-items center
+  @media (max-width tablet-upper-limit)
+    display block
   &__single-one
     border 2px solid main-color01
     border-radius 4px
@@ -25,6 +27,8 @@
     &:nth-last-child(4),
     &:nth-last-child(7)
       margin-left 8px
+      @media (max-width tablet-upper-limit)
+        margin-left 12px
   .select
     width auto
     height auto
@@ -34,6 +38,8 @@
     border-radius 4px
     border 2px solid main-color01
     min-width 86px
+    @media (max-width tablet-upper-limit)
+      display inline-block
     &:hover
       border-color main-color02
     &--is-open
@@ -65,6 +71,32 @@
       font-weight inherit
   .inputs-wrapper
     margin-right 24px
+    @media (max-width desktop-lower-limit)
+      margin-right 0
+    @media (max-width tablet-upper-limit)
+      display inline-block
+  &__buttons-wrapper
+    display inline-block
+    @media (max-width desktop-lower-limit)
+      display block
+      margin-top 24px
+  &__prefix
+    @media (max-width tablet-upper-limit)
+      display inline-block
+    &--separated
+      display block
+      &+.select
+        margin-left 0
+        margin-top 8px
 
 .single-code
   margin-left 4px
+  @media (max-width tablet-upper-limit)
+    display inline-block
+  @media (max-width mobile-upper-limit)
+    &+.inputs-wrapper
+      display block
+      margin-top 8px
+      .rt-phone-input__single-one:first-child
+        margin-left 0!important
+
