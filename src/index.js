@@ -84,7 +84,8 @@ import {
   TextImageBlock,
   HelpBlock,
   BannerV2,
-  BannerItemV2
+  BannerItemV2,
+  PhoneNumberInput
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -167,6 +168,7 @@ const VueRtStyle = {
       Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
       Vue.component(HeaderNavigation.name, HeaderNavigation);
       Vue.component(TextImageBlock.name, TextImageBlock);
+      Vue.component(PhoneNumberInput.name, PhoneNumberInput);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -316,6 +318,7 @@ export {
   TextImageBlock,
   BannerV2,
   BannerItemV2,
+  PhoneNumberInput,
   // need to change name directives
   SwipeLeft,
   SwipeRight,

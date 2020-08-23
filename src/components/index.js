@@ -80,6 +80,7 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export {default as Slider} from './Slider/Slider.vue'
  export {default as SliderItem} from './Slider/SliderItem.vue'
  export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
+ export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
 
 
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
