@@ -26,6 +26,10 @@
             type: Boolean,
             default: false
           },
+          useGradient:{
+            type: Boolean,
+            default: true
+          },
         },
         data: () => ({
 
@@ -48,6 +52,7 @@
               bannerStore.setSlot(parentId, 'label', label, itemId)
             }
           }
+          bannerStore.setSlot(parentId, 'useGradient', this.useGradient, itemId)
           if(this.$slots['header']) {
             const header = this.$slots['header'];
             if(header) {

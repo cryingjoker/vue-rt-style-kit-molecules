@@ -246,7 +246,9 @@ export default {
             <rt-banner-virtual-image-v2 image={this.data?.image}
                                         image-x2={this.data['image-x2']}
                                         image-tablet={this.data['image-tablet']}
-                                        image-mobile={this.data['image-mobile']}>
+                                        image-mobile={this.data['image-mobile']}
+                                        use-gradient={this.data['useGradient']}
+            >
             </rt-banner-virtual-image-v2>
           </div>
         </rt-col>

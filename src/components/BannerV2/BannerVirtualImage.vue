@@ -23,6 +23,9 @@
       },
       imageMobile:{
         type: Array,
+      },
+      useGradient: {
+        type: Boolean
       }
     },
 
@@ -41,6 +44,12 @@
     },
     methods: {},
     computed: {
+      gradient(){
+        if(this.useGradient){
+          return <div class="rt-n-banner-gradient md-d-none"></div>
+        }
+        return null
+      },
       imageRender(){
         if(this.image){
           const classList = ['rt-n-banner-image-container']
@@ -94,6 +103,7 @@
       return <rt-row class="flex-fill rt-n-banner-image">
         <rt-col size={5} tablet-size={2} m-hide={true}></rt-col>
         <rt-col size={7} tablet-size={4} mobile-size={3}>
+          {this.gradient}
           {this.imageRender}
           {this.imageX2Render}
           {this.imageTabletRender}
