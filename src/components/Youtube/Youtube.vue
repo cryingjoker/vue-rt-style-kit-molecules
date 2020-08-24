@@ -74,10 +74,7 @@ export default {
     isTouchDevice: false,
     isFullscreen: false,
     isMute: false,
-    secondAppearance: false,
-    isSafari: /constructor/i.test(window.HTMLElement) || (function (p) {
-        return p.toString() === "[object SafariRemoteNotification]";
-    })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
+    secondAppearance: false
   }),
   computed:{
     playerClasses() {
@@ -386,17 +383,33 @@ export default {
     },
     toggleFullscreen() {
       if(!this.isFullscreen) {
-        if(!this.isSafari) {
+        if(this.$refs['ytp-wrapper'].requestFullscreen) {
           this.$refs['ytp-wrapper'].requestFullscreen();
-        } else {
+        } else if(this.$refs['ytp-wrapper'].webkitRequestFullscreen){
           this.$refs['ytp-wrapper'].webkitRequestFullscreen();
+        } else if(this.$refs['ytp-wrapper'].msRequestFullscreen) {
+          this.$refs['ytp-wrapper'].msRequestFullscreen();
         }
+        // else if(document.getElementsByTagName('video') && document.getElementsByTagName('video')[0].webkitSupportsFullscreen) {
+        //   let videoPlayer = document.getElementsByTagName('video')[0];
+        //   console.log(videoPlayer);
+        //   videoPlayer.webkitEnterFullscreen();
+        // }
         this.isFullscreen = !this.isFullscreen;
         this.isMute = false;
         this.setMuteParams(this.isMute);
         this.$el.querySelector('.rt-youtube__sound-control').classList.remove('rt-youtube__sound-control--mute');
       } else {
-        !this.isSafari ? document.exitFullscreen() : document.webkitExitFullscreen();
+        if(this.$refs['ytp-wrapper'].requestFullscreen) {
+          document.exitFullscreen();
+        } else if(this.$refs['ytp-wrapper'].webkitRequestFullscreen){
+          document.webkitExitFullscreen();
+        } else if(this.$refs['ytp-wrapper'].msRequestFullscreen) {
+          document.msExitFullscreen();
+        }
+        // else if(this.$refs['ytp-wrapper'].webkitSupportsFullscreen) {
+        //   document.webkitExitFullscreen()
+        // }
         this.isFullscreen = !this.isFullscreen;
       }
     },
