@@ -59,7 +59,11 @@ export default {
             img.data.staticClass += ' rt-card-round__logo-img'
           }
         })
-        return <div class="rt-card-round__logo">
+        const classList = ["rt-card-round__logo"]
+        if(this.backgroundColor.length > 0){
+          classList.push('sp-h-0-1')
+        }
+        return <div class={classList.join(' ')}>
           {this.$slots.logo}
         </div>
       }
