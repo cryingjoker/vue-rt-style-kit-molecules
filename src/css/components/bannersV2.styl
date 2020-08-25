@@ -237,3 +237,23 @@
   -webkit-tap-highlight-color: transparent
   &+&
     margin-left: 12px
+
+.rt-n-banner-gradient
+  width: 25%
+  position: absolute;
+  left: 0
+
+  height: 100%
+  @media (max-width tablet-upper-limit)
+    width: 30%
+
+renderColorClass(classname, var, media)
+  .{classname}
+    .rt-n-banner-gradient
+      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 70%)
+
+
+for $i in colors
+  if search($i,'b2c') >= 0
+    className = 'color-block--'+replace($i,'b2c-','')
+    renderColorClass(className, $i, $type)

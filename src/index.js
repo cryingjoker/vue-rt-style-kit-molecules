@@ -11,6 +11,7 @@ import {
   Carousel,
   CarouselSlide,
   Card,
+  CardRounded,
   CardB2o,
   CardBuy,
   CardImage,
@@ -105,6 +106,7 @@ const VueRtStyle = {
 
       Vue.component(ScrollTabs.name, ScrollTabs);
       Vue.component(Card.name, Card);
+      Vue.component(CardRounded.name, CardRounded);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
       Vue.component(CardImageList.name, CardImageList);
@@ -247,6 +249,7 @@ export {
   Carousel,
   CarouselSlide,
   Card,
+  CardRounded,
   CardB2o,
   CardBuy,
   CardImage,

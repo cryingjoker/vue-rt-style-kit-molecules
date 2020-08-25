@@ -1,13 +1,11 @@
-
 class Tooltip {
   constructor(element, data, vnode) {
     this.$el = element;
     this.value = data.value;
-    this.bind();
     this.vnode = vnode;
     this.active = false
     this.orientation = 'bottom'
-
+    this.bind();
   }
 
   bind = () => {
@@ -18,7 +16,7 @@ class Tooltip {
     this.unbind()
     this.bind()
   };
-  unbind = () => {
+  unbind = (el) => {
     this.$el.removeEventListener('mouseenter', this.mouseenter)
     this.$el.removeEventListener('mouseleave', this.mouseleave)
   };
@@ -39,7 +37,7 @@ class Tooltip {
     if (screenHeight - y < 100) {
       this.orientation = 'top'
     }
-    if (bottom < 100 || left < 150 || screenWidth-left-width < 200) {
+    if (bottom < 100 || left < 150 || screenWidth - left - width < 200) {
       this.orientation = 'left'
       if (left < 150) {
         this.orientation = 'right'
@@ -48,7 +46,8 @@ class Tooltip {
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     var style = getComputedStyle(this.$el, null);
-    if (style.display == 'block') {
+
+    if (style.display == 'block' && !this.value['spec-content']) {
       const span = global.document.createElement("span");
       span.innerText = this.$el.innerText
 
@@ -70,7 +69,7 @@ class Tooltip {
         this.pageY = y + scrollTop - 4
         break
       case 'right':
-        this.pageX =x + width +4
+        this.pageX = x + width + 4
         this.pageY = y + scrollTop + height / 2
         break
       case 'bottom':
@@ -90,14 +89,16 @@ class Tooltip {
   mouseleave = () => {
     this.active = false;
     this.renderTooltop()
-    clearTimeout(this.timeout)
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
   }
   renderTooltop = () => {
     if (this.active) {
       const toolTip = global.document.createElement("div");
       this.toolTip = toolTip;
       toolTip.classList.add('rt-tooltip')
-      if(this.value.bright){
+      if (this.value.bright) {
         toolTip.classList.add('rt-tooltip-bright')
       }
       toolTip.classList.add('rt-tooltip-' + this.orientation)
@@ -122,15 +123,17 @@ class Tooltip {
 
 export const TooltipDirective = {
   name: "Tooltip",
-  isFn: true,
   bind(el, bindings, vnode) {
-    vnode.context.Tooltip = new Tooltip(vnode.elm, bindings, vnode);
+    vnode.tooltip  = new Tooltip(vnode.elm, bindings, vnode);
   },
-  update(el, bindings, vnode) {
-    vnode.context.Tooltip.update(el);
+  update(el, bindings, vnode,oldVnode) {
+    oldVnode.tooltip.unbind()
+    vnode.tooltip  = new Tooltip(vnode.elm, bindings, vnode);
   },
-  beforeDestroy() {
-    vnode.context.Tooltip.unbind(el);
+
+  unbind(el, bindings, vnode) {
+    vnode.tooltip.unbind(el);
+    vnode.tooltip.mouseleave();
   }
 };
 
