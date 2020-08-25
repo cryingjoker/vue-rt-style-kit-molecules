@@ -1,0 +1,105 @@
+.rt-card-round
+  border-radius: 19px;
+  display: block;
+
+.rt-card-round-img {
+  width: 100%;
+  display: block
+}
+
+.rt-card-round-img-container
+  overflow: hidden;
+  border-radius: 12px
+  transition-timing-function ease-in-out
+  transition-duration .3s
+  transition-property opacity
+
+
+.rt-card-round__logo
+  width: 137px;
+  height: 44px;
+
+.rt-card-round__content
+  border-radius 0 0 12px 12px
+  position: relative;
+  z-index 2
+  &:before
+    content ''
+    position: absolute;
+    border-radius  12px 12px 0 0
+    top: -20px
+    height: 20px
+    left: 0
+    right: 0
+    z-index 2
+
+.rt-card-round-white
+  border-radius 0 0 12px 12px
+  background-color: #fff
+
+.rt-card-round-color
+  border: 8px solid white
+  .rt-card-round__logo
+    width: 137px;
+    border-radius: 12px;
+    background-color: #fff;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  .rt-card-round-img-container
+    border-radius: 12px 12px 0 0
+  @media(hover: hover)
+    &:hover
+      .rt-card-round-img-container
+        opacity: 0.7
+.rt-card-round-arrow__text
+  margin-right: 16px
+
+@media(hover: hover)
+  .rt-card-round-arrow__text
+    max-width: 0;
+    overflow: hidden;
+    display: inline-block
+    white-space nowrap
+    transition-timing-function ease-in-out
+    transition-duration 0.5s
+    transition-property max-width, margin, opacity
+    margin-right: 0
+    opacity 0
+  .rt-card-round:hover
+    .rt-card-round-arrow__text
+      opacity 1
+      max-width 100%
+      margin-right: 16px
+
+.rt-card-round-color--white .rt-card-round__logo {
+  width: auto;
+  background-color: transparent;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: left;
+  height: 36px;
+}
+.rt-card-round-arrow-icon
+  height:100%
+
+.rt-card-round__logo-img {
+  max-height: 100%;
+}
+
+
+colors = readJsonKeys('../../../color.json')
+renderColorClass(postfix,color)
+
+  classname = 'rt-card-round-color--'+postfix
+  .{classname}
+    box-shadow 0 0 0 1px lookup(color)
+    border-radius: 19px;
+  .{classname} .rt-card-round__content,
+  .{classname} .rt-card-round__content:before {
+    color: white;
+    background-color lookup(color)
+  }
+for $i in colors
+  if search($i,'b2c') >= 0
+    className = replace($i,'b2c-','')
+    renderColorClass(className, $i, $type)
