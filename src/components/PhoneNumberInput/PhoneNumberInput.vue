@@ -17,10 +17,6 @@
         type: String,
         default: ''
       },
-      autoCompletePosition: {
-        type: Number,
-        default: 0
-      },
       submitButtonText: {
         type: String,
         default: 'Подобрать номер'
@@ -38,7 +34,8 @@
       startVal: '',
       nowVal: '',
       startCode: '',
-      areaCodeLength: null
+      areaCodeLength: null,
+      wasInteracted: 0
     }),
     computed: {
       prefixClass() {
@@ -62,17 +59,13 @@
       });
       this.startVal = this.prefix.toString();
       if(this.areaCode.length > 1) {
-        this.areaCode.map((item) => {
-          if(item.preSelected) {
-            if(isNaN(item.value)) {
-              for(let i = 0; i < this.areaCodeLength; i++) {
-                this.startVal += '\\d';
-              }
-            } else {
-              this.startVal = item.value;
-            }
+        if(isNaN(this.areaCode[0].value)) {
+          for(let i = 0; i < this.areaCodeLength; i++) {
+            this.startVal += '\\d';
           }
-        });
+        } else {
+          this.startVal = this.areaCode[0].value;
+        }
       } else {
         this.startVal += this.areaCode[0].value;
       }
@@ -91,6 +84,7 @@
           if($event.target.value.length == 1) {
             $event.target.value = ''
           }
+
         }
         if($event.keyCode === 8) {
           if($event.target.value != '') {
@@ -118,8 +112,9 @@
         }
       },
       setFocus() {
-        this.$refs.inputsWrapper && this.$refs.inputsWrapper.children[0] ? this.$refs.inputsWrapper.children[0].focus() : false;
-        this.stickNumber();
+        this.targetIndex = this.countActive('forward', -1);
+        this.$refs.inputsWrapper.children[this.targetIndex].focus();
+        this.emitInteration();
       },
       countActive(dir, index) {
         let quantity = this.$refs.inputsWrapper.children.length;
@@ -164,6 +159,8 @@
           }
         }
         this.eraseButton = this.startVal !== this.nowVal;
+        this.$emit('selected-number', this.nowVal)
+        this.emitInteration();
       },
       emitOrder() {
         this.$emit('selected-number', this.nowVal)
@@ -175,13 +172,21 @@
         }
         this.stickNumber();
         this.$emit('search-cleared', this.nowVal)
+      },
+      emitInteration() {
+        if(this.wasInteracted < 1) {
+          this.wasInteracted++;
+        } else if(this.wasInteracted == 1) {
+          this.$emit('interaction-detected', this.nowVal);
+          this.wasInteracted++;
+        }
       }
     },
     render: function(h) {
       const codeDropdown = () => {
         const selectOptions = () => {
-          return this.areaCode.map((item) => {
-            if(item.preSelected) {
+          return this.areaCode.map((item, index) => {
+            if(index == 0) {
               return <rt-select-option selected={true} value={item.value.toString()} ref="preselected">{item.code}</rt-select-option>
             } else {
               return <rt-select-option value={item.value.toString()}>{item.code}</rt-select-option>
