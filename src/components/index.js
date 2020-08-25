@@ -4,6 +4,7 @@ export {default as CheckboxTabs} from './CheckboxTabs/CheckboxTabs.vue';
 export {default as TabsNavigationItem} from './Tabs/TabsNavigationItem.vue';
 export {default as TabsContentItem} from './Tabs/TabsContentItem.vue';
 export {default as Card} from './Card/Card.vue';
+export {default as CardRounded} from './Card/CardRounded.vue';
 export {default as CardB2o} from './Card/CardB2o.vue';
 export {default as ProductCard} from './ProductCard/ProductCard.vue';
 export {default as TariffCard} from './TariffCard/TariffCard.vue';
