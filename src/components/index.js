@@ -32,6 +32,10 @@ export {default as TagsList} from './Tag/TagsList.vue';
 export {default as Filter} from './Filter/Filter.vue';
 export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
+
+export {default as FilterV2} from './FilterV2/Filter.vue';
+export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
+export {default as FilterSetterV2} from './FilterV2/FilterSetter.vue';
 export {default as Youtube} from './Youtube/Youtube.vue';
 export {default as Sticky} from './Sticky/Sticky.vue';
 export {default as ResizeContentHeight} from './ResizeContentHeight/ResizeContentHeight.vue';

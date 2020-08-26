@@ -1,12 +1,12 @@
 <template>
+  <div
+    :class="carouselClassesState"
+    :data-uid="_uid"
+    :style="carouselStylesState"
+  >
     <div
-      :class="carouselClassesState"
-      :data-uid="_uid"
-      :style="carouselStylesState"
-    >
-      <div
-        v-if="debug"
-        style="
+      v-if="debug"
+      style="
           background: black;
           color: #3fa;
           font-size: 10px;
@@ -18,80 +18,41 @@
           right: 0;
           z-index: 12;
         "
-      >
-        <p>offset: {{ innerBlockOffset }}</p>
-        <p>mc: {{ activeMCId }} {{ isAnimating ? 'run' : 'stopped' }}</p>
-        <p>page: {{ activePage }}</p>
-        <p>perf: {{ parseInt(Math.floor(perfResult/10)) }}ms</p>
-        <p>scrollLeft: {{ $refs && $refs.overlay ? $refs.overlay.scrollLeft : '' }}</p>
-        <p>canBack: {{ canAdvanceBackward }}</p>
-        <p>canForward: {{ canAdvanceForward }}</p>
-      </div>
+    >
+      <p>offset: {{ innerBlockOffset }}</p>
+      <p>mc: {{ activeMCId }} {{ isAnimating ? 'run' : 'stopped' }}</p>
+      <p>page: {{ activePage }}</p>
+      <p>perf: {{ parseInt(Math.floor(perfResult / 10)) }}ms</p>
+      <p>scrollLeft: {{ $refs && $refs.overlay ? $refs.overlay.scrollLeft : '' }}</p>
+      <p>canBack: {{ canAdvanceBackward }}</p>
+      <p>canForward: {{ canAdvanceForward }}</p>
+    </div>
 
-      <RtCarouselNavi
-        v-if="loaded && !hideNavigation && !isTouch && !disabledScrolling"
-        :hSpace="isInnerBlock && innerBlockOffset > 10 ? innerBlockOffset - 10 : hSpace"
-        :isPending="isPending"
-        :hideArrows="hideArrows"
-        :showTipsNext="showTipsNext"
-        :containerName="cssContainer"
-        :overlayEl="$refs.overlay"
-        :advancePage="advancePage"
-        :canAdvanceForward="canAdvanceForward"
-        :canAdvanceBackward="canAdvanceBackward"
-        :navigationContainer="navigationContainer"
-        :navsPosStart="navsPosStart"
-        :navsPosEnd="navsPosEnd"
-      />
+    <RtCarouselNavi
+      v-if="loaded && !hideNavigation && !isTouch && !disabledScrolling"
+      :hSpace="isInnerBlock && innerBlockOffset > 10 ? innerBlockOffset - 10 : hSpace"
+      :isPending="isPending"
+      :hideArrows="hideArrows"
+      :showTipsNext="showTipsNext"
+      :containerName="cssContainer"
+      :overlayEl="$refs.overlay"
+      :advancePage="advancePage"
+      :canAdvanceForward="canAdvanceForward"
+      :canAdvanceBackward="canAdvanceBackward"
+      :navigationContainer="navigationContainer"
+      :navsPosStart="navsPosStart"
+      :navsPosEnd="navsPosEnd"
+    />
 
+    <div
+      ref="overlay"
+      v-if="!isTouch"
+      :class="cssSelector + '__overlay'"
+    >
       <div
-        ref="overlay"
-        v-if="!isTouch"
-        :class="cssSelector + '__overlay'"
-      >
-        <div
-          ref="inner"
-          :class="cssSelector + '__inner ' + cssContainer"
-          :style="innerStylesState"
-        >
-          <div
-            v-if="!loaded && loader === 'spinner'"
-            :class="cssSelector + '__loader'"
-          >
-            <RtSpinner
-              class="spinner_m"
-            />
-          </div>
-          <template
-            v-if="!loaded && loader && loader.type === 'skeleton'"
-          >
-            <div
-              v-for="(card, key) in loader.count"
-              :key="key"
-              :class="['rt-carousel__slide', slidesClasses]"
-            >
-              <RtCardSkeleton
-                :rows=loader.rows
-                :sub=loader.sub
-              />
-            </div>
-          </template>
-          <slot></slot>
-
-          <div
-            v-if="loaded"
-            :class="cssSelector + '__spacer'"
-            :style="spacerStylesState"
-          >
-          </div>
-        </div>
-      </div>
-
-      <div
-        v-if="isTouch"
-        ref="overlay"
-        :class="cssSelector + '__overlay ' + cssSelector + '__inner ' + cssContainer"
-        :style="overlayStyleState"
+        ref="inner"
+        :class="cssSelector + '__inner ' + cssContainer"
+        :style="innerStylesState"
       >
         <div
           v-if="!loaded && loader === 'spinner'"
@@ -117,12 +78,50 @@
         </template>
         <slot></slot>
         <div
+          v-if="loaded"
           :class="cssSelector + '__spacer'"
           :style="spacerStylesState"
         >
         </div>
       </div>
     </div>
+
+    <div
+      v-if="isTouch"
+      ref="overlay"
+      :class="cssSelector + '__overlay ' + cssSelector + '__inner ' + cssContainer"
+      :style="overlayStyleState"
+    >
+      <div
+        v-if="!loaded && loader === 'spinner'"
+        :class="cssSelector + '__loader'"
+      >
+        <RtSpinner
+          class="spinner_m"
+        />
+      </div>
+      <template
+        v-if="!loaded && loader && loader.type === 'skeleton'"
+      >
+        <div
+          v-for="(card, key) in loader.count"
+          :key="key"
+          :class="['rt-carousel__slide', slidesClasses]"
+        >
+          <RtCardSkeleton
+            :rows=loader.rows
+            :sub=loader.sub
+          />
+        </div>
+      </template>
+      <slot></slot>
+      <div
+        :class="cssSelector + '__spacer'"
+        :style="spacerStylesState"
+      >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -155,7 +154,7 @@ export default {
       default: true
     },
     loader: {
-      type: String|Object,
+      type: String | Object,
       default: 'spinner'
     },
     navigationContainer: {
@@ -220,6 +219,10 @@ export default {
       type: Boolean,
       default: false
     },
+    deepSlideLoad: {
+      type: Number,
+      default: 1
+    }
   },
   data() {
     return {
@@ -251,7 +254,7 @@ export default {
     }
   },
   computed: {
-    carouselClassesState () {
+    carouselClassesState() {
       return [
         this.cssSelector,
         {
@@ -261,12 +264,12 @@ export default {
           'is-pending': this.isPending,
           'is-animating': this.isAnimating,
           'is-hide-navs': this.hideNavigation,
-          'is-scrolling' : !this.scrollingAutoEnd,
+          'is-scrolling': !this.scrollingAutoEnd,
           'is-disabled-scrolling': this.disabledScrolling
         }
       ]
     },
-    carouselStylesState () {
+    carouselStylesState() {
       return {
         marginTop: -this.offsetTop + 'px',
         marginBottom: -this.offsetBottom + 'px',
@@ -276,29 +279,29 @@ export default {
         maxWidth: this.bodyWidth
       }
     },
-    innerStylesState () {
+    innerStylesState() {
       return {
         paddingTop: this.offsetTop + 'px',
         paddingBottom: this.offsetBottom + 'px'
       }
     },
-    overlayStyleState () {
+    overlayStyleState() {
       return {
         paddingTop: this.offsetTop + 'px',
         paddingBottom: this.offsetBottom + 'px'
       }
     },
-    spacerStylesState () {
+    spacerStylesState() {
       return `flex: 0 0 ${this.isInnerBlock ? (this.innerBlockOffset - 10) : this.hSpace}px`
     },
-    overlayEl () {
+    overlayEl() {
       return this.$refs.overlay
     },
-    slidedEl () {
+    slidedEl() {
       return this.$refs.inner
     }
   },
-  mounted () {
+  mounted() {
     this.isInnerBlock = document.querySelector(`.${this.cssContainer} .${this.cssSelector}[data-uid="${this._uid}"]`) !== null
     if (this.isInnerBlock)
       this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
@@ -313,7 +316,7 @@ export default {
       })
   },
   watch: {
-    loaded (isLoaded) {
+    loaded(isLoaded) {
       if (isLoaded) {
         this.isLoaded = true
         this.$nextTick(() => {
@@ -330,23 +333,23 @@ export default {
       }
     }
   },
-  destroyed () {
+  destroyed() {
     this.unsetNavi()
   },
   methods: {
-    initNavi () {
+    initNavi() {
       if (!this.slidedEl || !this.overlayEl) return
       if (!this.isTouch) {
         this.createMoves()
-        window.addEventListener('resize', debounce(this.createMoves, 1), { passive: true })
+        window.addEventListener('resize', debounce(this.createMoves, 1), {passive: true})
         if (this.overlayEl)
-          this.overlayEl.addEventListener('scroll', this.scrollNative, { passive: true })
+          this.overlayEl.addEventListener('scroll', this.scrollNative, {passive: true})
       } else {
-        window.addEventListener('resize', debounce(this.fitCarouselWidth, 1), { passive: true })
+        window.addEventListener('resize', debounce(this.fitCarouselWidth, 1), {passive: true})
         this.fitCarouselWidth()
       }
     },
-    unsetNavi () {
+    unsetNavi() {
       this.isAnimating = false
       this.isPending = true
       if (!this.isTouch) {
@@ -362,7 +365,8 @@ export default {
      * + Формирует постраничную навигацию
      * + Собирает диапозоны широт в виде массива
      */
-    createMoves () {
+    createMoves() {
+
       this.autoScrollerRemove()
       clearTimeout(this.toggleSlidesTimer)
 
@@ -405,7 +409,6 @@ export default {
         let pageWidth = 0
         let distance = 0
         let distanceAfter = 0
-
         this.slides.forEach((slide, i) => {
           if (typeof slide.width === 'function') {
             let slideWidth = slide.width()
@@ -442,7 +445,9 @@ export default {
 
         if (this.pages[0]) {
           this.pages[0].active = true
-          this.move().then(() => { this.updateNavs() })
+          this.move().then(() => {
+            this.updateNavs()
+          })
           this.toggleSlides()
         }
 
@@ -459,7 +464,7 @@ export default {
       })
     },
 
-    fitCarouselWidth () {
+    fitCarouselWidth() {
       this.bodyWidth = getComputedStyle(window.document.body).width
     },
 
@@ -467,6 +472,7 @@ export default {
      * Простая навигация зоны просмотра по слайдам (Навигаторы, стрелочки)
      */
     advancePage(direction) {
+      console.info('this.isPending && this.pages.length > 0', !this.isPending, this.pages, this.pages.length > 0)
       if (!this.isPending && this.pages.length > 0) {
         this.perfStart = performance.now()
 
@@ -513,7 +519,7 @@ export default {
     /**
      * Анимированный скроллинг к указанной позиции
      */
-    move (to = 0) {
+    move(to = 0) {
       return new Promise(resolve => {
         if (!this.overlayEl) {
           resolve()
@@ -551,14 +557,14 @@ export default {
      * Скроллит к указанному слайду
      * @param {Number} slideId
      */
-    moveTo (slideId) {
+    moveTo(slideId) {
       if (slideId !== undefined && this.slides[slideId] && !this.isAnimating) {
         this.move(
           this.isTouch
             ?
-              this.$refs.overlay.scrollLeft + this.slides.filter(
-                (slide, i) => (i === parseInt(slideId) && slide.$el)
-              )[0].$el.getBoundingClientRect().left
+            this.$refs.overlay.scrollLeft + this.slides.filter(
+            (slide, i) => (i === parseInt(slideId) && slide.$el)
+            )[0].$el.getBoundingClientRect().left
             : this.slides[slideId].move
         ).then(() => this.updateNavs())
       }
@@ -567,7 +573,7 @@ export default {
     /**
      * Нативное событие скроллинга
      */
-    scrollNative (e) {
+    scrollNative(e) {
       if (!this.disabledScrolling && !this.isTouch) {
         this.autoScroller()
         this.$nextTick(() => {
@@ -612,31 +618,52 @@ export default {
       this.scrollingTimer = null
       this.scrollingAutoEnd = true
     },
-    getSlides () {
+    getSlides() {
       let slideName = 'CarouselSlide'
-      if (this.decorated) {
-        let list = []
-        this.$children
-          .filter(vn => vn.$vnode && vn.$vnode.tag && vn.$vnode.tag.indexOf('slide') > -1)
-          .forEach(ch => {
-            if (ch.$children && ch.$children.length > 0) {
-              ch.$children.forEach((child) => {
-                if (child.$vnode && child.$vnode.tag && child.$vnode.tag.indexOf(slideName) > -1)
-                  list.push(child)
-              })
-            }
-          })
-        this.slides = list
+
+      if (this.deepSlideLoad > 1) {
+        const getChild = (lvl, el) => {
+          if (lvl < this.deepSlideLoad && el?.$children?.length > 0) {
+            const children = el.$children.find((i) => {
+              return i?.$vnode?.tag?.search('RtCarouselNavi') < 0 && i?.$el?.nodeName != '#comment'
+            })
+            return getChild(lvl + 1, children)
+          } else {
+            this.slides = el.$children.filter((slide) => {
+                console.info('**',slide,slide.$vnode.tag.indexOf(slideName))
+               return slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
+              }
+            )
+          }
+        }
+        getChild(0, this)
       } else {
-        this.slides = this.$children.filter(
-          slide => slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
-        )
+        if (this.decorated) {
+          let list = []
+          this.$children
+            .filter((vn) => {
+              return vn.$vnode && vn.$vnode.tag && vn.$vnode.tag.indexOf('slide') > -1
+            })
+            .forEach(ch => {
+              if (ch.$children && ch.$children.length > 0) {
+                ch.$children.forEach((child) => {
+                  if (child.$vnode && child.$vnode.tag && child.$vnode.tag.indexOf(slideName) > -1)
+                    list.push(child)
+                })
+              }
+            })
+          this.slides = list
+        } else {
+          this.slides = this.$children.filter(
+            slide => slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
+          )
+        }
       }
     },
     /**
      * Определяет ближайший слайд для автоскролла и сэттит страницу
      */
-    getNearbySlide (to = Number(this.overlayEl.scrollLeft.toFixed())) {
+    getNearbySlide(to = Number(this.overlayEl.scrollLeft.toFixed())) {
       if (this.swipingStartPoint !== to) {
 
         let nextNav = this.swipingStartPoint <= to
@@ -684,7 +711,7 @@ export default {
     /**
      * Меняет состояние слайдов
      */
-    toggleSlides () {
+    toggleSlides() {
       if (!this.isTouch) {
         clearTimeout(this.toggleSlidesTimer)
         // Throttle for scroll event
@@ -717,7 +744,7 @@ export default {
         }, 15)
       }
     },
-    updateNavs () {
+    updateNavs() {
       if (!this.isTouch && this.overlayEl) {
         let el = this.overlayEl
         this.canAdvanceBackward = el.scrollLeft > 0
