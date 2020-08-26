@@ -33,6 +33,9 @@ import {
   Filter,
   FilterWatcher,
   FilterCaller,
+  FilterV2,
+  FilterItemV2,
+  FilterSetterV2,
   Youtube,
   Sticky,
   StickyBottomLine,
@@ -131,6 +134,9 @@ const VueRtStyle = {
       Vue.component(TagsList.name, TagsList);
       Vue.component(Filter.name, Filter);
       Vue.component(FilterWatcher.name, FilterWatcher);
+      Vue.component(FilterV2.name, FilterV2);
+      Vue.component(FilterItemV2.name, FilterItemV2);
+      Vue.component(FilterSetterV2.name, FilterSetterV2);
       Vue.component(OptionsList.name, OptionsList);
       Vue.component(OptionsListInfoItem.name, OptionsListInfoItem);
       Vue.component(FilterCaller.name, FilterCaller);
@@ -272,6 +278,9 @@ export {
   Filter,
   FilterWatcher,
   FilterCaller,
+  FilterV2,
+  FilterItemV2,
+  FilterSetterV2,
   Youtube,
   Sticky,
   StickyBottomLine,
