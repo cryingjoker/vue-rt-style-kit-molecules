@@ -26,17 +26,49 @@
         default: 'Очистить фильтр'
       }
     },
-    data: () => ({
-      inputsLength: null,
-      localAutoComplete: [],
-      targetIndex: null,
-      eraseButton: false,
-      startVal: '',
-      nowVal: '',
-      startCode: '',
-      areaCodeLength: null,
-      wasInteracted: 0
-    }),
+    data(){
+      return {
+        localVal: '',
+        inputsLength: null,
+        localAutoComplete: [],
+        targetIndex: null,
+        eraseButton: false,
+        startVal: '',
+        nowVal: '',
+        startCode: '',
+        areaCodeLength: null,
+        selectWasInteracted: 0
+      }
+    },
+    watch: {
+      autoComplete(newVal, oldVal) {
+        this.countStartVal();
+        this.localAutoComplete = newVal.split('');
+        this.localAutoComplete.map((item, index) => {
+            item == '\\' ? this.localAutoComplete.splice(index, 1) : false;
+        });
+        this.startVal = this.prefix.toString();
+        if(this.areaCode.length > 1) {
+          if(isNaN(this.areaCode[0].value)) {
+            for(let i = 0; i < this.areaCodeLength; i++) {
+              this.startVal += '\\d';
+            }
+          } else {
+            this.startVal += this.areaCode[0].value;
+          }
+        } else {
+          this.startVal += this.areaCode[0].value;
+        }
+        if(this.autoComplete) {
+          this.startVal += this.autoComplete;
+        } else {
+          for(let i = 0; i < this.inputsLength; i++) {
+            this.startVal += '\\d';
+            this.localAutoComplete.push('\\d')
+          }
+        }
+      }
+    },
     computed: {
       prefixClass() {
         let classList = '';
@@ -47,44 +79,47 @@
       }
     },
     mounted(){
+      this.localVal = this.autoComplete;
       if(!isNaN(this.areaCode[0].value)) {
-        this.areaCodeLength = this.areaCode[0].value.toString().length;
+          this.areaCodeLength = this.areaCode[0].value.toString().length;
       } else {
-        this.areaCodeLength = this.areaCode[1].value.toString().length;
+          this.areaCodeLength = this.areaCode[1].value.toString().length;
       }
       this.inputsLength = 11 - this.prefix.toString().length - this.areaCodeLength;
-      this.localAutoComplete = this.autoComplete.split('');
-      this.localAutoComplete.map((item, index) => {
-        item == 'd' ? this.localAutoComplete.splice(index, 1) : false;
-      });
-      this.startVal = this.prefix.toString();
-      if(this.areaCode.length > 1) {
-        if(isNaN(this.areaCode[0].value)) {
-          for(let i = 0; i < this.areaCodeLength; i++) {
-            this.startVal += '\\d';
-          }
-        } else {
-          this.startVal = this.areaCode[0].value;
-        }
-      } else {
-        this.startVal += this.areaCode[0].value;
-      }
-      if(this.autoComplete) {
-        this.startVal += this.autoComplete;
-      } else {
-        for(let i = 0; i < this.inputsLength; i++) {
-          this.startVal += '\\d';
-          this.localAutoComplete.push('\\d')
-        }
-      }
+      this.countStartVal();
     },
     methods: {
+      countStartVal(){
+        this.localAutoComplete = this.localVal.split('');
+        this.localAutoComplete.map((item, index) => {
+          item == '\\' ? this.localAutoComplete.splice(index, 1) : false;
+        });
+        this.startVal = this.prefix.toString();
+        if(this.areaCode.length > 1) {
+          if(isNaN(this.areaCode[0].value)) {
+            for(let i = 0; i < this.areaCodeLength; i++) {
+              this.startVal += '\\d';
+            }
+          } else {
+            this.startVal += this.areaCode[0].value;
+          }
+        } else {
+          this.startVal += this.areaCode[0].value;
+        }
+        if(this.autoComplete) {
+          this.startVal += this.autoComplete;
+        } else {
+          for(let i = 0; i < this.inputsLength; i++) {
+            this.startVal += '\\d';
+            this.localAutoComplete.push('\\d')
+          }
+        }
+      },
       changeValue($event) {
         if($event.key.match(/\d/)) {
           if($event.target.value.length == 1) {
             $event.target.value = ''
           }
-
         }
         if($event.keyCode === 8) {
           if($event.target.value != '') {
@@ -97,6 +132,7 @@
             }
           }
         }
+        this.$emit('input-interaction-detected');
       },
       moveFocus($event) {
         if(isNaN(+$event.key - 1)) {
@@ -110,11 +146,16 @@
         if($event.target.value != '' && activeIndex == this.$refs.inputsWrapper.children.length - 1) {
           this.$refs.submitBtn.$el.focus();
         }
+        this.eraseButton = this.startVal !== this.nowVal;
       },
       setFocus() {
         this.targetIndex = this.countActive('forward', -1);
         this.$refs.inputsWrapper.children[this.targetIndex].focus();
         this.stickNumber();
+        this.selectWasInteracted++;
+        if(this.selectWasInteracted > 1) {
+          this.$emit('select-interaction-detected');
+        }
       },
       countActive(dir, index) {
         let quantity = this.$refs.inputsWrapper.children.length;
@@ -152,15 +193,18 @@
           this.nowVal += this.$refs.preselected.innerText;
         }
         for(let i = 0; i < this.inputsLength; i++) {
-          if(this.$refs['input-' + i].value == '') {
-            this.nowVal += '\\d';
-          } else {
-            this.nowVal += this.$refs['input-' + i].value;
+          if(this.$refs['input-' + i]) {
+            if(this.$refs['input-' + i].value == '') {
+                this.nowVal += '\\d';
+            } else {
+                this.nowVal += this.$refs['input-' + i].value;
+            }
           }
         }
         this.eraseButton = this.startVal !== this.nowVal;
-        this.$emit('selected-number', this.nowVal);
-        this.emitInteration();
+        if(this.wasInteracted > 0) {
+          this.$emit('selected-number', this.nowVal);
+        }
       },
       emitOrder() {
         this.$emit('selected-number', this.nowVal)
@@ -173,14 +217,6 @@
         this.stickNumber();
         this.$emit('search-cleared', this.nowVal)
       },
-      emitInteration() {
-        if(this.wasInteracted < 1) {
-          this.wasInteracted++;
-        } else if(this.wasInteracted == 1) {
-          this.$emit('interaction-detected', this.nowVal);
-          this.wasInteracted++;
-        }
-      }
     },
     render: function(h) {
       const codeDropdown = () => {
@@ -209,7 +245,7 @@
             } else {
               return <input class="rt-phone-input__single-one"
                             onFocus={this.setCursor} type="number" onBlur={this.returnPlaceholder}
-                            onKeyup={this.moveFocus} onKeydown={this.changeValue} onChange={this.stickNumber}
+                            onKeyup={this.moveFocus} onKeydown={this.changeValue} onInput={this.stickNumber}
                             placeholder="X" ref={'input-' + index}/>
             }
           })
@@ -221,7 +257,8 @@
         } else {
           return null
         }
-      }
+      };
+
       return <div class="rt-phone-input">
         <div class={"rt-phone-input__prefix" + this.prefixClass}>{this.prefix.toLocaleString()}</div>
         {codeDropdown()}
