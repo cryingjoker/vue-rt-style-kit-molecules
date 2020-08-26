@@ -114,7 +114,7 @@
       setFocus() {
         this.targetIndex = this.countActive('forward', -1);
         this.$refs.inputsWrapper.children[this.targetIndex].focus();
-        this.emitInteration();
+        this.stickNumber();
       },
       countActive(dir, index) {
         let quantity = this.$refs.inputsWrapper.children.length;
@@ -159,7 +159,7 @@
           }
         }
         this.eraseButton = this.startVal !== this.nowVal;
-        this.$emit('selected-number', this.nowVal)
+        this.$emit('selected-number', this.nowVal);
         this.emitInteration();
       },
       emitOrder() {
