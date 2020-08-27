@@ -472,7 +472,6 @@ export default {
      * Простая навигация зоны просмотра по слайдам (Навигаторы, стрелочки)
      */
     advancePage(direction) {
-      console.info('this.isPending && this.pages.length > 0', !this.isPending, this.pages, this.pages.length > 0)
       if (!this.isPending && this.pages.length > 0) {
         this.perfStart = performance.now()
 
@@ -630,7 +629,6 @@ export default {
             return getChild(lvl + 1, children)
           } else {
             this.slides = el.$children.filter((slide) => {
-                console.info('**',slide,slide.$vnode.tag.indexOf(slideName))
                return slide.$vnode && slide.$vnode.tag && slide.$vnode.tag.indexOf(slideName) > -1
               }
             )

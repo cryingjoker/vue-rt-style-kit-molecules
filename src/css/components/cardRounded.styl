@@ -1,3 +1,9 @@
+//use("../../atoms/plugins/readJsonKeys.js")
+///Users/cryingjoker/rostel/ui-kit/vue-rt-style-kit-molecules/src/css/components/cardRounded.styl
+///Users/cryingjoker/rostel/ui-kit/vue-rt-style-kit-molecules/src/atoms
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
 .rt-card-round
   border-radius: 19px;
   display: block;
@@ -45,6 +51,7 @@
     background-color: #fff;
     padding-top: 7px;
     padding-bottom: 7px;
+    text-align center
   .rt-card-round-img-container
     border-radius: 12px 12px 0 0
   @media(hover: hover)
@@ -86,19 +93,20 @@
   max-height: 100%;
 }
 
-
 colors = readJsonKeys('../../../color.json')
+p(colors)
 renderColorClass(postfix,color)
-
   classname = 'rt-card-round-color--'+postfix
   .{classname}
     box-shadow 0 0 0 1px lookup(color)
     border-radius: 19px;
+
   .{classname} .rt-card-round__content,
   .{classname} .rt-card-round__content:before {
     color: white;
     background-color lookup(color)
   }
+
 for $i in colors
   if search($i,'b2c') >= 0
     className = replace($i,'b2c-','')
