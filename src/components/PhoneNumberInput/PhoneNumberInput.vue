@@ -37,36 +37,17 @@
         nowVal: '',
         startCode: '',
         areaCodeLength: null,
-        selectWasInteracted: 0
+        selectWasInteracted: 0,
+        areaCodeLocal: []
       }
     },
     watch: {
       autoComplete(newVal, oldVal) {
         this.countStartVal();
-        this.localAutoComplete = newVal.split('');
-        this.localAutoComplete.map((item, index) => {
-            item == '\\' ? this.localAutoComplete.splice(index, 1) : false;
-        });
-        this.startVal = this.prefix.toString();
-        if(this.areaCode.length > 1) {
-          if(isNaN(this.areaCode[0].value)) {
-            for(let i = 0; i < this.areaCodeLength; i++) {
-              this.startVal += '\\d';
-            }
-          } else {
-            this.startVal += this.areaCode[0].value;
-          }
-        } else {
-          this.startVal += this.areaCode[0].value;
-        }
-        if(this.autoComplete) {
-          this.startVal += this.autoComplete;
-        } else {
-          for(let i = 0; i < this.inputsLength; i++) {
-            this.startVal += '\\d';
-            this.localAutoComplete.push('\\d')
-          }
-        }
+      },
+      areaCode(newVal, oldVal) {
+        this.areaCodeLocal = newVal;
+        this.countStartVal();
       }
     },
     computed: {
@@ -80,31 +61,37 @@
     },
     mounted(){
       this.localVal = this.autoComplete;
-      if(!isNaN(this.areaCode[0].value)) {
-          this.areaCodeLength = this.areaCode[0].value.toString().length;
-      } else {
-          this.areaCodeLength = this.areaCode[1].value.toString().length;
-      }
-      this.inputsLength = 11 - this.prefix.toString().length - this.areaCodeLength;
+      this.areaCodeLocal = this.areaCode;
+
       this.countStartVal();
     },
     methods: {
       countStartVal(){
+        if(this.areaCodeLocal.length) {
+          if(!isNaN(this.areaCodeLocal[0].value)) {
+            this.areaCodeLength = this.areaCodeLocal[0].value.toString().length;
+          } else {
+            this.areaCodeLength = this.areaCodeLocal[1].value.toString().length;
+          }
+          this.inputsLength = 11 - this.prefix.toString().length - this.areaCodeLength;
+        }
         this.localAutoComplete = this.localVal.split('');
         this.localAutoComplete.map((item, index) => {
           item == '\\' ? this.localAutoComplete.splice(index, 1) : false;
         });
         this.startVal = this.prefix.toString();
-        if(this.areaCode.length > 1) {
-          if(isNaN(this.areaCode[0].value)) {
-            for(let i = 0; i < this.areaCodeLength; i++) {
-              this.startVal += '\\d';
+        if(this.areaCodeLocal.length) {
+          if(this.areaCodeLocal.length > 1) {
+            if(isNaN(this.areaCodeLocal[0].value)) {
+              for(let i = 0; i < this.areaCodeLength; i++) {
+                this.startVal += '\\d';
+              }
+            } else {
+              this.startVal += this.areaCodeLocal[0].value;
             }
           } else {
-            this.startVal += this.areaCode[0].value;
+            this.startVal += this.areaCodeLocal[0].value;
           }
-        } else {
-          this.startVal += this.areaCode[0].value;
         }
         if(this.autoComplete) {
           this.startVal += this.autoComplete;
@@ -221,7 +208,7 @@
     render: function(h) {
       const codeDropdown = () => {
         const selectOptions = () => {
-          return this.areaCode.map((item, index) => {
+          return this.areaCodeLocal.map((item, index) => {
             if(index == 0) {
               return <rt-select-option selected={true} value={item.value.toString()} ref="preselected">{item.code}</rt-select-option>
             } else {
@@ -229,12 +216,14 @@
             }
           })
         };
-        if(this.areaCode.length > 1) {
-          return <rt-select ref="dropdown" onInput={this.setFocus} onChange={this.stickNumber}>
-            {selectOptions()}
-          </rt-select>
-        } else {
-          return <p class="single-code" ref="preselected" value={this.areaCode[0].value.toString()}>{this.areaCode[0].code}</p>
+        if(this.areaCodeLocal.length) {
+          if(this.areaCodeLocal.length > 1) {
+            return <rt-select ref="dropdown" onInput={this.setFocus} onChange={this.stickNumber}>
+              {selectOptions()}
+            </rt-select>
+          } else {
+            return <p class="single-code" ref="preselected" value={this.areaCode[0].value.toString()}>{this.areaCode[0].code}</p>
+          }
         }
       };
       const inputs = () => {
