@@ -116,8 +116,8 @@
     bottom: 0
 .rt-n-banner-image-container
   img
-    object-fit contain
-    object-position right center
+    object-fit cover
+    object-position left center
     width: calc(100%  + 2px);
     min-height 422px
     max-height 422px
@@ -128,8 +128,6 @@
     @media (max-width mobile-upper-limit)
       min-height 56vw
       max-height 56vw
-      object-fit cover
-      object-position right center
 
 .rt-n-banner-description
   max-width 100%
@@ -257,8 +255,8 @@ renderColorClass(classname, var, media)
     .rt-n-banner-image-container
       img
         @media (min-width tablet-lower-limit)
-          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 55%, transparent 70%)
-          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 60%, transparent 80%)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
+          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
 
 
 for $i in colors
