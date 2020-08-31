@@ -252,7 +252,13 @@
 renderColorClass(classname, var, media)
   .{classname}
     .rt-n-banner-gradient
-      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 70%)
+      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 40%)
+
+    .rt-n-banner-image-container
+      img
+        @media (min-width tablet-lower-limit)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 55%, transparent 70%)
+          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 60%, transparent 80%)
 
 
 for $i in colors
