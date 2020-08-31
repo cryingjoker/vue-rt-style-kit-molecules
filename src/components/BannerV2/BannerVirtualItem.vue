@@ -201,7 +201,7 @@ export default {
       return classNames.join(' ')
     },
     bannerWrapperClass() {
-      const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1', 'height-fill'];
+      const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1','md-sp-r-none', 'height-fill'];
       classNames.push('color-block--' + this.data.background)
       if (this.data.background != 'gray') {
         classNames.push('color-white')
