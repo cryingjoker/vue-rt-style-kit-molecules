@@ -21,7 +21,7 @@ const config = {
     }
   },
   mode: env,
-  externals:['vue','vue-rt-style-kit-atoms','vee-validate'],
+  externals:['vue','vue-rt-style-kit-atoms'],
   output: {
     path: local_dirname + '/lib',
     filename: 'vue-rt-style-kit-molecules.js',
