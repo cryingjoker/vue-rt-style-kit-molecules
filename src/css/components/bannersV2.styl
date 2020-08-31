@@ -116,8 +116,8 @@
     bottom: 0
 .rt-n-banner-image-container
   img
-    object-fit cover
-    object-position left center
+    object-fit contain
+    object-position right center
     width: calc(100%  + 2px);
     min-height 422px
     max-height 422px
@@ -128,6 +128,8 @@
     @media (max-width mobile-upper-limit)
       min-height 56vw
       max-height 56vw
+      object-fit cover
+      object-position right center
 
 .rt-n-banner-description
   max-width 100%
