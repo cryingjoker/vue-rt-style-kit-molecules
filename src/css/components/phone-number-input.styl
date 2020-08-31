@@ -98,6 +98,60 @@
     @media (max-width mobile-upper-limit)
       margin-left 0
       margin-top 24px
+  &__select
+    min-width 86px
+    padding 10px 12px
+    border 2px solid main-color01
+    border-radius 4px
+    cursor pointer
+    margin-left 12px
+    margin-right 8px
+    font-size 18px
+    line-height 28px
+    position relative
+    @media (max-width desktop-lower-limit)
+      display inline-block
+    &:hover
+      border-color main-color02
+    &:after
+      position absolute
+      content ''
+      top 50%
+      right 10px
+      transform translateY(-50%)
+      size(11px, 6px)
+      background-image url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iNyIgdmlld0JveD0iMCAwIDE0IDciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNi40NjkxOCA2LjUzMzkzTDAuOTk3MTkyIDEuMDYwODZMMi4wNTc5NiAwLjAwMDMwNTE3Nkw2Ljk5OTU3IDQuOTQyODlMMTEuOTQxMiAwLjAwMDMwNTI5NEwxMy4wMDE5IDEuMDYwODZMNy41Mjk5NSA2LjUzMzkzQzcuMzg5MjkgNi42NzQ2MSA3LjE5ODUgNi43NTM2NSA2Ljk5OTU3IDYuNzUzNjVDNi44MDA2MyA2Ljc1MzY1IDYuNjA5ODQgNi42NzQ2MSA2LjQ2OTE4IDYuNTMzOTNaIiBmaWxsPSIjMTAxODI4Ii8+Cjwvc3ZnPg==")
+      background-size contain
+      transition transform .2s linear
+    &--active
+      border-color b2c-purple
+      .rt-phone-input__select-items-wrapper
+        height auto
+        max-height 300px
+      &:after
+        transform translateY(-50%) rotate(-180deg)
+  &__select-items-wrapper
+    height 0
+    max-height 0
+    overflow hidden
+    position absolute
+    box-shadow 0 36px 36px rgba(16, 24, 40, 0.1)
+    background-color b2c-white
+    width 100%
+    top calc(100% + 2px)
+    left 0
+    right 0
+    transition max-height .2s linear
+
+  &__select-item
+    padding 6px 12px
+    //margin-top 10px
+    &:last-child
+      margin-bottom 10px
+    &:first-child
+      margin-top 10px
+    &:hover
+      color b2c-purple
 
 .single-code
   margin-left 4px
