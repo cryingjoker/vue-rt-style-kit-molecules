@@ -114,6 +114,13 @@
   right: 0
   @media (min-width tablet-lower-limit)
     bottom: 0
+  @media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
+    &>.rt-col-td-3
+      flex: 0 0 41.7%;
+      max-width: 41.7%;
+    &>.rt-col-td-3+.rt-col-td-3
+        flex: 0 0 58.3%;
+        max-width: 58.3%;
 .rt-n-banner-image-container
   img
     object-fit cover
