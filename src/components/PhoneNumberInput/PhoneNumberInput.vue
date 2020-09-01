@@ -47,7 +47,9 @@
         selectOpened: false,
         localClientAutoComplete: [],
         stickedAutoComplete: [],
-        stickedStringAutoComplete: ''
+        stickedStringAutoComplete: '',
+        dropdownIsHovered: false,
+        tempInputVal: null
       }
     },
     watch: {
@@ -92,7 +94,10 @@
         if(this.$refs.inputsWrapper.children.length) {
           this.setFocus();
         }
-      },0)
+      },0);
+      window.addEventListener('click', () => {
+        !this.dropdownIsHovered ? this.selectOpened = false : false;
+      })
     },
     methods: {
       countStartVal(){
@@ -151,7 +156,7 @@
       changeValue($event) {
         if($event.key.match(/\d/)) {
           if($event.target.value.length == 1) {
-            $event.target.value = ''
+            $event.target.value = '';
           }
         }
         if($event.keyCode === 8) {
@@ -165,7 +170,7 @@
             }
           }
         }
-        this.$emit('input-interaction-detected');
+        this.$emit('interaction-detected');
       },
       moveFocus($event) {
         if(isNaN(+$event.key - 1)) {
@@ -185,10 +190,10 @@
         this.targetIndex = this.countActive('forward', -1);
         this.$refs.inputsWrapper.children.length ? this.$refs.inputsWrapper.children[this.targetIndex].focus() : false;
         this.stickNumber();
-        this.selectWasInteracted++;
-        if(this.selectWasInteracted > 1) {
-          this.$emit('select-interaction-detected');
+        if(this.selectWasInteracted > 0) {
+          this.$emit('interaction-detected');
         }
+        this.selectWasInteracted++;
       },
       countActive(dir, index) {
         let quantity = this.$refs.inputsWrapper.children.length;
@@ -208,9 +213,16 @@
       },
       setCursor($event) {
         $event.target.placeholder = '';
+        let position = Array.prototype.indexOf.call(this.$refs.inputsWrapper.children, $event.target);
+        this.tempInputVal = {'value': $event.target.value, 'position': position};
+        $event.target.value = ''
       },
       returnPlaceholder($event) {
-        $event.target.placeholder = 'X';
+        if(this.tempInputVal?.value && $event.target.value == '') {
+          $event.target.value = this.tempInputVal.value;
+        } else {
+          $event.target.placeholder = 'X';
+        }
       },
       stickNumber() {
         this.nowVal = this.prefix;
@@ -228,14 +240,17 @@
         for(let i = 0; i < this.inputsLength; i++) {
           if(this.$refs['input-' + i]) {
             if(this.$refs['input-' + i].value == '') {
-              this.nowVal += '\\d';
+              if(this.tempInputVal?.position == i) {
+                this.nowVal += this.tempInputVal.value;
+              } else {
+                this.nowVal += '\\d';
+              }
             } else {
               this.nowVal += this.$refs['input-' + i].value;
             }
           }
         }
         this.eraseButton = this.startVal !== this.nowVal;
-        this.$emit('selected-number', this.nowVal);
       },
       emitOrder() {
         if(this.nowVal) {
@@ -245,27 +260,40 @@
       clearData() {
         this.$refs.dropdown ? this.selectedValue = this.startCode : false;
         for(let i = 0; i < this.inputsLength; i++) {
-          !this.$refs['input-' + i].hasAttribute('disabled') ? this.$refs['input-' + i].value = '' : false;
+          if(!this.$refs['input-' + i].hasAttribute('disabled')) {
+            this.$refs['input-' + i].value = '';
+            this.$refs['input-' + i].placeholder = 'X';
+          }
         }
         this.stickNumber();
-        this.$emit('search-cleared', this.nowVal)
+        this.$emit('search-cleared', this.nowVal);
+        this.eraseButton = false;
       },
       open() {
         this.selectOpened = !this.selectOpened;
       },
       setStartCodeValue() {
-        this.areaCodeLocal.map((item) => {
+        this.areaCodeLocal.map((item, index) => {
           if(item.preselected) {
            this.startCode = item.code;
            this.selectedValue = item.code;
+          } else if(index == 0){
+            this.startCode = item.code;
+            this.selectedValue = item.code;
           }
         })
+      },
+      setHovered() {
+        this.dropdownIsHovered = true;
+      },
+      removeHovered() {
+        this.dropdownIsHovered = false;
       }
     },
     render: function(h) {
       const codeDropdown = () => {
         const selectOptions = () => {
-          return this.areaCodeLocal.map((item) => {
+          return this.areaCodeLocal.map((item, index) => {
             const setValue = () => {
               this.selectedValue = item.code;
               this.setFocus();
@@ -274,13 +302,20 @@
               return <div class="rt-phone-input__select-item rt-phone-input__select-item--selected"
                           selected={true} value={item.value.toString()} ref="preselected" onClick={setValue}>{item.code}</div>
             } else {
-              return <div class="rt-phone-input__select-item" value={item.value.toString()} onClick={setValue}>{item.code}</div>
+              if(index == 0) {
+                return <div class="rt-phone-input__select-item rt-phone-input__select-item--selected"
+                            selected={true} value={item.value.toString()} ref="preselected" onClick={setValue}>{item.code}</div>
+
+              } else {
+                return <div class="rt-phone-input__select-item" value={item.value.toString()} onClick={setValue}>{item.code}</div>
+              }
             }
           })
         };
         if(this.areaCodeLocal.length) {
           if(this.areaCodeLocal.length > 1) {
-            return <div class={this.selectClasses} ref="dropdown" onClick={this.open}>
+            return <div class={this.selectClasses} ref="dropdown" onClick={this.open} onMouseenter={this.setHovered}
+                        onMouseleave={this.removeHovered}>
               <span>{this.selectedValue}</span>
               <div class="rt-phone-input__select-items-wrapper">
                 {selectOptions()}
