@@ -114,6 +114,13 @@
   right: 0
   @media (min-width tablet-lower-limit)
     bottom: 0
+  @media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
+    &>.rt-col-td-3
+      flex: 0 0 41.7%;
+      max-width: 41.7%;
+    &>.rt-col-td-3+.rt-col-td-3
+        flex: 0 0 58.3%;
+        max-width: 58.3%;
 .rt-n-banner-image-container
   img
     object-fit cover
@@ -250,7 +257,13 @@
 renderColorClass(classname, var, media)
   .{classname}
     .rt-n-banner-gradient
-      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 70%)
+      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 40%)
+
+    .rt-n-banner-image-container
+      img
+        @media (min-width tablet-lower-limit)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
+          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
 
 
 for $i in colors

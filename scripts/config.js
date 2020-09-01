@@ -47,7 +47,6 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vee-validate'],
         assetPath: resolve('lib'),
 
     },
@@ -62,7 +61,6 @@ const builds = {
         env: 'production',
         sourcemap: true,
         banner,
-        external: ['vee-validate'],
         assetPath: resolve('lib'),
 
     },
@@ -85,7 +83,6 @@ function genConfig(name = 'web-full-prod') {
             externals({
                 include: [
                     'vue',
-                    'vue-validate',
                     'vue-rt-style-kit-atoms'
                 ],
                 exclude:[
@@ -124,7 +121,7 @@ function genConfig(name = 'web-full-prod') {
 
             node({
                 jsnext: true,
-                skip: ['vee-validate','vue-rt-style-kit-atoms']
+                skip: ['vue-rt-style-kit-atoms']
             }),
 
             terser(),
