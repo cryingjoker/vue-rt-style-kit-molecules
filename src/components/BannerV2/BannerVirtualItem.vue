@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     setWatcher() {
-
       if (bannerStore.runWatcher(this._uid)) {
         this.getHeight();
         window.addEventListener("resize", debounce(this.getHeight, 10));
@@ -99,9 +98,9 @@ export default {
         })
       } else {
         this.removeWatcher();
-        setTimeout(()=>{
+        setTimeout(() => {
           this.setWatcher();
-        },1000)
+        }, 1000)
       }
 
       // this.$refs['bannerItemWrapper'].style.minHeigth = null
@@ -201,7 +200,7 @@ export default {
       return classNames.join(' ')
     },
     bannerWrapperClass() {
-      const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1','md-sp-r-none', 'height-fill'];
+      const classNames = ['rt-n-banner-wrapper', 'd-flex', 'flex-fill', 'td-sp-h-1', 'md-sp-r-none', 'height-fill'];
       classNames.push('color-block--' + this.data.background)
       if (this.data.background != 'gray') {
         classNames.push('color-white')
@@ -220,14 +219,24 @@ export default {
         return {minHeight: 'auto'}
       }
       return null
+    },
+    url() {
+      if (this.data?.url && (this.type == 'mobile' && this.data.showUrlOnMobile || this.type == 'tablet' && this.data.showUrlOnTablet || this.type == 'desktop' && this.data.showUrlOnDesktop)) {
+        return <a href={this.data?.url} class="rt-n-banner-item-url"></a>
+      }
+      return null
     }
   },
   render(h) {
     return <div class={this.bannerClass} ref="bannerItem" style={this.bannerStyle}>
+
       <div class="rt-container flex-fill d-flex td-sp-h-none">
         <rt-col class="height-fill td-sp-h-none" size={12}>
+
           <div class={this.bannerWrapperClass} style={this.wrapperStyle} ref="bannerItemWrapper">
+
             <rt-row class="flex-fill rt-n-banner-content md-d-block">
+
               <rt-col size={1} t-hide={true} m-hide={true}></rt-col>
               <rt-col size={5} tablet-size={3} mobile-size={3} class="d-flex flex-fill md-height-fill">
                 <div class="d-flex flex-start-center md-flex-start-top rt-n-banner-inner">
@@ -250,6 +259,7 @@ export default {
                                         use-gradient={this.data['useGradient']}
             >
             </rt-banner-virtual-image-v2>
+            {this.url}
           </div>
         </rt-col>
       </div>
