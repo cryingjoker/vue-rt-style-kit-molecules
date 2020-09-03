@@ -32,47 +32,8 @@
     @media (max-width mobile-upper-limit)
       &:first-child
         margin-left 0
-  .select
-    width auto
-    height auto
-    margin-left 12px
-    margin-right 8px
-    padding 10px 12px
-    border-radius 4px
-    border 2px solid main-color01
-    min-width 86px
-    @media (max-width desktop-lower-limit)
-      display inline-block
-    &:hover
-      border-color main-color02
-    &--is-open
-      border-color b2c-purple!important
-    &-arrow
-      top -3px
-      &__icon
-        transform translateY(-120%)
-    &-list
-      left 0
-      bottom -4px
-      transform translateY(100%)
-      border-radius 4px
-    &-input,
-    &-option__inner
-      font-size 18px
-      line-height 28px
-    &-value
-      padding 0
-      margin 0
-  .text-field__line
-    display none
-  .select-option__inner:focus,
-  .select-option__inner:hover
-    color b2c-purple
-    background-color b2c-white
-  .select-option--select
-    .select-option__inner
-      font-weight inherit
   .inputs-wrapper
+    display flex
     margin-right 24px
     @media (max-width desktop-lower-limit)
       margin-right 0
