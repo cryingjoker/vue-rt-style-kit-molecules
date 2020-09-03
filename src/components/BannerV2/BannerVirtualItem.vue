@@ -50,6 +50,7 @@ export default {
 
   mounted: function () {
     deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
+    this.setGoogleAn()
   },
   beforeMount() {
 
@@ -63,6 +64,58 @@ export default {
     }
   },
   methods: {
+    setGoogleAn(){
+      if(this.data.ga){
+        this.googleAn(true)
+      }
+    },
+    fireGoogleAn(e){
+      if(this.data.ga) {
+        if(e){
+          e.preventDefault();
+        }
+        let parentId;
+        const customSlotsSort = bannerStore.getSlotSort(this.bannerName)
+        let currentKey = customSlotsSort.indexOf(this._uid);
+        if(this.bannerName.length > 0){
+          parentId = this.bannerName;
+        }
+        else{
+          parentId = this.$parent._uid
+        }
+        if (!window.dataLayer) {
+          window.dataLayer = [];
+        }
+        let banner_place = currentKey+1;
+        // if(this.data.gaBannerName){
+        //   banner_place = this.data.gaBannerName
+        // }
+
+        window.dataLayer.push({
+          event: this.data.gaEventType,
+          type: 'banner_click',
+          banner_name: this.data.ga.name,
+          banner_id: this.data.gaBannerName ? this.data.gaBannerName : parentId,
+          banner_place: banner_place,
+          banner_section: this.data.ga.section || window.location.pathname
+        });
+        if(e){
+          global.location.href = this.data?.url;
+        }
+      }
+    },
+    googleAn(bind){
+      if(bind) {
+        this.$el.querySelector('a, button').addEventListener('click', (e)=> {
+          if (!e.target.getAttribute('data-ga-pushed')) {
+            e.preventDefault();
+            this.fireGoogleAn()
+            e.target.setAttribute('data-ga-pushed', 'true');
+            e.target.click();
+          }
+        }, false);
+      }
+    },
     setWatcher() {
       if (bannerStore.runWatcher(this._uid)) {
         this.getHeight();
@@ -222,7 +275,7 @@ export default {
     },
     url() {
       if (this.data?.url && (this.type == 'mobile' && this.data.showUrlOnMobile || this.type == 'tablet' && this.data.showUrlOnTablet || this.type == 'desktop' && this.data.showUrlOnDesktop)) {
-        return <a href={this.data?.url} class="rt-n-banner-item-url"></a>
+        return <a onClick={this.fireGoogleAn} href={this.data?.url} class="rt-n-banner-item-url"></a>
       }
       return null
     }

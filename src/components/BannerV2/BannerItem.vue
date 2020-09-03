@@ -19,6 +19,20 @@
             type: String,
             default: ''
           },
+          ga:{
+            type: Object,
+            default: () => {
+              return {}
+            }
+          },
+          gaEventType:{
+            type:String,
+            default: 'b2c'
+          },
+          gaBannerName:{
+            type:String,
+            default: ''
+          },
           isActive:{
             type: Boolean,
             default: false
@@ -122,6 +136,14 @@
             bannerStore.setSlot(parentId, 'showUrlOnMobile', this.showUrlOnMobile, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnTablet', this.showUrlOnTablet, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnDesktop', this.showUrlOnDesktop, itemId)
+          }
+          if(this.ga && Object.keys(this.ga).length > 0){
+
+            bannerStore.setSlot(parentId, 'ga', this.ga, itemId)
+            bannerStore.setSlot(parentId, 'gaEventType', this.gaEventType, itemId)
+            if(this.gaBannerName.length>0) {
+              bannerStore.setSlot(parentId, 'gaBannerName', this.gaBannerName, itemId)
+            }
           }
           bannerStore.setSlot(parentId, 'background', this.colorType, itemId)
           bannerStore.setActiveId(parentId, itemId)
