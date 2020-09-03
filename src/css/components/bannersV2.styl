@@ -95,6 +95,7 @@
   transition-timing-function ease-in-out
   transition-duration 0.5s
   transition-property transform
+  z-index 2
   @media (max-width mobile-upper-limit)
     opacity: 1
     visibility: visible;
@@ -112,6 +113,7 @@
   top: 0
   left: 0
   right: 0
+  pointer-events none
   @media (min-width tablet-lower-limit)
     bottom: 0
   @media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
@@ -141,15 +143,17 @@
   @media (max-width mobile-upper-limit)
     max-width: calc(100% - 20px)
 .rt-n-banner-paginator
-  z-index 2
+  z-index 4
   position: absolute;
   bottom: 29px
   left: 0
   right: 0
+
   @media (max-width tablet-upper-limit)
     bottom 18px
   @media (max-width mobile-upper-limit)
-    position: static;
+    pointer-events none
+    position: relative;
 
 
 .rt-n-banner-paginator-item
@@ -160,7 +164,8 @@
   padding-bottom: 3px
   padding-right: 3px
   position: relative;
-  cursor: pointer;
+  z-index 20
+  pointer-events auto
   &:before
     content: ''
     display: block
@@ -242,6 +247,7 @@
   touch-callout: none
   outline: none
   -webkit-tap-highlight-color: transparent
+  pointer-events all
   &+&
     margin-left: 12px
 
@@ -270,3 +276,14 @@ for $i in colors
   if search($i,'b2c') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
+
+
+.rt-n-banner-item-url
+  cursor: pointer;
+  pointer-events: auto
+  position: absolute;
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index 10

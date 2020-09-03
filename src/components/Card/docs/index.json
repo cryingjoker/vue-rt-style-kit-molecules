@@ -1,6 +1,31 @@
 {
   "items" : [
     {
+      "name" : "rt-card-rounded",
+      "property" : ":need-resize",
+      "type" : "Number",
+      "description" : "Если есть необходимлсть вызвать resize event, то это время в ms для его триггера",
+      "value" : "0",
+      "version":"0.3.45"
+    },
+    {
+      "name" : "rt-card-rounded",
+      "property" : ":background-сolor",
+      "type" : "String",
+      "description" : "Название цвета заднего фона из /colors все b2c- пишется без b2c",
+      "value" : "",
+      "version": "0.3.45"
+    },
+    {
+      "name" : "rt-card-rounded",
+      "property" : ":сolor",
+      "type" : "String",
+      "description" : "Название цвета текст из /colors все b2c- пишется без b2c",
+      "value" : "",
+      "version": "0.3.45"
+    },
+
+    {
       "name" : "rt-card",
       "property" : "lazy-background-image, lazy-image",
       "type" : "String",

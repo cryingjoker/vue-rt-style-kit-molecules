@@ -6,9 +6,6 @@
 
     const componentsList = {};
 
-    //dark-slate
-    //gray
-    //orange-super
 
     export default {
         name: "RtBannerItemV2",
@@ -30,6 +27,22 @@
             type: Boolean,
             default: true
           },
+          url:{
+            type:String,
+            default: ''
+          },
+          showUrlOnMobile:{
+            type:Boolean,
+            default: true
+          },
+          showUrlOnTablet:{
+            type:Boolean,
+            default: false
+          },
+          showUrlOnDesktop:{
+            type:Boolean,
+            default: false
+          }
         },
         data: () => ({
 
@@ -103,6 +116,12 @@
           }
           if(this.isActive){
             bannerStore.setActiveSlot(parentId,itemId)
+          }
+          if(this.url.length > 0){
+            bannerStore.setSlot(parentId, 'url', this.url, itemId)
+            bannerStore.setSlot(parentId, 'showUrlOnMobile', this.showUrlOnMobile, itemId)
+            bannerStore.setSlot(parentId, 'showUrlOnTablet', this.showUrlOnTablet, itemId)
+            bannerStore.setSlot(parentId, 'showUrlOnDesktop', this.showUrlOnDesktop, itemId)
           }
           bannerStore.setSlot(parentId, 'background', this.colorType, itemId)
           bannerStore.setActiveId(parentId, itemId)

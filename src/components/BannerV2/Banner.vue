@@ -25,7 +25,7 @@ export default {
     },
     time: {
       type: Number,
-      default: 3000
+      default: 4500
     },
     fps: {
       type: Number,
