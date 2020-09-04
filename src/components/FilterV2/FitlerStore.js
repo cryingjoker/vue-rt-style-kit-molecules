@@ -126,7 +126,7 @@ export const filterStore = Vue.observable({
   getActiveTags: filterStoreObject.getActiveTags,
   removeActiveTags: filterStoreObject.removeActiveTags,
   setActiveTags: filterStoreObject.setActiveTags,
-  removeSlots: filterStoreObject.removeSlots,
+  removeSlot: filterStoreObject.removeSlot,
   getSlotSort: filterStoreObject.getSlotSort,
   getHeight: filterStoreObject.getHeight,
   removeWatcher: filterStoreObject.removeWatcher,
