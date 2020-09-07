@@ -19,7 +19,9 @@
                 adImage: null,
                 adText: null,
                 adLink: null,
-                adLinkText: null
+                adLinkText: null,
+                gaValue: [],
+                gotBanner: false
             };
         },
         computed: {
@@ -28,10 +30,27 @@
                 return navClass;
             }
         },
-        mounted() {},
+        mounted() {
+            if(this.gotBanner) {
+                this.bindBannerClick()
+            }
+        },
+        beforeUpdate() {
+            if(this.gotBanner) {
+                this.unbindBannerClick();
+            }
+        },
+        updated(){
+            if(this.gotBanner) {
+                this.bindBannerClick();
+            }
+        },
         created() {},
         methods: {
             navigateBack() {
+                if (!window.dataLayer) {
+                    window.dataLayer = [];
+                }
                 this.activeNodePath = this.activeNodePath.split('/');
                 this.activeNodePath.pop();
                 let targetNodeIndex = this.activeNodePath[this.activeNodePath.length - 1];
@@ -48,6 +67,49 @@
                     this.adLinkText = this.navTree[targetNodeIndex].linkText;
                 }
                 this.activeNodePath = this.activeNodePath.length !== 0 ? this.activeNodePath.join('/') : null;
+                this.gaValue.pop();
+            },
+            pushData($event) {
+                $event.preventDefault();
+                this.gaValue.push($event.target.innerText);
+                let targetLink;
+                if($event.target.localName == 'div') {
+                    targetLink = $event.target.closest('a').getAttribute('href');
+                } else if($event.target.localName == 'a') {
+                    targetLink = $event.target.getAttribute('href');
+                }
+                if (!window.dataLayer) {
+                    window.dataLayer = [];
+                }
+                window.dataLayer.push({
+                    'event': window.RTK_UTILS ? window.RTK_UTILS.currentSegment : 'b2c',
+                    'type': 'main_nav',
+                    'value': this.gaValue.join(' | ')
+                });
+                window.location = targetLink;
+            },
+            bindBannerClick(){
+                this.$refs.promoBanner.$el.addEventListener('click', ($event) => {
+                    this.pushBannerData($event)
+                })
+            },
+            unbindBannerClick(){
+                this.$refs.promoBanner.$el.removeEventListener('click', ($event) => {
+                    this.pushBannerData($event)
+                })
+            },
+            pushBannerData($event) {
+                $event.preventDefault();
+                this.gaValue.push(this.adTitle);
+                if (!window.dataLayer) {
+                    window.dataLayer = [];
+                }
+                window.dataLayer.push({
+                    'event': window.RTK_UTILS ? window.RTK_UTILS.currentSegment : 'b2c',
+                    'type': 'banner_nav',
+                    'value': this.gaValue.join(' | ')
+                });
+                window.location = this.adLink;
             }
         },
         render(h) {
@@ -73,6 +135,10 @@
                         this.adText = item.adText;
                         this.adLink = item.linkTarget;
                         this.adLinkText = item.linkText;
+                        if (!window.dataLayer) {
+                            window.dataLayer = [];
+                        }
+                        this.gaValue.push(item.label);
                     };
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
@@ -85,7 +151,7 @@
                         </div>
 
                     } else {
-                        return <a href={item.path}>
+                        return <a href={item.path} onClick={this.pushData}>
                             <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
                                 {item.label}
                                 {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
@@ -96,15 +162,19 @@
             }
 
             const navigationAdvertisement = () => {
+                this.gotBanner = true;
                 if(this.activeNodePath.length === 3 && this.adTitle) {
                     return <rt-header-advertisement-block image={this.adImage}
                                                           link-target={this.adLink}
-                                                          link-text={this.adLinkText}>
+                                                          link-text={this.adLinkText}
+                                                          ref="promoBanner">
                         <template slot="title">{this.adTitle}</template>
                         <template slot="paragraph">{this.adText}</template>
                     </rt-header-advertisement-block>
+                } else {
+                    this.gotBanner = false;
                 }
-            }
+            };
 
             return <div class={this.navigationClasses}>
                 {navigationTitle()}
