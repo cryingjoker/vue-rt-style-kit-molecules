@@ -54,13 +54,7 @@ colors = readJsonKeys('../../../color.json')
   pointer-events none
   @media (min-width tablet-lower-limit)
     bottom: 0
-  @media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
-    &>.rt-col-td-3
-      flex: 0 0 41.7%;
-      max-width: 41.7%;
-    &>.rt-col-td-3+.rt-col-td-3
-        flex: 0 0 58.3%;
-        max-width: 58.3%;
+
   @media (max-width mobile-upper-limit)
     position: relative;
 .rt-jumbotron-image-container
@@ -107,7 +101,7 @@ renderColorClass(classname, var, media)
 
 
 for $i in colors
-  if search($i,'b2c') >= 0
+  if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
 

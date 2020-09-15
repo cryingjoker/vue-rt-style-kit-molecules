@@ -130,9 +130,9 @@ export default {
     },
     label() {
       if (this.$slots.label) {
-        return <h2 class="rt-font-h2">
+        return <h1 class="rt-font-h1">
           {this.$slots.label}
-        </h2>
+        </h1>
       }
       return null
     },
@@ -168,8 +168,8 @@ export default {
   render(h) {
     return <div class={this.jumbotronClass}>
       <rt-row class="rt-jumbotron-image flex-fill">
-        <rt-col size={5} tablet-size={3} m-hide={true}></rt-col>
-        <rt-col size={7} tablet-size={3} mobile-size={3}>
+        <rt-col size={6} tablet-size={3} m-hide={true}></rt-col>
+        <rt-col size={6} tablet-size={3} mobile-size={3}>
 
           {this.imageRender}
           {this.imageX2Render}
