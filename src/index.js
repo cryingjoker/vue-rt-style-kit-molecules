@@ -89,7 +89,8 @@ import {
   HelpBlock,
   BannerV2,
   BannerItemV2,
-  PhoneNumberInput
+  PhoneNumberInput,
+  Jumbotron
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -194,6 +195,7 @@ const VueRtStyle = {
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
+      Vue.component(Jumbotron.name, Jumbotron);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -331,6 +333,7 @@ export {
   BannerV2,
   BannerItemV2,
   PhoneNumberInput,
+  Jumbotron,
   // need to change name directives
   SwipeLeft,
   SwipeRight,

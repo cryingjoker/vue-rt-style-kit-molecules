@@ -88,4 +88,5 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
 
 
+ export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';

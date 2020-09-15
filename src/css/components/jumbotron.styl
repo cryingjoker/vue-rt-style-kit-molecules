@@ -1,0 +1,123 @@
+use("./plugins/readJsonKeys.js")
+use("./plugins/search.js")
+use("./plugins/replace.js")
+use("./plugins/callVariable.js")
+colors = readJsonKeys('../../../color.json')
+
+.rt-jumbotron
+  overflow hidden
+  position: relative;
+
+  @media (min-width tablet-lower-limit)
+    height 340px
+  @media (min-width laptop-lower-limit)
+    height: 480px
+
+.rt-jumbotron-wrapper
+  overflow: hidden;
+  position: relative;
+  max-width 100%
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+    height: 100%
+  @media (max-width tablet-upper-limit)
+    border-radius 0;
+  @media (max-width mobile-upper-limit)
+    padding-top: 56vw
+    padding-bottom: 24px
+    box-sizing border-box
+.rt-jumbotron-inner
+  min-width 100%
+.rt-jumbotron-header
+  @media (max-width mobile-upper-limit)
+    max-height 32px
+
+
+.rt-jumbotron-content
+  position: relative;
+  z-index 2
+  max-width 100%
+
+.rt-jumbotron-inner-content
+  @media (max-width mobile-upper-limit)
+    min-width 100%
+    min-height 100%
+
+
+
+
+
+.rt-jumbotron-image
+  position: absolute;
+  top: 0
+  left: 0
+  right: 0
+  pointer-events none
+  @media (min-width tablet-lower-limit)
+    bottom: 0
+  @media (min-width tablet-lower-limit) and (max-width tablet-upper-limit)
+    &>.rt-col-td-3
+      flex: 0 0 41.7%;
+      max-width: 41.7%;
+    &>.rt-col-td-3+.rt-col-td-3
+        flex: 0 0 58.3%;
+        max-width: 58.3%;
+  @media (max-width mobile-upper-limit)
+    position: relative;
+.rt-jumbotron-image-container
+  img
+    object-fit cover
+    object-position left center
+    width: calc(100%  + 2px);
+
+    min-height 480px
+    max-height 480px
+    font-family: 'object-fit: cover; object-position: left center;'
+    @media (max-width tablet-upper-limit)
+      min-height 340px
+      max-height 340px
+    @media (max-width mobile-upper-limit)
+      min-height 56vw
+      max-height 56vw
+
+.rt-jumbotron-description
+  max-width 100%
+  @media (max-width mobile-upper-limit)
+    max-width: calc(100% - 20px)
+
+
+.rt-jumbotron-gradient
+  width: 25%
+  position: absolute;
+  left: 0
+
+  height: 100%
+  @media (max-width tablet-upper-limit)
+    width: 30%
+
+renderColorClass(classname, var, media)
+  .{classname}
+    .rt-jumbotron-gradient
+      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 40%)
+
+    .rt-jumbotron-image-container
+      img
+        @media (min-width tablet-lower-limit)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
+          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
+
+
+for $i in colors
+  if search($i,'b2c') >= 0
+    className = 'color-block--'+replace($i,'b2c-','')
+    renderColorClass(className, $i, $type)
+
+
+.rt-jumbotron-item-url
+  cursor: pointer;
+  pointer-events: auto
+  position: absolute;
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index 10
