@@ -23,10 +23,30 @@ export default {
     descriptionColor:{
       type: String,
       default: 'white'
+    },
+    url:{
+      type: String,
+      default: ''
+    },
+    showUrlOnMobile:{
+      type:Boolean,
+      default: true
+    },
+    showUrlOnTablet:{
+      type:Boolean,
+      default: false
+    },
+    showUrlOnDesktop:{
+      type:Boolean,
+      default: false
     }
   },
+  data: () => ({
+    type: ''
+  }),
 
   mounted: function () {
+    deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
 
   },
   beforeMount() {
@@ -39,7 +59,17 @@ export default {
   beforeDestroy: function () {
   },
 
-  methods: {},
+  methods: {
+    fireGoogleAn(){
+
+    },
+    setDeviceType() {
+      const type = deviceTypeStore.getStatus()
+      if (this.type != type) {
+        this.type = type;
+      }
+    },
+  },
   computed: {
 
     jumbotronClass() {
@@ -164,6 +194,12 @@ export default {
       }
       return null
     },
+    renderUrl(){
+        if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type == 'desktop' && this.showUrlOnDesktop)) {
+          return <a onClick={this.fireGoogleAn} href={this.url} class="rt-jumbotron-url"></a>
+        }
+        return null
+    }
   },
   render(h) {
     return <div class={this.jumbotronClass}>
@@ -194,6 +230,7 @@ export default {
             </div>
           </rt-col>
         </div>
+      {this.renderUrl}
     </div>
 
   }

@@ -75,6 +75,7 @@ export default {
   },
 
   methods: {
+
     setDeviceType() {
       const type = deviceTypeStore.getStatus()
       if (this.type != type) {
