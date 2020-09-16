@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     setGoogleAn(){
-      if(this.data.ga){
+      if(this.ga && Object.keys(this.data.ga).length > 0){
         this.googleAn(true)
       }
     },

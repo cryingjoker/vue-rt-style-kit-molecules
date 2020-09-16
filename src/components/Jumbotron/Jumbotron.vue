@@ -1,6 +1,7 @@
 <script type="text/jsx">
 
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import {bannerStore} from "../BannerV2/BannerStore";
 
 const componentsList = {};
 
@@ -28,6 +29,14 @@ export default {
       type: String,
       default: ''
     },
+    name:{
+      type: String,
+      default: ''
+    },
+    section:{
+      type: String,
+      default: ''
+    },
     showUrlOnMobile:{
       type:Boolean,
       default: true
@@ -39,7 +48,17 @@ export default {
     showUrlOnDesktop:{
       type:Boolean,
       default: false
-    }
+    },
+    gaEventType:{
+      type:String,
+      default: 'b2c'
+    },
+    ga:{
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
   },
   data: () => ({
     type: ''
@@ -47,6 +66,7 @@ export default {
 
   mounted: function () {
     deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
+    this.setGoogleAn()
 
   },
   beforeMount() {
@@ -60,8 +80,63 @@ export default {
   },
 
   methods: {
-    fireGoogleAn(){
+    fireGoogleAn(e){
+      if(this.ga) {
+        if(e){
+          e.preventDefault();
+        }
+        let jumbotronName;
 
+        if(this.ga?.name?.length > 0){
+          jumbotronName = this.ga.name
+        }else {
+          if (this.name.length > 0) {
+            jumbotronName = this.name;
+          } else {
+            jumbotronName = this._uid
+          }
+        }
+        if (!window.dataLayer) {
+          window.dataLayer = [];
+        }
+        let section;
+        if(this.ga?.section?.length > 0){
+          section = this.ga.section
+        }else{
+          section = window.location.pathname;
+        }
+        let banner_place = 1;
+
+
+        window.dataLayer.push({
+          event: this.gaEventType,
+          type: 'banner_click',
+          banner_name: jumbotronName,
+          banner_id: this._uid,
+          banner_place: banner_place,
+          banner_section: section
+        });
+        if(e && this.url.length > 0){
+          global.location.href = this.url;
+        }
+      }
+    },
+    setGoogleAn(){
+      if(this.ga && Object.keys(this.ga).length > 0){
+        this.googleAn(true)
+      }
+    },
+    googleAn(bind){
+      if(bind) {
+        this.$el.querySelector('a, button').addEventListener('click', (e)=> {
+          if (!e.target.getAttribute('data-ga-pushed')) {
+            e.preventDefault();
+            this.fireGoogleAn()
+            e.target.setAttribute('data-ga-pushed', 'true');
+            e.target.click();
+          }
+        }, false);
+      }
     },
     setDeviceType() {
       const type = deviceTypeStore.getStatus()
