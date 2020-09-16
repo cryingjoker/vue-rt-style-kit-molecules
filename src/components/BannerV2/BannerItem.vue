@@ -92,6 +92,12 @@
               bannerStore.setSlot(parentId, 'mobileHeader', header, itemId)
             }
           }
+          if(this.$slots['tablet-header']) {
+            const header = this.$slots['tablet-header'];
+            if(header) {
+              bannerStore.setSlot(parentId, 'tabletHeader', header, itemId)
+            }
+          }
           if(this.$slots['description']) {
             const description = this.$slots['description'];
             if(description) {

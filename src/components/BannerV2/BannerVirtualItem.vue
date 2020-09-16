@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     setGoogleAn(){
-      if(this.data.ga){
+      if(this.ga && Object.keys(this.data.ga).length > 0){
         this.googleAn(true)
       }
     },
@@ -167,6 +167,9 @@ export default {
         if (this.data.mobileHeader) {
           classList.push('md-d-none')
         }
+        if (this.data.tabletHeader) {
+          classList.push('td-d-none')
+        }
         return <div class={classList.join(' ')}>
           {this.data.header}
         </div>
@@ -177,6 +180,14 @@ export default {
       if (this.data.mobileHeader) {
         return <div class="sp-b-0-3 md-d-flex d-none">
           {this.data.mobileHeader}
+        </div>
+      }
+      return null
+    },
+    tabletHeader() {
+      if (this.data.tabletHeader) {
+        return <div class="sp-b-0-3 md-d-none td-d-flex d-none">
+          {this.data.tabletHeader}
         </div>
       }
       return null
@@ -296,6 +307,7 @@ export default {
                   <div class="md-sp-t-1-2 d-flex flex-column rt-n-banner-inner-content">
                     <div class="md-flex-fill">
                       {this.header}
+                      {this.tabletHeader}
                       {this.mobileHeader}
                       {this.label}
                       {this.description}
