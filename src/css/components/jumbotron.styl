@@ -60,7 +60,7 @@ colors = readJsonKeys('../../../color.json')
 .rt-jumbotron-image-container
   img
     object-fit cover
-    object-position left center
+    object-position center center
     width: calc(100%  + 2px);
 
     min-height 480px
@@ -77,12 +77,15 @@ colors = readJsonKeys('../../../color.json')
   max-width 100%
   @media (max-width mobile-upper-limit)
     max-width: calc(100% - 20px)
-
+.rt-jumbotron-content
+  position: relative;
+  z-index 3
 
 .rt-jumbotron-gradient
-  width: 25%
+  width: 35%
   position: absolute;
   left: 0
+  z-index 1
 
   height: 100%
   @media (max-width tablet-upper-limit)
@@ -91,17 +94,19 @@ colors = readJsonKeys('../../../color.json')
 renderColorClass(classname, var, media)
   .{classname}
     .rt-jumbotron-gradient
-      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 40%)
+      background-image: linear-gradient(to left, rgba(lookup(var),0) 0%, rgba(lookup(var),1) 100%)
 
     .rt-jumbotron-image-container
       img
         @media (min-width tablet-lower-limit)
-          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
-          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 55%, transparent 100%)
+          mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 70%, transparent 100%)
 
 
 for $i in colors
+
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
+
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
 
