@@ -196,7 +196,7 @@ export default {
     },
     imageMobileRender() {
       if (this.$slots['image-mobile']) {
-        const classList = ['rt-jumbotron-image-container', 'md-d-block', 'd-none'];
+        const classList = ['rt-jumbotron-image-container', 'md-d-flex', 'd-none'];
 
         return <div class={classList.join(' ')}>{this.$slots['image-mobile'][0]}</div>
       }
@@ -291,7 +291,7 @@ export default {
         <div class="rt-container d-flex flex-fill height-fill ">
           <rt-col size="5" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
-              <div class="md-sp-t-1-2 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
+              <div class="md-sp-t-1 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
                 <div class="md-flex-fill">
                   {this.header}
                   {this.tabletHeader}
