@@ -28,6 +28,10 @@
       clientAutoComplete: {
         type: String,
         default: ''
+      },
+      showClearButton: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -52,7 +56,8 @@
         tempInputVal: null,
         searchCleared: false,
         activeOptionIndex: 0,
-        hoveredOptionIndex: null
+        hoveredOptionIndex: null,
+        localShowClearButton: this.showClearButton
       }
     },
     watch: {
@@ -74,6 +79,9 @@
       activeOptionIndex(newVal, oldVal) {
         this.activeOptionIndex = newVal;
         this.setOptionClass(this.activeOptionIndex);
+      },
+      showClearButton(newVal, oldVal) {
+        this.localShowClearButton = newVal;
       }
     },
     computed: {
@@ -191,6 +199,7 @@
         },1)
       },
       changeValue($event) {
+        $event.preventDefault();
         if($event.key.match(/\d/)) {
           if($event.target.value.length > 0) {
             $event.target.value = '';
@@ -445,15 +454,25 @@
         })
       };
       const clearForm = () => {
-        if(this.eraseButton) {
+        if(this.eraseButton && this.localShowClearButton) {
           return <rt-button class="rt-button-cool-grey-border" onClick={this.clearData}>{this.clearButtonText}</rt-button>
         } else {
           return null
         }
       };
+      const prefix = () => {
+        if(this.prefix.toString().length > 1) {
+          let localPrefix = this.prefix.toString().split('');
+          localPrefix.shift();
+          localPrefix.unshift('8', ' ');
+          return localPrefix.join('')
+        } else {
+          return this.prefix;
+        }
+      };
 
       return <div class="rt-phone-input">
-        <div class={"rt-phone-input__prefix" + this.prefixClass}>{this.prefix.toLocaleString()}</div>
+        <div class={"rt-phone-input__prefix" + this.prefixClass}>{prefix()}</div>
         {codeDropdown()}
         <div class="inputs-wrapper md-d-block" ref="inputsWrapper">
           {inputs()}

@@ -11,7 +11,8 @@
     border 2px solid main-color01
     border-radius 4px
     margin-left 4px
-    size(32px 52px)
+    width 32px
+    height 52px
     box-sizing border-box
     padding 12px 0
     text-align center
@@ -74,6 +75,8 @@
     font-size 18px
     line-height 28px
     position relative
+    overflow hidden
+    vertical-align middle
     @media (max-width desktop-lower-limit)
       display inline-block
     &:hover
@@ -90,6 +93,7 @@
       transition transform .2s linear
     &--active
       border-color b2c-purple
+      overflow inherit
       .rt-phone-input__select-items-wrapper
         height auto
         max-height 300px

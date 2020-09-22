@@ -159,23 +159,20 @@
       let id = 'tabs-'+this._uid;
       const renderContent = ()=>{
         return <div class="rt-tabs-content">
-              {this.$slots.content}
-            </div>
+          {this.$slots.content}
+        </div>
       }
       const renderNavigation = ()=>{
-
         if(this.roundTabletView){
           return <div class="rt-tabs-navigation-round-wrapper">
-                <div style={this.navigationStyle} class="rt-tabs-navigation">
-                  {this.$slots.navigation}
-                </div>
-              </div>
-
+            <div style={this.navigationStyle} class="rt-tabs-navigation">
+              {this.$slots.navigation}
+            </div>
+          </div>
         }
           return <div style={this.navigationStyle} class="rt-tabs-navigation">
-                {this.$slots.navigation}
-              </div>
-
+            {this.$slots.navigation}
+          </div>
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
         return <div id={id} class={this.tabsClassNames}>
@@ -197,9 +194,7 @@
             </div>
           </div>;
         }
-
       }
-
     }
   };
 </script>
