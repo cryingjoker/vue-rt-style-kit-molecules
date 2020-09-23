@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     setGoogleAn(){
-      if(this.ga && Object.keys(this.data.ga).length > 0){
+      if(this.data.ga && Object.keys(this.data.ga).length > 0){
         this.googleAn(true)
       }
     },
@@ -106,6 +106,7 @@ export default {
     },
     googleAn(bind){
       if(bind) {
+        console.info(this.$el.querySelector('a, button'))
         this.$el.querySelector('a, button').addEventListener('click', (e)=> {
           if (!e.target.getAttribute('data-ga-pushed')) {
             e.preventDefault();
