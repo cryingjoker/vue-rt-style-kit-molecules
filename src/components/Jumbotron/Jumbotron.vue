@@ -59,6 +59,10 @@ export default {
         return {}
       }
     },
+    desktopColumnSize:{
+      type: Number,
+      default: 6
+    }
   },
   data: () => ({
     type: ''
@@ -286,11 +290,10 @@ export default {
           {this.imageX2Render}
           {this.imageTabletRender}
           {this.imageMobileRender}
-
         </rt-col>
       </rt-row>
         <div class="rt-container d-flex flex-fill height-fill ">
-          <rt-col size="6" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
+          <rt-col size={this.desktopColumnSize} tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
               <div class="md-sp-t-1-2 md-sp-b-1-4 d-flex flex-column rt-jumbotron-inner-content">
                 <div class="md-flex-fill">
