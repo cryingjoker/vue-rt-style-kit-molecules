@@ -289,7 +289,7 @@ export default {
 
         </rt-col>
       </rt-row>
-        <div class="rt-container rt-jumbotron-content d-flex flex-fill height-fill ">
+        <div class="rt-container d-flex flex-fill height-fill ">
           <rt-col size="5" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
               <div class="md-sp-t-1 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
