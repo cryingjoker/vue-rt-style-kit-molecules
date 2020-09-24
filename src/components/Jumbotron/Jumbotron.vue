@@ -243,7 +243,7 @@ export default {
     },
     description() {
       if (this.$slots.description) {
-        const classList = ['sp-t-0-4','td-sp-t-0-3'];
+        const classList = ['sp-t-0-4','td-sp-t-0-3','rt-font-paragraph'];
           classList.push('color-' + this.descriptionColor)
         return <p class={classList.join(' ')}>
           {this.$slots.description}
@@ -279,8 +279,8 @@ export default {
   render(h) {
     return <div class={this.jumbotronClass}>
       <rt-row class="rt-jumbotron-image flex-fill">
-        <rt-col size={6} tablet-size={2} m-hide={true}></rt-col>
-        <rt-col size={6} tablet-size={4} mobile-size={3}>
+        <rt-col size={6} tablet-size={3} m-hide={true}></rt-col>
+        <rt-col size={6} tablet-size={3} mobile-size={3}>
           <div class="rt-jumbotron-gradient md-d-none d-block"></div>
           {this.imageRender}
           {this.imageX2Render}
@@ -290,7 +290,7 @@ export default {
         </rt-col>
       </rt-row>
         <div class="rt-container d-flex flex-fill height-fill ">
-          <rt-col size="5" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
+          <rt-col size="6" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
               <div class="md-sp-t-1-2 md-sp-b-1-4 d-flex flex-column rt-jumbotron-inner-content">
                 <div class="md-flex-fill">
