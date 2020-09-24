@@ -281,7 +281,7 @@ export default {
       <rt-row class="rt-jumbotron-image flex-fill">
         <rt-col size={6} tablet-size={2} m-hide={true}></rt-col>
         <rt-col size={6} tablet-size={4} mobile-size={3}>
-          <div class="rt-jumbotron-gradient md-d-none"></div>
+          <div class="rt-jumbotron-gradient md-d-none d-block"></div>
           {this.imageRender}
           {this.imageX2Render}
           {this.imageTabletRender}
