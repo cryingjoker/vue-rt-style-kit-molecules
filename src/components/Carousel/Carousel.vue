@@ -466,6 +466,9 @@ export default {
 
     fitCarouselWidth() {
       this.bodyWidth = getComputedStyle(window.document.body).width
+      if (this.isInnerBlock) {
+        this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
+      }
     },
 
     /**
