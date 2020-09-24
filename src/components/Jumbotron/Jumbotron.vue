@@ -204,7 +204,7 @@ export default {
     },
     header() {
       if (this.$slots.header) {
-        const classList = ['sp-b-0-4'];
+        const classList = ['sp-b-0-4','td-sp-b-0-3'];
         if (this.$slots['mobile-header']) {
           classList.push('md-d-none')
         }
@@ -219,7 +219,7 @@ export default {
     },
     mobileHeader() {
       if (this.$slots['mobile-header']) {
-        return <div class="sp-b-0-4 md-d-flex d-none">
+        return <div class="sp-b-0-4 td-sp-b-0-3 md-d-flex d-none">
           {this.$slots['mobile-header']}
         </div>
       }
@@ -227,7 +227,7 @@ export default {
     },
     tabletHeader() {
       if (this.$slots['tablet-header']) {
-        return <div class="sp-b-0-4 md-d-none td-d-flex d-none">
+        return <div class="sp-b-0-4 td-sp-b-0-3 md-d-none td-d-flex d-none">
           {this.$slots['tablet-header']}
         </div>
       }
@@ -243,7 +243,7 @@ export default {
     },
     description() {
       if (this.$slots.description) {
-        const classList = ['sp-t-0-4'];
+        const classList = ['sp-t-0-4','td-sp-t-0-3'];
           classList.push('color-' + this.descriptionColor)
         return <p class={classList.join(' ')}>
           {this.$slots.description}
@@ -253,7 +253,7 @@ export default {
     },
     bodyHtml(){
       if(this.$slots['body-html']){
-        const classList = ['sp-t-0-4'];
+        const classList = ['sp-t-0-4','td-sp-t-0-3'];
         return <div class={classList.join(' ')}>
           {this.$slots['body-html']}
         </div>
@@ -262,7 +262,7 @@ export default {
     },
     footer() {
       if (this.$slots.footer) {
-        const classList = ['sp-t-1-2'];
+        const classList = ['sp-t-1-2','td-sp-t-1-1'];
         return <div class={classList.join(' ')}>
           {this.$slots.footer}
         </div>
@@ -292,7 +292,7 @@ export default {
         <div class="rt-container d-flex flex-fill height-fill ">
           <rt-col size="5" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
-              <div class="md-sp-t-1 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
+              <div class="md-sp-t-1-2 md-sp-b-2-4 d-flex flex-column rt-jumbotron-inner-content">
                 <div class="md-flex-fill">
                   {this.header}
                   {this.tabletHeader}
