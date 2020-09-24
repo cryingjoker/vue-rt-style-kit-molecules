@@ -292,7 +292,7 @@ export default {
         <div class="rt-container d-flex flex-fill height-fill ">
           <rt-col size="5" tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
             <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
-              <div class="md-sp-t-1-2 md-sp-b-2-4 d-flex flex-column rt-jumbotron-inner-content">
+              <div class="md-sp-t-1-2 md-sp-b-1-4 d-flex flex-column rt-jumbotron-inner-content">
                 <div class="md-flex-fill">
                   {this.header}
                   {this.tabletHeader}
