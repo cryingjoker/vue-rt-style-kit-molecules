@@ -194,12 +194,12 @@
             this.localAutoComplete.push('\\d')
           }
         }
-        setTimeout(() => {
-          this.setFocus();
-        },1)
+        // setTimeout(() => {
+        //   this.setFocus();
+        // },1)
       },
       changeValue($event) {
-        $event.preventDefault();
+        // $event.preventDefault();
         if($event.key.match(/\d/)) {
           if($event.target.value.length > 0) {
             $event.target.value = '';
@@ -266,6 +266,7 @@
         $event.target.placeholder = '';
       },
       returnPlaceholder($event) {
+        isNaN($event.target.value) ? $event.target.value = '' : false;
         $event.target.placeholder = 'X';
       },
       stickNumber() {
@@ -323,9 +324,15 @@
         this.$emit('select-interaction-detected');
         this.selectOpened = !this.selectOpened;
         if(this.selectWasInteracted == 0) {
+          let hasPreselection = false;
           this.areaCodeLocal.map((item, index) => {
             if(item.preselected) {
-              this.activeOptionIndex = index;
+              hasPreselection = true;
+            }
+          });
+          this.areaCodeLocal.map((item, index) => {
+            if(hasPreselection) {
+              item.preselected ? this.activeOptionIndex = index : false;
             } else {
               this.activeOptionIndex = 0;
             }
@@ -366,15 +373,23 @@
       },
       setStartCodeValue() {
         if(this.areaCodeLocal.length) {
+          let hasPreselection = false;
           this.areaCodeLocal.map((item, index) => {
             if(item.preselected) {
-              this.startCode = item.code;
-              this.selectedValue = item.code;
+              hasPreselection = true;
+            }
+          });
+          this.areaCodeLocal.map((item, index) => {
+            if(hasPreselection) {
+              if(item.preselected) {
+                this.startCode = item.code;
+                this.selectedValue = item.code;
+              }
             } else {
               this.startCode = this.areaCodeLocal[0].code;
               this.selectedValue = this.areaCodeLocal[0].code;
             }
-          });
+          })
         }
       },
       setHovered() {
@@ -387,6 +402,7 @@
         this.stickedAutoComplete.map((item, index) => {
           if (!isNaN(item.value) && !item.disabled) {
             this.$refs['input-' + index].value = item.value;
+            this.eraseButton = true;
           }
         });
       },
