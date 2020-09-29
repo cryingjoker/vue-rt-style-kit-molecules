@@ -294,7 +294,7 @@
         },0)
       },
       emitOrder() {
-        if(this.nowVal) {
+        if(this.nowVal || !this.showClearButton) {
           this.$emit('selected-number', this.nowVal);
         }
         this.eraseButton = true;
@@ -332,7 +332,7 @@
             }
           });
           this.areaCodeLocal.map((item, index) => {
-            if(hasPreselection) {
+            if(hasPreselection && !this.searchCleared) {
               item.preselected ? this.activeOptionIndex = index : false;
             } else {
               this.activeOptionIndex = 0;
@@ -408,23 +408,28 @@
         });
       },
       setOptionClass(index) {
-        let options = this.$refs.optionWrapper.children;
-        for(let i = 0; i < options.length; i++) {
-          options[i].classList.remove('rt-phone-input__select-item--selected');
+        if(this.$refs.optionWrapper) {
+          let options = this.$refs.optionWrapper.children;
+          for(let i = 0; i < options.length; i++) {
+            options[i].classList.remove('rt-phone-input__select-item--selected');
+          }
+          options[index].classList.add('rt-phone-input__select-item--selected');
         }
-        options[index].classList.add('rt-phone-input__select-item--selected');
       }
     },
     render: function(h) {
       const codeDropdown = () => {
         const selectOptions = () => {
           return this.areaCodeLocal.map((item, index) => {
+            console.log('!!!!')
             const setValue = () => {
               this.selectedValue = item.code;
               this.activeOptionIndex = index;
               this.setOptionClass(this.activeOptionIndex);
               this.setFocus();
             };
+            console.log(this.selectedValue)
+            console.log(this.activeOptionIndex)
             if(item.preselected) {
               return <div class="rt-phone-input__select-item"
                           selected={true} value={item.value.toString()} ref="preselected" onClick={setValue}>{item.code}</div>
