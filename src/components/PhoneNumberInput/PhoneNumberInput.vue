@@ -303,6 +303,7 @@
         this.searchCleared = true;
         this.$refs.dropdown ? this.selectedValue = this.areaCodeLocal[0].code : false;
         this.activeOptionIndex = 0;
+        this.setOptionClass(this.activeOptionIndex);
         for(let i = 0; i < this.inputsLength; i++) {
           if(!this.$refs['input-' + i].hasAttribute('disabled')) {
             this.$refs['input-' + i].value = '';
