@@ -172,7 +172,7 @@
           <div class={lineClassList.join(' ')}>
             <div class="rt-n-banner-paginator-line-inner" style={this.lineStyle}></div>
           </div>
-          <div class='rt-n-banner-paginator-inner' style={{top: (this.height-60)+'px'}}>
+          <div class='rt-n-banner-paginator-inner' style={{top: (this.height-45)+'px'}}>
           <div class="rt-n-banner-paginator-button" onClick={setPrevActive}>
             <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.471149 5.46945L5.97115 0L7.02885 1.06361L2.06363 6.00126L7.02885 10.9389L5.97115 12.0025L0.471149 6.53306C0.329592 6.39229 0.25 6.2009 0.25 6.00126C0.25 5.80162 0.329592 5.61023 0.471149 5.46945Z" fill="#101828"/>

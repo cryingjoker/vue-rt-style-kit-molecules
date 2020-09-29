@@ -9,9 +9,9 @@ colors = readJsonKeys('../../../color.json')
   position: relative;
 
   @media (min-width tablet-lower-limit)
-    height 340px
+    height 380px
   @media (min-width laptop-lower-limit)
-    height: 480px
+    height: 520px
 
 .rt-jumbotron-wrapper
   overflow: hidden;
@@ -27,6 +27,7 @@ colors = readJsonKeys('../../../color.json')
     box-sizing border-box
 .rt-jumbotron-inner
   min-width 100%
+  z-index 2
 .rt-jumbotron-header
   @media (max-width mobile-upper-limit)
     max-height 32px
@@ -63,12 +64,12 @@ colors = readJsonKeys('../../../color.json')
     object-position center center
     width: calc(100%  + 2px);
 
-    min-height 480px
-    max-height 480px
+    min-height 520px
+    max-height 520px
     font-family: 'object-fit: cover; object-position: left center;'
     @media (max-width tablet-upper-limit)
-      min-height 340px
-      max-height 340px
+      min-height 380px
+      max-height 380px
     @media (max-width mobile-upper-limit)
       min-height 56vw
       max-height 56vw
@@ -82,14 +83,13 @@ colors = readJsonKeys('../../../color.json')
   z-index 3
 
 .rt-jumbotron-gradient
-  width: 35%
+  width: 15%
   position: absolute;
   left: 0
   z-index 1
-
   height: 100%
   @media (max-width tablet-upper-limit)
-    width: 30%
+    width: 15%
 
 renderColorClass(classname, var, media)
   .{classname}
@@ -99,7 +99,7 @@ renderColorClass(classname, var, media)
     .rt-jumbotron-image-container
       img
         @media (min-width tablet-lower-limit)
-          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 55%, transparent 100%)
+          -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 70%, transparent 100%)
           mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 70%, transparent 100%)
 
 

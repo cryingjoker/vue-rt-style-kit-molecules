@@ -76,7 +76,7 @@ export default {
         }
         let parentId;
         const customSlotsSort = bannerStore.getSlotSort(this.bannerName)
-        let currentKey = customSlotsSort.indexOf(this._uid);
+        let currentKey = customSlotsSort.indexOf(this.id);
         if(this.bannerName.length > 0){
           parentId = this.bannerName;
         }
