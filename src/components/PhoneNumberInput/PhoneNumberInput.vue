@@ -87,7 +87,7 @@
     computed: {
       prefixClass() {
         let classList = '';
-        if(this.prefix.toString().length > 1 && window.innerWidth <= parseInt(variables["mobile-upper-limit"])) {
+        if(this.prefix.toString().length > 1 && window.innerWidth <= parseInt(variables["mobile-upper-limit"]) && this.areaCodeLocal.length != 1) {
           classList += ' rt-phone-input__prefix--separated'
         }
         return classList;
@@ -201,6 +201,7 @@
       changeValue($event) {
         // $event.preventDefault();
         if($event.key.match(/\d/)) {
+          // alert($event.target.value)
           if($event.target.value.length > 0) {
             $event.target.value = '';
             $event.target.value = $event.key;
@@ -217,23 +218,30 @@
           }
         } else if($event.keyCode === 13) {
           this.emitOrder();
+        } else if($event.key == 'Unidentified') {
+
         }
         this.$emit('input-interaction-detected');
       },
       moveFocus($event) {
         if($event.key.match(/\d/)) {
-          $event.preventDefault();
+          // $event.preventDefault();
           $event.target.value = $event.key;
+        } else if($event.key == 'Unidentified'){
+
         } else {
           $event.target.value = '';
         }
         let activeIndex = Array.prototype.indexOf.call(this.$refs.inputsWrapper.children, $event.target);
-        if($event.target.value != '' && $event.target.nextSibling && $event.key.match(/\d/)) {
+        if($event.target.value != '' && $event.target.nextSibling && ($event.key.match(/\d/) || ($event.key == 'Unidentified' && !isNaN($event.target.value)))) {
           this.targetIndex = this.countActive('forward', activeIndex);
           this.$refs.inputsWrapper.children[this.targetIndex].focus()
         }
         if($event.target.value != '' && activeIndex == this.$refs.inputsWrapper.children.length - 1) {
           this.$refs.submitBtn.$el.focus();
+        }
+        if(isNaN($event.target.value)) {
+            $event.target.value = '';
         }
         // this.eraseButton = this.startVal !== this.nowVal;
         this.stickNumber();
@@ -415,21 +423,23 @@
           }
           options[index].classList.add('rt-phone-input__select-item--selected');
         }
+      },
+      checkValid($event) {
+        if(isNaN($event.clipboardData.getData('Text'))) {
+            $event.target.value = '';
+        }
       }
     },
     render: function(h) {
       const codeDropdown = () => {
         const selectOptions = () => {
           return this.areaCodeLocal.map((item, index) => {
-            console.log('!!!!')
             const setValue = () => {
               this.selectedValue = item.code;
               this.activeOptionIndex = index;
               this.setOptionClass(this.activeOptionIndex);
               this.setFocus();
             };
-            console.log(this.selectedValue)
-            console.log(this.activeOptionIndex)
             if(item.preselected) {
               return <div class="rt-phone-input__select-item"
                           selected={true} value={item.value.toString()} ref="preselected" onClick={setValue}>{item.code}</div>
@@ -464,13 +474,13 @@
               return <input class="rt-phone-input__single-one" disabled ref={'input-' + index} value={item.value}/>
             } else {
               return <input class="rt-phone-input__single-one" ref={'input-' + index}
-                            onFocus={this.setCursor} type="text" onBlur={this.returnPlaceholder} maxLength="1"
-                            onKeyup={this.moveFocus} onKeydown={this.changeValue} placeholder="X"/>
+                            onFocus={this.setCursor} type="number" onBlur={this.returnPlaceholder} maxLength="1"
+                            onKeyup={this.moveFocus} onKeydown={this.changeValue} placeholder="X" onPaste={this.checkValid}/>
             }
           } else {
             return <input class="rt-phone-input__single-one"
-                          onFocus={this.setCursor} type="text" onBlur={this.returnPlaceholder} maxLength="1"
-                          onKeyup={this.moveFocus} onKeydown={this.changeValue} onInput={this.stickNumber}
+                          onFocus={this.setCursor} type="number" onBlur={this.returnPlaceholder} maxLength="1"
+                          onKeyup={this.moveFocus} onKeydown={this.changeValue} onInput={this.stickNumber} onPaste={this.checkValid}
                           placeholder="X" ref={'input-' + index}/>
           }
         })
