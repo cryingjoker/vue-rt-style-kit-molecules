@@ -87,7 +87,7 @@
     computed: {
       prefixClass() {
         let classList = '';
-        if(this.prefix.toString().length > 1 && window.innerWidth <= parseInt(variables["mobile-upper-limit"])) {
+        if(this.prefix.toString().length > 1 && window.innerWidth <= parseInt(variables["mobile-upper-limit"]) && this.areaCodeLocal.length != 1) {
           classList += ' rt-phone-input__prefix--separated'
         }
         return classList;
@@ -194,13 +194,14 @@
             this.localAutoComplete.push('\\d')
           }
         }
-        setTimeout(() => {
-          this.setFocus();
-        },1)
+        // setTimeout(() => {
+        //   this.setFocus();
+        // },1)
       },
       changeValue($event) {
-        $event.preventDefault();
+        // $event.preventDefault();
         if($event.key.match(/\d/)) {
+          // alert($event.target.value)
           if($event.target.value.length > 0) {
             $event.target.value = '';
             $event.target.value = $event.key;
@@ -217,23 +218,30 @@
           }
         } else if($event.keyCode === 13) {
           this.emitOrder();
+        } else if($event.key == 'Unidentified') {
+
         }
         this.$emit('input-interaction-detected');
       },
       moveFocus($event) {
         if($event.key.match(/\d/)) {
-          $event.preventDefault();
+          // $event.preventDefault();
           $event.target.value = $event.key;
+        } else if($event.key == 'Unidentified'){
+
         } else {
           $event.target.value = '';
         }
         let activeIndex = Array.prototype.indexOf.call(this.$refs.inputsWrapper.children, $event.target);
-        if($event.target.value != '' && $event.target.nextSibling && $event.key.match(/\d/)) {
+        if($event.target.value != '' && $event.target.nextSibling && ($event.key.match(/\d/) || ($event.key == 'Unidentified' && !isNaN($event.target.value)))) {
           this.targetIndex = this.countActive('forward', activeIndex);
           this.$refs.inputsWrapper.children[this.targetIndex].focus()
         }
         if($event.target.value != '' && activeIndex == this.$refs.inputsWrapper.children.length - 1) {
           this.$refs.submitBtn.$el.focus();
+        }
+        if(isNaN($event.target.value)) {
+            $event.target.value = '';
         }
         // this.eraseButton = this.startVal !== this.nowVal;
         this.stickNumber();
@@ -266,6 +274,7 @@
         $event.target.placeholder = '';
       },
       returnPlaceholder($event) {
+        isNaN($event.target.value) ? $event.target.value = '' : false;
         $event.target.placeholder = 'X';
       },
       stickNumber() {
@@ -293,7 +302,7 @@
         },0)
       },
       emitOrder() {
-        if(this.nowVal) {
+        if(this.nowVal || !this.showClearButton) {
           this.$emit('selected-number', this.nowVal);
         }
         this.eraseButton = true;
@@ -302,6 +311,7 @@
         this.searchCleared = true;
         this.$refs.dropdown ? this.selectedValue = this.areaCodeLocal[0].code : false;
         this.activeOptionIndex = 0;
+        this.setOptionClass(this.activeOptionIndex);
         for(let i = 0; i < this.inputsLength; i++) {
           if(!this.$refs['input-' + i].hasAttribute('disabled')) {
             this.$refs['input-' + i].value = '';
@@ -323,9 +333,15 @@
         this.$emit('select-interaction-detected');
         this.selectOpened = !this.selectOpened;
         if(this.selectWasInteracted == 0) {
+          let hasPreselection = false;
           this.areaCodeLocal.map((item, index) => {
             if(item.preselected) {
-              this.activeOptionIndex = index;
+              hasPreselection = true;
+            }
+          });
+          this.areaCodeLocal.map((item, index) => {
+            if(hasPreselection && !this.searchCleared) {
+              item.preselected ? this.activeOptionIndex = index : false;
             } else {
               this.activeOptionIndex = 0;
             }
@@ -366,15 +382,23 @@
       },
       setStartCodeValue() {
         if(this.areaCodeLocal.length) {
+          let hasPreselection = false;
           this.areaCodeLocal.map((item, index) => {
             if(item.preselected) {
-              this.startCode = item.code;
-              this.selectedValue = item.code;
+              hasPreselection = true;
+            }
+          });
+          this.areaCodeLocal.map((item, index) => {
+            if(hasPreselection) {
+              if(item.preselected) {
+                this.startCode = item.code;
+                this.selectedValue = item.code;
+              }
             } else {
               this.startCode = this.areaCodeLocal[0].code;
               this.selectedValue = this.areaCodeLocal[0].code;
             }
-          });
+          })
         }
       },
       setHovered() {
@@ -387,15 +411,23 @@
         this.stickedAutoComplete.map((item, index) => {
           if (!isNaN(item.value) && !item.disabled) {
             this.$refs['input-' + index].value = item.value;
+            this.eraseButton = true;
           }
         });
       },
       setOptionClass(index) {
-        let options = this.$refs.optionWrapper.children;
-        for(let i = 0; i < options.length; i++) {
-          options[i].classList.remove('rt-phone-input__select-item--selected');
+        if(this.$refs.optionWrapper) {
+          let options = this.$refs.optionWrapper.children;
+          for(let i = 0; i < options.length; i++) {
+            options[i].classList.remove('rt-phone-input__select-item--selected');
+          }
+          options[index].classList.add('rt-phone-input__select-item--selected');
         }
-        options[index].classList.add('rt-phone-input__select-item--selected');
+      },
+      checkValid($event) {
+        if(isNaN($event.clipboardData.getData('Text'))) {
+            $event.target.value = '';
+        }
       }
     },
     render: function(h) {
@@ -442,13 +474,13 @@
               return <input class="rt-phone-input__single-one" disabled ref={'input-' + index} value={item.value}/>
             } else {
               return <input class="rt-phone-input__single-one" ref={'input-' + index}
-                            onFocus={this.setCursor} type="text" onBlur={this.returnPlaceholder} maxLength="1"
-                            onKeyup={this.moveFocus} onKeydown={this.changeValue} placeholder="X"/>
+                            onFocus={this.setCursor} type="number" onBlur={this.returnPlaceholder} maxLength="1"
+                            onKeyup={this.moveFocus} onKeydown={this.changeValue} placeholder="X" onPaste={this.checkValid}/>
             }
           } else {
             return <input class="rt-phone-input__single-one"
-                          onFocus={this.setCursor} type="text" onBlur={this.returnPlaceholder} maxLength="1"
-                          onKeyup={this.moveFocus} onKeydown={this.changeValue} onInput={this.stickNumber}
+                          onFocus={this.setCursor} type="number" onBlur={this.returnPlaceholder} maxLength="1"
+                          onKeyup={this.moveFocus} onKeydown={this.changeValue} onInput={this.stickNumber} onPaste={this.checkValid}
                           placeholder="X" ref={'input-' + index}/>
           }
         })
