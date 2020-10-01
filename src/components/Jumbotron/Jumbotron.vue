@@ -283,8 +283,8 @@ export default {
   render(h) {
     return <div class={this.jumbotronClass}>
       <rt-row class="rt-jumbotron-image flex-fill">
-        <rt-col size={6} tablet-size={3} m-hide={true}></rt-col>
-        <rt-col size={6} tablet-size={3} mobile-size={3}>
+        <rt-col size={6} large-size={5} tablet-size={3} m-hide={true}></rt-col>
+        <rt-col size={6} large-size={7} tablet-size={3} mobile-size={3}>
           <div class="rt-jumbotron-gradient md-d-none d-block"></div>
           {this.imageRender}
           {this.imageX2Render}
