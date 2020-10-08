@@ -86,7 +86,7 @@ export default {
         if (!window.dataLayer) {
           window.dataLayer = [];
         }
-        let banner_place = currentKey+1;
+        let banner_place = currentKey;
         // if(this.data.gaBannerName){
         //   banner_place = this.data.gaBannerName
         // }
