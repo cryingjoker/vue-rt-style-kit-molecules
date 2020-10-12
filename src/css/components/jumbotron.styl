@@ -48,16 +48,18 @@ colors = readJsonKeys('../../../color.json')
 
 
 .rt-jumbotron-image
-  position: absolute;
-  top: 0
-  left: 0
-  right: 0
-  pointer-events none
-  @media (min-width tablet-lower-limit)
-    bottom: 0
+  &.row,
+  &
+    position: absolute;
+    top: 0
+    left: 0
+    right: 0
+    pointer-events none
+    @media (min-width tablet-lower-limit)
+      bottom: 0
 
-  @media (max-width mobile-upper-limit)
-    position: relative;
+    @media (max-width mobile-upper-limit)
+      position: relative;
 .rt-jumbotron-image-container
   img
     object-fit cover
