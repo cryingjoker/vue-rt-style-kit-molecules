@@ -71,7 +71,6 @@ export default {
   mounted: function () {
     deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
     this.setGoogleAn()
-
   },
   beforeMount() {
 
@@ -132,14 +131,17 @@ export default {
     },
     googleAn(bind){
       if(bind) {
-        this.$el.querySelector('a, button').addEventListener('click', (e)=> {
-          if (!e.target.getAttribute('data-ga-pushed')) {
-            e.preventDefault();
-            this.fireGoogleAn()
-            e.target.setAttribute('data-ga-pushed', 'true');
-            e.target.click();
-          }
-        }, false);
+        const el = this.$el.querySelector('a, button');
+        if(el) {
+          el.addEventListener('click', (e) => {
+            if (!e.target.getAttribute('data-ga-pushed')) {
+              e.preventDefault();
+              this.fireGoogleAn()
+              e.target.setAttribute('data-ga-pushed', 'true');
+              e.target.click();
+            }
+          }, false);
+        }
       }
     },
     setDeviceType() {
