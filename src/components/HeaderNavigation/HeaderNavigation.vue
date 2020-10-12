@@ -120,7 +120,7 @@
                              class="header-navigation__item-arrow header-navigation__item-arrow--back">
                             <path d="M4.5 1L1 4.5L4.5 8" stroke="#101828"/>
                         </svg>
-                        {this.activeNodeTitle}
+                        <span domPropsInnerHTML={this.activeNodeTitle}/>
                     </div>
                 }
             };
@@ -142,8 +142,8 @@
                     };
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
-                            <p>{item.label}</p>
-                            {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
+                            <p domPropsInnerHTML={item.label}/>
+                            <div domPropsInnerHTML={item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}/>
                             <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="header-navigation__item-arrow header-navigation__item-arrow--next">
                                 <path d="M1 8L4.5 4.5L1 1" stroke="#101828"/>
@@ -153,8 +153,8 @@
                     } else {
                         return <a href={item.path} onClick={this.pushData}>
                             <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
-                                {item.label}
-                                {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
+                                <div domPropsInnerHTML={item.label}/>
+                                <div domPropsInnerHTML={item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}/>
                             </div>
                         </a>
                     }

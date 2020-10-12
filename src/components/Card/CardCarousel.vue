@@ -56,9 +56,9 @@
             },
             getCarouselItems(index) {
                 if (index === undefined) {
-                    return this.$refs.carousel.querySelectorAll(this.itemClassNormalized)
+                    return this.$refs.carousel?.querySelectorAll(this.itemClassNormalized)
                 } else {
-                    return this.$refs.carousel.querySelectorAll(this.itemClassNormalized)[index];
+                    return this.$refs.carousel?.querySelectorAll(this.itemClassNormalized)[index];
                 }
             },
             renderLayout() {

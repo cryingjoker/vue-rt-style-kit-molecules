@@ -1,0 +1,90 @@
+.rt-carousel-v2
+  position relative
+  scroll-behavior smooth
+  &--d-scroll
+    .rt-carousel-slide-v2
+      width 30%
+      flex-basis 30%
+  &__inner
+    overflow auto
+    flex-wrap wrap
+    display flex
+    margin 0 -10px
+    scroll-snap-type x mandatory
+    scrollbar-width none
+    -webkit-overflow-scrolling touch
+    &::-webkit-scrollbar
+      width 0
+      display none
+    @media (max-width laptop-upper-limit)
+      flex-wrap nowrap
+  &--d-scroll
+    .rt-carousel-v2__inner
+      flex-wrap nowrap
+    .rt-carousel-slide-v2
+      padding-bottom 0
+  &__slide-wrapper
+    overflow hidden
+    margin 0 auto
+  &__navs
+    position absolute
+    top 0
+    left 40px
+    right 40px
+    bottom 0
+  &__arrow
+    size(52px)
+    border-radius 50%
+    background-color b2c-white
+    box-shadow 0 0 8px rgba(main-color, .25)
+    display flex
+    position absolute
+    top calc((100% - 52px) / 2)
+    cursor pointer
+    align-items center
+    justify-content center
+    z-index 4
+    @media (max-width tablet-upper-limit)
+      display none
+    &-left
+      left 10px
+    &-right
+      right 10px
+  &__fading
+    position absolute
+    top 0
+    bottom 0
+    width 60px
+    z-index 3
+    padding 10px
+    &-right
+      right -1px
+      background linear-gradient(to left, rgba(b2c-white, 1), rgba(b2c-white, 1) 10px, rgba(b2c-white, 0) 100%)
+    &-left
+      left -1px
+      background linear-gradient(to right, rgba(b2c-white, 1), rgba(b2c-white, 1) 10px, rgba(b2c-white, 0) 100%)
+
+.rt-carousel-slide-v2
+  padding 0 10px 20px
+  flex-shrink 0
+  box-sizing border-box
+  scroll-snap-align center center
+  transition opacity .1s linear
+  &--3
+    width calc(100% / 3)
+    flex-basis calc(100% / 3)
+  &--4
+    width 25%
+    flex-basis 25%
+  &--hidden
+    opacity .3
+  @media (max-width desktop-upper-limit)
+    width calc(35vw + 20px)!important
+    flex-basis calc(35vw + 20px)!important
+    scroll-snap-align start
+    scroll-snap-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+    scroll-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+  @media (max-width mobile-upper-limit)
+    width calc(65vw + 20px)!important
+    flex-basis calc(65vw + 20px)!important
+    scroll-snap-align center center

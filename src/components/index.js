@@ -86,6 +86,8 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export {default as SliderItem} from './Slider/SliderItem.vue'
  export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
  export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
+export {default as CarouselV2} from './CarouselV2/Carousel.vue';
+export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
 
 
  export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
