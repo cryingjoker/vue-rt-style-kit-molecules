@@ -44,6 +44,9 @@
       if(this.contentToResize) {
         this.resizeData = this.resizeData.concat(this.contentToResize);
       }
+      setTimeout(()=> {
+        window.dispatchEvent(new Event('resize'));
+      },500)
     },
     beforeUpdate() {
       let primaryData = this.hasSlotContent;
@@ -96,8 +99,6 @@
         this.scrollStep = data.size;
       },
       smoothScroll(startPos, endPos, wrapper) {
-        console.log(startPos);
-        console.log(endPos);
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
           if (startPos < endPos) {
             let int = setInterval(() => {
@@ -157,7 +158,7 @@
     },
     render(h) {
       const arrowLeft = () => {
-        if(!this.farLeft) {
+        if(!this.farLeft && this.scrollableOnDesktop) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-left">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-left" onClick={this.scrollLeft}>
                 <rt-system-icons name="chevron left"></rt-system-icons>
@@ -166,7 +167,7 @@
         }
       };
       const arrowRight = () => {
-        if (!this.farRight) {
+        if (!this.farRight && this.scrollableOnDesktop) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-right">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-right" onClick={this.scrollRight}>
                 <rt-system-icons name="chevron right"></rt-system-icons>

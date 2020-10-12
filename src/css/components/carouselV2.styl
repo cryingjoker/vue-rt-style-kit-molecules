@@ -78,13 +78,15 @@
     flex-basis 25%
   &--hidden
     opacity .3
-  @media (max-width desktop-upper-limit)
-    width calc(35vw + 20px)!important
-    flex-basis calc(35vw + 20px)!important
-    scroll-snap-align start
-    scroll-snap-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
-    scroll-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
-  @media (max-width mobile-upper-limit)
-    width calc(65vw + 20px)!important
-    flex-basis calc(65vw + 20px)!important
-    scroll-snap-align center center
+  & .rt-carousel-v2--d-scroll
+    &
+      @media (max-width desktop-upper-limit)
+        width calc(35vw + 20px)
+        flex-basis calc(35vw + 20px)
+        scroll-snap-align start
+        scroll-snap-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+        scroll-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+      @media (max-width mobile-upper-limit)
+        width calc(65vw + 20px)
+        flex-basis calc(65vw + 20px)
+        scroll-snap-align center center
