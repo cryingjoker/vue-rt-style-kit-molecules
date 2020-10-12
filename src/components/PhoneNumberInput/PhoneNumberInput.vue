@@ -409,7 +409,7 @@
       },
       setClientAutoComplete() {
         this.stickedAutoComplete.map((item, index) => {
-          if (!isNaN(item.value) && !item.disabled) {
+          if (!isNaN(item.value) && !item.disabled && this.$refs['input-' + index]) {
             this.$refs['input-' + index].value = item.value;
             this.eraseButton = true;
           }

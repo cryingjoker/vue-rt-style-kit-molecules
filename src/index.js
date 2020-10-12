@@ -90,7 +90,9 @@ import {
   BannerV2,
   BannerItemV2,
   PhoneNumberInput,
-  Jumbotron
+  Jumbotron,
+  CarouselV2,
+  CarouselSlideV2
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -178,6 +180,8 @@ const VueRtStyle = {
       Vue.component(HeaderNavigation.name, HeaderNavigation);
       Vue.component(TextImageBlock.name, TextImageBlock);
       Vue.component(PhoneNumberInput.name, PhoneNumberInput);
+      Vue.component(CarouselV2.name, CarouselV2);
+      Vue.component(CarouselSlideV2.name, CarouselSlideV2);
 
 
       Vue.component(Tabs.name, Tabs);
@@ -334,6 +338,8 @@ export {
   BannerItemV2,
   PhoneNumberInput,
   Jumbotron,
+  CarouselV2,
+  CarouselSlideV2,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
