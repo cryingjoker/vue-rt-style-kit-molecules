@@ -39,6 +39,10 @@ export default {
     withIcon: {
       type: Boolean,
       default: false
+    },
+    openInNewTab: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -261,7 +265,7 @@ export default {
       </div>
     };
     if(this.href) {
-      return <a class={this.mainClass} href={this.href}>
+      return <a class={this.mainClass} href={this.href} target={this.openInNewTab ? '_blank' : '_self'}>
         {innerContent()}
       </a>
     } else {

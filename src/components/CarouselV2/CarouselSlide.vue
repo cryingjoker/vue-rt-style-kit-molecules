@@ -23,22 +23,26 @@
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
-        classList += ` rt-carousel-slide-v2--${this.$parent._props.width}`;
+        if(this.$parent?._props) {
+          classList += ` rt-carousel-slide-v2--${this.$parent._props.width}`;
+        }
         this.isOutsideContainer ? classList += ' rt-carousel-slide-v2--hidden' : null;
         return classList;
       }
     },
     mounted() {
-      this.emitScrollStep();
-      this.defineContainer();
-      this.calculatePosition();
-      this.$parent.$on('scrolling', this.setTempStyle);
-      this.$parent.$on('scroll-end', this.returnStyle);
-      this.$parent.$on('native-scroll-stopped', this.calculatePosition);
-      window.addEventListener('resize', debounce(this.emitScrollStep, 25));
-      window.addEventListener('resize', debounce(this.defineContainer, 25));
-      deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
-      this.calculateMobileOptions();
+      if(this.$el && this.$parent) {
+        this.emitScrollStep();
+        this.defineContainer();
+        this.calculatePosition();
+        this.$parent.$on('scrolling', this.setTempStyle);
+        this.$parent.$on('scroll-end', this.returnStyle);
+        this.$parent.$on('native-scroll-stopped', this.calculatePosition);
+        window.addEventListener('resize', debounce(this.emitScrollStep, 25));
+        window.addEventListener('resize', debounce(this.defineContainer, 25));
+        deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+        this.calculateMobileOptions();
+      }
     },
     beforeUpdate(){
       deviceTypeStore.removeWatcher(this._uid,this.calculateMobileOptions);
@@ -87,13 +91,15 @@
         this.isTablet = type === 'tablet';
       },
       defineContainer() {
-        this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
-        this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
-        this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
-        this.calculatePosition();
+        if(this.$parent?.$refs.inner) {
+          this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
+          this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
+          this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
+          this.calculatePosition();
+        }
       },
       calculatePosition() {
-        if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || Math.floor(this.$el.getBoundingClientRect().left) < this.startLimit) {
+        if(this.$el.getBoundingClientRect().right > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
           this.isOutsideContainer = true;
         } else {
           this.isOutsideContainer = false;

@@ -5,6 +5,8 @@
     .rt-carousel-slide-v2
       width 30%
       flex-basis 30%
+    .rt-carousel-v2__fading
+      display block
   &__inner
     overflow auto
     flex-wrap wrap
@@ -57,6 +59,7 @@
     width 60px
     z-index 3
     padding 10px
+    display none
     &-right
       right -1px
       background linear-gradient(to left, rgba(b2c-white, 1), rgba(b2c-white, 1) 10px, rgba(b2c-white, 0) 100%)
@@ -78,13 +81,16 @@
     flex-basis 25%
   &--hidden
     opacity .3
-  @media (max-width desktop-upper-limit)
-    width calc(35vw + 20px)!important
-    flex-basis calc(35vw + 20px)!important
-    scroll-snap-align start
-    scroll-snap-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
-    scroll-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
-  @media (max-width mobile-upper-limit)
-    width calc(65vw + 20px)!important
-    flex-basis calc(65vw + 20px)!important
-    scroll-snap-align center center
+
+.rt-carousel-v2--d-scroll
+  .rt-carousel-slide-v2
+    @media (max-width desktop-upper-limit)
+      width calc(35vw + 20px)
+      flex-basis calc(35vw + 20px)
+      scroll-snap-align start
+      scroll-snap-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+      scroll-margin calc(((100vw - 20px) - (35vw + 20px) * 2) / 2)
+    @media (max-width mobile-upper-limit)
+      width calc(65vw + 20px)
+      flex-basis calc(65vw + 20px)
+      scroll-snap-align center center
