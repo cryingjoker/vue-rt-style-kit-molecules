@@ -23,7 +23,9 @@
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
-        classList += ` rt-carousel-slide-v2--${this.$parent?._props.width}`;
+        if(this.$parent?._props) {
+          classList += ` rt-carousel-slide-v2--${this.$parent._props.width}`;
+        }
         this.isOutsideContainer ? classList += ' rt-carousel-slide-v2--hidden' : null;
         return classList;
       }
