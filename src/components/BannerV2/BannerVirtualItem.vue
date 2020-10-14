@@ -87,9 +87,10 @@ export default {
           window.dataLayer = [];
         }
         let banner_place = currentKey;
-        // if(this.data.gaBannerName){
-        //   banner_place = this.data.gaBannerName
-        // }
+        let section = this.data.ga.section || window.location.pathname
+        if(section == '/'){
+          section = 'main_page'
+        }
 
         window.dataLayer.push({
           event: this.data.gaEventType,
@@ -97,7 +98,7 @@ export default {
           banner_name: this.data.ga.name,
           banner_id: this.data.gaBannerName ? this.data.gaBannerName : parentId,
           banner_place: banner_place,
-          banner_section: this.data.ga.section || window.location.pathname
+          banner_section: section
         });
         if(e){
           global.location.href = this.data?.url;
