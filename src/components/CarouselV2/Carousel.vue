@@ -46,7 +46,7 @@
       }
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
-      },500)
+      },1000)
     },
     beforeUpdate() {
       let primaryData = this.hasSlotContent;

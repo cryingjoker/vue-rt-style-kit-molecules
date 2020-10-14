@@ -23,7 +23,7 @@
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
-        classList += ` rt-carousel-slide-v2--${this.$parent._props.width}`;
+        classList += ` rt-carousel-slide-v2--${this.$parent?._props.width}`;
         this.isOutsideContainer ? classList += ' rt-carousel-slide-v2--hidden' : null;
         return classList;
       }
@@ -87,13 +87,15 @@
         this.isTablet = type === 'tablet';
       },
       defineContainer() {
-        this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
-        this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
-        this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
-        this.calculatePosition();
+        if(this.$parent?.$refs.inner) {
+          this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
+          this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
+          this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
+          this.calculatePosition();
+        }
       },
       calculatePosition() {
-        if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || Math.floor(this.$el.getBoundingClientRect().left) < this.startLimit) {
+        if(this.$el.getBoundingClientRect().right > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
           this.isOutsideContainer = true;
         } else {
           this.isOutsideContainer = false;
