@@ -119,9 +119,9 @@
                 let place = '';
                 if(startPos != -1) {
                     if(endPos != -1) {
-                        place = `-${urlString.substring(startPos + 2, endPos)}-`
+                        place = `${urlString.substring(startPos, endPos)}-`
                     } else {
-                        place = `-${urlString.substring(startPos + 2, urlString.length - 1)}-`
+                        place = `${urlString.substring(startPos, urlString.length - 1)}-`
                     }
                 }
                 return urlString.substring(0, startPos) + place;
