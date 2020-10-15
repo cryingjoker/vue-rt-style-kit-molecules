@@ -162,7 +162,7 @@
     },
     render(h) {
       const arrowLeft = () => {
-        if(!this.farLeft && this.scrollableOnDesktop) {
+        if(!this.farLeft) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-left">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-left" onClick={this.scrollLeft}>
                 <rt-system-icons name="chevron left"></rt-system-icons>
@@ -171,7 +171,7 @@
         }
       };
       const arrowRight = () => {
-        if (!this.farRight && this.scrollableOnDesktop) {
+        if (!this.farRight) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-right">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-right" onClick={this.scrollRight}>
                 <rt-system-icons name="chevron right"></rt-system-icons>

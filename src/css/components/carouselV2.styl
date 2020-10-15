@@ -66,6 +66,10 @@
     z-index 3
     padding 10px
     display none
+    @media (max-width laptop-upper-limit)
+      display block
+    @media (max-width tablet-upper-limit)
+      display none!important
     &-right
       right -1px
       background linear-gradient(to left, rgba(b2c-white, 1), rgba(b2c-white, 1) 10px, rgba(b2c-white, 0) 100%)
@@ -82,9 +86,23 @@
 .rt-carousel-slide-v2
   padding 0 10px 20px
   flex-shrink 0
-  box-sizing content-box
+  box-sizing border-box
   scroll-snap-align center center
   transition opacity .1s linear
+  @media (max-width laptop-upper-limit)
+    width calc(35vw + 20px)!important
+    flex-basis calc(35vw + 20px)!important
+    scroll-snap-align start
+    scroll-snap-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)!important
+    scroll-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)!important
+    box-sizing content-box
+  @media (max-width tablet-upper-limit)
+    &:first-child
+      padding-left 20px
+  @media (max-width mobile-upper-limit)
+    width calc(75vw + 20px)!important
+    flex-basis calc(75vw + 20px)!important
+    scroll-snap-align center center!important
   &--3
     width calc(100% / 3)
     flex-basis calc(100% / 3)
@@ -94,22 +112,4 @@
   &--hidden
     opacity .3
     @media (max-width tablet-upper-limit)
-      opacity 1
-
-.rt-carousel-v2--d-scroll
-  .rt-carousel-slide-v2
-    @media (max-width desktop-upper-limit)
-      width calc(35vw + 20px)
-      flex-basis calc(35vw + 20px)
-      scroll-snap-align start
-      scroll-snap-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)
-      scroll-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)
-    @media (max-width tablet-upper-limit)
-      &:first-child
-        padding-left 20px
-      &:last-child
-        padding-right 20px
-    @media (max-width mobile-upper-limit)
-      width calc(75vw + 20px)
-      flex-basis calc(75vw + 20px)
-      scroll-snap-align center center
+      opacity .5
