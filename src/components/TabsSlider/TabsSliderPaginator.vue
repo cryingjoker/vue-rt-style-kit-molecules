@@ -90,7 +90,7 @@ export default {
       let activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
       const goToEl = ()=>{
         activeEl = activeEl.$el
-        const left = activeEl.getBoundingClientRect().left - 20
+        const left = activeEl.getBoundingClientRect().left - 20 + this.$refs.header.scrollLeft
         this.$refs.header.scrollTo(left,0);
       }
       if(activeEl){
