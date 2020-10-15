@@ -27,13 +27,13 @@
         scrollStep: null,
         isScrolling: () => {},
         hasSlotContent: false,
-        resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h3', '.rt-card-round__content .color-main05'],
+        resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
         mayScroll: true
       }
     },
     computed: {
       carouselClasses() {
-        let classList = 'rt-carousel-v2 rt-container';
+        let classList = 'rt-carousel-v2 rt-container rt-container--mobile-full-width';
         if(this.scrollableOnDesktop)
           classList += ' rt-carousel-v2--d-scroll';
         return classList;
@@ -47,6 +47,10 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
+      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
+        this.farRight = true;
+        this.farLeft = true;
+      }
     },
     beforeUpdate() {
       let primaryData = this.hasSlotContent;
@@ -158,7 +162,7 @@
     },
     render(h) {
       const arrowLeft = () => {
-        if(!this.farLeft && this.scrollableOnDesktop) {
+        if(!this.farLeft) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-left">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-left" onClick={this.scrollLeft}>
                 <rt-system-icons name="chevron left"></rt-system-icons>
@@ -167,7 +171,7 @@
         }
       };
       const arrowRight = () => {
-        if (!this.farRight && this.scrollableOnDesktop) {
+        if (!this.farRight) {
           return <div class="rt-carousel-v2__fading rt-carousel-v2__fading-right">
             <div class="rt-carousel-v2__arrow rt-carousel-v2__arrow-right" onClick={this.scrollRight}>
                 <rt-system-icons name="chevron right"></rt-system-icons>
@@ -184,6 +188,7 @@
             {this.$slots.default}
             {arrowLeft()}
             {arrowRight()}
+            <div class="rt-carousel-v2__mobile-stretcher"/>
           </div>
         </div>
       </div>

@@ -86,7 +86,7 @@
                     'type': 'main_nav',
                     'value': this.gaValue.join(' | ')
                 });
-                window.location = targetLink;
+                window.location.href = this.fixRegion() + targetLink;
             },
             bindBannerClick(){
                 this.$refs.promoBanner.$el.addEventListener('click', ($event) => {
@@ -100,6 +100,7 @@
             },
             pushBannerData($event) {
                 $event.preventDefault();
+                $event.stopPropagation();
                 this.gaValue.push(this.adTitle);
                 if (!window.dataLayer) {
                     window.dataLayer = [];
@@ -109,7 +110,21 @@
                     'type': 'banner_nav',
                     'value': this.gaValue.join(' | ')
                 });
-                window.location = this.adLink;
+                window.location.href = this.fixRegion() + this.adLink;
+            },
+            fixRegion() {
+                let urlString = window.location.href;
+                let startPos = urlString.indexOf('/-');
+                let endPos = urlString.indexOf('-/');
+                let place = '';
+                if(startPos != -1) {
+                    if(endPos != -1) {
+                        place = `${urlString.substring(startPos, endPos)}-`
+                    } else {
+                        place = `${urlString.substring(startPos, urlString.length - 1)}-`
+                    }
+                }
+                return urlString.substring(0, startPos) + place;
             }
         },
         render(h) {

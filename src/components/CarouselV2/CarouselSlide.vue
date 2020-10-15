@@ -99,7 +99,7 @@
         }
       },
       calculatePosition() {
-        if(this.$el.getBoundingClientRect().right > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
+        if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
           this.isOutsideContainer = true;
         } else {
           this.isOutsideContainer = false;

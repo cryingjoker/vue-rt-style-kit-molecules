@@ -53,7 +53,7 @@ export default {
     label() {
       if (this.$slots.label) {
         if(this.previewCard) {
-            return <p class="rt-font-h3 sp-b-0-2">{this.$slots.label}</p>
+            return <p class="rt-font-h4 sp-b-0-2 td-sp-b-none">{this.$slots.label}</p>
         } else {
           return <p class="rt-font-h3 sp-t-0-3 sp-b-0-2">{this.$slots.label}</p>
         }
@@ -74,7 +74,7 @@ export default {
       if(this.$slots['content-large-space']) {
         const classList = ['color-main05'];
         if(this.previewCard){
-          classList.push('sp-t-0-3')
+          classList.push('sp-t-0-3 rt-font-small-paragraph')
         }
         return <p class={classList.join(' ')}>{this.$slots['content-large-space']}</p>
       }
@@ -139,6 +139,10 @@ export default {
     innerContentClass(){
       if(this.$slots.arrowText){
         return 'flex-fill'
+      } else {
+        if(this.previewCard) {
+          return 'sp-b-1'
+        }
       }
       return null
     },
@@ -148,8 +152,6 @@ export default {
       if(this.backgroundColor.length == 0){
         classNames.push('sp-t-1');
         classNames.push('rt-card-round__content-s');
-      } else if(this.withIcon) {
-        classNames.push('sp-t-1');
       }
       if(this.$slots.arrowText){
         classNames.push('d-flex');
@@ -158,6 +160,11 @@ export default {
       if(this.previewCard) {
         classNames.push('sp-h-1');
         classNames.push('sp-t-1');
+        classNames.push('md-sp-t-none');
+        if(this.withIcon) {
+          classNames.push('sp-t-1-3');
+          classNames.push('md-sp-t-1')
+        }
       } else {
         classNames.push('sp-h-0-3')
       }
@@ -175,6 +182,7 @@ export default {
         if(this.previewCard) {
           classNames.push('sp-t-2');
           classNames.push('sp-b-0-3');
+          classNames.push('td-sp-t-1-3');
         } else {
           classNames.push('sp-t-1');
         }
