@@ -33,13 +33,13 @@
         let urlString = window.location.href;
         let startPos = urlString.indexOf('/-');
         let endPos = urlString.indexOf('-/');
-        let place;
+        let place = '';
         if(startPos != -1) {
           if(endPos != -1) {
             place = `-${urlString.substring(startPos + 2, endPos)}-`
-          }
-        } else {
+          } else {
             place = `-${urlString.substring(startPos + 2, urlString.length - 1)}-`
+          }
         }
         window.location.href = urlString.substring(0, startPos) + place + this.linkTarget;
       }
