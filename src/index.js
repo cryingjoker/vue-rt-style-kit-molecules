@@ -53,6 +53,8 @@ import {
   OpportunityItem,
   UnWrapper,
   RealPopup,
+  TabsSlider,
+  TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
@@ -183,8 +185,9 @@ const VueRtStyle = {
       Vue.component(CarouselV2.name, CarouselV2);
       Vue.component(CarouselSlideV2.name, CarouselSlideV2);
 
-
       Vue.component(Tabs.name, Tabs);
+      Vue.component(TabsSlider.name, TabsSlider);
+      Vue.component(TabsSliderItem.name, TabsSliderItem);
       Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
@@ -304,6 +307,8 @@ export {
   OpportunityItem,
   UnWrapper,
   RealPopup,
+  TabsSlider,
+  TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,

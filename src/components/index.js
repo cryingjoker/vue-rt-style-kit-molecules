@@ -1,5 +1,7 @@
 export {default as ScrollTabs} from './ScrollTabs/ScrollTabs.vue';
 export {default as Tabs} from './Tabs/Tabs.vue';
+export {default as TabsSlider} from './TabsSlider/TabsSlider.vue';
+export {default as TabsSliderItem} from './TabsSlider/TabsSliderItem.vue';
 export {default as CheckboxTabs} from './CheckboxTabs/CheckboxTabs.vue';
 export {default as TabsNavigationItem} from './Tabs/TabsNavigationItem.vue';
 export {default as TabsContentItem} from './Tabs/TabsContentItem.vue';
