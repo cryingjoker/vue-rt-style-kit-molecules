@@ -27,13 +27,13 @@
         scrollStep: null,
         isScrolling: () => {},
         hasSlotContent: false,
-        resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h3', '.rt-card-round__content .color-main05'],
+        resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
         mayScroll: true
       }
     },
     computed: {
       carouselClasses() {
-        let classList = 'rt-carousel-v2 rt-container';
+        let classList = 'rt-carousel-v2 rt-container rt-container--mobile-full-width';
         if(this.scrollableOnDesktop)
           classList += ' rt-carousel-v2--d-scroll';
         return classList;
@@ -47,6 +47,10 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
+      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
+        this.farRight = true;
+        this.farLeft = true;
+      }
     },
     beforeUpdate() {
       let primaryData = this.hasSlotContent;
@@ -184,6 +188,7 @@
             {this.$slots.default}
             {arrowLeft()}
             {arrowRight()}
+            <div class="rt-carousel-v2__mobile-stretcher"/>
           </div>
         </div>
       </div>

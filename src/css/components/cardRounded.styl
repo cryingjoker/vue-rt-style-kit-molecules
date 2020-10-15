@@ -57,9 +57,6 @@ use("./plugins/replace.js")
       .rt-card-round-img-container
         opacity 0.7
 
-.rt-card-round-arrow__text
-  margin-right: 16px
-
 //@media(hover: hover)
 .rt-card-round-arrow__text
   max-width 0
@@ -124,6 +121,7 @@ for $i in colors
   &:hover
     .rt-card-round-arrow__text
       color b2c-orange
+      margin-right 8px
     .rt-card-round-arrow-icon
       path
         fill b2c-orange
@@ -159,12 +157,11 @@ for $i in colors
     .rt-card-round-color
       display flex
       flex-direction row
-      padding 12px 0
       border-radius 8px
       @media (max-width tablet-upper-limit)
         flex-direction column
       .rt-card-round-icon-container
-        padding 20px 0 0 20px
+        padding 32px 0 0 20px
         size(56px)
         box-sizing content-box
         flex-shrink 0
@@ -175,3 +172,6 @@ for $i in colors
     border-radius 8px
     &--main-color003
       background-color main-color003
+    &:hover
+      .rt-card-round-img-container
+        opacity 1
