@@ -253,6 +253,7 @@ if (typeof window !== 'undefined') {
     window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
   })
 }
+
 VueRtStyle.version = version;
 
 export default VueRtStyle;

@@ -38,19 +38,19 @@ export default {
         if (this.activeItem.nextActiveId) {
           isActive = id == this.activeItem.nextActiveId
         }
-        const setActive = ()=>{
+        const setActive = () => {
           this.setActive(id)
         }
-        if(isActive) {
+        if (isActive) {
           return <rt-tabs-slider-paginator-item onClick={setActive} has-timer={this.hasTimer} id={id}
-                                                ref={'tabs-slider-paginator-item-'+id}
+                                                ref={'tabs-slider-paginator-item-' + id}
                                                 tabs-slider-name={this.name}
                                                 is-active={isActive} step={this.step}>
             {this.customSlots[id].label}
           </rt-tabs-slider-paginator-item>
         }
         return <rt-tabs-slider-paginator-item onClick={setActive} has-timer={this.hasTimer} id={id}
-                                              ref={'tabs-slider-paginator-item-'+id}
+                                              ref={'tabs-slider-paginator-item-' + id}
                                               tabs-slider-name={this.name}>
           {this.customSlots[id].label}
         </rt-tabs-slider-paginator-item>
@@ -69,7 +69,7 @@ export default {
       return null
     }
   },
-  watch:{
+  watch: {
     activeItem(newVal, oldVal) {
       if (newVal && JSON.stringify(newVal) != JSON.stringify(oldVal)) {
         this.scrollToActive()
@@ -79,24 +79,37 @@ export default {
   },
   mounted: function () {
     this.initMethods()
-    if(this.autoplay){
+    if (this.autoplay) {
       this.tick()
     }
   },
 
   methods: {
-    scrollToActive(id){
+    scrollTo(element, to, duration) {
+      if (duration <= 0) return;
+      var difference = to - element.scrollLeft;
+      var perTick = difference / duration * 10;
+
+
+      setTimeout(() => {
+        element.scrollLeft = element.scrollLeft + perTick;
+        if (element.scrollLeft === to) return;
+        // this.scrollTo(element, to, duration - 10);
+      }, 10);
+    },
+    scrollToActive(id) {
       let activeId = id || this.activeItem.nextActiveId || this.activeItem.activeId;
       let activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
-      const goToEl = ()=>{
-        activeEl = activeEl.$el
-        const left = activeEl.getBoundingClientRect().left - 20 + this.$refs.header.scrollLeft
-        this.$refs.header.scrollTo(left,0);
+      const goToEl = () => {
+        // activeEl = activeEl.$el
+        // const left = activeEl.getBoundingClientRect().left - 20 + this.$refs.header.scrollLeft
+        // this.$refs.header.scrollTo(left, 0);
+        // // this.scrollTo(this.$refs.header,left,300)
       }
-      if(activeEl){
+      if (activeEl) {
         goToEl()
-      }else{
-        this.$nextTick(()=> {
+      } else {
+        this.$nextTick(() => {
 
           activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
           goToEl()
@@ -104,13 +117,13 @@ export default {
       }
     },
 
-    initMethods(){
+    initMethods() {
       this.updateSlots();
       this.addStoreWatcher()
     },
-    setNextSlide(){
+    setNextSlide() {
       const slideSize = this.customSlotsSort.length;
-      const nextIndex = (this.customSlotsSort.indexOf(this.activeItem.activeId)+1+slideSize)%slideSize;
+      const nextIndex = (this.customSlotsSort.indexOf(this.activeItem.activeId) + 1 + slideSize) % slideSize;
       this.setActive(this.customSlotsSort[nextIndex])
     },
     getSlots() {
@@ -119,15 +132,15 @@ export default {
     getSlotSort() {
       this.customSlotsSort = tabsSliderStore.getSlotSort(this.sliderName) || []
     },
-    getActiveItems(){
+    getActiveItems() {
       this.activeItem = tabsSliderStore.getActiveId(this.sliderName)
     },
-    updateSlots(){
+    updateSlots() {
       this.getSlots();
       this.getSlotSort();
       this.getActiveItems();
     },
-    addStoreWatcher(){
+    addStoreWatcher() {
       tabsSliderStore.addWatcher(this.sliderName, this.updateSlots)
     },
     tick() {

@@ -10,7 +10,7 @@ class TabsSliderStore extends StorePrototype {
     this.tabsHtmlMode = {}
     this.slots = {}
     this.tabsActiveIds = {}
-    this.tabsNextActiveIds = {}
+    this.tabsBeforeActiveIds = {}
     this.watchers = {}
     this.afterRegisterFns = {}
   }
@@ -65,34 +65,28 @@ class TabsSliderStore extends StorePrototype {
     this.runWatchersById(tabsUid)
   }
   setActiveId = (tabsUid, id) => {
-    if (!this.tabsActiveIds[tabsUid]) {
-      this.tabsActiveIds[tabsUid] = id
-      this.runWatchersById(tabsUid)
-
-    } else {
-      if (this.tabsNextActiveIds[tabsUid] == id) {
+    if (this.tabsActiveIds[tabsUid] != id) {
+      if (!this.tabsActiveIds[tabsUid]) {
         this.tabsActiveIds[tabsUid] = id
-        delete this.tabsNextActiveIds[tabsUid]
         this.runWatchersById(tabsUid)
+
       } else {
-        if(!this.tabsNextActiveIds[tabsUid]) {
-          this.tabsNextActiveIds[tabsUid] = id
+        if (!this.tabsBeforeActiveIds[tabsUid]) {
+          this.tabsBeforeActiveIds[tabsUid] = this.tabsActiveIds[tabsUid]
+          this.tabsActiveIds[tabsUid] = id
           this.runWatchersById(tabsUid)
           setTimeout(() => {
-            this.setActiveId(tabsUid, id)
-          }, 500)
+            delete this.tabsBeforeActiveIds[tabsUid]
+            this.runWatchersById(tabsUid)
+          }, 1000)
         }
       }
     }
-    // this.tabsNextActiveIds[tabsUid] = id;
-
-    // this.tabsActiveIds[tabsUid] = id
-
   }
   getActiveId = (tabsUid) => {
     const data = {
       activeId: this.tabsActiveIds[tabsUid],
-      nextActiveId: this.tabsNextActiveIds[tabsUid]
+      beforeActiveId: this.tabsBeforeActiveIds[tabsUid]
     }
     // if(this.slots[tabsUid] && this.slots[tabsUid][data.activeId]) {
     //   data.activeColor = this.slots[tabsUid][data.activeId].background

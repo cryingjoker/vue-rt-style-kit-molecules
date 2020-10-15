@@ -12,11 +12,11 @@ export default {
       type: String,
       default: ''
     },
-    isNextActive:{
+    isBeforeActive:{
       type:Boolean,
       default: false
     },
-    isHide:{
+    isShow:{
       type: Boolean,
       default: false
     }
@@ -26,11 +26,11 @@ export default {
   computed: {
     tabSliderClass(){
       const classList = ['tab-slider__item', 'sp-t-2-4'];
-      if(this.isNextActive){
-        classList.push('tab-slider__item--next-active')
+      if(this.isBeforeActive){
+        classList.push('tab-slider__item--before-active')
       }
-      if(this.isHide){
-        classList.push('tab-slider__item--hide')
+      if(this.isShow){
+        classList.push('tab-slider__item--show')
       }
       return classList.join(' ')
     }

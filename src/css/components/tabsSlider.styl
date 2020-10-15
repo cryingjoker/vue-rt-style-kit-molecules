@@ -1,7 +1,6 @@
 .tab-slider__header
   display: flex
   flex-wrap wrap
-  scroll-behavior: smooth;
   @media (max-width: tablet-upper-limit)
     //display: block
     overflow: auto;
@@ -71,7 +70,11 @@
     max-width 100%
   & img
     display: block
-
+.tab-slider__img
+  @media (min-width: tablet-upper-limit)
+    padding-left: 50px
+  @media (min-width: desktop-lower-limit)
+    padding-left: 58px
 .tab-slider__item
   .row-td-reverse
     @media (max-width: tablet-upper-limit)
@@ -92,23 +95,39 @@
   100%
     opacity 0
 
-.tab-slider__item--hide
-  opacity: 1
-  animation-name HideActiveTab
-  animation-duration 0.5s
+@keyframes HideBeforeTab
+  0%
+    opacity: 1
+
+  100%
+    opacity 0
+
+@keyframes ShowActiveTab
+  0%
+    opacity: 0
+
+  100%
+    opacity 1
+
+.tab-slider__item--show
+  opacity: 0
+  z-index 10
+  position: relative;
+  animation-name ShowActiveTab
+  animation-duration 1s
   animation-timing-function ease-in-out
 
 .tab-slider__content
   position: relative;
   overflow: hidden;
 
-.tab-slider__item--next-active
+.tab-slider__item--show+.tab-slider__item
   opacity: 0
   position: absolute;
-  z-index 10
+  z-index 2
   left: 0
   right: 0
   top: 0
-  animation-name ShowNextTab
-  animation-duration 0.5s
+  animation-name HideBeforeTab
+  animation-duration 0.9s
   animation-timing-function ease-in-out

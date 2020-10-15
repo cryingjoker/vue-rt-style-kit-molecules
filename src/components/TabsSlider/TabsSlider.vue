@@ -36,15 +36,21 @@
        return <rt-tabs-slider-paginator slider-name={this.name}></rt-tabs-slider-paginator>
       },
       renderTabs(){
-        let sort = [...this.customSlotsSort]
-        if(this.activeItem.nextActiveId){
-          sort = sort.sort(a=>a == this.activeItem.nextActiveId ? -1 : 1)
+
+
+        let indexesShow = [this.customSlotsSort.filter((i)=>i == this.activeItem.activeId)];
+        let indexBeforeEl = this.customSlotsSort.indexOf(this.activeItem.beforeActiveId);
+
+        if(indexBeforeEl>=0){
+          indexesShow.push(this.customSlotsSort[indexBeforeEl]);
         }
-        return sort.map((id)=>{
-          const hideThisTab =  this.activeItem.nextActiveId && this.activeItem.nextActiveId != id
-          const isNextActive = this.activeItem.nextActiveId == id
-          if(isNextActive || this.activeItem.activeId == id ) {
-            return <rt-tabs-slider-virtual-item is-next-active={isNextActive} is-hide={hideThisTab}>
+
+        return indexesShow.map((id,index)=>{
+          const showThisTab =  this.activeItem.beforeActiveId && this.activeItem.activeId == id
+          const isBeforeActive = this.activeItem.beforeActiveId == id
+          if(isBeforeActive || this.activeItem.activeId == id ) {
+
+            return <rt-tabs-slider-virtual-item is-before-active={isBeforeActive} is-show={showThisTab}>
               <template slot="image">{this.customSlots[id].image}</template>
               <template slot="content">{this.customSlots[id].content}</template>
             </rt-tabs-slider-virtual-item>
