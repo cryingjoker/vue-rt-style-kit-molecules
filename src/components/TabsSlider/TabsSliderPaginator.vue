@@ -16,10 +16,7 @@ export default {
       type: Number,
       default: 10000
     },
-    autoplay: {
-      type: Boolean,
-      default: true
-    },
+
     sliderName: {
       type: String,
       default: ''
@@ -50,13 +47,14 @@ export default {
   },
   components: components,
   data: () => ({
+    autoplay: false,
     step: 0,
-    customSlots: [],
+    customSlots: {},
     customSlotsSort: [],
     activeItem: {},
-    stopAutoplay: false,
     timeout: null,
-    localPause: false
+    localPause: false,
+
   }),
   computed: {
     renderPaginatiorItems() {
@@ -98,6 +96,14 @@ export default {
     },
   },
   watch: {
+    autoplay(newWal,oldVal){
+      if(newWal != oldVal && newWal){
+       this.tick()
+      }
+    },
+
+
+
     activeItem(newVal, oldVal) {
       if (newVal && JSON.stringify(newVal) != JSON.stringify(oldVal) && this.activeItem.beforeActiveId) {
         this.scrollToActive()
@@ -202,6 +208,9 @@ export default {
     getSlots() {
       this.customSlots = tabsSliderStore.getSlot(this.sliderName)
     },
+    getSettings(){
+      this.autoplay = tabsSliderStore.getSettings(this.sliderName, 'autoplay')
+    },
     getSlotSort() {
       this.customSlotsSort = tabsSliderStore.getSlotSort(this.sliderName) || []
     },
@@ -212,16 +221,13 @@ export default {
       this.getSlots();
       this.getSlotSort();
       this.getActiveItems();
+      this.getSettings();
     },
     addStoreWatcher() {
       tabsSliderStore.addWatcher(this.sliderName, this.updateSlots)
     },
     tick() {
-      if (!this.pause && !this.localPause) {
-        if(this.stopAutoplay){
-          this.step = 0
-          return null
-        }
+      if (!this.pause && this.autoplay) {
         this.step += 100 / (this.time / 1000 * this.fps)
         if (this.step >= 100) {
           this.step = 0
@@ -246,7 +252,7 @@ export default {
     },
     stopAutoplayFn(){
       if(this.onClickStopPlay && this.autoplay){
-        this.stopAutoplay = true
+        tabsSliderStore.setSettings(this.sliderName, 'autoplay', false)
       }
     }
   },

@@ -35,7 +35,7 @@ export default {
     },
     timerDuration: {
       type: Number,
-      default: 5000
+      default: 6000
     },
     scrollDuration: {
       type: Number,
@@ -79,6 +79,7 @@ export default {
         indexesShow.push(this.customSlotsSort[indexBeforeEl]);
       }
       return indexesShow.map((id, index) => {
+
         const showThisTab = this.activeItem.beforeActiveId && this.activeItem.activeId == id
         const isBeforeActive = this.activeItem.beforeActiveId == id
         if (isBeforeActive || this.activeItem.activeId == id) {
@@ -95,6 +96,7 @@ export default {
 
   mounted: function () {
     this.registerTabsSlider();
+
   },
   methods: {
     mouseenter() {
@@ -147,6 +149,9 @@ export default {
       if (this.name.length > 0) {
         tabsSliderStore.register(this.name, this.tabsHtmlMode).then(() => {
           this.isRegistered = true
+          tabsSliderStore.setSettings(this.name, 'autoplay', this.autoplay)
+          tabsSliderStore.setSettings(this.name, 'stopWhenNotShow', this.stopWhenNotShow)
+          tabsSliderStore.runWatchersById(this.name)
         })
       }
     },
@@ -162,7 +167,6 @@ export default {
     },
     getActiveItems() {
       this.activeItem = tabsSliderStore.getActiveId(this.name)
-      console.info(this.activeItem,this.name)
     },
     updateSlots() {
       this.getSlots();

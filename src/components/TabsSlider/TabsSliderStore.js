@@ -13,6 +13,7 @@ class TabsSliderStore extends StorePrototype {
     this.watchers = {}
     this.afterRegisterFns = {}
     this.timeouts = {}
+    this.settings = {}
   }
 
   getSlot = (id) => {
@@ -21,21 +22,40 @@ class TabsSliderStore extends StorePrototype {
     }
   }
 
+  setSettings = (tabsUid, name, option) => {
+    this.settings[tabsUid][name] = option
+    this.runWatchersById(tabsUid)
+  }
+
+  getSettings = (tabsUid, name = null) => {
+    if(!this.settings[tabsUid])
+      return null
+    if (name) {
+      return this.settings[tabsUid][name]
+    }
+    return this.settings[tabsUid]
+  }
 
   setSlot = (tabsUid, name, slot, id) => {
     let setActive = false
-
-    if (Object.keys(this.slots[tabsUid]).length == 0) {
-      setActive = true;
-    }
-
-    let index = this.tabsArray[tabsUid].indexOf(id);
-    if (index == -1) {
-      if (setActive) {
-        this.setActiveId(tabsUid, id)
-      }
+    if (id == 'settings' && !this.slots[tabsUid][id]) {
       this.slots[tabsUid][id] = {}
-      this.tabsArray[tabsUid].push(id)
+    } else {
+      const slotsSize = Object.keys(this.slots[tabsUid]).length;
+      if (slotsSize == 1 && this.slots[tabsUid]['settings'] || slotsSize == 0) {
+        setActive = true;
+      }
+
+      let index = this.tabsArray[tabsUid].indexOf(id);
+      if (index == -1) {
+        if (setActive) {
+          this.setActiveId(tabsUid, id)
+        }
+        if (!this.slots[tabsUid][id]) {
+          this.slots[tabsUid][id] = {}
+        }
+        this.tabsArray[tabsUid].push(id)
+      }
     }
     this.slots[tabsUid][id][name] = slot;
 
@@ -61,7 +81,7 @@ class TabsSliderStore extends StorePrototype {
     this.runWatchersById(tabsUid)
   }
   setActiveId = (tabsUid, id) => {
-    if(!this.timeouts[tabsUid]) {
+    if (!this.timeouts[tabsUid]) {
       if (this.tabsActiveIds[tabsUid] != id) {
         if (!this.tabsActiveIds[tabsUid]) {
           this.tabsActiveIds[tabsUid] = id
@@ -108,12 +128,18 @@ class TabsSliderStore extends StorePrototype {
   }
   register = (tabsUid, htmlMode) => {
     return new Promise((resolve, reject) => {
+
       this.tabsHtmlMode[tabsUid] = htmlMode;
-      if(!this.tabsArray[tabsUid]) {
+      if (!this.tabsArray[tabsUid]) {
         this.tabsArray[tabsUid] = [];
       }
-      if(!this.slots[tabsUid]) {
-        this.slots[tabsUid] = [];
+      if (!this.settings[tabsUid]) {
+        this.settings[tabsUid] = {}
+      }
+      if (!this.slots[tabsUid]) {
+        this.slots[tabsUid] = {
+          settings: {}
+        };
       }
       this.runAfterFunctions(tabsUid)
       resolve(htmlMode)
@@ -127,14 +153,18 @@ class TabsSliderStore extends StorePrototype {
       delete this.afterRegisterFns[tabsUid]
     }
   }
-  runAfterInit = (tabsUid, fn) => {
+  runAfterInit = (tabsUid, fn, reversePush = false) => {
     if (this.slots[tabsUid]) {
       fn.call();
     } else {
       if (!this.afterRegisterFns[tabsUid]) {
         this.afterRegisterFns[tabsUid] = []
       }
-      this.afterRegisterFns[tabsUid].push(fn);
+      if (reversePush) {
+        this.afterRegisterFns[tabsUid].unshift(fn);
+      } else {
+        this.afterRegisterFns[tabsUid].push(fn);
+      }
     }
   }
   checkHtmlMode = (tabsUid) => {
@@ -158,5 +188,8 @@ export const tabsSliderStore = Vue.observable({
   stopWatcher: tabsStoreObject.stopWatcher,
   register: tabsStoreObject.register,
   checkHtmlMode: tabsStoreObject.checkHtmlMode,
-  runAfterInit: tabsStoreObject.runAfterInit
+  runAfterInit: tabsStoreObject.runAfterInit,
+  runWatchersById: tabsStoreObject.runWatchersById,
+  setSettings: tabsStoreObject.setSettings,
+  getSettings: tabsStoreObject.getSettings
 });

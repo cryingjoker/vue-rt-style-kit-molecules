@@ -11,7 +11,15 @@ export default {
     tabsSliderName: {
       type: String,
       default: ''
+    },
+    reversePushInStore:{
+      type:Boolean,
+      default: false
+    },
+    sort:{
+      type: Number
     }
+
   },
   data: () => ({
     tabsHtmlMode: false
@@ -29,7 +37,7 @@ export default {
   },
   mounted: function () {
     if (this.label.length > 0 && this.tabsSliderName.length > 0) {
-      tabsSliderStore.runAfterInit(this.tabsSliderName, this.fillTabsSliderStore)
+      tabsSliderStore.runAfterInit(this.tabsSliderName, this.fillTabsSliderStore, this.reversePushInStore)
     }
   },
   methods: {
@@ -48,7 +56,6 @@ export default {
       if(this.tabsHtmlMode){
         return this.$slots.default
       }
-      // return
     }
     return null
   }
