@@ -21,26 +21,26 @@ export default {
       type: String,
       default: ''
     },
-    durationTime:{
+    durationTime: {
       type: Number,
       default: 300
     },
-    pause:{
+    pause: {
       type: Boolean,
       default: false
     },
-    onClickStopPlay:{
-      type:Boolean,
+    onClickStopPlay: {
+      type: Boolean,
       default: true
     },
-    durationFn:{
+    durationFn: {
       type: String
     },
-    stopWhenNotShow:{
+    stopWhenNotShow: {
       type: Boolean,
       default: false
     },
-    hover:{
+    hover: {
       type: Boolean,
       default: false
     }
@@ -96,12 +96,11 @@ export default {
     },
   },
   watch: {
-    autoplay(newWal,oldVal){
-      if(newWal != oldVal && newWal){
-       this.tick()
+    autoplay(newWal, oldVal) {
+      if (newWal != oldVal && newWal) {
+        this.tick()
       }
     },
-
 
 
     activeItem(newVal, oldVal) {
@@ -110,8 +109,8 @@ export default {
         this.step = 0
       }
     },
-    pause(newVal, oldVal){
-      if(newVal!= oldVal && oldVal && !newVal && this.autoplay){
+    pause(newVal, oldVal) {
+      if (newVal != oldVal && oldVal && !newVal && this.autoplay) {
         this.tick()
       }
     }
@@ -122,45 +121,45 @@ export default {
     if (this.autoplay) {
       this.tick()
     }
-    if(this.autoplay && this.stopWhenNotShow){
+    if (this.autoplay && this.stopWhenNotShow) {
       this.bindScroll()
     }
   },
   updated() {
-    if(this.autoplay && this.stopWhenNotShow){
+    if (this.autoplay && this.stopWhenNotShow) {
       this.unbindScroll()
       this.bindScroll()
     }
   },
   beforeDestroy() {
-    if(this.autoplay && this.stopWhenNotShow){
+    if (this.autoplay && this.stopWhenNotShow) {
       this.unbindScroll()
     }
   },
   methods: {
-    bindScroll(){
-      window.addEventListener('scroll',getViewPortPosition)
+    bindScroll() {
+      window.addEventListener('scroll', getViewPortPosition)
     },
-    unbindScroll(){
-      window.removeEventListener('scroll',getViewPortPosition)
+    unbindScroll() {
+      window.removeEventListener('scroll', getViewPortPosition)
     },
-    getViewPortPosition(){
+    getViewPortPosition() {
       const scrollPos = window.pageYOffset || document.documentElement.scrollTop
       const top = this.$el.getBoundingClientRect().top
       const innerHeight = window.innerHeight;
-      if(Math.abs(scrollPos + top) < innerHeight*1.5){
+      if (Math.abs(scrollPos + top) < innerHeight * 1.5) {
         this.localPause = true
-      }else{
-        if(!this.pause){
+      } else {
+        if (!this.pause) {
           this.localPause = true
         }
       }
     },
-    scrollTo(element,from, to) {
-      if(element) {
+    scrollTo(element, from, to) {
+      if (element) {
         Animate.start({
           draw: (dist, rId) => {
-            element.scrollLeft = from + (to-from) * dist
+            element.scrollLeft = from + (to - from) * dist
           },
           duration: this.durationTime,
           onLeave: () => {
@@ -174,7 +173,7 @@ export default {
     scrollToActive(id) {
       let activeId = id || this.activeItem.nextActiveId || this.activeItem.activeId;
       let activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
-      if(!activeEl){
+      if (!activeEl) {
         return null
       }
       const goToEl = () => {
@@ -182,8 +181,8 @@ export default {
         activeEl = activeEl.$el
         const header = this.$refs.header;
         const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft)
-        if(header.scrollLeft != left) {
-          this.scrollTo(header,header.scrollLeft, left, 300)
+        if (header.scrollLeft != left) {
+          this.scrollTo(header, header.scrollLeft, left, 300)
         }
       }
       if (activeEl) {
@@ -208,7 +207,7 @@ export default {
     getSlots() {
       this.customSlots = tabsSliderStore.getSlot(this.sliderName)
     },
-    getSettings(){
+    getSettings() {
       this.autoplay = tabsSliderStore.getSettings(this.sliderName, 'autoplay')
     },
     getSlotSort() {
@@ -227,38 +226,40 @@ export default {
       tabsSliderStore.addWatcher(this.sliderName, this.updateSlots)
     },
     tick() {
-      if (!this.pause && this.autoplay) {
-        this.step += 100 / (this.time / 1000 * this.fps)
-        if (this.step >= 100) {
-          this.step = 0
-          this.setNextSlide()
-          this.tick()
-        } else {
-          if(this.timeout){
-            clearTimeout(this.timeout)
-            this.timeout = null
-          }
-          this.timeout = setTimeout(() => {
-            this.tick()
-          }, 1000 / this.fps)
-        }
-      }
-    },
-    setActive(id) {
-      if (!this.isActive) {
-        tabsSliderStore.setActiveId(this.sliderName, id)
+      this.step += 100 / (this.time / 1000 * this.fps)
+      if (this.step >= 100) {
         this.step = 0
-      }
-    },
-    stopAutoplayFn(){
-      if(this.onClickStopPlay && this.autoplay){
-        tabsSliderStore.setSettings(this.sliderName, 'autoplay', false)
+        this.setNextSlide()
+        this.tick()
+      } else {
+        if (this.timeout) {
+          clearTimeout(this.timeout)
+          this.timeout = null
+        }
+        this.timeout = setTimeout(() => {
+          this.tick()
+        }, 1000 / this.fps)
       }
     }
   },
-  render(h) {
-    return <div class="tab-slider__header" ref="header">{this.renderPaginatiorItems}</div>
-
+  setActive(id) {
+    if (!this.isActive) {
+      tabsSliderStore.setActiveId(this.sliderName, id)
+      this.step = 0
+    }
+  },
+  stopAutoplayFn() {
+    if (this.onClickStopPlay && this.autoplay) {
+      tabsSliderStore.setSettings(this.sliderName, 'autoplay', false)
+    }
   }
-};
+}
+,
+render(h)
+{
+  return <div class="tab-slider__header" ref="header">{this.renderPaginatiorItems}</div>
+
+}
+}
+;
 </script>

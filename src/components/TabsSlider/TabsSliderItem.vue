@@ -12,11 +12,11 @@ export default {
       type: String,
       default: ''
     },
-    reversePushInStore:{
-      type:Boolean,
+    reversePushInStore: {
+      type: Boolean,
       default: false
     },
-    sort:{
+    sort: {
       type: Number
     }
 
@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    clearTabsSliderStore(){
+    clearTabsSliderStore() {
       tabsSliderStore.removeSlots(this.tabsSliderName, this._uid)
     },
     fillTabsSliderStore() {
@@ -53,7 +53,7 @@ export default {
   render(h) {
 
     if (this.label.length > 0 && this.tabsSliderName.length > 0) {
-      if(this.tabsHtmlMode){
+      if (this.tabsHtmlMode) {
         return this.$slots.default
       }
     }

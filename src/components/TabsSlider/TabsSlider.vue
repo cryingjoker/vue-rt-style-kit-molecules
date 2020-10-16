@@ -139,8 +139,6 @@ export default {
           tabsSliderStore.setActiveId(this.name, this.customSlotsSort[prev])
         }
       }
-
-
       this.xDown = null;
       this.yDown = null;
     },

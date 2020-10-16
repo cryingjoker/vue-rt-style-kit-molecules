@@ -9,7 +9,7 @@ export default {
       type: Boolean,
       default: false
     },
-    step:{
+    step: {
       type: Number,
       default: 0
     }
@@ -23,24 +23,18 @@ export default {
       }
       return classNames.join(' ')
     },
-    renderTimer(){
+    renderTimer() {
       if (this.isActive && this.step > 0 || true) {
         const style = {
           width: this.step.toFixed(2) + '%'
         }
         return <div class="tab-slider__timer" style={style}></div>
       }
-      // if (this.isActive) {
-      //   const style = {
-      //     width: this.step + '%'
-      //   }
-      //   return <div class="tab-slider__timer" style={style}></div>
-      // }
       return null
     }
   },
-  methods:{
-    onClickEmit(){
+  methods: {
+    onClickEmit() {
       this.$emit('click')
     }
   },
