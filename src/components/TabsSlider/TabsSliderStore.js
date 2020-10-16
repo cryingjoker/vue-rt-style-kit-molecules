@@ -1,6 +1,5 @@
 import Vue from "vue";
 
-// import StorePrototype from "@vue-rt-style-kit-atoms-local/stores/storePrototype.class";
 import {StorePrototype} from "vue-rt-style-kit-atoms";
 
 class TabsSliderStore extends StorePrototype {
@@ -10,9 +9,10 @@ class TabsSliderStore extends StorePrototype {
     this.tabsHtmlMode = {}
     this.slots = {}
     this.tabsActiveIds = {}
-    this.tabsNextActiveIds = {}
+    this.tabsBeforeActiveIds = {}
     this.watchers = {}
     this.afterRegisterFns = {}
+    this.timeouts = {}
   }
 
   getSlot = (id) => {
@@ -23,18 +23,13 @@ class TabsSliderStore extends StorePrototype {
 
 
   setSlot = (tabsUid, name, slot, id) => {
-
     let setActive = false
+
     if (Object.keys(this.slots[tabsUid]).length == 0) {
       setActive = true;
     }
-    // if (!this.slots[tabsUid]) {
-    //   this.tabsArray[tabsUid] = [];
-    //   this.slots[tabsUid] = {};
-    //   setActive = true;
-    // }
-    let index = this.tabsArray[tabsUid].indexOf(id);
 
+    let index = this.tabsArray[tabsUid].indexOf(id);
     if (index == -1) {
       if (setActive) {
         this.setActiveId(tabsUid, id)
@@ -47,15 +42,16 @@ class TabsSliderStore extends StorePrototype {
   }
   removeSlots = (tabsUid, id) => {
     delete this.slots[tabsUid][id];
-    this.runWatchersById(tabsUid)
+
     const indexInArray = this.tabsArray[tabsUid].indexOf(id)
+
     if (indexInArray >= 0) {
       this.tabsArray[tabsUid].splice(indexInArray, 1)
     }
-
     if (this.tabsActiveIds[tabsUid] == id) {
       this.tabsActiveIds[tabsUid] = null
     }
+    this.runWatchersById(tabsUid)
   }
   getSlotSort = (tabsUid) => {
     return this.tabsArray[tabsUid]
@@ -65,38 +61,32 @@ class TabsSliderStore extends StorePrototype {
     this.runWatchersById(tabsUid)
   }
   setActiveId = (tabsUid, id) => {
-    if (!this.tabsActiveIds[tabsUid]) {
-      this.tabsActiveIds[tabsUid] = id
-      this.runWatchersById(tabsUid)
-
-    } else {
-      if (this.tabsNextActiveIds[tabsUid] == id) {
-        this.tabsActiveIds[tabsUid] = id
-        delete this.tabsNextActiveIds[tabsUid]
-        this.runWatchersById(tabsUid)
-      } else {
-        if(!this.tabsNextActiveIds[tabsUid]) {
-          this.tabsNextActiveIds[tabsUid] = id
+    if(!this.timeouts[tabsUid]) {
+      if (this.tabsActiveIds[tabsUid] != id) {
+        if (!this.tabsActiveIds[tabsUid]) {
+          this.tabsActiveIds[tabsUid] = id
           this.runWatchersById(tabsUid)
-          setTimeout(() => {
-            this.setActiveId(tabsUid, id)
-          }, 500)
+        } else {
+          if (this.timeouts[tabsUid]) {
+            clearTimeout(this.timeouts[tabsUid])
+          }
+          this.tabsBeforeActiveIds[tabsUid] = this.tabsActiveIds[tabsUid]
+          this.tabsActiveIds[tabsUid] = id
+          this.runWatchersById(tabsUid)
+          this.timeouts[tabsUid] = setTimeout(() => {
+            delete this.tabsBeforeActiveIds[tabsUid]
+            delete this.timeouts[tabsUid]
+            this.runWatchersById(tabsUid)
+          }, 1000)
         }
       }
     }
-    // this.tabsNextActiveIds[tabsUid] = id;
-
-    // this.tabsActiveIds[tabsUid] = id
-
   }
   getActiveId = (tabsUid) => {
     const data = {
       activeId: this.tabsActiveIds[tabsUid],
-      nextActiveId: this.tabsNextActiveIds[tabsUid]
+      beforeActiveId: this.tabsBeforeActiveIds[tabsUid]
     }
-    // if(this.slots[tabsUid] && this.slots[tabsUid][data.activeId]) {
-    //   data.activeColor = this.slots[tabsUid][data.activeId].background
-    // }
     return data;
   }
 
@@ -119,8 +109,12 @@ class TabsSliderStore extends StorePrototype {
   register = (tabsUid, htmlMode) => {
     return new Promise((resolve, reject) => {
       this.tabsHtmlMode[tabsUid] = htmlMode;
-      this.tabsArray[tabsUid] = [];
-      this.slots[tabsUid] = [];
+      if(!this.tabsArray[tabsUid]) {
+        this.tabsArray[tabsUid] = [];
+      }
+      if(!this.slots[tabsUid]) {
+        this.slots[tabsUid] = [];
+      }
       this.runAfterFunctions(tabsUid)
       resolve(htmlMode)
     })

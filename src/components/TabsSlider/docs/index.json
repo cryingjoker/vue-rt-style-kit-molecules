@@ -1,0 +1,92 @@
+{
+  "items": [
+    {
+      "name": "rt-tabs-slider",
+      "property": "tabs-html-mode",
+      "type": ["Boolean"],
+      "value": "false",
+      "version": "~0.3.63",
+      "description": ""
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "name",
+      "type": ["String"],
+      "value": "''",
+      "version": "0.3.61",
+      "description": "название слайдера(обязательно)"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "prevent-scroll",
+      "type": ["Boolean"],
+      "value": "true",
+      "version": "0.3.61",
+      "description": "блокировать вертикальный скрол при свайпе в мобиле"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "pause-on-hover",
+      "type": ["Boolean"],
+      "value": "true",
+      "version": "0.3.61",
+      "description": "устанавливать на паузу если наведен курсор"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "autoplay",
+      "type": ["Boolean"],
+      "value": "true",
+      "version": "0.3.61",
+      "description": "включение автопереключение слайдов"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "on-click-stop-play",
+      "type": ["Boolean"],
+      "value": "true",
+      "version": "0.3.61",
+      "description": "останавливать автопереключение слайдов после первого переключения пользователя"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "timer-duration",
+      "type": ["Number"],
+      "value": " 4000",
+      "version": "0.3.61",
+      "description": "время просмотра слайда при автопереключение"
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "scroll-duration",
+      "type": ["Number"],
+      "value": " 500",
+      "version": "0.3.61",
+      "description": "время автодоведения до активного эелемента в шапке(для мобильных телефонов) "
+    },
+    {
+      "name": "rt-tabs-slider",
+      "property": "scroll-duration-fn",
+      "type": ["String"],
+      "value": " 'easeInOutCubic'",
+      "version": "0.3.61",
+      "description": "функция автодоведения возможны: <br/> linear <br/>  easeInQuad <br/> easeOutQuad <br/> easeInOutQuad <br/> easeInCubic <br/> easeOutCubic <br/> easeInOutCubic <br/> easeInQuart <br/> easeOutQuart <br/> easeInOutQuart <br/> easeInQuint <br/> easeOutQuint <br/> easeInOutQuint <br/>"
+    },
+    {
+      "name": "rt-tabs-slider-item",
+      "property": "label",
+      "type": ["String"],
+      "value": " ''",
+      "version": "0.3.61",
+      "description": "Название в меню"
+    },
+    {
+      "name": "rt-tabs-slider-item",
+      "property": "tabs-slider-name",
+      "type": ["String"],
+      "value": " ''",
+      "version": "0.3.61",
+      "description": "Название tags-slider для связки (обязательно)"
+    }
+  ]
+}

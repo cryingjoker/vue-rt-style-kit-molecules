@@ -37,7 +37,11 @@
                 }
             },
             onChange(event) {
+              if(event.target) {
                 this.isActiveLocal = event.target.checked;
+              }else{
+                this.isActiveLocal = event
+              }
             },
             setActiveTabName(name, hashAnchor = false) {
                 tabsStore.setActiveTabName(name, hashAnchor);
@@ -78,7 +82,7 @@
             return <div
                 class={"rt-tabs-checklist" + (this.isActiveLocal && !this.hideNotActive ? " rt-tabs-checklist--is-active" : "")}>
                 <div class="rt-tabs-checklist-input">
-                    <rt-checkbox onChange={this.onChange} ref="checkbox" model={this.isActiveLocal}
+                    <rt-checkbox  onChange={this.onChange} ref="checkbox" model={this.isActiveLocal}
                                  name={"rt-checkbox-" + this._uid}>{this.$slots.label}</rt-checkbox>
                 </div>
                 {content()}
