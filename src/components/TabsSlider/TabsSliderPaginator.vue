@@ -226,40 +226,38 @@ export default {
       tabsSliderStore.addWatcher(this.sliderName, this.updateSlots)
     },
     tick() {
-      this.step += 100 / (this.time / 1000 * this.fps)
-      if (this.step >= 100) {
-        this.step = 0
-        this.setNextSlide()
-        this.tick()
-      } else {
-        if (this.timeout) {
-          clearTimeout(this.timeout)
-          this.timeout = null
-        }
-        this.timeout = setTimeout(() => {
+      if (!this.pause && this.autoplay) {
+        this.step += 100 / (this.time / 1000 * this.fps)
+        if (this.step >= 100) {
+          this.step = 0
+          this.setNextSlide()
           this.tick()
-        }, 1000 / this.fps)
+        } else {
+          if (this.timeout) {
+            clearTimeout(this.timeout)
+            this.timeout = null
+          }
+          this.timeout = setTimeout(() => {
+            this.tick()
+          }, 1000 / this.fps)
+        }
+      }
+    },
+    setActive(id) {
+      if (!this.isActive) {
+        tabsSliderStore.setActiveId(this.sliderName, id)
+        this.step = 0
+      }
+    },
+    stopAutoplayFn() {
+      if (this.onClickStopPlay && this.autoplay) {
+        tabsSliderStore.setSettings(this.sliderName, 'autoplay', false)
       }
     }
   },
-  setActive(id) {
-    if (!this.isActive) {
-      tabsSliderStore.setActiveId(this.sliderName, id)
-      this.step = 0
-    }
-  },
-  stopAutoplayFn() {
-    if (this.onClickStopPlay && this.autoplay) {
-      tabsSliderStore.setSettings(this.sliderName, 'autoplay', false)
-    }
-  }
-}
-,
-render(h)
-{
-  return <div class="tab-slider__header" ref="header">{this.renderPaginatiorItems}</div>
+  render(h) {
+    return <div class="tab-slider__header" ref="header">{this.renderPaginatiorItems}</div>
 
-}
-}
-;
+  }
+};
 </script>
