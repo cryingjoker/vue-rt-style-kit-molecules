@@ -38,8 +38,15 @@ export default {
     },
     durationFn:{
       type: String
+    },
+    stopWhenNotShow:{
+      type: Boolean,
+      default: false
+    },
+    hover:{
+      type: Boolean,
+      default: false
     }
-
   },
   components: components,
   data: () => ({
@@ -47,7 +54,9 @@ export default {
     customSlots: [],
     customSlotsSort: [],
     activeItem: {},
-    stopAutoplay: false
+    stopAutoplay: false,
+    timeout: null,
+    localPause: false
   }),
   computed: {
     renderPaginatiorItems() {
@@ -86,7 +95,7 @@ export default {
       if (this.isActive && this.hasTimer)
         return <div class="tab-slider__timer"></div>
       return null
-    }
+    },
   },
   watch: {
     activeItem(newVal, oldVal) {
@@ -107,9 +116,40 @@ export default {
     if (this.autoplay) {
       this.tick()
     }
+    if(this.autoplay && this.stopWhenNotShow){
+      this.bindScroll()
+    }
   },
-
+  updated() {
+    if(this.autoplay && this.stopWhenNotShow){
+      this.unbindScroll()
+      this.bindScroll()
+    }
+  },
+  beforeDestroy() {
+    if(this.autoplay && this.stopWhenNotShow){
+      this.unbindScroll()
+    }
+  },
   methods: {
+    bindScroll(){
+      window.addEventListener('scroll',getViewPortPosition)
+    },
+    unbindScroll(){
+      window.removeEventListener('scroll',getViewPortPosition)
+    },
+    getViewPortPosition(){
+      const scrollPos = window.pageYOffset || document.documentElement.scrollTop
+      const top = this.$el.getBoundingClientRect().top
+      const innerHeight = window.innerHeight;
+      if(Math.abs(scrollPos + top) < innerHeight*1.5){
+        this.localPause = true
+      }else{
+        if(!this.pause){
+          this.localPause = true
+        }
+      }
+    },
     scrollTo(element,from, to) {
       if(element) {
         Animate.start({
@@ -137,8 +177,6 @@ export default {
         const header = this.$refs.header;
         const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft)
         if(header.scrollLeft != left) {
-          // this.$refs.header.scrollTo(left, 0);
-
           this.scrollTo(header,header.scrollLeft, left, 300)
         }
       }
@@ -179,7 +217,7 @@ export default {
       tabsSliderStore.addWatcher(this.sliderName, this.updateSlots)
     },
     tick() {
-      if (!this.pause) {
+      if (!this.pause && !this.localPause) {
         if(this.stopAutoplay){
           this.step = 0
           return null
@@ -190,7 +228,11 @@ export default {
           this.setNextSlide()
           this.tick()
         } else {
-          setTimeout(() => {
+          if(this.timeout){
+            clearTimeout(this.timeout)
+            this.timeout = null
+          }
+          this.timeout = setTimeout(() => {
             this.tick()
           }, 1000 / this.fps)
         }

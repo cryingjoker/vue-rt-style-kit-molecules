@@ -48,7 +48,7 @@ export default {
   render(h) {
     return <button type="button" onClick={this.onClickEmit} class={this.tabsSliderClass}>
       {this.renderTimer}
-      <p class="tab-slider__header-text">{this.$slots.default}</p>
+      <p class="tab-slider__header-text rt-font-paragraph">{this.$slots.default}</p>
     </button>
   }
 };

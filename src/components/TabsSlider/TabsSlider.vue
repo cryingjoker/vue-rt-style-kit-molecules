@@ -35,7 +35,7 @@ export default {
     },
     timerDuration: {
       type: Number,
-      default: 4000
+      default: 5000
     },
     scrollDuration: {
       type: Number,
@@ -44,6 +44,10 @@ export default {
     scrollDurationFn: {
       type: String,
       default: 'easeInOutCubic'
+    },
+    stopWhenNotShow:{
+      type: Boolean,
+      default: false
     }
   },
   components: components,
@@ -54,13 +58,15 @@ export default {
     activeItem: {},
     xDown: null,
     yDown: null,
-    pause: false
+    pause: false,
+    hover: false
 
   }),
   computed: {
     renderMenu() {
       return <rt-tabs-slider-paginator on-click-stop-play={this.onClickStopPlay} pause={this.pause}
                                        time={this.timerDuration}
+                                       stop-when-not-show={this.stopWhenNotShow}
                                        duration-time={this.scrollDuration}
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
@@ -93,11 +99,13 @@ export default {
   methods: {
     mouseenter() {
       if (this.pauseOnHover) {
+        this.hover = true;
         this.pause = true
       }
     },
     mouseleave() {
       if (this.pauseOnHover) {
+        this.hover = false;
         this.pause = false
       }
     },
@@ -154,6 +162,7 @@ export default {
     },
     getActiveItems() {
       this.activeItem = tabsSliderStore.getActiveId(this.name)
+      console.info(this.activeItem,this.name)
     },
     updateSlots() {
       this.getSlots();
