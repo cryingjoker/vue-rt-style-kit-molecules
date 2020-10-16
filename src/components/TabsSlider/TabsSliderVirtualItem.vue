@@ -25,7 +25,7 @@ export default {
   }),
   computed: {
     tabSliderClass(){
-      const classList = ['tab-slider__item', 'sp-t-2-4'];
+      const classList = ['tab-slider__item', 'sp-t-2','td-sp-t-1-1','md-sp-t-0-4'];
       if(this.isBeforeActive){
         classList.push('tab-slider__item--before-active')
       }

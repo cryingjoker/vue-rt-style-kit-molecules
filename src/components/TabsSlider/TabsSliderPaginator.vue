@@ -47,7 +47,8 @@ export default {
     customSlots: [],
     customSlotsSort: [],
     activeItem: {},
-    stopAutoplay: false
+    stopAutoplay: false,
+    timeout: null
   }),
   computed: {
     renderPaginatiorItems() {
@@ -190,7 +191,11 @@ export default {
           this.setNextSlide()
           this.tick()
         } else {
-          setTimeout(() => {
+          if(this.timeout){
+            clearTimeout(this.timeout)
+            this.timeout = null
+          }
+          this.timeout = setTimeout(() => {
             this.tick()
           }, 1000 / this.fps)
         }
