@@ -13,10 +13,6 @@ export default {
       type: Boolean,
       default: false
     },
-    hasTimer: {
-      type: Boolean,
-      default: true
-    },
     name: {
       type: String,
       default: ''
@@ -37,15 +33,15 @@ export default {
       type: Boolean,
       default: true
     },
-    timerDuration:{
+    timerDuration: {
       type: Number,
       default: 4000
     },
-    scrollDuration:{
+    scrollDuration: {
       type: Number,
       default: 500
     },
-    scrollDurationFn:{
+    scrollDurationFn: {
       type: String,
       default: 'easeInOutCubic'
     }
@@ -69,13 +65,13 @@ export default {
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
     renderTabs() {
+
       let indexesShow = [this.customSlotsSort.filter((i) => i == this.activeItem.activeId)];
       let indexBeforeEl = this.customSlotsSort.indexOf(this.activeItem.beforeActiveId);
 
       if (indexBeforeEl >= 0) {
         indexesShow.push(this.customSlotsSort[indexBeforeEl]);
       }
-
       return indexesShow.map((id, index) => {
         const showThisTab = this.activeItem.beforeActiveId && this.activeItem.activeId == id
         const isBeforeActive = this.activeItem.beforeActiveId == id

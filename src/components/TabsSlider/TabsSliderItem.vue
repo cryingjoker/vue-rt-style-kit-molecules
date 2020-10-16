@@ -24,6 +24,7 @@ export default {
     this.clearTabsSliderStore()
   },
   updated() {
+    this.clearTabsSliderStore()
     this.fillTabsSliderStore()
   },
   mounted: function () {
@@ -36,12 +37,14 @@ export default {
       tabsSliderStore.removeSlots(this.tabsSliderName, this._uid)
     },
     fillTabsSliderStore() {
+      console.info('fillTabsSliderStore',this.label)
       tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.label, this._uid)
       tabsSliderStore.setSlot(this.tabsSliderName, 'content', this.$slots.content, this._uid)
       tabsSliderStore.setSlot(this.tabsSliderName, 'image', this.$slots.image, this._uid)
     }
   },
   render(h) {
+
     if (this.label.length > 0 && this.tabsSliderName.length > 0) {
       if(this.tabsHtmlMode){
         return this.$slots.default

@@ -23,11 +23,12 @@ class TabsSliderStore extends StorePrototype {
 
 
   setSlot = (tabsUid, name, slot, id) => {
-
     let setActive = false
+
     if (Object.keys(this.slots[tabsUid]).length == 0) {
       setActive = true;
     }
+
     let index = this.tabsArray[tabsUid].indexOf(id);
     if (index == -1) {
       if (setActive) {
@@ -41,14 +42,16 @@ class TabsSliderStore extends StorePrototype {
   }
   removeSlots = (tabsUid, id) => {
     delete this.slots[tabsUid][id];
-    this.runWatchersById(tabsUid)
+
     const indexInArray = this.tabsArray[tabsUid].indexOf(id)
+
     if (indexInArray >= 0) {
       this.tabsArray[tabsUid].splice(indexInArray, 1)
     }
     if (this.tabsActiveIds[tabsUid] == id) {
       this.tabsActiveIds[tabsUid] = null
     }
+    this.runWatchersById(tabsUid)
   }
   getSlotSort = (tabsUid) => {
     return this.tabsArray[tabsUid]
@@ -106,8 +109,12 @@ class TabsSliderStore extends StorePrototype {
   register = (tabsUid, htmlMode) => {
     return new Promise((resolve, reject) => {
       this.tabsHtmlMode[tabsUid] = htmlMode;
-      this.tabsArray[tabsUid] = [];
-      this.slots[tabsUid] = [];
+      if(!this.tabsArray[tabsUid]) {
+        this.tabsArray[tabsUid] = [];
+      }
+      if(!this.slots[tabsUid]) {
+        this.slots[tabsUid] = [];
+      }
       this.runAfterFunctions(tabsUid)
       resolve(htmlMode)
     })
