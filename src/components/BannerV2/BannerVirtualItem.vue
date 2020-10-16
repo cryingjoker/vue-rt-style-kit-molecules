@@ -164,7 +164,7 @@ export default {
   computed: {
     header() {
       if (this.data.header) {
-        const classList = ['sp-b-0-4'];
+        const classList = ['sp-b-0-4','td-b-0-3'];
         if (this.data.mobileHeader) {
           classList.push('md-d-none')
         }
