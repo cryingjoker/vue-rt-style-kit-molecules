@@ -87,6 +87,14 @@
       "value": " ''",
       "version": "0.3.61",
       "description": "Название tags-slider для связки (обязательно)"
+    },
+    {
+      "name": "rt-tabs-slider-item",
+      "property": "sort",
+      "type": ["Number"],
+      "value": "-1",
+      "version": "0.3.62",
+      "description": "Указание порядкового номера слайда"
     }
   ]
 }

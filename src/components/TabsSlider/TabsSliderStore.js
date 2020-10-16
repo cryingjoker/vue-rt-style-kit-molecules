@@ -42,7 +42,7 @@ class TabsSliderStore extends StorePrototype {
       this.slots[tabsUid][id] = {}
     } else {
       const slotsSize = Object.keys(this.slots[tabsUid]).length;
-      if (slotsSize == 1 && this.slots[tabsUid]['settings'] || slotsSize == 0) {
+      if (slotsSize == 0) {
         setActive = true;
       }
 
@@ -68,8 +68,12 @@ class TabsSliderStore extends StorePrototype {
     if (indexInArray >= 0) {
       this.tabsArray[tabsUid].splice(indexInArray, 1)
     }
+
     if (this.tabsActiveIds[tabsUid] == id) {
       this.tabsActiveIds[tabsUid] = null
+      if(this.tabsArray[tabsUid].length > 0) {
+        this.tabsActiveIds[tabsUid] = this.tabsArray[tabsUid][0]
+      }
     }
     this.runWatchersById(tabsUid)
   }
@@ -80,10 +84,27 @@ class TabsSliderStore extends StorePrototype {
     this.tabsActiveIds[tabsUid] = id
     this.runWatchersById(tabsUid)
   }
+  getIndex = (tabsUid, id)=>{
+    return this.tabsArray[tabsUid].indexOf(id)
+  }
+  setIndex = (tabsUid, id,index)=>{
+    const arrayIDs = this.tabsArray[tabsUid];
+    const indexId = this.tabsArray[tabsUid].indexOf(id);
+    const arraySize = arrayIDs.length;
+    if(arraySize-1 < index){
+      arrayIDs.concat(new Array(arraySize-1 < index).map(i=>null))
+    }
+    if(indexId >= 0 ){
+      this.tabsArray[tabsUid].splice(indexId, 1)
+    }
+    arrayIDs.splice( index, 0, id );
+    this.runWatchersById(tabsUid)
+  }
   setActiveId = (tabsUid, id) => {
     if (!this.timeouts[tabsUid]) {
       if (this.tabsActiveIds[tabsUid] != id) {
         if (!this.tabsActiveIds[tabsUid]) {
+
           this.tabsActiveIds[tabsUid] = id
           this.runWatchersById(tabsUid)
         } else {
@@ -100,6 +121,7 @@ class TabsSliderStore extends StorePrototype {
           }, 1000)
         }
       }
+
     }
   }
   getActiveId = (tabsUid) => {
@@ -137,9 +159,7 @@ class TabsSliderStore extends StorePrototype {
         this.settings[tabsUid] = {}
       }
       if (!this.slots[tabsUid]) {
-        this.slots[tabsUid] = {
-          settings: {}
-        };
+        this.slots[tabsUid] = {};
       }
       this.runAfterFunctions(tabsUid)
       resolve(htmlMode)
@@ -160,11 +180,7 @@ class TabsSliderStore extends StorePrototype {
       if (!this.afterRegisterFns[tabsUid]) {
         this.afterRegisterFns[tabsUid] = []
       }
-      if (reversePush) {
-        this.afterRegisterFns[tabsUid].unshift(fn);
-      } else {
-        this.afterRegisterFns[tabsUid].push(fn);
-      }
+      this.afterRegisterFns[tabsUid].push(fn);
     }
   }
   checkHtmlMode = (tabsUid) => {
@@ -191,5 +207,7 @@ export const tabsSliderStore = Vue.observable({
   runAfterInit: tabsStoreObject.runAfterInit,
   runWatchersById: tabsStoreObject.runWatchersById,
   setSettings: tabsStoreObject.setSettings,
-  getSettings: tabsStoreObject.getSettings
+  getSettings: tabsStoreObject.getSettings,
+  getIndex: tabsStoreObject.getIndex,
+  setIndex: tabsStoreObject.setIndex,
 });
