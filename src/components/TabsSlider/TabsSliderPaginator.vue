@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import {tabsSliderStore} from "./TabsSliderStore";
 import TabsSliderPaginatorItem from './TabsSliderPaginatorItem.vue'
+import Animate from "../../utils/animate";
 
 const components = {}
 components[TabsSliderPaginatorItem.name] = TabsSliderPaginatorItem;
@@ -22,7 +23,23 @@ export default {
     sliderName: {
       type: String,
       default: ''
+    },
+    durationTime:{
+      type: Number,
+      default: 300
+    },
+    pause:{
+      type: Boolean,
+      default: false
+    },
+    onClickStopPlay:{
+      type:Boolean,
+      default: true
+    },
+    durationFn:{
+      type: String
     }
+
   },
   components: components,
   data: () => ({
@@ -30,19 +47,21 @@ export default {
     customSlots: [],
     customSlotsSort: [],
     activeItem: {},
+    stopAutoplay: false
   }),
   computed: {
     renderPaginatiorItems() {
       return this.customSlotsSort.map((id) => {
         let isActive = this.activeItem.activeId == id
-        if (this.activeItem.nextActiveId) {
+        if (this.activeItem.activeId != id) {
           isActive = id == this.activeItem.nextActiveId
         }
         const setActive = () => {
           this.setActive(id)
+          this.stopAutoplayFn()
         }
         if (isActive) {
-          return <rt-tabs-slider-paginator-item onClick={setActive} has-timer={this.hasTimer} id={id}
+          return <rt-tabs-slider-paginator-item has-timer={this.hasTimer} id={id}
                                                 ref={'tabs-slider-paginator-item-' + id}
                                                 tabs-slider-name={this.name}
                                                 is-active={isActive} step={this.step}>
@@ -71,8 +90,14 @@ export default {
   },
   watch: {
     activeItem(newVal, oldVal) {
-      if (newVal && JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+      if (newVal && JSON.stringify(newVal) != JSON.stringify(oldVal) && this.activeItem.beforeActiveId) {
         this.scrollToActive()
+        this.step = 0
+      }
+    },
+    pause(newVal, oldVal){
+      if(newVal!= oldVal && oldVal && !newVal && this.autoplay){
+        this.tick()
       }
     }
 
@@ -85,32 +110,42 @@ export default {
   },
 
   methods: {
-    scrollTo(element, to, duration) {
-      if (duration <= 0) return;
-      var difference = to - element.scrollLeft;
-      var perTick = difference / duration * 10;
+    scrollTo(element,from, to) {
+      if(element) {
+        Animate.start({
+          draw: (dist, rId) => {
+            element.scrollLeft = from + (to-from) * dist
+          },
+          duration: this.durationTime,
+          onLeave: () => {
+          },
+          timing: Animate.timingFunctions['easeInOutCubic']
+        })
+      }
 
 
-      setTimeout(() => {
-        element.scrollLeft = element.scrollLeft + perTick;
-        if (element.scrollLeft === to) return;
-        // this.scrollTo(element, to, duration - 10);
-      }, 10);
     },
     scrollToActive(id) {
       let activeId = id || this.activeItem.nextActiveId || this.activeItem.activeId;
       let activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
+      if(!activeEl){
+        return null
+      }
       const goToEl = () => {
-        // activeEl = activeEl.$el
-        // const left = activeEl.getBoundingClientRect().left - 20 + this.$refs.header.scrollLeft
-        // this.$refs.header.scrollTo(left, 0);
-        // // this.scrollTo(this.$refs.header,left,300)
+        this.scrollTo();
+        activeEl = activeEl.$el
+        const header = this.$refs.header;
+        const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft)
+        if(header.scrollLeft != left) {
+          // this.$refs.header.scrollTo(left, 0);
+
+          this.scrollTo(header,header.scrollLeft, left, 300)
+        }
       }
       if (activeEl) {
         goToEl()
       } else {
         this.$nextTick(() => {
-
           activeEl = this.$refs['tabs-slider-paginator-item-' + activeId]
           goToEl()
         })
@@ -145,6 +180,10 @@ export default {
     },
     tick() {
       if (!this.pause) {
+        if(this.stopAutoplay){
+          this.step = 0
+          return null
+        }
         this.step += 100 / (this.time / 1000 * this.fps)
         if (this.step >= 100) {
           this.step = 0
@@ -160,8 +199,12 @@ export default {
     setActive(id) {
       if (!this.isActive) {
         tabsSliderStore.setActiveId(this.sliderName, id)
-        this.scrollToActive(id);
         this.step = 0
+      }
+    },
+    stopAutoplayFn(){
+      if(this.onClickStopPlay && this.autoplay){
+        this.stopAutoplay = true
       }
     }
   },

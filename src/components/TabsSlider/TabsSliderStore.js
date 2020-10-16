@@ -1,6 +1,5 @@
 import Vue from "vue";
 
-// import StorePrototype from "@vue-rt-style-kit-atoms-local/stores/storePrototype.class";
 import {StorePrototype} from "vue-rt-style-kit-atoms";
 
 class TabsSliderStore extends StorePrototype {
@@ -13,6 +12,7 @@ class TabsSliderStore extends StorePrototype {
     this.tabsBeforeActiveIds = {}
     this.watchers = {}
     this.afterRegisterFns = {}
+    this.timeouts = {}
   }
 
   getSlot = (id) => {
@@ -28,13 +28,7 @@ class TabsSliderStore extends StorePrototype {
     if (Object.keys(this.slots[tabsUid]).length == 0) {
       setActive = true;
     }
-    // if (!this.slots[tabsUid]) {
-    //   this.tabsArray[tabsUid] = [];
-    //   this.slots[tabsUid] = {};
-    //   setActive = true;
-    // }
     let index = this.tabsArray[tabsUid].indexOf(id);
-
     if (index == -1) {
       if (setActive) {
         this.setActiveId(tabsUid, id)
@@ -52,7 +46,6 @@ class TabsSliderStore extends StorePrototype {
     if (indexInArray >= 0) {
       this.tabsArray[tabsUid].splice(indexInArray, 1)
     }
-
     if (this.tabsActiveIds[tabsUid] == id) {
       this.tabsActiveIds[tabsUid] = null
     }
@@ -65,18 +58,21 @@ class TabsSliderStore extends StorePrototype {
     this.runWatchersById(tabsUid)
   }
   setActiveId = (tabsUid, id) => {
-    if (this.tabsActiveIds[tabsUid] != id) {
-      if (!this.tabsActiveIds[tabsUid]) {
-        this.tabsActiveIds[tabsUid] = id
-        this.runWatchersById(tabsUid)
-
-      } else {
-        if (!this.tabsBeforeActiveIds[tabsUid]) {
+    if(!this.timeouts[tabsUid]) {
+      if (this.tabsActiveIds[tabsUid] != id) {
+        if (!this.tabsActiveIds[tabsUid]) {
+          this.tabsActiveIds[tabsUid] = id
+          this.runWatchersById(tabsUid)
+        } else {
+          if (this.timeouts[tabsUid]) {
+            clearTimeout(this.timeouts[tabsUid])
+          }
           this.tabsBeforeActiveIds[tabsUid] = this.tabsActiveIds[tabsUid]
           this.tabsActiveIds[tabsUid] = id
           this.runWatchersById(tabsUid)
-          setTimeout(() => {
+          this.timeouts[tabsUid] = setTimeout(() => {
             delete this.tabsBeforeActiveIds[tabsUid]
+            delete this.timeouts[tabsUid]
             this.runWatchersById(tabsUid)
           }, 1000)
         }
@@ -88,9 +84,6 @@ class TabsSliderStore extends StorePrototype {
       activeId: this.tabsActiveIds[tabsUid],
       beforeActiveId: this.tabsBeforeActiveIds[tabsUid]
     }
-    // if(this.slots[tabsUid] && this.slots[tabsUid][data.activeId]) {
-    //   data.activeColor = this.slots[tabsUid][data.activeId].background
-    // }
     return data;
   }
 

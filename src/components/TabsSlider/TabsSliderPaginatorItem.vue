@@ -46,10 +46,10 @@ export default {
   },
 
   render(h) {
-    return <div onClick={this.onClickEmit} class={this.tabsSliderClass}>
+    return <button type="button" onClick={this.onClickEmit} class={this.tabsSliderClass}>
       {this.renderTimer}
       <p class="tab-slider__header-text">{this.$slots.default}</p>
-    </div>
+    </button>
   }
 };
 </script>

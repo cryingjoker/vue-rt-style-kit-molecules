@@ -38,14 +38,20 @@
   @media (max-width: tablet-upper-limit)
     flex-shrink: 0
   @media (hover: hover)
-    &:hover
-      background-color b2c-purple
-      color white
+    &:hover,
+    &:focus
+      background-color main-color01
 
 .tab-slider__header-item--active
   cursor: default;
   background-color b2c-purple
   color white
+  @media (hover: hover)
+    &:hover,
+    &:focus
+      cursor: default;
+      background-color b2c-purple
+      color white
 
 
 .tab-slider__timer
