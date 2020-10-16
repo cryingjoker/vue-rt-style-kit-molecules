@@ -28,7 +28,7 @@
     computed: {},
     methods: {
       fixRegion($event) {
-        if(window.innerWidth > parseInt(variables['tablet-upper-limit'])) {
+        if(window.innerWidth > parseInt(variables["tablet-upper-limit"])) {
           $event.preventDefault();
           $event.stopPropagation();
           let urlString = window.location.href;
@@ -37,9 +37,9 @@
           let place = '';
           if(startPos != -1) {
             if(endPos != -1) {
-              place = `-${urlString.substring(startPos + 2, endPos)}-`
+              place = `${urlString.substring(startPos, endPos)}-`
             } else {
-              place = `-${urlString.substring(startPos + 2, urlString.length - 1)}-`
+              place = `${urlString.substring(startPos, urlString.length - 1)}-`
             }
           }
           window.location.href = urlString.substring(0, startPos) + place + this.linkTarget;
@@ -54,9 +54,9 @@
         <div class="rt-header__ab-content-block">
           <div class="rt-header__ab-content-block-top">
             <a href={this.linkTarget} onClick={this.fixRegion}>
-              <h5 class="p1 rt-font-bold">{this.$slots.title}</h5>
+              <h5 class="p1 rt-font-bold"domPropsInnerHTML={this.$slots.title[0].text}></h5>
             </a>
-            <p class="p3 color-main07">{this.$slots.paragraph}</p>
+            <p class="p3 color-main07" domPropsInnerHTML={this.$slots.paragraph[0].text}></p>
           </div>
           <div class="rt-header__ab-content-block-bottom">
             <a href={this.linkTarget} class="p3 rt-link rt-link--purple" onClick={this.fixRegion}>{this.linkText}</a>

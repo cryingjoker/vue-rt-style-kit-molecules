@@ -14,12 +14,12 @@
                 activeNode: this.navTree,
                 activeNodeTitle: null,
                 activeNodePath: '0',
-                adTitle: null,
-                adSubTitle: null,
-                adImage: null,
-                adText: null,
-                adLink: null,
-                adLinkText: null,
+                adTitle: '',
+                adSubTitle: '',
+                adImage: '',
+                adText: '',
+                adLink: '',
+                adLinkText: '',
                 gaValue: [],
                 gotBanner: false
             };
@@ -158,7 +158,7 @@
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
                             <p domPropsInnerHTML={item.label}/>
-                            {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1" domPropsInnerHTML={item.subTitle}/> : null}
+                            {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
                             <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="header-navigation__item-arrow header-navigation__item-arrow--next">
                                 <path d="M1 8L4.5 4.5L1 1" stroke="#101828"/>
@@ -169,7 +169,7 @@
                         return <a href={item.path} onClick={this.pushData}>
                             <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
                                 <div domPropsInnerHTML={item.label}/>
-                                {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1" domPropsInnerHTML={item.subTitle}/> : null}
+                                {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1">{item.subTitle}</p> : null}
                             </div>
                         </a>
                     }
@@ -178,6 +178,8 @@
 
             const navigationAdvertisement = () => {
                 this.gotBanner = true;
+                console.log(this.adTitle)
+                console.log(typeof this.adTitle)
                 if(this.activeNodePath.length === 3 && this.adTitle) {
                     return <rt-header-advertisement-block image={this.adImage}
                                                           link-target={this.adLink}
