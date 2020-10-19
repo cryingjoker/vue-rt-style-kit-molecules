@@ -82,8 +82,8 @@
             return <div
                 class={"rt-tabs-checklist" + (this.isActiveLocal && !this.hideNotActive ? " rt-tabs-checklist--is-active" : "")}>
                 <div class="rt-tabs-checklist-input">
-                    <rt-checkbox  onChange={this.onChange} ref="checkbox" model={this.isActiveLocal}
-                                 name={"rt-checkbox-" + this._uid}>{this.$slots.label}</rt-checkbox>
+                    <rt-checkbox onChange={this.onChange} ref="checkbox"
+                                 name={"rt-checkbox-" + this._uid}>{this.$slots.label}></rt-checkbox>
                 </div>
                 {content()}
 
