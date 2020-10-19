@@ -156,6 +156,9 @@ export default {
           this.setWatcher();
         }, 1000)
       }
+      setTimeout(()=>{
+        this.getHeight();
+      },500)
 
       // this.$refs['bannerItemWrapper'].style.minHeigth = null
 
