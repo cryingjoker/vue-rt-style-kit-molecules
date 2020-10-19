@@ -61,7 +61,9 @@ class TabsSliderStore extends StorePrototype {
 
   }
   removeSlots = (tabsUid, id) => {
-    delete this.slots[tabsUid][id];
+    if(this.slots[tabsUid] && this.slots[tabsUid][id]) {
+      delete this.slots[tabsUid][id];
+    }
 
     const indexInArray = this.tabsArray[tabsUid].indexOf(id)
 
