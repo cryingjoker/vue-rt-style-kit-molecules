@@ -25,15 +25,8 @@ export default {
     index: NaN
   }),
   computed: {},
-  beforeUpdate() {
-    this.clearTabsSliderStore()
-  },
   destroyed() {
     this.clearTabsSliderStore()
-  },
-  updated() {
-    this.clearTabsSliderStore()
-    this.fillTabsSliderStore()
   },
   mounted: function () {
     if(this.sort - 0 > -1){
