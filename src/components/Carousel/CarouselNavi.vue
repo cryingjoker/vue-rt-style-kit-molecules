@@ -100,7 +100,7 @@ export default {
         let posY = window.pageYOffset + window.innerHeight / 2
         let posStart = getTop + this.navsPosStart
         let posEnd = getTop + this.overlayEl.clientHeight - this.navsPosEnd - this.buttonSize
-        if (((posY >= posStart) && posY < posEnd) && this.arrowTopFixed) {
+        if ((posY >= posStart) && posY < posEnd) {
           // Scrolled
           this.position = 'fixed'
           this.topPos = null
