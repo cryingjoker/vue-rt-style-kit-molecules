@@ -18,7 +18,6 @@ class ScrollToOnClick {
   }
 
   bind = () => {
-    console.info('!!')
     if (this.$el && (!this.vnode || !this.vnode.ScrollToOnClick)) {
       this.$el.addEventListener("click", this.scrollTo, { passive: true });
     }
