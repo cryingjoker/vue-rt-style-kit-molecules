@@ -63,6 +63,10 @@ export default {
     advancePage: {
       type: Function,
       default: () => {}
+    },
+    arrowTopFixed: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -75,6 +79,7 @@ export default {
   },
   mounted() {
     this.activateNavi()
+    this.checkTopFixed()
   },
   updated() {
     if (!this.navContainerChanged && this.navigationContainer !== '') {
@@ -111,6 +116,14 @@ export default {
           this.topPos = `${this.navsPosStart}px`
           this.bottomPos = 'auto'
         }
+        this.checkTopFixed()
+      }
+    },
+    checkTopFixed () {
+      if (this.arrowTopFixed) {
+        this.position = 'absolute'
+        this.topPos = this.arrowTopFixed
+        this.bottomPos = 'auto'
       }
     },
     triggerPageAdvance (e) {
