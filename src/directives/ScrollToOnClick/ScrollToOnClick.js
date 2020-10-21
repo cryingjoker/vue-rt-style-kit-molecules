@@ -13,11 +13,12 @@ class ScrollToOnClick {
       this.bind();
 
     }else{
-      console.error('have not set scrollToId property!');
+      // console.error('have not set scrollToId property!');
     }
   }
 
   bind = () => {
+    console.info('!!')
     if (this.$el && (!this.vnode || !this.vnode.ScrollToOnClick)) {
       this.$el.addEventListener("click", this.scrollTo, { passive: true });
     }
