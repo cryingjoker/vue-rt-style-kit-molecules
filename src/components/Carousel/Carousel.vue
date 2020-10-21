@@ -33,6 +33,7 @@
       :hSpace="isInnerBlock && innerBlockOffset > 10 ? innerBlockOffset - 10 : hSpace"
       :isPending="isPending"
       :hideArrows="hideArrows"
+      :arrowTopFixed="arrowTopFixed"
       :showTipsNext="showTipsNext"
       :containerName="cssContainer"
       :overlayEl="$refs.overlay"
@@ -222,6 +223,9 @@ export default {
     deepSlideLoad: {
       type: Number,
       default: 1
+    },
+    arrowTopFixed: {
+      type: String
     }
   },
   data() {
