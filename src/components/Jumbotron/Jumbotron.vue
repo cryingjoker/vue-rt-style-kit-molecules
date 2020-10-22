@@ -248,11 +248,20 @@ export default {
       return null
     },
     description() {
-      if (this.$slots.description) {
-        const classList = ['sp-t-0-4','td-sp-t-0-3','rt-font-paragraph'];
+      if (this.$slots['description']) {
+        const classList = [,'rt-font-paragraph'];
+        if(this.$slots['anchor']){
+          classList.push('sp-t-0-3')
+          classList.push('td-sp-t-1-1')
+          classList.push('md-sp-t-1')
+        }else{
+          classList.push('sp-t-0-4')
+          classList.push('td-sp-t-0-3')
+        }
+
           classList.push('color-' + this.descriptionColor)
         return <p class={classList.join(' ')}>
-          {this.$slots.description}
+          {this.$slots['description']}
         </p>
       }
       return null
