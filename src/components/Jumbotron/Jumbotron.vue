@@ -252,8 +252,6 @@ export default {
         const classList = [,'rt-font-paragraph'];
         if(this.$slots['anchor']){
           classList.push('sp-t-0-3')
-          classList.push('td-sp-t-1-1')
-          classList.push('md-sp-t-1')
         }else{
           classList.push('sp-t-0-4')
           classList.push('td-sp-t-0-3')
