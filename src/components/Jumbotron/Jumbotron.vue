@@ -266,6 +266,24 @@ export default {
       }
       return null
     },
+    anchorContainer(){
+
+      if(this.$slots['anchor']){
+        const achorItems = this.$slots['anchor'].map((item,index)=>{
+          const classList = [];
+          if(index>0){
+            classList.push('sp-t-0-4')
+            classList.push('td-sp-t-0-3')
+          }else{
+            classList.push('sp-t-1-3')
+            classList.push('td-sp-t-1-1')
+            classList.push('md-sp-t-1')
+          }
+          return <div class={classList.join(' ')}>{item}</div>
+        })
+        return <div>{achorItems}</div>
+      }
+    },
     footer() {
       if (this.$slots.footer) {
         const classList = ['sp-t-1-2','td-sp-t-1-1'];
@@ -305,6 +323,7 @@ export default {
                   {this.label}
                   {this.description}
                   {this.bodyHtml}
+                  {this.anchorContainer}
                   {this.footer}
                 </div>
               </div>
