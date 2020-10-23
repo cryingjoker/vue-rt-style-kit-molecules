@@ -29,7 +29,15 @@
             carouselItemClass: {
                 type: String,
                 default: '.carousel-card'
-            }
+            },
+            ga: {
+                type: Object,
+                default: null
+            },
+            gaB2b: {
+                type: Object,
+                default: null
+            },
         },
 
         data() {
@@ -48,6 +56,12 @@
                 this.renderLayout();
             });
             this.renderLayout();
+            if (this.mobileLayout) {
+                window.addEventListener('touchstart', () => {
+                    console.log(123);
+                    this.pushGa()
+                })
+            }
         },
         methods: {
             getCarouselItemsLength() {
@@ -149,6 +163,7 @@
                     this.updateClasses();
                     this.positionCarouselCards();
                     this.activeSlideIndex = this.nextSlideIndex;
+                    this.pushGa()
                 }
             },
 
@@ -158,6 +173,7 @@
                     this.updateClasses();
                     this.positionCarouselCards()
                     this.activeSlideIndex = this.nextSlideIndex;
+                    this.pushGa()
                 }
             },
 
@@ -186,7 +202,6 @@
                 }, false);
             },
             mobileSmoothScroll(currentScroll, endScrollPosition, cardGallery) {
-
                 if (currentScroll < (endScrollPosition - 1) || currentScroll > (endScrollPosition + 1)) {
                     if (currentScroll < endScrollPosition) {
 
@@ -213,6 +228,19 @@
                         }, 5);
                     }
                 }
+            },
+            pushGa() {     
+                let ga = this.ga || this.gaB2b
+                if (!ga) return
+                let typeEvent = this.ga ? 'b2c' : 'b2b'
+                if (!window.dataLayer) {
+                    window.dataLayer = [];
+                }
+                window.dataLayer.push({
+                    event: typeEvent,
+                    type: 'slider',
+                    value: ga.value
+                });
             }
         },
         render(h) {
