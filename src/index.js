@@ -91,6 +91,7 @@ import {
   HelpBlock,
   BannerV2,
   BannerItemV2,
+  BannerSkeleton,
   PhoneNumberInput,
   Jumbotron,
   CarouselV2,
@@ -120,6 +121,7 @@ const VueRtStyle = {
       Vue.component(CardImageList.name, CardImageList);
       Vue.component(Banner.name, Banner);
       Vue.component(BannerV2.name, BannerV2);
+      Vue.component(BannerSkeleton.name, BannerSkeleton);
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
@@ -262,6 +264,7 @@ export {
   Banner,
   BannerItem,
   BannerPaginatorItem,
+  BannerSkeleton,
   Carousel,
   CarouselSlide,
   Card,
