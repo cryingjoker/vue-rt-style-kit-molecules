@@ -28,7 +28,8 @@
         isScrolling: () => {},
         hasSlotContent: false,
         resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
-        mayScroll: true
+        mayScroll: true,
+        touchStart: null
       }
     },
     computed: {
@@ -151,13 +152,22 @@
         window.clearTimeout(this.isScrolling);
         this.isScrolling = setTimeout(() => {
           this.$emit('native-scroll-stopped');
-        }, 1);
+        }, 10);
       },
       checkForSlotContent() {
         let checkForContent = (hasContent, node) => {
             return hasContent || node.tag || (node.text && node.text.trim());
         };
         return this.$slots.default && this.$slots.default.reduce(checkForContent, false);
+      },
+      checkAbility($event) {
+        this.touchStart = $event.touches[0].clientX
+      },
+      mobileScroll($event) {
+        if((this.farRight && this.touchStart > $event.touches[0].clientX) || (this.farLeft && this.touchStart < $event.touches[0].clientX)) {
+          $event.preventDefault();
+          $event.stopPropagation();
+        }
       }
     },
     render(h) {
@@ -184,7 +194,7 @@
       };
       return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData}>
         <div class="rt-carousel-v2__slide-wrapper rt-col" ref="wrapper">
-          <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions}>
+          <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions} onTouchstart={this.checkAbility} onTouchmove={this.mobileScroll}>
             {this.$slots.default}
             {arrowLeft()}
             {arrowRight()}
