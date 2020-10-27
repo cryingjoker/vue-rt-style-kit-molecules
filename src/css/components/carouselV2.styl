@@ -1,6 +1,5 @@
 .rt-carousel-v2
   position relative
-  scroll-behavior smooth
   &--d-scroll
     .rt-carousel-slide-v2
       width 30%
@@ -8,13 +7,14 @@
     .rt-carousel-v2__fading
       display block
   &__inner
-    overflow auto
+    overflow scroll
     flex-wrap wrap
     display flex
     margin 0 -10px
     scroll-snap-type x mandatory
     scrollbar-width none
     -webkit-overflow-scrolling touch
+    scroll-behavior smooth
     &::-webkit-scrollbar
       width 0
       display none
@@ -93,8 +93,8 @@
     width calc(35vw + 20px)!important
     flex-basis calc(35vw + 20px)!important
     scroll-snap-align start
-    scroll-snap-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)!important
-    scroll-margin calc(((100vw \- 40px) \- (35vw \+ 20px) * 2) / 2)!important
+    scroll-snap-margin calc((100vw - 70px - 80px) / 2)  //calc(((100vw - 40px) - (35vw + 20px) * 2) / 2)!important
+    scroll-margin calc((100vw - 70px - 80px) / 2)  //calc(((100vw - 40px) - (35vw + 20px) * 2) / 2)!important
     box-sizing content-box
   @media (max-width tablet-upper-limit)
     &:first-child
@@ -103,6 +103,8 @@
     width calc(75vw + 20px)!important
     flex-basis calc(75vw + 20px)!important
     scroll-snap-align center center!important
+    scroll-snap-margin 0
+    scroll-margin 0
   &--3
     width calc(100% / 3)
     flex-basis calc(100% / 3)

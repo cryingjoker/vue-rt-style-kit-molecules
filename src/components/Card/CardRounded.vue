@@ -141,7 +141,7 @@ export default {
         return 'flex-fill'
       } else {
         if(this.previewCard) {
-          return 'sp-b-1'
+          return 'sp-b-1 td-sp-b-0-3'
         }
       }
       return null
@@ -183,6 +183,7 @@ export default {
           classNames.push('sp-t-2');
           classNames.push('sp-b-0-3');
           classNames.push('td-sp-t-1-3');
+          classNames.push('td-sp-b-none');
         } else {
           classNames.push('sp-t-1');
         }
