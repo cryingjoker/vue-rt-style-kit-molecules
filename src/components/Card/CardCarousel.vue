@@ -58,7 +58,6 @@
             this.renderLayout();
             if (this.mobileLayout) {
                 window.addEventListener('touchstart', () => {
-                    console.log(123);
                     this.pushGa()
                 })
             }
