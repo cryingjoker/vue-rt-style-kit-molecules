@@ -1,4 +1,5 @@
-$waveSizeBanner = 750px
+$waveSizeBanner = 600px
+$waveDurationBanner = 3s
 
 .rt-skeleton-banner
   overflow hidden
@@ -21,7 +22,7 @@ $waveSizeBanner = 750px
     &-item
       height 56vw
       width 100vw
-      background-color $colorStart
+      background-color b2c-cool-grey05-no-opacity
 
   &-wrapper
     border-radius 8px
@@ -59,7 +60,7 @@ $waveSizeBanner = 750px
   &-header
     height 16px
     width 142px
-    background-color $colorStart
+    background-color b2c-cool-grey05-no-opacity
     margin-bottom 16px
     border-radius: 4px;
     @media(max-width tablet-upper-limit)
@@ -67,7 +68,7 @@ $waveSizeBanner = 750px
   &-label
     height 88px
     width 100%
-    background-color $colorStart
+    background-color b2c-cool-grey05-no-opacity
     margin-bottom 16px
     border-radius: 4px;
     @media(max-width tablet-upper-limit)
@@ -76,7 +77,7 @@ $waveSizeBanner = 750px
   &-description
     height 24px
     width 100%
-    background-color $colorStart
+    background-color b2c-cool-grey05-no-opacity
     margin-bottom 24px
     border-radius: 4px;
     @media(max-width tablet-upper-limit)
@@ -90,7 +91,7 @@ $waveSizeBanner = 750px
     &-button
       height 52px
       width 142px
-      background-color $colorStart
+      background-color b2c-cool-grey05-no-opacity
       border-radius: 4px;
       @media(max-width tablet-upper-limit)
         height 36px
@@ -100,51 +101,42 @@ $waveSizeBanner = 750px
       display none
       @media(max-width mobile-upper-limit)
         height 36px
-        display flex
-        justify-content start
-      &-item
+        display block
         position relative
-        height 100%
+        height 36px
+        width 84px
+      &:before
+        content ''
+        display block
         width 36px
-        &:not(:first-child)
-          margin-left 12px
-        &:before
-          content ''
-          display block
-          width 36px
-          height 36px
-          position absolute
-          margin auto
-          left 0
-          right 0
-          top 0
-          bottom 0
-          background-color $colorStart
-          border-radius 50%
+        height 36px
+        position absolute
+        margin auto
+        left 0
+        top 0
+        background-color b2c-cool-grey05-no-opacity
+        border-radius 50%
+      &:after
+        content ''
+        display block
+        width 36px
+        height 36px
+        position absolute
+        margin auto
+        right 0
+        top 0
+        background-color b2c-cool-grey05-no-opacity
+        border-radius 50%
 
   &-paginator
     margin-top 49px
     display flex
     justify-content start
+    width 80px
+    height 10px
+    background url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCA3OCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9IiNFN0U3RTkiLz4KPGNpcmNsZSBjeD0iMzkiIGN5PSI1IiByPSI1IiBmaWxsPSIjRTdFN0U5Ii8+CjxjaXJjbGUgY3g9IjczIiBjeT0iNSIgcj0iNSIgZmlsbD0iI0U3RTdFOSIvPgo8L3N2Zz4K") left top no-repeat
     @media(max-width mobile-upper-limit)
       display none
-    &-item
-      position relative
-      &:not(:first-child)
-        margin-left 24px
-      &:before
-        content ''
-        display block
-        width 10px
-        height 10px
-        position absolute
-        margin auto
-        left 0
-        right 0
-        top 0
-        bottom 0
-        background-color $colorStart
-        border-radius 50%
 
   &-image
     padding 60px
@@ -157,7 +149,7 @@ $waveSizeBanner = 750px
     &-item
       height 302px
       width 530px
-      background-color $colorStart
+      background-color b2c-cool-grey05-no-opacity
       @media(max-width tablet-upper-limit)
         height 180px
         width 307px
@@ -171,17 +163,21 @@ $waveSizeBanner = 750px
 
     &:after
       content ''
-      animation wave $waveDuration ease-in-out infinite
-      background $colorEnd
-      border-radius 50%
+      animation wave $waveDurationBanner ease-in-out infinite
+      background b2c-cool-grey
+      border-radius 40px
       position absolute
-      width $waveSizeBanner
-      height $waveSizeBanner
-      top - $waveSizeBanner
-      left - $waveSizeBanner
+      width 0px
+      height 100%
+      top 0px
+      left -10px
 
 @keyframes wave
   0%
-    transform translate( 0, 0 )
+    width 0px
+  50%
+    width $waveSizeBanner
+    transform translateX(0)
   100%
-    transform translate( $waveSizeBanner * 3, $waveSizeBanner * 2 )
+    transform translateX($waveSizeBanner * 1.5)
+    width 0px
