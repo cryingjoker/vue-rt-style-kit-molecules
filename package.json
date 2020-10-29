@@ -36,6 +36,7 @@
     "babel-plugin-transform-vue-tsx": "^3510.0.3",
     "buefy": "^0.8.8",
     "element-ui": "^2.13.0",
+    "ismobilejs": "^1.1.1",
     "nodelist-foreach-polyfill": "^1.2.0",
     "normalize.css": "^8.0.1",
     "reflect-metadata": "^0.1.13",
