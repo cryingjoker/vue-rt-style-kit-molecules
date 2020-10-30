@@ -1,0 +1,67 @@
+.rt-ad-banner
+  overflow: hidden;
+  border-radius 8px
+  background main-color005
+  @media (max-width: mobile-upper-limit)
+    background transparent
+    height: auto
+.rt-ad-banner__inner
+  height: 100%
+  position: relative;
+  z-index 2
+.rt-ad-banner__image-container
+  position: absolute;
+  top: 0
+  left: 0
+  right: 0
+  z-index 1
+
+
+.rt-ad-banner__image
+  height: 440px
+  width: 604px
+  max-width 100%
+  background-image: url(https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/Pattern%20web.png)
+  background-size: contain;
+  background-repeat:no-repeat
+  @media (max-width: tablet-upper-limit)
+    background-image: url(https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/Pattern%20tablet.png)
+    width: 492px;
+    height: 376px;
+
+  @media (max-width: mobile-upper-limit)
+    background-image: url(https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/Pattern%20mobile.png)
+    width: 100%;
+    height: 59vw;
+    border-radius 5px
+    background-color: main-color005
+.rt-ad-banner__mobile
+  position: absolute;
+  top: 0
+  bottom: 3px
+  height: 364px
+  width: 181px
+  left: 0
+  right: 0
+  margin-top: auto
+  margin-bottom auto
+  margin-left: auto;
+  margin-right auto
+  background-size: cover;
+  background-image: url(https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/img%20mobile.png)
+  @media (max-width: tablet-upper-limit)
+    width: 157px;
+    height: 315px;
+  @media (max-width: mobile-upper-limit)
+    height calc(59vw - 24px)
+    width: 49vw
+    margin-left: auto
+    margin-right: auto
+    position: relative
+    background-size: auto;
+    background-repeat: no-repeat
+    background-size: 49vw 98.3vw;
+
+
+
+

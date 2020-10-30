@@ -283,6 +283,7 @@
     backface-visibility visible
     @media(max-width: mobile-upper-limit)
       min-height 338px
+      max-height 358px
     .{newAppName}-card__background
       &:after
         position absolute
@@ -529,6 +530,7 @@
     .{b2bAppName}-category__content-top--cut
       max-height 258px
   &__title
+    z-index 2
     @media (max-width: tablet-upper-limit)
       font-size 18px
       line-height 26px
@@ -908,6 +910,7 @@
         transform rotate(180deg)
 
 .pseudo-select
+  z-index 2
   overflow hidden
   position absolute
   top 0
@@ -961,6 +964,7 @@
     width 20px
     height 20px
     cursor pointer
+    z-index 2
     transform rotate(180deg)
     transition transform 0.3s linear
   &-wrapper

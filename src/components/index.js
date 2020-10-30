@@ -1,5 +1,7 @@
 export {default as ScrollTabs} from './ScrollTabs/ScrollTabs.vue';
 export {default as Tabs} from './Tabs/Tabs.vue';
+export {default as TabsSlider} from './TabsSlider/TabsSlider.vue';
+export {default as TabsSliderItem} from './TabsSlider/TabsSliderItem.vue';
 export {default as CheckboxTabs} from './CheckboxTabs/CheckboxTabs.vue';
 export {default as TabsNavigationItem} from './Tabs/TabsNavigationItem.vue';
 export {default as TabsContentItem} from './Tabs/TabsContentItem.vue';
@@ -86,6 +88,10 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export {default as SliderItem} from './Slider/SliderItem.vue'
  export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
  export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
+export {default as CarouselV2} from './CarouselV2/Carousel.vue';
+export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
+export {default as AdBanner} from './AdBanner/AdBanner.vue';
 
 
+ export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';

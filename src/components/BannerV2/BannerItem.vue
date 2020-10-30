@@ -45,6 +45,10 @@
             type:String,
             default: ''
           },
+          useMinusPrefix:{
+            type: Boolean,
+            default: false
+          },
           showUrlOnMobile:{
             type:Boolean,
             default: true
@@ -92,6 +96,12 @@
               bannerStore.setSlot(parentId, 'mobileHeader', header, itemId)
             }
           }
+          if(this.$slots['tablet-header']) {
+            const header = this.$slots['tablet-header'];
+            if(header) {
+              bannerStore.setSlot(parentId, 'tabletHeader', header, itemId)
+            }
+          }
           if(this.$slots['description']) {
             const description = this.$slots['description'];
             if(description) {
@@ -132,7 +142,18 @@
             bannerStore.setActiveSlot(parentId,itemId)
           }
           if(this.url.length > 0){
-            bannerStore.setSlot(parentId, 'url', this.url, itemId)
+            let url = this.url;
+            if(url.search(/^http/) < 0){
+              let prefix = '';
+              if(this.useMinusPrefix){
+                prefix = location?.pathname?.split('/').find(i=>i && i.search(/(^-)([\W\w]*)(-$)/gi)==0)?.replace(/(^-)|(-$)/g,'')
+                if(prefix?.length > 0){
+                  url = prefix+'/'+url.replace(/(^-)/g,'')
+                }
+              }
+            }
+
+            bannerStore.setSlot(parentId, 'url', url, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnMobile', this.showUrlOnMobile, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnTablet', this.showUrlOnTablet, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnDesktop', this.showUrlOnDesktop, itemId)

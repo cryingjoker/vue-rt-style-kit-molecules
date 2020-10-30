@@ -79,7 +79,9 @@
                             <div class="rt-col-6 rt-col-td-6">
                                 <div class="d-flex d-space-between flex-column text-image-block__content">
                                     <div class="text-image-block__content-inner">
-                                        <h2 class="rt-font-h2 sp-t-1 td-sp-t-2 md-sp-t-1-3">{this.title}</h2>
+                                        <h2 class="rt-font-h2 sp-t-1 td-sp-t-2 md-sp-t-1-3">
+                                            {this.title.length > 0 ? this.title : this.$slots.title}
+                                        </h2>
                                         {this.$slots['upper-content']}
                                     </div>
                                     {bottomContentPart()}

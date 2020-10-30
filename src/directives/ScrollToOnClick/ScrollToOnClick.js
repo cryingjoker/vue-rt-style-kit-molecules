@@ -13,7 +13,7 @@ class ScrollToOnClick {
       this.bind();
 
     }else{
-      console.error('have not set scrollToId property!');
+      // console.error('have not set scrollToId property!');
     }
   }
 

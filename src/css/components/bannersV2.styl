@@ -219,7 +219,7 @@ colors = readJsonKeys('../../../color.json')
 
 .rt-n-banner-paginator-line
   position: absolute;
-  top: 56vw
+  top: calc(56vw + 18px)
   left: -10px
   right: -10px
   height: 2px
@@ -278,9 +278,10 @@ renderColorClass(classname, var, media)
 
 
 for $i in colors
-  if search($i,'b2c') >= 0
+  if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'color-block--'+replace($i,'b2c-','')
     renderColorClass(className, $i, $type)
+
 
 
 .rt-n-banner-item-url

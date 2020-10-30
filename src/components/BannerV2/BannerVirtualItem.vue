@@ -9,10 +9,6 @@ import BannerVirtualImage from "./BannerVirtualImage.vue";
 const componentsList = {};
 componentsList[BannerVirtualImage.name] = BannerVirtualImage
 
-//dark-slate
-//gray
-//orange
-
 export default {
   name: "RtBannerVirtualItemV2",
   components: componentsList,
@@ -42,6 +38,9 @@ export default {
     orientation: {
       type: Number
     },
+    lastDateUpdate:{
+      type: String|Number
+    }
   },
   data: () => ({
     type: null,
@@ -63,9 +62,16 @@ export default {
       this.removeWatcher()
     }
   },
+  watch:{
+    lastDateUpdate(newVal,oldVal){
+      if(newVal!=oldVal){
+        this.getHeight();
+      }
+    }
+  },
   methods: {
     setGoogleAn(){
-      if(this.data.ga){
+      if(this.data.ga && Object.keys(this.data.ga).length > 0){
         this.googleAn(true)
       }
     },
@@ -76,7 +82,7 @@ export default {
         }
         let parentId;
         const customSlotsSort = bannerStore.getSlotSort(this.bannerName)
-        let currentKey = customSlotsSort.indexOf(this._uid);
+        let currentKey = customSlotsSort.indexOf(this.id);
         if(this.bannerName.length > 0){
           parentId = this.bannerName;
         }
@@ -86,10 +92,11 @@ export default {
         if (!window.dataLayer) {
           window.dataLayer = [];
         }
-        let banner_place = currentKey+1;
-        // if(this.data.gaBannerName){
-        //   banner_place = this.data.gaBannerName
-        // }
+        let banner_place = currentKey;
+        let section = this.data.ga.section || window.location.pathname
+        if(section == '/'){
+          section = 'main_page'
+        }
 
         window.dataLayer.push({
           event: this.data.gaEventType,
@@ -97,7 +104,7 @@ export default {
           banner_name: this.data.ga.name,
           banner_id: this.data.gaBannerName ? this.data.gaBannerName : parentId,
           banner_place: banner_place,
-          banner_section: this.data.ga.section || window.location.pathname
+          banner_section: section
         });
         if(e){
           global.location.href = this.data?.url;
@@ -138,34 +145,35 @@ export default {
       }
     },
     getHeight() {
-      this.hideHeight = true;
-      if (this.$refs['bannerItemWrapper']) {
-        this.$nextTick(() => {
-          this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
-          const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
-          if (thisHeight) {
-            bannerStore.setHeight(this.bannerName, thisHeight);
-          }
-          this.hideHeight = false;
-
-        })
-      } else {
-        this.removeWatcher();
-        setTimeout(() => {
-          this.setWatcher();
-        }, 1000)
+      if (this.activeId != this.id) {
+        this.hideHeight = true;
+        if (this.$refs['bannerItemWrapper']) {
+          this.$nextTick(() => {
+            this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
+            const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
+            if (thisHeight) {
+              bannerStore.setHeight(this.bannerName, thisHeight);
+            }
+            this.hideHeight = false;
+          })
+        } else {
+          this.removeWatcher();
+          setTimeout(() => {
+            this.setWatcher();
+          }, 1000)
+        }
       }
-
-      // this.$refs['bannerItemWrapper'].style.minHeigth = null
-
     }
   },
   computed: {
     header() {
       if (this.data.header) {
-        const classList = ['sp-b-0-4'];
+        const classList = ['sp-b-0-4','td-b-0-3'];
         if (this.data.mobileHeader) {
           classList.push('md-d-none')
+        }
+        if (this.data.tabletHeader) {
+          classList.push('td-d-none')
         }
         return <div class={classList.join(' ')}>
           {this.data.header}
@@ -177,6 +185,14 @@ export default {
       if (this.data.mobileHeader) {
         return <div class="sp-b-0-3 md-d-flex d-none">
           {this.data.mobileHeader}
+        </div>
+      }
+      return null
+    },
+    tabletHeader() {
+      if (this.data.tabletHeader) {
+        return <div class="sp-b-0-3 md-d-none td-d-flex d-none">
+          {this.data.tabletHeader}
         </div>
       }
       return null
@@ -296,6 +312,7 @@ export default {
                   <div class="md-sp-t-1-2 d-flex flex-column rt-n-banner-inner-content">
                     <div class="md-flex-fill">
                       {this.header}
+                      {this.tabletHeader}
                       {this.mobileHeader}
                       {this.label}
                       {this.description}

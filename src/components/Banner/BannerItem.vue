@@ -318,8 +318,10 @@
         mounted() {
             deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
             this.calculateMobileOptions();
-            if (this.RtBanners.activeIndex < 0 && this.RtBanners.items.length) {
-              this.RtBanners.activeIndex = 0
+            if(this.RtBanners) {
+              if (this.RtBanners.activeIndex < 0 && this.RtBanners.items.length) {
+                this.RtBanners.activeIndex = 0
+              }
             }
             if (this.ga) {
                 this.activateEventToLink('b2c', this.ga);

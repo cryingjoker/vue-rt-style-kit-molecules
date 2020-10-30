@@ -21,13 +21,17 @@
       &-background
         border-radius 50%
         position relative
-        .{newAppName}-benefit-item__icon
-          position absolute
-          top 50%
-          left 50%
-          transform translateY(-50%) translateX(-50%)
+        margin-bottom 20px
+        //.{newAppName}-benefit-item__icon
+        //  position absolute
+        //  top 50%
+        //  left 50%
+        //  transform translateY(-50%) translateX(-50%)
       .rt-icon
         height 100%
+      img
+        max-width 100%
+        max-height 100%
     &__image
       margin-bottom: 20px
       &>img
@@ -48,7 +52,10 @@
         margin-left: 20px
     @media (max-width tablet-upper-limit)
       margin-bottom 40px
-
+    &__icon
+      display flex
+      align-items center
+      justify-content center
   &-item__text
     //h4
     //  font-size 22px

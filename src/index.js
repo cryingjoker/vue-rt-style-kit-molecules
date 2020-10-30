@@ -53,6 +53,8 @@ import {
   OpportunityItem,
   UnWrapper,
   RealPopup,
+  TabsSlider,
+  TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
@@ -89,7 +91,11 @@ import {
   HelpBlock,
   BannerV2,
   BannerItemV2,
-  PhoneNumberInput
+  PhoneNumberInput,
+  Jumbotron,
+  CarouselV2,
+  CarouselSlideV2,
+  AdBanner
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -177,9 +183,12 @@ const VueRtStyle = {
       Vue.component(HeaderNavigation.name, HeaderNavigation);
       Vue.component(TextImageBlock.name, TextImageBlock);
       Vue.component(PhoneNumberInput.name, PhoneNumberInput);
-
+      Vue.component(CarouselV2.name, CarouselV2);
+      Vue.component(CarouselSlideV2.name, CarouselSlideV2);
 
       Vue.component(Tabs.name, Tabs);
+      Vue.component(TabsSlider.name, TabsSlider);
+      Vue.component(TabsSliderItem.name, TabsSliderItem);
       Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
@@ -194,6 +203,8 @@ const VueRtStyle = {
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
+      Vue.component(Jumbotron.name, Jumbotron);
+      Vue.component(AdBanner.name, AdBanner);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -244,6 +255,7 @@ if (typeof window !== 'undefined') {
     window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
   })
 }
+
 VueRtStyle.version = version;
 
 export default VueRtStyle;
@@ -298,6 +310,8 @@ export {
   OpportunityItem,
   UnWrapper,
   RealPopup,
+  TabsSlider,
+  TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
@@ -331,6 +345,10 @@ export {
   BannerV2,
   BannerItemV2,
   PhoneNumberInput,
+  Jumbotron,
+  CarouselV2,
+  CarouselSlideV2,
+  AdBanner,
   // need to change name directives
   SwipeLeft,
   SwipeRight,

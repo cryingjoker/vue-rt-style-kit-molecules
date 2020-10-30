@@ -59,11 +59,11 @@
             el.classList !== undefined && el.classList.contains('card-layout__slide') ? el.classList.add('rt-carousel__slide') : null;
           });
         } else if(!!this.$slots.cards && window.innerWidth <= parseInt(variables["laptop-upper-limit"]) && window.innerWidth >= parseInt(variables["laptop-lower-limit"])) {
-          this.$refs.layout.childNodes.forEach(el => {
+          this.$refs.layout?.childNodes.forEach(el => {
             el.classList !== undefined && el.classList.contains('card-layout__slide') ? el.classList.add('rt-carousel__slide') : null;
           });
         } else if(!!this.$slots.cards && window.innerWidth >= parseInt(variables["desktop-lower-limit"])) {
-          this.$refs.layout.childNodes.forEach(el => {
+          this.$refs.layout?.childNodes.forEach(el => {
             el.classList !== undefined && el.classList.contains('rt-carousel__slide') ? el.classList.remove('rt-carousel__slide') : null;
           });
         }

@@ -33,6 +33,7 @@
       :hSpace="isInnerBlock && innerBlockOffset > 10 ? innerBlockOffset - 10 : hSpace"
       :isPending="isPending"
       :hideArrows="hideArrows"
+      :arrowTopFixed="arrowTopFixed"
       :showTipsNext="showTipsNext"
       :containerName="cssContainer"
       :overlayEl="$refs.overlay"
@@ -222,6 +223,9 @@ export default {
     deepSlideLoad: {
       type: Number,
       default: 1
+    },
+    arrowTopFixed: {
+      type: String
     }
   },
   data() {
@@ -466,6 +470,9 @@ export default {
 
     fitCarouselWidth() {
       this.bodyWidth = getComputedStyle(window.document.body).width
+      if (this.isInnerBlock) {
+        this.innerBlockOffset = this.$el.parentElement.getBoundingClientRect().left
+      }
     },
 
     /**

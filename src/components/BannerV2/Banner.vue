@@ -34,6 +34,10 @@ export default {
     pauseOnHover: {
       type: Boolean,
       default: true
+    },
+    preventScroll:{
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -48,10 +52,17 @@ export default {
     slotHeight: null,
     type: null,
     xDown: null,
-    yDown: null
+    yDown: null,
+    lastDateUpdate: new Date() - 0
 
   }),
-
+  watch:{
+    customSlotsSort(newVal,oldVal){
+      if(JSON.stringify(newVal) != JSON.stringify(newVal)){
+        this.lastDateUpdate = new Date() - 0;
+      }
+    }
+  },
 
   mounted: function () {
     if (this.name.length > 0) {
@@ -75,6 +86,7 @@ export default {
   },
 
   methods: {
+
     setDeviceType() {
       const type = deviceTypeStore.getStatus()
       if (this.type != type) {
@@ -96,10 +108,10 @@ export default {
       this.activeSlideColor = data.activeColor
     },
     getSlots() {
-      this.customSlotsSort = bannerStore.getSlotSort(this.bannerName) || []
+      this.customSlots = bannerStore.getSlot(this.bannerName)
     },
     getSlotSort() {
-      this.customSlots = bannerStore.getSlot(this.bannerName)
+      this.customSlotsSort = bannerStore.getSlotSort(this.bannerName) || []
     },
     getSlotHeight() {
       this.slotHeight = bannerStore.getHeight(this.bannerName)
@@ -135,6 +147,9 @@ export default {
       const next = (activeIndex + 1) % size;
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+        if (this.preventScroll) {
+          event.preventDefault();
+        }
         if (xDiff > 0) {
           bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next])
 
@@ -157,10 +172,10 @@ export default {
     bannerItems() {
       return this.customSlotsSort?.map((key) => {
         const slide = this.customSlots[key];
-        const isActive = key == this.bannerActiveId
         return <rt-banner-virtual-item-v2
           next-id={this.bannerNextActiveId}
           id={key}
+          last-date-update={this.lastDateUpdate}
           height={this.slotHeight}
           banner-name={this.bannerName}
           active-id={this.bannerActiveId}
