@@ -67,7 +67,7 @@ export default {
       }
       if(this.isAndroid) {
         return <div class="d-flex sp-t-1-1 md-d-block">
-          <div class="flex-fill sp-l-0-2">
+          <div class="flex-fill">
             <rt-button href={this.androindUrl} color="black" is-block={true}>
               <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/googlePlay.svg" alt=""/>
             </rt-button>
