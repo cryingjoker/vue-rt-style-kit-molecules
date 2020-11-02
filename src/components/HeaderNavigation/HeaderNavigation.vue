@@ -22,7 +22,8 @@
                 adLinkText: '',
                 gaValue: [],
                 gotBanner: false,
-                expandTitle: ''
+                expandTitle: '',
+                newWindow: false
             };
         },
         computed: {
@@ -66,6 +67,7 @@
                     this.adText = this.navTree[targetNodeIndex].adText;
                     this.adLink = this.navTree[targetNodeIndex].linkTarget;
                     this.adLinkText = this.navTree[targetNodeIndex].linkText;
+                    this.newWindow = this.navTree[targetNodeIndex].newWindow;
                 }
                 this.activeNodePath = this.activeNodePath.length !== 0 ? this.activeNodePath.join('/') : null;
                 this.gaValue.pop();
@@ -156,6 +158,7 @@
                         this.adText = item.adText;
                         this.adLink = item.linkTarget;
                         this.adLinkText = item.linkText;
+                        this.newWindow = item.newWindow;
                         if (!window.dataLayer) {
                             window.dataLayer = [];
                         }
@@ -200,7 +203,8 @@
                     return <rt-header-advertisement-block image={this.adImage}
                                                           link-target={this.adLink}
                                                           link-text={this.adLinkText}
-                                                          ref="promoBanner">
+                                                          ref="promoBanner"
+                                                          new-window={this.newWindow}>
                         <template slot="title">{this.adTitle}</template>
                         <template slot="paragraph">{this.adText}</template>
                     </rt-header-advertisement-block>

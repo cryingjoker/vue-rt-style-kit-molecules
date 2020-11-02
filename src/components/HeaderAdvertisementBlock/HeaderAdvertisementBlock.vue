@@ -17,6 +17,10 @@
       linkText: {
         type: String,
         default: ''
+      },
+      newWindow: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -24,7 +28,9 @@
 
       }
     },
-    mounted(){},
+    mounted(){
+      console.log(this.newWindow)
+    },
     computed: {},
     methods: {
       fixRegion($event) {
@@ -42,7 +48,11 @@
               place = `${urlString.substring(startPos, urlString.length - 1)}-`
             }
           }
-          window.location.href = urlString.substring(0, startPos) + place + this.linkTarget;
+          if(this.newWindow) {
+            window.open(urlString.substring(0, startPos) + place + this.linkTarget, '_blank');
+          } else {
+            window.open(urlString.substring(0, startPos) + place + this.linkTarget, '_self');
+          }
         }
       }
     },
@@ -54,7 +64,7 @@
         <div class="rt-header__ab-content-block">
           <div class="rt-header__ab-content-block-top">
             <a href={this.linkTarget} onClick={this.fixRegion}>
-              <h5 class="p1 rt-font-bold"domPropsInnerHTML={this.$slots.title[0].text}></h5>
+              <h5 class="p1 rt-font-bold" domPropsInnerHTML={this.$slots.title[0].text}></h5>
             </a>
             <p class="p3 color-main07" domPropsInnerHTML={this.$slots.paragraph[0].text}></p>
           </div>
