@@ -21,7 +21,8 @@
                 adLink: '',
                 adLinkText: '',
                 gaValue: [],
-                gotBanner: false
+                gotBanner: false,
+                expandTitle: ''
             };
         },
         computed: {
@@ -50,7 +51,7 @@
             navigateBack() {
                 if (!window.dataLayer) {
                     window.dataLayer = [];
-                }
+                };
                 this.activeNodePath = this.activeNodePath.split('/');
                 this.activeNodePath.pop();
                 let targetNodeIndex = this.activeNodePath[this.activeNodePath.length - 1];
@@ -68,6 +69,11 @@
                 }
                 this.activeNodePath = this.activeNodePath.length !== 0 ? this.activeNodePath.join('/') : null;
                 this.gaValue.pop();
+                this.activeNode.map((item) => {
+                    if(this.expandTitle == item.label && item.expandable) {
+                        this.$emit('shrink');
+                    }
+                });
             },
             pushData($event) {
                 $event.preventDefault();
@@ -154,6 +160,14 @@
                             window.dataLayer = [];
                         }
                         this.gaValue.push(item.label);
+                        if(item.expandable) {
+                            this.expandTitle = item.label;
+                            this.$emit('expand');
+                        }
+                    };
+                    const customFunc = () => {
+                        let fn = new Function(item.callback);
+                        fn();
                     };
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
@@ -164,7 +178,11 @@
                                 <path d="M1 8L4.5 4.5L1 1" stroke="#101828"/>
                             </svg>
                         </div>
-
+                    } else if(!!item.callback){
+                        return <div class={"header-navigation__item rt-font-small-paragraph " + item.class} onClick={customFunc}>
+                            <div domPropsInnerHTML={item.label}/>
+                            {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1" domPropsInnerHTML={item.subTitle}/> : null}
+                        </div>
                     } else {
                         return <a href={item.path} onClick={this.pushData}>
                             <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
