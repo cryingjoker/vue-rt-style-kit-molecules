@@ -59,7 +59,7 @@ export default {
       if(this.isIos) {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill sp-r-0-2 md-sp-r-none">
-            <rt-button href={this.iosUrl} color="black">
+            <rt-button class="rt-button-md--is-block" href={this.iosUrl} color="black">
               <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/appStore.svg" alt=""/>
             </rt-button>
           </div>
@@ -68,7 +68,7 @@ export default {
       if(this.isAndroid) {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill">
-            <rt-button href={this.androindUrl} color="black">
+            <rt-button class="rt-button-md--is-block" href={this.androindUrl} color="black">
               <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/googlePlay.svg" alt=""/>
             </rt-button>
           </div>
