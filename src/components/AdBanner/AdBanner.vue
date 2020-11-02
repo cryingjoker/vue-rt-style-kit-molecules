@@ -80,7 +80,7 @@ export default {
     return <div class="rt-container">
       <rt-col size={12} class="rt-ad-banner sp-t-3 sp-b-3 td-sp-t-2-4 td-sp-b-2-4 md-sp-t-none md-sp-b-none">
         <rt-row class="rt-ad-banner__image-container">
-          <rt-col size={5} tablet-size={4} mobile-size={3} class="relative">
+          <rt-col size={5} tablet-size={3} mobile-size={3} class="relative">
             <div class="rt-ad-banner__image"></div>
           </rt-col>
         </rt-row>
