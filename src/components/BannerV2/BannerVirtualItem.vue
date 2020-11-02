@@ -9,10 +9,6 @@ import BannerVirtualImage from "./BannerVirtualImage.vue";
 const componentsList = {};
 componentsList[BannerVirtualImage.name] = BannerVirtualImage
 
-//dark-slate
-//gray
-//orange
-
 export default {
   name: "RtBannerVirtualItemV2",
   components: componentsList,
@@ -42,6 +38,9 @@ export default {
     orientation: {
       type: Number
     },
+    lastDateUpdate:{
+      type: String|Number
+    }
   },
   data: () => ({
     type: null,
@@ -61,6 +60,13 @@ export default {
   beforeDestroy: function () {
     if (this.type == 'mobile') {
       this.removeWatcher()
+    }
+  },
+  watch:{
+    lastDateUpdate(newVal,oldVal){
+      if(newVal!=oldVal){
+        this.getHeight();
+      }
     }
   },
   methods: {
@@ -139,29 +145,24 @@ export default {
       }
     },
     getHeight() {
-      this.hideHeight = true;
-      if (this.$refs['bannerItemWrapper']) {
-        this.$nextTick(() => {
-          this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
-          const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
-          if (thisHeight) {
-            bannerStore.setHeight(this.bannerName, thisHeight);
-          }
-          this.hideHeight = false;
-
-        })
-      } else {
-        this.removeWatcher();
-        setTimeout(() => {
-          this.setWatcher();
-        }, 1000)
+      if (this.activeId != this.id) {
+        this.hideHeight = true;
+        if (this.$refs['bannerItemWrapper']) {
+          this.$nextTick(() => {
+            this.$refs['bannerItemWrapper'].style.minHeigth = '1px'
+            const thisHeight = this.$refs['bannerItemWrapper']?.offsetHeight
+            if (thisHeight) {
+              bannerStore.setHeight(this.bannerName, thisHeight);
+            }
+            this.hideHeight = false;
+          })
+        } else {
+          this.removeWatcher();
+          setTimeout(() => {
+            this.setWatcher();
+          }, 1000)
+        }
       }
-      setTimeout(()=>{
-        this.getHeight();
-      },500)
-
-      // this.$refs['bannerItemWrapper'].style.minHeigth = null
-
     }
   },
   computed: {
