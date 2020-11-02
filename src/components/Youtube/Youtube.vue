@@ -390,11 +390,6 @@ export default {
         } else if(this.$refs['ytp-wrapper'].msRequestFullscreen) {
           this.$refs['ytp-wrapper'].msRequestFullscreen();
         }
-        // else if(document.getElementsByTagName('video') && document.getElementsByTagName('video')[0].webkitSupportsFullscreen) {
-        //   let videoPlayer = document.getElementsByTagName('video')[0];
-        //   console.log(videoPlayer);
-        //   videoPlayer.webkitEnterFullscreen();
-        // }
         this.isFullscreen = !this.isFullscreen;
         this.isMute = false;
         this.setMuteParams(this.isMute);
@@ -407,26 +402,25 @@ export default {
         } else if(this.$refs['ytp-wrapper'].msRequestFullscreen) {
           document.msExitFullscreen();
         }
-        // else if(this.$refs['ytp-wrapper'].webkitSupportsFullscreen) {
-        //   document.webkitExitFullscreen()
-        // }
         this.isFullscreen = !this.isFullscreen;
       }
     },
     checkPosition() {
-      let playerTop = this.$refs['ytp-wrapper'].getBoundingClientRect().top;
-      let playerBottom = this.$refs['ytp-wrapper'].getBoundingClientRect().bottom;
-      if(playerTop > 0 && playerBottom < window.innerHeight) {
-        setTimeout(() => {
-          if(!this.secondAppearance) {
-            this.isMute = true;
-            this.setMuteParams(this.isMute);
-          }
-          this.playVideo();
-          this.secondAppearance = true;
-        },900);
-      } else {
-        this.isPlaying ? this.pauseVideo() : false;
+      if(this.$refs['ytp-wrapper']) {
+        let playerTop = this.$refs['ytp-wrapper'].getBoundingClientRect().top;
+        let playerBottom = this.$refs['ytp-wrapper'].getBoundingClientRect().bottom;
+        if(playerTop > 0 && playerBottom < window.innerHeight) {
+          setTimeout(() => {
+            if(!this.secondAppearance) {
+              this.isMute = true;
+              this.setMuteParams(this.isMute);
+            }
+            this.playVideo();
+            this.secondAppearance = true;
+          },900);
+        } else {
+          this.isPlaying ? this.pauseVideo() : false;
+        }
       }
     }
   },

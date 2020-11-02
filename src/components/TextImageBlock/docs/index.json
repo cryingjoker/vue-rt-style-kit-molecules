@@ -34,6 +34,13 @@
       "type" : "String",
       "description" : "Идентификатор видео на youtube.com",
       "value" : ""
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "tight-text",
+      "type" : "Boolean",
+      "description" : "Флаг указывающий на наличие дополнительного отступа шшишриной в 1 колонку между текстовым содержанием и изображением",
+      "value" : "false"
     }
   ]
 }
