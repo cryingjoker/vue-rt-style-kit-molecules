@@ -59,7 +59,7 @@ export default {
       if(this.isIos) {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill sp-r-0-2 md-sp-r-none">
-            <rt-button href={this.iosUrl} color="black" is-block={true}>
+            <rt-button href={this.iosUrl} color="black">
               <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/appStore.svg" alt=""/>
             </rt-button>
           </div>
@@ -68,7 +68,7 @@ export default {
       if(this.isAndroid) {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill">
-            <rt-button href={this.androindUrl} color="black" is-block={true}>
+            <rt-button href={this.androindUrl} color="black">
               <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/googlePlay.svg" alt=""/>
             </rt-button>
           </div>
@@ -93,7 +93,7 @@ export default {
           </rt-col>
           <rt-col size={5} tablet-size={3} mobile-size={3}>
               <p class="rt-font-h2 md-sp-t-1-2">Скачайте приложение <br/>«Мой Ростелеком»</p>
-              <p class="sp-t-1-1 md-sp-t-0-3 p2">Установите бесплатное приложение «Мой Ростелеком» и <br class="td-d-none"/>управляйте услугами
+              <p class="sp-t-1-1 td-sp-t-1 md-sp-t-0-3 rt-font-paragraph">Установите бесплатное приложение «Мой Ростелеком» и <br class="td-d-none"/>управляйте услугами
                 в режиме онлайн не выходя из дома <br class="td-d-none"/>через любое устройство.</p>
             {this.renderFooter}
           </rt-col>
