@@ -241,7 +241,7 @@ export default {
     },
     label() {
       if (this.$slots.label) {
-        if (this.$slots.label.find(i => i.tag)) {
+        if (this.$slots.label.find(i => i.tag && i.tag != 'br')) {
           this.$slots.label.filter(i => i.tag).forEach((item) => {
               item.data = item.data || {}
               item.data.staticClass = 'rt-font-h1'
