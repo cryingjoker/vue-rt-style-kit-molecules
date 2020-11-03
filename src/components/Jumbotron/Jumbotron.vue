@@ -21,45 +21,45 @@ export default {
       type: String,
       default: 'white'
     },
-    descriptionColor:{
+    descriptionColor: {
       type: String,
       default: 'white'
     },
-    url:{
+    url: {
       type: String,
       default: ''
     },
-    name:{
+    name: {
       type: String,
       default: ''
     },
-    section:{
+    section: {
       type: String,
       default: ''
     },
-    showUrlOnMobile:{
-      type:Boolean,
+    showUrlOnMobile: {
+      type: Boolean,
       default: true
     },
-    showUrlOnTablet:{
-      type:Boolean,
+    showUrlOnTablet: {
+      type: Boolean,
       default: false
     },
-    showUrlOnDesktop:{
-      type:Boolean,
+    showUrlOnDesktop: {
+      type: Boolean,
       default: false
     },
-    gaEventType:{
-      type:String,
+    gaEventType: {
+      type: String,
       default: 'b2c'
     },
-    ga:{
+    ga: {
       type: Object,
       default: () => {
         return {}
       }
     },
-    desktopColumnSize:{
+    desktopColumnSize: {
       type: Number,
       default: 6
     }
@@ -83,16 +83,16 @@ export default {
   },
 
   methods: {
-    fireGoogleAn(e){
-      if(this.ga) {
-        if(e){
+    fireGoogleAn(e) {
+      if (this.ga) {
+        if (e) {
           e.preventDefault();
         }
         let jumbotronName;
 
-        if(this.ga?.name?.length > 0){
+        if (this.ga?.name?.length > 0) {
           jumbotronName = this.ga.name
-        }else {
+        } else {
           if (this.name.length > 0) {
             jumbotronName = this.name;
           } else {
@@ -103,9 +103,9 @@ export default {
           window.dataLayer = [];
         }
         let section;
-        if(this.ga?.section?.length > 0){
+        if (this.ga?.section?.length > 0) {
           section = this.ga.section
-        }else{
+        } else {
           section = window.location.pathname;
         }
         let banner_place = 1;
@@ -119,20 +119,20 @@ export default {
           banner_place: banner_place,
           banner_section: section
         });
-        if(e && this.url.length > 0){
+        if (e && this.url.length > 0) {
           global.location.href = this.url;
         }
       }
     },
-    setGoogleAn(){
-      if(this.ga && Object.keys(this.ga).length > 0){
+    setGoogleAn() {
+      if (this.ga && Object.keys(this.ga).length > 0) {
         this.googleAn(true)
       }
     },
-    googleAn(bind){
-      if(bind) {
+    googleAn(bind) {
+      if (bind) {
         const el = this.$el.querySelector('a, button');
-        if(el) {
+        if (el) {
           el.addEventListener('click', (e) => {
             if (!e.target.getAttribute('data-ga-pushed')) {
               e.preventDefault();
@@ -210,7 +210,7 @@ export default {
     },
     header() {
       if (this.$slots.header) {
-        const classList = ['sp-b-0-4','td-sp-b-0-3'];
+        const classList = ['sp-b-0-4', 'td-sp-b-0-3'];
         if (this.$slots['mobile-header']) {
           classList.push('md-d-none')
         }
@@ -241,47 +241,55 @@ export default {
     },
     label() {
       if (this.$slots.label) {
-        return <h1 class="rt-font-h1">
-          {this.$slots.label}
-        </h1>
+        if (this.$slots.label.find(i => i.tag)) {
+          this.$slots.label.filter(i => i.tag).forEach((item) => {
+              item.data = item.data || {}
+              item.data.staticClass = 'rt-font-h1'
+          })
+          return this.$slots.label
+        } else {
+          return <h1 class="rt-font-h1">
+            {this.$slots.label}
+          </h1>
+        }
       }
       return null
     },
     description() {
       if (this.$slots['description']) {
-        const classList = [,'rt-font-paragraph'];
-        if(this.$slots['anchor']){
+        const classList = [, 'rt-font-paragraph'];
+        if (this.$slots['anchor']) {
           classList.push('sp-t-0-3')
-        }else{
+        } else {
           classList.push('sp-t-0-4')
           classList.push('td-sp-t-0-3')
         }
 
-          classList.push('color-' + this.descriptionColor)
+        classList.push('color-' + this.descriptionColor)
         return <p class={classList.join(' ')}>
           {this.$slots['description']}
         </p>
       }
       return null
     },
-    bodyHtml(){
-      if(this.$slots['body-html']){
-        const classList = ['sp-t-0-4','td-sp-t-0-3'];
+    bodyHtml() {
+      if (this.$slots['body-html']) {
+        const classList = ['sp-t-0-4', 'td-sp-t-0-3'];
         return <div class={classList.join(' ')}>
           {this.$slots['body-html']}
         </div>
       }
       return null
     },
-    anchorContainer(){
+    anchorContainer() {
 
-      if(this.$slots['anchor']){
-        const achorItems = this.$slots['anchor'].map((item,index)=>{
+      if (this.$slots['anchor']) {
+        const achorItems = this.$slots['anchor'].map((item, index) => {
           const classList = [];
-          if(index>0){
+          if (index > 0) {
             classList.push('sp-t-0-4')
             classList.push('td-sp-t-0-3')
-          }else{
+          } else {
             classList.push('sp-t-1-3')
             classList.push('td-sp-t-1-1')
             classList.push('md-sp-t-1')
@@ -293,18 +301,18 @@ export default {
     },
     footer() {
       if (this.$slots.footer) {
-        const classList = ['sp-t-1-2','td-sp-t-1-1'];
+        const classList = ['sp-t-1-2', 'td-sp-t-1-1'];
         return <div class={classList.join(' ')}>
           {this.$slots.footer}
         </div>
       }
       return null
     },
-    renderUrl(){
-        if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type == 'desktop' && this.showUrlOnDesktop)) {
-          return <a onClick={this.fireGoogleAn} href={this.url} class="rt-jumbotron-url"></a>
-        }
-        return null
+    renderUrl() {
+      if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type == 'desktop' && this.showUrlOnDesktop)) {
+        return <a onClick={this.fireGoogleAn} href={this.url} class="rt-jumbotron-url"></a>
+      }
+      return null
     }
   },
   render(h) {
@@ -319,24 +327,24 @@ export default {
           {this.imageMobileRender}
         </rt-col>
       </rt-row>
-        <div class="rt-container d-flex flex-fill height-fill ">
-          <rt-col size={this.desktopColumnSize} tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
-            <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
-              <div class="md-sp-t-1-2 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
-                <div class="md-flex-fill">
-                  {this.header}
-                  {this.tabletHeader}
-                  {this.mobileHeader}
-                  {this.label}
-                  {this.description}
-                  {this.bodyHtml}
-                  {this.anchorContainer}
-                  {this.footer}
-                </div>
+      <div class="rt-container d-flex flex-fill height-fill ">
+        <rt-col size={this.desktopColumnSize} tablet-size="3" mobile-size="3" class="d-flex flex-fill md-height-fill">
+          <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
+            <div class="md-sp-t-1-2 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
+              <div class="md-flex-fill">
+                {this.header}
+                {this.tabletHeader}
+                {this.mobileHeader}
+                {this.label}
+                {this.description}
+                {this.bodyHtml}
+                {this.anchorContainer}
+                {this.footer}
               </div>
             </div>
-          </rt-col>
-        </div>
+          </div>
+        </rt-col>
+      </div>
       {this.renderUrl}
     </div>
 

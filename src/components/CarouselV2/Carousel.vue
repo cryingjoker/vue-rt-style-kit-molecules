@@ -1,7 +1,10 @@
 <script type="text/jsx">
-  const componentsList = {};
-  import browser from '../../utils/browser'
   import variables from "../../variables.json";
+  import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
+  import {carouselStore} from "./CarouselStore";
+
+  const componentsList = {};
+  componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
 
   export default {
     name: "RtCarouselV2",
@@ -18,6 +21,14 @@
       contentToResize: {
         type: Array,
         default: () => ([])
+      },
+      carouselName: {
+        type: String,
+        default: '123'
+      },
+      carouselHtmlMode: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -28,7 +39,18 @@
         isScrolling: () => {},
         hasSlotContent: false,
         resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
-        mayScroll: true
+        mayScroll: true,
+        touchStart: null,
+        isRegistered: false,
+        customSlides: {},
+        customSlidesSort: []
+      }
+    },
+    watch: {
+      isRegistered(newVal, oldVal) {
+        if (newVal != oldVal && newVal) {
+          this.initMethods()
+        }
       }
     },
     computed: {
@@ -37,9 +59,15 @@
         if(this.scrollableOnDesktop)
           classList += ' rt-carousel-v2--d-scroll';
         return classList;
+      },
+      renderSlides() {
+        return Object.entries(this.customSlides).map(item => {
+          return <rt-virtual-carousel-slide-v2>{item[1]}</rt-virtual-carousel-slide-v2>
+        })
       }
     },
     mounted() {
+      this.registerCarousel();
       this.$on('scroll-step', this.setScrollStep);
       if(this.contentToResize) {
         this.resizeData = this.resizeData.concat(this.contentToResize);
@@ -50,20 +78,6 @@
       if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
         this.farLeft = true;
-      }
-    },
-    beforeUpdate() {
-      let primaryData = this.hasSlotContent;
-      this.hasSlotContent = this.checkForSlotContent();
-      if(this.hasSlotContent != primaryData) {
-        this.$forceUpdate();
-      }
-    },
-    created() {
-      let primaryData = this.hasSlotContent;
-      this.hasSlotContent = this.checkForSlotContent();
-      if(this.hasSlotContent != primaryData) {
-        this.$forceUpdate();
       }
     },
     updated() {},
@@ -151,14 +165,42 @@
         window.clearTimeout(this.isScrolling);
         this.isScrolling = setTimeout(() => {
           this.$emit('native-scroll-stopped');
-        }, 1);
+        }, 10);
       },
-      checkForSlotContent() {
-        let checkForContent = (hasContent, node) => {
-            return hasContent || node.tag || (node.text && node.text.trim());
-        };
-        return this.$slots.default && this.$slots.default.reduce(checkForContent, false);
-      }
+      checkAbility($event) {
+        this.touchStart = $event.touches[0].clientX
+      },
+      mobileScroll($event) {
+        if((this.farRight && this.touchStart > $event.touches[0].clientX) || (this.farLeft && this.touchStart < $event.touches[0].clientX)) {
+          $event.preventDefault();
+          $event.stopPropagation();
+        }
+      },
+      registerCarousel() {
+        if (this.carouselName.length > 0) {
+          carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
+            this.isRegistered = true;
+            carouselStore.runWatchersById(this.carouselName)
+          })
+        }
+      },
+      initMethods() {
+        this.updateSlots();
+        this.addStoreWatcher()
+      },
+      getSlots() {
+        this.customSlides = carouselStore.getSlot(this.carouselName)
+      },
+      getSlotSort() {
+        this.customSlidesSort = carouselStore.getSlotSort(this.carouselName) || []
+      },
+      updateSlots() {
+        this.getSlots();
+        this.getSlotSort();
+      },
+      addStoreWatcher() {
+        carouselStore.addWatcher(this.carouselName, this.updateSlots)
+      },
     },
     render(h) {
       const arrowLeft = () => {
@@ -180,11 +222,12 @@
         }
       };
       const resizeData = {
-          querySelectorsNames: this.resizeData
+        querySelectorsNames: this.resizeData
       };
       return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData}>
         <div class="rt-carousel-v2__slide-wrapper rt-col" ref="wrapper">
-          <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions}>
+          <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions} onTouchstart={this.checkAbility} onTouchmove={this.mobileScroll}>
+            {this.renderSlides}
             {this.$slots.default}
             {arrowLeft()}
             {arrowRight()}

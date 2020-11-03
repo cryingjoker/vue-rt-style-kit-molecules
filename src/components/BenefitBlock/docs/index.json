@@ -91,10 +91,18 @@
       "description": "Флаг установки непрозрачности для текста описания в дочерних элементах",
       "value": "false"
     },
-    {"name": "rt-benefit-block",
+    {
+      "name": "rt-benefit-block",
       "property": "three-column-tablet",
       "type": "Boolean",
       "description": "Флаг отвечающий за распределение контента в 3 колонки в планшетном разрешении",
+      "value": "false"
+    },
+    {
+      "name": "rt-benefit-block",
+      "property": "is-nested",
+      "type": "Boolean",
+      "description": "Флаг, указывающий, что компонент используется внутри другого компонента и занимает половину ширины экрана",
       "value": "false"
     }
   ]

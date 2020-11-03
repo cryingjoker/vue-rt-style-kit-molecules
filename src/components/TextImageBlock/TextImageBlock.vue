@@ -23,6 +23,10 @@
             video: {
                 type: String,
                 default: ''
+            },
+            tightText: {
+                type: Boolean,
+                default: false
             }
         },
         data: () => ({
@@ -41,6 +45,15 @@
                 if(this.bgColor) {
                     this.backgroundColor = this.bgColor.includes('b2c-') ? this.bgColor.replace('b2c-', '') : this.bgColor;
                     classList +=  ` color-block--${this.backgroundColor}`;
+                }
+                return classList;
+            },
+            contentClass() {
+                let classList = 'rt-col-td-6';
+                if(this.tightText) {
+                    classList += ' rt-col-5'
+                } else {
+                    classList += ' rt-col-6'
                 }
                 return classList;
             }
@@ -72,11 +85,18 @@
                     </div>
                 }
             };
+            const emptyColumn = () => {
+                if(this.tightText) {
+                    return <div class="rt-col-1"/>
+                } else {
+                    return null
+                }
+            };
             return <div class={this.blockClass}>
                 <div class="rt-container sp-v-4 td-sp-v-3 md-sp-v-2">
                     <div class="rt-col">
                         <div class={this.wrapperClass}>
-                            <div class="rt-col-6 rt-col-td-6">
+                            <div class={this.contentClass}>
                                 <div class="d-flex d-space-between flex-column text-image-block__content">
                                     <div class="text-image-block__content-inner">
                                         <h2 class="rt-font-h2 sp-t-1 td-sp-t-2 md-sp-t-1-3">
@@ -87,6 +107,7 @@
                                     {bottomContentPart()}
                                 </div>
                             </div>
+                            {emptyColumn()}
                             <div class="rt-col-6 rt-col-td-6">
                                 {visualContent()}
                             </div>
