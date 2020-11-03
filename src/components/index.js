@@ -72,6 +72,7 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
  export { default as Banner } from './Banner/Banner.vue';
  export { default as BannerV2 } from './BannerV2/Banner.vue';
  export { default as BannerItemV2 } from './BannerV2/BannerItem.vue';
+ export { default as BannerSkeleton } from './BannerV2/BannerSkeleton.vue';
  export { default as BannerItem } from './Banner/BannerItem.vue';
  export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
  export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';

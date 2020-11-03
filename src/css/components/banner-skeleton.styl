@@ -1,0 +1,183 @@
+$waveSizeBanner = 600px
+$waveDurationBanner = 3s
+
+.rt-skeleton-banner
+  overflow hidden
+  position relative;
+
+  @media (min-width tablet-lower-limit)
+    height 341px
+  @media (min-width laptop-lower-limit)
+    height 422px
+
+  &-mob-image
+    display none
+    position absolute
+    top 0
+    left 0
+    right 0
+    z-index 1
+    @media (max-width mobile-upper-limit)
+      display block
+    &-item
+      height 56vw
+      width 100vw
+      background-color b2c-cool-grey05-no-opacity
+
+  &-wrapper
+    border-radius 8px
+    overflow hidden;
+    position relative;
+    max-width 100%
+    background-color: #fff
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+      height 100%
+    @media (max-width tablet-upper-limit)
+      border-radius 0;
+    @media (max-width mobile-upper-limit)
+      padding-top 56vw
+      padding-bottom 24px
+      box-sizing border-box
+
+  &-content
+    position relative;
+    z-index 2
+    max-width 100%
+  &-inner-content
+    @media (max-width mobile-upper-limit)
+      min-width 100%
+      min-height 100%
+
+  &-inner
+    min-width 100%
+    margin-top 93px
+    @media(max-width tablet-upper-limit)
+      margin-top 81px
+    @media(max-width mobile-upper-limit)
+      margin-top 0px
+  &-inner-content
+    min-width 100%
+  &-header
+    height 16px
+    width 142px
+    background-color b2c-cool-grey05-no-opacity
+    margin-bottom 16px
+    border-radius: 4px;
+    @media(max-width tablet-upper-limit)
+      margin-bottom 12px
+  &-label
+    height 88px
+    width 100%
+    background-color b2c-cool-grey05-no-opacity
+    margin-bottom 16px
+    border-radius: 4px;
+    @media(max-width tablet-upper-limit)
+      height 64px
+      margin-bottom 12px
+  &-description
+    height 24px
+    width 100%
+    background-color b2c-cool-grey05-no-opacity
+    margin-bottom 24px
+    border-radius: 4px;
+    @media(max-width tablet-upper-limit)
+      margin-bottom 16px
+    @media(max-width mobile-upper-limit)
+      height 48px
+      margin-bottom 24px
+  &-actions
+    display flex
+    justify-content space-between
+    &-button
+      height 52px
+      width 142px
+      background-color b2c-cool-grey05-no-opacity
+      border-radius: 4px;
+      @media(max-width tablet-upper-limit)
+        height 36px
+        width 115px
+    
+    &-arrows
+      display none
+      @media(max-width mobile-upper-limit)
+        height 36px
+        display block
+        position relative
+        height 36px
+        width 84px
+      &:before
+        content ''
+        display block
+        width 36px
+        height 36px
+        position absolute
+        margin auto
+        left 0
+        top 0
+        background-color b2c-cool-grey05-no-opacity
+        border-radius 50%
+      &:after
+        content ''
+        display block
+        width 36px
+        height 36px
+        position absolute
+        margin auto
+        right 0
+        top 0
+        background-color b2c-cool-grey05-no-opacity
+        border-radius 50%
+
+  &-paginator
+    margin-top 49px
+    display flex
+    justify-content start
+    width 80px
+    height 10px
+    background url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCA3OCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9IiNFN0U3RTkiLz4KPGNpcmNsZSBjeD0iMzkiIGN5PSI1IiByPSI1IiBmaWxsPSIjRTdFN0U5Ii8+CjxjaXJjbGUgY3g9IjczIiBjeT0iNSIgcj0iNSIgZmlsbD0iI0U3RTdFOSIvPgo8L3N2Zz4K") left top no-repeat
+    @media(max-width mobile-upper-limit)
+      display none
+
+  &-image
+    padding 60px
+    display flex
+    justify-content flex-end
+    @media(max-width tablet-upper-limit)
+      padding 80px 20px
+    @media(max-width mobile-upper-limit)
+      display none
+    &-item
+      height 302px
+      width 530px
+      background-color b2c-cool-grey05-no-opacity
+      @media(max-width tablet-upper-limit)
+        height 180px
+        width 307px
+      @media(max-width mobile-upper-limit)
+        height 100%
+        width 100%
+  
+  &__wave
+    overflow hidden
+    position relative
+
+    &:after
+      content ''
+      animation wave $waveDurationBanner ease-in-out infinite
+      background b2c-cool-grey
+      border-radius 40px
+      position absolute
+      width 0px
+      height 100%
+      top 0px
+      left -10px
+
+@keyframes wave
+  0%
+    width 0px
+  50%
+    width $waveSizeBanner
+    transform translateX(0)
+  100%
+    transform translateX($waveSizeBanner * 1.5)
+    width 0px

@@ -85,15 +85,8 @@
                     </div>
                 }
             };
-            const leftEmptyColumn = () => {
-                if(this.tightText && this.reversed) {
-                    return <div class="rt-col-1"/>
-                } else {
-                    return null
-                }
-            };
-            const rightEmptyColumn = () => {
-                if(this.tightText && !this.reversed) {
+            const emptyColumn = () => {
+                if(this.tightText) {
                     return <div class="rt-col-1"/>
                 } else {
                     return null
@@ -103,7 +96,6 @@
                 <div class="rt-container sp-v-4 td-sp-v-3 md-sp-v-2">
                     <div class="rt-col">
                         <div class={this.wrapperClass}>
-                            {leftEmptyColumn()}
                             <div class={this.contentClass}>
                                 <div class="d-flex d-space-between flex-column text-image-block__content">
                                     <div class="text-image-block__content-inner">
@@ -115,7 +107,7 @@
                                     {bottomContentPart()}
                                 </div>
                             </div>
-                            {rightEmptyColumn()}
+                            {emptyColumn()}
                             <div class="rt-col-6 rt-col-td-6">
                                 {visualContent()}
                             </div>
