@@ -142,16 +142,12 @@
             bannerStore.setActiveSlot(parentId,itemId)
           }
           if(this.url.length > 0){
+            let locality = document.cookie.split('; ').find( i=>
+              i.search('userLocalityEng=')==0
+            );
+            let place = locality ? `/-${locality.split('=')[1]}-` : '';
             let url = this.url;
-            if(url.search(/^http/) < 0){
-              let prefix = '';
-              if(this.useMinusPrefix){
-                prefix = location?.pathname?.split('/').find(i=>i && i.search(/(^-)([\W\w]*)(-$)/gi)==0)?.replace(/(^-)|(-$)/g,'')
-                if(prefix?.length > 0){
-                  url = prefix+'/'+url.replace(/(^-)/g,'')
-                }
-              }
-            }
+            url = place + url;
 
             bannerStore.setSlot(parentId, 'url', url, itemId)
             bannerStore.setSlot(parentId, 'showUrlOnMobile', this.showUrlOnMobile, itemId)

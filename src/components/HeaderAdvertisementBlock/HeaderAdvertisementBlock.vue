@@ -37,7 +37,7 @@
           $event.stopPropagation();
           let locality = document.cookie.split('; ').find( i=>
               i.search('userLocalityEng=')==0
-          )
+          );
           let place = '';
           place = locality ? `/-${locality.split('=')[1]}-` : '';
           if(this.newWindow) {
