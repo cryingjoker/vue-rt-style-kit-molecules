@@ -1,6 +1,6 @@
 {
   "name": "vue-rt-style-kit-molecules",
-  "version": "0.3.69",
+  "version": "0.3.71",
   "description": "",
   "main": "lib/vue-rt-style-kit-molecules.js",
   "scripts": {

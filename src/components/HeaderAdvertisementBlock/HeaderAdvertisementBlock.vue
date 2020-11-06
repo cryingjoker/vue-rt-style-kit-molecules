@@ -28,30 +28,22 @@
 
       }
     },
-    mounted(){
-      console.log(this.newWindow)
-    },
+    mounted(){},
     computed: {},
     methods: {
       fixRegion($event) {
         if(window.innerWidth > parseInt(variables["tablet-upper-limit"])) {
           $event.preventDefault();
           $event.stopPropagation();
-          let urlString = window.location.href;
-          let startPos = urlString.indexOf('/-');
-          let endPos = urlString.indexOf('-/');
+          let locality = document.cookie.split('; ').find( i=>
+              i.search('userLocalityEng=')==0
+          );
           let place = '';
-          if(startPos != -1) {
-            if(endPos != -1) {
-              place = `${urlString.substring(startPos, endPos)}-`
-            } else {
-              place = `${urlString.substring(startPos, urlString.length - 1)}-`
-            }
-          }
+          place = locality ? `/-${locality.split('=')[1]}-` : '';
           if(this.newWindow) {
-            window.open(urlString.substring(0, startPos) + place + this.linkTarget, '_blank');
+            window.open(place + this.linkTarget, '_blank');
           } else {
-            window.open(urlString.substring(0, startPos) + place + this.linkTarget, '_self');
+            window.open(place + this.linkTarget, '_self');
           }
         }
       }

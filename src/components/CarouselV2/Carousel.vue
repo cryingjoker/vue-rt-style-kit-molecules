@@ -171,6 +171,8 @@
         this.touchStart = $event.touches[0].clientX
       },
       mobileScroll($event) {
+        this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth + this.$refs.inner.scrollLeft ? this.farRight = true : this.farRight = false;
+        this.$refs.inner.scrollLeft == 0 ? this.farLeft = true : this.farLeft = false;
         if((this.farRight && this.touchStart > $event.touches[0].clientX) || (this.farLeft && this.touchStart < $event.touches[0].clientX)) {
           $event.preventDefault();
           $event.stopPropagation();

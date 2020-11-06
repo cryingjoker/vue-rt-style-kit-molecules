@@ -118,21 +118,19 @@
                     'type': 'banner_nav',
                     'value': this.gaValue.join(' | ')
                 });
-                window.location.href = this.fixRegion() + this.adLink;
+                if(this.newWindow) {
+                    window.open(this.fixRegion() + this.adLink, '_blank');
+                } else {
+                    window.open(this.fixRegion() + this.adLink, '_self');
+                }
             },
             fixRegion() {
-                let urlString = window.location.href;
-                let startPos = urlString.indexOf('/-');
-                let endPos = urlString.indexOf('-/');
+                let locality = document.cookie.split('; ').find( i=>
+                    i.search('userLocalityEng=')==0
+                );
                 let place = '';
-                if(startPos != -1) {
-                    if(endPos != -1) {
-                        place = `${urlString.substring(startPos, endPos)}-`
-                    } else {
-                        place = `${urlString.substring(startPos, urlString.length - 1)}-`
-                    }
-                }
-                return urlString.substring(0, startPos) + place;
+                place = locality ? `-${locality.split('=')[1]}-` : '';
+                return place;
             }
         },
         render(h) {
