@@ -75,7 +75,7 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
-      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
+      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth && this.customSlidesSort.length > 0) {
         this.farRight = true;
         this.farLeft = true;
       }
@@ -83,8 +83,9 @@
     updated() {},
     methods: {
       countFarPositions() {
+        this.mayScroll = false;
         this.emitNativeScrollEnd();
-        this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth + this.$refs.inner.scrollLeft ? this.farRight = true : this.farRight = false;
+        this.$refs.inner.scrollLeft == this.$refs.inner.scrollWidth - this.$refs.inner.offsetWidth ? this.farRight = true : this.farRight = false;
         this.$refs.inner.scrollLeft == 0 ? this.farLeft = true : this.farLeft = false;
       },
       scrollRight() {
@@ -164,18 +165,24 @@
       emitNativeScrollEnd() {
         window.clearTimeout(this.isScrolling);
         this.isScrolling = setTimeout(() => {
+          this.mayScroll = true;
           this.$emit('native-scroll-stopped');
-        }, 10);
+        }, 50);
       },
-      checkAbility($event) {
-        this.touchStart = $event.touches[0].clientX
+      checkAbility(e) {
+        this.touchStart = e.touches[0].clientX;
       },
-      mobileScroll($event) {
-        this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth + this.$refs.inner.scrollLeft ? this.farRight = true : this.farRight = false;
-        this.$refs.inner.scrollLeft == 0 ? this.farLeft = true : this.farLeft = false;
-        if((this.farRight && this.touchStart > $event.touches[0].clientX) || (this.farLeft && this.touchStart < $event.touches[0].clientX)) {
-          $event.preventDefault();
-          $event.stopPropagation();
+      mobileScroll(e) {
+        if(!this.mayScroll) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        } else {
+          if((this.farRight && this.touchStart > e.touches[0].clientX) || (this.farLeft && this.touchStart < e.touches[0].clientX)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
         }
       },
       registerCarousel() {
