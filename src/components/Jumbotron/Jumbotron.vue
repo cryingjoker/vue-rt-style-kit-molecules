@@ -160,7 +160,10 @@ export default {
 
       return classNames.join(' ')
     },
-    imageRender() {
+
+  },
+  render(h) {
+    const imageRender = ()=>{
       if (this.$slots.image) {
         const classList = ['rt-jumbotron-image-container']
         if (this.$slots['image-x2']) {
@@ -172,11 +175,11 @@ export default {
         if (this.$slots['image-mobile']) {
           classList.push('md-d-none')
         }
-        return <div class={classList.join(' ')}>{this.$slots.image[0]}</div>
+        return <div class={classList.join(' ')}>{this.$scopedSlots.image()}</div>
       }
       return null
-    },
-    imageX2Render() {
+    }
+    const imageX2Render=()=> {
       if (this.$slots['image-x2']) {
         const classList = ['rt-jumbotron-image-container', 'd-none', 'x2-d-block'];
         if (this.$slots['image-tablet']) {
@@ -185,30 +188,30 @@ export default {
         if (this.$slots['image-mobile']) {
           classList.push('md-d-none')
         }
-        return <div class={classList.join(' ')}>{this.$slots['image-x2'][0]}</div>
+        return <div class={classList.join(' ')}>{this.$scopedSlots['image-x2']()}</div>
       }
       return null
-    },
-    imageTabletRender() {
+    }
+    const imageTabletRender=()=> {
 
       if (this.$slots['image-tablet']) {
         const classList = ['rt-jumbotron-image-container', 'td-d-block', 'd-none'];
         if (this.$slots['image-mobile']) {
           classList.push('md-d-none');
         }
-        return <div class={classList.join(' ')}>{this.$slots['image-tablet'][0]}</div>
+        return <div class={classList.join(' ')}>{this.$scopedSlots['image-tablet']()}</div>
       }
       return null
-    },
-    imageMobileRender() {
+    }
+    const imageMobileRender=()=> {
       if (this.$slots['image-mobile']) {
         const classList = ['rt-jumbotron-image-container', 'md-d-flex', 'd-none'];
 
-        return <div class={classList.join(' ')}>{this.$slots['image-mobile'][0]}</div>
+        return <div class={classList.join(' ')}>{this.$scopedSlots['image-mobile']()}</div>
       }
       return null
-    },
-    header() {
+    }
+    const header=()=> {
       if (this.$slots.header) {
         const classList = ['sp-b-0-4', 'td-sp-b-0-3'];
         if (this.$slots['mobile-header']) {
@@ -218,44 +221,44 @@ export default {
           classList.push('td-d-none')
         }
         return <div class={classList.join(' ')}>
-          {this.$slots.header}
+          {this.$scopedSlots.header()}
         </div>
       }
       return null
-    },
-    mobileHeader() {
+    }
+    const mobileHeader=()=> {
       if (this.$slots['mobile-header']) {
         return <div class="sp-b-0-4 td-sp-b-0-3 md-d-flex d-none">
-          {this.$slots['mobile-header']}
+          {this.$scopedSlots['mobile-header']()}
         </div>
       }
       return null
-    },
-    tabletHeader() {
+    }
+    const tabletHeader=()=> {
       if (this.$slots['tablet-header']) {
         return <div class="sp-b-0-4 td-sp-b-0-3 md-d-none td-d-flex d-none">
-          {this.$slots['tablet-header']}
+          {this.$scopedSlots['tablet-header']()}
         </div>
       }
       return null
-    },
-    label() {
+    }
+    const label=()=> {
       if (this.$slots.label) {
         if (this.$slots.label.find(i => i.tag && i.tag != 'br')) {
           this.$slots.label.filter(i => i.tag).forEach((item) => {
-              item.data = item.data || {}
-              item.data.staticClass = 'rt-font-h1'
+            item.data = item.data || {}
+            item.data.staticClass = 'rt-font-h1'
           })
-          return this.$slots.label
+          return this.$scopedSlots.label()
         } else {
           return <h1 class="rt-font-h1">
-            {this.$slots.label}
+            {this.$scopedSlots.label()}
           </h1>
         }
       }
       return null
-    },
-    description() {
+    }
+    const description=()=> {
       if (this.$slots['description']) {
         const classList = [, 'rt-font-paragraph'];
         if (this.$slots['anchor']) {
@@ -267,21 +270,22 @@ export default {
 
         classList.push('color-' + this.descriptionColor)
         return <p class={classList.join(' ')}>
-          {this.$slots['description']}
+          {this.$scopedSlots.description()}
+
         </p>
       }
       return null
-    },
-    bodyHtml() {
+    }
+    const bodyHtml=()=> {
       if (this.$slots['body-html']) {
         const classList = ['sp-t-0-4', 'td-sp-t-0-3'];
         return <div class={classList.join(' ')}>
-          {this.$slots['body-html']}
+          {this.$scopedSlots['body-html']()}
         </div>
       }
       return null
-    },
-    anchorContainer() {
+    }
+    const anchorContainer=()=> {
 
       if (this.$slots['anchor']) {
         const achorItems = this.$slots['anchor'].map((item, index) => {
@@ -294,37 +298,35 @@ export default {
             classList.push('td-sp-t-1-1')
             classList.push('md-sp-t-1')
           }
-          return <div class={classList.join(' ')}>{item}</div>
+          return <div class={classList.join(' ')}>{this.$scopedSlots['anchor']()[index]}</div>
         })
         return <div>{achorItems}</div>
       }
-    },
-    footer() {
+    }
+    const footer=()=> {
       if (this.$slots.footer) {
         const classList = ['sp-t-1-2', 'td-sp-t-1-1'];
         return <div class={classList.join(' ')}>
-          {this.$slots.footer}
+          {this.$scopedSlots.footer()}
         </div>
       }
       return null
-    },
-    renderUrl() {
+    }
+    const renderUrl=()=> {
       if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type == 'desktop' && this.showUrlOnDesktop)) {
         return <a onClick={this.fireGoogleAn} href={this.url} class="rt-jumbotron-url"></a>
       }
       return null
     }
-  },
-  render(h) {
     return <div class={this.jumbotronClass}>
       <rt-row class="rt-jumbotron-image flex-fill">
         <rt-col size={6} large-size={5} tablet-size={3} m-hide={true}></rt-col>
         <rt-col size={6} large-size={7} tablet-size={3} mobile-size={3}>
           <div class="rt-jumbotron-gradient md-d-none d-block"></div>
-          {this.imageRender}
-          {this.imageX2Render}
-          {this.imageTabletRender}
-          {this.imageMobileRender}
+          {imageRender()}
+          {imageX2Render()}
+          {imageTabletRender()}
+          {imageMobileRender()}
         </rt-col>
       </rt-row>
       <div class="rt-container d-flex flex-fill height-fill ">
@@ -332,14 +334,14 @@ export default {
           <div class="d-flex flex-start-center md-flex-start-top rt-jumbotron-inner">
             <div class="md-sp-t-1-2 md-sp-b-2 d-flex flex-column rt-jumbotron-inner-content">
               <div class="md-flex-fill">
-                {this.header}
-                {this.tabletHeader}
-                {this.mobileHeader}
-                {this.label}
-                {this.description}
-                {this.bodyHtml}
-                {this.anchorContainer}
-                {this.footer}
+                {header()}
+                {tabletHeader()}
+                {mobileHeader()}
+                {label()}
+                {description()}
+                {bodyHtml()}
+                {anchorContainer()}
+                {footer()}
               </div>
             </div>
           </div>
