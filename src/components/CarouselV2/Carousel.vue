@@ -85,8 +85,8 @@
       countFarPositions() {
         this.mayScroll = false;
         this.emitNativeScrollEnd();
-        this.$refs.inner.scrollLeft == this.$refs.inner.scrollWidth - this.$refs.inner.offsetWidth ? this.farRight = true : this.farRight = false;
-        this.$refs.inner.scrollLeft == 0 ? this.farLeft = true : this.farLeft = false;
+        this.$refs.inner.scrollLeft >= this.$refs.inner.scrollWidth - this.$refs.inner.offsetWidth - this.scrollStep * .01 ? this.farRight = true : this.farRight = false;
+        this.$refs.inner.scrollLeft <= this.scrollStep * .01 ? this.farLeft = true : this.farLeft = false;
       },
       scrollRight() {
         if(this.mayScroll) {
