@@ -78,7 +78,7 @@
                 });
             },
             pushData($event) {
-                $event.preventDefault();
+                // $event.preventDefault();
                 this.gaValue.push($event.target.innerText);
                 let targetLink;
                 if($event.target.localName == 'div') {
@@ -94,7 +94,7 @@
                     'type': 'main_nav',
                     'value': this.gaValue.join(' | ')
                 });
-                window.location.href = this.fixRegion() + targetLink;
+                // window.location.href = this.fixRegion() + targetLink;
             },
             bindBannerClick(){
                 this.$refs.promoBanner.$el.addEventListener('click', ($event) => {
@@ -106,9 +106,9 @@
                     this.pushBannerData($event)
                 })
             },
-            pushBannerData($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
+            pushBannerData() {
+                // $event.preventDefault();
+                // $event.stopPropagation();
                 this.gaValue.push(this.adTitle);
                 if (!window.dataLayer) {
                     window.dataLayer = [];
@@ -118,11 +118,11 @@
                     'type': 'banner_nav',
                     'value': this.gaValue.join(' | ')
                 });
-                if(this.newWindow) {
-                    window.open(this.fixRegion() + this.adLink, '_blank');
-                } else {
-                    window.open(this.fixRegion() + this.adLink, '_self');
-                }
+                // if(this.newWindow) {
+                //     window.open(this.fixRegion() + this.adLink, '_blank');
+                // } else {
+                //     window.open(this.fixRegion() + this.adLink, '_self');
+                // }
             },
             fixRegion() {
                 let locality = document.cookie.split('; ').find( i=>
@@ -170,6 +170,19 @@
                         let fn = new Function(item.callback);
                         fn();
                     };
+                    const linkAddress = () => {
+                        if(item.path.indexOf('.') == -1) {
+                            let linkHref = item.path;
+                            let locality = document.cookie.split('; ').find(i =>
+                                i.search('userLocalityEng=') == 0
+                            );
+                            let place = '';
+                            place = locality ? `/-${locality.split('=')[1]}-` : '';
+                            return place + linkHref;
+                        } else {
+                            return item.path;
+                        }
+                    }
                     if(item.items && item.items.length > 0) {
                         return <div class="header-navigation__item rt-font-small-paragraph" onClick={navigate}>
                             <p domPropsInnerHTML={item.label}/>
@@ -185,7 +198,7 @@
                             {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1" domPropsInnerHTML={item.subTitle}/> : null}
                         </div>
                     } else {
-                        return <a href={item.path} onClick={this.pushData}>
+                        return <a href={linkAddress()} onClick={this.pushData}>
                             <div class={"header-navigation__item rt-font-small-paragraph " + item.class}>
                                 <div domPropsInnerHTML={item.label}/>
                                 {item.subTitle ? <p class="rt-font-control color-main05 sp-t-0-1" domPropsInnerHTML={item.subTitle}/> : null}

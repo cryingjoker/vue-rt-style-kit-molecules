@@ -31,13 +31,17 @@
     mounted(){},
     computed: {
       fixRegion() {
-        let linkHref = this.linkTarget;
-        let locality = document.cookie.split('; ').find( i =>
+        if(this.linkTarget.indexOf('.') == -1) {
+          let linkHref = this.linkTarget;
+          let locality = document.cookie.split('; ').find(i =>
             i.search('userLocalityEng=') == 0
-        );
-        let place = '';
-        place = locality ? `/-${locality.split('=')[1]}-` : '';
-        return place + linkHref;
+          );
+          let place = '';
+          place = locality ? `/-${locality.split('=')[1]}-` : '';
+          return place + linkHref;
+        } else {
+          return this.linkTarget;
+        }
       }
     },
     methods: {},
