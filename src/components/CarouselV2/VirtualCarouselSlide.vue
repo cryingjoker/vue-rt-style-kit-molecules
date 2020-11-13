@@ -51,60 +51,60 @@
     },
     methods: {
       setTempStyle() {
-          if(!this.isMobile && !this.isSafari) {
-              this.$el.style.scrollSnapAlign = 'none';
-          }
+        if(!this.isMobile && !this.isSafari) {
+          this.$el.style.scrollSnapAlign = 'none';
+        }
       },
       returnStyle() {
-          if(!this.isSafari) {
-              if(!this.middleResolution) {
-                  this.calculatePosition();
-                  if(this.isCentral) {
-                      this.$el.style.scrollSnapAlign = 'center';
-                  } else {
-                      setTimeout(() => {
-                          this.$el.style.scrollSnapAlign = 'center';
-                      }, 25)
-                  }
-              } else {
-                  this.calculatePosition();
-                  if(this.isCentral) {
-                      this.$el.style.scrollSnapAlign = 'start';
-                  } else {
-                      setTimeout(() => {
-                          this.$el.style.scrollSnapAlign = 'start';
-                      }, 25)
-                  }
-              }
+        if(!this.isSafari) {
+          if(!this.middleResolution) {
+            this.calculatePosition();
+            if(this.isCentral) {
+              this.$el.style.scrollSnapAlign = 'center';
+            } else {
+              setTimeout(() => {
+                this.$el.style.scrollSnapAlign = 'center';
+              }, 25)
+            }
+          } else {
+            this.calculatePosition();
+            if(this.isCentral) {
+              this.$el.style.scrollSnapAlign = 'start';
+            } else {
+              setTimeout(() => {
+                this.$el.style.scrollSnapAlign = 'start';
+              }, 25)
+            }
           }
+        }
       },
       emitScrollStep() {
-          this.$parent ? setTimeout(()=> {this.$parent.$emit('scroll-step', {'size': this.$el.offsetWidth})}, 50) : setTimeout(()=> {this.emitScrollStep()}, 100);
+        this.$parent ? setTimeout(()=> {this.$parent.$emit('scroll-step', {'size': this.$el.offsetWidth})}, 50) : setTimeout(()=> {this.emitScrollStep()}, 100);
       },
       calculateMobileOptions(){
-          const type =  deviceTypeStore.getStatus();
-          this.isMobile = type === 'mobile';
-          this.isTablet = type === 'tablet';
+        const type =  deviceTypeStore.getStatus();
+        this.isMobile = type === 'mobile';
+        this.isTablet = type === 'tablet';
       },
       defineContainer() {
-          if(this.$parent?.$refs.inner) {
-              this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
-              this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
-              this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
-              this.calculatePosition();
-          }
+        if(this.$parent?.$refs.inner) {
+          this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
+          this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
+          this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
+          this.calculatePosition();
+        }
       },
       calculatePosition() {
-          if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
-              this.isOutsideContainer = true;
-          } else {
-              this.isOutsideContainer = false;
-          }
-          if(this.$el.getBoundingClientRect().right < ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10) && this.$el.getBoundingClientRect().left > (window.innerWidth - ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10))) {
-              this.isCentral = true;
-          } else {
-              this.isCentral = false;
-          }
+        if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
+          this.isOutsideContainer = true;
+        } else {
+          this.isOutsideContainer = false;
+        }
+        if(this.$el.getBoundingClientRect().right < ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10) && this.$el.getBoundingClientRect().left > (window.innerWidth - ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10))) {
+          this.isCentral = true;
+        } else {
+          this.isCentral = false;
+        }
       },
     },
     render(h) {
