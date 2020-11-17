@@ -1,13 +1,8 @@
 <script type="text/jsx">
 
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
-import {bannerStore} from "../BannerV2/BannerStore";
 
 const componentsList = {};
-
-//dark-slate
-//gray
-//orange-super
 
 export default {
   name: "RtJumbotron",
