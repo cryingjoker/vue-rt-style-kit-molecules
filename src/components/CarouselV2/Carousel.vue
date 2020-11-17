@@ -85,8 +85,8 @@
       countFarPositions() {
         this.mayScroll = false;
         this.emitNativeScrollEnd();
-        this.$refs.inner.scrollLeft == this.$refs.inner.scrollWidth - this.$refs.inner.offsetWidth ? this.farRight = true : this.farRight = false;
-        this.$refs.inner.scrollLeft == 0 ? this.farLeft = true : this.farLeft = false;
+        this.$refs.inner.scrollLeft >= this.$refs.inner.scrollWidth - this.$refs.inner.offsetWidth - this.scrollStep * .01 ? this.farRight = true : this.farRight = false;
+        this.$refs.inner.scrollLeft <= this.scrollStep * .01 ? this.farLeft = true : this.farLeft = false;
       },
       scrollRight() {
         if(this.mayScroll) {
@@ -119,46 +119,51 @@
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
-          if (startPos < endPos) {
-            let int = setInterval(() => {
-              if (startPos > (endPos - 15)) startPos += 1;
-              else if (startPos > (endPos - 50)) startPos += 5;
-              else if (startPos > (endPos - 100)) startPos += 10;
-              else if (startPos > (endPos - 200)) startPos += 20;
-              else if (startPos > (endPos - 350)) startPos += 35;
-              else if (startPos > (endPos - 500)) startPos += 50;
-              wrapper.scrollTo(startPos, 0);
-              if (startPos >= endPos) {
-                setTimeout(()=> {
-                  this.countFarPositions();
-                  this.$emit('scroll-end');
-                  setTimeout( () => {
-                    this.mayScroll = true;
-                  }, 10);
-                  clearInterval(int)
-                }, 11)
-              }
-            }, 3);
+          if(!!window.chrome) {
+              wrapper.scrollTo(endPos, 0)
           } else {
-            let int = setInterval(() => {
-              if (startPos < (endPos + 15)) startPos -= 1;
-              else if (startPos < (endPos + 50)) startPos -= 5;
-              else if (startPos < (endPos + 100)) startPos -= 10;
-              else if (startPos < (endPos + 200)) startPos -= 20;
-              else if (startPos < (endPos + 350)) startPos -= 35;
-              else if (startPos < (endPos + 500)) startPos -= 50;
-              wrapper.scrollTo(startPos, 0);
-              if (startPos <= endPos) {
-                setTimeout(()=> {
-                  this.countFarPositions();
-                  this.$emit('scroll-end');
-                  setTimeout( () => {
-                    this.mayScroll = true;
-                  }, 10);
-                  clearInterval(int)
-                }, 11)
-              }
-            }, 3);
+            let intervalTime = !!window.safari ? 35 : 15;
+            if (startPos < endPos) {
+              let int = setInterval(() => {
+                if (startPos > (endPos - 15)) startPos += 1;
+                else if (startPos > (endPos - 50)) startPos += 5;
+                else if (startPos > (endPos - 100)) startPos += 10;
+                else if (startPos > (endPos - 200)) startPos += 20;
+                else if (startPos > (endPos - 350)) startPos += 35;
+                else if (startPos > (endPos - 500)) startPos += 50;
+                wrapper.scrollTo(startPos, 0);
+                if (startPos >= endPos) {
+                  setTimeout(() => {
+                    this.countFarPositions();
+                    this.$emit('scroll-end');
+                    setTimeout(() => {
+                      this.mayScroll = true;
+                    }, 10);
+                    clearInterval(int)
+                  }, 11)
+                }
+              }, intervalTime);
+            } else {
+              let int = setInterval(() => {
+                if (startPos < (endPos + 15)) startPos -= 1;
+                else if (startPos < (endPos + 50)) startPos -= 5;
+                else if (startPos < (endPos + 100)) startPos -= 10;
+                else if (startPos < (endPos + 200)) startPos -= 20;
+                else if (startPos < (endPos + 350)) startPos -= 35;
+                else if (startPos < (endPos + 500)) startPos -= 50;
+                wrapper.scrollTo(startPos, 0);
+                if (startPos <= endPos) {
+                  setTimeout(() => {
+                    this.countFarPositions();
+                    this.$emit('scroll-end');
+                    setTimeout(() => {
+                      this.mayScroll = true;
+                    }, 10);
+                    clearInterval(int)
+                  }, 11)
+                }
+              }, intervalTime);
+            }
           }
         }
       },

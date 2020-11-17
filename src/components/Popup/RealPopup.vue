@@ -96,12 +96,12 @@
         this.countOffset()
       });
       this.countOffset();
-      document.querySelector('body').addEventListener('open-popup', (e) => {
-        if(this.$el.querySelector('.rtb-popup').classList.contains(e.detail[1]) || this.$el.classList.contains(e.detail[1])) {
+      document.querySelector('body').addEventListener('open-popup', function(e) {
+        if(that.$el.querySelector('.rtb-popup').classList.contains(e.detail[1]) || that.$el.classList.contains(e.detail[1])) {
           if(e.detail[0].closest('.rt-card')) {
-            this.$el.querySelector('.popup-content').innerHTML = e.detail[0].closest('.rt-card').querySelector('.rt-card__popup-benefits').innerHTML;
+              that.$el.querySelector('.popup-content').innerHTML = e.detail[0].closest('.rt-card').querySelector('.rt-card__popup-benefits').innerHTML;
           }
-          this.$el.classList.add('rtb-popup-wrapper--active');
+            that.$el.classList.add('rtb-popup-wrapper--active');
         }
       });
       let trigger = '.' + this.triggerElementClass;
