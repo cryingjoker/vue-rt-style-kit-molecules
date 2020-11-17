@@ -43,7 +43,7 @@ export default {
     }
   },
   data: () => ({
-    type: null,
+    type: '',
     hideHeight: false
   }),
 
@@ -112,7 +112,8 @@ export default {
       }
     },
     googleAn(bind){
-      if(bind) {
+      if(bind && this.$el.tagName) {
+        console.info('this.$el');
         this.$el.querySelector('a, button').addEventListener('click', (e)=> {
           if (!e.target.getAttribute('data-ga-pushed')) {
             e.preventDefault();
