@@ -313,7 +313,7 @@ export default {
       return null
     }
     const renderUrl=()=> {
-      if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type == 'desktop' && this.showUrlOnDesktop)) {
+      if (this.url && (this.type == 'mobile' && this.showUrlOnMobile || this.type == 'tablet' && this.showUrlOnTablet || this.type.search('desktop')==0 && this.showUrlOnDesktop)) {
         return <a onClick={this.fireGoogleAn} href={this.url} class="rt-jumbotron-url"></a>
       }
       return null

@@ -3,7 +3,7 @@ import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 class OutsideClick {
   constructor(element, action, vnode){
     this.$el = element;
-    
+
     if(typeof action.value === 'function') {
       this.action = action;
     }
@@ -12,7 +12,7 @@ class OutsideClick {
     this.workOnTablet = false;
     if(typeof action.value === 'object') {
       this.action = {}
-      
+
       this.action.value = action.value.fn
       if('workOnMobile' in action) {
         this.workOnMobile = action.value.workOnMobile;
@@ -62,9 +62,9 @@ class OutsideClick {
   }
   triggerAction = ()=>{
 
-    
+
     if(!this.hover){
-      if(this.workOnMobile && this.deviceType === 'mobile' || this.workOnTablet && this.deviceType ===  'tablet' || this.workOnDesktop && this.deviceType ===  'desktop'){
+      if(this.workOnMobile && this.deviceType === 'mobile' || this.workOnTablet && this.deviceType ===  'tablet' || this.workOnDesktop && this.deviceType.search('desktop')==0){
         this.action.value();
       }
     }

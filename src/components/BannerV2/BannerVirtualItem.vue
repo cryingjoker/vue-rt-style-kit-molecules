@@ -290,7 +290,7 @@ export default {
       return null
     },
     url() {
-      if (this.data?.url && (this.type == 'mobile' && this.data.showUrlOnMobile || this.type == 'tablet' && this.data.showUrlOnTablet || this.type == 'desktop' && this.data.showUrlOnDesktop)) {
+      if (this.data?.url && (this.type == 'mobile' && this.data.showUrlOnMobile || this.type == 'tablet' && this.data.showUrlOnTablet || this.type.search('desktop') == 0 && this.data.showUrlOnDesktop)) {
         return <a onClick={this.fireGoogleAn} href={this.data?.url} class="rt-n-banner-item-url"></a>
       }
       return null
