@@ -114,7 +114,7 @@ export default {
       this.customSlotsSort = bannerStore.getSlotSort(this.bannerName) || []
     },
     getSlotHeight() {
-      this.slotHeight = bannerStore.getHeight(this.bannerName)
+        this.slotHeight = bannerStore.getHeight(this.bannerName)
     },
     mouseenter() {
       if (this.type != 'mobile') {
