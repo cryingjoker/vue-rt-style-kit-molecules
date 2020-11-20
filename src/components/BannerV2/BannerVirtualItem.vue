@@ -44,7 +44,8 @@ export default {
   },
   data: () => ({
     type: '',
-    hideHeight: false
+    hideHeight: false,
+    onceHeightSet: false
   }),
 
   mounted: function () {
@@ -113,7 +114,6 @@ export default {
     },
     googleAn(bind){
       if(bind && this.$el.tagName) {
-        console.info('this.$el');
         this.$el.querySelector('a, button').addEventListener('click', (e)=> {
           if (!e.target.getAttribute('data-ga-pushed')) {
             e.preventDefault();
@@ -146,7 +146,8 @@ export default {
       }
     },
     getHeight() {
-      if (this.activeId != this.id) {
+      if (this.activeId != this.id || !this.onceHeightSet) {
+        this.onceHeightSet = true;
         this.hideHeight = true;
         if (this.$refs['bannerItemWrapper']) {
           this.$nextTick(() => {
