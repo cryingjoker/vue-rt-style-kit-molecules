@@ -41,6 +41,7 @@ import {
   StickyBottomLine,
   ResizeContentHeight,
   Popup,
+  PopupTrigger,
   LinksBlock,
   BannerVideoGameControl,
   SlideContent,
@@ -153,6 +154,7 @@ const VueRtStyle = {
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
       Vue.component(Youtube.name, Youtube);
       Vue.component(Popup.name, Popup);
+      Vue.component(PopupTrigger.name, PopupTrigger);
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
@@ -301,6 +303,7 @@ export {
   StickyBottomLine,
   ResizeContentHeight,
   Popup,
+  PopupTrigger,
   LinksBlock,
   BannerVideoGameControl,
   SlideContent,
