@@ -22,13 +22,15 @@ export default {
       cmpName: 'rt-microtabs',
       navList: [],
       cntList: [],
-      activeTab: 0
+      activeTab: 0,
+      direction: 'right'
     }
   },
   computed:{
     cmpClasses(){
       return [
-        this.cmpName
+        this.cmpName,
+        `is--direction-${this.direction}`
       ]
     },
     conveerStyles(){
@@ -40,6 +42,7 @@ export default {
   mounted(){
     this.$on('setActiveTab', name => {
       if (name !== this.activeTab) {
+        this.direction = name > this.activeTab ? 'right' : 'left'
         this.activeTab = name
       }
     })
