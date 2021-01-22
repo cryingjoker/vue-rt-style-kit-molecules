@@ -1,0 +1,56 @@
+microtabsTriangleSize = 6px
+microtabsDefColor = main-color005
+
+.{newAppName}-microtabs
+  position relative
+  overflow hidden
+
+  &-navi,
+  &-coni
+    display flex
+
+  &-navi
+    &__item
+      background microtabsDefColor
+      border-radius 16px
+      color main-color
+      cursor pointer
+      font-size 12px
+      line-height 16px
+      margin-right 8px
+      padding 4px 8px
+      position relative
+      transition background .3s ease-in
+      user-select none
+      &.is--active
+        cursor default
+        &:after // Triangle
+          content ''
+          border-top microtabsTriangleSize solid microtabsDefColor
+          border-right microtabsTriangleSize solid transparent
+          border-left microtabsTriangleSize solid transparent
+          margin auto
+          position absolute
+          width 0
+          height 0
+          left 0
+          right 0
+          bottom -(microtabsTriangleSize)
+
+  &-coni
+    padding-top 8px
+    transition transform .3s ease-in
+    &__item
+      flex: 0 0 100%;
+      max-width 100%
+      opacity 1
+      transition opacity .3s ease-in
+      &.is--hidden
+        transition opacity .3s ease-out
+        opacity 0
+
+@media (hover: hover)
+  .{newAppName}-microtabs
+    &-navi
+      &__item:not(.is--active):hover
+        background main-color01
