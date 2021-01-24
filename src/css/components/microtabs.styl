@@ -12,20 +12,44 @@ cmp = '.rt-microtabs'
     display flex
 
   &-navi
-    &__item
-      background microtabsDefColor
-      border-radius 16px
+    & > a
       color main-color
       cursor pointer
       font-size 12px
-      line-height 16px
+      line-height 24px
+      display flex
+      align-items center
+      flex 0 0 auto
       margin-right 8px
-      padding 4px 8px
       position relative
-      transition background .3s ease-in
       user-select none
-      &:after // Triangle
-        content ''
+      z-index 2
+      // Background
+      &:after
+        content: ''
+        background microtabsDefColor
+        border-radius 16px
+        position absolute
+        width 100%
+        height 100%
+        left 0
+        top 0
+        transition background .3s ease-in
+        z-index -1
+      &.is--active
+        cursor default
+      &.is--hidden
+        position absolute
+        transform scale(0)
+        z-index 1
+    &__control
+      padding 0 4px
+    &__item
+      padding 0 8px
+      transform scale(1)
+      transition transform .123s ease-out
+      // Triangle
+      &-tgl
         border-top microtabsTriangleSize solid microtabsDefColor
         border-right microtabsTriangleSize solid transparent
         border-left microtabsTriangleSize solid transparent
@@ -36,10 +60,8 @@ cmp = '.rt-microtabs'
         left 0
         right 0
         bottom -(microtabsTriangleSize)
-        transition transform .3s ease-in
-        z-index -1
-      &.is--active
-        cursor default
+        transition transform .3s ease-in .1s
+        z-index -2
 
   &-coni
     padding-top 8px
@@ -54,18 +76,24 @@ cmp = '.rt-microtabs'
         opacity 0
 
   // Обработка состояний
+  &.is--conveer
+    {cmp}-navi__item
+      cursor default
+      &-tgl
+        display none
   &.is--direction
     &-right
-      {cmp}
-        &-navi__item:not(.is--active):after
+      {cmp}-navi__item:not(.is--active) {cmp}-navi__item-tgl
           transform translate3d(100%, -100%, 0)
     &-left
-      {cmp}
-        &-navi__item:not(.is--active):after
+      {cmp}-navi__item:not(.is--active) {cmp}-navi__item-tgl
           transform translate3d(-100%, -100%, 0)
+  {cmp}-navi__item
+    &.is--theme-flat
+      &:after
+        display none
 
 @media (hover: hover)
-  .{newAppName}-microtabs
-    &-navi
-      &__item:not(.is--active):hover
-        background microtabsDefColorHover
+  {cmp}.is--tabs
+    {cmp}-navi > a:not(.is--active):hover:after
+      background microtabsDefColorHover

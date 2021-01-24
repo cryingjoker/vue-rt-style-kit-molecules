@@ -11,14 +11,14 @@ export default {
   name: 'RtMicrotabsConi',
   data(){
     return {
-      _name: null
+      key: null
     }
   },
   computed:{
     cmpClasses(){
       return [
         'rt-microtabs-coni__item',
-        this._name !== this.activeTab ? 'is--hidden' : null
+        this.key !== this.activeTab ? 'is--hidden' : null
       ]
     },
     activeTab(){
@@ -26,7 +26,7 @@ export default {
     }
   },
   beforeMount(){
-    this._name = this.$parent.activateCnt(this)
+    this.key = this.$parent.activateCnt(this)
   },
   destroyed(){
     this.$parent.destroy()
