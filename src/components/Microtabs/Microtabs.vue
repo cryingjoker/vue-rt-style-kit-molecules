@@ -28,6 +28,8 @@
 <script>
 import { cmpName, resizeHandler, resizeHandlerDestroy } from './common.js'
 import MicrotabsControl from './MicrotabsControl.vue'
+const offset = 8
+const controlWidth = 32
 
 const defaultConfig = () => {
   return {
@@ -77,12 +79,10 @@ export default {
   methods:{
     activateNav(cmp){
       this.navList.push(cmp)
-      let getPosLeft = el => el.getBoundingClientRect().left
-      let offset = 8
       let navEl = cmp.$el
       return {
         key: this.navList.length - 1,
-        rightPos: getPosLeft(navEl) + navEl.clientWidth + offset
+        rightPos: navEl.getBoundingClientRect().left + navEl.clientWidth + offset
       }
     },
     activateCnt(cmp){
@@ -94,8 +94,6 @@ export default {
         if (!this.$refs.navigationEl) return
         let shown = []
         let hiddens = []
-        let offset = 8
-        let controlWidth = 32
         let distance = controlWidth
         let wrapWidth = this.$refs.navigationEl.clientWidth
         this.navList.forEach(nav => {
