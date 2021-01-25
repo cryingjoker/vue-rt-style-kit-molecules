@@ -3,23 +3,17 @@
     :class="cmpClasses"
   >
     <div :class="`${cmpName}-navi`" ref="navigationEl">
-      <a :class="[
-          `${cmpName}-navi__control`,
-          { 'is--hidden': !allowNavLeft }
-        ]"
+      <microtabs-control
         @click="navLeft"
-      >
-        <rt-system-icons name="chevron left"></rt-system-icons>
-      </a>
+        direction="left"
+        :hidden="!allowNavLeft"
+      ></microtabs-control>
       <slot name="navi"></slot>
-      <a :class="[
-          `${cmpName}-navi__control`,
-          { 'is--hidden': !allowNavRight }
-        ]"
+      <microtabs-control
         @click="navRight"
-      >
-        <rt-system-icons name="chevron right"></rt-system-icons>
-      </a>
+        direction="right"
+        :hidden="!allowNavRight"
+      ></microtabs-control>
     </div>
     <div
       v-if="$slots.coni"
@@ -32,7 +26,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import { cmpName } from './common.js'
+import MicrotabsControl from './MicrotabsControl.vue'
 
 const defaultConfig = () => {
   return {
@@ -47,9 +42,19 @@ const defaultConfig = () => {
 }
 export default {
   name: 'RtMicrotabs',
+  components: { MicrotabsControl },
+  props:{
+    theme:{
+      type: String
+    },
+    inverse:{
+      type: Boolean,
+      default: false
+    }
+  },
   data(){
     return {
-      cmpName: 'rt-microtabs',
+      cmpName,
       ...defaultConfig()
     }
   },
@@ -58,7 +63,8 @@ export default {
       return [
         this.cmpName,
         `is--direction-${this.direction}`,
-        !this.$slots.coni ? 'is--conveer' : 'is--tabs'
+        !this.$slots.coni ? 'is--conveer' : 'is--tabs',
+        { 'is--inverse-color': this.inverse }
       ]
     },
     conveerStyles(){
@@ -66,15 +72,6 @@ export default {
         transform: `translateX(${this.activeTab ? -this.activeTab * 100 : 0}%)`
       }
     }
-  },
-  mounted(){
-    this.$on('setActiveTab', key => {
-      if (key !== this.activeTab) {
-        this.direction = key > this.activeTab ? 'right' : 'left'
-        this.activeTab = key
-      }
-    })
-    this.fitItems()
   },
   methods:{
     activateNav(cmp){
@@ -93,6 +90,7 @@ export default {
     },
     fitItems(){
       this.$nextTick(() => {
+        if (!this.$refs.navigationEl) return
         let shown = []
         let hiddens = []
         let offset = 8
@@ -134,7 +132,17 @@ export default {
     destroy(){
       let config = defaultConfig()
       Object.keys(config).forEach(param => this[param] = config[param])
+      this.fitItems()
     }
+  },
+  mounted(){
+    this.$on('setActiveTab', key => {
+      if (key !== this.activeTab) {
+        this.direction = key > this.activeTab ? 'right' : 'left'
+        this.activeTab = key
+      }
+    })
+    this.fitItems()
   }
 }
 </script>

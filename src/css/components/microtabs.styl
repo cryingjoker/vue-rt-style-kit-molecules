@@ -13,7 +13,6 @@ cmp = '.rt-microtabs'
 
   &-navi
     & > a
-      color main-color
       cursor pointer
       font-size 12px
       line-height 24px
@@ -24,18 +23,6 @@ cmp = '.rt-microtabs'
       position relative
       user-select none
       z-index 2
-      // Background
-      &:after
-        content: ''
-        background microtabsDefColor
-        border-radius 16px
-        position absolute
-        width 100%
-        height 100%
-        left 0
-        top 0
-        transition background .3s ease-in
-        z-index -1
       &.is--active
         cursor default
       &.is--hidden
@@ -48,6 +35,10 @@ cmp = '.rt-microtabs'
       padding 0 8px
       transform scale(1)
       transition transform .123s ease-out
+      // Block with opacity for Hover-effect
+      &-opacity
+        opacity .1
+        transition opacity .3s ease-in
       // Triangle
       &-tgl
         border-top microtabsTriangleSize solid microtabsDefColor
@@ -62,6 +53,17 @@ cmp = '.rt-microtabs'
         bottom -(microtabsTriangleSize)
         transition transform .3s ease-in .1s
         z-index -2
+      // Background
+      &-bg
+        content: ''
+        background microtabsDefColor
+        border-radius 16px
+        position absolute
+        width 100%
+        height 100%
+        left 0
+        top 0
+        z-index -1
 
   &-coni
     padding-top 8px
@@ -90,10 +92,10 @@ cmp = '.rt-microtabs'
           transform translate3d(-100%, -100%, 0)
   {cmp}-navi__item
     &.is--theme-flat
-      &:after
+      {cmp}-navi__item-bg
         display none
 
 @media (hover: hover)
   {cmp}.is--tabs
-    {cmp}-navi > a:not(.is--active):hover:after
-      background microtabsDefColorHover
+    {cmp}-navi > a:not(.is--active):hover {cmp}-navi__item-opacity
+      opacity .15
