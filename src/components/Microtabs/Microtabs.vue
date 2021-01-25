@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { cmpName } from './common.js'
+import { cmpName, resizeHandler, resizeHandlerDestroy } from './common.js'
 import MicrotabsControl from './MicrotabsControl.vue'
 
 const defaultConfig = () => {
@@ -144,6 +144,10 @@ export default {
       }
     })
     this.fitItems()
+    resizeHandler(this, this.fitItems)
+  },
+  destroyed(){
+    resizeHandlerDestroy(this)
   }
 }
 </script>
