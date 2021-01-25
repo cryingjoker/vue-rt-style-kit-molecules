@@ -59,8 +59,8 @@ import {
   TabsNavigationItem,
   TabsContentItem,
   Microtabs,
-  MicrotabsNavi,
-  MicrotabsConi,
+  MicrotabsContent,
+  MicrotabsNavigation,
   UseCase,
   ProductCard,
   TariffCard,
@@ -198,8 +198,8 @@ const VueRtStyle = {
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
       Vue.component(Microtabs.name, Microtabs)
-      Vue.component(MicrotabsNavi.name, MicrotabsNavi)
-      Vue.component(MicrotabsConi.name, MicrotabsConi)
+      Vue.component(MicrotabsContent.name, MicrotabsContent)
+      Vue.component(MicrotabsNavigation.name, MicrotabsNavigation)
       Vue.component(GalleryCarousel.name, GalleryCarousel);
       Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(ProductCard.name, ProductCard);
@@ -325,8 +325,8 @@ export {
   TabsNavigationItem,
   TabsContentItem,
   Microtabs,
-  MicrotabsNavi,
-  MicrotabsConi,
+  MicrotabsContent,
+  MicrotabsNavigation,
   UseCase,
   ProductCard,
   TariffCard,

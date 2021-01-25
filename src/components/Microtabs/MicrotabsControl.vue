@@ -1,7 +1,7 @@
 <template>
   <a
     :class="[
-      `${cmpName}-navi__control`,
+      `${cmpName}-nav__control`,
       { 'is--hidden': hidden }
     ]"
     :style="{ color: cmpColor }"
@@ -11,9 +11,9 @@
       :style="{ fill: cmpColor }"
       :name="`chevron ${direction}`"
     ></rt-system-icons>
-    <div :class="`${cmpName}-navi__item-opacity`">
+    <div :class="`${cmpName}-nav__item-opacity`">
       <div
-        :class="`${cmpName}-navi__item-bg`"
+        :class="`${cmpName}-nav__item-bg`"
         :style="{ background: cmpBackground }"
       ></div>
     </div>

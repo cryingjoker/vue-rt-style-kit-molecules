@@ -7,8 +7,10 @@
 </template>
 
 <script>
+import { cmpName } from './common'
+
 export default {
-  name: 'RtMicrotabsConi',
+  name: 'RtMicrotabsCnt',
   data(){
     return {
       key: null
@@ -17,7 +19,7 @@ export default {
   computed:{
     cmpClasses(){
       return [
-        'rt-microtabs-coni__item',
+        `${cmpName}-cnt__item`,
         this.key !== this.activeTab ? 'is--hidden' : null
       ]
     },

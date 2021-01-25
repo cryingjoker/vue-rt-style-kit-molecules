@@ -7,11 +7,11 @@ cmp = '.rt-microtabs'
   position relative
   overflow hidden
 
-  &-navi,
-  &-coni
+  &-nav,
+  &-cnt
     display flex
 
-  &-navi
+  &-nav
     & > a
       cursor pointer
       font-size 12px
@@ -65,7 +65,7 @@ cmp = '.rt-microtabs'
         top 0
         z-index -1
 
-  &-coni
+  &-cnt
     padding-top 8px
     transition transform .3s ease-in
     &__item
@@ -79,23 +79,23 @@ cmp = '.rt-microtabs'
 
   // Обработка состояний
   &.is--conveer
-    {cmp}-navi__item
+    {cmp}-nav__item
       cursor default
       &-tgl
         display none
   &.is--direction
     &-right
-      {cmp}-navi__item:not(.is--active) {cmp}-navi__item-tgl
-          transform translate3d(100%, -100%, 0)
+      {cmp}-nav__item:not(.is--active) {cmp}-nav__item-tgl
+        transform translate3d(100%, -100%, 0)
     &-left
-      {cmp}-navi__item:not(.is--active) {cmp}-navi__item-tgl
-          transform translate3d(-100%, -100%, 0)
-  {cmp}-navi__item
+      {cmp}-nav__item:not(.is--active) {cmp}-nav__item-tgl
+        transform translate3d(-100%, -100%, 0)
+  {cmp}-nav__item
     &.is--theme-flat
-      {cmp}-navi__item-bg
+      {cmp}-nav__item-bg
         display none
 
 @media (hover: hover)
   {cmp}.is--tabs
-    {cmp}-navi > a:not(.is--active):hover {cmp}-navi__item-opacity
+    {cmp}-nav > a:not(.is--active):hover {cmp}-nav__item-opacity
       opacity .15

@@ -2,13 +2,13 @@
   <div
     :class="cmpClasses"
   >
-    <div :class="`${cmpName}-navi`" ref="navigationEl">
+    <div :class="`${cmpName}-nav`" ref="navigationEl">
       <microtabs-control
         @click="navLeft"
         direction="left"
         :hidden="!allowNavLeft"
       ></microtabs-control>
-      <slot name="navi"></slot>
+      <slot name="nav"></slot>
       <microtabs-control
         @click="navRight"
         direction="right"
@@ -16,11 +16,11 @@
       ></microtabs-control>
     </div>
     <div
-      v-if="$slots.coni"
-      :class="cmpName+'-coni'"
+      v-if="$slots.cnt"
+      :class="cmpName+'-cnt'"
       :style="conveerStyles"
     >
-      <slot name="coni"></slot>
+      <slot name="cnt"></slot>
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ const defaultConfig = () => {
     direction: 'right'
   }
 }
+
 export default {
   name: 'RtMicrotabs',
   components: { MicrotabsControl },
@@ -63,7 +64,7 @@ export default {
       return [
         this.cmpName,
         `is--direction-${this.direction}`,
-        !this.$slots.coni ? 'is--conveer' : 'is--tabs',
+        !this.$slots.cnt ? 'is--conveer' : 'is--tabs',
         { 'is--inverse-color': this.inverse }
       ]
     },

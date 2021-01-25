@@ -23,7 +23,7 @@
 import { cmpName, inverseColor, getBackground, getColor } from './common'
 
 export default {
-  name: 'RtMicrotabsNavi',
+  name: 'RtMicrotabsNav',
   props:{
     theme:{
       type: String,
@@ -42,7 +42,7 @@ export default {
       themeLocal: null,
       customLocal: {},
       rightPos: null,
-      cmpName: `${cmpName}-navi__item`
+      cmpName: `${cmpName}-nav__item`
     }
   },
   computed:{
