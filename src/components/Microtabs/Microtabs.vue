@@ -119,6 +119,7 @@ export default {
       })
     },
     navLeft(){
+      if (this.activeKey < 1) return
       this.activeKey--
       this.direction = 'left'
       this.fitItems()
