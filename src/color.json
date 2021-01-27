@@ -1,4 +1,7 @@
 {
+  "b2c-black": "#000000",
+  "b2c-black085": "rgba(16, 24, 40 , 0.85)",
+  "b2c-black085-no-opacity": "#343B48",
   "b2c-purple": "#7700FF",
   "b2c-purple-button-hover": "#5B09C0",
   "b2c-purple-button-active": "#3F028C",
@@ -56,6 +59,7 @@
   "main-color05-no-opacity": "#868B95",
   "main-color03-no-opacity": "#B8B9C0",
   "main-color01-no-opacity": "#B8B9C0",
+  "main-color005-no-opacity": "#F3F3F4",
   "main-color003-no-opacity": "#E7E7E9",
 
   "b2c-cool-grey": "#E3E8EC",
