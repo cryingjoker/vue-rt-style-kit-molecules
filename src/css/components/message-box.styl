@@ -1,0 +1,32 @@
+.{newAppName}-message-box
+  position fixed
+  bottom 40px
+  right 40px
+  max-width 240px
+  border-radius 8px
+  opacity 0
+  transition opacity .2s ease-in-out
+  pointer-events none
+
+  &__show
+    opacity 1
+    pointer-events all
+
+  &__theme-light
+    border 1px solid #F3F3F4
+    box-shadow  0 0 20px rgba(0, 0, 0, 0.1)
+
+  &-close
+    position absolute
+    top 0
+    right 0
+    width 37px
+    height 37px
+    cursor pointer
+
+  &-corner
+    position absolute
+    bottom 0
+    right 0
+    @media(min-width desktop-lower-limit)
+      border-radius 0 0 8px 0
