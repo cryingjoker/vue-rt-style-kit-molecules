@@ -1,9 +1,9 @@
 <script type="text/jsx">
 
-import Global from "../../variables.json"
+import Global from '../../variables.json'
 
 export default {
-  name: "RtMessageBox",
+  name: 'RtMessageBox',
   data() {
     return {
       show: false
@@ -12,17 +12,17 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Не нашли, что искали?",
+      default: 'Не нашли, что искали?',
       required: false
     },
     subtitle: {
       type: String,
-      default: "Больше информации и предложений на нашем сайте",
+      default: 'Больше информации и предложений на нашем сайте',
       required: false
     },
     buttonText: {
       type: String,
-      default: "Перейти",
+      default: 'Перейти',
       required: false
     },
     timeout: {
@@ -36,7 +36,7 @@ export default {
     },
     theme: {
       type: String,
-      default: "light",
+      default: 'light',
       required: false
     }
   },
@@ -45,37 +45,37 @@ export default {
       return window[Global.globalSettingsKey].segment
     },
     isB2cSegment() {
-      return this.segment === "b2c"
+      return this.segment === 'b2c'
     },
     isB2bSegment() {
-      return this.segment === "b2b"
+      return this.segment === 'b2b'
     },
     segmentColor() {
-      return this.isB2cSegment ? "#7700FF" : "#7B929B"
+      return this.isB2cSegment ? '#7700FF' : '#7B929B'
     },
     timeoutInMs() {
       return this.timeout * 1000
     },
     isDarkTheme() {
-      return this.theme === "dark"
+      return this.theme === 'dark'
     },
     isLightTheme() {
-      return this.theme === "light"
+      return this.theme === 'light'
     },
     parentClasses() {
-      return "rt-message-box" +
-        (this.isLightTheme ? " rt-message-box__theme-light background-white color-main" : " rt-message-box__theme-dark background-main-color color-white") +
-        (this.show ? " rt-message-box__show" : "") +
-        " sp-v-0-3 sp-h-0-4 td-sp-v-1 td-sp-h-1 md-sp-v-1-1"
+      return 'rt-message-box' +
+        (this.isLightTheme ? ' rt-message-box__theme-light background-white color-main' : ' rt-message-box__theme-dark background-main-color color-white') +
+        (this.show ? ' rt-message-box__show' : '') +
+        ' sp-v-0-3 sp-h-0-4 td-sp-v-1 td-sp-h-1 md-sp-v-1-1'
     },
     closeIconColor() {
-      return this.isLightTheme ? "main-color05" : "white"
+      return this.isLightTheme ? 'main-color05' : 'white'
     },
     buttonColor() {
-      return this.isLightTheme ? "orange" : "full-white"
+      return this.isLightTheme ? 'orange' : 'full-white'
     },
     href() {
-      return this.link || ("/" + this.segment)
+      return this.link || ('/' + this.segment)
     }
   },
   mounted() {
@@ -83,12 +83,12 @@ export default {
   },
   methods: {
     close() {
-      this.fireGoogleAn("close_popup")
+      this.fireGoogleAn('close_popup')
       this.show=false
     },
     action(e) {
       e.preventDefault()
-      this.fireGoogleAn("home_page")
+      this.fireGoogleAn('home_page')
       global.location.href=this.href
     },
     fireGoogleAn(value) {
@@ -97,7 +97,7 @@ export default {
       }
       dataLayer.push({
         event: this.segment,
-        type: "popup_interaction",
+        type: 'popup_interaction',
         value
       })
     }
