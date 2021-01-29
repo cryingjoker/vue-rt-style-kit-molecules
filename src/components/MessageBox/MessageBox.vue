@@ -12,32 +12,26 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Не нашли, что искали?',
-      required: false
+      default: 'Не нашли, что искали?'
     },
     subtitle: {
       type: String,
-      default: 'Больше информации и предложений на нашем сайте',
-      required: false
+      default: 'Больше информации и предложений на нашем сайте'
     },
     buttonText: {
       type: String,
-      default: 'Перейти',
-      required: false
+      default: 'Перейти'
     },
     timeout: {
       type: Number,
-      default: 20,
-      required: false
+      default: 20
     },
     link: {
-      type: String,
-      required: false
+      type: String
     },
     theme: {
       type: String,
-      default: 'light',
-      required: false
+      default: 'light'
     }
   },
   computed: {
