@@ -5,6 +5,10 @@
       duration: {
         type: String,
         default: ''
+      },
+      color: {
+        type: String,
+        default: 'purple'
       }
     },
     data() {
@@ -16,7 +20,7 @@
     },
     computed: {
       countdownClass() {
-        let className = 'rt-timer';
+        let className = `rt-timer color-${this.color}`;
         return className;
       }
     },
