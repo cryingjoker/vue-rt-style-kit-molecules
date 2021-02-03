@@ -56,8 +56,15 @@
       },
       ga: {
         type: String,
-        default: '',
-        validator: val => ['b2c', 'b2b'].includes(val)
+        default: ''
+      },
+      name:{
+        type:String,
+        default: ''
+      },
+      version:{
+        type: Number,
+        default: 1
       }
     },
     data: () => ({
@@ -67,16 +74,21 @@
       deviceType: "pc"
     }),
 
-    computed: {},
 
     mounted: function() {
-      if (!this.dontUseAdaptive) {
-        this.tabletSize = parseInt(variables["tablet-upper-limit"]);
-        this.mobileSize = parseInt(variables["mobile-upper-limit"]);
-        window.addEventListener("resize", this.checkDeviceType);
-        this.checkDeviceType();
-      }
-      tabsStore.setGlobalAnalyticsSegment(this.ga);
+
+        if (!this.dontUseAdaptive) {
+          this.tabletSize = parseInt(variables["tablet-upper-limit"]);
+          this.mobileSize = parseInt(variables["mobile-upper-limit"]);
+          window.addEventListener("resize", this.checkDeviceType);
+          this.checkDeviceType();
+        }
+        if(this.ga.length > 0) {
+          tabsStore.setGlobalAnalyticsSegment(this.ga);
+        }
+
+        tabsStore.addWatcher(this._uid,this.onUpdateTabsStore)
+
     },
     computed: {
         tabsClassNames(){
@@ -114,6 +126,8 @@
       window.addEventListener("resize", this.checkDeviceType);
     },
     beforeDestroy: function() {
+      // console.info('beforeDestroy')
+      // tabsStore.unregisterWrapper(this.name)
     },
     methods: {
       checkDeviceType() {
@@ -136,6 +150,11 @@
         if (hashAnchor) {
           window.history.replaceState(undefined, undefined, "#" + hashAnchor);
         }
+      },
+      onUpdateTabsStore(){
+
+        // console.info('onUpdateTabsStore',tabsStore.getActiveIndexes(this._uid))
+
       },
 
       addTabName(name) {
@@ -162,15 +181,25 @@
           {this.$slots.content}
         </div>
       }
+      if(this.version == 2){
+        return <div id={id} class={this.tabsClassNames}>
+          <div class="rt-tabs-v2-navigation-wrapper">
+            <div style={this.navigationStyle} ref="navigation" class="rt-tabs-v2-navigation">
+              {this.$slots.navigation}
+            </div>
+          </div>
+          {renderContent()}
+        </div>;
+      }
       const renderNavigation = ()=>{
         if(this.roundTabletView){
           return <div class="rt-tabs-navigation-round-wrapper">
-            <div style={this.navigationStyle} class="rt-tabs-navigation">
+            <div style={this.navigationStyle} ref="navigation" class="rt-tabs-navigation">
               {this.$slots.navigation}
             </div>
           </div>
         }
-          return <div style={this.navigationStyle} class="rt-tabs-navigation">
+          return <div style={this.navigationStyle} ref="navigation" class="rt-tabs-navigation">
             {this.$slots.navigation}
           </div>
       }
