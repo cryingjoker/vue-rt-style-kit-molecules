@@ -1,6 +1,7 @@
 import Vue from "vue";
 
 const setActiveTabName = (tabsName, tabAnchore = '', index) => {
+
   if (!tabsStore.tabsNames) {
     tabsStore.tabsNames = []
   }
@@ -19,6 +20,7 @@ const setActiveTabName = (tabsName, tabAnchore = '', index) => {
       parentArray.indexBefore = 0
     }
     parentArray.index = index;
+
     runWatchers(parentId);
   }
   // Определение Internet Explorer. нужно т.к. в нем не работет resize
@@ -46,20 +48,27 @@ const getActiveIndexes = (parentId)=>{
   const parentArray = tabsStore.tabsParents[parentId]
   return {index: parentArray.index, indexBefore: parentArray.indexBefore}
 }
-const addTabUuid = (tabsContainerId, tabsName) => {
+const setVersion = (parentId,version)=>{
+  if (tabsStore.tabsParents[parentId]) {
+    tabsStore.tabsParents[parentId].version = version
+    runWatchers(parentId);
+  }
+}
+const addTabUuid = (parentId, tabsName) => {
 
-  if (!tabsStore.tabsParents[tabsContainerId]) {
-    tabsStore.tabsParents[tabsContainerId] = {};
-    if (tabsStore.tabsParents[tabsContainerId][tabsName]) {
+  if (!tabsStore.tabsParents[parentId]) {
+    tabsStore.tabsParents[parentId] = {};
+    if (tabsStore.tabsParents[parentId][tabsName]) {
       console.error('tabs name must be unique')
     } else {
-      tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: true};
+      tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
     }
   } else {
-    tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: false};
+    tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
   }
-  tabsStore.tabsNames[tabsName] = tabsContainerId;
-  runWatchers(tabsContainerId);
+  tabsStore.tabsNames[tabsName] = parentId;
+
+  runWatchers(parentId);
 };
 const getActiveTabs = (parentUid)=>{
   return tabsStore.tabsParents[parentUid]
@@ -106,6 +115,7 @@ export const tabsStore = Vue.observable({
   tabsNames: {},
   addWatcher: addWatcher,
   watcherFunction: {},
+  setVersion: setVersion,
   getActiveIndexes:getActiveIndexes,
   setTabWidth: setTabWidth,
   getActiveTabs:getActiveTabs,

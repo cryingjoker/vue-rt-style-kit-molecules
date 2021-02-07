@@ -23,38 +23,49 @@ export default {
     activeTab: {
       type: Boolean,
       default: false
-    },
-    version: {
-      type: Number,
-      default: 1
     }
   },
 
   data: () => ({
     parentid: "",
     isActive: false,
-    parentElement: null
+    parentElement: null,
+    timeAnimate: 500,
+    animateHide: false,
+    animateShow: false,
+    version: 1,
+    index: -1,
   }),
   methods: {
     getIndex() {
-      return Array.from(this.$el.parentElement.querySelectorAll('.rt-tabs-navigation__item')).findIndex((item) => {
+      if(!this.$el.parentElement){
+        return null
+      }
+      return Array.from(this.$el.parentElement.querySelectorAll('.rt-tabs-nav-v2_item')).findIndex((item) => {
         return item.__vue__._uid == this._uid
       })
     },
     setActiveTabName() {
       const thisIndex = this.getIndex()
-      // console.info('setActiveTabName')
-      tabsStore.setActiveTabName(this.name, this.anchor, thisIndex);
-      const $el = this.$el;
-      if (this.parentElement) {
-        this.parentElement.scrollTo({
-          left: ($el.offsetLeft - ((window.innerWidth - $el.offsetWidth) / 2)),
-          behavior: 'smooth'
-        });
+      if(thisIndex == -1){
+        setTimeout(()=>this.setActiveTabName,100)
       }
+      tabsStore.setActiveTabName(this.name, this.anchor, thisIndex);
+
     },
     onUpdateTabsStore() {
-      this.isActive = tabsStore.tabsParents[this.$parent._uid][this.name]?.isActive
+      const data = tabsStore.tabsParents[this.$parent._uid]
+      const indexThis = this.getIndex()
+      const indexBefore = data.indexBefore;
+      const indexActive = data.index
+      this.version = data.version
+      this.isActive = data[this.name]?.isActive
+
+      if(indexActive <= indexThis && indexThis <= indexBefore || indexActive >= indexThis && indexThis >= indexBefore){
+        this.fireAnimate(indexBefore,indexActive,indexThis)
+      }
+    },
+    fireAnimate(before,active,index){
     },
     setGlobalAnalytics() {
       if (tabsStore.globalAnalyticsSegment) {
@@ -69,12 +80,12 @@ export default {
       }
     },
     onClick(){
-      // console.info('onClick')
       this.setActiveTabName()
       this.setGlobalAnalytics()
     }
   },
   mounted() {
+
     tabsStore.addTabUuid(this.$parent._uid, this.name);
     if (document.querySelector('#tabs-' + this.$parent._uid).classList.contains('rt-tabs--round-tablet-view')) {
       this.parentElement = document.querySelector('#tabs-' + this.$parent._uid + ' .rt-tabs-navigation-wrapper');
@@ -95,11 +106,15 @@ export default {
     }
     if (this.anchor && document.location.hash) {
       if (document.location.hash.replace(/^\#/, "") === this.anchor) {
-        this.setActiveTabName();
+        setTimeout(()=>{
+          this.setActiveTabName();
+        },100)
       }
     }
     if (this.activeTab) {
-      this.setActiveTabName();
+      setTimeout(()=> {
+        this.setActiveTabName();
+      },100)
     }
     setTimeout(() => {
       if (this.$parent['roundTabletView'] && this.$parent['roundTabletViewMaxWidth']) {
@@ -111,11 +126,35 @@ export default {
   created() {
     tabsStore.addWatcher(this.$parent._uid,this.onUpdateTabsStore);
   },
+  computed:{
+    tabsItemClass(){
+      const navigatonClassList = [];
+      navigatonClassList.push('rt-tabs-nav-v2_item')
+      if(this.animateShow){
+        navigatonClassList.push('rt-tabs-nav-v2_item--anim-show')
+      }
+      if(this.animateHide){
+        navigatonClassList.push('rt-tabs-nav-v2_item--anim-hide')
+      }
+      if(!this.animateShow && !this.animateHide && this.isActive){
+        navigatonClassList.push('rt-tabs-nav-v2_item--active')
+      }
+      return navigatonClassList.join(' ')
+    }
+  },
   render(h) {
+    if(this.version == 2){
+      return <div ref="tabItem" onClick={this.onClick} class={this.tabsItemClass}>
+        <button class="rt-tabs-nav-v2_item-name">
+          {this.$slots.default}
+        </button>
+      </div>
+    }
     let tabsItemClass = "rt-tabs-navigation__item";
     if (this.isActive) {
       tabsItemClass += " rt-tabs-navigation__item--is-active";
     }
+
     if (this.scrollOnTop && this.$el) {
       const id = this.$el.closest('.rt-tabs').getAttribute('id');
       const scrollToTopData = '{ "scrollToId" : "' + id + '" }';
