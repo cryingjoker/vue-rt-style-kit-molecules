@@ -55,6 +55,15 @@
   @media (hover: hover)
     &:hover
       color b2c-orange
+      .rt-sys-icon
+        fill b2c-orange
+      .rt-tabs--bright &,
+      .rt-dark-theme &
+        color b2c-orange
+        .rt-sys-icon
+          fill b2c-orange
+
+
 
   &:before
     content ''
@@ -75,8 +84,13 @@
 .rt-tabs-nav-v2_item--active
   .rt-tabs-nav-v2_item-name
     color b2c-orange
-//    &:before
-//      background-color: b2c-orange
+    .rt-sys-icon
+      fill b2c-orange
+    .rt-tabs--bright &,
+    .rt-dark-theme &
+      color b2c-orange
+      .rt-sys-icon
+        fill b2c-orange
 .rt-tabs--background
   .rt-tabs-v2-navigation:before
     display: none
@@ -133,6 +147,9 @@
   .rt-tabs--bright &,
   .rt-dark-theme &
     color white
+    .rt-sys-icon
+      fill white
+
 
 .rt-tabs--small
   .rt-tabs-nav-v2_item + .rt-tabs-nav-v2_item
