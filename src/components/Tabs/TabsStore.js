@@ -62,6 +62,8 @@ const addTabUuid = (parentId, tabsName) => {
       console.error('tabs name must be unique')
     } else {
       tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
+      tabsStore.tabsParents[parentId].index = 0
+
     }
   } else {
     tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
@@ -70,6 +72,12 @@ const addTabUuid = (parentId, tabsName) => {
 
   runWatchers(parentId);
 };
+const clearStore = (parentId)=>{
+  if (tabsStore.tabsParents[parentId]) {
+    delete tabsStore.tabsParents[parentId]
+    removeWatchers();
+  }
+}
 const getActiveTabs = (parentUid)=>{
   return tabsStore.tabsParents[parentUid]
 }
@@ -78,6 +86,11 @@ const addWatcher = (parentUid,fn) => {
     tabsStore.watcherFunction[parentUid] = []
   }
   tabsStore.watcherFunction[parentUid].push(fn);
+};
+const removeWatchers = (parentUid) => {
+  if(tabsStore.watcherFunction[parentUid]){
+    delete tabsStore.watcherFunction[parentUid]
+  }
 };
 const setTabWidth = (parentUiid, width) => {
   if (!tabsStore.tabsParents[parentUiid]) {
@@ -115,6 +128,7 @@ export const tabsStore = Vue.observable({
   tabsNames: {},
   addWatcher: addWatcher,
   watcherFunction: {},
+  clearStore:clearStore,
   setVersion: setVersion,
   getActiveIndexes:getActiveIndexes,
   setTabWidth: setTabWidth,

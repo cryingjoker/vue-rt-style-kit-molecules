@@ -78,7 +78,7 @@ export default {
       type: Boolean,
       default: false
     },
-    orange:{
+    orange: {
       type: Boolean,
       default: false
     }
@@ -109,9 +109,9 @@ export default {
     tabsStore.setVersion(this._uid, this.version);
     tabsStore.addWatcher(this._uid, this.onUpdateTabsStore)
     this.onScroll();
-
-    // this.onUpdateTabsStore()
-
+    setTimeout(() => {
+      this.onUpdateTabsStore()
+    }, 100)
   },
   computed: {
     tabsClassNames() {
@@ -168,13 +168,12 @@ export default {
     window.addEventListener("resize", this.checkDeviceType);
   },
   beforeDestroy: function () {
-    // console.info('beforeDestroy')
-    // tabsStore.unregisterWrapper(this.name)
+    tabsStore.clearStore(this._uid)
   },
   methods: {
 
     onScroll() {
-      if(this.$refs.scroller) {
+      if (this.$refs.scroller) {
         const scrollLeft = this.$refs.scroller.scrollLeft
         const scrollerWidth = this.$refs.scroller.clientWidth
         const navigationWidth = this.$refs.navigation.clientWidth
@@ -220,25 +219,36 @@ export default {
     },
     onUpdateTabsStore() {
       var data = tabsStore.tabsParents[this._uid]
+      if (data) {
 
+        let index = data.index
+        if (index < 0) {
+          index = 0
+        }
+        if (index >= 0) {
 
-      let index = data.index
-      if (index < 0) {
-        index = 0
-      }
+          const updateStyle = () => {
+            const rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
 
-      if (index >= 0) {
-          const rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
-          if (rect) {
-            this.lineWidth = rect.width
-            this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
+            if (rect) {
+              this.lineWidth = rect.width
+              this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
+            }
+          }
+          if (this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name').length == 0) {
+            setTimeout(() => {
+              updateStyle()
+            }, 200)
+          } else {
+            updateStyle()
           }
 
-        if (this.$refs.scroller) {
-          this.$refs.scroller.scroll({
-            left: this.lineLeft - window.innerWidth / 3,
-            behavior: 'smooth'
-          });
+          if (this.$refs.scroller) {
+            this.$refs.scroller.scroll({
+              left: this.lineLeft - window.innerWidth / 3,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }
@@ -270,11 +280,11 @@ export default {
         {this.$slots.content}
       </div>
     }
-    const renderLine = ()=>{
-      if(!this.showAsTags){
+    const renderLine = () => {
+      if (!this.showAsTags) {
         return <div class="rt-tabs-navigation_line" style={this.lineStyle}></div>
       }
-      return  null
+      return null
     }
     if (this.version == 2) {
       return <div id={id} class={this.tabsClassNames}>

@@ -114,7 +114,7 @@ export default {
     if (this.activeTab) {
       setTimeout(()=> {
         this.setActiveTabName();
-      },100)
+      },300)
     }
     setTimeout(() => {
       if (this.$parent['roundTabletView'] && this.$parent['roundTabletViewMaxWidth']) {
