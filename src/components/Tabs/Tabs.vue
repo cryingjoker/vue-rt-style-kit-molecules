@@ -108,8 +108,9 @@ export default {
     }
     tabsStore.setVersion(this._uid, this.version);
     tabsStore.addWatcher(this._uid, this.onUpdateTabsStore)
-    this.onScroll();
+
     setTimeout(() => {
+      this.onScroll();
       this.onUpdateTabsStore()
     }, 100)
   },
@@ -176,7 +177,7 @@ export default {
       if (this.$refs.scroller) {
         const scrollLeft = this.$refs.scroller.scrollLeft
         const scrollerWidth = this.$refs.scroller.clientWidth
-        const navigationWidth = this.$refs.navigation.clientWidth
+        const navigationWidth = this.$refs.navigation.offsetWidth
         if (scrollLeft > 0) {
           this.showShadowLeft = true
           if (scrollLeft + scrollerWidth < navigationWidth - 20) {
@@ -185,7 +186,7 @@ export default {
             this.showShadowRight = false
           }
         } else {
-          if (scrollLeft + scrollerWidth < navigationWidth - 20) {
+          if (scrollLeft + scrollerWidth < navigationWidth) {
             this.showShadowRight = true
           } else {
             this.showShadowRight = false
