@@ -77,6 +77,10 @@ export default {
     small: {
       type: Boolean,
       default: false
+    },
+    orange:{
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -144,6 +148,9 @@ export default {
       if (this.showAsTags) {
         classes.push("rt-tabs--tag-mode");
       }
+      if (this.orange) {
+        classes.push("rt-tabs--orange");
+      }
       return classes.join(' ')
       // fillContent
 
@@ -167,23 +174,25 @@ export default {
   methods: {
 
     onScroll() {
-      const scrollLeft = this.$refs.scroller.scrollLeft
-      const scrollerWidth = this.$refs.scroller.clientWidth
-      const navigationWidth = this.$refs.navigation.clientWidth
-      if (scrollLeft > 0) {
-        this.showShadowLeft = true
-        if (scrollLeft + scrollerWidth < navigationWidth - 20) {
-          this.showShadowRight = true
+      if(this.$refs.scroller) {
+        const scrollLeft = this.$refs.scroller.scrollLeft
+        const scrollerWidth = this.$refs.scroller.clientWidth
+        const navigationWidth = this.$refs.navigation.clientWidth
+        if (scrollLeft > 0) {
+          this.showShadowLeft = true
+          if (scrollLeft + scrollerWidth < navigationWidth - 20) {
+            this.showShadowRight = true
+          } else {
+            this.showShadowRight = false
+          }
         } else {
-          this.showShadowRight = false
+          if (scrollLeft + scrollerWidth < navigationWidth - 20) {
+            this.showShadowRight = true
+          } else {
+            this.showShadowRight = false
+          }
+          this.showShadowLeft = false
         }
-      } else {
-        if (scrollLeft + scrollerWidth < navigationWidth - 20) {
-          this.showShadowRight = true
-        } else {
-          this.showShadowRight = false
-        }
-        this.showShadowLeft = false
       }
 
 
@@ -217,12 +226,14 @@ export default {
       if (index < 0) {
         index = 0
       }
+
       if (index >= 0) {
-        const rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
-        if (rect) {
-          this.lineWidth = rect.width
-          this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
-        }
+          const rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
+          if (rect) {
+            this.lineWidth = rect.width
+            this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
+          }
+
         if (this.$refs.scroller) {
           this.$refs.scroller.scroll({
             left: this.lineLeft - window.innerWidth / 3,
@@ -259,6 +270,12 @@ export default {
         {this.$slots.content}
       </div>
     }
+    const renderLine = ()=>{
+      if(!this.showAsTags){
+        return <div class="rt-tabs-navigation_line" style={this.lineStyle}></div>
+      }
+      return  null
+    }
     if (this.version == 2) {
       return <div id={id} class={this.tabsClassNames}>
         <div class="rt-tabs-v2-navigation-wrapper">
@@ -266,7 +283,7 @@ export default {
           <div class="rt-tabs-v2-navigation-scoller" ref="scroller" onScroll={this.onScroll}>
             <div style={this.navigationStyle} ref="navigation" class="rt-tabs-v2-navigation">
               {this.$slots.navigation}
-              <div class="rt-tabs-navigation_line" style={this.lineStyle}></div>
+              {renderLine()}
             </div>
           </div>
           {this.showShadowLeft ? <div class="rt-tabs-v2-navigation-shadow-left"></div> : null}

@@ -62,9 +62,6 @@
         color b2c-orange
         .rt-sys-icon
           fill b2c-orange
-
-
-
   &:before
     content ''
     position: absolute;
@@ -77,6 +74,7 @@
     transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
     transition-duration 0.25s
     transition-property background
+
 .rt-tabs-v2-navigation-scoller
   padding-bottom: 20px
   overflow: auto;
@@ -91,6 +89,17 @@
       color b2c-orange
       .rt-sys-icon
         fill b2c-orange
+
+
+
+.rt-tabs--tag-mode.rt-tabs--orange
+
+  .rt-tabs-nav-v2_item--active
+    .rt-tabs-nav-v2_item-name
+      color white
+      background-color: b2c-orange
+      .rt-sys-icon
+        fill white
 .rt-tabs--background
   .rt-tabs-v2-navigation:before
     display: none
@@ -144,6 +153,10 @@
   justify-content center
   white-space nowrap
   font-size 16px
+  background-color: transparent
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration 0.4s
+  transition-property background, box-shadow, color
   .rt-tabs--bright &,
   .rt-dark-theme &
     color white
@@ -208,3 +221,63 @@
   100%
     width 50px
     opacity 1
+
+.rt-tabs--tag-mode
+  &.rt-tabs--background
+    .rt-tabs-v2-navigation-scoller
+      padding-left: 0
+      padding-right: 0
+      @media (max-width tablet-upper-limit)
+        padding-left: 20px
+        padding-right: 20px
+  .rt-tabs-v2-navigation
+    min-width auto
+    padding-left: 2px
+    padding-right: 2px
+  &.rt-tabs--small
+    .rt-tabs-v2-navigation-wrapper
+      height: 32px
+    .rt-tabs-nav-v2_item-name
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 4px
+      padding-bottom: 4px
+      height: 28px
+      border-radius 16px
+
+  .rt-tabs-v2-navigation-wrapper
+    height: 48px
+    .rt-tabs-v2-navigation-shadow-left,
+    .rt-tabs-v2-navigation-shadow-rigth
+      top: 0px
+      bottom: 0px
+  &.rt-tabs--small .rt-tabs-nav-v2_item + .rt-tabs-nav-v2_item,
+  .rt-tabs-nav-v2_item + .rt-tabs-nav-v2_item
+    padding-left: 0
+  .rt-tabs-nav-v2_item--active
+    .rt-tabs-nav-v2_item-name
+      background-color: white
+      box-shadow: 0px 0px 1px rgba(28, 41, 61, 0.2), 0px 2px 4px rgba(28, 41, 61, 0.1);
+
+  .rt-tabs-nav-v2_item-name
+    padding-left: 24px
+    padding-right: 24px
+    padding-top: 12px
+    padding-bottom: 12px
+    border-radius 24px
+    margin-top: 2px
+    margin-bottom: 2px
+    height: 44px
+  .rt-tabs-v2-navigation
+    border-radius 24px
+  &.rt-tabs--background-gray
+    .rt-tabs-v2-navigation-scoller
+      background-color: transparent
+    .rt-tabs-v2-navigation
+      background-color: b2c-gray
+  &.rt-tabs--bright.rt-tabs--background-gray,
+  .rt-dark-theme &
+    .rt-tabs-v2-navigation-scoller
+      background-color: transparent
+    .rt-tabs-v2-navigation
+      background-color b2c-white005
