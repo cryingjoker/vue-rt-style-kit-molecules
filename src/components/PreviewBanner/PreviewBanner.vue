@@ -9,6 +9,10 @@ export default {
     background:{
       type: String,
       default: 'main-color005'
+    },
+    color: {
+      type:String,
+      default: ''
     }
   },
   data: () => ({}),
@@ -29,8 +33,12 @@ export default {
   computed: {
     wrapperClass(){
       const wrapperClassList = ['rt-preview-banner'];
+
       if(this.background.length>0){
         wrapperClassList.push('color-block--'+this.background)
+      }
+      if(this.color.length > 0){
+        wrapperClassList.push('color-'+this.color)
       }
       return wrapperClassList.join(' ')
     },
