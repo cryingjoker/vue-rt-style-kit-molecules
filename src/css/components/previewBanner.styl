@@ -3,11 +3,20 @@
   overflow: hidden
   .rt-img
     max-width 100%
+    object-fit contain
 .rt-preview-banner__image
-  min-height 100%
+  max-height 100%
+  max-width 100%
+
+  @media (min-width laptop-lower-limit)
+    .rt-img-container
+      max-height 100%
+    min-height 328px
+    height 328px
 .rt-container__body
   @media (min-width laptop-lower-limit)
     min-height 328px
+    height 328px
 .rt-preview-banner__date
   color main-color05
   .rt-sys-icon
