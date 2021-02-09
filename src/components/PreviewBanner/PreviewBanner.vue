@@ -73,12 +73,14 @@ export default {
     return <div class="rt-container">
       <rt-col size={12}>
         <div class={this.wrapperClass}>
+
           <rt-row>
-            <rt-col size={6} tablet-size={6}>
+            <rt-col size={5} tablet-size={6}>
               <div class="rt-preview-banner__image d-flex flex-v-end">
               {this.$slots.image}
               </div>
             </rt-col>
+            <rt-col size={1} t-hide={true}></rt-col>
             <rt-col size={6} tablet-size={6} class="d-flex flex-v-center rt-container__body">
               <div class="td-sp-h-2 td-sp-v-2 sp-r-2-3 md-sp-h-1 md-sp-v-1">
                 {this.renderDate}

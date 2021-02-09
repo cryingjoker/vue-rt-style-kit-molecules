@@ -5,12 +5,18 @@
     max-width 100%
     object-fit contain
 .rt-preview-banner__image
-  max-height 100%
-  max-width 100%
 
+  max-height 100%
+  @media (max-width tablet-upper-limit)
+
+    width: 100%
   @media (min-width laptop-lower-limit)
+    left: 60%;
+    transform: translateX(-50%);
+    position: absolute;
     .rt-img-container
       max-height 100%
+      width: 588px
     min-height 328px
     height 328px
 .rt-container__body
