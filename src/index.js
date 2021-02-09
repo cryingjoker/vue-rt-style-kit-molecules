@@ -99,7 +99,8 @@ import {
   Jumbotron,
   CarouselV2,
   CarouselSlideV2,
-  AdBanner
+  AdBanner,
+  PreviewBanner
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -213,6 +214,7 @@ const VueRtStyle = {
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Jumbotron.name, Jumbotron);
       Vue.component(AdBanner.name, AdBanner);
+      Vue.component(PreviewBanner.name, PreviewBanner);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -361,6 +363,7 @@ export {
   CarouselV2,
   CarouselSlideV2,
   AdBanner,
+  PreviewBanner,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
