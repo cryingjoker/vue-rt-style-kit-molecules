@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "name": "rt-microtabs",
+      "property": "theme",
+      "type": "String",
+      "description": "Тема отображения для всех табов",
+      "value": "default"
+    },
+    {
+      "name": "rt-microtabs",
+      "property": "inverse",
+      "type": "Boolean",
+      "description": "Принудительно обесцвечивает табы для темных фонов",
+      "value": "false"
+    },
+    {
+      "name": "rt-microtabs-nav",
+      "property": "theme",
+      "type": "String",
+      "description": "Тема отображения определенного таба",
+      "value": "default"
+    }
+  ]
+}
