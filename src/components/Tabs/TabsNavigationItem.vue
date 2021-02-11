@@ -145,7 +145,7 @@ export default {
   render(h) {
     if(this.version == 2){
       return <div ref="tabItem" onClick={this.onClick} class={this.tabsItemClass}>
-        <button class="rt-tabs-nav-v2_item-name">
+        <button class="rt-tabs-nav-v2_item-name d-flex flex-v-center">
           {this.$slots.default}
         </button>
       </div>
