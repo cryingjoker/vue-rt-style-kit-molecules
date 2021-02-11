@@ -9,7 +9,7 @@
   transition opacity .2s ease-in-out
   pointer-events none
   @media(max-width tablet-upper-limit)
-    bottom 0
+    bottom -1px
     right 0
     width 100%
     max-width 100%
@@ -21,7 +21,7 @@
 
   &--is-theme-light
     border 1px solid #F3F3F4
-    box-shadow  0 0 20px rgba(0, 0, 0, 0.1)
+    box-shadow  0 -4px 20px rgba(0, 0, 0, 0.1)
     @media(max-width tablet-upper-limit)
       border none
 
@@ -32,7 +32,7 @@
   &__close
     position absolute
     top 0
-    right 0
+    right 4px
     width 37px
     height 37px
     cursor pointer
