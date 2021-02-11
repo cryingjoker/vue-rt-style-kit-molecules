@@ -229,11 +229,18 @@ export default {
         if (index >= 0) {
 
           const updateStyle = () => {
-            const rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
+            let rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
 
             if (rect) {
               this.lineWidth = rect.width
               this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
+            }
+            else{
+              rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
+              if (rect) {
+                this.lineWidth = rect.width
+                this.lineLeft = rect.x + this.$refs['navigation'].scrollLeft
+              }
             }
           }
           if (this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name').length == 0) {
@@ -249,6 +256,16 @@ export default {
               left: this.lineLeft - window.innerWidth / 3,
               behavior: 'smooth'
             });
+          }else {
+            if(this.$refs.navigation) {
+              setTimeout(() => {
+                this.$refs.navigation.scroll({
+                  left: this.lineLeft - window.innerWidth / 3,
+                  behavior: 'smooth'
+                });
+
+              }, 200)
+            }
           }
         }
       }

@@ -41,8 +41,13 @@ export default {
       if(!this.$el.parentElement){
         return null
       }
-      return Array.from(this.$el.parentElement.querySelectorAll('.rt-tabs-nav-v2_item')).findIndex((item) => {
-        return item.__vue__._uid == this._uid
+      if(this.$el.parentElement.querySelectorAll('.rt-tabs-nav-v2_item').length > 0) {
+        return Array.from(this.$el.parentElement.querySelectorAll('.rt-tabs-nav-v2_item')).findIndex((item) => {
+          return item.__vue__._uid == this._uid
+        })
+      }
+      return Array.from(this.$el.parentElement.querySelectorAll('.rt-tabs-navigation__item')).findIndex((item) => {
+        return item.__vue__ ? item.__vue__._uid == this._uid : false
       })
     },
     setActiveTabName() {

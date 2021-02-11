@@ -38,7 +38,7 @@
       },
       onUpdateTabsStore(){
         const tabsParentUid = tabsStore.tabsNames[this.name]
-        this.isActive = tabsStore.tabsParents[tabsParentUid][this.name]?.isActive
+        this.isActive = tabsStore.tabsParents[tabsParentUid] ? tabsStore.tabsParents[tabsParentUid][this.name]?.isActive: false
 
       }
 
