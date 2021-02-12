@@ -1,0 +1,38 @@
+.rt-arrow-block
+  position: relative;
+  display: flex
+  align-items center
+  min-height 188px
+  background-color white
+  border-radius 8px
+  @media (max-width: tablet-upper-limit)
+    min-height 164px
+  @media (max-width: mobile-upper-limit)
+    min-height 120px
+  &:hover
+    @media (hover: hover)
+      .rt-arrow-block__arrow
+        transform translateX(20px)
+.rt-arrow-block__icon
+  width: 80px
+  height: 80px
+  box-sizing content-box
+  .rt-img-container,
+  .rt-img
+    width: 80px
+    height: 80px
+
+.rt-arrow-block__body
+  flex 1
+.rt-arrow-block__label
+  color main-color
+.rt-arrow-block__content
+  color main-color05
+  @media (max-width: mobile-upper-limit)
+    display: none
+.rt-arrow-block__arrow
+  position: relative
+  transition-duration 0.25s
+  transition-property transform
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+
