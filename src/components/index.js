@@ -99,3 +99,4 @@ export {default as AdBanner} from './AdBanner/AdBanner.vue';
 
  export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
+ export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
