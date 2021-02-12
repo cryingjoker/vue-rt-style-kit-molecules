@@ -18,7 +18,7 @@ export default {
     },
   },
   render(h) {
-    return <a href={this.href} class="rt-arrow-block sp-v-1 sp-l-1-3 sp-r-2-3 md-sp-h-1 rt-sys-icon-hover--orange">
+    return <a href={this.href} class="rt-arrow-block sp-v-1-3 sp-l-1-3 sp-r-2-3 md-sp-h-1 rt-sys-icon-hover--orange">
       {this.renderIcon}
       <div class="rt-arrow-block__body d-inline-block">
         <div class="rt-arrow-block__label rt-font-h4">

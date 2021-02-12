@@ -11,6 +11,8 @@
     min-height 120px
   &:hover
     @media (hover: hover)
+      .rt-arrow-block__label
+        color b2c-orange
       .rt-arrow-block__arrow
         transform translateX(20px)
 .rt-arrow-block__icon
@@ -26,6 +28,9 @@
   flex 1
 .rt-arrow-block__label
   color main-color
+  transition-duration 0.25s
+  transition-property color
+  transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
 .rt-arrow-block__content
   color main-color05
   @media (max-width: mobile-upper-limit)
