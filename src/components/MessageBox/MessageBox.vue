@@ -52,7 +52,7 @@ export default {
       return 'rt-message-box' +
         (this.isLightTheme ? ' rt-message-box--is-theme-light background-white color-main' : ' rt-message-box--is-theme-dark background-main-color color-white') +
         (this.show ? ' rt-message-box--is-show' : '') +
-        ' sp-v-0-3 sp-h-0-4 td-sp-v-1 td-sp-h-1 md-sp-v-1-1 md-sp-h-0-4'
+        ' sp-v-0-3 sp-h-0-4 td-sp-v-1 td-sp-h-1 md-sp-v-1-1'
     },
     closeIconColor() {
       return this.isLightTheme ? 'main-color05' : 'white'
@@ -61,7 +61,7 @@ export default {
       return this.isLightTheme ? 'orange' : 'full-white'
     },
     href() {
-      return this.link || ('/' + this.segment)
+      return this.link || this.isB2cSegment ? '/' : '/' + this.segment
     }
   },
   mounted() {
