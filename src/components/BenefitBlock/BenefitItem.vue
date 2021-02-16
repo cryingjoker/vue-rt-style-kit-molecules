@@ -4,7 +4,12 @@
 
   export default {
     name: "RtBenefitItem",
-    props: {},
+    props: {
+      className: {
+        type: String,
+        default: ''
+      }
+    },
     data: () => ({
       iconSize: '',
       columnsQuantity: null,
@@ -144,7 +149,7 @@
         }
       })();
 
-      return <div class={"rt-benefit-item " + columnClass + tabletColumnClass +" rt-col-md-3" +
+      return <div class={`rt-benefit-item ${this.className} ${columnClass} ${tabletColumnClass} rt-col-md-3` +
       (this.alignCenter ? " rt-benefit-item--center" : "") +
       (this.inlineLayout ? " rt-benefit-item--inline" : "")}>
           {icon}
