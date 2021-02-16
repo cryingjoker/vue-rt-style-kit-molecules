@@ -20,7 +20,6 @@
 
 
     },
-
     methods: {
       addWatcher(step = 0){
         const tabsParentUid = tabsStore.tabsNames[this.name]
@@ -39,20 +38,15 @@
       onUpdateTabsStore(){
         const tabsParentUid = tabsStore.tabsNames[this.name]
         this.isActive = tabsStore.tabsParents[tabsParentUid] ? tabsStore.tabsParents[tabsParentUid][this.name]?.isActive: false
-
       }
 
     },
     render() {
-      if (tabsStore.tabsNames[this.name]) {
-        const tabsParentUid = tabsStore.tabsNames[this.name];
-
         if (this.isActive) {
           return <div class="rt-tabs-content__item">{this.$slots.default}</div>;
         }
-      }
+        return null
 
-      return null;
     }
 
 

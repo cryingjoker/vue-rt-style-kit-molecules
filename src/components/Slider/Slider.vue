@@ -6,7 +6,7 @@
   import SliderImage from "./SliderImage.vue";
   import debounce from "debounce";
 
-  const componentList = [];
+  const componentList = {};
   componentList[SlideContent.name] = SlideContent;
   componentList[SliderImage.name] = SliderImage;
   export default {
