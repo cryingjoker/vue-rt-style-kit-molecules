@@ -90,7 +90,6 @@ export default {
     }
   },
   mounted() {
-
     tabsStore.addTabUuid(this.$parent._uid, this.name);
     if (document.querySelector('#tabs-' + this.$parent._uid).classList.contains('rt-tabs--round-tablet-view')) {
       this.parentElement = document.querySelector('#tabs-' + this.$parent._uid + ' .rt-tabs-navigation-wrapper');
