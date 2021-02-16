@@ -101,7 +101,8 @@ import {
   CarouselSlideV2,
   AdBanner,
   ArrowBlock,
-  PreviewBanner
+  PreviewBanner,
+  MessageBox
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -217,6 +218,7 @@ const VueRtStyle = {
       Vue.component(AdBanner.name, AdBanner);
       Vue.component(PreviewBanner.name, PreviewBanner);
       Vue.component(ArrowBlock.name, ArrowBlock);
+      Vue.component(MessageBox.name, MessageBox);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -365,6 +367,7 @@ export {
   CarouselV2,
   CarouselSlideV2,
   AdBanner,
+  MessageBox,
   PreviewBanner,
   ArrowBlock,
   // need to change name directives
