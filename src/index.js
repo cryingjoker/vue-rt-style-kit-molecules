@@ -369,6 +369,7 @@ export {
   AdBanner,
   MessageBox,
   PreviewBanner,
+  ArrowBlock,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
