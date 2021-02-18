@@ -51,8 +51,11 @@ export default {
   },
   render: function (h) {
     if(this.version == 2){
+      const gaObj = {
+        type: 'card_click'
+      }
       if(this.href.length > 0){
-        return <a href={this.href} class={this.cardClass}>
+        return <a href={this.href} class={this.cardClass} v-ga-click={{data:gaObj}}>
           <span class="rt-card-image__figure-wrapper">
             <span style={this.figureImageStyle} class="rt-card-image__figure"/>
           </span>
@@ -67,7 +70,7 @@ export default {
           </span>
         </a>
       }
-      return <div class={this.cardClass}>
+      return <div class={this.cardClass} v-ga-click={{data:gaObj}}>
         <div class="rt-card-image__figure-wrapper">
         <div style={this.figureImageStyle} class="rt-card-image__figure"/>
         </div>
