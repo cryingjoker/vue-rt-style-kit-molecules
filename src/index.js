@@ -111,6 +111,7 @@ import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
+import {GaClickDirective} from "./directives/GaClick";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -224,6 +225,7 @@ const VueRtStyle = {
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
       Vue.directive(TooltipDirective.name, TooltipDirective);
+      Vue.directive(GaClickDirective.name, GaClickDirective);
 
 
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
@@ -374,5 +376,6 @@ export {
   SwipeLeft,
   SwipeRight,
   OutsideClickDirective,
-  ResizeTypeStore
+  ResizeTypeStore,
+  GaClickDirective
 }
