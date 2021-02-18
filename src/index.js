@@ -59,6 +59,9 @@ import {
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
+  Microtabs,
+  MicrotabsContent,
+  MicrotabsNavigation,
   UseCase,
   ProductCard,
   TariffCard,
@@ -97,7 +100,8 @@ import {
   Jumbotron,
   CarouselV2,
   CarouselSlideV2,
-  AdBanner
+  AdBanner,
+  MessageBox
 } from "./components";
 
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -196,6 +200,9 @@ const VueRtStyle = {
       Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
+      Vue.component(Microtabs.name, Microtabs)
+      Vue.component(MicrotabsContent.name, MicrotabsContent)
+      Vue.component(MicrotabsNavigation.name, MicrotabsNavigation)
       Vue.component(GalleryCarousel.name, GalleryCarousel);
       Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(ProductCard.name, ProductCard);
@@ -209,6 +216,7 @@ const VueRtStyle = {
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Jumbotron.name, Jumbotron);
       Vue.component(AdBanner.name, AdBanner);
+      Vue.component(MessageBox.name, MessageBox);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -321,6 +329,9 @@ export {
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
+  Microtabs,
+  MicrotabsContent,
+  MicrotabsNavigation,
   UseCase,
   ProductCard,
   TariffCard,
@@ -355,6 +366,7 @@ export {
   CarouselV2,
   CarouselSlideV2,
   AdBanner,
+  MessageBox,
   // need to change name directives
   SwipeLeft,
   SwipeRight,

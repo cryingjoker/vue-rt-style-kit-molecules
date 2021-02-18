@@ -1,11 +1,13 @@
 import Vue from "vue";
 
-const setActiveTabName = (tabsName, tabAnchore = '', dontResize = false) => {
+const setActiveTabName = (tabsName, tabAnchore = '', index) => {
+
   if (!tabsStore.tabsNames) {
     tabsStore.tabsNames = []
   }
   if (tabsStore.tabsNames[tabsName]) {
     const parentId = tabsStore.tabsNames[tabsName];
+
     const parentArray = tabsStore.tabsParents[parentId];
     for (let key in parentArray) {
       if (typeof parentArray[key] === 'object') {
@@ -13,11 +15,18 @@ const setActiveTabName = (tabsName, tabAnchore = '', dontResize = false) => {
       }
     }
     parentArray[tabsName].isActive = true;
+    parentArray.indexBefore = parentArray.index
+    if(typeof parentArray.indexBefore != 'number'){
+      parentArray.indexBefore = 0
+    }
+    parentArray.index = index;
+
+    runWatchers(parentId);
   }
   // Определение Internet Explorer. нужно т.к. в нем не работет resize
   const browserName = navigator.userAgent.toLowerCase(),
     isIE = (/trident/gi).test(browserName) || (/msie/gi).test(browserName);
-  if (!dontResize) {
+
     if (!isIE) {
       window.dispatchEvent(new Event("resize"));
     } else {
@@ -26,34 +35,62 @@ const setActiveTabName = (tabsName, tabAnchore = '', dontResize = false) => {
       resizeEvent['initUIEvent']('resize', true, false, window, 0);
       window.dispatchEvent(resizeEvent);
     }
-  }
+
   if (tabAnchore && tabAnchore.length > 0) {
     window.history.replaceState(undefined, undefined, "#" + tabAnchore);
   }
-  runWatchers();
+
 };
-const runWatchers = () => {
-  for (let fnIndex in tabsStore.watcherFunction) {
-    tabsStore.watcherFunction[fnIndex]();
+const runWatchers = (wrapperUid) => {
+  tabsStore.watcherFunction[wrapperUid].forEach((fn)=>{fn()})
+}
+const getActiveIndexes = (parentId)=>{
+  const parentArray = tabsStore.tabsParents[parentId]
+  return {index: parentArray.index, indexBefore: parentArray.indexBefore}
+}
+const setVersion = (parentId,version)=>{
+  if (tabsStore.tabsParents[parentId]) {
+    tabsStore.tabsParents[parentId].version = version
+    runWatchers(parentId);
   }
 }
-const addTabUuid = (tabsContainerId, tabsName) => {
+const addTabUuid = (parentId, tabsName) => {
 
-  if (!tabsStore.tabsParents[tabsContainerId]) {
-    tabsStore.tabsParents[tabsContainerId] = {};
-    if (tabsStore.tabsParents[tabsContainerId][tabsName]) {
+  if (!tabsStore.tabsParents[parentId]) {
+    tabsStore.tabsParents[parentId] = {};
+    if (tabsStore.tabsParents[parentId][tabsName]) {
       console.error('tabs name must be unique')
     } else {
-      tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: true};
+      tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
+      tabsStore.tabsParents[parentId].index = 0
+
     }
   } else {
-    tabsStore.tabsParents[tabsContainerId][tabsName] = {isActive: false};
+    tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
   }
-  tabsStore.tabsNames[tabsName] = tabsContainerId;
-  runWatchers();
+  tabsStore.tabsNames[tabsName] = parentId;
+
+  runWatchers(parentId);
 };
-const addWatcher = (fn) => {
-  tabsStore.watcherFunction.push(fn);
+const clearStore = (parentId)=>{
+  if (tabsStore.tabsParents[parentId]) {
+    delete tabsStore.tabsParents[parentId]
+    removeWatchers();
+  }
+}
+const getActiveTabs = (parentUid)=>{
+  return tabsStore.tabsParents[parentUid]
+}
+const addWatcher = (parentUid,fn) => {
+  if(!tabsStore.watcherFunction[parentUid]){
+    tabsStore.watcherFunction[parentUid] = []
+  }
+  tabsStore.watcherFunction[parentUid].push(fn);
+};
+const removeWatchers = (parentUid) => {
+  if(tabsStore.watcherFunction[parentUid]){
+    delete tabsStore.watcherFunction[parentUid]
+  }
 };
 const setTabWidth = (parentUiid, width) => {
   if (!tabsStore.tabsParents[parentUiid]) {
@@ -78,7 +115,7 @@ const checkMaxWidth = (parentUiid) => {
   const time = (new Date()).getTime();
   if (time - tabsStore.tabsParents[parentUiid].lastUpdateTime >= 400) {
     tabsStore.tabsParents[parentUiid].lastUpdateTime = (new Date()).getTime();
-    runWatchers();
+    runWatchers(parentUiid);
   }
 }
 const setGlobalAnalyticsSegment = (segment) => {
@@ -90,8 +127,12 @@ export const tabsStore = Vue.observable({
   tabsParents: {},
   tabsNames: {},
   addWatcher: addWatcher,
-  watcherFunction: [],
+  watcherFunction: {},
+  clearStore:clearStore,
+  setVersion: setVersion,
+  getActiveIndexes:getActiveIndexes,
   setTabWidth: setTabWidth,
+  getActiveTabs:getActiveTabs,
   globalAnalyticsSegment: '',
   setGlobalAnalyticsSegment: setGlobalAnalyticsSegment,
 
