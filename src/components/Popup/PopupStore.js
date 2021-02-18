@@ -40,6 +40,16 @@ class PopupStore extends StorePrototype {
     this.runWatchersById(this.popupActiveId)
   }
 
+  toggleActiveId = (popupUid)=>{
+    const popupActiveIdBefore = this.popupActiveId
+    this.popupActiveId = popupUid
+    if(popupActiveIdBefore){
+      this.runWatchersById(popupActiveIdBefore)
+    }
+    this.runWatchersById(this.popupActiveId)
+  }
+
+
   getActiveId = () =>{
     const data = {
       activeId: this.popupActiveId,

@@ -176,7 +176,6 @@ export default {
     }
   },
   render: function (h) {
-
     let wrapperClasses;
     let popupClasses;
     if (this.showOnDesktop) {
@@ -202,6 +201,7 @@ export default {
         </div>
       </div>;
     }
+
     if(this.isActive){
       return <div ref="wrapper" class={wrapperClasses} onClick={this.clickOutside}>
         <div class={popupClasses} onMouseenter={this.setHover} onMouseleave={this.removeHover}

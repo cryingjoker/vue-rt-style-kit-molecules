@@ -48,7 +48,8 @@ export {default as SlideContent} from './SlideContent/SlideContent.vue';
 export {default as SlideContentDottedContent} from './SlideContent/SlideContentDottedContent.vue';
 export {default as SlideContentDottedHeader} from './SlideContent/SlideContentDottedHeader.vue';
 export {default as Popup} from './Popup/Popup.vue';
-export {default as PopupTrigger} from './Popup/PopupTrigger.vue';
+// export {PopupTriggerDirective} from './Popup/PopupTrigger.vue';
+
 export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.vue';
 
  export { default as LinksBlock } from './Card/LinksBlock.vue';
