@@ -40,7 +40,7 @@ export default {
     },
     renderlabel(){
       if(this.$slots.label){
-        return <div class="rt-card-image__label rt-font-h4 sp-b-0-4">
+        return <div class="rt-card-image__label rt-font-h4 sp-b-0-3">
           {this.$slots.label}
         </div>
       }
@@ -65,7 +65,7 @@ export default {
               {this.$slots.body}
             </span>
             <span class="rt-card-image__arrow rt-font-small-paragraph sp-t-0-2">
-              Подробнее <rt-system-icons name="arrow right"></rt-system-icons>
+              Подробнее <rt-system-icons class="sp-l-0-2" name="arrow right"></rt-system-icons>
             </span>
           </span>
         </a>
@@ -80,7 +80,7 @@ export default {
             {this.$slots.body}
           </div>
           <div class="rt-card-image__arrow rt-font-small-paragraph sp-t-0-2">
-            Подробнее <rt-system-icons name="arrow right"></rt-system-icons>
+            Подробнее <rt-system-icons class="sp-l-0-2" name="arrow right"></rt-system-icons>
           </div>
         </div>
       </div>
