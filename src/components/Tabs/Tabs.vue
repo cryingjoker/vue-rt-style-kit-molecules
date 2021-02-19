@@ -172,7 +172,6 @@ export default {
     tabsStore.clearStore(this._uid)
   },
   methods: {
-
     onScroll() {
       if (this.$refs.scroller) {
         const scrollLeft = this.$refs.scroller.scrollLeft
@@ -234,8 +233,7 @@ export default {
             if (rect) {
               this.lineWidth = rect.width
               this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
-            }
-            else{
+            } else {
               rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
               if (rect) {
                 this.lineWidth = rect.width
@@ -256,8 +254,8 @@ export default {
               left: this.lineLeft - window.innerWidth / 3,
               behavior: 'smooth'
             });
-          }else {
-            if(this.$refs.navigation) {
+          } else {
+            if (this.$refs.navigation) {
               setTimeout(() => {
                 this.$refs.navigation.scroll({
                   left: this.lineLeft - window.innerWidth / 3,
@@ -269,29 +267,17 @@ export default {
           }
         }
       }
+    },
+    navigationStyle() {
+      const style = {};
+      if (this.navigationHorizontalPadding) {
+        style.paddingLeft = this.navigationHorizontalPadding + "px";
+        style.paddingRight = this.navigationHorizontalPadding + "px";
+      }
+      return style;
     }
-
-
-  },
-
-  addTabName(name) {
-    if (this.RtTabs.namesArray.length === 0) {
-      this.setActiveTabName(name);
-    }
-    this.RtTabs.namesArray.push(name);
-  },
-
-  navigationStyle() {
-    const style = {};
-    if (this.navigationHorizontalPadding) {
-      style.paddingLeft = this.navigationHorizontalPadding + "px";
-      style.paddingRight = this.navigationHorizontalPadding + "px";
-    }
-    return style;
-
   },
   render(h) {
-
     let id = 'tabs-' + this._uid;
     const renderContent = () => {
       return <div class="rt-tabs-content">

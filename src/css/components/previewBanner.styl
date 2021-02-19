@@ -1,0 +1,34 @@
+.rt-preview-banner
+  border-radius 8px
+  overflow: hidden
+  .rt-img
+    max-width 100%
+    object-fit contain
+.rt-preview-banner__image
+
+  max-height 100%
+  @media (max-width tablet-upper-limit)
+
+    width: 100%
+  @media (min-width laptop-lower-limit)
+    left: 60%;
+    transform: translateX(-50%);
+    position: absolute;
+    .rt-img-container
+      max-height 100%
+      width: 588px
+    min-height 328px
+    height 328px
+.rt-container__body
+  @media (min-width laptop-lower-limit)
+    min-height 328px
+    height 328px
+.rt-preview-banner__date
+  color main-color05
+  .rt-preview-banner.color-white &
+    color b2c-white06
+
+  .rt-sys-icon
+    fill main-color05
+    .rt-preview-banner.color-white &
+      fill b2c-white06
