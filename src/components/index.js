@@ -97,8 +97,10 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
 export {default as CarouselV2} from './CarouselV2/Carousel.vue';
 export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
 export {default as AdBanner} from './AdBanner/AdBanner.vue';
+export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
 
 
  export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
+ export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
