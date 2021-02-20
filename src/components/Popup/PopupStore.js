@@ -34,7 +34,6 @@ class PopupStore extends StorePrototype {
   }
 
   fireGa = (popupUid) => {
-    console.info(popupUid , this.ga)
     if (popupUid in this.ga) {
       const data = {
         ...{
