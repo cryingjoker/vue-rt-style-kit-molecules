@@ -1,12 +1,11 @@
 
-.{newAppName}-popup-wrapper
+.rt-popup-wrapper
   display none
   flex 1
   justify-content center
   align-items center
   width 100%
   max-width 100%
-  height 100%
   opacity 0
   visibility hidden
   position fixed
@@ -15,22 +14,35 @@
   left 0
   right 0
   z-index 100
+  background-color: main-color05
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property opacity, visibility
   pointer-events none
 
-.{newAppName}-popup-content
+
+.rt-popup-content
   max-height 80vh
   overflow auto
 
+.rt-popup
+  max-width 1024px
+  width: 100%
+  border-radius 8px
+
+.rt-popup-close
+  position: absolute;
+  top: 16px
+  right: 16px
+  cursor: pointer;
 
 
-.{newAppName}-popup-content-td
+
+.rt-popup-content-td
   max-height 80vh
   overflow auto
 
-.{newAppName}-popup-wrapper-td
+.rt-popup-wrapper-td
   @media (max-width: tablet-upper-limit)
     display none
     flex 1
@@ -51,53 +63,75 @@
     transition-duration .4s
     transition-property opacity, visibility
 
-.{newAppName}-popup-wrapper--is-active,
-.{newAppName}-popup-wrapper-td--is-active
+.rt-popup-wrapper--is-active
+
+  overflow auto
+
+  opacity 1
+  visibility visible
+  animation .3s showPopupWrapper ease-in-out
+  align-items flex-start
+  position: fixed
+  pointer-events auto
+  max-height 100vh
+  display flex
+
+  .rt-popup
+    pointer-events auto
+
+.rt-popup-inner
+  display: flex
+  width: 100%
+  min-height 100vh
+  align-items  center
+  padding-top: 52px
+  padding-bottom: 52px
+  box-sizing border-box
+
+.rt-popup-wrapper-td--is-active
+  pointer-events auto
   display flex
   opacity 1
   visibility visible
   animation .3s showPopupWrapper ease-in-out
 
-  .{newAppName}-popup,
-  .{newAppName}-popup-td
-    animation .3s showPopup ease-in-out .1s
 
-.{newAppName}-popup-wrapper--is-closing,
-.{newAppName}-popup-wrapper-td--is-closing
-  animation .3s hidePopupWrapper ease-in-out
 
-.{newAppName}-popup
+.rt-popup-wrapper--is-closing,
+.rt-popup-wrapper-td--is-closing
+  animation .4s hidePopupWrapper ease-in-out
+
+.rt-popup
+  position: relative;
   background-color white
-  box-shadow 0 20px 25px 0 main-color05
-  padding-top vertical-space * 2
-  padding-bottom vertical-space * 2
-  padding-left horizontal-space
-  padding-right horizontal-space
+  padding-top 40px
+  padding-bottom 40px
+  padding-left 40px
+  padding-right 40px
+  @media (max-width: tablet-upper-limit)
+    padding-top: 20px
+    padding-left: 20px
+    padding-bottom: 20px
+    padding-right: 20px
 
-.{newAppName}-popup-td
+.rt-popup-td
   @media (max-width: tablet-upper-limit)
     background-color white
-    box-shadow 0 20px 25px 0 main-color05
     padding-top vertical-space * 2
     padding-bottom vertical-space * 2
     padding-left horizontal-space
     padding-right horizontal-space
 
-.{newAppName}-popup--filter
+.rt-popup--filter
   width 300px
 
-@keyframes showPopup
-  0%
-    box-shadow 0 0 0 0 main-color05
 
-  100%
-    box-shadow 0 20px 25px 0 main-color05
 
 @keyframes showPopupWrapper
   0%
     display flex
     opacity 0
-    visibility hidden
+    visibility visible
 
   100%
     display flex
@@ -113,4 +147,4 @@
   100%
     display flex
     opacity 0
-    visibility hidden
+    visibility visible

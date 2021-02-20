@@ -104,7 +104,7 @@ import {
   PreviewBanner,
   ArrowBlock
 } from "./components";
-
+import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
 import {TooltipDirective} from "./directives/Tooltip/tooltip";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
@@ -160,6 +160,7 @@ const VueRtStyle = {
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
       Vue.component(Youtube.name, Youtube);
       Vue.component(Popup.name, Popup);
+
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
@@ -228,6 +229,7 @@ const VueRtStyle = {
       Vue.directive(GaClickDirective.name, GaClickDirective);
 
 
+      Vue.directive(PopupTriggerDirective.name, PopupTriggerDirective);
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
       Vue.directive(
         SlideContentVerticalDirective.name,
@@ -244,7 +246,6 @@ const VueRtStyle = {
   }
 };
 // VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
-VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 
 // if(localStorage && localStorage.getItem('dev_Zmode')){
 //   localStorage.setItem('dev_mode__version',version);
