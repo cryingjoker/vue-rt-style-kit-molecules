@@ -6,7 +6,6 @@
   align-items center
   width 100%
   max-width 100%
-  height 100%
   opacity 0
   visibility hidden
   position fixed
@@ -15,7 +14,7 @@
   left 0
   right 0
   z-index 100
-  background-color: main-color04
+  background-color: main-color05
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property opacity, visibility
@@ -64,7 +63,31 @@
     transition-duration .4s
     transition-property opacity, visibility
 
-.rt-popup-wrapper--is-active,
+.rt-popup-wrapper--is-active
+
+  overflow auto
+
+  opacity 1
+  visibility visible
+  animation .3s showPopupWrapper ease-in-out
+  align-items flex-start
+  position: fixed
+  pointer-events auto
+  max-height 100vh
+  display flex
+
+  .rt-popup
+    pointer-events auto
+
+.rt-popup-inner
+  display: flex
+  width: 100%
+  min-height 100vh
+  align-items  center
+  padding-top: 52px
+  padding-bottom: 52px
+  box-sizing border-box
+
 .rt-popup-wrapper-td--is-active
   pointer-events auto
   display flex
@@ -76,15 +99,20 @@
 
 .rt-popup-wrapper--is-closing,
 .rt-popup-wrapper-td--is-closing
-  animation .3s hidePopupWrapper ease-in-out
+  animation .4s hidePopupWrapper ease-in-out
 
 .rt-popup
   position: relative;
   background-color white
-  padding-top vertical-space * 2
-  padding-bottom vertical-space * 2
-  padding-left horizontal-space
-  padding-right horizontal-space
+  padding-top 40px
+  padding-bottom 40px
+  padding-left 40px
+  padding-right 40px
+  @media (max-width: tablet-upper-limit)
+    padding-top: 20px
+    padding-left: 20px
+    padding-bottom: 20px
+    padding-right: 20px
 
 .rt-popup-td
   @media (max-width: tablet-upper-limit)
