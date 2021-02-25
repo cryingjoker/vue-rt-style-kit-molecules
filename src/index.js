@@ -102,7 +102,8 @@ import {
   AdBanner,
   MessageBox,
   PreviewBanner,
-  ArrowBlock
+  ArrowBlock,
+  ShowOn
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -164,6 +165,7 @@ const VueRtStyle = {
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
+      Vue.component(ShowOn.name, ShowOn);
       Vue.component(Slide.name, Slide);
       Vue.component(Pattern.name, Pattern);
       Vue.component(Opportunity.name, Opportunity);
@@ -353,6 +355,7 @@ export {
   GalleryCarousel,
   GalleryCarouselItem,
   OptionsList,
+  ShowOn,
   OptionsListInfoItem,
   GameArrow,
   CheckboxTabs,
