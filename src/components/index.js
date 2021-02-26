@@ -47,52 +47,55 @@ export {default as SlideContentDottedHeader} from './SlideContent/SlideContentDo
 export {default as Popup} from './Popup/Popup.vue';
 export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.vue';
 
- export { default as LinksBlock } from './Card/LinksBlock.vue';
- export { default as Pattern } from './Pattern/Pattern.vue';
+export { default as LinksBlock } from './Card/LinksBlock.vue';
+export { default as Pattern } from './Pattern/Pattern.vue';
 
- export { default as Swiper } from './Swiper/Swiper.vue';
- export { default as Slide } from './Swiper/Slide.vue';
- export { default as Opportunity } from './Opportunity/Opportunity.vue';
- export { default as OpportunityItem } from './Opportunity/OpportunityItem.vue';
- export { default as UnWrapper } from './MobileExpandWrapper/UnWrapper.vue';
- export { default as RealPopup } from './Popup/RealPopup.vue';
- export { default as UseCase } from './Card/UseCase.vue';
- export { default as BenefitBlock } from './BenefitBlock/BenefitBlock.vue';
- export { default as BenefitItem } from './BenefitBlock/BenefitItem.vue';
- export { default as PortraitTile } from './BusinessDrive/PortraitTile.vue';
- export { default as Timeline } from './BusinessDrive/Timeline.vue';
- export { default as ScrollBar } from './ScrollBar/ScrollBar.vue';
- export { default as VerticalScrollBar } from './ScrollBar/VerticalScrollBar.vue';
- export { default as TimelineItem } from './BusinessDrive/TimelineItem.vue';
- export { default as PortraitTileItem } from './BusinessDrive/PortraitTileItem.vue';
- export { default as ReplacementLink } from './ReplacementLinkWrapper/ReplacementLink.vue';
- export { default as CardCarousel } from './Card/CardCarousel.vue';
- export { default as CardLayout } from './Card/CardLayout.vue';
- export { default as GameArrow } from './Game/Arrow/GameArrow.vue'
- export { default as Banner } from './Banner/Banner.vue';
- export { default as BannerV2 } from './BannerV2/Banner.vue';
- export { default as BannerItemV2 } from './BannerV2/BannerItem.vue';
- export { default as BannerSkeleton } from './BannerV2/BannerSkeleton.vue';
- export { default as BannerItem } from './Banner/BannerItem.vue';
- export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
- export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';
- export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.vue';
- export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.vue';
- export { default as CountdownTimer } from './CountdownTimer/CountdownTimer.vue';
- export { default as FunctionItem } from './FunctionList/FunctionItem.vue';
- export { default as FunctionList } from './FunctionList/FunctionList.vue';
- export { default as HeaderAdvertisementBlock } from './HeaderAdvertisementBlock/HeaderAdvertisementBlock.vue';
- export { default as HeaderNavigation } from './HeaderNavigation/HeaderNavigation.vue';
- export { default as TextImageBlock } from './TextImageBlock/TextImageBlock.vue';
- export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
- export {default as Slider} from './Slider/Slider.vue'
- export {default as SliderItem} from './Slider/SliderItem.vue'
- export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
- export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
+export { default as Swiper } from './Swiper/Swiper.vue';
+export { default as Slide } from './Swiper/Slide.vue';
+export { default as Opportunity } from './Opportunity/Opportunity.vue';
+export { default as OpportunityItem } from './Opportunity/OpportunityItem.vue';
+export { default as UnWrapper } from './MobileExpandWrapper/UnWrapper.vue';
+export { default as RealPopup } from './Popup/RealPopup.vue';
+export { default as UseCase } from './Card/UseCase.vue';
+export { default as BenefitBlock } from './BenefitBlock/BenefitBlock.vue';
+export { default as BenefitItem } from './BenefitBlock/BenefitItem.vue';
+export { default as PortraitTile } from './BusinessDrive/PortraitTile.vue';
+export { default as Timeline } from './BusinessDrive/Timeline.vue';
+export { default as ScrollBar } from './ScrollBar/ScrollBar.vue';
+export { default as VerticalScrollBar } from './ScrollBar/VerticalScrollBar.vue';
+export { default as TimelineItem } from './BusinessDrive/TimelineItem.vue';
+export { default as PortraitTileItem } from './BusinessDrive/PortraitTileItem.vue';
+export { default as ReplacementLink } from './ReplacementLinkWrapper/ReplacementLink.vue';
+export { default as CardCarousel } from './Card/CardCarousel.vue';
+export { default as CardLayout } from './Card/CardLayout.vue';
+export { default as GameArrow } from './Game/Arrow/GameArrow.vue'
+export { default as Banner } from './Banner/Banner.vue';
+export { default as BannerV2 } from './BannerV2/Banner.vue';
+export { default as BannerItemV2 } from './BannerV2/BannerItem.vue';
+export { default as BannerSkeleton } from './BannerV2/BannerSkeleton.vue';
+export { default as BannerItem } from './Banner/BannerItem.vue';
+export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
+export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';
+export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.vue';
+export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.vue';
+export { default as CountdownTimer } from './CountdownTimer/CountdownTimer.vue';
+export { default as FunctionItem } from './FunctionList/FunctionItem.vue';
+export { default as FunctionList } from './FunctionList/FunctionList.vue';
+export { default as HeaderAdvertisementBlock } from './HeaderAdvertisementBlock/HeaderAdvertisementBlock.vue';
+export { default as HeaderNavigation } from './HeaderNavigation/HeaderNavigation.vue';
+export { default as TextImageBlock } from './TextImageBlock/TextImageBlock.vue';
+export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
+export {default as Slider} from './Slider/Slider.vue'
+export {default as SliderItem} from './Slider/SliderItem.vue'
+export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.vue';
+export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
 export {default as CarouselV2} from './CarouselV2/Carousel.vue';
 export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
 export {default as AdBanner} from './AdBanner/AdBanner.vue';
 
 
- export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
- export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
+export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
+export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
+export {default as CardHelp} from './Card/CardHelp.vue';
+export {default as CardBanner} from './Card/CardBanner.vue';
+export {default as CardTileLayout} from './Card/CardTileLayout.vue';

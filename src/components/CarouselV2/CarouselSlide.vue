@@ -18,6 +18,9 @@
         carouselStore.runAfterInit(this.parentCarouselName, this.fillCarouselSliderStore)
       }
     },
+    beforeDestroy() {
+      this.clearCarouselSliderStore()
+    },
     methods: {
       clearCarouselSliderStore() {
         carouselStore.removeSlots(this.parentCarouselName, this._uid)
