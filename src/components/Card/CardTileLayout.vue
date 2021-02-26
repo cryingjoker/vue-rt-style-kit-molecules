@@ -23,7 +23,7 @@ export default {
     if(this.desktop) {
       this.setChildrenWidth();
     }
-    window.addEventListener('resize', debounce(this.isDesktop, 500))
+    window.addEventListener('resize', debounce(this.isDesktop, 5))
   },
   updated() {
     if(this.desktop) {
@@ -34,13 +34,18 @@ export default {
     setChildrenWidth() {
       if(this.desktop) {
         this.$children?.map((item, index) => {
-          item.$el.classList.remove('rt-card-banner-wrapper--double-sized')
+          item.$el.classList.remove('rt-card-banner-wrapper--double-sized');
+          item.$el.querySelector('.rt-card-banner__image').removeAttribute('style');
           if (this.$children.length % 4 == 0) {
             item.$el.style.flexBasis = '25%';
             item.$el.style.maxWidth = '25%'
           } else if (this.$children.length % 5 == 0) {
             item.$el.style.flexBasis = '20%';
-            item.$el.style.maxWidth = '20%'
+            item.$el.style.maxWidth = '20%';
+            if(window.innerWidth < parseInt(variables['desktop-upper-limit'])) {
+              item.$el.querySelector('.rt-card-banner__image').style.width = '208px';
+              item.$el.querySelector('.rt-card-banner__image').style.height = '136px'
+            }
           } else if (this.$children.length % 3 == 0) {
             if (index % 3 == 0) {
               item.$el.style.flexBasis = '50%';
