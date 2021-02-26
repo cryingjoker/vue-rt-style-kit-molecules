@@ -86,7 +86,7 @@ export default {
         </div>
       </div>
     }
-    return <rt-carousel-v2 carousel-name={this.name}>
+    return <rt-carousel-v2 carousel-name={this.name} v-rt-resize-content-height={resizeData}>
       {this.$slots.default}
     </rt-carousel-v2>
   }

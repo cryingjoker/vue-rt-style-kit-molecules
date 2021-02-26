@@ -67,7 +67,7 @@ export default {
           <div class="rt-card-banner__text-content">
             <div class="rt-card-banner__tag rt-font-control">{this.tag}</div>
             <h4 class="rt-font-h4 sp-b-0-3 sp-r-1">{this.$slots.title}</h4>
-            <p class="rt-font-small-paragraph sp-b-0-3 sp-r-1">{this.$slots.description}</p>
+            <p class="rt-font-small-paragraph sp-b-0-3 sp-r-1 color-main05">{this.$slots.description}</p>
           </div>
           <div class="rt-card-banner__image">
             <rt-img src={this.src}
@@ -85,7 +85,7 @@ export default {
           <div class="rt-card-banner__text-content">
             <div class="rt-card-banner__tag rt-font-control">{this.tag}</div>
             <h4 class="rt-font-h4 sp-b-0-3 sp-r-1">{this.$slots.title}</h4>
-            <p class="rt-font-small-paragraph sp-b-0-3 sp-r-1">{this.$slots.description}</p>
+            <p class="rt-font-small-paragraph sp-b-0-3 sp-r-1 color-main05">{this.$slots.description}</p>
           </div>
           <div class="rt-card-banner__image">
             <rt-img src={this.src}
