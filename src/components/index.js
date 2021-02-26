@@ -5,6 +5,9 @@ export {default as TabsSliderItem} from './TabsSlider/TabsSliderItem.vue';
 export {default as CheckboxTabs} from './CheckboxTabs/CheckboxTabs.vue';
 export {default as TabsNavigationItem} from './Tabs/TabsNavigationItem.vue';
 export {default as TabsContentItem} from './Tabs/TabsContentItem.vue';
+export {default as Microtabs} from './Microtabs/Microtabs.vue';
+export {default as MicrotabsContent} from './Microtabs/MicrotabsContent.vue';
+export {default as MicrotabsNavigation} from './Microtabs/MicrotabsNavigation.vue';
 export {default as Card} from './Card/Card.vue';
 export {default as CardRounded} from './Card/CardRounded.vue';
 export {default as CardB2o} from './Card/CardB2o.vue';
@@ -96,6 +99,7 @@ export {default as AdBanner} from './AdBanner/AdBanner.vue';
 
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
 export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
+export {default as MessageBox} from './MessageBox/MessageBox.vue'
 export {default as CardHelp} from './Card/CardHelp.vue';
 export {default as CardBanner} from './Card/CardBanner.vue';
 export {default as CardTileLayout} from './Card/CardTileLayout.vue';
