@@ -33,6 +33,10 @@ export default {
       type: Object,
       default: null
     },
+    gaClose: {
+      type: Object,
+      default: null
+    },
     size:{
       type: Number,
       default: 8
@@ -81,7 +85,7 @@ export default {
     },
     bindStore() {
       if (this.name) {
-        popupStore.setSlot(this.name, this.updateSlots, this.ga)
+        popupStore.setSlot(this.name, this.updateSlots, this.ga,this.gaClose)
       }
     },
     unbindStore() {

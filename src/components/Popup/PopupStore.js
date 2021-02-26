@@ -10,14 +10,16 @@ class PopupStore extends StorePrototype {
     this.popupActiveId = null
     this.watchers = {}
     this.ga = {}
+    this.gaClose = {}
   }
 
 
-  setSlot = (popupUid, fn, ga) => {
+  setSlot = (popupUid, fn, ga,gaClose) => {
     let index = this.popupArray.indexOf(popupUid);
     if (index == -1) {
       this.popupArray.push(popupUid)
       this.ga[popupUid] = ga
+      this.gaClose[popupUid] = gaClose
       this.addWatcher(popupUid, fn)
     }
   }
@@ -27,6 +29,7 @@ class PopupStore extends StorePrototype {
     if (indexInArray >= 0) {
       this.popupArray.splice(indexInArray, 1)
       delete this.ga[popupUid]
+      delete this.gaClose[popupUid]
     }
     if (this.bannerActiveId == popupUid) {
       this.bannerActiveId = null
@@ -38,7 +41,20 @@ class PopupStore extends StorePrototype {
       const data = {
         ...{
           event: window[variables.globalSettingsKey].segment,
+          type: 'popup_interaction'
         }, ...this.ga[popupUid]
+      }
+      if (!window.dataLayer) window.dataLayer = []
+      window.dataLayer.push(data)
+    }
+  }
+  fireGaClose = (popupUid) => {
+    if (popupUid in this.gaClose) {
+      const data = {
+        ...{
+          event: window[variables.globalSettingsKey].segment,
+          type: 'popup_interaction'
+        }, ...this.gaClose[popupUid]
       }
       if (!window.dataLayer) window.dataLayer = []
       window.dataLayer.push(data)
@@ -47,6 +63,9 @@ class PopupStore extends StorePrototype {
 
   setActiveId = (popupUid) => {
     const popupActiveIdBefore = this.popupActiveId
+    if(popupActiveIdBefore){
+      this.fireGaClose(popupActiveIdBefore)
+    }
     this.popupActiveId = popupUid
     if (popupActiveIdBefore) {
       this.runWatchersById(popupActiveIdBefore)
@@ -57,11 +76,15 @@ class PopupStore extends StorePrototype {
 
   toggleActiveId = (popupUid) => {
     const popupActiveIdBefore = this.popupActiveId
+    if(popupActiveIdBefore){
+      this.fireGaClose(popupActiveIdBefore)
+    }
     this.popupActiveId = popupUid
     if (popupActiveIdBefore) {
       this.runWatchersById(popupActiveIdBefore)
     }
     this.runWatchersById(this.popupActiveId)
+    this.fireGa(popupUid)
   }
 
 
