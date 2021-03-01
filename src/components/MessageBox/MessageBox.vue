@@ -61,7 +61,7 @@ export default {
       return this.isLightTheme ? 'orange' : 'full-white'
     },
     href() {
-      return this.link || ('/' + this.segment)
+      return this.link || (this.isB2cSegment ? '/' : ('/' + this.segment))
     }
   },
   mounted() {

@@ -101,17 +101,21 @@ import {
   CarouselSlideV2,
   AdBanner,
   MessageBox,
+  PreviewBanner,
+  ArrowBlock,
+  ShowOn,
   CardHelp,
   CardBanner,
   CardTileLayout
 } from "./components";
-
+import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
 import {TooltipDirective} from "./directives/Tooltip/tooltip";
 import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
 import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
+import {GaClickDirective} from "./directives/GaClick";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
@@ -160,9 +164,11 @@ const VueRtStyle = {
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
       Vue.component(Youtube.name, Youtube);
       Vue.component(Popup.name, Popup);
+
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
+      Vue.component(ShowOn.name, ShowOn);
       Vue.component(Slide.name, Slide);
       Vue.component(Pattern.name, Pattern);
       Vue.component(Opportunity.name, Opportunity);
@@ -217,6 +223,8 @@ const VueRtStyle = {
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Jumbotron.name, Jumbotron);
       Vue.component(AdBanner.name, AdBanner);
+      Vue.component(PreviewBanner.name, PreviewBanner);
+      Vue.component(ArrowBlock.name, ArrowBlock);
       Vue.component(MessageBox.name, MessageBox);
       Vue.component(CardHelp.name, CardHelp);
       Vue.component(CardBanner.name, CardBanner);
@@ -226,8 +234,10 @@ const VueRtStyle = {
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
       Vue.directive(TooltipDirective.name, TooltipDirective);
+      Vue.directive(GaClickDirective.name, GaClickDirective);
 
 
+      Vue.directive(PopupTriggerDirective.name, PopupTriggerDirective);
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
       Vue.directive(
         SlideContentVerticalDirective.name,
@@ -244,7 +254,6 @@ const VueRtStyle = {
   }
 };
 // VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
-VueRtStyle.directives = {SwipeLeft, SwipeRight, OutsideClickDirective};
 
 // if(localStorage && localStorage.getItem('dev_Zmode')){
 //   localStorage.setItem('dev_mode__version',version);
@@ -352,6 +361,7 @@ export {
   GalleryCarousel,
   GalleryCarouselItem,
   OptionsList,
+  ShowOn,
   OptionsListInfoItem,
   GameArrow,
   CheckboxTabs,
@@ -370,6 +380,8 @@ export {
   CarouselSlideV2,
   AdBanner,
   MessageBox,
+  PreviewBanner,
+  ArrowBlock,
   CardHelp,
   CardBanner,
   CardTileLayout,
@@ -377,5 +389,6 @@ export {
   SwipeLeft,
   SwipeRight,
   OutsideClickDirective,
-  ResizeTypeStore
+  ResizeTypeStore,
+  GaClickDirective
 }

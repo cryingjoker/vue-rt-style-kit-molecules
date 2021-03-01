@@ -89,6 +89,9 @@ export default {
       this.cntList.push(cmp)
       return this.cntList.length - 1
     },
+    activateParentEvent(key = this.activeKey){
+      this.$emit('onChange', this.navList[key].$el, this.cntList[key].$el)
+    },
     fitItems(){
       this.$nextTick(() => {
         if (!this.$refs.navigationEl) return
@@ -123,11 +126,13 @@ export default {
       this.activeKey--
       this.direction = 'left'
       this.fitItems()
+      this.activateParentEvent()
     },
     navRight(){
       this.activeKey++
       this.direction = 'right'
       this.fitItems()
+      this.activateParentEvent()
     },
     destroy(){
       let config = defaultConfig()
@@ -140,6 +145,7 @@ export default {
       if (key !== this.activeTab) {
         this.direction = key > this.activeTab ? 'right' : 'left'
         this.activeTab = key
+        this.activateParentEvent(key)
       }
     })
     this.fitItems()
