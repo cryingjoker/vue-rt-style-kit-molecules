@@ -2,7 +2,7 @@
 .rt-card__content
   min-height inherit
 
-.{newAppName}-card
+.rt-card
   display flex
   z-index: 1
   flex 1
@@ -105,88 +105,88 @@
     right -20px
     z-index 1
 
-    .{newAppName}-card-purple &
+    .rt-card-purple &
       background-color b2c-purple
 
-    .{newAppName}-card-purple-low &
+    .rt-card-purple-low &
       background-color b2c-purple-low
 
-    .{newAppName}-card-purple-high &
+    .rt-card-purple-high &
       background-color b2c-purple-high
 
-    .{newAppName}-card-red &
+    .rt-card-red &
       background-color b2c-red
 
-    .{newAppName}-card-red-low &
+    .rt-card-red-low &
       background-color b2c-red-low
 
-    .{newAppName}-card-red-high &
+    .rt-card-red-high &
       background-color b2c-red-high
 
-    .{newAppName}-card-dark-blue &
+    .rt-card-dark-blue &
       background-color b2c-dark-blue
 
-    .{newAppName}-card-dark-blue-low &
+    .rt-card-dark-blue-low &
       background-color b2c-dark-blue-low
 
-    .{newAppName}-card-dark-blue-high &
+    .rt-card-dark-blue-high &
       background-color b2c-dark-blue-high
 
-    .{newAppName}-card-light-blue &
+    .rt-card-light-blue &
       background-color b2c-light-blue
 
-    .{newAppName}-card-light-blue-low &
+    .rt-card-light-blue-low &
       background-color b2c-light-blue-low
 
-    .{newAppName}-card-light-blue-high &
+    .rt-card-light-blue-high &
       background-color b2c-light-blue-high
 
-    .{newAppName}-card-yellow &
+    .rt-card-yellow &
       background-color b2c-yellow
 
-    .{newAppName}-card-yellow-low &
+    .rt-card-yellow-low &
       background-color b2c-yellow-low
 
-    .{newAppName}-card-yellow-high &
+    .rt-card-yellow-high &
       background-color b2c-yellow-high
 
-    .{newAppName}-card-orange &
+    .rt-card-orange &
       background-color b2c-orange
 
-    .{newAppName}-card-orange-low &
+    .rt-card-orange-low &
       background-color b2c-orange-low
 
-    .{newAppName}-card-orange-high &
+    .rt-card-orange-high &
       background-color b2c-orange-high
 
-    .{newAppName}-card-pink &
+    .rt-card-pink &
       background-color b2c-pink
 
-    .{newAppName}-card-pink-low &
+    .rt-card-pink-low &
       background-color b2c-pink-low
 
-    .{newAppName}-card-pink-high &
+    .rt-card-pink-high &
       background-color b2c-pink-high
 
-    .{newAppName}-card-green &
+    .rt-card-green &
       background-color b2c-green
 
-    .{newAppName}-card-green-low &
+    .rt-card-green-low &
       background-color b2c-green-low
 
-    .{newAppName}-card-green-high &
+    .rt-card-green-high &
       background-color b2c-green-high
 
-    .{newAppName}-card-black &
+    .rt-card-black &
       background-color dark-card-background
 
-    .{newAppName}-card-slate &
+    .rt-card-slate &
       background-color b2c-slate
 
-    .{newAppName}-card-dark-slate &
+    .rt-card-dark-slate &
       background-color b2c-dark-slate
 
-    .{newAppName}-card-light-grey &
+    .rt-card-light-grey &
       background-color light-grey
 
     &--position-background-top
@@ -221,10 +221,10 @@
       background-position-x 40px
       background-position-y top
 
-    .{newAppName}-card--has-bg-repeat &
+    .rt-card--has-bg-repeat &
       background-repeat repeat
 
-    .{newAppName}-card--has-bg-cover &
+    .rt-card--has-bg-cover &
       background-size cover
 
     @media (max-width: mobile-upper-limit)
@@ -341,7 +341,7 @@
   &__popup-costs
     display none
 
-.{newAppName}-card-image
+.rt-card-image
   flex-direction column
   background-color transparent
 
@@ -355,6 +355,7 @@
 
   &__figure
     flex 0
+    display: block
     width 100%
     height 364px
     min-height 364px
@@ -385,18 +386,133 @@
         box-sizing border-box
         padding-right horizontal-space * .5
 
-  .{newAppName}-card-image-list:last-child
+  .rt-card-image-list:last-child
     border-bottom-width 0
+.rt-card-image-v2
+  box-shadow none
+  color: inherit
 
-.{newAppName}-card-buy
+  .rt-card__body
+    padding-left: 0
+    padding-right: 0
+  @media (hover: hover)
+    &:hover
+      box-shadow none
+      .rt-card-image__arrow
+         opacity: 1
+         pointer-events auto
+      .rt-card-image__label
+        color b2c-orange
+      .rt-card-image__figure
+        transform scale(1.2)
+
+  .rt-card-image__figure-wrapper
+    border-radius 8px
+    display: block
+
+    overflow: hidden
+    height: 354px
+    .rt-card-image__figure
+      height: 354px
+      min-height 354px
+      max-height 354px
+
+    @media (min-width laptop-upper-limit)
+      height: 400px
+      .rt-card-image__figure
+        height: 400px
+        min-height 400px
+        max-height 400px
+    @media (max-width: tablet-upper-limit)
+      height: 312px
+      .rt-card-image__figure
+        height: 312px
+        min-height 312px
+        max-height 312px
+    @media (max-width: mobile-upper-limit)
+      height: 264px
+      .rt-card-image__figure
+        height: 264px
+        min-height 264px
+        max-height 264px
+
+  &.rt-card-image-type--small
+    .rt-card-image__figure-wrapper
+
+      height: 232px
+      .rt-card-image__figure
+        height: 232px
+        min-height 232px
+        max-height 232px
+      @media (min-width laptop-upper-limit)
+        height: 264px
+        .rt-card-image__figure
+          height: 264px
+          min-height 264px
+          max-height 264px
+
+      @media (max-width: mobile-upper-limit)
+        height: 200px
+        .rt-card-image__figure
+          min-height 200px
+          max-height 200px
+
+  .rt-card-image__figure
+    height: 100%
+    width: 100%
+    left: 0
+    right: 0
+    position: relative
+    transform scale(1)
+    transition-duration 0.25s
+    transition-property width, height, transform
+    transition-timing-function ease-in-out
+
+
+  .rt-card-image__content
+    padding-top: 24px
+    background transparent
+    display flex
+    flex-direction: column
+  .rt-card-image__label
+    transition-duration 0.25s
+    transition-property color
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+  .rt-card-image__body
+    flex: 1
+    transition-duration 0.25s
+    transition-property color
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    color main-color05
+    .rt-dark-theme &
+      color b2c-white05
+  .rt-card-image__arrow
+    display: flex
+    vertical-align middle
+    opacity: 0
+    pointer-events none
+    transition-duration 0.25s
+    transition-property opacity
+    transition-timing-function cubic-bezier(0.4, 0, 0.2, 1)
+    .rt-sys-icon
+      fill main-color05
+    color main-color05
+    .rt-dark-theme &
+      color b2c-white05
+      .rt-sys-icon
+        fill b2c-white05
+
+
+
+.rt-card-buy
   min-height inherit
   background-color b2c-white
   position relative
 
-.{newAppName}-card-buy__info
+.rt-card-buy__info
   position relative
 
-.{newAppName}-card-buy__form
+.rt-card-buy__form
   width 100%
   background-color b2c-white
   visibility hidden
@@ -428,11 +544,11 @@
     transition-property opacity, visibility, max-height
     animation none
 
-  .rt-card-buy__form-horizontal.{newAppName}-card-buy--show-form &
+  .rt-card-buy__form-horizontal.rt-card-buy--show-form &
     max-height 2000px
     position relative
 
-  .{newAppName}-card-buy--show-form &
+  .rt-card-buy--show-form &
     opacity 1
     visibility visible
     position relative
@@ -440,11 +556,11 @@
     z-index 2
     animation .4s showCardForm linear
 
-  .{newAppName}-card-buy--show-form.rt-card-buy--is-horizontal &
+  .rt-card-buy--show-form.rt-card-buy--is-horizontal &
     max-height 3000px
     animation none
 
-.{newAppName}-card-buy__content
+.rt-card-buy__content
   min-height 300px
   position relative
   top 0
@@ -454,7 +570,7 @@
   transition-duration .2s
   transition-property top, opacity, max-height
 
-  .{newAppName}-card-buy--show-form &
+  .rt-card-buy--show-form &
     display none
     max-height 0
     overflow hidden
@@ -469,7 +585,7 @@
     top 0
     animation none
 
-  .{newAppName}-card-buy--show-form.rt-card-buy--is-horizontal &
+  .rt-card-buy--show-form.rt-card-buy--is-horizontal &
     max-height 0
     opacity 0
     top 0
@@ -516,7 +632,7 @@
     position absolute
     top -50%
 
-.{newAppName}-card-buy__image
+.{newAppName}-buy__image
   width 100%
   background-position center
   background-size contain
@@ -526,12 +642,12 @@
   max-width 100%
   max-height 160px
 
-.{newAppName}-tariff-card
+.rt-tariff-card
   box-shadow 0 2px 4px 0 rgba(0,0,0,0.5)
   overflow: visible
   padding: 20px
   background-color: #fff
-  .{newAppName}-dark-theme &
+  .rt-dark-theme &
     background-color: main-color
     color b2c-white09
 
@@ -545,7 +661,7 @@
     font-weight: 500
 
 
-.{newAppName}-tariff-card-icons
+.rt-tariff-card-icons
   @media (min-width: desktop-lower-limit)
     height: 61px
 
@@ -554,11 +670,11 @@
   right: 0
   top: 0
 
-.{newAppName}-card-discount
+.{newAppName}-discount
   right: -15px
   top: 15px
   position: absolute
-.{newAppName}-card-discount__value
+.{newAppName}-discount__value
   position: absolute
   color: #fff
   font-size: 16px

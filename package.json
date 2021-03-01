@@ -5,8 +5,8 @@
   "main": "lib/vue-rt-style-kit-molecules.js",
   "scripts": {
     "start": "node bin/local/index.js",
-    "build": "NODE_ENV=production node scripts/build.js",
-    "build:development": "NODE_ENV=development node scripts/build.js"
+    "build": "cross-env NODE_ENV=production node scripts/build.js",
+    "build:development": "cross-env NODE_ENV=development node scripts/build.js"
   },
   "lint-staged": {
     "*.styl": [
@@ -42,6 +42,7 @@
     "normalize.css": "^8.0.1",
     "reflect-metadata": "^0.1.13",
     "reset-css": "^4.0.1",
+    "smoothscroll-polyfill": "^0.4.4",
     "tslib": "^1.11.1",
     "vue-fragment": "^1.5.1",
     "vue-tsx-support": "^2.3.1"
@@ -77,6 +78,8 @@
     "debounce": "^1.2.0",
     "element-closest-polyfill": "^1.0.0",
     "element-remove": "^1.0.4",
+    "eslint": "^7.19.0",
+    "eslint-plugin-vue": "^7.5.0",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.8.0",

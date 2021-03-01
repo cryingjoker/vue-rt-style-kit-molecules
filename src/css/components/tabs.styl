@@ -1,23 +1,23 @@
-.{newAppName}-tabs-navigation
+.rt-tabs-navigation
   color main-color
 
-.{newAppName}-tabs
+.rt-tabs
   width 100%
   font-size 18px
   &-content
     //border-top 1px solid main-color01
-    .{newAppName}-row-list__item
+    .rt-row-list__item
       padding-top vertical-space
       padding-bottom vertical-space
       @media (max-width: mobile-upper-limit)
         padding-top vertical-space
         padding-bottom vertical-space
-        &+.{newAppName}-row-list__item
+        &+.rt-row-list__item
           border-top none
           padding-top: 0
   &--vertical
     display flex
-    .{newAppName}-tabs-navigation
+    .rt-tabs-navigation
       flex-direction: column
       margin 0
       white-space unset!important
@@ -30,7 +30,7 @@
       &__item
         position relative
         display block
-        &+.{newAppName}-tabs-navigation__item
+        &+.rt-tabs-navigation__item
           margin-top vertical-space * .5
         &:before
           position absolute
@@ -54,7 +54,7 @@
       &__item-name
         &:before
           display none
-    .{newAppName}-tabs-content
+    .rt-tabs-content
       border-top none
       //padding-left vertical-space * 2
       width 66%
@@ -66,7 +66,7 @@
           margin-top vertical-space
   &--centered
     text-align: center
-    .{newAppName}-tabs-navigation-wrapper
+    .rt-tabs-navigation-wrapper
       display: inline-block
       //border-bottom 1px solid main-color01
       height 35px
@@ -74,7 +74,7 @@
         position relative
         width calc(100% + 40px)
         margin-left -20px
-    .{newAppName}-tabs-navigation
+    .rt-tabs-navigation
       margin-bottom 30px
       //display flex
       //justify-content center
@@ -83,7 +83,7 @@
         margin-left 0
         margin-right 0
         overflow-y hidden!important
-    .{newAppName}-tabs-navigation__item
+    .rt-tabs-navigation__item
       white-space nowrap
     .rt-tabs-content
       border-top none
@@ -105,7 +105,7 @@
     @media (max-width: mobile-upper-limit)
       left -20px
 
-.{newAppName}-tabs-navigation
+.rt-tabs-navigation
   display inline-flex
   flex-direction row
   max-width 100%  //calc(100% + 20px)
@@ -145,7 +145,7 @@
       //right 0
       display none
 
-.{newAppName}-tabs-navigation-wrapper
+.rt-tabs-navigation-wrapper
   .rt-tabs-tablet &,
   .rt-tabs-mobile &
     width: 100vw
@@ -160,7 +160,7 @@
   .rt-tabs-mobile &
     margin-left -20px
 
-.{newAppName}-tabs-navigation__item
+.rt-tabs-navigation__item
   //padding-left vertical-space
   //padding-right vertical-space
   cursor pointer
@@ -209,10 +209,10 @@
 .rt-tabs--tag-mode
   &.rt-tabs-mobile,
   &.rt-tabs-tablet,
-    .{newAppName}-tabs-navigation__item
+    .rt-tabs-navigation__item
       &:after
         display: none;
-.{newAppName}-tabs-navigation__item-name
+.rt-tabs-navigation__item-name
   box-sizing border-box
   text-align inherit
   border none
@@ -235,31 +235,31 @@
     transition-duration .2s
     transition-property border, width, text-shadow
     z-index 9
-  .{newAppName}-tabs-navigation__item--is-active
+  .rt-tabs-navigation__item--is-active
     pointer-events: none
   &:hover,
   &:focus,
-  .{newAppName}-tabs-navigation__item--is-active &
+  .rt-tabs-navigation__item--is-active &
     &:before
       width 100%
       border-bottom-color b2c-purple
 
-  .{newAppName}-tabs-navigation__item--is-active &
+  .rt-tabs-navigation__item--is-active &
     cursor default
 
   cursor pointer
-.{newAppName}-tabs--round-tablet-view
-  .{newAppName}-tabs-navigation__item
+.rt-tabs--round-tablet-view
+  .rt-tabs-navigation__item
     padding-left: 0
     padding-right: 0
     background-color: #fff
-    &.{newAppName}-tabs-navigation__item--is-active
+    &.rt-tabs-navigation__item--is-active
       background-color: b2c-purple
     &:after
       display none
     &:last-child
       padding-right: 0
-    &+.{newAppName}-tabs-navigation__item
+    &+.rt-tabs-navigation__item
       margin-left: 0
       border-left 2px solid b2c-purple
   .rt-tabs-navigation
@@ -280,7 +280,7 @@
     @media (max-width mobile-upper-limit)
       padding-top 8px
       padding-bottom 8px
-  .{newAppName}-tabs-navigation
+  .rt-tabs-navigation
     overflow: auto
     max-width 100%
     &:after
@@ -295,14 +295,14 @@
     background-color: b2c-purple
     @media (max-width mobile-upper-limit)
       margin-left: 0px
-  .{newAppName}-tabs-navigation__item
+  .rt-tabs-navigation__item
     background-color: white
     &+&
       margin-left: -1ex
-  .{newAppName}-tabs-navigation__item--is-active
+  .rt-tabs-navigation__item--is-active
     background-color: b2c-purple
     color #fff
-  .{newAppName}-tabs-content
+  .rt-tabs-content
     border-top-width: 0
 
 .rt-tabs
@@ -383,14 +383,14 @@
           right 0
           transform rotate(180 deg) scale(-1)
 
-.{newAppName}-tabs--fill
+.rt-tabs--fill
   width: 100%
-  .{newAppName}-tabs-navigation
+  .rt-tabs-navigation
     display: flex
-  &.{newAppName}-tabs--justify-all-width
-    .{newAppName}-tabs-navigation
+  &.rt-tabs--justify-all-width
+    .rt-tabs-navigation
       justify-content: space-between
-.{newAppName}-dark-theme
+.rt-dark-theme
   .rt-tabs-navigation:after
     background-color b2c-white07
   .rt-tabs-navigation__item-name:hover:before,

@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "name": "rt-message-box",
+      "property": "theme",
+      "type": "String",
+      "description": "Светлая или темная тема `light` или `dark`",
+      "value": "light"
+    },
+    {
+      "name": "rt-message-box",
+      "property": "timeout",
+      "type": "Number",
+      "description": "Время задержки до появления окна в секундах",
+      "value": "20"
+    },
+    {
+      "name": "rt-message-box",
+      "property": "link",
+      "type": "String",
+      "description": "Адрес ссылки",
+      "value": "Главная сегмента"
+    },
+    {
+      "name": "rt-message-box",
+      "property": "button-text",
+      "type": "String",
+      "description": "Текст кнопки",
+      "value": "Перейти"
+    }
+  ]
+}
