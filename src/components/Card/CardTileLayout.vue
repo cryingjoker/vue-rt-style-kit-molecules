@@ -13,28 +13,28 @@ export default {
   },
   data: () => ({
     resizeData: ['.rt-font-h4', '.rt-font-small-paragraph', '.rt-card-banner'],
-    desktop: window.innerWidth > parseInt(variables["tablet-upper-limit"]),
+    isDesktop: window.innerWidth > parseInt(variables["tablet-upper-limit"]),
     children: []
   }),
   computed: {},
   mounted () {
-    this.isDesktop();
+    this.checkWidth();
     this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
-    if(this.desktop) {
+    if(this.isDesktop) {
       this.setChildrenWidth();
     }
-    window.addEventListener('resize', debounce(this.isDesktop, 5))
+    window.addEventListener('resize', debounce(this.checkWidth, 35))
   },
   updated() {
     this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
-    if(this.desktop) {
+    if(this.isDesktop) {
       this.setChildrenWidth()
     }
   },
   methods: {
     setChildrenWidth() {
-      if(this.desktop) {
-        this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'));
+      if(this.isDesktop) {
+        // this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'));
         this.children.map((item, index) => {
           item.classList.remove('rt-card-banner-wrapper--double-sized');
           item.querySelector('.rt-card-banner__image').removeAttribute('style');
@@ -70,11 +70,12 @@ export default {
         })
       }
     },
-    isDesktop() {
+    checkWidth() {
       if(window.innerWidth <= parseInt(variables["tablet-upper-limit"])) {
-        this.desktop = false
+        this.isDesktop = false
+      } else {
+        this.isDesktop = true
       }
-      this.desktop = true
       this.$forceUpdate()
     }
   },
@@ -82,7 +83,7 @@ export default {
     const resizeData = {
       querySelectorsNames: this.resizeData
     };
-    if(window.innerWidth > parseInt(variables["tablet-upper-limit"])) {
+    if(this.isDesktop) {
       return <div v-rt-resize-content-height={resizeData}>
         <div class="rt-container">
           <div class="rt-col">
@@ -92,10 +93,11 @@ export default {
           </div>
         </div>
       </div>
+    } else {
+      return <rt-carousel-v2 carousel-name={this.name} v-rt-resize-content-height={resizeData}>
+        {this.$slots.default}
+      </rt-carousel-v2>
     }
-    return <rt-carousel-v2 carousel-name={this.name} v-rt-resize-content-height={resizeData}>
-      {this.$slots.default}
-    </rt-carousel-v2>
   }
 };
 </script>
