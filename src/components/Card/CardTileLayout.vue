@@ -34,6 +34,7 @@ export default {
     setChildrenWidth() {
       if(this.desktop) {
         this.$children?.map((item, index) => {
+          
           item.$el.classList.remove('rt-card-banner-wrapper--double-sized');
           item.$el.querySelector('.rt-card-banner__image').removeAttribute('style');
           if (this.$children.length % 4 == 0) {
