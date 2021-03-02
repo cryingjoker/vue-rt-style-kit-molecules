@@ -13,19 +13,20 @@ export default {
   },
   data: () => ({
     resizeData: ['.rt-font-h4', '.rt-font-small-paragraph', '.rt-card-banner'],
-    desktop: window.innerWidth > parseInt(variables["tablet-upper-limit"])
+    desktop: window.innerWidth > parseInt(variables["tablet-upper-limit"]),
+    children: []
   }),
-  computed: {
-
-  },
+  computed: {},
   mounted () {
     this.isDesktop();
+    this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
     if(this.desktop) {
       this.setChildrenWidth();
     }
     window.addEventListener('resize', debounce(this.isDesktop, 5))
   },
   updated() {
+    this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
     if(this.desktop) {
       this.setChildrenWidth()
     }
@@ -33,36 +34,37 @@ export default {
   methods: {
     setChildrenWidth() {
       if(this.desktop) {
-        this.$children?.map((item, index) => {
-          item.$el.classList.remove('rt-card-banner-wrapper--double-sized');
-          item.$el.querySelector('.rt-card-banner__image').removeAttribute('style');
-          if (this.$children.length % 4 == 0) {
-            item.$el.style.flexBasis = '25%';
-            item.$el.style.maxWidth = '25%'
-          } else if (this.$children.length % 5 == 0) {
-            item.$el.style.flexBasis = '20%';
-            item.$el.style.maxWidth = '20%';
+        this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'));
+        this.children.map((item, index) => {
+          item.classList.remove('rt-card-banner-wrapper--double-sized');
+          item.querySelector('.rt-card-banner__image').removeAttribute('style');
+          if (this.children.length % 4 == 0) {
+            item.style.flexBasis = '25%';
+            item.style.maxWidth = '25%'
+          } else if (this.children.length % 5 == 0) {
+            item.style.flexBasis = '20%';
+            item.style.maxWidth = '20%';
             if(window.innerWidth < parseInt(variables['desktop-upper-limit'])) {
-              item.$el.querySelector('.rt-card-banner__image').style.width = '208px';
-              item.$el.querySelector('.rt-card-banner__image').style.height = '136px'
+              item.querySelector('.rt-card-banner__image').style.width = '208px';
+              item.querySelector('.rt-card-banner__image').style.height = '136px'
             }
-          } else if (this.$children.length % 3 == 0) {
+          } else if (this.children.length % 3 == 0) {
             if (index % 3 == 0) {
-              item.$el.style.flexBasis = '50%';
-              item.$el.style.maxWidth = '50%';
-              item.$el.classList.add('rt-card-banner-wrapper--double-sized')
+              item.style.flexBasis = '50%';
+              item.style.maxWidth = '50%';
+              item.classList.add('rt-card-banner-wrapper--double-sized')
             } else {
-              item.$el.style.flexBasis = '25%';
-              item.$el.style.maxWidth = '25%'
+              item.style.flexBasis = '25%';
+              item.style.maxWidth = '25%'
             }
-          } else if (this.$children.length % 7 == 0) {
+          } else if (this.children.length % 7 == 0) {
             if (index == 0) {
-              item.$el.style.flexBasis = '50%';
-              item.$el.style.maxWidth = '50%';
-              item.$el.classList.add('rt-card-banner-wrapper--double-sized')
+              item.style.flexBasis = '50%';
+              item.style.maxWidth = '50%';
+              item.classList.add('rt-card-banner-wrapper--double-sized')
             } else {
-              item.$el.style.flexBasis = '25%';
-              item.$el.style.maxWidth = '25%'
+              item.style.flexBasis = '25%';
+              item.style.maxWidth = '25%'
             }
           }
         })
