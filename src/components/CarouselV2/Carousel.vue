@@ -51,6 +51,7 @@
         if (newVal != oldVal && newVal) {
           this.initMethods()
         }
+        this.$forceUpdate()
       }
     },
     computed: {

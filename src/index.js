@@ -103,7 +103,10 @@ import {
   MessageBox,
   PreviewBanner,
   ArrowBlock,
-  ShowOn
+  ShowOn,
+  CardHelp,
+  CardBanner,
+  CardTileLayout
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -223,6 +226,9 @@ const VueRtStyle = {
       Vue.component(PreviewBanner.name, PreviewBanner);
       Vue.component(ArrowBlock.name, ArrowBlock);
       Vue.component(MessageBox.name, MessageBox);
+      Vue.component(CardHelp.name, CardHelp);
+      Vue.component(CardBanner.name, CardBanner);
+      Vue.component(CardTileLayout.name, CardTileLayout);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -376,6 +382,9 @@ export {
   MessageBox,
   PreviewBanner,
   ArrowBlock,
+  CardHelp,
+  CardBanner,
+  CardTileLayout,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
