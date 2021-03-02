@@ -205,7 +205,14 @@ export default {
     if (this.isActive) {
         wrapperClasses += " rt-popup-wrapper--is-active";
     }
-
+    if(this.isAntivirus) {
+      return <div class={wrapperClasses} onClick={this.clickOutside}>
+        <div class={popupClasses} onMouseenter={this.setHover} onMouseleave={this.removeHover}
+             onMousemove={this.setHover}>
+          {this.$slots.default}
+        </div>
+      </div>;
+    }
     if (this.isActive) {
       const emptySize = parseInt((12 - this.size)/2)
       return <div ref="wrapper" class={wrapperClasses} onClick={this.clickOutside}>
