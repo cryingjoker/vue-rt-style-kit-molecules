@@ -1,7 +1,13 @@
-microtabsTriangleSize = 6px
-microtabsDefColor = #f5f5f5 // main-color005
-microtabsDefColorHover = #eaeaec // main-color01
 cmp = '.rt-microtabs'
+microtabsTriangleSize = 6px
+microtabsDefBg = #eeeff0
+microtabsDefBgHover = #e7e8e9
+microtabsPurpleBg = #f1e5ff
+microtabsPurpleBgHover = #ebd9ff
+microtabsPurpleColor = #7700ff
+microtabsOrangeBg = #ffede7
+microtabsOrangeBgHover = #ffe5db
+microtabsOrangeColor = #ff4f12
 
 {cmp}
   position relative
@@ -22,10 +28,13 @@ cmp = '.rt-microtabs'
       margin-right 8px
       position relative
       user-select none
+      transform scale(1)
+      transition transform .3s ease-in
       z-index 2
       &.is--active
         cursor default
       &.is--hidden
+        color transparent !important
         position absolute
         transform scale(0)
         z-index 1
@@ -33,15 +42,9 @@ cmp = '.rt-microtabs'
       padding 0 4px
     &__item
       padding 0 8px
-      transform scale(1)
-      transition transform .123s ease-out
-      // Block with opacity for Hover-effect
-      &-opacity
-        opacity .1
-        transition opacity .3s ease-in
-      // Triangle
       &-tgl
-        border-top microtabsTriangleSize solid microtabsDefColor
+        color microtabsDefBg
+        border-top microtabsTriangleSize solid
         border-right microtabsTriangleSize solid transparent
         border-left microtabsTriangleSize solid transparent
         margin auto
@@ -51,18 +54,19 @@ cmp = '.rt-microtabs'
         left 0
         right 0
         bottom -(microtabsTriangleSize)
-        transition transform .3s ease-in .1s
+        transition transform .3s ease-in .1s, color .3s ease-in
         z-index -2
       // Background
       &-bg
         content: ''
-        background microtabsDefColor
+        background microtabsDefBg
         border-radius 16px
         position absolute
         width 100%
         height 100%
         left 0
         top 0
+        transition background .3s ease-in
         z-index -1
 
   &-cnt
@@ -94,8 +98,38 @@ cmp = '.rt-microtabs'
     &.is--theme-flat
       {cmp}-nav__item-bg
         display none
+    &.is--theme-purple
+      color microtabsPurpleColor
+      {cmp}-nav__item
+        &-bg
+          background microtabsPurpleBg
+        &-tgl
+          color microtabsPurpleBg
+    &.is--theme-orange
+      color microtabsOrangeColor
+      {cmp}-nav__item
+        &-bg
+          background microtabsOrangeBg
+        &-tgl
+          color microtabsOrangeBg
 
 @media (hover: hover)
   {cmp}.is--tabs
-    {cmp}-nav > a:not(.is--active):hover {cmp}-nav__item-opacity
-      opacity .15
+    {cmp}-nav > a:not(.is--active):hover
+      {cmp}-nav__item
+        &-bg
+          background microtabsDefBgHover
+        &-tgl
+          color microtabsDefBgHover
+      &.is--theme-purple
+        {cmp}-nav__item
+          &-bg
+            background microtabsPurpleBgHover
+          &-tgl
+            color microtabsPurpleBgHover
+      &.is--theme-orange
+        {cmp}-nav__item
+          &-bg
+            background microtabsOrangeBgHover
+          &-tgl
+            color microtabsOrangeBgHover  

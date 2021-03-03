@@ -269,6 +269,7 @@ export default {
           'is-animating': this.isAnimating,
           'is-hide-navs': this.hideNavigation,
           'is-scrolling': !this.scrollingAutoEnd,
+          'is--conveer': this.canAdvanceForward,
           'is-disabled-scrolling': this.disabledScrolling
         }
       ]
