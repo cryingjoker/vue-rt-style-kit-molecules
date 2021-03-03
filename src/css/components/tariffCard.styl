@@ -120,6 +120,20 @@ inverse()
         background #565C6C
       &-tgl
         color #565C6C
+      &.is--theme-purple
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #420B96
+          &-tgl
+            color #420B96
+      &.is--theme-orange
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #923326
+          &-tgl
+            color #923326
   &.is--theme-yadisk
     background #5D96D9
     border-color transparent
@@ -137,17 +151,57 @@ inverse()
         background #8eb5e4
       &-tgl
         color #8eb5e4
+      &.is--theme-purple
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #6958ec
+          &-tgl
+            color #6958ec
+      &.is--theme-orange
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #b37486
+          &-tgl
+            color #b37486
 
 @media (hover: hover)
   {cmp}.is--theme-dark
-    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover .rt-microtabs-nav__item
-      &-bg
-        background #868a96
-      &-tgl
-        color #868a96
+    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover
+      .rt-microtabs-nav__item
+        &-bg
+          background #868a96
+        &-tgl
+          color #868a96
+      &.is--theme-purple
+        .rt-microtabs-nav__item
+          &-bg
+            background #501db2
+          &-tgl
+            color #501db2
+      &.is--theme-orange
+        .rt-microtabs-nav__item
+          &-bg
+            background #a93924
+          &-tgl
+            color #a93924
   {cmp}.is--theme-yadisk
-    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover .rt-microtabs-nav__item
-      &-bg
-        background #aecbec
-      &-tgl
-        color #aecbec
+    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover
+      .rt-microtabs-nav__item
+        &-bg
+          background #aecbec
+        &-tgl
+          color #aecbec
+      &.is--theme-purple
+        .rt-microtabs-nav__item
+          &-bg
+            background #6b4bf0
+          &-tgl
+            color #6b4bf0
+      &.is--theme-orange
+        .rt-microtabs-nav__item
+          &-bg
+            background #c36d74
+          &-tgl
+            color #c36d74
