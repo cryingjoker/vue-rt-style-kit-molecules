@@ -18,28 +18,23 @@ export default {
   }),
   computed: {},
   mounted () {
-    console.log('mounted beginning, this.isDesktop=', this.isDesktop, ' this.children=', this.children)
     this.checkWidth();
     // this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
     // if(this.isDesktop) {
     //   this.setChildrenWidth();
     // }
     window.addEventListener('resize', debounce(this.checkWidth, 35))
-    console.log('mounted end, this.isDesktop=', this.isDesktop, ' this.children=', this.children)
-
   },
   updated() {
-    this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
+    // this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
     if(this.isDesktop) {
       this.setChildrenWidth()
     }
   },
   methods: {
     setChildrenWidth() {
-      console.log('setChildrenWidth outer, this.isDesktop=', this.isDesktop, ' this.children=', this.children)
-      if(this.isDesktop) {
-        this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'));
-        console.log('setChildrenWidth inner, this.isDesktop=', this.isDesktop, ' this.children=', this.children)
+      this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'));
+      if(this.isDesktop && this.children.length > 0) {
         this.children.map((item, index) => {
           item.classList.remove('rt-card-banner-wrapper--double-sized');
           item.querySelector('.rt-card-banner__image').removeAttribute('style');
@@ -73,6 +68,10 @@ export default {
             }
           }
         })
+      } else {
+        setTimeout(() => {
+          this.setChildrenWidth();
+        },100)
       }
     },
     checkWidth() {
