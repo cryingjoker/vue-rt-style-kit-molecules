@@ -37,6 +37,7 @@ export {default as TagsList} from './Tag/TagsList.vue';
 export {default as Filter} from './Filter/Filter.vue';
 export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
+export {default as ShowOn} from './ShowOn/ShowOn.vue';
 
 export {default as FilterV2} from './FilterV2/Filter.vue';
 export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
