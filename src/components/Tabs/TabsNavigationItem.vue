@@ -90,9 +90,11 @@ export default {
     }
   },
   mounted() {
-
     tabsStore.addTabUuid(this.$parent._uid, this.name);
-    if (document.querySelector('#tabs-' + this.$parent._uid).classList.contains('rt-tabs--round-tablet-view')) {
+    if(!document.querySelector('#tabs-' + this.$parent._uid)){
+      return
+    }
+    if (document.querySelector('#tabs-' + this.$parent._uid).classList.contains('rt-tabs--round-tablet-view') ) {
       this.parentElement = document.querySelector('#tabs-' + this.$parent._uid + ' .rt-tabs-navigation-wrapper');
     } else {
       this.parentElement = document.querySelector('#tabs-' + this.$parent._uid + ' .rt-tabs-navigation');

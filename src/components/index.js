@@ -37,6 +37,7 @@ export {default as TagsList} from './Tag/TagsList.vue';
 export {default as Filter} from './Filter/Filter.vue';
 export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
+export {default as ShowOn} from './ShowOn/ShowOn.vue';
 
 export {default as FilterV2} from './FilterV2/Filter.vue';
 export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
@@ -48,6 +49,8 @@ export {default as SlideContent} from './SlideContent/SlideContent.vue';
 export {default as SlideContentDottedContent} from './SlideContent/SlideContentDottedContent.vue';
 export {default as SlideContentDottedHeader} from './SlideContent/SlideContentDottedHeader.vue';
 export {default as Popup} from './Popup/Popup.vue';
+// export {PopupTriggerDirective} from './Popup/PopupTrigger.vue';
+
 export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.vue';
 
  export { default as LinksBlock } from './Card/LinksBlock.vue';
@@ -95,8 +98,10 @@ export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.v
 export {default as CarouselV2} from './CarouselV2/Carousel.vue';
 export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
 export {default as AdBanner} from './AdBanner/AdBanner.vue';
+export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
 
 
  export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
  export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
+ export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
