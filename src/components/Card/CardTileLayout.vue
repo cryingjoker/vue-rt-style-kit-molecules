@@ -23,7 +23,7 @@ export default {
     // if(this.isDesktop) {
     //   this.setChildrenWidth();
     // }
-    window.addEventListener('resize', debounce(this.checkWidth, 35))
+    window.addEventListener('resize', debounce(this.checkWidth, 1))
   },
   updated() {
     // this.children = Array.from(this.$el.querySelectorAll('.rt-card-banner-wrapper'))
@@ -47,6 +47,15 @@ export default {
             if(window.innerWidth < parseInt(variables['desktop-upper-limit'])) {
               item.querySelector('.rt-card-banner__image').style.width = '208px';
               item.querySelector('.rt-card-banner__image').style.height = '136px'
+            }
+            if(window.innerWidth <= parseInt(variables['laptop-upper-limit'])) {
+              if(index < 2) {
+                item.style.flexBasis = '50%';
+                item.style.maxWidth = '50%';
+              } else {
+                item.style.flexBasis = 'calc(100% / 3)';
+                item.style.maxWidth = 'calc(100% / 3)';
+              }
             }
           } else if (this.children.length % 3 == 0) {
             if (index % 3 == 0) {
