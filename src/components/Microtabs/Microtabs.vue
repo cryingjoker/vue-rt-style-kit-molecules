@@ -99,10 +99,11 @@ export default {
         let hiddens = []
         let distance = controlWidth
         let wrapWidth = this.$refs.navigationEl.clientWidth
-        this.navList.forEach(nav => {
+        this.navList.forEach((nav, key) => {
           if (
             nav.key < this.activeKey ||
-            wrapWidth < distance + nav.$el.clientWidth + offset + controlWidth
+            // Сравниваем по ширине, учитывая текущую позицию
+            wrapWidth < distance + nav.$el.clientWidth + offset + (this.navList.length - 1 === key ? 0 : controlWidth)
           ) {
             hiddens[nav.key] = true
           } else {
@@ -115,7 +116,8 @@ export default {
         this.navList.forEach(nav => nav.hidden = !!hiddens[nav.key])
         this.allowNavLeft = this.navList[0].hidden
         this.allowNavRight = this.navList[this.navList.length - 1].hidden
-        if (this.navList[this.activeTab].hidden) {
+        // Если активный таб остался "за бортом"
+        if (this.navList[this.activeTab] && this.navList[this.activeTab].hidden) {
           this.activeTab = shown[this.direction === 'right' ? 0 : shown.length - 1]
         }
         this.navList.splice(0, 0)
