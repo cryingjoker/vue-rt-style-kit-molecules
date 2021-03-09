@@ -117,7 +117,7 @@ export default {
         this.allowNavLeft = this.navList[0].hidden
         this.allowNavRight = this.navList[this.navList.length - 1].hidden
         // Если активный таб остался "за бортом"
-        if (this.navList[this.activeTab].hidden) {
+        if (this.navList[this.activeTab] && this.navList[this.activeTab].hidden) {
           this.activeTab = shown[this.direction === 'right' ? 0 : shown.length - 1]
         }
         this.navList.splice(0, 0)
