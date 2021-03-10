@@ -21,6 +21,10 @@ export default {
     link: {
       type: String
     },
+    hrefInNewWindow: {
+      type: Boolean,
+      default: false
+    },
     theme: {
       type: String,
       default: 'light'
@@ -75,7 +79,11 @@ export default {
     action(e) {
       e.preventDefault()
       this.fireGoogleAn('home_page')
-      global.location.href=this.href
+      if (this.hrefInNewWindow) {
+        window.open(this.href)
+      } else {
+        global.location.href = this.href
+      }
     },
     fireGoogleAn(value) {
       if (!window.dataLayer) {
