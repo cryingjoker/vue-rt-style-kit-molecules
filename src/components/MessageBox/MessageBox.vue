@@ -23,7 +23,7 @@ export default {
     },
     hrefInNewWindow: {
       type: Boolean,
-      default: false
+      default: true
     },
     theme: {
       type: String,
