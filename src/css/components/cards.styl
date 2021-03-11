@@ -409,14 +409,53 @@
   .rt-card-image__figure-wrapper
     border-radius 8px
     display: block
-    height: 344px
+
     overflow: hidden
+    height: 354px
+    .rt-card-image__figure
+      height: 354px
+      min-height 354px
+      max-height 354px
+
+    @media (min-width laptop-upper-limit)
+      height: 400px
+      .rt-card-image__figure
+        height: 400px
+        min-height 400px
+        max-height 400px
+    @media (max-width: tablet-upper-limit)
+      height: 312px
+      .rt-card-image__figure
+        height: 312px
+        min-height 312px
+        max-height 312px
+    @media (max-width: mobile-upper-limit)
+      height: 264px
+      .rt-card-image__figure
+        height: 264px
+        min-height 264px
+        max-height 264px
+
   &.rt-card-image-type--small
     .rt-card-image__figure-wrapper
-      height: 234px
-    .rt-card-image__figure
-      min-height 234px
-      max-height 234px
+
+      height: 232px
+      .rt-card-image__figure
+        height: 232px
+        min-height 232px
+        max-height 232px
+      @media (min-width laptop-upper-limit)
+        height: 264px
+        .rt-card-image__figure
+          height: 264px
+          min-height 264px
+          max-height 264px
+
+      @media (max-width: mobile-upper-limit)
+        height: 200px
+        .rt-card-image__figure
+          min-height 200px
+          max-height 200px
 
   .rt-card-image__figure
     height: 100%
@@ -593,7 +632,7 @@
     position absolute
     top -50%
 
-.rt-card-buy__image
+.{newAppName}-buy__image
   width 100%
   background-position center
   background-size contain
@@ -626,16 +665,16 @@
   @media (min-width: desktop-lower-limit)
     height: 61px
 
-.rt-card-seal
+.{newAppName}-card-seal
   position: absolute
   right: 0
   top: 0
 
-.rt-card-discount
+.{newAppName}-discount
   right: -15px
   top: 15px
   position: absolute
-.rt-card-discount__value
+.{newAppName}-discount__value
   position: absolute
   color: #fff
   font-size: 16px

@@ -1,1 +1,1 @@
-export { default as scrollIt } from './scrollIt';
+export { default as scrollIt } from './scrollIt'

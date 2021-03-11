@@ -57,6 +57,14 @@ export default {
     desktopColumnSize: {
       type: Number,
       default: 6
+    },
+    flagBackground: {
+      type: String,
+      default: 'purple'
+    },
+    flagScrollToId: {
+      type: String,
+      default: 'purple'
     }
   },
   data: () => ({
@@ -229,6 +237,34 @@ export default {
       }
       return null
     }
+    const renderFlag = ()=>{
+      if(this.$slots['flag-text']) {
+        let flagClassList = 'jumbotron-flag'
+        let flagSvgClassList = 'jumbotron-flag-svg jumbotron-flag-svg--' + this.flagBackground;
+        if (this.flagScrollToId) {
+          return <button type="button" class={flagClassList}
+                         v-rt-scroll-to-on-click={{"scrollToId": this.flagScrollToId}}>
+            <svg class={flagSvgClassList} width="192" height="120" viewBox="0 0 192 120"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M52.2803 0L0.085734 0C-1.75025 4.93649 26.4605 87.7044 31.1282 91.6947C33.9523 94.1068 37.6202 95.6032 41.4913 96.1592C41.5001 96.1632 41.5143 96.1708 41.5266 96.1749L192 120V0.000449098L52.2803 0Z"/>
+            </svg>
+            <p class="color-white jumbotron-flag-text rt-font-h3">{this.$scopedSlots['flag-text']()}</p>
+          </button>
+        }else{
+          return <button type="button" class={flagClassList}>
+            <svg class={flagSvgClassList} width="192" height="120" viewBox="0 0 192 120"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M52.2803 0L0.085734 0C-1.75025 4.93649 26.4605 87.7044 31.1282 91.6947C33.9523 94.1068 37.6202 95.6032 41.4913 96.1592C41.5001 96.1632 41.5143 96.1708 41.5266 96.1749L192 120V0.000449098L52.2803 0Z"/>
+            </svg>
+            <p class="color-white jumbotron-flag-text rt-font-h3">{this.$scopedSlots['flag-text']()}</p>
+          </button>
+        }
+      }
+      return null
+    }
+
     const tabletHeader=()=> {
       if (this.$slots['tablet-header']) {
         return <div class="sp-b-0-4 td-sp-b-0-3 md-d-none td-d-flex d-none">
@@ -237,6 +273,7 @@ export default {
       }
       return null
     }
+
     const label=()=> {
       if (this.$slots.label) {
         if (this.$slots.label.find(i => i.tag && i.tag != 'br')) {
@@ -253,6 +290,7 @@ export default {
       }
       return null
     }
+
     const description=()=> {
       if (this.$slots['description']) {
         const classList = [, 'rt-font-paragraph'];
@@ -314,6 +352,7 @@ export default {
       return null
     }
     return <div class={this.jumbotronClass}>
+      {renderFlag()}
       <rt-row class="rt-jumbotron-image flex-fill">
         <rt-col size={6} large-size={5} tablet-size={3} m-hide={true}></rt-col>
         <rt-col size={6} large-size={7} tablet-size={3} mobile-size={3}>
