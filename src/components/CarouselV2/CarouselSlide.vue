@@ -14,7 +14,16 @@
         default: '123'
       }
     },
-    data: () => ({}),
+    data: () => ({
+      isMobile: false,
+      isTablet: false,
+      startLimit: null,
+      endLimit: null,
+      isOutsideContainer: false,
+      isSafari: window.safari,
+      middleResolution: false,
+      isCentral: false,
+    }),
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
