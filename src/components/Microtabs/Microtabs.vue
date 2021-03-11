@@ -89,39 +89,37 @@ export default {
       this.cntList.push(cmp)
       return this.cntList.length - 1
     },
-    activateParentEvent(key = this.activeKey){
-      this.$emit('onChange', this.navList[key].$el, this.cntList[key].$el)
+    activateParentEvent(){
+      this.$nextTick(() => this.$emit('onChange', this.navList[this.activeTab].$el, this.cntList[this.activeTab].$el))
     },
     fitItems(){
-      this.$nextTick(() => {
-        if (!this.$refs.navigationEl) return
-        let shown = []
-        let hiddens = []
-        let distance = controlWidth
-        let wrapWidth = this.$refs.navigationEl.clientWidth
-        this.navList.forEach((nav, key) => {
-          if (
-            nav.key < this.activeKey ||
-            // Сравниваем по ширине, учитывая текущую позицию
-            wrapWidth < distance + nav.$el.clientWidth + offset + (this.navList.length - 1 === key ? 0 : controlWidth)
-          ) {
-            hiddens[nav.key] = true
-          } else {
-            shown.push(nav.key)
-          }
-          if (nav.key >= this.activeKey) {
-            distance += nav.$el.clientWidth + offset
-          }
-        })
-        this.navList.forEach(nav => nav.hidden = !!hiddens[nav.key])
-        this.allowNavLeft = this.navList[0].hidden
-        this.allowNavRight = this.navList[this.navList.length - 1].hidden
-        // Если активный таб остался "за бортом"
-        if (this.navList[this.activeTab] && this.navList[this.activeTab].hidden) {
-          this.activeTab = shown[this.direction === 'right' ? 0 : shown.length - 1]
+      if (!this.$refs.navigationEl) return
+      let shown = []
+      let hiddens = []
+      let distance = controlWidth
+      let wrapWidth = this.$refs.navigationEl.clientWidth
+      this.navList.forEach((nav, key) => {
+        if (
+          nav.key < this.activeKey ||
+          // Сравниваем по ширине, учитывая текущую позицию
+          wrapWidth < distance + nav.$el.clientWidth + offset + (this.navList.length - 1 === key ? 0 : controlWidth)
+        ) {
+          hiddens[nav.key] = true
+        } else {
+          shown.push(nav.key)
         }
-        this.navList.splice(0, 0)
+        if (nav.key >= this.activeKey) {
+          distance += nav.$el.clientWidth + offset
+        }
       })
+      this.navList.forEach(nav => nav.hidden = !!hiddens[nav.key])
+      this.allowNavLeft = this.navList[0].hidden
+      this.allowNavRight = this.navList[this.navList.length - 1].hidden
+      // Если активный таб остался "за бортом"
+      if (this.navList[this.activeTab] && this.navList[this.activeTab].hidden) {
+        this.activeTab = shown[this.direction === 'right' ? 0 : shown.length - 1]
+      }
+      this.navList.splice(0, 0)
     },
     navLeft(){
       if (this.activeKey < 1) return
