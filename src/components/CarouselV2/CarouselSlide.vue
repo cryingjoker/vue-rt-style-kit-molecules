@@ -25,6 +25,12 @@
       isCentral: false,
       parentCarousel: null
     }),
+    watch: {
+      parentCarousel(newVal) {
+        this.parentCarousel = newVal;
+        this.defineContainer();
+      }
+    },
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
@@ -39,23 +45,17 @@
       // if (this.parentCarouselName.length > 0) {
       //   carouselStore.runAfterInit(this.parentCarouselName, this.fillCarouselSliderStore)
       // }
-      this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
-      if(this.$el && this.parentCarousel) {
-        this.emitScrollStep();
-        this.defineContainer();
-        this.calculatePosition();
-        this.parentCarousel.$on('scrolling', this.setTempStyle);
-        this.parentCarousel.$on('scroll-end', this.returnStyle);
-        this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
-        window.addEventListener('resize', debounce(this.emitScrollStep, 25));
-        window.addEventListener('resize', debounce(this.defineContainer, 25));
-        // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
-        this.calculateMobileOptions();
-      }
+      // this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+      this.setData();
     },
     // beforeDestroy() {
     //   this.clearCarouselSliderStore()
     // },
+    updated() {
+      if(!this.parentCarousel) {
+        this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+      }
+    },
     methods: {
       // clearCarouselSliderStore() {
       //   carouselStore.removeSlots(this.parentCarouselName, this._uid)
@@ -63,6 +63,25 @@
       // fillCarouselSliderStore() {
       //   carouselStore.setSlot(this.parentCarouselName, this.$slots.default, this._uid);
       // }
+      setData() {
+        console.log(this.parentCarousel)
+        if(this.$el && this.parentCarousel) {
+          this.emitScrollStep();
+          this.defineContainer();
+          this.calculatePosition();
+          this.parentCarousel.$on('scrolling', this.setTempStyle);
+          this.parentCarousel.$on('scroll-end', this.returnStyle);
+          this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
+          window.addEventListener('resize', debounce(this.emitScrollStep, 25));
+          window.addEventListener('resize', debounce(this.defineContainer, 25));
+          // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+          this.calculateMobileOptions();
+        } else {
+          setTimeout(()=> {
+            this.setData();
+          },1000)
+        }
+      },
       setTempStyle() {
         if(!this.isMobile && !this.isSafari) {
           this.$el.style.scrollSnapAlign = 'none';
