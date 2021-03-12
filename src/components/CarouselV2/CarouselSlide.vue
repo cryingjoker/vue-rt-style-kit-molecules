@@ -52,6 +52,7 @@
     //   this.clearCarouselSliderStore()
     // },
     updated() {
+      console.log('updated')
       if(!this.parentCarousel) {
         this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
       }
@@ -64,7 +65,7 @@
       //   carouselStore.setSlot(this.parentCarouselName, this.$slots.default, this._uid);
       // }
       setData() {
-        console.log(this.parentCarousel)
+        console.log('!!', this.parentCarousel)
         if(this.$el && this.parentCarousel) {
           this.emitScrollStep();
           this.defineContainer();

@@ -1,10 +1,10 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
-  import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
-  import {carouselStore} from "./CarouselStore";
+  // import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
+  // import {carouselStore} from "./CarouselStore";
 
   const componentsList = {};
-  componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
+  // componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
 
   export default {
     name: "RtCarouselV2",
@@ -115,6 +115,7 @@
         }
       },
       setScrollStep(data) {
+        console.log('setScrollStep, data = ', data)
         this.scrollStep = data.size;
       },
       smoothScroll(startPos, endPos, wrapper) {
@@ -190,14 +191,14 @@
           }
         }
       },
-      registerCarousel() {
-        if (this.carouselName.length > 0) {
-          carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
-            this.isRegistered = true;
-            carouselStore.runWatchersById(this.carouselName)
-          })
-        }
-      },
+      // registerCarousel() {
+      //   if (this.carouselName.length > 0) {
+      //     carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
+      //       this.isRegistered = true;
+      //       carouselStore.runWatchersById(this.carouselName)
+      //     })
+      //   }
+      // },
       // initMethods() {
       //   this.updateSlots();
       //   this.addStoreWatcher()
