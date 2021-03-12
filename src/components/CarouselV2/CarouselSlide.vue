@@ -65,7 +65,9 @@
       //   carouselStore.setSlot(this.parentCarouselName, this.$slots.default, this._uid);
       // }
       setData() {
-        console.log('!!', this.parentCarousel)
+        if(!this.parentCarousel) {
+          this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+        }
         if(this.$el && this.parentCarousel) {
           this.emitScrollStep();
           this.defineContainer();
