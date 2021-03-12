@@ -67,7 +67,7 @@
       // }
     },
     mounted() {
-      this.registerCarousel();
+      // this.registerCarousel();
       this.$on('scroll-step', this.setScrollStep);
       if(this.contentToResize) {
         this.resizeData = this.resizeData.concat(this.contentToResize);
