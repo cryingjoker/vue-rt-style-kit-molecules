@@ -52,7 +52,6 @@
     //   this.clearCarouselSliderStore()
     // },
     updated() {
-      console.log('updated')
       if(!this.parentCarousel) {
         this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
       }
