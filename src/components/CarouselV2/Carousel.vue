@@ -75,7 +75,7 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
-      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
+      if(this.$el.querySelector('.rt-carousel-slide-v2') && this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
         this.farLeft = true;
       }
