@@ -62,7 +62,6 @@ export default {
       this.$forceUpdate()
     },
     pushGA(e) {
-      e.preventDefault();
       if(!window.dataLayer) {
         window.dataLayer = []
       }
