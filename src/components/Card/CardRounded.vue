@@ -252,8 +252,7 @@ export default {
       this.isMobile = type === 'mobile';
       this.isTablet = type === 'tablet';
     },
-    pushGA(e) {
-      e.preventDefault();
+    pushGA() {
       if(!window.dataLayer) {
         window.dataLayer = []
       }
