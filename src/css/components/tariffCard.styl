@@ -13,9 +13,6 @@ inverse()
     background-color b2c-white07
   .rt-sys-icon
     fill #fff
-  @media (hover: hover)
-    .rt-tariff__link:hover
-      color b2c-orange
 
 .rt-tariff
   background #fff
@@ -143,6 +140,8 @@ inverse()
             background #CF4417
           &-tgl
             color #CF4417
+    .rt-link--orange
+      color #FF5E2D
   &.is--theme-yadisk
     background #5D96D9
     border-color transparent
@@ -174,6 +173,8 @@ inverse()
             background #DF5D3A
           &-tgl
             color #DF5D3A
+    .rt-link--orange
+      color #FF9737
 
 // @TODO - Add typography mixins (.rt-tariff__title == h4)
 @media (max-width: mobile-upper-limit)
@@ -221,6 +222,10 @@ inverse()
             background #DB4616
           &-tgl
             color #DB4616
+    .rt-tariff__link:hover
+      color #FF4F12
+    .rt-link--orange:hover
+      color #D33706  
   .rt-tariff.is--theme-yadisk
     .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover
       .rt-microtabs-nav__item
@@ -240,3 +245,7 @@ inverse()
             background #E75A30
           &-tgl
             color #E75A30
+    .rt-tariff__link:hover
+      color #F48E30
+    .rt-link--orange:hover
+      color #F48E30
