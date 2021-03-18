@@ -41,7 +41,6 @@ export default {
     cmpClasses(){
       return [
         this.cmpName,
-        `is--direction-${this.direction}`,
         !this.$slots.cnt ? 'is--conveer' : 'is--tabs',
         {
           'is--inverse-color': this.inverse,
@@ -58,10 +57,8 @@ export default {
   methods:{
     activateNav(cmp){
       this.navList.push(cmp)
-      let navEl = cmp.$el
       return {
-        key: this.navList.length - 1,
-        rightPos: navEl.getBoundingClientRect().left + navEl.clientWidth + offset
+        key: this.navList.length - 1
       }
     },
     activateCnt(cmp){
@@ -69,7 +66,12 @@ export default {
       return this.cntList.length - 1
     },
     activateParentEvent(){
-      this.$nextTick(() => this.$emit('onChange', this.navList[this.activeTab].$el, this.cntList[this.activeTab].$el))
+      this.$nextTick(() => this.$emit(
+        'onChange',
+        this.navList[this.activeTab].$el,
+        // Опциональная последовательность для simple темы (отображение иконок)
+        this.cntList?.[this.activeTab]?.$el)
+      )
     },
     fitItems(){
       if (!this.$refs.navigationEl) return

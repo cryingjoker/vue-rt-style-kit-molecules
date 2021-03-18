@@ -13,8 +13,6 @@ export default {
     return {
       key: null,
       themeLocal: null,
-      customLocal: {},
-      rightPos: null,
       cmpName: `${cmpName}-nav__item`
     }
   },
@@ -22,6 +20,7 @@ export default {
     cmpClasses(){
       return [
         this.cmpName,
+        this.key !== this.activeTab ? `is--from-${this.key > this.activeTab ? 'right' : 'left'}` : null,
         this.themeLocal !== 'default' ? `is--theme-${this.themeLocal}` : null,
         {
           'is--active': this.key === this.activeTab,
@@ -42,7 +41,6 @@ export default {
     this.themeLocal = this.$parent.theme || this.theme
     let data = this.$parent.activateNav(this)
     this.key = data.key
-    this.rightPos = data.rightPos
   },
   destroyed(){
     this.$parent.destroy()
