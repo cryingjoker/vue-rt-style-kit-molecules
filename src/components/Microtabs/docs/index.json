@@ -15,6 +15,13 @@
       "value": "false"
     },
     {
+      "name": "rt-microtabs",
+      "property": "fit",
+      "type": "Boolean",
+      "description": "Обрезать контент выше трех строк",
+      "value": "true"
+    },
+    {
       "name": "rt-microtabs-nav",
       "property": "theme",
       "type": "String",

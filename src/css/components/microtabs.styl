@@ -74,6 +74,8 @@ microtabsOrangeColor = #ff4f12
     padding-top 18px
     transition transform .3s ease-in
     &__item
+      font-size 14px
+      line-height 20px
       flex: 0 0 100%;
       max-width 100%
       max-height 60px // Органичение в 3 строки
@@ -97,6 +99,11 @@ microtabsOrangeColor = #ff4f12
     &-left
       {cmp}-nav__item:not(.is--active) {cmp}-nav__item-tgl
         transform translate3d(-100%, -100%, 0)
+  &.is--no-fit
+    {cmp}-cnt
+      &__item
+        max-height none
+
   {cmp}-nav__item
     &.is--theme-flat
       {cmp}-nav__item-bg

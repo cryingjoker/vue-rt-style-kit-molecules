@@ -1,31 +1,4 @@
-<template>
-  <div
-    :class="cmpClasses"
-  >
-    <div :class="`${cmpName}-nav`" ref="navigationEl">
-      <microtabs-control
-        @click="navLeft"
-        direction="left"
-        :hidden="!allowNavLeft"
-      ></microtabs-control>
-      <slot name="nav"></slot>
-      <microtabs-control
-        @click="navRight"
-        direction="right"
-        :hidden="!allowNavRight"
-      ></microtabs-control>
-    </div>
-    <div
-      v-if="$slots.cnt"
-      :class="cmpName+'-cnt'"
-      :style="conveerStyles"
-    >
-      <slot name="cnt"></slot>
-    </div>
-  </div>
-</template>
-
-<script>
+<script type="text/jsx">
 import { cmpName, resizeHandler, resizeHandlerDestroy } from './common.js'
 import MicrotabsControl from './MicrotabsControl.vue'
 const offset = 8
@@ -35,7 +8,6 @@ const defaultConfig = () => {
   return {
     navList: [],
     cntList: [],
-    activeKey: 0,
     activeTab: 0,
     allowNavLeft: false,
     allowNavRight: false,
@@ -53,6 +25,10 @@ export default {
     inverse:{
       type: Boolean,
       default: false
+    },
+    fit:{
+      type: Boolean,
+      default: true
     }
   },
   data(){
@@ -67,7 +43,10 @@ export default {
         this.cmpName,
         `is--direction-${this.direction}`,
         !this.$slots.cnt ? 'is--conveer' : 'is--tabs',
-        { 'is--inverse-color': this.inverse }
+        {
+          'is--inverse-color': this.inverse,
+          'is--no-fit': !this.fit
+        }
       ]
     },
     conveerStyles(){
@@ -100,7 +79,7 @@ export default {
       let wrapWidth = this.$refs.navigationEl.clientWidth
       this.navList.forEach((nav, key) => {
         if (
-          nav.key < this.activeKey ||
+          nav.key < this.activeTab ||
           // Сравниваем по ширине, учитывая текущую позицию
           wrapWidth < distance + nav.$el.clientWidth + offset + (this.navList.length - 1 === key ? 0 : controlWidth)
         ) {
@@ -108,7 +87,7 @@ export default {
         } else {
           shown.push(nav.key)
         }
-        if (nav.key >= this.activeKey) {
+        if (nav.key >= this.activeTab) {
           distance += nav.$el.clientWidth + offset
         }
       })
@@ -122,14 +101,15 @@ export default {
       this.navList.splice(0, 0)
     },
     navLeft(){
-      if (this.activeKey < 1) return
-      this.activeKey--
+      if (this.activeTab < 1) return
+      this.activeTab--
       this.direction = 'left'
       this.fitItems()
       this.activateParentEvent()
     },
     navRight(){
-      this.activeKey++
+      if (this.activeTab >= this.navList.length) return
+      this.activeTab++
       this.direction = 'right'
       this.fitItems()
       this.activateParentEvent()
@@ -153,6 +133,36 @@ export default {
   },
   destroyed(){
     resizeHandlerDestroy(this)
+  },
+  render(h){
+    const contentRender = () => {
+      if (!this.$slots.cnt) return
+      return <div
+        class={`${this.cmpName}-cnt`}
+        style={this.conveerStyles}
+      >
+        {this.$slots.cnt}
+      </div>
+    }
+    return <div class={this.cmpClasses}>
+      <div class={`${this.cmpName}-nav`} ref="navigationEl">
+        <microtabs-control
+          onClick={this.navLeft}
+          direction="left"
+          hidden={!this.allowNavLeft}
+        ></microtabs-control>
+
+        {this.$slots.nav}
+
+        <microtabs-control
+          onClick={this.navRight}
+          direction="right"
+          hidden={!this.allowNavRight}
+        ></microtabs-control>
+      </div>
+
+      {contentRender()}
+    </div>
   }
 }
 </script>

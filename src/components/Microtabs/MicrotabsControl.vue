@@ -1,24 +1,5 @@
-<template>
-  <a
-    :class="[
-      `${cmpName}-nav__control`,
-      { 'is--hidden': hidden }
-    ]"
-     @click="controlClick"
-  >
-    <rt-system-icons
-      :name="`chevron ${direction}`"
-    ></rt-system-icons>
-    <div :class="`${cmpName}-nav__item-opacity`">
-      <div
-        :class="`${cmpName}-nav__item-bg`"
-      ></div>
-    </div>
-  </a>
-</template>
-
-<script>
-import { cmpName, inverseColor, getBackground, getColor } from './common'
+<script type="text/jsx">
+import { cmpName } from './common'
 
 export default {
   props:{
@@ -36,10 +17,26 @@ export default {
       cmpName
     }
   },
+  computed:{
+    cmpClasses(){
+      return [
+        `${this.cmpName}-nav__control`,
+        { 'is--hidden': this.hidden }
+      ]
+    }
+  },
   methods:{
     controlClick(e){
       return this.$emit('click', e)
     }
+  },
+  render(h){
+    return <a class={this.cmpClasses} onClick={this.controlClick}>
+      <rt-system-icons name={`chevron ${this.direction}`}></rt-system-icons>
+      <div class={`${this.cmpName}-nav__item-opacity`}>
+        <div class={`${this.cmpName}-nav__item-bg`}></div>
+      </div>
+    </a>
   }
 }
 </script>

@@ -1,23 +1,5 @@
-<template>
-  <a
-    :data-key="key"
-    :class="cmpClasses"
-    @click="setActive"
-  >
-    <slot></slot>
-    <div :class="`${cmpName}-opacity`">
-      <div
-        :class="`${cmpName}-tgl`"
-      ></div>
-      <div
-        :class="`${cmpName}-bg`"
-      ></div>
-    </div>
-  </a>
-</template>
-
-<script>
-import { cmpName, inverseColor, getBackground, getColor } from './common'
+<script type="text/jsx">
+import { cmpName } from './common'
 
 export default {
   name: 'RtMicrotabsNav',
@@ -64,6 +46,15 @@ export default {
   },
   destroyed(){
     this.$parent.destroy()
+  },
+  render(h){
+    return <a class={this.cmpClasses} data-key={this.key} onClick={this.setActive}>
+      {this.$slots.default}
+      <div class={`${this.cmpName}-opacity`}>
+        <div class={`${this.cmpName}-tgl`}></div>
+        <div class={`${this.cmpName}-bg`}></div>
+      </div>
+    </a>
   }
 }
 </script>
