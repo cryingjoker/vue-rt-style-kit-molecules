@@ -94,7 +94,7 @@ export default {
         </div>
       </a>
     } else {
-      return <a class={this.cardClass} href={this.link}>
+      return <a class={this.cardClass} href={this.link} onClick={this.pushGA}>
         <div class="rt-card-help__inner">
           <div class="">
             <h4 class="rt-font-h4 sp-b-1 td-sp-b-0-3">{this.$slots.title}</h4>
