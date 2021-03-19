@@ -25,10 +25,6 @@ export default {
     inverse:{
       type: Boolean,
       default: false
-    },
-    fit:{
-      type: Boolean,
-      default: true
     }
   },
   data(){
@@ -43,8 +39,7 @@ export default {
         this.cmpName,
         !this.$slots.cnt ? 'is--conveer' : 'is--tabs',
         {
-          'is--inverse-color': this.inverse,
-          'is--no-fit': !this.fit
+          'is--inverse-color': this.inverse
         }
       ]
     },
