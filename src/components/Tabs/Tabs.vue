@@ -220,7 +220,12 @@ export default {
     onUpdateTabsStore() {
       var data = tabsStore.tabsParents[this._uid]
       if (data) {
-
+        if(data.index != data.indexBefore && data.indexBefore != -1){
+          this.$emit('change',{
+            activeIndex: data.index,
+            activeName: Object.keys(data).filter(i=> data[i].isActive)[0]
+          })
+        }
         let index = data.index
         if (index < 0) {
           index = 0
