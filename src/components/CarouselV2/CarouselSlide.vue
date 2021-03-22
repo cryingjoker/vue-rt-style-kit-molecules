@@ -23,12 +23,19 @@
       isSafari: window.safari,
       middleResolution: false,
       isCentral: false,
+      parentCarousel: null
     }),
+    watch: {
+      parentCarousel(newVal) {
+        this.parentCarousel = newVal;
+        this.defineContainer();
+      }
+    },
     computed: {
       slideClasses() {
         let classList = 'rt-carousel-slide-v2';
-        if(this.$parent?._props) {
-          classList += ` rt-carousel-slide-v2--${this.$parent._props.width}`;
+        if(this.parentCarousel?._props) {
+          classList += ` rt-carousel-slide-v2--${this.parentCarousel._props.width}`;
         }
         this.isOutsideContainer ? classList += ' rt-carousel-slide-v2--hidden' : null;
         return classList;
@@ -38,22 +45,17 @@
       // if (this.parentCarouselName.length > 0) {
       //   carouselStore.runAfterInit(this.parentCarouselName, this.fillCarouselSliderStore)
       // }
-      if(this.$el && this.$parent) {
-        this.emitScrollStep();
-        this.defineContainer();
-        this.calculatePosition();
-        this.$parent.$on('scrolling', this.setTempStyle);
-        this.$parent.$on('scroll-end', this.returnStyle);
-        this.$parent.$on('native-scroll-stopped', this.calculatePosition);
-        window.addEventListener('resize', debounce(this.emitScrollStep, 25));
-        window.addEventListener('resize', debounce(this.defineContainer, 25));
-        // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
-        this.calculateMobileOptions();
-      }
+      // this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+      this.setData();
     },
     // beforeDestroy() {
     //   this.clearCarouselSliderStore()
     // },
+    updated() {
+      if(!this.parentCarousel) {
+        this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+      }
+    },
     methods: {
       // clearCarouselSliderStore() {
       //   carouselStore.removeSlots(this.parentCarouselName, this._uid)
@@ -61,6 +63,27 @@
       // fillCarouselSliderStore() {
       //   carouselStore.setSlot(this.parentCarouselName, this.$slots.default, this._uid);
       // }
+      setData() {
+        if(!this.parentCarousel) {
+          this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
+        }
+        if(this.$el && this.parentCarousel) {
+          this.emitScrollStep();
+          this.defineContainer();
+          this.calculatePosition();
+          this.parentCarousel.$on('scrolling', this.setTempStyle);
+          this.parentCarousel.$on('scroll-end', this.returnStyle);
+          this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
+          window.addEventListener('resize', debounce(this.emitScrollStep, 25));
+          window.addEventListener('resize', debounce(this.defineContainer, 25));
+          // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
+          this.calculateMobileOptions();
+        } else {
+          setTimeout(()=> {
+            this.setData();
+          },1000)
+        }
+      },
       setTempStyle() {
         if(!this.isMobile && !this.isSafari) {
           this.$el.style.scrollSnapAlign = 'none';
@@ -90,7 +113,7 @@
         }
       },
       emitScrollStep() {
-        this.$parent ? setTimeout(()=> {this.$parent.$emit('scroll-step', {'size': this.$el.offsetWidth})}, 50) : setTimeout(()=> {this.emitScrollStep()}, 100);
+        this.parentCarousel ? setTimeout(()=> {this.parentCarousel.$emit('scroll-step', {'size': this.$el.offsetWidth})}, 50) : setTimeout(()=> {this.emitScrollStep()}, 100);
       },
       calculateMobileOptions(){
         const type =  deviceTypeStore.getStatus();
@@ -98,9 +121,9 @@
         this.isTablet = type === 'tablet';
       },
       defineContainer() {
-        if(this.$parent?.$refs.inner) {
-          this.startLimit = this.$parent.$refs.inner.getBoundingClientRect().left;
-          this.endLimit = this.$parent.$refs.inner.getBoundingClientRect().right;
+        if(this.parentCarousel?.$refs.inner) {
+          this.startLimit = this.parentCarousel.$refs.inner.getBoundingClientRect().left;
+          this.endLimit = this.parentCarousel.$refs.inner.getBoundingClientRect().right;
           this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
           this.calculatePosition();
         }
