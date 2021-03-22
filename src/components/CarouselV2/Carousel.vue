@@ -1,10 +1,10 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
-  import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
-  import {carouselStore} from "./CarouselStore";
+  // import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
+  // import {carouselStore} from "./CarouselStore";
 
   const componentsList = {};
-  componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
+  // componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
 
   export default {
     name: "RtCarouselV2",
@@ -75,7 +75,7 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
-      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
+      if(this.$el.querySelector('.rt-carousel-slide-v2') && this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
         this.farLeft = true;
       }
@@ -116,6 +116,7 @@
       },
       setScrollStep(data) {
         this.scrollStep = data.size;
+        this.$refs.inner.scrollLeft = 0;
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
