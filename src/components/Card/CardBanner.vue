@@ -37,6 +37,10 @@ export default {
     parentCarouselName: {
       type: String,
       default: 'tile'
+    },
+    link: {
+      type: String,
+      default: '#'
     }
   },
   data: () => ({
@@ -47,9 +51,7 @@ export default {
     this.isDesktop();
     window.addEventListener('resize', debounce(this.isDesktop, 500))
   },
-  updated() {
-
-  },
+  updated() {},
   methods: {
     isDesktop() {
       if(window.innerWidth <= parseInt(variables["tablet-upper-limit"])) {
@@ -58,12 +60,22 @@ export default {
         this.desktop = true
       }
       this.$forceUpdate()
+    },
+    pushGA(e) {
+      if(!window.dataLayer) {
+        window.dataLayer = []
+      }
+      dataLayer.push({
+        event: 'b2c',
+        type: 'support_info',
+        value: this.$slots.title[0].elm.nodeValue
+      })
     }
   },
   render(h){
     if(this.desktop) {
       return <div class="rt-card-banner-wrapper">
-        <div class="rt-card-banner">
+        <a class="rt-card-banner" href={this.link} onClick={this.pushGA}>
           <div class="rt-card-banner__text-content">
             <div class="rt-card-banner__tag rt-font-control">{this.tag}</div>
             <h4 class="rt-font-h4 sp-b-0-3 sp-r-1">{this.$slots.title}</h4>
@@ -76,12 +88,12 @@ export default {
                     lg-src={this.lgSrc}
                     x2-src={this.x2Src}/>
           </div>
-        </div>
+        </a>
       </div>
     }
     return <rt-carousel-slide-v2 parent-carousel-name={this.parentCarouselName}>
       <div class="rt-card-banner-wrapper">
-        <div class="rt-card-banner">
+        <a class="rt-card-banner" href={this.link}>
           <div class="rt-card-banner__text-content">
             <div class="rt-card-banner__tag rt-font-control">{this.tag}</div>
             <h4 class="rt-font-h4 sp-b-0-3 sp-r-1">{this.$slots.title}</h4>
@@ -94,7 +106,7 @@ export default {
                     lg-src={this.lgSrc}
                     x2-src={this.x2Src}/>
           </div>
-        </div>
+        </a>
       </div>
     </rt-carousel-slide-v2>
   }
