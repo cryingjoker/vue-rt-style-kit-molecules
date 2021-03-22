@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showNavigationLine:{
+      type:Boolean,
+      default: false
+    },
     navigationHorizontalPadding: {
       type: Number,
       default: null
@@ -126,6 +130,9 @@ export default {
       if (this.background.length > 0) {
         classes.push('rt-tabs--background')
         classes.push('rt-tabs--background-' + this.background)
+        if(this.showNavigationLine){
+          classes.push('rt-tabs--background-show-line')
+        }
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
         classes.push("rt-tabs--vertical");
