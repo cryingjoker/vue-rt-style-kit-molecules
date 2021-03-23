@@ -65,6 +65,9 @@ class Tooltip {
     if (style.display == 'block' && !this.value['spec-content']) {
       const span = global.document.createElement("span");
       span.innerText = this.$el.innerText
+      if (!span.innerText) {
+        span.innerHTML = this.$el.innerHTML
+      }
 
       this.$el.appendChild(span)
 
@@ -97,8 +100,6 @@ class Tooltip {
         break
 
     }
-
-
     this.renderTooltop(notAnimate)
   }
   mouseleave = () => {
