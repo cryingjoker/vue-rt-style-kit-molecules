@@ -288,7 +288,7 @@ export default {
         {innerContent()}
       </a>
     } else {
-      return <div class={this.mainClass}>
+      return <div class={this.mainClass} onClick={this.pushGA}>
         {innerContent()}
       </div>
     }
