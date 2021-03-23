@@ -1,0 +1,10 @@
+{
+  "items": [
+    {
+      "name": "onChange",
+      "description": "Возвращает активный навигатор и контент, при клике на таб",
+      "component": "rt-microtabs",
+      "return": "DOMElement, DOMElement|null"
+    }
+  ]
+}

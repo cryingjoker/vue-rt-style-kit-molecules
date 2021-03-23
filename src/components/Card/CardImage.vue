@@ -11,11 +11,11 @@ export default {
       type: Number,
       default: 1
     },
-    sizeType:{
+    sizeType: {
       type: String,
       default: ''
     },
-    href:{
+    href: {
       type: String,
       default: ''
     }
@@ -26,41 +26,38 @@ export default {
       styleObject.backgroundImage = "url(" + this.cardImage + ")";
       return styleObject;
     },
-    cardClass(){
+    cardClass() {
       const cardClassName = ["rt-card"]
-      if(this.version == 1){
+      if (this.version == 1) {
         cardClassName.push("rt-card-image")
-      }else{
-        cardClassName.push("rt-card-image-v"+this.version)
+      } else {
+        cardClassName.push("rt-card-image-v" + this.version)
       }
-      if(this.sizeType.length > 0){
-        cardClassName.push("rt-card-image-type--"+this.sizeType)
+      if (this.sizeType.length > 0) {
+        cardClassName.push("rt-card-image-type--" + this.sizeType)
       }
       return cardClassName.join(' ')
     },
-    renderlabel(){
-      if(this.$slots.label){
-        return <div class="rt-card-image__label rt-font-h4 sp-b-0-3">
-          {this.$slots.label}
-        </div>
-      }
-      return null
-    }
+
   },
   mounted: function () {
   },
   render: function (h) {
-    if(this.version == 2){
+    if (this.version == 2) {
+
       const gaObj = {
-        type: 'card_click'
+        type: 'card_click',
+        value: this.$slots.label[0].text.trim()
       }
-      if(this.href.length > 0){
-        return <a href={this.href} class={this.cardClass} v-ga-click={{data:gaObj}}>
+      if (this.href.length > 0) {
+        return <a href={this.href} class={this.cardClass} v-ga-click={{data: gaObj}}>
           <span class="rt-card-image__figure-wrapper">
             <span style={this.figureImageStyle} class="rt-card-image__figure"/>
           </span>
           <span class="rt-card-image__content">
-            {this.renderlabel}
+            <div class="rt-card-image__label rt-font-h4 sp-b-0-3" ref="label">
+          {this.$slots.label}
+        </div>
             <span class="rt-card-image__body rt-font-small-paragraph">
               {this.$slots.body}
             </span>
@@ -70,12 +67,14 @@ export default {
           </span>
         </a>
       }
-      return <div class={this.cardClass} v-ga-click={{data:gaObj}}>
+      return <div class={this.cardClass} v-ga-click={{data: gaObj}}>
         <div class="rt-card-image__figure-wrapper">
-        <div style={this.figureImageStyle} class="rt-card-image__figure"/>
+          <div style={this.figureImageStyle} class="rt-card-image__figure"/>
         </div>
         <div class="rt-card-image__content">
-          {this.renderlabel}
+          <div class="rt-card-image__label rt-font-h4 sp-b-0-3" ref="label">
+            {this.$slots.label}
+          </div>
           <div class="rt-card-image__body rt-font-small-paragraph">
             {this.$slots.body}
           </div>
