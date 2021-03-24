@@ -1,0 +1,119 @@
+.rt-popover
+  position: relative;
+  z-index: 2
+  display: flex
+.rt-popover-icon-button
+  cursor: pointer;
+  opacity 0.5
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property opacity
+  position relative
+  display: block
+  @media (hover:hover)
+    &:hover
+      opacity 0.7
+  &:focus
+    opacity 0.7
+.rt-popover-body
+  box-shadow: 0px 0px 1px rgba(28, 41, 61, 0.1), 0px 12px 20px rgba(28, 41, 61, 0.1);
+  position absolute
+  width: 250px
+  z-index 2
+  background-color: #fff
+  opacity 0
+  pointer-events none
+  margin-top: 0
+  margin-bottom: 0
+  margin-left: 0
+  margin-right: 0
+
+.rt-popover-active
+  .rt-popover-body
+    animation-name showPopover
+    animation-timing-function ease-in-out
+    animation-duration 0.1s
+    pointer-events auto
+    opacity: 1
+
+  .rt-popover-body-h-center
+    transform translateX(-50%)
+    left: 50%
+
+  .rt-popover-body-h-right
+    left: 100%
+    margin-left: 16px
+  .rt-popover-body-h-left
+    right: 100%
+    margin-right: 16px
+
+  .rt-popover-body-v-top
+    bottom: 100%
+    margin-bottom: 9px
+
+  .rt-popover-body-v-bottom
+    top: 100%
+    margin-top: 9px
+
+  .rt-popover-body-v-center
+    top: 50%
+    transform translateY(-50%)
+
+  .rt-popover-body-v-center.rt-popover-body-h-center
+    top: 50%
+    transform translateY(-50%) translateX(-50%)
+  @media (max-width mobile-upper-limit)
+    .rt-md-popover-body-h-center
+      transform translateX(-50%)
+      left: 50%
+
+    .rt-md-popover-body-h-right
+      left: 100%
+      margin-left: 16px
+    .rt-md-popover-body-h-left
+      right: 100%
+      margin-right: 16px
+
+    .rt-md-popover-body-v-top
+      bottom: 100%
+      margin-bottom: 9px
+
+    .rt-md-popover-body-v-bottom
+      top: 100%
+      margin-top: 9px
+
+    .rt-md-popover-body-v-center
+      top: 50%
+      transform translateY(-50%)
+
+    .rt-md-popover-body-v-center.md-popover-body-h-center
+      top: 50%
+      transform translateY(-50%) translateX(-50%)
+
+.rt-popover-close
+  position: absolute;
+  top: 4px
+  right: 4px
+  opacity 0.5
+  cursor: pointer;
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property opacity
+  @media (hover:hover)
+    &:hover
+      opacity 1
+  &:focus
+    opacity 1
+.rt-popover-closing
+  .rt-popover-body
+    animation-name hidePopover
+@keyframes showPopover
+  0%
+    opacity 0
+  100%
+    opacity 1
+@keyframes hidePopover
+  0%
+    opacity 1
+  100%
+    opacity 0

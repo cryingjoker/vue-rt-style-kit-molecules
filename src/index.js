@@ -106,7 +106,8 @@ import {
   ShowOn,
   CardHelp,
   CardBanner,
-  CardTileLayout
+  CardTileLayout,
+  Popover
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -131,6 +132,7 @@ const VueRtStyle = {
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
       Vue.component(CardImageList.name, CardImageList);
+      Vue.component(Popover.name, Popover);
       Vue.component(Banner.name, Banner);
       Vue.component(BannerV2.name, BannerV2);
       Vue.component(BannerSkeleton.name, BannerSkeleton);
@@ -324,6 +326,7 @@ export {
   StickyBottomLine,
   ResizeContentHeight,
   Popup,
+  Popover,
   LinksBlock,
   BannerVideoGameControl,
   SlideContent,
