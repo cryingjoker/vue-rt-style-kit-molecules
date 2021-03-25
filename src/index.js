@@ -109,7 +109,9 @@ import {
   CardTileLayout,
   CommentSlider,
   CommentSliderItem,
-  Popover
+  Popover,
+  CommentSlider,
+  CommentSliderItem
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";

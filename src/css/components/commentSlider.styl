@@ -66,6 +66,8 @@
   position: absolute;
   pointer-events none
   opacity: 0
+  display: flex
+  flex-direction column
   left: -100vw
   width: calc(50% - 20px)
   transition-timing-function linear
@@ -77,9 +79,15 @@
     width: calc(66% - 20px)
   @media (max-width: mobile-upper-limit)
     width: calc(100% - 20px)
+    bottom: 62px
 .rt-comment-slider-item-content
+  display: flex
+  flex 1
+  flex-direction column
   @media (max-width: mobile-upper-limit)
     min-height 268px
+.rt-comment-slider-item-text
+  flex 1
 .rt-comment-slider-item-show
   opacity: 0.5
   pointer-events auto
@@ -159,14 +167,14 @@
 
 @keyframes goLeft
   100%
-    transform translateX(-50%)
+    transform translateX(-51%)
 
 @keyframes goRight
   100%
-    transform translateX(50%)
+    transform translateX(50.5%)
 @keyframes goLeftTablet
   100%
-    transform translateX(-65%)
+    transform translateX(-60.5%)
 
 @keyframes goLeftMobile
   100%
