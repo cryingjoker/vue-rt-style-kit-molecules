@@ -107,8 +107,6 @@ import {
   CardHelp,
   CardBanner,
   CardTileLayout,
-  CommentSlider,
-  CommentSliderItem,
   Popover,
   CommentSlider,
   CommentSliderItem
