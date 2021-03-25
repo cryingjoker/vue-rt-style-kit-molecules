@@ -1,10 +1,10 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
-  import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
-  import {carouselStore} from "./CarouselStore";
+  // import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
+  // import {carouselStore} from "./CarouselStore";
 
   const componentsList = {};
-  componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
+  // componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
 
   export default {
     name: "RtCarouselV2",
@@ -37,21 +37,21 @@
         farLeft: true,
         scrollStep: null,
         isScrolling: () => {},
-        hasSlotContent: false,
         resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
         mayScroll: true,
         touchStart: null,
-        isRegistered: false,
-        customSlides: {},
-        customSlidesSort: []
+        // isRegistered: false,
+        // customSlides: {},
+        // customSlidesSort: []
       }
     },
     watch: {
-      isRegistered(newVal, oldVal) {
-        if (newVal != oldVal && newVal) {
-          this.initMethods()
-        }
-      }
+      // isRegistered(newVal, oldVal) {
+      //   if (newVal != oldVal && newVal) {
+      //     this.initMethods()
+      //   }
+      //   this.$forceUpdate()
+      // }
     },
     computed: {
       carouselClasses() {
@@ -60,14 +60,14 @@
           classList += ' rt-carousel-v2--d-scroll';
         return classList;
       },
-      renderSlides() {
-        return Object.entries(this.customSlides).map(item => {
-          return <rt-virtual-carousel-slide-v2>{item[1]}</rt-virtual-carousel-slide-v2>
-        })
-      }
+      // renderSlides() {
+      //   return Object.entries(this.customSlides).map(item => {
+      //     return <rt-virtual-carousel-slide-v2>{item[1]}</rt-virtual-carousel-slide-v2>
+      //   })
+      // }
     },
     mounted() {
-      this.registerCarousel();
+      // this.registerCarousel();
       this.$on('scroll-step', this.setScrollStep);
       if(this.contentToResize) {
         this.resizeData = this.resizeData.concat(this.contentToResize);
@@ -75,7 +75,7 @@
       setTimeout(()=> {
         window.dispatchEvent(new Event('resize'));
       },1000)
-      if(this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth && this.customSlidesSort.length > 0) {
+      if(this.$el.querySelector('.rt-carousel-slide-v2') && this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
         this.farLeft = true;
       }
@@ -116,6 +116,7 @@
       },
       setScrollStep(data) {
         this.scrollStep = data.size;
+        this.$refs.inner.scrollLeft = 0;
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
@@ -190,31 +191,31 @@
           }
         }
       },
-      registerCarousel() {
-        if (this.carouselName.length > 0) {
-          carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
-            this.isRegistered = true;
-            carouselStore.runWatchersById(this.carouselName)
-          })
-        }
-      },
-      initMethods() {
-        this.updateSlots();
-        this.addStoreWatcher()
-      },
-      getSlots() {
-        this.customSlides = carouselStore.getSlot(this.carouselName)
-      },
-      getSlotSort() {
-        this.customSlidesSort = carouselStore.getSlotSort(this.carouselName) || []
-      },
-      updateSlots() {
-        this.getSlots();
-        this.getSlotSort();
-      },
-      addStoreWatcher() {
-        carouselStore.addWatcher(this.carouselName, this.updateSlots)
-      },
+      // registerCarousel() {
+      //   if (this.carouselName.length > 0) {
+      //     carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
+      //       this.isRegistered = true;
+      //       carouselStore.runWatchersById(this.carouselName)
+      //     })
+      //   }
+      // },
+      // initMethods() {
+      //   this.updateSlots();
+      //   this.addStoreWatcher()
+      // },
+      // getSlots() {
+      //   this.customSlides = carouselStore.getSlot(this.carouselName)
+      // },
+      // getSlotSort() {
+      //   this.customSlidesSort = carouselStore.getSlotSort(this.carouselName) || []
+      // },
+      // updateSlots() {
+      //   this.getSlots();
+      //   this.getSlotSort();
+      // },
+      // addStoreWatcher() {
+      //   carouselStore.addWatcher(this.carouselName, this.updateSlots)
+      // },
     },
     render(h) {
       const arrowLeft = () => {
@@ -241,7 +242,6 @@
       return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData}>
         <div class="rt-carousel-v2__slide-wrapper rt-col" ref="wrapper">
           <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions} onTouchstart={this.checkAbility} onTouchmove={this.mobileScroll}>
-            {this.renderSlides}
             {this.$slots.default}
             {arrowLeft()}
             {arrowRight()}

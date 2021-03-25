@@ -2,18 +2,15 @@
   <a
     :data-key="key"
     :class="cmpClasses"
-    :style="{ color: cmpColor }"
     @click="setActive"
   >
     <slot></slot>
     <div :class="`${cmpName}-opacity`">
       <div
         :class="`${cmpName}-tgl`"
-        :style="{ borderTopColor: cmpBackground }"
       ></div>
       <div
         :class="`${cmpName}-bg`"
-        :style="{ background: cmpBackground }"
       ></div>
     </div>
   </a>
@@ -28,13 +25,7 @@ export default {
     theme:{
       type: String,
       default: 'default'
-    },
-    // customBg:{
-    //   type: String
-    // },
-    // customColor:{
-    //   type: String
-    // }
+    }
   },
   data(){
     return {
@@ -56,12 +47,6 @@ export default {
         }
       ]
     },
-    cmpBackground(){
-      return getBackground(this)
-    },
-    cmpColor(){
-      return getColor(this)
-    },
     activeTab(){
       return this.$parent.activeTab
     }
@@ -73,15 +58,6 @@ export default {
   },
   mounted(){
     this.themeLocal = this.$parent.theme || this.theme
-    if (this.$parent.inverse) {
-      this.customColorLocal = inverseColor
-      this.customBgLocal = inverseColor
-    }
-    // if (this.customBg || this.customColor || this.$parent.customBg || this.$parent.customColor) {
-    //   this.customBgLocal = this.customBg || this.$parent.customBg
-    //   this.customColorLocal = this.customColor || this.$parent.customColor
-    //   this.themeLocal = 'custom'
-    // }
     let data = this.$parent.activateNav(this)
     this.key = data.key
     this.rightPos = data.rightPos

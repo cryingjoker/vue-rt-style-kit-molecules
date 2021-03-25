@@ -10,8 +10,6 @@ class CarouselStore extends StorePrototype {
     this.slots = {}
     this.watchers = {}
     this.afterRegisterFns = {}
-    this.timeouts = {}
-    this.settings = {}
   }
   getSlot = (id) => {
     if (this.slots[id]) {
@@ -31,23 +29,21 @@ class CarouselStore extends StorePrototype {
       }
     }
     this.slots[carouselId][id] = slot;
-    // console.log(this.slots)
-    // console.log(this.slidesArray)
-  }
+  };
   removeSlots = (slidesUid, id) => {
     if(this.slots[slidesUid] && this.slots[slidesUid][id]) {
       delete this.slots[slidesUid][id];
     }
-    const indexInArray = this.slidesArray[slidesUid].indexOf(id)
+    const indexInArray = this.slidesArray[slidesUid].indexOf(id);
     if (indexInArray >= 0) {
       this.slidesArray[slidesUid].splice(indexInArray, 1)
     }
-    if (this.slidesActiveIds[slidesUid] == id) {
-      this.slidesActiveIds[slidesUid] = null
-      if(this.slidesArray[slidesUid].length > 0) {
-        this.slidesActiveIds[slidesUid] = this.slidesArray[slidesUid][0]
-      }
-    }
+    // if (this.slidesActiveIds[slidesUid] == id) {
+    //   this.slidesActiveIds[slidesUid] = null
+    //   if(this.slidesArray[slidesUid].length > 0) {
+    //     this.slidesActiveIds[slidesUid] = this.slidesArray[slidesUid][0]
+    //   }
+    // }
     this.runWatchersById(slidesUid)
   }
   getSlotSort = (carouselId) => {

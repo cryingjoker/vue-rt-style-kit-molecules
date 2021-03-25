@@ -40,7 +40,12 @@
       this.calculateMobileOptions();
       deviceTypeStore.addWatcher(this._uid, this.calculateMobileOptions);
       this.columnsTemplate();
-      window.addEventListener('resize', debounce(this.columnsTemplate, 2));
+      window.addEventListener('resize', ()=> {
+        this.componentStyle = {}
+        setTimeout(()=>{
+          this.columnsTemplate();
+        },100)
+      });
     },
     beforeUpdate() {
       deviceTypeStore.removeWatcher(this._uid, this.calculateMobileOptions);
@@ -94,8 +99,6 @@
           } else {
             this.componentStyle = {}
           }
-
-
         } else {
           this.componentStyle = {}
         }

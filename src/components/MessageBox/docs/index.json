@@ -23,6 +23,13 @@
     },
     {
       "name": "rt-message-box",
+      "property": "href-in-new-window",
+      "type": "Boolean",
+      "description": "Флаг, отвечающий за открытие ссылки в новом окне",
+      "value": "true"
+    },
+    {
+      "name": "rt-message-box",
       "property": "button-text",
       "type": "String",
       "description": "Текст кнопки",

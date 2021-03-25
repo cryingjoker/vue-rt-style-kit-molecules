@@ -1,3 +1,4 @@
+colors = readJsonKeys('../../../color.json')
 use("./plugins/readJsonKeys.js")
 use("./plugins/search.js")
 use("./plugins/replace.js")
@@ -131,3 +132,74 @@ for $i in colors
   left: 0
   right: 0
   z-index 10
+
+.jumbotron-flag
+  position: absolute;
+  top: -1px
+  right: -1px
+  width: 192px
+  height: 120px
+  display: flex
+  align-items center
+  justify-content center
+  box-sizing border-box
+  padding-bottom: 20px
+  padding-left: 10px
+  cursor: pointer;
+  @media (max-width: tablet-upper-limit)
+    width 120px
+    height 80px
+    padding-bottom: 0
+    padding-left: 20px
+  @media (max-width: mobile-upper-limit)
+    width 96px
+    height 60px
+    padding-bottom: 10px
+    padding-right: 10px
+    padding-left: 20px
+
+
+.jumbotron-flag-svg
+  position: absolute;
+  top: 0
+  right: 0
+  width: 192px
+  height: 120px
+  z-index 1
+  @media (max-width: tablet-upper-limit)
+    width 120px
+    height 80px
+  @media (max-width: mobile-upper-limit)
+    width 96px
+    height 60px
+
+.jumbotron-flag-text
+  position: relative;
+  z-index 2
+  cursor: pointer;
+.jumbotron-flag-svg
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property fill
+
+@media (hover:hover)
+  .jumbotron-flag-svg--purple:hover
+    fill b2c-purple-button-hover
+  .jumbotron-flag-svg--purple:active
+    fill b2c-purple-button-active
+
+  .jumbotron-flag-svg--orange:hover
+    fill b2c-orange-button-hover
+
+  .jumbotron-flag-svg--orange:active
+    fill b2c-orange-button-active
+
+for $i in colors
+  if search($i,'b2c') >= 0 || search($i,'main') >= 0
+    className = '.jumbotron-flag-svg--'+replace($i,'b2c-','')
+    {className}
+      fill lookup($i)
+
+
+
+

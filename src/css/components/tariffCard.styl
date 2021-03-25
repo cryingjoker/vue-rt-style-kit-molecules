@@ -1,0 +1,251 @@
+tariffCardRadius = 8px
+inverse()
+  color #fff
+  .rt-tariff__line
+    border-color b2c-white01
+  .rt-tariff-price--inline
+    color b2c-white05
+  .rt-price-n__info,
+  .rt-price-v2__old-value
+    color b2c-white07
+  .rt-price-v2__info-item+.rt-price-v2__info-item:before,
+  .rt-price-v2__old-value:before
+    background-color b2c-white07
+  .rt-sys-icon
+    fill #fff
+
+.rt-tariff
+  background #fff
+  border 2px solid b2c-gray
+  border-radius tariffCardRadius
+  color main-color
+  font-size 14px
+  line-height 20px
+  padding 20px
+  position relative
+  user-select text
+  z-index 1
+
+  &__title
+    font-weight 500
+    padding-bottom 8px
+
+  &__badge
+    color #fff
+    font-size 12px
+    line-height 16px
+    padding-top 2px
+    position absolute
+    width 28px
+    height 24px
+    right 8px
+    top -2px // Бэйдж должен быть поверх рамки
+    text-align center
+    z-index 2
+    &:after
+      content ''
+      position absolute
+      background-image url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyOCAyNCIgZmlsbD0iIzc3MDBGRiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAyMi4zNzIzVjBIMjhWMjIuMzcyM0MyOCAyMy4xMTggMjcuMjEzMiAyMy42MDE0IDI2LjU0OCAyMy4yNjQzTDE0LjkwNCAxNy4zNjQ1QzE0LjMzNTcgMTcuMDc2NSAxMy42NjQzIDE3LjA3NjUgMTMuMDk2MSAxNy4zNjQ1TDEuNDUxOTggMjMuMjY0M0MwLjc4Njc3NyAyMy42MDE0IDAgMjMuMTE4IDAgMjIuMzcyM1oiLz48L3N2Zz4K')
+      background-repeat no-repeat
+      width 100%
+      height 100%
+      top 0
+      left 0
+      right 0
+      margin auto
+      z-index -1
+
+  &__line
+    border-top 1px solid rgba(16, 24, 40, .05)
+    margin-left -20px
+    margin-right -20px
+
+  &__link
+    cursor pointer
+    transition color .2s ease-in-out
+
+  &-option
+    display flex
+    padding-top 8px
+    padding-bottom 8px
+    &__icon
+      flex-shrink  0
+      width 24px + 12
+    // &__info
+    // &__title
+    &__desc
+      font-size 12px
+      line-height 16px
+      opacity .5
+    &.is--disabled
+      .rt-tariff-option
+        &__icon,
+        &__title
+          opacity .5
+        
+  &-price
+    padding-bottom 12px
+    &--inline
+      color main-color05
+
+  .rt-tariff__bg
+    overflow hidden
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
+    z-index -1
+    &:after
+      content ''
+      background-repeat no-repeat
+      position absolute
+
+  &.is--badge-orange
+    .rt-tariff__badge:after
+      background-image url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyOCAyNCIgZmlsbD0iI0ZGNEYxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAyMi4zNzIzVjBIMjhWMjIuMzcyM0MyOCAyMy4xMTggMjcuMjEzMiAyMy42MDE0IDI2LjU0OCAyMy4yNjQzTDE0LjkwNCAxNy4zNjQ1QzE0LjMzNTcgMTcuMDc2NSAxMy42NjQzIDE3LjA3NjUgMTMuMDk2MSAxNy4zNjQ1TDEuNDUxOTggMjMuMjY0M0MwLjc4Njc3NyAyMy42MDE0IDAgMjMuMTE4IDAgMjIuMzcyM1oiLz48L3N2Zz4K')
+
+  // Темизация
+  &.is--theme-dark,
+  &.is--theme-yadisk
+    inverse()
+
+  &.is--theme-dark
+    background #0D162D
+    border-color transparent
+    .rt-tariff__bg:after
+      background-image url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIzIiBoZWlnaHQ9IjQxMSIgdmlld0JveD0iMCAwIDMyMyA0MTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00Ny43MDY0IDI0Ny4xMzZMMCAwLjEwNzkxTDcwNyA1NzcuMTA4TDQ3LjcwNjQgMjQ3LjEzNloiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcikiLz4KPHBhdGggZD0iTTE5OC42MjQgMjk4LjM2NkwxNzkuMTk3IDE2Ni4yMTRMNTQwLjY1NiA0ODkuMTA2TDE5OC42MjQgMjk4LjM2NloiIGZpbGw9InVybCgjcGFpbnQxX2xpbmVhcikiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQwX2xpbmVhciIgeDE9Ii0wLjQyOTc1NSIgeTE9IjEyOS4wMzEiIHgyPSI1OTguMzcxIiB5Mj0iNDY5LjQ4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IndoaXRlIiBzdG9wLW9wYWNpdHk9IjAuMTkiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzFCQkZGIiBzdG9wLW9wYWNpdHk9IjAiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQxX2xpbmVhciIgeDE9IjE3NS44OTQiIHkxPSIyMzQuNTc5IiB4Mj0iNDg1LjQ1NSIgeTI9IjQyOS42MTgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0id2hpdGUiIHN0b3Atb3BhY2l0eT0iMC4xOSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3MUJCRkYiIHN0b3Atb3BhY2l0eT0iMCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IndoaXRlIiBzdG9wLW9wYWNpdHk9IjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K')
+      background-repeat no-repeat
+      opacity .3
+      width 707px
+      height 577px
+      left 20px
+      bottom -174px
+    .rt-microtabs-nav__item
+      &-bg
+        background #565C6C
+      &-tgl
+        color #565C6C
+      &.is--theme-purple
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #5707C0
+          &-tgl
+            color #5707C0
+      &.is--theme-orange
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #CF4417
+          &-tgl
+            color #CF4417
+    .rt-link--orange
+      color #FF5E2D
+  &.is--theme-yadisk
+    background #5D96D9
+    border-color transparent
+    .rt-tariff__bg:after
+      background-image url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjg0IiBoZWlnaHQ9IjIyOCIgdmlld0JveD0iMCAwIDI4NCAyMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIG9wYWNpdHk9IjAuMSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMDkuOTk1IDU4LjIzMTNDMzEzLjIzMyA0Ni4yMDg1IDMxMi42MTggMzUuNzAxMiAzMDcuODg3IDI3LjMwMjlDMzAyLjgxNCAxOC4yOTc2IDI5My4zMTkgMTIuMjc2OSAyODAuMTk3IDkuMzI4MzZDMjY3LjA3IDYuMzc4OTIgMjUwLjUwNCA2LjU1NjQ2IDIzMS42ODUgOS44MDA1M0MyMzEuNjE3IDkuODEyMzEgMjMxLjU0OCA5LjgyMzk4IDIzMS40OCA5LjgzNTU0QzE5OC45OTYgMTUuNDY5MSAxNjAuMTE2IDMwLjE3MjQgMTIxLjI3MSA1My4xNTY4Qzc5LjMwMTQgNzcuOTg5MyA0NS40ODA4IDEwNy42OSAyNC43MDM5IDEzNS41NkMxNC4zMTI4IDE0OS40OTggNy4yNDU3MSAxNjIuODk3IDQuMDA0OSAxNzQuOTNDMC43NjY5NTcgMTg2Ljk1MyAxLjM4MTUzIDE5Ny40NiA2LjExMjg0IDIwNS44NTlDMTAuODQ0MSAyMTQuMjU3IDE5LjQxNiAyMjAuMDU2IDMxLjE5NDcgMjIzLjE5NEM0Mi45ODM5IDIyNi4zMzQgNTcuODM5NiAyMjYuNzYxIDc0LjgxMzcgMjI0LjUwOEM5Mi43Nzc0IDIyMi4xMjMgMTEzLjAwMiAyMTYuNzUyIDEzNC4yODQgMjA4LjU0MkMxNDMuMTU5IDIwNS4xMTggMTUyLjIxNyAyMDEuMjAxIDE2MS4zNzIgMTk2LjgwMUMxNzEuNzQyIDE5MS44MTcgMTgyLjIzNyAxODYuMjEzIDE5Mi43MyAxODAuMDA1QzIzNC42OTkgMTU1LjE3MiAyNjguNTE5IDEyNS40NzEgMjg5LjI5NiA5Ny42MDE0QzI5OS42ODcgODMuNjYyOSAzMDYuNzU0IDcwLjI2NDcgMzA5Ljk5NSA1OC4yMzEzWk0xMjAuMjg5IDUxLjQxNDNDMTUzLjg1OSAzMS41NTE0IDE4Ny41MDUgMTcuODE0OSAyMTcuMTIyIDEwLjc0OTdDMjExLjg0OCAxMC42MTgxIDIwNi40NjcgMTAuMDU3MSAyMDEuMDEzIDkuMjg2MzVDMTk1LjczMiA4LjUzOTk4IDE5MC4zNDUgNy41OTA3OCAxODQuOTAyIDYuNjMxODNMMTg0LjkgNi42MzE0M0wxODQuODU4IDYuNjI0MDRDMTc5LjM4OSA1LjY2MDQ4IDE3My44NjEgNC42ODY3NyAxNjguMjYgMy44ODMwOEMxNDUuODY5IDAuNjcwMTkzIDEyMi42MTkgMC4yMjU3NyA5OS4yNDE0IDE0LjA1OEM3NS44NjM3IDI3Ljg5MDMgNjQuNjE0NSA0OC43NDcgNTYuMTM0IDcwLjIyNjFDNTQuMDEyNyA3NS41OTkgNTIuMDcxMiA4MC45OTI2IDUwLjE1MTIgODYuMzI3OUw1MC4xMzc1IDg2LjM2NkM0OC4yMjU5IDkxLjY3NzYgNDYuMzMzOCA5Ni45MzUzIDQ0LjMyMzIgMTAxLjk5OEM0Mi4yNDcgMTA3LjIyNSA0MC4wMyAxMTIuMjgyIDM3LjUwMzQgMTE3LjAzQzU4LjI4MjcgOTQuMjc0OCA4Ni43MTU3IDcxLjI3OSAxMjAuMjg5IDUxLjQxNDNaTTE4NS4yMzggNC42MzkwNUMyMDEuNTQ0IDcuNTEyMjIgMjE3LjAwNiAxMC4yMzY2IDIzMS4xNzQgNy44NDQ4OEMyNjkuMjE1IDEuMjQ4NjkgMjk4LjcxOCA2Ljk0OTI5IDMwOS42MSAyNi4yODM2QzMyOS44ODYgNjIuMjczOCAyNzcuOTk3IDEzMS44NzcgMTkzLjcxMyAxODEuNzQ2QzE4My4xNzcgMTg3Ljk4IDE3Mi42MzMgMTkzLjYxMSAxNjIuMjA5IDE5OC42MjFDMTUyLjU2OCAyMDMuMjU1IDE0My4wMjkgMjA3LjM1OCAxMzMuNjkzIDIxMC45MThDNzIuMzcwNSAyMzQuMjk2IDE5Ljc4NjYgMjM0LjIwOCA0LjM4OTcxIDIwNi44NzhDLTYuNDgzMTkgMTg3LjU3OCAzLjM5NjM3IDE1OC42MTIgMjcuODk1NCAxMjguMjA2QzM3LjA3ODQgMTE2LjgwOSA0Mi41MzE0IDEwMS42NTcgNDguMjgzOCA4NS42NzI3QzU3Ljg3NzkgNTkuMDEzMSA2OC4zMDQ5IDMwLjAzOTMgOTguMjU5NyAxMi4zMTU1QzEyOC4yMTUgLTUuNDA4MzIgMTU3LjkxMiAtMC4xNzU2NjIgMTg1LjIzOCA0LjYzOTA1Wk0xODMuNjggMTYzLjkzOEMxOTYuNTA5IDE1Ni4zNDggMjA4LjUzOCAxNDcuMjcxIDIxNi44ODMgMTM5LjEzN0MyMjEuMDQ0IDEzNS4wODEgMjI0LjM3IDEzMS4xODEgMjI2LjQwNSAxMjcuNzU1QzIyNy40MjEgMTI2LjA0MyAyMjguMTcxIDEyNC4zNTggMjI4LjUwMSAxMjIuNzYzQzIyOC44MzQgMTIxLjE1NiAyMjguNzY2IDExOS40OTkgMjI3Ljk0NyAxMTguMDQ1QzIyNi4zNzggMTE1LjI2IDIyMi45OTMgMTE0LjM3NSAyMTkuNDExIDExNC4zMzhDMjE1LjY4NCAxMTQuMjk5IDIxMC45NTcgMTE1LjE1NiAyMDUuNjA1IDExNi43MjVDMTk0Ljg3MSAxMTkuODcxIDE4MS4xNzkgMTI2LjAxNyAxNjcuMDMyIDEzNC4zODdDMTUyLjg4NSAxNDIuNzU4IDE0MC44NDUgMTUxLjgzOCAxMzIuODIgMTU5Ljc5MUMxMjguODE4IDE2My43NTYgMTI1LjczIDE2Ny41MjMgMTIzLjg5OSAxNzAuODUxQzEyMi4xNDEgMTc0LjA0OCAxMjEuMTk2IDE3Ny40OTUgMTIyLjc2NSAxODAuMjhDMTIzLjU4NCAxODEuNzM0IDEyNC45NDkgMTgyLjYyMyAxMjYuNDc0IDE4My4xMzFDMTI3Ljk4NyAxODMuNjM1IDEyOS43ODYgMTgzLjgxMiAxMzEuNzQxIDE4My43NjZDMTM1LjY1NCAxODMuNjczIDE0MC42MTIgMTgyLjY3MSAxNDYuMTIgMTgxLjAwNkMxNTcuMTY2IDE3Ny42NjcgMTcwLjg1MSAxNzEuNTI5IDE4My42OCAxNjMuOTM4Wk0yMjYuMjI2IDExOS4wNjRDMjMwLjI4MSAxMjYuMjYyIDIwOC4xMzMgMTQ3LjE0NyAxODIuNjk4IDE2Mi4xOTZDMTU3LjI2MyAxNzcuMjQ1IDEyOC41NDEgMTg2LjQ2IDEyNC40ODYgMTc5LjI2MkMxMjAuNDMxIDE3Mi4wNjQgMTM5LjkxOSAxNTIuNzUzIDE2OC4wMTMgMTM2LjEzQzE5Ni4xMDggMTE5LjUwNiAyMjIuMTcgMTExLjg2NiAyMjYuMjI2IDExOS4wNjRaIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjkiLz4KPC9zdmc+Cg==')
+      max-width 93%
+      width 314px
+      height 227px
+      left 60px
+      bottom 20px
+    .rt-link--orange
+      color #FF9737
+    .rt-microtabs-nav__item
+      &-bg
+        background #8EB5E4
+      &-tgl
+        color #8EB5E4
+      &.is--theme-purple
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #6F2DF4
+          &-tgl
+            color #6F2DF4
+      &.is--theme-orange
+        color #fff
+        .rt-microtabs-nav__item
+          &-bg
+            background #DF5D3A
+          &-tgl
+            color #DF5D3A
+    .rt-link--orange
+      color #FF9737
+
+// @TODO - Add typography mixins (.rt-tariff__title == h4)
+@media (max-width: mobile-upper-limit)
+  .rt-tariff
+    &__title
+      font-size 18px
+      line-height 24px
+
+    .rt-price-v2__value
+      font-size 36px
+      line-height 44px
+
+@media (min-width: tablet-lower-limit) and (max-width: tablet-upper-limit)
+  .rt-tariff
+    &__title
+      font-size 20px
+      line-height 24px
+
+@media (min-width: laptop-lower-limit)
+  .rt-tariff
+    &__title
+      font-size 22px
+      line-height 28px
+
+@media (hover: hover)
+  .rt-tariff
+    &__link:hover
+      color b2c-orange-button-hover
+  .rt-tariff.is--theme-dark
+    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover
+      .rt-microtabs-nav__item
+        &-bg
+          background #868A96
+        &-tgl
+          color #868A96
+      &.is--theme-purple
+        .rt-microtabs-nav__item
+          &-bg
+            background #5C05CB
+          &-tgl
+            color #5C05CB
+      &.is--theme-orange
+        .rt-microtabs-nav__item
+          &-bg
+            background #DB4616
+          &-tgl
+            color #DB4616
+    .rt-tariff__link:hover
+      color #FF4F12
+    .rt-link--orange:hover
+      color #D33706  
+  .rt-tariff.is--theme-yadisk
+    .rt-microtabs.is--tabs .rt-microtabs-nav>a:not(.is--active):hover
+      .rt-microtabs-nav__item
+        &-bg
+          background #AECBEC
+        &-tgl
+          color #AECBEC
+      &.is--theme-purple
+        .rt-microtabs-nav__item
+          &-bg
+            background #7025F6
+          &-tgl
+            color #7025F6
+      &.is--theme-orange
+        .rt-microtabs-nav__item
+          &-bg
+            background #E75A30
+          &-tgl
+            color #E75A30
+    .rt-tariff__link:hover
+      color #F48E30
+    .rt-link--orange:hover
+      color #F48E30
