@@ -128,10 +128,17 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize(){
-      let {top, left} = this.$refs.popover.getClientRects()[0]
-      let wrapperHeight = window.windowHeight
+      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
+      let wrapperHeight = window.innerHeight
+      let wrapperWidth = window.innerWidth
+      let windowWidth = window.innerWidth
       let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
-
+      if(x && !left){
+        left = x
+      }
+      if(y && !top){
+        top = y
+      }
       if(this.containerId.length >0){
         const wrap = document.querySelector('#'+this.containerId);
         if(wrap){
@@ -140,18 +147,19 @@ export default {
           left -= wrapRect.left
         }
         wrapperHeight = wrap.clientHeight
+        wrapperWidth = wrap.clientWidth
       }
-      const windowWidth = document.body.clientWidth
 
-      // this.$refs.popover
+
       if(windowWidth < 769 && this.stopAutoOnMd){
         this.setLocalValues()
       }else {
         const xStart = left - 125 - 12
         const xEnd = left + 125 + 12
-        if (xStart > 0 && xEnd < windowWidth - 20 - 125) {
+        if (xStart +20 > 0 && xEnd - 20 < wrapperWidth) {
           this.localHorizontal = 'center'
         } else {
+
           if (xStart > 0) {
             this.localHorizontal = 'left'
           } else {
@@ -201,9 +209,9 @@ export default {
         </div>
       </div>;
     }
-    return <div class="popover" ref="popover">
-      <button type="button" onClick={this.activate} class="popover-icon-button">
-        <rt-system-icons class="popover-icon" name="help stroke"></rt-system-icons>
+    return <div class="rt-popover" ref="popover">
+      <button type="button" onClick={this.activate} class="rt-popover-icon-button">
+        <rt-system-icons class="rt-popover-icon" name="help stroke"></rt-system-icons>
       </button>
     </div>;
   }
