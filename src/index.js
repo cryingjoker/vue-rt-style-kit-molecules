@@ -103,12 +103,12 @@ import {
   MessageBox,
   PreviewBanner,
   ArrowBlock,
-  PreviewBanner,
-  MessageBox,
   ShowOn,
   CardHelp,
   CardBanner,
-  CardTileLayout
+  CardTileLayout,
+  CommentSlider,
+  CommentSliderItem
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";

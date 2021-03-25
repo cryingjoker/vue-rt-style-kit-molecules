@@ -48,7 +48,8 @@ export default {
     touchstartY: false,
     pauseAnimation: false,
     rowBoBack: false,
-    buttonIsHover: false
+    buttonIsHover: false,
+    containerHeight: 0
 
   }),
 
@@ -233,9 +234,10 @@ export default {
           this.timeout = setTimeout(this.tick.bind(this), (this.duration - 0) / 100)
         }
       }
+    },
+    onResize(res){
+      this.containerHeight = res.maxHeight
     }
-
-
   },
 
 
@@ -269,18 +271,18 @@ export default {
 
           <div class="color-block--main-color005 sp-t-1-3 sp-b-1-3 sp-h-1 rt-comment-slider-item-content">
 
-            <svg class="sp-b-0-3" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M4 12.9437L10.2535 5L11.5493 5.90141L7.88732 12.9437H10.5352V19.5352H4V12.9437ZM12.4507 12.9437L18.7042 5L20 5.90141L16.338 12.9437H18.9859V19.5352H12.4507V12.9437Z"
                 fill="#101828"/>
             </svg>
-            <div class="rt-font color-main">
+            <div class="rt-font color-main sp-t-0-3 rt-comment-slider-item-text">
               {content.comment}
             </div>
             <a target="_blank" href={content.contentUrl} class="sp-t-0-2 color-main05 p3">Читать целиком</a>
           </div>
-          <div class="sp-h-1 md-sp-b-1-2 sp-v-1-3 td-sp-v-1">
+          <div class="sp-h-1 md-sp-b-1 sp-v-1-3 td-sp-v-1">
             <div class="d-flex rt-comment-slider-item-body">
               <div class="rt-comment-slider-item-image">
                 <img class="rt-comment-slider-item-image-tag" src={content.authorImage} alt=""/>
@@ -326,10 +328,18 @@ export default {
         </div>
       })
     }
+    let heightSlideContainer
+    if(window.innerWidth > 768){
+      heightSlideContainer = {minHeight: this.containerHeight+170+'px'}
+    }else{
+      heightSlideContainer = {minHeight: this.containerHeight+100+'px'}
+    }
     return <div class="rt-comment-slider" onMousedown={this.mousedown} onMousemove={this.mousemove}
                 onTouchstart={this.touchstart} onTouchmove={this.touchmove} onTouchend={this.mouseup}
+                onResizeHeightFire={this.onResize}
+                v-rt-resize-content-height={{querySelectorsNames:['.rt-comment-slider-item-content']}}
                 onMouseup={this.mouseup}>
-      <div class="rt-comment-slider-inner">
+      <div class="rt-comment-slider-inner" style={heightSlideContainer}>
         <div class="rt-container relative height-fill rt-comment-slider-navigation">
           <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}
                class="rt-comment-slider-arrow rt-comment-slider-arrow--next" onClick={this.setNextActive}>
@@ -341,7 +351,7 @@ export default {
             <rt-system-icons name="chevron left"></rt-system-icons>
           </div>
         </div>
-        <div class="rt-container rt-comment-slider-container height-fill">
+        <div class="rt-container rt-comment-slider-container height-fill" style={heightSlideContainer}>
           <rt-col size="12" class="height-fill d-flex">
             <rt-row class={rowClassList} ref="row">
               {renderContent()}
