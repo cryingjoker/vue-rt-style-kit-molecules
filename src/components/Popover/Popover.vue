@@ -26,6 +26,10 @@ export default {
     stopAutoOnMd: {
       type: Boolean,
       default: false
+    },
+    containerId:{
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -123,7 +127,17 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize(){
-      const {top, left} = this.$refs.popover.getClientRects()[0]
+      let {top, left} = this.$refs.popover.getClientRects()[0]
+      let wrapperHeight = window.windowHeight
+      if(this.containerId.length >0){
+        const wrap = document.querySelector('#'+this.containerId);
+        if(wrap){
+          const wrapRect = wrap.getClientRects()[0];
+          top -= wrapRect.top
+          left -= wrapRect.left
+        }
+        wrapperHeight = wrap.clientHeight
+      }
       const windowWidth = document.body.clientWidth
       if(windowWidth < 769 && this.stopAutoOnMd){
         this.setLocalValues()
@@ -139,10 +153,10 @@ export default {
             this.localHorizontal = 'right'
           }
         }
-        if (top > 200) {
+        if (top > 120) {
           this.localVertical = 'top'
         } else {
-          if (top + 400 > window.windowHeight && this.localHorizontal != 'center') {
+          if (top + 400 > wrapperHeight && this.localHorizontal != 'center') {
             this.localVertical = 'center'
           } else {
             this.localVertical = 'bottom'
@@ -174,7 +188,7 @@ export default {
           <rt-system-icons class="popover-icon" name="help stroke"></rt-system-icons>
         </button>
         <div class={popoverBodyClass.join(' ')}>
-          <button class="popover-close" type="button" onClick={this.deactivate}>
+          <button class="rt-popover-close" type="button" onClick={this.deactivate}>
             <rt-system-icons name="close small"></rt-system-icons>
           </button>
           {this.$slots.default}
