@@ -4,7 +4,7 @@
       "name": "rt-microtabs",
       "property": "theme",
       "type": "String",
-      "description": "Тема отображения для всех табов",
+      "description": "Тема отображения для всех табов (purple, orange)",
       "value": "default"
     },
     {
@@ -15,10 +15,17 @@
       "value": "false"
     },
     {
+      "name": "rt-microtabs",
+      "property": "fit",
+      "type": "Boolean",
+      "description": "Обрезать контент выше трех строк",
+      "value": "true"
+    },
+    {
       "name": "rt-microtabs-nav",
       "property": "theme",
       "type": "String",
-      "description": "Тема отображения определенного таба",
+      "description": "Тема отображения определенного таба (purple, orange)",
       "value": "default"
     }
   ]

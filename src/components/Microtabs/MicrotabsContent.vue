@@ -1,12 +1,4 @@
-<template>
-  <div
-    :class="cmpClasses"
-  >
-    <slot></slot>
-  </div>
-</template>
-
-<script>
+<script type="text/jsx">
 import { cmpName } from './common'
 
 export default {
@@ -32,6 +24,11 @@ export default {
   },
   destroyed(){
     this.$parent.destroy()
+  },
+  render(h){
+    return <div class={this.cmpClasses}>
+      {this.$slots.default}
+    </div>
   }
 }
 </script>

@@ -1,5 +1,6 @@
 cmp = '.rt-microtabs'
-microtabsTriangleSize = 6px
+microtabsTriangleRealSize = 12
+microtabsTriangleSize = (microtabsTriangleRealSize * 0.7075)px
 microtabsDefBg = #eeeff0
 microtabsDefBgHover = #e7e8e9
 microtabsPurpleBg = #f1e5ff
@@ -44,36 +45,38 @@ microtabsOrangeColor = #ff4f12
     &__item
       padding 0 8px
       &-tgl
-        color microtabsDefBg
-        border-top microtabsTriangleSize solid
-        border-right microtabsTriangleSize solid transparent
-        border-left microtabsTriangleSize solid transparent
+        background inherit
         margin auto
         position absolute
-        width 0
-        height 0
+        width microtabsTriangleSize
+        height microtabsTriangleSize
         left 0
         right 0
-        bottom -(microtabsTriangleSize)
-        transition transform .3s ease-in .1s, color .3s ease-in
+        bottom -(microtabsTriangleSize / 2)
+        transform rotate(45deg)
+        transition transform .3s ease-in
         z-index -2
       // Background
       &-bg
         content: ''
-        background microtabsDefBg
+        background inherit
         border-radius 16px
         position absolute
         width 100%
         height 100%
         left 0
         top 0
-        transition background .3s ease-in
         z-index -1
+      &-opacity
+        background microtabsDefBg
+        transition background .3s ease-in
 
   &-cnt
     padding-top 18px
     transition transform .3s ease-in
     &__item
+      font-size 14px
+      line-height 20px
       flex: 0 0 100%;
       max-width 100%
       max-height 60px // Органичение в 3 строки
@@ -90,49 +93,36 @@ microtabsOrangeColor = #ff4f12
       cursor default
       &-tgl
         display none
-  &.is--direction
-    &-right
-      {cmp}-nav__item:not(.is--active) {cmp}-nav__item-tgl
-        transform translate3d(100%, -100%, 0)
-    &-left
-      {cmp}-nav__item:not(.is--active) {cmp}-nav__item-tgl
-        transform translate3d(-100%, -100%, 0)
+  {cmp}-nav__item
+    &.is--from
+      &-right
+        {cmp}-nav__item-tgl
+          transform rotate(45deg) translate3d(-(microtabsTriangleRealSize)px, 0, 0)
+      &-left
+        {cmp}-nav__item-tgl
+          transform rotate(45deg) translate3d(0, -(microtabsTriangleRealSize)px, 0)
+
   {cmp}-nav__item
     &.is--theme-flat
       {cmp}-nav__item-bg
         display none
     &.is--theme-purple
       color microtabsPurpleColor
-      {cmp}-nav__item
-        &-bg
-          background microtabsPurpleBg
-        &-tgl
-          color microtabsPurpleBg
+      {cmp}-nav__item-opacity
+        background microtabsPurpleBg
     &.is--theme-orange
       color microtabsOrangeColor
-      {cmp}-nav__item
-        &-bg
-          background microtabsOrangeBg
-        &-tgl
-          color microtabsOrangeBg
+      {cmp}-nav__item-opacity
+        background microtabsOrangeBg
 
 @media (hover: hover)
   {cmp}.is--tabs
     {cmp}-nav > a:not(.is--active):hover
-      {cmp}-nav__item
-        &-bg
-          background microtabsDefBgHover
-        &-tgl
-          color microtabsDefBgHover
+      {cmp}-nav__item-opacity
+        background microtabsDefBgHover
       &.is--theme-purple
-        {cmp}-nav__item
-          &-bg
-            background microtabsPurpleBgHover
-          &-tgl
-            color microtabsPurpleBgHover
+        {cmp}-nav__item-opacity
+          background microtabsPurpleBgHover
       &.is--theme-orange
-        {cmp}-nav__item
-          &-bg
-            background microtabsOrangeBgHover
-          &-tgl
-            color microtabsOrangeBgHover  
+        {cmp}-nav__item-opacity
+          background microtabsOrangeBgHover
