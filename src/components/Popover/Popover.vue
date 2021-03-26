@@ -156,22 +156,21 @@ export default {
       }else {
         const xStart = left - 125 - 12
         const xEnd = left + 125 + 12
-        if (xStart +20 > 0 && xEnd - 20 < wrapperWidth) {
+        if (xStart +20 >= 0 && xEnd - 20 <= wrapperWidth) {
           this.localHorizontal = 'center'
         } else {
 
-          if (xStart > 0) {
+          if (xStart+20 > 0) {
             this.localHorizontal = 'left'
           } else {
             this.localHorizontal = 'right'
           }
         }
-        if (top > bodyHeight) {
-          this.localVertical = 'top'
+        if (top - bodyHeight/2 > 0 && top + 20 + bodyHeight/2 < wrapperHeight && this.localHorizontal != 'center') {
+          this.localVertical = 'center'
         } else {
-          if (top - bodyHeight/2 > 0 && this.localHorizontal != 'center') {
-            this.localVertical = 'center'
-
+          if (top > bodyHeight) {
+            this.localVertical = 'top'
           } else {
             this.localVertical = 'bottom'
           }
