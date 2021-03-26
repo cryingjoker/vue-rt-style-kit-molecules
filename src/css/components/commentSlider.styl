@@ -1,6 +1,10 @@
 .rt-comment-slider
   overflow: hidden;
   user-select none
+  @media (hover:hover)
+    &:hover
+      .rt-comment-slider-arrow
+        opacity: 1
 
 .rt-comment-slider-inner
   scroll-padding 80px
@@ -29,8 +33,10 @@
   cursor: pointer;
   transition-timing-function cubic-bezier(10, 2, .9, .65)
   transition-duration .3s
-  transition-property transform
+  transition-property transform, opacity
   user-select none
+  @media (min-width: laptop-lower-limit)
+    opacity: 0
   @media (max-width: tablet-upper-limit)
     height: 36px
     width: 36px
@@ -167,7 +173,7 @@
 
 @keyframes goLeft
   100%
-    transform translateX(-51%)
+    transform translateX(-50.3%)
 
 @keyframes goRight
   100%
