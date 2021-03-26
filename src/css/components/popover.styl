@@ -42,18 +42,29 @@
 
   .rt-popover-body-h-right
     left: 100%
-    margin-left: 16px
+    margin-left: 4px
+
   .rt-popover-body-h-left
     right: 100%
-    margin-right: 16px
+    margin-right: 4px
 
   .rt-popover-body-v-top
     bottom: 100%
-    margin-bottom: 9px
+    margin-bottom: 4px
+    &.rt-popover-body-h-left
+      transform translateX(24px)
+    &.rt-popover-body-h-right
+      transform translateX(-24px)
+
 
   .rt-popover-body-v-bottom
     top: 100%
-    margin-top: 9px
+    margin-top: 4px
+    &.rt-popover-body-h-left
+      transform translateX(24px)
+    &.rt-popover-body-h-right
+      transform translateX(-24px)
+
 
   .rt-popover-body-v-center
     top: 50%
