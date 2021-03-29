@@ -1,15 +1,16 @@
+use("./getCalc.js")
 .rt-comment-slider
   overflow: hidden;
   user-select none
-  @media (hover:hover)
-    &:hover
-      .rt-comment-slider-arrow
-        opacity: 1
 
 .rt-comment-slider-inner
   scroll-padding 80px
   position: relative;
-  height: 376px
+  @media (min-width: laptop-upper-limit)
+    height: 376px
+  height: getCalc(1280,376, 1024, 420)
+  @media (max-width: tablet-upper-limit)
+    height: getCalc(1024, 420, 768, 432)
   @media (max-width: mobile-upper-limit)
     height: 432px
 
@@ -33,10 +34,8 @@
   cursor: pointer;
   transition-timing-function cubic-bezier(10, 2, .9, .65)
   transition-duration .3s
-  transition-property transform, opacity
+  transition-property transform
   user-select none
-  @media (min-width: laptop-lower-limit)
-    opacity: 0
   @media (max-width: tablet-upper-limit)
     height: 36px
     width: 36px
@@ -72,8 +71,6 @@
   position: absolute;
   pointer-events none
   opacity: 0
-  display: flex
-  flex-direction column
   left: -100vw
   width: calc(50% - 20px)
   transition-timing-function linear
@@ -85,15 +82,22 @@
     width: calc(66% - 20px)
   @media (max-width: mobile-upper-limit)
     width: calc(100% - 20px)
-    bottom: 62px
 .rt-comment-slider-item-content
-  display: flex
-  flex 1
-  flex-direction column
+  height getCalc(1280,200, 1024, 244)
+  min-height: getCalc(1280,200, 1024, 244)
+  max-height: getCalc(1280,200, 1024, 244)
+  @media (max-width: tablet-upper-limit)
+    height getCalc(1024,244, 768, 268)
+    min-height: getCalc(1024,244, 768, 268)
+    max-height: getCalc(1024,244, 768, 268)
   @media (max-width: mobile-upper-limit)
     min-height 268px
-.rt-comment-slider-item-text
-  flex 1
+    max-height 268px
+    height 268px
+  @media (min-width: laptop-upper-limit)
+    height: 200px
+    min-height: 200px
+    max-height: 200px
 .rt-comment-slider-item-show
   opacity: 0.5
   pointer-events auto
@@ -173,14 +177,14 @@
 
 @keyframes goLeft
   100%
-    transform translateX(-50.3%)
+    transform translateX(-50%)
 
 @keyframes goRight
   100%
-    transform translateX(50.5%)
+    transform translateX(50%)
 @keyframes goLeftTablet
   100%
-    transform translateX(-60.5%)
+    transform translateX(-65%)
 
 @keyframes goLeftMobile
   100%

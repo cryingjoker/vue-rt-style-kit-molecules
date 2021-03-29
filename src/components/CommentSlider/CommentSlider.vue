@@ -20,7 +20,7 @@ export default {
     },
     autoplay: {
       type: Boolean,
-      default: true
+      default: false
     },
     preventScroll: {
       type: Boolean,
@@ -234,9 +234,6 @@ export default {
           this.timeout = setTimeout(this.tick.bind(this), (this.duration - 0) / 100)
         }
       }
-    },
-    onResize(res){
-      this.containerHeight = res.maxHeight
     }
   },
 
@@ -253,21 +250,17 @@ export default {
       rowClassList.push('rt-comment-slider-row-back')
     }
     const renderContent = () => {
-
       return this.ids.map((id) => {
         const content = this.content[id]
         const sliderItemClassList = ['rt-comment-slider-item', 'color-block--white', 'ovh', 'round-border'];
         const index = this.activeIds.indexOf(id)
-
 
         if (index >= 0) {
           sliderItemClassList.push('rt-comment-slider-item-i' + index)
           sliderItemClassList.push('rt-comment-slider-item-show')
         }
 
-
-
-        return <div class={sliderItemClassList.join(' ')} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
+        return <div class={sliderItemClassList.join(' ')}  onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
 
           <div class="color-block--main-color005 sp-t-1-3 sp-b-1-3 sp-h-1 rt-comment-slider-item-content">
 
@@ -328,18 +321,12 @@ export default {
         </div>
       })
     }
-    let heightSlideContainer
-    if(window.innerWidth > 768){
-      heightSlideContainer = {minHeight: this.containerHeight+170+'px'}
-    }else{
-      heightSlideContainer = {minHeight: this.containerHeight+100+'px'}
-    }
+
     return <div class="rt-comment-slider" onMousedown={this.mousedown} onMousemove={this.mousemove}
                 onTouchstart={this.touchstart} onTouchmove={this.touchmove} onTouchend={this.mouseup}
-                onResizeHeightFire={this.onResize}
-                v-rt-resize-content-height={{querySelectorsNames:['.rt-comment-slider-item-content']}}
+
                 onMouseup={this.mouseup}>
-      <div class="rt-comment-slider-inner" style={heightSlideContainer}>
+      <div class="rt-comment-slider-inner">
         <div class="rt-container relative height-fill rt-comment-slider-navigation">
           <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}
                class="rt-comment-slider-arrow rt-comment-slider-arrow--next" onClick={this.setNextActive}>
@@ -351,7 +338,7 @@ export default {
             <rt-system-icons name="chevron left"></rt-system-icons>
           </div>
         </div>
-        <div class="rt-container rt-comment-slider-container height-fill" style={heightSlideContainer}>
+        <div class="rt-container rt-comment-slider-container height-fill">
           <rt-col size="12" class="height-fill d-flex">
             <rt-row class={rowClassList} ref="row">
               {renderContent()}
