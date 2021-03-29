@@ -1,0 +1,306 @@
+.rt-comment-slider
+  overflow: hidden;
+  user-select none
+
+.rt-comment-slider-inner
+  scroll-padding 80px
+  position: relative;
+  height: 376px
+  @media (max-width: mobile-upper-limit)
+    height: 432px
+
+
+.rt-comment-slider-arrow
+  position: absolute;
+  pointer-events auto
+  width: 52px
+  height: 52px
+  background-color: #fff
+  top: 0
+  bottom: 0
+  border-radius 50%
+  margin-top auto
+  margin-bottom: auto
+  z-index 5
+  box-shadow  0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex
+  align-items center
+  justify-content center
+  cursor: pointer;
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property transform
+  user-select none
+  @media (max-width: tablet-upper-limit)
+    height: 36px
+    width: 36px
+    margin-top initial
+    margin-bottom: initial
+    top: initial
+    bottom: 5px
+    margin-left: 20px
+    display: none
+  @media (max-width: mobile-upper-limit)
+    display: flex
+
+.rt-comment-slider-arrow--next
+  right: 54px
+
+  @media (hover:hover)
+    &:hover
+      transform translateX(5px)
+  @media (max-width: tablet-upper-limit)
+    right: initial
+    left: 48px
+.rt-comment-slider-arrow--prew
+  left: 54px
+  @media (hover:hover)
+    &:hover
+      transform translateX(-5px)
+  @media (max-width: tablet-upper-limit)
+    left: 0
+
+
+.rt-comment-slider-item
+  box-shadow 0 0 0 1px main-color005 inset
+  position: absolute;
+  pointer-events none
+  opacity: 0
+  display: flex
+  flex-direction column
+  left: -100vw
+  width: calc(50% - 20px)
+  transition-timing-function linear
+  transition-duration .3s
+  transition-property transform, opacity
+  bottom: 52px
+  top: 0
+  @media (max-width: tablet-upper-limit)
+    width: calc(66% - 20px)
+  @media (max-width: mobile-upper-limit)
+    width: calc(100% - 20px)
+    bottom: 62px
+.rt-comment-slider-item-content
+  display: flex
+  flex 1
+  flex-direction column
+  @media (max-width: mobile-upper-limit)
+    min-height 268px
+.rt-comment-slider-item-text
+  flex 1
+.rt-comment-slider-item-show
+  opacity: 0.5
+  pointer-events auto
+  &.rt-comment-slider-item-i2
+    opacity: 1
+    &.rt-comment-slider-item-left,
+    &.rt-comment-slider-item-rigth
+      opacity: 0.5
+
+.rt-comment-slider-item-i1
+  left: -25%
+  @media (max-width: tablet-upper-limit)
+    left: -48%
+  @media (max-width: mobile-upper-limit)
+    left: -100%
+
+
+.rt-comment-slider-item-i0
+  left: -75%
+  @media (max-width: tablet-upper-limit)
+    left: -114%
+  @media (max-width: mobile-upper-limit)
+    left: -200%
+
+.rt-comment-slider-item-i3
+  right: -25%
+  left: initial
+  @media (max-width: tablet-upper-limit)
+    right: -48%
+  @media (max-width: mobile-upper-limit)
+    right: -100%
+
+
+
+
+.rt-comment-slider-item-i4
+  right: -75%
+  left: initial
+  @media (max-width: tablet-upper-limit)
+    right: -114%
+  @media (max-width: mobile-upper-limit)
+    right: -200%
+
+.rt-comment-slider-item-i2
+  margin-left auto
+  margin-right auto
+  left: 0
+  right: 0
+  opacity: 1
+  @media (max-width: mobile-upper-limit)
+    margin-right initial
+    right: initial
+    left: 10px
+
+.rt-comment-slider-row-left
+  animation-name goLeft
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+  @media (max-width: tablet-upper-limit)
+    animation-name goLeftTablet
+  @media (max-width: mobile-upper-limit)
+    animation-name goLeftMobile
+
+.rt-comment-slider-row-right
+  animation-name goRight
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+  @media (max-width: tablet-upper-limit)
+    animation-name goRightTablet
+  @media (max-width: mobile-upper-limit)
+    animation-name goRightMobile
+.rt-comment-slider-row-back
+  animation-name goBack
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+
+
+@keyframes goLeft
+  100%
+    transform translateX(-51%)
+
+@keyframes goRight
+  100%
+    transform translateX(50.5%)
+@keyframes goLeftTablet
+  100%
+    transform translateX(-60.5%)
+
+@keyframes goLeftMobile
+  100%
+    transform translateX(-100%)
+
+@keyframes goRightMobile
+  100%
+    transform translateX(100%)
+@keyframes goRightTablet
+  100%
+    transform translateX(65%)
+@keyframes goBack
+  100%
+    transform translateX(0%)
+
+.rt-comment-slider-col
+  position static
+
+.rt-comment-slider-item-body
+  flex-wrap wrap
+  justify-content: stretch;
+.rt-comment-slider-item-author
+  flex 1
+.rt-comment-slider-item-image
+  width: 60px
+  height: 60px
+  min-width: 60px
+  min-height: 60px
+  display: flex
+  border-radius 50%
+  overflow: hidden
+
+.rt-comment-slider-item-image-tag
+  width: 100%
+  height: 100%
+  object-fit cover
+
+.rt-comment-slider-icon
+  position: absolute;
+  right: 0
+
+.rt-comment-slider-row
+  flex-wrap nowrap
+
+.rt-comment-slider-row--go-back
+  animation-name rowGoBack
+  animation-duration 0.5s
+  animation-timing-function ease-in-out
+
+.rt-comment-slider-navigation
+  position: absolute
+  top: 0
+  bottom: 0
+  pointer-events none
+  left: 0
+  right: 0
+  z-index 10
+  &:before
+    content ''
+    position: absolute;
+    left: 0
+    height: 100%
+    top: 0
+    bottom: 0
+    width: 80px
+    background-color: #fff
+    @media (max-width: tablet-upper-limit)
+      display: none
+  &:after
+    content ''
+    position: absolute;
+    right: 0
+    height: 100%
+    top: 0
+    bottom: 0
+    width: 80px
+    background-color: #fff
+    @media (max-width: tablet-upper-limit)
+      display: none
+
+.rt-comment-slider-container
+  height: 100%
+  overflow: hidden;
+  position: relative;
+
+  &:before
+    content ''
+    position: absolute;
+    left: 80px
+    height: 100%
+    top: 0
+    bottom: 0
+    width: 40px
+    background: linear-gradient(to right , rgba(255,255,255,1) 20%, rgba(255,255,255,0) 100%)
+    z-index 1
+    @media (max-width: tablet-upper-limit)
+      display: none
+
+  &:after
+    content ''
+    position: absolute;
+    right: 80px
+    height: 100%
+    top: 0
+    bottom: 0
+    width: 40px
+    background: linear-gradient(to left , rgba(255,255,255,1) 20%, rgba(255,255,255,0) 100%)
+    z-index 1
+    @media (max-width: tablet-upper-limit)
+      display: none
+
+.rt-n-comment-slider-paginator
+
+  position: absolute;
+  display: flex
+  justify-content center
+  left: 0
+  right: 0
+  bottom: 0
+  pointer-events none
+  @media (max-width: mobile-upper-limit)
+    display: none
+  .rt-n-banner-paginator-item
+    pointer-events auto
+    cursor: pointer;
+
+
+
+

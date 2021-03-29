@@ -107,7 +107,9 @@ import {
   CardHelp,
   CardBanner,
   CardTileLayout,
-  Popover
+  Popover,
+  CommentSlider,
+  CommentSliderItem
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -125,7 +127,8 @@ const VueRtStyle = {
   install(Vue, config) {
     if (!Vue.RtStyle) {
 
-
+      Vue.component(CommentSlider.name, CommentSlider);
+      Vue.component(CommentSliderItem.name, CommentSliderItem);
       Vue.component(ScrollTabs.name, ScrollTabs);
       Vue.component(Card.name, Card);
       Vue.component(CardRounded.name, CardRounded);
@@ -233,6 +236,10 @@ const VueRtStyle = {
       Vue.component(CardTileLayout.name, CardTileLayout);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
+
+
+      Vue.directive(CommentSlider.name, CommentSlider);
+      Vue.directive(CommentSliderItem.name, CommentSliderItem);
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
       Vue.directive(TooltipDirective.name, TooltipDirective);
@@ -393,5 +400,7 @@ export {
   SwipeRight,
   OutsideClickDirective,
   ResizeTypeStore,
-  GaClickDirective
+  GaClickDirective,
+  CommentSlider,
+  CommentSliderItem
 }

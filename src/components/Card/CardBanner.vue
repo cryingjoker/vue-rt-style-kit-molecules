@@ -61,7 +61,7 @@ export default {
       }
       this.$forceUpdate()
     },
-    pushGA(e) {
+    pushGA() {
       if(!window.dataLayer) {
         window.dataLayer = []
       }
@@ -93,7 +93,7 @@ export default {
     }
     return <rt-carousel-slide-v2 parent-carousel-name={this.parentCarouselName}>
       <div class="rt-card-banner-wrapper">
-        <a class="rt-card-banner" href={this.link}>
+        <a class="rt-card-banner" href={this.link} onClick={this.pushGA}>
           <div class="rt-card-banner__text-content">
             <div class="rt-card-banner__tag rt-font-control">{this.tag}</div>
             <h4 class="rt-font-h4 sp-b-0-3 sp-r-1">{this.$slots.title}</h4>

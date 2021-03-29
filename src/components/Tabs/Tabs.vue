@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showNavigationLine:{
+      type:Boolean,
+      default: false
+    },
     navigationHorizontalPadding: {
       type: Number,
       default: null
@@ -126,6 +130,9 @@ export default {
       if (this.background.length > 0) {
         classes.push('rt-tabs--background')
         classes.push('rt-tabs--background-' + this.background)
+        if(this.showNavigationLine){
+          classes.push('rt-tabs--background-show-line')
+        }
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
         classes.push("rt-tabs--vertical");
@@ -220,7 +227,12 @@ export default {
     onUpdateTabsStore() {
       var data = tabsStore.tabsParents[this._uid]
       if (data) {
-
+        if(data.index != data.indexBefore && data.indexBefore != -1){
+          this.$emit('change',{
+            activeIndex: data.index,
+            activeName: Object.keys(data).filter(i=> data[i].isActive)[0]
+          })
+        }
         let index = data.index
         if (index < 0) {
           index = 0
