@@ -20,7 +20,7 @@ export default {
     },
     autoplay: {
       type: Boolean,
-      default: false
+      default: true
     },
     preventScroll: {
       type: Boolean,
