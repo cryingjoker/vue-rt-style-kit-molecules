@@ -273,7 +273,7 @@ export default {
             <div class="rt-font color-main sp-t-0-3 rt-comment-slider-item-text">
               {content.comment}
             </div>
-            <a target="_blank" href={content.contentUrl} class="sp-t-0-2 color-main05 p3">Читать целиком</a>
+            <a target="_blank" href={content.contentUrl} class="sp-t-0-2 color-main05 rt-comment-slider-link p3">Читать целиком</a>
           </div>
           <div class="sp-h-1 md-sp-b-1 sp-v-1-3 td-sp-v-1">
             <div class="d-flex rt-comment-slider-item-body">

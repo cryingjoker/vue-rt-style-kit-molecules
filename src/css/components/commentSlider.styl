@@ -65,9 +65,12 @@ use("./getCalc.js")
   @media (max-width: tablet-upper-limit)
     left: 0
 
-
+.rt-comment-slider-link
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property color
 .rt-comment-slider-item
-  box-shadow 0 0 0 1px main-color005 inset
+  box-shadow 0 0 0 2px main-color005 inset
   position: absolute;
   pointer-events none
   opacity: 0
@@ -82,6 +85,10 @@ use("./getCalc.js")
     width: calc(66% - 20px)
   @media (max-width: mobile-upper-limit)
     width: calc(100% - 20px)
+  &:hover
+    .rt-comment-slider-link
+      color b2c-orange
+
 .rt-comment-slider-item-content
   height getCalc(1280,200, 1024, 244)
   min-height: getCalc(1280,200, 1024, 244)
