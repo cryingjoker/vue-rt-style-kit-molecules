@@ -50,7 +50,8 @@ export default {
     rowBoBack: false,
     buttonIsHover: false,
     containerHeight: 0,
-    isMobile: false
+    isMobile: false,
+    maxLength: 0
 
   }),
 
@@ -74,21 +75,22 @@ export default {
     this.unbindResize()
   },
   methods: {
-    checkWindowWidth(){
 
-        if(window.innerWidth < 768){
-          this.isMobile = true
-        }else{
-          this.isMobile = false
-        }
+    checkWindowWidth() {
+
+      if (window.innerWidth < 768) {
+        this.isMobile = true
+      } else {
+        this.isMobile = false
+      }
 
     },
-    bindResize(){
-      window.addEventListener('resize',this.checkWindowWidth)
+    bindResize() {
+      window.addEventListener('resize', this.checkWindowWidth)
       this.checkWindowWidth();
     },
-    unbindResize(){
-      window.removeEventListener('resize',this.checkWindowWidth)
+    unbindResize() {
+      window.removeEventListener('resize', this.checkWindowWidth)
     },
     mousedown(e) {
       this.mousedownFlag = true
@@ -117,16 +119,16 @@ export default {
         this.touchdownFlag = false
         this.touchstartX = null;
         this.touchstartY = null;
-        if(!this.goLeft && !this.goRight && !this.buttonIsHover){
+        if (!this.goLeft && !this.goRight && !this.buttonIsHover) {
           this.rowBoBack = true
-          setTimeout(()=>{
+          setTimeout(() => {
             this.rowBoBack = false
-          },500)
+          }, 500)
         }
         this.deltaRowMove()
       }
       let delta = parseInt(this.$refs.row.$el.style.transform.replace(/[a-z()]/gi, ''))
-      if(this.pauseAnimation && Math.abs(delta)>1){
+      if (this.pauseAnimation && Math.abs(delta) > 1) {
         this.pauseAnimation = false
         this.deltaRowMove(true)
       }
@@ -196,7 +198,9 @@ export default {
         _ids: this.ids,
         activeIndex: this.activeIndex,
         goLeft: this.goLeft,
-        goRight: this.goRight
+        goRight: this.goRight,
+        maxLength: this.maxLength
+
       } = commentSliderStore.getSliderContent(this.name));
       this.activeIndex = [...this.activeIndex]
       this.activeIds = this.activeIndex.map((index) => this.ids[index])
@@ -228,12 +232,12 @@ export default {
       this.isHover = false
       this.tick()
     },
-    buttonMouseenter(){
+    buttonMouseenter() {
 
       this.mouseenter()
       this.buttonIsHover = true
     },
-    buttonMouseleave(){
+    buttonMouseleave() {
       this.mouseleave()
       this.buttonIsHover = false
     },
@@ -254,9 +258,18 @@ export default {
     }
   },
 
+  computed: {
+    renderPseudoText() {
+      let a = []
+      for (var i = 0; i < this.maxLength; i++) {
+        a.push('ш')
+      }
+      return a.join('')
+    }
 
+  },
   render(h) {
-    const rowClassList =  ["rt-comment-slider-row","height-fill"]
+    const rowClassList = ["rt-comment-slider-row", "height-fill"]
     if (this.goRight) {
       rowClassList.push('rt-comment-slider-row-right')
     }
@@ -277,7 +290,7 @@ export default {
           sliderItemClassList.push('rt-comment-slider-item-show')
         }
 
-        return <div class={sliderItemClassList.join(' ')}  onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
+        return <div class={sliderItemClassList.join(' ')} onMouseenter={this.mouseenter} onMouseleave={this.mouseleave}>
 
           <div class="color-block--main-color005 sp-t-1-3 sp-b-1-3 sp-h-1 rt-comment-slider-item-content">
 
@@ -290,7 +303,8 @@ export default {
             <div class="rt-font color-main sp-t-0-3 rt-comment-slider-item-text">
               {content.comment}
             </div>
-            <a target="_blank" href={content.contentUrl} class="sp-t-0-2 color-main05 rt-comment-slider-link p3">Читать целиком</a>
+            <a target="_blank" href={content.contentUrl} class="sp-t-0-2 color-main05 rt-comment-slider-link p3">Читать
+              целиком</a>
           </div>
           <div class="sp-h-1 md-sp-b-1 sp-v-1-3 td-sp-v-1">
             <div class="d-flex rt-comment-slider-item-body">
@@ -309,7 +323,13 @@ export default {
                   </a>
 
                 </p>
-                <p class="sp-t-0-2 color-main05 p3 md-sp-r-2">{content.author_about}</p>
+                <div class="md-sp-r-2 sp-t-0-2">
+                  <div class="rt-comment-slider-item-author-text p3">
+                    {this.renderPseudoText}
+                    <p class="color-main05 rt-comment-slider-item-author-content">{content.author_about}</p>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -328,7 +348,8 @@ export default {
         const setActiveId = () => {
           this.setActiveId(id)
         }
-        return <div class={paginatorClassName.join(' ')} onClick={setActiveId} onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}>
+        return <div class={paginatorClassName.join(' ')} onClick={setActiveId} onMouseenter={this.buttonMouseenter}
+                    onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}>
           <svg class="rt-n-banner-paginator-round" width="18px" height="18px" viewBox="0 0 18 18" version="1.1"
                style={roundStyle}
                xmlns="http://www.w3.org/2000/svg">
@@ -345,12 +366,14 @@ export default {
                 onMouseup={this.mouseup}>
       <div class="rt-comment-slider-inner">
         <div class="rt-container relative height-fill rt-comment-slider-navigation">
-          <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}
+          <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter}
+               onMouseleave={this.buttonMouseleave}
                class="rt-comment-slider-arrow rt-comment-slider-arrow--next" onClick={this.setNextActive}>
             <rt-system-icons name="chevron right"></rt-system-icons>
           </div>
 
-          <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter} onMouseleave={this.buttonMouseleave}
+          <div onMouseenter={this.buttonMouseenter} onMousemove={this.buttonMouseenter}
+               onMouseleave={this.buttonMouseleave}
                class="rt-comment-slider-arrow rt-comment-slider-arrow--prew" onClick={this.setPrewActive}>
             <rt-system-icons name="chevron left"></rt-system-icons>
           </div>
