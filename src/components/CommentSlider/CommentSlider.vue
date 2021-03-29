@@ -49,7 +49,8 @@ export default {
     pauseAnimation: false,
     rowBoBack: false,
     buttonIsHover: false,
-    containerHeight: 0
+    containerHeight: 0,
+    isMobile: false
 
   }),
 
@@ -57,8 +58,8 @@ export default {
   mounted: function () {
     this.addInStore()
     this.addWatcher();
-
     this.tick();
+    this.bindResize()
     // this.$refs.row.scroll({
     //   left: this.lineLeft - window.innerWidth / 3,
     //   behavior: 'smooth'
@@ -70,8 +71,25 @@ export default {
 
   beforeDestroy: function () {
     this.removeWatcher()
+    this.unbindResize()
   },
   methods: {
+    checkWindowWidth(){
+
+        if(window.innerWidth < 768){
+          this.isMobile = true
+        }else{
+          this.isMobile = false
+        }
+
+    },
+    bindResize(){
+      window.addEventListener('resize',this.checkWindowWidth)
+      this.checkWindowWidth();
+    },
+    unbindResize(){
+      window.removeEventListener('resize',this.checkWindowWidth)
+    },
     mousedown(e) {
       this.mousedownFlag = true
       this.mousedownX = e.clientX
@@ -99,7 +117,6 @@ export default {
         this.touchdownFlag = false
         this.touchstartX = null;
         this.touchstartY = null;
-
         if(!this.goLeft && !this.goRight && !this.buttonIsHover){
           this.rowBoBack = true
           setTimeout(()=>{
@@ -246,7 +263,7 @@ export default {
     if (this.goLeft) {
       rowClassList.push('rt-comment-slider-row-left')
     }
-    if (this.rowBoBack) {
+    if (this.rowBoBack && !this.isMobile) {
       rowClassList.push('rt-comment-slider-row-back')
     }
     const renderContent = () => {
