@@ -51,13 +51,13 @@
         document.querySelector('.popup-image').style.backgroundImage = 'url(' + this.$el.querySelector('.rt-timeline__item-image').src + ')';
         let fullName = this.$el.querySelector('.rt-timeline__item-speaker').innerHTML;
         let space = fullName.indexOf(' ');
-        let firstName = fullName.substring(0, space);
-        let lastName = fullName.substr(space + 1);
+        let firstname = fullName.substring(0, space);
+        let lastname = fullName.substr(space + 1);
         document.querySelector('.popup-title').innerHTML = '<div class="speaker-name__wrapper"> ' +
-            '<div class="speaker-name__name">' + firstName + '</div> ' +
+            '<div class="speaker-name__name">' + firstname + '</div> ' +
           '</div> ' +
           '<div class="speaker-name__wrapper"> ' +
-            '<div class="speaker-name__surname">' + lastName + '</div> ' +
+            '<div class="speaker-name__surname">' + lastname + '</div> ' +
           '</div> ';
         document.querySelector('.popup-theme').innerHTML = this.$el.querySelector('.rt-timeline__item-theme').innerHTML;
         document.querySelector('.popup-description').innerHTML = this.$el.querySelector('.rt-timeline__item-description').innerHTML;

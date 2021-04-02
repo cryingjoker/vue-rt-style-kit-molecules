@@ -42,14 +42,14 @@
       const name = (() => {
         let fullName = this.$slots.title[0].text;
         let space = fullName.indexOf(' ');
-        let firstName = fullName.substring(0, space);
-        let lastName = fullName.substr(space + 1);
+        let firstname = fullName.substring(0, space);
+        let lastname = fullName.substr(space + 1);
         return <div class="speaker-name rt-font-bold rt-space-bottom rt-md-space-bottom-none">
           <div class="speaker-name__wrapper">
-            <div class="speaker-name__name">{firstName}</div>
+            <div class="speaker-name__name">{firstname}</div>
           </div>
           <div class="speaker-name__wrapper">
-            <div class="speaker-name__surname">{lastName}</div>
+            <div class="speaker-name__surname">{lastname}</div>
           </div>
         </div>
       })();
