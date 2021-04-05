@@ -1,11 +1,20 @@
+use("./getCalc.js")
 .rt-comment-slider
   overflow: hidden;
   user-select none
+  @media (hover:hover)
+    &:hover
+      .rt-comment-slider-arrow
+        opacity: 1
 
 .rt-comment-slider-inner
   scroll-padding 80px
   position: relative;
-  height: 376px
+  @media (min-width: laptop-upper-limit)
+    height: 376px
+  height: getCalc(1280,376, 1024, 420)
+  @media (max-width: tablet-upper-limit)
+    height: 378px
   @media (max-width: mobile-upper-limit)
     height: 432px
 
@@ -29,8 +38,10 @@
   cursor: pointer;
   transition-timing-function cubic-bezier(10, 2, .9, .65)
   transition-duration .3s
-  transition-property transform
+  transition-property transform, opacity
   user-select none
+  @media (min-width: laptop-upper-limit)
+    opacity 0
   @media (max-width: tablet-upper-limit)
     height: 36px
     width: 36px
@@ -60,34 +71,53 @@
   @media (max-width: tablet-upper-limit)
     left: 0
 
-
+.rt-comment-slider-link
+  transition-timing-function cubic-bezier(10, 2, .9, .65)
+  transition-duration .3s
+  transition-property color
 .rt-comment-slider-item
-  box-shadow 0 0 0 1px main-color005 inset
+  box-shadow 0 0 0 2px main-color005 inset
   position: absolute;
   pointer-events none
   opacity: 0
-  display: flex
-  flex-direction column
-  left: -100vw
+  left: 0
+  right: 0
+  margin-left auto
+  margin-right auto
   width: calc(50% - 20px)
   transition-timing-function linear
   transition-duration .3s
-  transition-property transform, opacity
+  transition-property  opacity
   bottom: 52px
   top: 0
   @media (max-width: tablet-upper-limit)
     width: calc(66% - 20px)
   @media (max-width: mobile-upper-limit)
     width: calc(100% - 20px)
-    bottom: 62px
-.rt-comment-slider-item-content
-  display: flex
-  flex 1
-  flex-direction column
-  @media (max-width: mobile-upper-limit)
-    min-height 268px
+    margin-bottom: 10px
+  &:hover
+    .rt-comment-slider-link
+      color b2c-orange
 .rt-comment-slider-item-text
   flex 1
+.rt-comment-slider-item-content
+  display: flex
+  flex-direction column
+  height getCalc(1280,200, 1024, 244)
+  min-height: getCalc(1280,200, 1024, 224)
+  max-height: getCalc(1280,200, 1024, 224)
+  @media (max-width: tablet-upper-limit)
+    height 224px
+    min-height: 224px
+    max-height: 224px
+  @media (max-width: mobile-upper-limit)
+    min-height 268px
+    max-height 268px
+    height 268px
+  @media (min-width: laptop-upper-limit)
+    height: 200px
+    min-height: 200px
+    max-height: 200px
 .rt-comment-slider-item-show
   opacity: 0.5
   pointer-events auto
@@ -98,45 +128,48 @@
       opacity: 0.5
 
 .rt-comment-slider-item-i1
-  left: -25%
-  @media (max-width: tablet-upper-limit)
-    left: -48%
+  transform translateX(-100%)
+  left -20px
+  right: 20px
+
   @media (max-width: mobile-upper-limit)
-    left: -100%
+    left -10px
+    right: 10px
 
 
 .rt-comment-slider-item-i0
-  left: -75%
-  @media (max-width: tablet-upper-limit)
-    left: -114%
+  transform translateX(-200%)
+  left -40px
+  right: 40px
+
   @media (max-width: mobile-upper-limit)
-    left: -200%
+    left -20px
+    right: 20px
 
 .rt-comment-slider-item-i3
-  right: -25%
-  left: initial
-  @media (max-width: tablet-upper-limit)
-    right: -48%
+  transform translateX(100%)
+  left 20px
+  right: -20px
+
   @media (max-width: mobile-upper-limit)
-    right: -100%
+    left 10px
+    right: -10px
 
 
 
 
 .rt-comment-slider-item-i4
-  right: -75%
-  left: initial
-  @media (max-width: tablet-upper-limit)
-    right: -114%
+  transform translateX(200%)
+  left 40px
+  right: -40px
   @media (max-width: mobile-upper-limit)
-    right: -200%
+    left 20px
+    right: -20px
 
 .rt-comment-slider-item-i2
-  margin-left auto
-  margin-right auto
-  left: 0
-  right: 0
   opacity: 1
+
+
   @media (max-width: mobile-upper-limit)
     margin-right initial
     right: initial
@@ -146,11 +179,19 @@
   animation-name goLeft
   animation-duration 0.5s
   animation-timing-function ease-in-out
+
   @media (max-width: tablet-upper-limit)
     animation-name goLeftTablet
+
   @media (max-width: mobile-upper-limit)
     animation-name goLeftMobile
 
+.rt-comment-slider-item-author-text
+  color transparent
+  position: relative;
+.rt-comment-slider-item-author-content
+  position: absolute;
+  top: 0
 .rt-comment-slider-row-right
   animation-name goRight
   animation-duration 0.5s
@@ -167,25 +208,26 @@
 
 @keyframes goLeft
   100%
-    transform translateX(-51%)
+    transform translateX(-50%)
+
 
 @keyframes goRight
   100%
-    transform translateX(50.5%)
+    transform translateX(50%)
 @keyframes goLeftTablet
   100%
-    transform translateX(-60.5%)
+    transform translateX(-50%)
 
 @keyframes goLeftMobile
   100%
-    transform translateX(-100%)
+    transform translateX(calc(-100% + 10px))
 
 @keyframes goRightMobile
   100%
-    transform translateX(100%)
+    transform translateX(calc(100% - 10px))
 @keyframes goRightTablet
   100%
-    transform translateX(65%)
+    transform translateX(50%)
 @keyframes goBack
   100%
     transform translateX(0%)

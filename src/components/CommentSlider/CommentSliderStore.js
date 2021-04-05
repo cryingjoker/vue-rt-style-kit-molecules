@@ -60,6 +60,7 @@ class CommentSliderStore extends StorePrototype {
 
       }
       this.setActiveItems(sliderName)
+      this.setMaxAuthorTextLength(sliderName)
     }
     if (sliderName in this.sliders) {
       pushSlide()
@@ -70,6 +71,12 @@ class CommentSliderStore extends StorePrototype {
       this.sliderSqueue[sliderName].push(pushSlide)
     }
   }
+  setMaxAuthorTextLength = (sliderName)=>{
+    const content = this.sliders[sliderName].content
+    this.sliders[sliderName].maxLength = Math.max.apply(null,Object.values(content).map(i=>i.author_about[0]?.text?.length))
+    this.callWatcher(sliderName)
+
+  }
   updateSlide = (sliderName, _id, content, isActive) => {
 
     this.sliders[sliderName].content[_id] = content
@@ -77,14 +84,15 @@ class CommentSliderStore extends StorePrototype {
       this.sliders[sliderName].activeIndex[2] = this.sliders[sliderName]._ids.length - 1;
 
     }
+    this.setMaxAuthorTextLength(sliderName)
     this.setActiveItems(sliderName)
 
   }
 
   getSliderContent = (sliderName) => {
     if(sliderName in this.sliders){
-      const {content, _ids, activeIndex, goLeft, goRight} = this.sliders[sliderName]
-      return {content, _ids, activeIndex,goLeft, goRight}
+      const {content, _ids, activeIndex, goLeft, goRight, maxLength} = this.sliders[sliderName]
+      return {content, _ids, activeIndex,goLeft, goRight, maxLength}
     }
   }
 
