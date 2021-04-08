@@ -1,14 +1,15 @@
-const fs = require('fs')
-const path = require('path')
-const zlib = require('zlib')
-const rollup = require('rollup')
-const terser = require('terser')
+import fs from 'fs'
+import path from 'path'
+import zlib from 'zlib'
+import {rollup} from 'rollup'
+import terser from 'terser'
+import genConfig from './config.js'
+
 
 if (!fs.existsSync('dist')) {
     fs.mkdirSync('dist')
 }
 
-let genConfig = require('./config')
 
 // filter builds via command line arg
 const keysBuild = ['web-es-full-prod','web-full-prod'];
@@ -38,7 +39,7 @@ function buildEntry (configData) {
 
     const { file, banner } = output
     const isProd = /(min|prod)\.js$/.test(file)
-    return rollup.rollup(config)
+    return rollup(config)
         .then((bundle) => {
             return bundle.generate(output)
         })
