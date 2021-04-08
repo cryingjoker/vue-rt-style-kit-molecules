@@ -3,6 +3,7 @@
   "b2c-black085": "rgba(16, 24, 40 , 0.85)",
   "b2c-black085-no-opacity": "#343B48",
   "b2c-purple": "#7700FF",
+  "b2c-purple": "#9466FF",
   "b2c-purple-button-hover": "#5B09C0",
   "b2c-purple-button-active": "#3F028C",
   "b2c-purple01": "rgba(119,0,255,0.1)",
@@ -27,13 +28,18 @@
   "b2c-yellow-high": "#FFD800",
 
   "b2c-orange": "#FF4F12",
+  "b2c-orange-night": "#FF5E2D",
   "b2c-orange-button-hover": "#D33706",
   "b2c-orange-button-active": "#B12F01",
   "b2c-orange-low": "#D33706",
   "b2c-orange-high": "#FF8218",
   "b2c-orange-super": "#FE5013",
-
-
+  "color-success": "#5BCF6A",
+  "color-success-night": "#26DA72",
+  "color-warning": "#F4B941",
+  "color-warning-night": "#FFCA00",
+  "color-info": "#0E49E3",
+  "color-info-night": "#4075FF",
   "b2c-pink": "#FFBFC3",
   "b2c-pink-low": "#FFA0A7",
   "b2c-pink-high": "#FFD2DD",
@@ -57,12 +63,14 @@
   "main-color003": "rgba(16,24,40,0.03)",
 
   "main-color09-no-opacity": "#272F3D",
+  "main-color085-no-opacity": "#343B48",
   "main-color07-no-opacity": "#575D68",
   "main-color05-no-opacity": "#868B95",
   "main-color03-no-opacity": "#B8B9C0",
-  "main-color01-no-opacity": "#B8B9C0",
+  "main-color01-no-opacity": "#E7E7E9",
+  "main-color007-no-opacity": "#EEEFF0",
   "main-color005-no-opacity": "#F3F3F4",
-  "main-color003-no-opacity": "#E7E7E9",
+  "main-color003-no-opacity": "#F8F8F8",
 
   "b2c-cool-grey": "#E3E8EC",
   "b2c-cool-grey07": "rgba(227,232,236,0.7)",
@@ -80,7 +88,7 @@
 
   "b2c-slate": "#7B939B",
   "b2c-dark-slate": "#313A49",
-  "b2c-burgundy": "#431625",
+  "b2c-burgundy": "#850337",
 
   "b2c-white09": "rgba(255,255,255, 0.9)",
   "b2c-white08": "rgba(255,255,255, 0.8)",
@@ -98,7 +106,9 @@
   "disable-button-color-dark-theme": "rgba(255,255,255,0.1)",
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
-  "error-color": "#D30606",
+  "error-color": "#eb3728",
+  "error-color-darktheme": "#FF4747",
+  "error-color-light": "#FF4747",
   "box-shadow-background": "rgba(16,24,40,0.1)",
   "dark-theme-dropdown-background": "#202432",
   "light-grey": "#fafafa"

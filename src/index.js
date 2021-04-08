@@ -398,6 +398,7 @@ export {
   // need to change name directives
   SwipeLeft,
   SwipeRight,
+  PopupTriggerDirective,
   OutsideClickDirective,
   ResizeTypeStore,
   GaClickDirective,
