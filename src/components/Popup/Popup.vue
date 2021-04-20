@@ -162,7 +162,6 @@ export default {
       window.removeEventListener('keydown', this.keyPress);
     },
     bindCloseButton() {
-
       const close = this.$el.querySelector('.rt-close');
       if (close) {
         close.addEventListener('click', this.triggerClose, {passive: true});
