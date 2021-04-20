@@ -85,6 +85,18 @@ export default {
     orange: {
       type: Boolean,
       default: false
+    },
+    shadowColor:{
+      type:String,
+      default: ''
+    },
+    showBottomLine:{
+      type: Boolean,
+      default: false
+    },
+    bottomLineWhite:{
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -127,11 +139,26 @@ export default {
       if (this.bright) {
         classes.push('rt-tabs--bright')
       }
+      if(this.showBottomLine) {
+        classes.push('rt-tabs--show-b-line')
+        if (this.bottomLineWhite) {
+          classes.push('rt-tabs--b-line-white')
+        }
+      }
       if (this.background.length > 0) {
         classes.push('rt-tabs--background')
         classes.push('rt-tabs--background-' + this.background)
         if(this.showNavigationLine){
           classes.push('rt-tabs--background-show-line')
+        }
+      }
+      if(this.showShadowLeft || this.showShadowRight) {
+        if (this.shadowColor.length > 0) {
+          classes.push('rt-tabs--shadow-' + this.shadowColor)
+        } else {
+          if(this.background.length > 0) {
+            classes.push('rt-tabs--shadow-' + this.background)
+          }
         }
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
@@ -285,6 +312,7 @@ export default {
     }
   },
   render(h) {
+    console.info('shadowColor','-__.>>>',this.shadowColor,this.background)
     let id = 'tabs-' + this._uid;
     const renderContent = () => {
       return <div class="rt-tabs-content">
