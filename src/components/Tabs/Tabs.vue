@@ -312,7 +312,6 @@ export default {
     }
   },
   render(h) {
-    console.info('shadowColor','-__.>>>',this.shadowColor,this.background)
     let id = 'tabs-' + this._uid;
     const renderContent = () => {
       return <div class="rt-tabs-content">
