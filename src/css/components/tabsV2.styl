@@ -284,11 +284,32 @@ colors = readJsonKeys('../../../color.json')
       background-color: transparent
     .rt-tabs-v2-navigation
       background-color b2c-white005
+.rt-tabs--show-b-line
+  .rt-tabs-v2-navigation
+    &:before
+      content ''
+      bottom: 0
+      left: 0
+      display: block
+      width: 100%
+      position: absolute;
+      background-color: main-color01!important
+      height: 2px
+      right: 0
 
+.rt-tabs--b-line-white.rt-tabs--show-b-line
+  .rt-tabs-v2-navigation
+    &:before
+      background-color: b2c-white01!important
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'rt-tabs--background-'+replace($i,'b2c-','')
+    shadowClassName = 'rt-tabs--shadow-'+replace($i,'b2c-','')
+
     .{className}
+      .rt-tabs-v2-navigation
+        background-color rgba(lookup($i))
+    .{shadowClassName}
       .rt-tabs-v2-navigation-shadow-left
         background-image: linear-gradient(to left, rgba(lookup($i),0) 0%, lookup($i) 90%)
       .rt-tabs-v2-navigation-shadow-right
