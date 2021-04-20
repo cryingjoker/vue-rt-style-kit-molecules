@@ -59,7 +59,8 @@ export default {
     xDown: null,
     yDown: null,
     pause: false,
-    hover: false
+    hover: false,
+    minHeight: 0
 
   }),
   computed: {
@@ -74,12 +75,11 @@ export default {
 
       let indexesShow = [this.customSlotsSort.filter((i) => i == this.activeItem.activeId)];
       let indexBeforeEl = this.customSlotsSort.indexOf(this.activeItem.beforeActiveId);
-
+      console.info('indexBeforeEl',indexBeforeEl)
       if (indexBeforeEl >= 0) {
         indexesShow.push(this.customSlotsSort[indexBeforeEl]);
       }
       return indexesShow.map((id, index) => {
-
         const showThisTab = this.activeItem.beforeActiveId && this.activeItem.activeId == id
         const isBeforeActive = this.activeItem.beforeActiveId == id
         if (isBeforeActive || this.activeItem.activeId == id) {
@@ -186,6 +186,7 @@ export default {
   render(h) {
     if (this.name.length > 0) {
       return <div class="tab-slider" ref="slider"
+                  style={{minHeight: this.minHeight+'px'}}
                   onMouseenter={this.mouseenter}
                   onMouseleave={this.mouseleave}
       >
