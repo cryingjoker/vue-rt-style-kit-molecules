@@ -30,6 +30,10 @@ export default {
     containerId:{
       type: String,
       default: ''
+    },
+    iconName:{
+      type: String,
+      default:'help stroke'
     }
   },
   data: () => ({
@@ -179,6 +183,12 @@ export default {
     }
   },
   render() {
+    const renderIcon = ()=>{
+      if(this.$slots.customIcon){
+        return this.$slots.customIcon[0]
+      }
+      return <rt-system-icons class="rt-popover-icon" name={this.iconName}></rt-system-icons>
+    }
     const popoverBodyClass = ['rt-popover-body', 'sp-l-0-4', 'sp-r-1-2', 'sp-v-0-4', 'round-border']
     popoverBodyClass.push('rt-popover-body-v-' + this.localVertical);
     popoverBodyClass.push('rt-popover-body-h-' + this.localHorizontal);
@@ -198,19 +208,20 @@ export default {
       return <div class={popoverClassList.join(' ')} onMouseenter={this.mouseenter} onMousemove={this.mouseenter}
                   onMouseleave={this.mouseleave} ref="popover">
         <button type="button" onClick={this.activate} class="popover-icon-button">
-          <rt-system-icons class="popover-icon" name="help stroke"></rt-system-icons>
+          {renderIcon()}
         </button>
         <div class={popoverBodyClass.join(' ')} ref="popoverBody">
           <button class="rt-popover-close" type="button" onClick={this.deactivate}>
             <rt-system-icons name="close small"></rt-system-icons>
           </button>
-          {this.$slots.default}
+          {this.$slots.content || this.$slots.default}
         </div>
       </div>;
     }
     return <div class="rt-popover" ref="popover">
       <button type="button" onClick={this.activate} class="rt-popover-icon-button">
-        <rt-system-icons class="rt-popover-icon" name="help stroke"></rt-system-icons>
+        {renderIcon()}
+
       </button>
     </div>;
   }
