@@ -121,28 +121,11 @@ export default {
     if (this.autoplay) {
       this.tick()
     }
-    if (this.autoplay && this.stopWhenNotShow) {
-      this.bindScroll()
-    }
+
   },
-  updated() {
-    if (this.autoplay && this.stopWhenNotShow) {
-      this.unbindScroll()
-      this.bindScroll()
-    }
-  },
-  beforeDestroy() {
-    if (this.autoplay && this.stopWhenNotShow) {
-      this.unbindScroll()
-    }
-  },
+
+
   methods: {
-    bindScroll() {
-      window.addEventListener('scroll', getViewPortPosition)
-    },
-    unbindScroll() {
-      window.removeEventListener('scroll', getViewPortPosition)
-    },
     getViewPortPosition() {
       const scrollPos = window.pageYOffset || document.documentElement.scrollTop
       const top = this.$el.getBoundingClientRect().top

@@ -47,7 +47,7 @@ export default {
     },
     stopWhenNotShow:{
       type: Boolean,
-      default: false
+      default: true
     }
   },
   components: components,
@@ -67,7 +67,6 @@ export default {
     renderMenu() {
       return <rt-tabs-slider-paginator on-click-stop-play={this.onClickStopPlay} pause={this.pause}
                                        time={this.timerDuration}
-                                       stop-when-not-show={this.stopWhenNotShow}
                                        duration-time={this.scrollDuration}
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
@@ -75,7 +74,6 @@ export default {
 
       let indexesShow = [this.customSlotsSort.filter((i) => i == this.activeItem.activeId)];
       let indexBeforeEl = this.customSlotsSort.indexOf(this.activeItem.beforeActiveId);
-      console.info('indexBeforeEl',indexBeforeEl)
       if (indexBeforeEl >= 0) {
         indexesShow.push(this.customSlotsSort[indexBeforeEl]);
       }
@@ -96,6 +94,7 @@ export default {
 
   mounted: function () {
     this.registerTabsSlider();
+    this.bindScroll()
 
   },
   methods: {
@@ -109,6 +108,24 @@ export default {
       if (this.pauseOnHover) {
         this.hover = false;
         this.pause = false
+      }
+    },
+    bindScroll(){
+      if ('IntersectionObserver' in window && this.stopWhenNotShow) {
+        const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if(this.autoplay) {
+                tabsSliderStore.setSettings(this.name, 'autoplay', true)
+              }
+            }else{
+              if(this.autoplay) {
+                tabsSliderStore.setSettings(this.name, 'autoplay', false)
+              }
+            }
+          })
+        }, {threshold: 0});
+        imageObserver.observe(this.$el);
       }
     },
     touchstart(evt) {
@@ -147,8 +164,6 @@ export default {
       if (this.name.length > 0) {
         tabsSliderStore.register(this.name, this.tabsHtmlMode).then(() => {
           this.isRegistered = true
-          tabsSliderStore.setSettings(this.name, 'autoplay', this.autoplay)
-          tabsSliderStore.setSettings(this.name, 'stopWhenNotShow', this.stopWhenNotShow)
           tabsSliderStore.runWatchersById(this.name)
         })
       }
