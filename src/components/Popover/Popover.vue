@@ -34,6 +34,10 @@ export default {
     iconName:{
       type: String,
       default:'help stroke'
+    },
+    stopOpacity:{
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -192,6 +196,11 @@ export default {
     const popoverBodyClass = ['rt-popover-body', 'sp-l-0-4', 'sp-r-1-2', 'sp-v-0-4', 'round-border']
     popoverBodyClass.push('rt-popover-body-v-' + this.localVertical);
     popoverBodyClass.push('rt-popover-body-h-' + this.localHorizontal);
+
+    const popoverClass = ['rt-popover']
+    if(this.stopOpacity){
+      popoverClass.push('rt-popover--stop-opacity')
+    }
     if(!this.autoPosition) {
       if (this.mdVertical.length > 0) {
         popoverBodyClass.push('rt-md-popover-body-v-' + this.mdHorizontal);
@@ -201,11 +210,11 @@ export default {
       }
     }
     if (this.isActive) {
-      const popoverClassList = ['rt-popover', 'rt-popover-active']
+      popoverClass.push('rt-popover-active')
       if (this.close) {
-        popoverClassList.push('rt-popover-closing')
+        popoverClass.push('rt-popover-closing')
       }
-      return <div class={popoverClassList.join(' ')} onMouseenter={this.mouseenter} onMousemove={this.mouseenter}
+      return <div class={popoverClass.join(' ')} onMouseenter={this.mouseenter} onMousemove={this.mouseenter}
                   onMouseleave={this.mouseleave} ref="popover">
         <button type="button" onClick={this.activate} class="popover-icon-button">
           {renderIcon()}
@@ -218,7 +227,7 @@ export default {
         </div>
       </div>;
     }
-    return <div class="rt-popover" ref="popover">
+    return <div class={popoverClass.join(' ')} ref="popover">
       <button type="button" onClick={this.activate} class="rt-popover-icon-button">
         {renderIcon()}
 
