@@ -225,6 +225,10 @@
       hasGradientOverImage: {
         type: Boolean,
         default: false
+      },
+      hasShadow: {
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
@@ -313,6 +317,9 @@
         }
         if (this.fullWidthTopImage) {
           cardClass += " rtb-card--img-full-width"
+        }
+        if (!this.hasShadow) {
+          cardClass += " rt-card--no-shadow"
         }
         return cardClass;
       },
