@@ -1,7 +1,6 @@
 import Vue from "vue";
 
 const setActiveTabName = (tabsName, tabAnchore = '', index) => {
-
   if (!tabsStore.tabsNames) {
     tabsStore.tabsNames = []
   }
@@ -9,17 +8,20 @@ const setActiveTabName = (tabsName, tabAnchore = '', index) => {
     const parentId = tabsStore.tabsNames[tabsName];
 
     const parentArray = tabsStore.tabsParents[parentId];
-    for (let key in parentArray) {
-      if (typeof parentArray[key] === 'object') {
-        parentArray[key].isActive = false;
+
+    if (parentArray) {
+      for (let key in parentArray) {
+        if (typeof parentArray[key] === 'object') {
+          parentArray[key].isActive = false;
+        }
       }
+      parentArray[tabsName].isActive = true;
+      parentArray.indexBefore = parentArray.index
+      if (typeof parentArray.indexBefore != 'number') {
+        parentArray.indexBefore = 0
+      }
+      parentArray.index = index;
     }
-    parentArray[tabsName].isActive = true;
-    parentArray.indexBefore = parentArray.index
-    if(typeof parentArray.indexBefore != 'number'){
-      parentArray.indexBefore = 0
-    }
-    parentArray.index = index;
 
     runWatchers(parentId);
   }
