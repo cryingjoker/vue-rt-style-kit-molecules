@@ -42,11 +42,18 @@ export default {
   updated() {
   },
   mounted: function () {
+    if(this.isBeforeActive){
+      this.$parent.minHeight = this.$refs.slide.clientHeight
+    }
   },
+
   methods: {
   },
+
   render(h) {
-    return <div class={this.tabSliderClass}>
+    console.info('isBeforeActive',this.isBeforeActive)
+
+    return <div ref="slide" class={this.tabSliderClass}>
       <rt-row class="row-td-reverse">
         <rt-col size={6} tablet-size={6} mobile-size={3}>
           <div class="tab-slider__body td-sp-t-1-3 md-sp-t-1-1">
