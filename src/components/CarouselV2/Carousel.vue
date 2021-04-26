@@ -73,7 +73,13 @@
         this.resizeData = this.resizeData.concat(this.contentToResize);
       }
       setTimeout(()=> {
-        window.dispatchEvent(new Event('resize'));
+        if (typeof(Event) === 'function') {
+          window.dispatchEvent(new Event('resize'));
+        } else {
+          var evt = window.document.createEvent('UIEvents');
+          evt.initUIEvent('resize', true, false, window, 0);
+          window.dispatchEvent(evt);
+        }
       },1000)
       if(this.$el.querySelector('.rt-carousel-slide-v2') && this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
