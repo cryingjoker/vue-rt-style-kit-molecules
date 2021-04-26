@@ -32,7 +32,6 @@ const setActiveTabName = (tabsName, tabAnchore = '', index) => {
     if (!isIE) {
       window.dispatchEvent(new Event("resize"));
     } else {
-
       let resizeEvent = window.document.createEvent('UIEvents');
       resizeEvent['initUIEvent']('resize', true, false, window, 0);
       window.dispatchEvent(resizeEvent);
