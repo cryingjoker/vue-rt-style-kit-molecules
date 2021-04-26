@@ -1,7 +1,4 @@
-import Vue from "vue";
 import "./css/vue-rt-style-kit-molecules.styl";
-import Global from "./variables.json";
-import Project from "@projectMolecules";
 
 import {
   ScrollTabs,
@@ -119,9 +116,6 @@ import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
 import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
 import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
 import {GaClickDirective} from "./directives/GaClick";
-// import 'element-closest-polyfill';
-// import 'nodelist-foreach-polyfill';
-// import 'element-remove';
 
 const VueRtStyle = {
   install(Vue, config) {
@@ -262,146 +256,5 @@ const VueRtStyle = {
     }
   }
 };
-// VueRtStyle.directives = { SwipeLeft, SwipeRight, OutsideClickDirective, FilterCallerDirective};
-
-// if(localStorage && localStorage.getItem('dev_Zmode')){
-//   localStorage.setItem('dev_mode__version',version);
-// }
-
-/**
- * Глобальные настройки библиотеки
- * -Для добавления своих настроек, создайте объект
- * с названием из Global.globalSettingsKey и положите перед подключением либы
- */
-const settingsKey = Global.globalSettingsKey;
-const version = Project.version;
-if (typeof window !== 'undefined') {
-
-  if (settingsKey) {
-    if (!window[settingsKey]) window[settingsKey] = {}
-    if (!window[settingsKey].segment) window[settingsKey].segment = Global.defaultSegment
-    window[settingsKey].version = version;
-  }
-
-// @Deprecated
-  window.RTK_STYLE_KIT_MOLECULES_VER = version;
-  window.addEventListener('getVueRtStyleVersion', function () {
-    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
-  })
-}
-
-VueRtStyle.version = version;
 
 export default VueRtStyle;
-export {
-  ScrollTabs,
-  Banner,
-  BannerItem,
-  BannerPaginatorItem,
-  BannerSkeleton,
-  Carousel,
-  CarouselSlide,
-  Card,
-  CardRounded,
-  CardB2o,
-  CardBuy,
-  CardImage,
-  CardImageList,
-  CardSkeleton,
-  FullscreenImage,
-  RowList,
-  HelpBlock,
-  RowListItem,
-  Table,
-  TableCol,
-  TableHeadItem,
-  TableItem,
-  TableRow,
-  DownloadContent,
-  InlineDropdown,
-  InlineDropdownItem,
-  Tag,
-  TagsList,
-  Filter,
-  FilterWatcher,
-  FilterCaller,
-  FilterV2,
-  FilterItemV2,
-  FilterSetterV2,
-  Youtube,
-  Sticky,
-  StickyBottomLine,
-  ResizeContentHeight,
-  Popup,
-  Popover,
-  LinksBlock,
-  BannerVideoGameControl,
-  SlideContent,
-  SlideContentDottedContent,
-  SlideContentDottedHeader,
-  Slide,
-  Swiper,
-  Pattern,
-  Opportunity,
-  OpportunityItem,
-  UnWrapper,
-  RealPopup,
-  TabsSlider,
-  TabsSliderItem,
-  Tabs,
-  TabsNavigationItem,
-  TabsContentItem,
-  Microtabs,
-  MicrotabsContent,
-  MicrotabsNavigation,
-  UseCase,
-  ProductCard,
-  TariffCard,
-  BenefitItem,
-  BenefitBlock,
-  PortraitTile,
-  PortraitTileItem,
-  Timeline,
-  TimelineItem,
-  ScrollBar,
-  VerticalScrollBar,
-  ReplacementLink,
-  CardCarousel,
-  CardLayout,
-  GalleryCarousel,
-  GalleryCarouselItem,
-  OptionsList,
-  ShowOn,
-  OptionsListInfoItem,
-  GameArrow,
-  CheckboxTabs,
-  CountdownTimer,
-  StickyHeaderLine,
-  HeaderAdvertisementBlock,
-  HeaderNavigation,
-  Slider,
-  SliderItem,
-  TextImageBlock,
-  BannerV2,
-  BannerItemV2,
-  PhoneNumberInput,
-  Jumbotron,
-  CarouselV2,
-  CarouselSlideV2,
-  AdBanner,
-  MessageBox,
-  PreviewBanner,
-  ArrowBlock,
-  CardHelp,
-  CardBanner,
-  CardTileLayout,
-  // need to change name directives
-  SwipeLeft,
-  SwipeRight,
-  PopupTriggerDirective,
-  OutsideClickDirective,
-  ResizeTypeStore,
-  GaClickDirective,
-  CommentSlider,
-  CommentSliderItem
-}

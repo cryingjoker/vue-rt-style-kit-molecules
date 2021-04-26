@@ -1,26 +1,36 @@
-const path = require('path')
-const fs = require('fs');
-const babel = require('rollup-plugin-babel');
-const babelCompilerPlugin = require('./babel-compiler-plugin');
-const cjs = require('@rollup/plugin-commonjs')
-const vue = require('rollup-plugin-vue');
-const node = require('@rollup/plugin-node-resolve')
-const flow = require('rollup-plugin-flow-no-whitespace')
-const postcss = require('rollup-plugin-postcss')
-const postcssEnv = require('postcss-preset-env');
-const externals = require('rollup-plugin-node-externals')
-// const typescript = require('@rollup/plugin-typescript');
-// const typescript = require('rollup-plugin-typescript2');
-const alias = require('@rollup/plugin-alias');
+import path from 'path'
 
-const stylusCompilerPlugin = require('./rollup-plugin-stylus-compiler');
-const stylusMixin = require('./stylus-mixin')
-const terser = require("rollup-plugin-terser").terser;
-const css = require('rollup-plugin-css-porter');
-const cssnano = require('cssnano')
-const version = process.env.VERSION || require('../package.json').version
+import babel from 'rollup-plugin-babel'
+import cjs from '@rollup/plugin-commonjs'
+import vue from 'rollup-plugin-vue'
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+
+import flow from 'rollup-plugin-flow-no-whitespace'
+import postcss from 'rollup-plugin-postcss'
+import postcssEnv from 'postcss-preset-env'
+import externals from 'rollup-plugin-node-externals'
+import stylusCompilerPlugin from './rollup-plugin-stylus-compiler.js'
+import stylusMixin from './stylus-mixin.js'
+import {terser} from "rollup-plugin-terser"
+import css from 'rollup-plugin-css-porter'
+import cssnano from 'cssnano'
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+let date_ob = new Date();
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+let year = date_ob.getFullYear()
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
+const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
 const aliases = {}
-const json = require('rollup-plugin-json');
+import json from 'rollup-plugin-json'
+import alias from '@rollup/plugin-alias'
+
 const resolve = p => {
     const base = p.split('/')[0]
     if (aliases[base]) {
@@ -119,7 +129,7 @@ function genConfig(name = 'web-full-prod') {
 
 
 
-            node({
+            nodeResolve({
                 jsnext: true,
                 skip: ['vue-rt-style-kit-atoms']
             }),
@@ -173,4 +183,4 @@ function genConfig(name = 'web-full-prod') {
     }
 }
 
-module.exports = genConfig
+export default genConfig

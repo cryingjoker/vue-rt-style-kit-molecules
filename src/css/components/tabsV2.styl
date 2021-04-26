@@ -1,4 +1,4 @@
-
+colors = readJsonKeys('../../../color.json')
 //.rt-tabs-v2-navigation-wrapper
 //  height:
 .rt-tabs-v2-navigation-wrapper
@@ -118,17 +118,10 @@
       margin-left: -20px
       margin-right: -20px
       width: calc(100% + 40px)
+.rt-tabs--background-show-line
+  .rt-tabs-v2-navigation:before
+    display: none
 .rt-tabs--background-gray
-  //.rt-tabs-v2-navigation-shadow-left
-  //  background-image: linear-gradient(to left, rgba(#f3f3f4,0) 0%, #f3f3f4 90%)
-  //  .rt-tabs--bright &,
-  //  .rt-dark-theme &
-  //    background-image: linear-gradient(to left, transparent 0%, #1b2433 100%)
-  //.rt-tabs-v2-navigation-shadow-right
-  //  background-image: linear-gradient(to right , rgba(#f3f3f4,0) 0%, #f3f3f4 90%)
-  //  .rt-tabs--bright &,
-  //  .rt-dark-theme &
-  //    background-image: linear-gradient(to right , transparent 0%, #1b2433 100%)
   .rt-tabs-v2-navigation-scoller
     background-color: main-color005
     .rt-tabs--bright &,
@@ -291,3 +284,12 @@
       background-color: transparent
     .rt-tabs-v2-navigation
       background-color b2c-white005
+
+for $i in colors
+  if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
+    className = 'rt-tabs--background-'+replace($i,'b2c-','')
+    .{className}
+      .rt-tabs-v2-navigation-shadow-left
+        background-image: linear-gradient(to left, rgba(lookup($i),0) 0%, lookup($i) 90%)
+      .rt-tabs-v2-navigation-shadow-right
+        background-image: linear-gradient(to right , rgba(lookup($i),0) 0%, lookup($i) 90%)

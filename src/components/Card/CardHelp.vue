@@ -39,7 +39,7 @@ export default {
     },
     link: {
       type: String,
-      default: ''
+      default: '#'
     }
   },
   data: () => ({}),
@@ -58,10 +58,21 @@ export default {
   },
   mounted () {},
   updated() {},
-  methods: {},
+  methods: {
+    pushGA() {
+      if(!window.dataLayer) {
+        window.dataLayer = []
+      }
+      dataLayer.push({
+        event: 'b2c',
+        type: 'popular_sections',
+        value: this.$slots.title[0].elm.nodeValue
+      })
+    }
+  },
   render(h){
     if(this.dualWidth) {
-      return <a class={this.cardClass} href={this.link}>
+      return <a class={this.cardClass} href={this.link} onClick={this.pushGA}>
         <div class="rt-card-help__content-wrapper">
           <div class="rt-card-help__content">
             <div>
@@ -83,7 +94,7 @@ export default {
         </div>
       </a>
     } else {
-      return <a class={this.cardClass} href={this.link}>
+      return <a class={this.cardClass} href={this.link} onClick={this.pushGA}>
         <div class="rt-card-help__inner">
           <div class="">
             <h4 class="rt-font-h4 sp-b-1 td-sp-b-0-3">{this.$slots.title}</h4>

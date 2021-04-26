@@ -39,6 +39,7 @@ export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
 export {default as ShowOn} from './ShowOn/ShowOn.vue';
 
+export {default as Popover} from './Popover/Popover.vue';
 export {default as FilterV2} from './FilterV2/Filter.vue';
 export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
 export {default as FilterSetterV2} from './FilterV2/FilterSetter.vue';
@@ -99,6 +100,8 @@ export {default as CarouselV2} from './CarouselV2/Carousel.vue';
 export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
 export {default as AdBanner} from './AdBanner/AdBanner.vue';
 export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
+export {default as CommentSlider} from './CommentSlider/CommentSlider.vue';
+export {default as CommentSliderItem} from './CommentSlider/CommentSliderItem.vue';
 
 
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';

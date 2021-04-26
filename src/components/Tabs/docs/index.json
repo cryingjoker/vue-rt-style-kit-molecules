@@ -2,6 +2,41 @@
   "items" : [
     {
       "name" : "rt-tabs",
+      "property" : "ga",
+      "type" : ["Object"],
+      "description" : "Пуш евента аналитики при изменении табов",
+      "value" : ""
+    },
+    {
+      "name" : "rt-tabs",
+      "property" : "background",
+      "type" : ["String"],
+      "description" : "Название цвета для background для version 2",
+      "value" : ""
+    },
+    {
+      "name" : "rt-tabs",
+      "property" : "bright",
+      "type" : ["Boolean"],
+      "description" : "Переключение в отображение как в темной теме для version 2",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-tabs",
+      "property" : "small",
+      "type" : ["Boolean"],
+      "description" : "Переключение в маленькое отображение для version 2",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-tabs",
+      "property" : "version",
+      "type" : ["Number"],
+      "description" : "Версионность",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-tabs",
       "property" : "round-tablet-view",
       "type" : ["Boolean"],
       "description" : "Отображение больших скругленных табов",

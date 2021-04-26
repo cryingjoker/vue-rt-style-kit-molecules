@@ -251,6 +251,16 @@ export default {
       const type =  deviceTypeStore.getStatus();
       this.isMobile = type === 'mobile';
       this.isTablet = type === 'tablet';
+    },
+    pushGA() {
+      if(!window.dataLayer) {
+        window.dataLayer = []
+      }
+      dataLayer.push({
+        event: 'b2c',
+        type: 'card_click',
+        value: this.$slots.label[0].text
+      })
     }
   },
   render(h) {
@@ -274,11 +284,11 @@ export default {
       </div>
     };
     if(this.href) {
-      return <a class={this.mainClass} href={this.href} target={this.openInNewTab ? '_blank' : '_self'}>
+      return <a class={this.mainClass} href={this.href} target={this.openInNewTab ? '_blank' : '_self'} onClick={this.pushGA}>
         {innerContent()}
       </a>
     } else {
-      return <div class={this.mainClass}>
+      return <div class={this.mainClass} onClick={this.pushGA}>
         {innerContent()}
       </div>
     }

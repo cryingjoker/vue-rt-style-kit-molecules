@@ -53,7 +53,6 @@ class ResizeContentHeight {
     this.isMobile = isMobile;
     this.isTablet = isTablet;
     if (isMobile && this.mobileNotResize || isTablet && this.tabletNotResize || !isMobile && !isTablet && this.desktopNotResize) {
-
       this.querySelectorsNames.forEach((selectorName) => {
         this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
           if (node.style.height) {
@@ -116,6 +115,7 @@ class ResizeContentHeight {
           this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
             node.style.height = `${maxHeight}px`;
           });
+          emit(this.vnode, 'resizeHeightFire' , {maxHeight: maxHeight});
         });
       }
     }
@@ -134,6 +134,14 @@ class ResizeContentHeight {
     }, 50);
   }
 
+}
+var emit = (vnode, name, data) => {
+  var handlers = (vnode.data && vnode.data.on) ||
+    (vnode.componentOptions && vnode.componentOptions.listeners);
+
+  if (handlers && handlers[name]) {
+    handlers[name].fns(data);
+  }
 }
 export const ResizeContentHeightDirective = {
   name: "RtResizeContentHeight",
