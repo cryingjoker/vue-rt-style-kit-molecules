@@ -239,8 +239,10 @@ export default {
         }
         if (index >= 0) {
 
+          const tabNames = this.$refs['navigation']?.querySelectorAll('.rt-tabs-nav-v2_item-name');
+
           const updateStyle = () => {
-            let rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
+            let rect = tabNames[index]?.getBoundingClientRect();
 
             if (rect) {
               this.lineWidth = rect.width
@@ -253,7 +255,7 @@ export default {
               }
             }
           }
-          if (this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name').length == 0) {
+          if (tabNames.length === 0) {
             setTimeout(() => {
               updateStyle()
             }, 200)
