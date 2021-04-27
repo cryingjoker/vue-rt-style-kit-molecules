@@ -281,7 +281,7 @@ export default {
               this.lineWidth = rect.width
               this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
             } else {
-              rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
+              rect = this.$refs['navigation']?.querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
               if (rect) {
                 this.lineWidth = rect.width
                 this.lineLeft = rect.x + this.$refs['navigation'].scrollLeft
@@ -304,7 +304,7 @@ export default {
           } else {
             if (this.$refs.navigation) {
               setTimeout(() => {
-                this.$refs.navigation.scroll({
+                this.$refs.navigation?.scroll({
                   left: this.lineLeft - window.innerWidth / 3,
                   behavior: 'smooth'
                 });
