@@ -208,16 +208,16 @@
        */
       moveTo(slideId = 0) {
         if (!this.$refs.inner || !this.$refs.inner.children[slideId]) return
-        let distance = 0;
+        const startPos = this.$refs.inner.scrollLeft;
+        let endPos = 0;
         [...this.$refs.inner.children].forEach((el, index) => {
           if (
             el.className.indexOf('carousel-slide') > -1
             && slideId > index
-          ) distance += +el.clientWidth
+          ) endPos += +el.clientWidth
         })
-        const startPos = this.$refs.inner.scrollLeft;
-        const endPos = distance
-        if (distance > this.$refs.inner.scrollWidth) return
+        if (endPos > this.$refs.inner.scrollWidth) return
+        if (slideId > 0) endPos -= 133 // magic space
         this.smoothScroll(startPos, endPos, this.$refs.inner)
       },
       // registerCarousel() {
