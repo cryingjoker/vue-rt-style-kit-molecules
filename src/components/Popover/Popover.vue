@@ -136,51 +136,54 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize(){
-      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
-      let wrapperHeight = window.innerHeight
-      let wrapperWidth = window.innerWidth
-      let windowWidth = window.innerWidth
-      let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
-      if(x && !left){
-        left = x
-      }
-      if(y && !top){
-        top = y
-      }
-      if(this.containerId.length >0){
-        const wrap = document.querySelector('#'+this.containerId);
-        if(wrap){
-          const wrapRect = wrap.getClientRects()[0];
-          top -= wrapRect.top
-          left -= wrapRect.left
+      if(this.$refs.popover) {
+        let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
+        let wrapperHeight = window.innerHeight
+        let wrapperWidth = window.innerWidth
+        let windowWidth = window.innerWidth
+        let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
+        if (x && !left) {
+          left = x
         }
-        wrapperHeight = wrap.clientHeight
-        wrapperWidth = wrap.clientWidth
-      }
+        if (y && !top) {
+          top = y
+        }
 
-
-      if(windowWidth < 769 && this.stopAutoOnMd){
-        this.setLocalValues()
-      }else {
-        const xStart = left - 125 - 12
-        const xEnd = left + 125 + 12
-        if (xStart +20 >= 0 && xEnd - 20 <= wrapperWidth) {
-          this.localHorizontal = 'center'
-        } else {
-
-          if (xStart+20 > 0) {
-            this.localHorizontal = 'left'
-          } else {
-            this.localHorizontal = 'right'
+        if (this.containerId.length > 0) {
+          const wrap = document.querySelector('#' + this.containerId);
+          if (wrap) {
+            const wrapRect = wrap.getClientRects()[0];
+            top -= wrapRect.top
+            left -= wrapRect.left
           }
+          wrapperHeight = wrap.clientHeight
+          wrapperWidth = wrap.clientWidth
         }
-        if (top - bodyHeight/2 > 0 && top + 20 + bodyHeight/2 < wrapperHeight && this.localHorizontal != 'center') {
-          this.localVertical = 'center'
+
+
+        if (windowWidth < 769 && this.stopAutoOnMd) {
+          this.setLocalValues()
         } else {
-          if (top > bodyHeight) {
-            this.localVertical = 'top'
+          const xStart = left - 125 - 12
+          const xEnd = left + 125 + 12
+          if (xStart + 20 >= 0 && xEnd <= wrapperWidth - 20) {
+            this.localHorizontal = 'center'
           } else {
-            this.localVertical = 'bottom'
+
+            if (xStart + 20 > 0) {
+              this.localHorizontal = 'left'
+            } else {
+              this.localHorizontal = 'right'
+            }
+          }
+          if (top - bodyHeight / 2 > 0 && top + 20 + bodyHeight / 2 < wrapperHeight && this.localHorizontal != 'center') {
+            this.localVertical = 'center'
+          } else {
+            if (top > bodyHeight) {
+              this.localVertical = 'top'
+            } else {
+              this.localVertical = 'bottom'
+            }
           }
         }
       }
