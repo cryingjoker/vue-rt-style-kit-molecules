@@ -1,0 +1,32 @@
+{
+  "items" : [
+    {
+      "name" : "rt-carousel-v2",
+      "property" : "width",
+      "type" : ["Number"],
+      "description" : "Количество карточек",
+      "value" : "3"
+    },
+    {
+      "name" : "rt-carousel-v2",
+      "property" : "scrollable-on-desktop",
+      "type" : ["Boolean"],
+      "description" : "Флаг для активации навигатора",
+      "value" : "true"
+    },
+    {
+      "name" : "rt-carousel-v2",
+      "property" : "content-to-resize",
+      "type" : ["Array, [String]"],
+      "description" : "Позволяет настроить авторесайзинг блоков",
+      "value" : "[]"
+    },
+    {
+      "name" : "rt-carousel-v2",
+      "property" : "container-me",
+      "type" : ["Boolean"],
+      "description" : "Обворачивает в контайнер содержимое",
+      "value" : "true"
+    }
+  ]
+}

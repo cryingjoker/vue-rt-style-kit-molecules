@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "name": "moveTo",
+      "description": "Скроллит к указанному слайду",
+      "component": "rt-carousel-v2",
+      "params": "slideId<Number>",
+      "return": ""
+    }
+  ]
+}
