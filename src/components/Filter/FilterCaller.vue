@@ -45,7 +45,13 @@ export default {
         this.RtFilter.setProps(optionName, childDataJson[optionName]);
       });
       setTimeout(()=>{
-        window.dispatchEvent(new Event("resize"));
+        if (typeof(Event) === 'function') {
+          window.dispatchEvent(new Event('resize'));
+        } else {
+          var evt = window.document.createEvent('UIEvents');
+          evt.initUIEvent('resize', true, false, window, 0);
+          window.dispatchEvent(evt);
+        }
       },0);
     },
     setPropsToChildren(props) {

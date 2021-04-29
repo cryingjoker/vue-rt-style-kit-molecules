@@ -22,6 +22,10 @@
         type: Array,
         default: () => ([])
       },
+      containerMe: {
+        type: Boolean,
+        default: true
+      },
       carouselName: {
         type: String,
         default: '123'
@@ -55,11 +59,18 @@
     },
     computed: {
       carouselClasses() {
-        let classList = 'rt-carousel-v2 rt-container rt-container--mobile-full-width';
-        if(this.scrollableOnDesktop)
-          classList += ' rt-carousel-v2--d-scroll';
-        return classList;
+        return [
+          'rt-carousel-v2 rt-container--mobile-full-width',
+          this.containerMe ? 'rt-container': '',
+          this.scrollableOnDesktop ? 'rt-carousel-v2--d-scroll' : ''
+        ]
       },
+      carouselWrapperClasses() {
+        return [
+          'rt-carousel-v2__slide-wrapper',
+          this.containerMe ? 'rt-col' : ''
+        ]
+      }
       // renderSlides() {
       //   return Object.entries(this.customSlides).map(item => {
       //     return <rt-virtual-carousel-slide-v2>{item[1]}</rt-virtual-carousel-slide-v2>
@@ -73,7 +84,13 @@
         this.resizeData = this.resizeData.concat(this.contentToResize);
       }
       setTimeout(()=> {
-        window.dispatchEvent(new Event('resize'));
+        if (typeof(Event) === 'function') {
+          window.dispatchEvent(new Event('resize'));
+        } else {
+          var evt = window.document.createEvent('UIEvents');
+          evt.initUIEvent('resize', true, false, window, 0);
+          window.dispatchEvent(evt);
+        }
       },1000)
       if(this.$el.querySelector('.rt-carousel-slide-v2') && this.$refs.inner.scrollWidth == this.$refs.inner.offsetWidth) {
         this.farRight = true;
@@ -116,7 +133,7 @@
       },
       setScrollStep(data) {
         this.scrollStep = data.size;
-        this.$refs.inner.scrollLeft = 0;
+        if (this.$refs.inner.scrollLeft) this.$refs.inner.scrollLeft = 0;
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
@@ -191,6 +208,24 @@
           }
         }
       },
+      /**
+       * Скроллит к указанному слайду
+       * @param {Number} slideId
+       */
+      moveTo(slideId = 0) {
+        if (!this.$refs.inner || !this.$refs.inner.children[slideId]) return
+        const startPos = this.$refs.inner.scrollLeft;
+        let endPos = 0;
+        [...this.$refs.inner.children].forEach((el, index) => {
+          if (
+            el.className.indexOf('carousel-slide') > -1
+            && slideId > index
+          ) endPos += +el.clientWidth
+        })
+        if (endPos > this.$refs.inner.scrollWidth) return
+        if (slideId > 0) endPos -= 133 // magic space
+        this.smoothScroll(startPos, endPos, this.$refs.inner)
+      },
       // registerCarousel() {
       //   if (this.carouselName.length > 0) {
       //     carouselStore.register(this.carouselName, this.carouselHtmlMode).then(() => {
@@ -240,7 +275,7 @@
         querySelectorsNames: this.resizeData
       };
       return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData}>
-        <div class="rt-carousel-v2__slide-wrapper rt-col" ref="wrapper">
+        <div class={this.carouselWrapperClasses} ref="wrapper">
           <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions} onTouchstart={this.checkAbility} onTouchmove={this.mobileScroll}>
             {this.$slots.default}
             {arrowLeft()}

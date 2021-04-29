@@ -246,7 +246,13 @@ export default {
 
     setActiveTabName(name, hashAnchor = false) {
       tabsStore.setActiveTabName(name, hashAnchor);
-      window.dispatchEvent(new Event("resize"));
+      if (typeof(Event) === 'function') {
+        window.dispatchEvent(new Event('resize'));
+      } else {
+        var evt = window.document.createEvent('UIEvents');
+        evt.initUIEvent('resize', true, false, window, 0);
+        window.dispatchEvent(evt);
+      }
       if (hashAnchor) {
         window.history.replaceState(undefined, undefined, "#" + hashAnchor);
       }
@@ -266,21 +272,23 @@ export default {
         }
         if (index >= 0) {
 
+          const tabNames = this.$refs['navigation']?.querySelectorAll('.rt-tabs-nav-v2_item-name');
+
           const updateStyle = () => {
-            let rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
+            let rect = tabNames[index]?.getBoundingClientRect();
 
             if (rect) {
               this.lineWidth = rect.width
               this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
             } else {
-              rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
+              rect = this.$refs['navigation']?.querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
               if (rect) {
                 this.lineWidth = rect.width
                 this.lineLeft = rect.x + this.$refs['navigation'].scrollLeft
               }
             }
           }
-          if (this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name').length == 0) {
+          if (tabNames.length === 0) {
             setTimeout(() => {
               updateStyle()
             }, 200)
@@ -296,7 +304,7 @@ export default {
           } else {
             if (this.$refs.navigation) {
               setTimeout(() => {
-                this.$refs.navigation.scroll({
+                this.$refs.navigation?.scroll({
                   left: this.lineLeft - window.innerWidth / 3,
                   behavior: 'smooth'
                 });
