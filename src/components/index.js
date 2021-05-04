@@ -107,7 +107,8 @@ export {default as CommentSliderItem} from './CommentSlider/CommentSliderItem.vu
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
 export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
- export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
+export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
 export {default as CardHelp} from './Card/CardHelp.vue';
 export {default as CardBanner} from './Card/CardBanner.vue';
 export {default as CardTileLayout} from './Card/CardTileLayout.vue';
+export {default as VideoBanner} from './VideoBanner/VideoBanner.vue';
