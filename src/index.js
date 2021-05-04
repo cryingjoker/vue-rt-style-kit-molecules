@@ -42,7 +42,6 @@ import {
   ResizeContentHeight,
   Popup,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -109,7 +108,8 @@ import {
   CardTileLayout,
   Popover,
   CommentSlider,
-  CommentSliderItem
+  CommentSliderItem,
+  VideoBanner
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -142,7 +142,6 @@ const VueRtStyle = {
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
-      Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
       Vue.component(FullscreenImage.name, FullscreenImage);
       Vue.component(RowList.name, RowList);
       Vue.component(RowListItem.name, RowListItem);
@@ -234,6 +233,8 @@ const VueRtStyle = {
       Vue.component(CardHelp.name, CardHelp);
       Vue.component(CardBanner.name, CardBanner);
       Vue.component(CardTileLayout.name, CardTileLayout);
+      Vue.component(VideoBanner.name, VideoBanner);
+
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -337,7 +338,6 @@ export {
   Popup,
   Popover,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -405,5 +405,6 @@ export {
   ResizeTypeStore,
   GaClickDirective,
   CommentSlider,
-  CommentSliderItem
+  CommentSliderItem,
+  VideoBanner
 }
