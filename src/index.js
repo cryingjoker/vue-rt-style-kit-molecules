@@ -42,7 +42,6 @@ import {
   ResizeContentHeight,
   Popup,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -143,7 +142,6 @@ const VueRtStyle = {
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
-      Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
       Vue.component(FullscreenImage.name, FullscreenImage);
       Vue.component(RowList.name, RowList);
       Vue.component(RowListItem.name, RowListItem);
@@ -338,7 +336,6 @@ export {
   Popup,
   Popover,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
