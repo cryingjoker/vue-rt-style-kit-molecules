@@ -109,7 +109,9 @@ import {
   Popover,
   CommentSlider,
   CommentSliderItem,
-  VideoBanner
+  VideoBanner,
+  CarouselV3,
+  CarouselV3Item
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -234,6 +236,9 @@ const VueRtStyle = {
       Vue.component(CardBanner.name, CardBanner);
       Vue.component(CardTileLayout.name, CardTileLayout);
       Vue.component(VideoBanner.name, VideoBanner);
+
+      Vue.component(CarouselV3.name, CarouselV3);
+      Vue.component(CarouselV3Item.name, CarouselV3Item);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
@@ -406,5 +411,7 @@ export {
   GaClickDirective,
   CommentSlider,
   CommentSliderItem,
-  VideoBanner
+  VideoBanner,
+  CarouselV3,
+  CarouselV3Item
 }
