@@ -1,0 +1,51 @@
+.rt-carousel-v3
+  position relative
+
+.rt-carousel-v3--scroll
+  display: flex
+  flex-wrap nowrap
+  transition-timing-function ease-in-out
+  transition-duration 0.3s
+  transition-property  margin-left
+  &>.row+.row
+    padding-left: 20px
+
+.rt-carousel-v3-wrap
+  overflow: hidden;
+  margin-right: 10px
+
+.rt-carousel-v3-arrows
+  position: absolute;
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  pointer-events none
+  display: flex
+  align-items center
+  justify-content space-between
+  padding-left: 55px
+  padding-right: 55px
+  z-index 2
+.rt-carousel-v3-arrow
+  width: 52px
+  height: 52px
+  border-radius 50%
+  background-color: b2c-white
+  box-shadow 0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex
+  align-items center
+  justify-content center
+  pointer-events auto
+  cursor: pointer
+  transition-timing-function ease-in-out
+  transition-duration 0.2s
+  transition-property  box-shadow
+
+  @media (hover:hover)
+    &:hover
+      box-shadow 0px 0px 8px rgba(0, 0, 0, 0.5);
+.rt-carousel-v3-arrow-left
+  padding-right: 3px
+.rt-carousel-v3-arrow-right
+  padding-left: 3px
