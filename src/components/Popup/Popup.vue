@@ -109,6 +109,7 @@ export default {
         this.isActive = true;
         this.addKeyBindind();
         this.bindPageScroll();
+        this.removeHover();
       }
 
     },
