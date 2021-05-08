@@ -8,6 +8,9 @@ export default {
     },
     colInRow:{
       type: Number
+    },
+    notActive: {
+      type: Boolean
     }
   },
   render(){
@@ -20,6 +23,9 @@ export default {
     }
     if(this.colInRow == 2){
       classListItem.push('rt-col-6')
+    }
+    if(this.notActive){
+      classListItem.push('rt-carousel-slide-v3--not-act')
     }
 
     return <div class={classListItem}>{this.$slots.default}</div>

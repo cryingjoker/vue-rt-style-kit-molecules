@@ -4,15 +4,23 @@
 .rt-carousel-v3--scroll
   display: flex
   flex-wrap nowrap
+  padding: 0
   transition-timing-function ease-in-out
-  transition-duration 0.3s
+  transition-duration 0.5s
   transition-property  margin-left
-  &>.row+.row
-    padding-left: 20px
+  margin-left: 0px
+  margin-right: 0px
+  &.rt-carousel-v3--scroll--remove-transform
+    transition-property  transform, margin-left
+  &>.row
+    margin-left: -10px
+    margin-right: 10px
+    min-width 1024px
 
 .rt-carousel-v3-wrap
   overflow: hidden;
   margin-right: 10px
+  margin-left: 10px
 
 .rt-carousel-v3-arrows
   position: absolute;
@@ -26,7 +34,7 @@
   justify-content space-between
   padding-left: 55px
   padding-right: 55px
-  z-index 2
+  z-index 15
 .rt-carousel-v3-arrow
   width: 52px
   height: 52px
@@ -49,3 +57,40 @@
   padding-right: 3px
 .rt-carousel-v3-arrow-right
   padding-left: 3px
+.rt-carousel-v3-shadows-wrapper
+  position: absolute;
+  left: 0
+  right: 0
+  pointer-events none
+  top: 0
+  bottom: 0
+  z-index 10
+  display: flex
+
+
+.rt-carousel-v3-shadows
+  margin-left: 10px
+  margin-right: 10px
+  position: relative;
+  flex 1
+  overflow: hidden;
+  .rt-shadow
+    position: absolute;
+    top: 0
+    bottom: 0
+    width: 40px
+    transition-timing-function ease-in-out
+    transition-duration 0.5s
+    transition-property  margin
+  .rt-shadow-left
+    left: 0px
+    margin-left: -40px
+  .rt-shadow-right
+    right: 0px
+    margin-right: -40px
+.rt-carousel-slide-v3
+  transition-timing-function ease-in-out
+  transition-duration 0.5s
+  transition-property  opacity
+.rt-carousel-slide-v3--not-act
+  opacity: 0.3

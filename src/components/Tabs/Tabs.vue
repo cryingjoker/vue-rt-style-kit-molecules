@@ -154,10 +154,10 @@ export default {
       }
       if(this.showShadowLeft || this.showShadowRight) {
         if (this.shadowColor.length > 0) {
-          classes.push('rt-tabs--shadow-' + this.shadowColor)
+          classes.push('rt-shadow-' + this.shadowColor)
         } else {
           if(this.background.length > 0) {
-            classes.push('rt-tabs--shadow-' + this.background)
+            classes.push('rt-shadow-' + this.background)
           }
         }
       }
@@ -339,8 +339,8 @@ export default {
               {renderLine()}
             </div>
           </div>
-          {this.showShadowLeft ? <div class="rt-tabs-v2-navigation-shadow-left"></div> : null}
-          {this.showShadowRight ? <div class="rt-tabs-v2-navigation-shadow-right"></div> : null}
+          {this.showShadowLeft ? <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left"></div> : null}
+          {this.showShadowRight ? <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right"></div> : null}
         </div>
         <div class="sp-t-1">
           {renderContent()}
