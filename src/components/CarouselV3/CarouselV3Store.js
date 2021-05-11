@@ -32,7 +32,13 @@ class CarouselV3Store extends StorePrototype {
         slides: [],
         ids: [],
         possibleIds: {},
-        watchers: []
+        watchers: [],
+        colInRow: 0,
+        infinityScroll: false,
+        showLArrow: false,
+        showRArrow: false,
+        showLShadow: false,
+        showRShadow: false,
       }
     }
   }
@@ -62,6 +68,19 @@ class CarouselV3Store extends StorePrototype {
   updateSlide = (sliderName, _id, content, isActive) => {
 
   }
+  setArrowProps = (sliderName)=>{
+    if (this.sliders[sliderName]) {
+      const slider = this.sliders[sliderName];
+      const index = slider.index;
+      const size = slider.ids.length;
+      const colInRow = slider.colInRow
+      slider.showRArrow = index < size - colInRow -1;
+      slider.showLArrow = index > 0;
+      slider.showRShadow = index < size - colInRow - 1;
+      slider.showLShadow = index > 0;
+
+    }
+  }
 
   getSliderContent = (sliderName) => {
     if (this.sliders[sliderName]) {
@@ -86,21 +105,39 @@ class CarouselV3Store extends StorePrototype {
 
   setNextSlide = (sliderName) => {
     if (this.sliders[sliderName]) {
-      const index = this.sliders[sliderName].index;
-      const size = this.sliders[sliderName].ids.length;
-      this.sliders[sliderName].index = (index + 1) % size;
+      const slider = this.sliders[sliderName];
+      const index = slider.index;
+      const size = slider.ids.length;
+      const colInRow = slider.colInRow
+      if (index + 1 == size - colInRow ){
+        this.sliders[sliderName].index = 0
+      }else {
+        this.sliders[sliderName].index = (index + 1) % size;
+      }
+      this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
   }
   setActiveId = (sliderName, id) => {
-
-
+  }
+  setActiveIndex = (sliderName, index) => {
+    if(this.sliders[sliderName]){
+      this.sliders[sliderName].index = index;
+      this.setArrowProps(sliderName)
+      this.callWatcher(sliderName);
+    }
   }
   setPrewSlide = (sliderName) => {
     if (this.sliders[sliderName]) {
-      const index = this.sliders[sliderName].index;
-      const size = this.sliders[sliderName].ids.length;
-      this.sliders[sliderName].index = (index - 1 + size) % size;
+      const slider = this.sliders[sliderName];
+      const index = slider.index;
+      const size = slider.ids.length;
+      const colInRow = slider.colInRow
+      slider.index = (index - 1 + size) % size;
+      if(slider.index  > size - colInRow ){
+        slider.index = size - colInRow - 1
+      }
+      this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
   }
@@ -110,6 +147,25 @@ class CarouselV3Store extends StorePrototype {
     }
     return 0
   }
+  getArrowOptions = (sliderName)=>{
+    const slider = this.sliders[sliderName];
+    return {
+      next : slider.showRArrow,
+      prew : slider.showLArrow
+    }
+  }
+  getShadowOptions = (sliderName)=>{
+    const slider = this.sliders[sliderName];
+    return {
+      next : slider.showRShadow,
+      prew : slider.showLShadow
+    }
+  }
+  setColInRow = (sliderName, colInRow) => {
+    if (this.sliders[sliderName]) {
+      this.sliders[sliderName].colInRow = colInRow - 0
+    }
+  }
 }
 
 const carouselV3StoreObject = new CarouselV3Store();
@@ -118,14 +174,18 @@ export const carouselV3Store = Vue.observable({
 
   removeWatcher: carouselV3StoreObject.removeWatcher,
   addWatcher: carouselV3StoreObject.addWatcher,
+  setColInRow: carouselV3StoreObject.setColInRow,
   setNextSlide: carouselV3StoreObject.setNextSlide,
   setPrewSlide: carouselV3StoreObject.setPrewSlide,
   setActiveId: carouselV3StoreObject.setActiveId,
+  setActiveIndex: carouselV3StoreObject.setActiveIndex,
   createContainer: carouselV3StoreObject.createContainer,
   removeContainer: carouselV3StoreObject.removeContainer,
   createSlide: carouselV3StoreObject.createSlide,
   updateSlide: carouselV3StoreObject.updateSlide,
   removeSlide: carouselV3StoreObject.removeSlide,
   getSliderContent: carouselV3StoreObject.getSliderContent,
-  getActiveIndex: carouselV3StoreObject.getActiveIndex
+  getActiveIndex: carouselV3StoreObject.getActiveIndex,
+  getArrowOptions: carouselV3StoreObject.getArrowOptions,
+  getShadowOptions: carouselV3StoreObject.getShadowOptions
 });
