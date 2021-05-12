@@ -10,17 +10,45 @@
   transition-property  margin-left
   margin-left: 0px
   margin-right: 0px
+  @media(max-width tablet-upper-limit)
+    max-width initial
+    flex 1
+    flex-wrap nowrap
+    width: calc(((100vw - 20px) / 6 * 5 - 7px) / 2 * 3)
+  @media(max-width mobile-upper-limit)
+    width: calc(80vw * 3 )
+
   &.rt-carousel-v3--scroll--remove-transform
     transition-property  transform, margin-left
   &>.row
     margin-left: -10px
     margin-right: 10px
-    min-width 1024px
+    min-width 100%
+    width: 1024px
+
+    @media(max-width tablet-upper-limit)
+      width: auto
+      flex-wrap nowrap
+      margin-left: 0
+      margin-right: 0
+      //min-width fit-content
+    &>.rt-col-td-3
+      @media(max-width tablet-upper-limit)
+        width: calc(((100vw - 20px) / 6 * 5 - 7px) / 2)
+        max-width: calc(((100vw - 20px) / 6 * 5 - 7px) / 2)
+        padding-right: 0
+        padding-left: 20px
+      @media(max-width mobile-upper-limit)
+        width: calc(80vw + 10px)
+        max-width: 80vw
 
 .rt-carousel-v3-wrap
   overflow: hidden;
   margin-right: 10px
   margin-left: 10px
+  @media(max-width tablet-upper-limit)
+    margin-left: 0
+    margin-right: 0
 
 .rt-carousel-v3-arrows
   position: absolute;
@@ -35,6 +63,8 @@
   padding-left: 55px
   padding-right: 55px
   z-index 15
+  @media(max-width tablet-upper-limit)
+    display: none
 .rt-carousel-v3-arrow
   width: 52px
   height: 52px
@@ -74,6 +104,8 @@
   position: relative;
   flex 1
   overflow: hidden;
+  @media(max-width tablet-upper-limit)
+    display: none
   .rt-shadow
     position: absolute;
     top: 0
@@ -82,6 +114,7 @@
     transition-timing-function ease-in-out
     transition-duration 0.5s
     transition-property  margin
+
   .rt-shadow-left
     left: 0px
     margin-left: -40px
@@ -94,3 +127,6 @@
   transition-property  opacity
 .rt-carousel-slide-v3--not-act
   opacity: 0.3
+.rt-carousel-slide-v3--td-not-act
+  @media(max-width tablet-upper-limit)
+    opacity: 0.3
