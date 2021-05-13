@@ -9,13 +9,6 @@
     },
     {
       "name": "rt-microtabs",
-      "property": "inverse",
-      "type": "Boolean",
-      "description": "Принудительно обесцвечивает табы для темных фонов",
-      "value": "false"
-    },
-    {
-      "name": "rt-microtabs",
       "property": "fit",
       "type": "Boolean",
       "description": "Обрезать контент выше трех строк",
