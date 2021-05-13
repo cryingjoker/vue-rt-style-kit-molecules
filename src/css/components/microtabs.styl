@@ -79,7 +79,6 @@ microtabsOrangeColor = #ff4f12
       line-height 20px
       flex: 0 0 100%;
       max-width 100%
-      max-height 60px // Органичение в 3 строки
       opacity 1
       overflow hidden
       transition opacity .3s ease-in
@@ -93,6 +92,9 @@ microtabsOrangeColor = #ff4f12
       cursor default
       &-tgl
         display none
+  &.is--fit-content
+    {cmp}-cnt__item
+      max-height 60px // Органичение в 3 строки
   {cmp}-nav__item
     &.is--from
       &-right
