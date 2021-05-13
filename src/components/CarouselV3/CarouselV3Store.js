@@ -74,9 +74,9 @@ class CarouselV3Store extends StorePrototype {
       const index = slider.index;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
-      slider.showRArrow = index < size - colInRow -1;
+      slider.showRArrow = index < size - colInRow;
       slider.showLArrow = index > 0;
-      slider.showRShadow = index < size - colInRow - 1;
+      slider.showRShadow = index < size - colInRow;
       slider.showLShadow = index > 0;
 
     }
@@ -109,11 +109,13 @@ class CarouselV3Store extends StorePrototype {
       const index = slider.index;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
-      if (index + 1 == size - colInRow ){
-        this.sliders[sliderName].index = 0
+      const width = window.innerWidth;
+      if (index  == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768){
+        slider.index = 0
       }else {
-        this.sliders[sliderName].index = (index + 1) % size;
+        slider.index = (index + 1) % size;
       }
+      console.info('slider.index',slider.index);
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
@@ -133,9 +135,22 @@ class CarouselV3Store extends StorePrototype {
       const index = slider.index;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
+      const width = window.innerWidth;
       slider.index = (index - 1 + size) % size;
-      if(slider.index  > size - colInRow ){
-        slider.index = size - colInRow - 1
+      if (width > 1024) {
+        if(slider.index  > size - colInRow ) {
+          slider.index = size - colInRow
+        }
+      }else{
+        if(width > 767 && width <= 1024 ){
+          if(slider.index  > size - 2 ) {
+            slider.index = size - 2
+          }
+        }else{
+          if(slider.index  > size - 1 ) {
+            slider.index = size
+          }
+        }
       }
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);

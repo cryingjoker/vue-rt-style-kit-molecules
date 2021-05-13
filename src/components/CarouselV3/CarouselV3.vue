@@ -1,8 +1,8 @@
 <script type="text/jsx">
 import CarouselV3RenderItem from "./CarouselV3RenderItem.vue"
 import {carouselV3Store} from "./CarouselV3Store";
-import {sliderStore} from "../Slider/SliderStore";
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import {bannerStore} from "../BannerV2/BannerStore";
 
 export default {
   name: "RtCarouselV3",
@@ -47,6 +47,7 @@ export default {
 
   },
   data: () => ({
+    origTransformBefore: 0,
     slides: [],
     activeItemIndex: 0,
     nextArrowShow: false,
@@ -58,7 +59,9 @@ export default {
     deltaRowRemoveTimer: false,
     deltaRowMoveTimeout: false,
     clearTransformTimeout: false,
-    isHover: false
+    isHover: false,
+    xDown: 0,
+    yDown: 0
   }),
   mounted() {
 
@@ -74,8 +77,55 @@ export default {
       })
     }
     deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
+    this.renderStyle()
   },
   methods: {
+    renderStyle(transform = 0) {
+      const delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
+      const style = {}
+      let inlineStyle = ''
+      let activeIndex = this.activeItemIndex;
+      let size = this.slides.length
+
+      if(activeIndex >= size - this.colInRow){
+        activeIndex = size - this.colInRow
+      }
+
+      style.marginLeft = delta * (activeIndex)
+      if(this.wheelEventPause){
+        transform = 0
+      }
+      const origTransform = transform-0
+      if(transform == 0){
+        this.origTransformBefore = 0
+      }
+      this.origTransformBefore += transform
+      if (this.origTransformBefore >= 0) {
+        transform = ' + ' + this.origTransformBefore
+      } else {
+        transform = ' - ' + Math.abs(this.origTransformBefore)
+      }
+      if (this.activeItemIndex > 0) {
+        style.marginLeft -= delta * ((0.65) / (12 / this.colInRow))
+      }
+      style.marginLeft = -1 * style.marginLeft + '%'
+      inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + style.marginLeft  + transform + 'px);'
+      if(origTransform!=0) {
+        inlineStyle+='transition-duration: 0s;'
+      }
+      inlineStyle += '}'
+      if (this.activeItemIndex > 0) {
+        let activeItemIndex = this.activeItemIndex;
+
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + activeItemIndex + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + activeItemIndex + ' + 7vw ' + transform + 'px);}}'
+      }else{
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
+      }
+
+      document.querySelector('.rt-carousel-v3-' + this._uid + ' style').innerText = inlineStyle
+    },
     mouseenter() {
       this.isHover = true
       this.bindKeydown()
@@ -104,6 +154,7 @@ export default {
     },
     setDeviceType() {
       this.deviceType = deviceTypeStore.getStatus();
+      this.renderStyle(1);
     },
     getSlide() {
       let localName = this.name;
@@ -128,10 +179,7 @@ export default {
       this.clearTransformTimeout = setTimeout(() => {
         this.$refs.caroselRow.$el.style.transform = 'translateX(' + (0) + 'px)'
 
-        setTimeout(() => {
 
-          this.$refs.caroselRow.$el.classList.remove('rt-carousel-v3--scroll--remove-transform')
-        }, 500)
       }, 0)
 
     },
@@ -140,7 +188,7 @@ export default {
       if (localName.length == 0) {
         localName = this._uid;
       }
-      this.clearTransform()
+      // this.clearTransform()
       carouselV3Store.setPrewSlide(localName)
     },
     setNextActive() {
@@ -148,35 +196,30 @@ export default {
       if (localName.length == 0) {
         localName = this._uid;
       }
-      this.clearTransform()
       carouselV3Store.setNextSlide(localName)
     },
     wheelMove(e) {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault()
-
       }
+
       if (!this.wheelEventPause) {
-        let transform = parseInt(this.$refs.caroselRow.$el.style.transform.replace(/[translateX(,)]/g, ''))
-        if (isNaN(transform)) {
-          transform = 0
-        }
 
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-
-          if (!this.$refs.caroselRow.$el.classList.contains('rt-carousel-v3--scroll--remove-transform')) {
-            if (e.deltaX < 0 && this.prewArrowShow || e.deltaX > 0 && this.nextArrowShow)
-              this.$refs.caroselRow.$el.style.transform = 'translateX(' + (transform - e.deltaX) + 'px)'
+          if(e.deltaX >= 0 && this.activeItemIndex + (this.colInRow-0+1) <= this.slides.length || e.deltaX < 0 && this.activeItemIndex > 0) {
+            this.renderStyle(e.deltaX * -1)
           }
-          this.deltaRowMoveStart()
         }
 
-        if (Math.abs(e.deltaX) > 10 || Math.abs(transform) > 100) {
-          this.deltaRowMoveStart()
+        if (Math.abs(e.deltaX) > 30 || Math.abs(this.origTransformBefore) > 100) {
+
+
           e.preventDefault()
 
           if (!this.wheelEventPause) {
             this.wheelEventPause = true;
+            this.origTransformBefore = 0
+
             if (e.deltaX > 0) {
               if (this.nextArrowShow || this.infiniteScroll) {
                 this.setNextActive()
@@ -188,44 +231,49 @@ export default {
             }
             setTimeout(() => {
               this.wheelEventPause = false
-            }, 400)
+            }, 800)
           }
 
         }
+      }else{
+        e.preventDefault()
+        e.stopImmediatePropagation()
       }
     },
-    deltaRowMoveStart() {
-      if (this.deltaRowRemoveTimer) {
-        clearTimeout(this.deltaRowRemoveTimer);
-        this.deltaRowRemoveTimer = false
+    touchstart(event) {
+      this.xDown = event.touches[0].clientX;
+      this.yDown = event.touches[0].clientY;
+    },
+    touchmove(event) {
+      if (!this.xDown || !this.yDown) {
+        return;
+      }
+      var xUp = event.touches[0].clientX;
+      var yUp = event.touches[0].clientY;
+
+      var xDiff = this.xDown - xUp;
+      var yDiff = this.yDown - yUp;
+
+
+
+      if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        event.preventDefault();
+        if (xDiff > 0) {
+          this.setNextActive();
+
+        } else {
+          this.setPrewActive();
+        }
       }
 
-      this.deltaRowRemoveTimer = setTimeout(() => {
-        clearTimeout(this.deltaRowMoveTimeout)
-        this.deltaRowMoveTimeout = false
-        this.deltaRowMove()
-      }, 200)
+      this.xDown = null;
+      this.yDown = null;
     },
-    deltaRowMove(step) {
-      let transform = parseInt(this.$refs.caroselRow.$el.style.transform.replace(/[translateX(,)]/g, ''))
-      if (isNaN(transform)) {
-        transform = 0
-      }
-      this.deltaRowMoveTimeout = setTimeout(() => {
-        let step = step || transform / 100
-        transform -= step
-        if (parseInt(transform) == 0) {
-          transform = 0
-        }
-        this.$refs.caroselRow.$el.style.transform = 'translateX(' + (transform) + 'px)'
-        if (transform != 0) {
-          this.deltaRowMove(step)
-        }
-      }, 1)
-    }
-  }
-  ,
+  },
   watch: {
+    activeItemIndex() {
+      this.renderStyle()
+    },
     nextShadowShow(newVal, oldVal) {
       this.$nextTick(() => {
         if (newVal) {
@@ -256,7 +304,7 @@ export default {
             return [[a, b]]
           } else {
             let size = a.length;
-            if (a[size - 1].length == this.colInRow) {
+            if (a[size - 1].length == this.colInRow - 0) {
               a.push([])
               size += 1
             }
@@ -273,15 +321,22 @@ export default {
             }
             return h('rt-row', options, row.map((slot, slotIndex) => {
               let notActive = slotIndex + index * (this.colInRow - 0) - this.activeItemIndex
-              if ((notActive < 0 || notActive > this.colInRow - 0) && this.blurNotActive) {
+
+              let tabletNotActive = false
+              if (notActive < 0 || notActive > 1 - 0) {
+                tabletNotActive = true
+              }
+
+              if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0 ) && this.blurNotActive) {
                 notActive = true
               } else {
                 notActive = false
               }
+
               if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
                 notActive = false
               }
-              return h(CarouselV3RenderItem, {props: {colInRow: this.colInRow - 0, notActive: notActive}}, slot)
+              return h(CarouselV3RenderItem, {props: {colInRow: this.colInRow, notActive: notActive, tabletNotActive: tabletNotActive}}, slot)
             }))
           }
         )
@@ -342,34 +397,20 @@ export default {
       return null
     }
 
-    const getStyle = () => {
-      const style = {}
-      if (this.activeItemIndex > 0 && this.scrollableOnDesktop) {
-        const delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
 
-        style.marginLeft = delta * this.activeItemIndex
-        if (this.activeItemIndex > 0) {
-          let inItemCol = 0
-          if (this.deviceType.search('desktop') >= 0) {
-            inItemCol = (12 / this.colInRow)
-          } else {
-            inItemCol = (6 / this.colInRow)
-          }
 
-          style.marginLeft -= delta * ((0.65) / inItemCol)
-        }
-        style.marginLeft = -1 * style.marginLeft + '%'
-      }
-      return style
-    }
     const caurouselWrapperClassList = ['rt-carousel-v3']
+    caurouselWrapperClassList.push('rt-carousel-v3-' + this._uid)
     if (this.background.length > 0) {
       caurouselWrapperClassList.push('color-block--' + this.background)
     }
+    // docu
     return <div class={caurouselWrapperClassList} onWheel={this.wheelMove} onMouseenter={this.mouseenter}
+                onTouchstart={this.touchstart}
+                onTouchmove={this.touchmove}
                 onMouseleave={this.mouseleave}>
-
-      <div class="rt-container relative">
+      <style></style>
+      <div class="rt-container td-sp-h-none relative">
         <div class="rt-carousel-v3-wrap" ref="wrap">
           {arrowRender()}
           {shadowRender()}
@@ -378,7 +419,6 @@ export default {
             props: {size: this.scrollableOnDesktop ? 11 : 12, tabletSize: 5, mobileSize: 3},
             class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
             ref: 'caroselRow',
-            style: getStyle()
           }, [
             renderSlides(),
             this.$slots.default
