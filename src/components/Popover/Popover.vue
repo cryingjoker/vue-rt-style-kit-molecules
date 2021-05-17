@@ -164,12 +164,9 @@ export default {
         if (windowWidth < 769 && this.stopAutoOnMd) {
           this.setLocalValues()
         } else {
-          let xStart = left - 125 - 12
+          const xStart = left - 125 - 12
           const xEnd = left + 125 + 12
-          if(windowWidth < 700){
-             xStart = left - 100
-          }
-          if ((xStart + 20 >= 0 && xEnd <= wrapperWidth - 20) || (windowWidth < 700 && xStart  >= 0 && xEnd <= wrapperWidth) ) {
+          if (xStart + 20 >= 0 && xEnd <= wrapperWidth - 20) {
             this.localHorizontal = 'center'
           } else {
 
