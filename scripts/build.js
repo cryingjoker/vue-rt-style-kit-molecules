@@ -32,7 +32,7 @@ const __dirname = path.dirname(__filename)
 const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes
 
 let packageJson = fs.readFileSync(path.join(__dirname,'..','package.json'),"utf8")
-packageJson = packageJson.replace(/("version")(: "[0-9\.]*")/,'"version": "'+version+'"')
+packageJson = packageJson.replace(/("version")(: "[0-9\. :-]*")/,'"version": "'+version+'"')
 fs.writeFileSync(path.join(__dirname,'..','package.json'),packageJson)
 
 function build(buildIndex = 0) {
