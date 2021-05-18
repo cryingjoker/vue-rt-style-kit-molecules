@@ -197,12 +197,16 @@
       },
       mobileScroll(e) {
         if(!this.mayScroll) {
-          e.preventDefault();
+          if (e.cancelable) {
+            e.preventDefault();
+          }
           e.stopPropagation();
           return false;
         } else {
           if((this.farRight && this.touchStart > e.touches[0].clientX) || (this.farLeft && this.touchStart < e.touches[0].clientX)) {
-            e.preventDefault();
+            if (e.cancelable) {
+              e.preventDefault();
+            }
             e.stopPropagation();
             return false;
           }
