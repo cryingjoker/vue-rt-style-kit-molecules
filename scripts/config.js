@@ -25,8 +25,8 @@ let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 let year = date_ob.getFullYear()
 let hours = date_ob.getHours();
 let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
+
+const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes
 const aliases = {}
 import json from 'rollup-plugin-json'
 import alias from '@rollup/plugin-alias'
