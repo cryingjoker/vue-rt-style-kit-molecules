@@ -4,7 +4,6 @@
   import debounce from "debounce";
 
   const componentsList = {};
-  // import {carouselStore} from "./CarouselStore";
   export default {
     name: "RtCarouselSlideV2",
     components: componentsList,
@@ -42,27 +41,14 @@
       }
     },
     mounted() {
-      // if (this.parentCarouselName.length > 0) {
-      //   carouselStore.runAfterInit(this.parentCarouselName, this.fillCarouselSliderStore)
-      // }
-      // this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
       this.setData();
     },
-    // beforeDestroy() {
-    //   this.clearCarouselSliderStore()
-    // },
     updated() {
       if(!this.parentCarousel) {
         this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
       }
     },
     methods: {
-      // clearCarouselSliderStore() {
-      //   carouselStore.removeSlots(this.parentCarouselName, this._uid)
-      // },
-      // fillCarouselSliderStore() {
-      //   carouselStore.setSlot(this.parentCarouselName, this.$slots.default, this._uid);
-      // }
       setData() {
         if(!this.parentCarousel) {
           this.parentCarousel = this.$el.closest('.rt-carousel-v2').__vue__;
@@ -76,7 +62,6 @@
           this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
           window.addEventListener('resize', debounce(this.emitScrollStep, 25));
           window.addEventListener('resize', debounce(this.defineContainer, 25));
-          // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
           this.calculateMobileOptions();
         } else {
           setTimeout(()=> {
