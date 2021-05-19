@@ -22,9 +22,9 @@ export default {
     theme:{
       type: String
     },
-    inverse:{
+    fit:{
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data(){
@@ -39,7 +39,7 @@ export default {
         this.cmpName,
         !this.$slots.cnt ? 'is--conveer' : 'is--tabs',
         {
-          'is--inverse-color': this.inverse
+          'is--fit-content': this.fit
         }
       ]
     },

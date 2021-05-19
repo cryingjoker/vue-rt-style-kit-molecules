@@ -61,10 +61,15 @@ export default {
     onUpdateTabsStore() {
       const data = tabsStore.tabsParents[this.$parent._uid]
       const indexThis = this.getIndex()
-      const indexBefore = data.indexBefore;
-      const indexActive = data.index
-      this.version = data.version
-      this.isActive = data[this.name]?.isActive
+      let indexBefore
+      let indexActive
+
+      if (data) {
+        indexBefore = data.indexBefore
+        indexActive = data.index
+        this.version = data.version
+        this.isActive = data[this.name]?.isActive
+      }
 
       if(indexActive <= indexThis && indexThis <= indexBefore || indexActive >= indexThis && indexThis >= indexBefore){
         this.fireAnimate(indexBefore,indexActive,indexThis)

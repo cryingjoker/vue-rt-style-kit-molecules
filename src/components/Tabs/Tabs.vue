@@ -85,6 +85,18 @@ export default {
     orange: {
       type: Boolean,
       default: false
+    },
+    shadowColor:{
+      type:String,
+      default: ''
+    },
+    showBottomLine:{
+      type: Boolean,
+      default: false
+    },
+    bottomLineWhite:{
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -127,11 +139,26 @@ export default {
       if (this.bright) {
         classes.push('rt-tabs--bright')
       }
+      if(this.showBottomLine) {
+        classes.push('rt-tabs--show-b-line')
+        if (this.bottomLineWhite) {
+          classes.push('rt-tabs--b-line-white')
+        }
+      }
       if (this.background.length > 0) {
         classes.push('rt-tabs--background')
         classes.push('rt-tabs--background-' + this.background)
         if(this.showNavigationLine){
           classes.push('rt-tabs--background-show-line')
+        }
+      }
+      if(this.showShadowLeft || this.showShadowRight) {
+        if (this.shadowColor.length > 0) {
+          classes.push('rt-tabs--shadow-' + this.shadowColor)
+        } else {
+          if(this.background.length > 0) {
+            classes.push('rt-tabs--shadow-' + this.background)
+          }
         }
       }
       if (this.vertical && window.innerWidth <= this.mobileSize) {
@@ -239,21 +266,23 @@ export default {
         }
         if (index >= 0) {
 
+          const tabNames = this.$refs['navigation']?.querySelectorAll('.rt-tabs-nav-v2_item-name');
+
           const updateStyle = () => {
-            let rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name')[index]?.getBoundingClientRect();
+            let rect = tabNames[index]?.getBoundingClientRect();
 
             if (rect) {
               this.lineWidth = rect.width
               this.lineLeft = rect.x - this.$refs['navigation'].getBoundingClientRect().x
             } else {
-              rect = this.$refs['navigation'].querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
+              rect = this.$refs['navigation']?.querySelectorAll('.rt-tabs-navigation__item-name')[index]?.getBoundingClientRect();
               if (rect) {
                 this.lineWidth = rect.width
                 this.lineLeft = rect.x + this.$refs['navigation'].scrollLeft
               }
             }
           }
-          if (this.$refs['navigation'].querySelectorAll('.rt-tabs-nav-v2_item-name').length == 0) {
+          if (tabNames.length === 0) {
             setTimeout(() => {
               updateStyle()
             }, 200)
@@ -269,7 +298,7 @@ export default {
           } else {
             if (this.$refs.navigation) {
               setTimeout(() => {
-                this.$refs.navigation.scroll({
+                this.$refs.navigation?.scroll({
                   left: this.lineLeft - window.innerWidth / 3,
                   behavior: 'smooth'
                 });
