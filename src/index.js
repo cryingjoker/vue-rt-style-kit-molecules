@@ -286,9 +286,11 @@ if (typeof window !== 'undefined') {
 
 // @Deprecated
   window.RTK_STYLE_KIT_MOLECULES_VER = version;
-  window.addEventListener('getVueRtStyleVersion', function () {
-    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
-  })
+  if(window && window.addEventListener) {
+    window.addEventListener('getVueRtStyleVersion', function () {
+      window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
+    })
+  }
 }
 
 VueRtStyle.version = version;

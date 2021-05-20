@@ -10,6 +10,8 @@
   transition-property opacity
   position relative
   display: block
+  .rt-popover--stop-opacity &
+    opacity 1!important
   @media (hover:hover)
     &:hover
       opacity 0.7
@@ -29,6 +31,7 @@
   margin-right: 0
 
 .rt-popover-active
+  z-index 11
   .rt-popover-body
     animation-name showPopover
     animation-timing-function ease-in-out
