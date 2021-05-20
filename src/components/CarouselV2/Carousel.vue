@@ -44,19 +44,9 @@
         resizeData: ['.rt-card-round-img-container', '.rt-card-round__content .rt-font-h4', '.rt-card-round__content .color-main05'],
         mayScroll: true,
         touchStart: null,
-        // isRegistered: false,
-        // customSlides: {},
-        // customSlidesSort: []
       }
     },
-    watch: {
-      // isRegistered(newVal, oldVal) {
-      //   if (newVal != oldVal && newVal) {
-      //     this.initMethods()
-      //   }
-      //   this.$forceUpdate()
-      // }
-    },
+    watch: {},
     computed: {
       carouselClasses() {
         return [
@@ -78,11 +68,7 @@
       // }
     },
     mounted() {
-      // this.registerCarousel();
       this.$on('scroll-step', this.setScrollStep);
-      if(this.contentToResize) {
-        this.resizeData = this.resizeData.concat(this.contentToResize);
-      }
       setTimeout(()=> {
         if (typeof(Event) === 'function') {
           window.dispatchEvent(new Event('resize'));
@@ -197,12 +183,16 @@
       },
       mobileScroll(e) {
         if(!this.mayScroll) {
-          e.preventDefault();
+          if (e.cancelable) {
+            e.preventDefault();
+          }
           e.stopPropagation();
           return false;
         } else {
           if((this.farRight && this.touchStart > e.touches[0].clientX) || (this.farLeft && this.touchStart < e.touches[0].clientX)) {
-            e.preventDefault();
+            if (e.cancelable) {
+              e.preventDefault();
+            }
             e.stopPropagation();
             return false;
           }
@@ -271,10 +261,11 @@
           </div>
         }
       };
-      const resizeData = {
-        querySelectorsNames: this.resizeData
+      const resizeData = () => {
+        let resizeData = this.resizeData.concat(this.contentToResize);
+        return {querySelectorsNames: resizeData}
       };
-      return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData}>
+      return <div class={this.carouselClasses} v-rt-resize-content-height={resizeData()}>
         <div class={this.carouselWrapperClasses} ref="wrapper">
           <div class="rt-carousel-v2__inner" ref="inner" onScroll={this.countFarPositions} onTouchstart={this.checkAbility} onTouchmove={this.mobileScroll}>
             {this.$slots.default}
