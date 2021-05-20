@@ -11,6 +11,10 @@ export default {
       type: [Number, String],
       default: -1
     },
+    preloadImage: {
+      type: String,
+      default: ''
+    },
     filterColor: {
       type: String,
       default: 'black'
@@ -32,7 +36,9 @@ export default {
       default: ''
     }
   },
-  data: () => ({}),
+  data: () => ({
+    videoIsLoaded: false
+  }),
 
   mounted() {
     this.bindScroll()
@@ -41,9 +47,11 @@ export default {
   methods: {
     pause() {
       const video = this.$refs.video;
-      var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
-      if (isPlaying) {
-        video.pause()
+      if (video) {
+        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
+        if (isPlaying) {
+          video.pause()
+        }
       }
     },
     play() {
@@ -78,6 +86,9 @@ export default {
         }, {threshold: 0});
         videoObserver.observe(this.$el);
       }
+    },
+    loadeddata(e) {
+      this.videoIsLoaded = true
     }
   },
   computed: {
@@ -121,18 +132,27 @@ export default {
       }
       return <div style={filterStyle} class={filterClassNames}></div>
     },
+    preloadImageRender() {
+      if (this.preloadImage.length > 0 && !this.videoIsLoaded) {
+        return <img src={this.preloadImage} class="rt-video-banner-default-image" alt=""/>
+      } else {
+        return null
+      }
+    },
     videoBlock() {
       if (this.src.length > 0) {
         if (this.mobileImage) {
           return <div>
             <img src={this.mobileImage} alt="" class="d-none md-d-block rt-video-banner__tag"/>
             <video class="md-d-none rt-video-banner__tag" width="100%" loop ref="video" preload="none" muted autolay
+                   onLoadeddata={this.loadeddata}
                    aria-hidden="true"
                    playsinline loop=""
                    src={this.src}></video>
           </div>
         } else {
           return <video class="rt-video-banner__tag" width="100%" loop ref="video" preload="none" muted autolay
+                        onLoadeddata={this.loadeddata}
                         aria-hidden="true"
                         playsinline loop=""
                         src={this.src}></video>
@@ -145,6 +165,7 @@ export default {
     return <div class="rt-video-banner">
       <div class="rt-video-banner__wrapper">
         {this.fitlerBlock}
+        {this.preloadImageRender}
         {this.videoBlock}
         {this.playWrapper}
       </div>
