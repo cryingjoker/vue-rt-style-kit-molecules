@@ -51,7 +51,6 @@ export default {
   },
 
   render(h) {
-    console.info('isBeforeActive',this.isBeforeActive)
 
     return <div ref="slide" class={this.tabSliderClass}>
       <rt-row class="row-td-reverse">
