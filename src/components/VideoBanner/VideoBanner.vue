@@ -57,21 +57,23 @@ export default {
     play() {
       const video = this.$refs.video;
       var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
-      if (!isPlaying) {
+      if (!isPlaying && video) {
         video.play()
       }
     },
     start() {
       const video = this.$refs.video;
-      video.volume = 0;
-      video.pause();
-      setTimeout(() => {
-        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
-          && video.readyState > 2;
-        if (!isPlaying) {
-          video.play();
-        }
-      }, 300)
+      if(video) {
+        video.volume = 0;
+        video.pause();
+        setTimeout(() => {
+          var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
+            && video.readyState > 2;
+          if (!isPlaying) {
+            video.play();
+          }
+        }, 300)
+      }
     },
     bindScroll() {
       if ('IntersectionObserver' in window && this.stopWhenNotShow) {
