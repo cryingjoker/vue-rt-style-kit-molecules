@@ -31,9 +31,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
 const version = year + "-" + month + "-" + date + " " + hours + ":" + minutes
 
-let packageJson = fs.readFileSync(path.join(__dirname,'..','package.json'),"utf8")
-packageJson = packageJson.replace(/("version")(: "[0-9\. :-]*")/,'"version": "'+version+'"')
-fs.writeFileSync(path.join(__dirname,'..','package.json'),packageJson)
+let indexFile = fs.readFileSync(path.join(__dirname,'..','src','index.js'),"utf8")
+indexFile = indexFile.replace(/(const version = )([0-9a-z"\. :-]*)/gi,'const version = "'+version+'"')
+
+fs.writeFileSync(path.join(__dirname,'..','src','index.js'),indexFile)
 
 function build(buildIndex = 0) {
 
