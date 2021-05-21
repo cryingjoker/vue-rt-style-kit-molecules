@@ -60,6 +60,7 @@ export default {
     deltaRowMoveTimeout: false,
     clearTransformTimeout: false,
     isHover: false,
+    isScrolling: false,
     xDown: 0,
     yDown: 0
   }),
@@ -80,6 +81,16 @@ export default {
     this.renderStyle()
   },
   methods: {
+    rollBack(){
+      this.renderStyle(0);
+    },
+    checkScrollEnd() {
+      window.clearTimeout(this.isScrolling);
+      this.isScrolling = setTimeout(() => {
+        this.rollBack()
+      }, 50);
+    },
+
     renderStyle(transform = 0) {
       const delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
       const style = {}
@@ -198,10 +209,12 @@ export default {
       }
       carouselV3Store.setNextSlide(localName)
     },
+
     wheelMove(e) {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault()
       }
+      this.checkScrollEnd();
 
       if (!this.wheelEventPause) {
 
