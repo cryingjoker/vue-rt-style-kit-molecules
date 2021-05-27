@@ -92,7 +92,10 @@ export default {
     },
 
     renderStyle(transform = 0) {
-      const delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
+      let delta = 1
+      if(this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
+         delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
+      }
       const style = {}
       let inlineStyle = ''
       let activeIndex = this.activeItemIndex;
@@ -125,11 +128,20 @@ export default {
         inlineStyle+='transition-duration: 0s;'
       }
       inlineStyle += '}'
+
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
+        if(activeItemIndex == size-2) {
+          inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + (activeItemIndex - 0.2) + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
+        }else{
+          inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + activeItemIndex + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
+        }
+        if(activeItemIndex == size-1) {
+          inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + (activeItemIndex-0.08) + ' + 7vw ' + transform + 'px);}}'
+        }else {
+          inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + activeItemIndex + ' + 7vw ' + transform + 'px);}}'
+        }
 
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + activeItemIndex + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + activeItemIndex + ' + 7vw ' + transform + 'px);}}'
       }else{
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
