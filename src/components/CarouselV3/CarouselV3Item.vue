@@ -16,10 +16,19 @@ export default {
   data: () => ({
     parentName : ''
   }),
+  methods:{
+    getParent(node = this.$parent){
+      if(node.$vnode.data.attrs.rtCarouselId){
+        return node.$vnode.data.attrs.rtCarouselId
+      }else{
+        return this.getParent(node.$parent)
+      }
+    }
+  },
   mounted() {
-
-    if(this.name.length == 0 && this.$parent.$vnode.data.attrs.rtCarouselId){
-        this.parentName = this.$parent.$vnode.data.attrs.rtCarouselId + ''
+    const rtCarouselId = this.getParent()
+    if(this.name.length == 0 && rtCarouselId){
+        this.parentName = rtCarouselId + ''
     }
   },
   render() {
