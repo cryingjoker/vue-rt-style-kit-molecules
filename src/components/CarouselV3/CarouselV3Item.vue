@@ -14,29 +14,46 @@ export default {
     }
   },
   data: () => ({
-    parentName : ''
+    parentName: ''
   }),
-  methods:{
-    getParent(node = this.$parent){
-      if(node.$vnode.data.attrs.rtCarouselId){
+  methods: {
+    getParent(node = this.$parent) {
+      console.info('node', node, this.$parent, node.$parent, node.$parent.$parent)
+      if (node.$vnode.data.attrs.rtCarouselId) {
         return node.$vnode.data.attrs.rtCarouselId
-      }else{
+      } else {
+        console.info('##@@')
         return this.getParent(node.$parent)
+      }
+    },
+    setParent() {
+
+      if (this.name.length == 0) {
+        const rtCarouselId = this.getParent()
+        if (rtCarouselId) {
+          if (this.name.length == 0 && rtCarouselId) {
+            this.parentName = rtCarouselId + ''
+          }
+        } else {
+          setTimeout(() => {
+            console.info('setParent', this.name)
+            this.setParent()
+          }, 400)
+
+
+        }
       }
     }
   },
   mounted() {
-    const rtCarouselId = this.getParent()
-    if(this.name.length == 0 && rtCarouselId){
-        this.parentName = rtCarouselId + ''
-    }
+
   },
   render() {
     let name = this.name;
-    if(name.length == 0){
+    if (name.length == 0) {
       name = this.parentName
     }
-    if(name.length > 0) {
+    if (name.length > 0) {
       carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
     }
     return null
