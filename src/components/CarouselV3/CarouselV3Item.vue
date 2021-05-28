@@ -19,10 +19,14 @@ export default {
   methods: {
     getParent(node = this.$parent) {
 
-      if (node?.$vnode.data.attrs.rtCarouselId) {
+      if (node?.$vnode?.data?.attrs?.rtCarouselId) {
         return node.$vnode.data.attrs.rtCarouselId
       } else {
-        return this.getParent(node.$parent)
+        if(this.$parent) {
+          return this.getParent(node.$parent)
+        }else {
+          return undefined
+        }
       }
     },
     setParent() {
