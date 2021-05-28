@@ -18,16 +18,14 @@ export default {
   }),
   methods: {
     getParent(node = this.$parent) {
-      console.info('node', node, this.$parent, node.$parent, node.$parent.$parent)
-      if (node.$vnode.data.attrs.rtCarouselId) {
+
+      if (node?.$vnode.data.attrs.rtCarouselId) {
         return node.$vnode.data.attrs.rtCarouselId
       } else {
-        console.info('##@@')
         return this.getParent(node.$parent)
       }
     },
     setParent() {
-
       if (this.name.length == 0) {
 
         const rtCarouselId = this.getParent()
@@ -57,7 +55,10 @@ export default {
     if (name.length > 0) {
       carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
     }
-    return null
+    if(this.parentName.length > 0 || this.name.length > 0){
+      return null
+    }
+    return <span class="d-none">slide item</span>
   }
 
 }
