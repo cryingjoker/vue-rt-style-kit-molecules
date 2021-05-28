@@ -29,6 +29,7 @@ export default {
     setParent() {
 
       if (this.name.length == 0) {
+
         const rtCarouselId = this.getParent()
         if (rtCarouselId) {
           if (this.name.length == 0 && rtCarouselId) {
@@ -46,7 +47,7 @@ export default {
     }
   },
   mounted() {
-
+    this.setParent()
   },
   render() {
     let name = this.name;
