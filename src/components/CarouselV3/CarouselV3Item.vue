@@ -39,7 +39,6 @@ export default {
           }
         } else {
           setTimeout(() => {
-            console.info('setParent', this.name)
             this.setParent()
           }, 400)
 
