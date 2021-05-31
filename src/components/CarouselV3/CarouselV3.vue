@@ -81,7 +81,7 @@ export default {
     this.renderStyle()
   },
   methods: {
-    rollBack(){
+    rollBack() {
       this.renderStyle(0);
     },
     checkScrollEnd() {
@@ -93,24 +93,24 @@ export default {
 
     renderStyle(transform = 0) {
       let delta = 1
-      if(this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
-         delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
+      if (this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
+        delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
       }
       const style = {}
       let inlineStyle = ''
       let activeIndex = this.activeItemIndex;
       let size = this.slides.length
 
-      if(activeIndex >= size - this.colInRow){
+      if (activeIndex >= size - this.colInRow) {
         activeIndex = size - this.colInRow
       }
 
       style.marginLeft = delta * (activeIndex)
-      if(this.wheelEventPause){
+      if (this.wheelEventPause) {
         transform = 0
       }
-      const origTransform = transform-0
-      if(transform == 0){
+      const origTransform = transform - 0
+      if (transform == 0) {
         this.origTransformBefore = 0
       }
       this.origTransformBefore += transform
@@ -122,27 +122,34 @@ export default {
       if (this.activeItemIndex > 0) {
         style.marginLeft -= delta * ((0.65) / (12 / this.colInRow))
       }
+
+
+      if (delta * (activeIndex) < 0 || !style.marginLeft) {
+        style.marginLeft = 0
+      } else {
+        style.marginLeft = delta * (activeIndex)
+      }
       style.marginLeft = -1 * style.marginLeft + '%'
-      inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + style.marginLeft  + transform + 'px);'
-      if(origTransform!=0) {
-        inlineStyle+='transition-duration: 0s;'
+      inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + (style.marginLeft + transform) + 'px);'
+      if (origTransform != 0) {
+        inlineStyle += 'transition-duration: 0s;'
       }
       inlineStyle += '}'
 
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
-        if(activeItemIndex == size-2) {
+        if (activeItemIndex == size - 2) {
           inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + (activeItemIndex - 0.2) + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
-        }else{
+        } else {
           inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + activeItemIndex + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
         }
-        if(activeItemIndex == size-1) {
-          inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + (activeItemIndex-0.08) + ' + 7vw ' + transform + 'px);}}'
-        }else {
+        if (activeItemIndex == size - 1) {
+          inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + (activeItemIndex - 0.08) + ' + 7vw ' + transform + 'px);}}'
+        } else {
           inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + activeItemIndex + ' + 7vw ' + transform + 'px);}}'
         }
 
-      }else{
+      } else {
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
       }
@@ -231,7 +238,7 @@ export default {
       if (!this.wheelEventPause) {
 
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-          if(e.deltaX >= 0 && this.activeItemIndex + (this.colInRow-0+1) <= this.slides.length || e.deltaX < 0 && this.activeItemIndex > 0) {
+          if (e.deltaX >= 0 && this.activeItemIndex + (this.colInRow - 0 + 1) <= this.slides.length || e.deltaX < 0 && this.activeItemIndex > 0) {
             this.renderStyle(e.deltaX * -1)
           }
         }
@@ -260,7 +267,7 @@ export default {
           }
 
         }
-      }else{
+      } else {
         e.preventDefault()
         e.stopImmediatePropagation()
       }
@@ -278,7 +285,6 @@ export default {
 
       var xDiff = this.xDown - xUp;
       var yDiff = this.yDown - yUp;
-
 
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
@@ -352,7 +358,7 @@ export default {
                 tabletNotActive = true
               }
 
-              if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0 ) && this.blurNotActive) {
+              if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0) && this.blurNotActive) {
                 notActive = true
               } else {
                 notActive = false
@@ -361,7 +367,13 @@ export default {
               if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
                 notActive = false
               }
-              return h(CarouselV3RenderItem, {props: {colInRow: this.colInRow, notActive: notActive, tabletNotActive: tabletNotActive}}, slot)
+              return h(CarouselV3RenderItem, {
+                props: {
+                  colInRow: this.colInRow,
+                  notActive: notActive,
+                  tabletNotActive: tabletNotActive
+                }
+              }, slot)
             }))
           }
         )
@@ -421,7 +433,6 @@ export default {
       }
       return null
     }
-
 
 
     const caurouselWrapperClassList = ['rt-carousel-v3']

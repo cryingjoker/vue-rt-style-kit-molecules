@@ -60,7 +60,10 @@ class CarouselV3Store extends StorePrototype {
       const index = sliders.ids.indexOf(_id)
       sliders.slides[index] = slot;
     }
+    this.setArrowProps(sliderName);
     this.callWatcher(sliderName)
+
+
   }
   setMaxAuthorTextLength = (sliderName) => {
 
@@ -115,7 +118,6 @@ class CarouselV3Store extends StorePrototype {
       }else {
         slider.index = (index + 1) % size;
       }
-      console.info('slider.index',slider.index);
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
