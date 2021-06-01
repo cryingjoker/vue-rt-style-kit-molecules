@@ -155,9 +155,9 @@ export default {
             const wrapRect = wrap.getClientRects()[0];
             top -= wrapRect.top
             left -= wrapRect.left
+            wrapperHeight = wrap.clientHeight
+            wrapperWidth = wrap.clientWidth
           }
-          wrapperHeight = wrap.clientHeight
-          wrapperWidth = wrap.clientWidth
         }
 
 
