@@ -123,6 +123,7 @@ export default {
         this.direction = key > this.activeTab ? 'right' : 'left'
         this.activeTab = key
         this.activateParentEvent(key)
+        this.fitItems()
       }
     })
     this.fitItems()
@@ -146,6 +147,7 @@ export default {
         <microtabs-control
           onClick={this.navLeft}
           direction="left"
+          active-tab={this.activeTab}
           hidden={!this.allowNavLeft}
         ></microtabs-control>
 
