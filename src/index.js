@@ -340,6 +340,7 @@ export {
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
+  ResizeContentHeightDirective,
   Popup,
   Popover,
   LinksBlock,

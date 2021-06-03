@@ -239,7 +239,11 @@ export default {
     }
   },
   render(h) {
-    return <div class="tab-slider__header" ref="header">{this.renderPaginatiorItems}</div>
+    return <div class="tab-slider__header" ref="header">
+      <div class="tab-slider__header-inner">
+        {this.renderPaginatiorItems}
+      </div>
+    </div>
 
   }
 };

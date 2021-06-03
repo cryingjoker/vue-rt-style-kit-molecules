@@ -17,7 +17,7 @@ export default {
   components: components,
   computed: {
     tabsSliderClass() {
-      const classNames = ['tab-slider__header-item', 'sp-h-1-3', 'sp-v-0-2']
+      const classNames = ['tab-slider__header-item', 'sp-h-1-3']
       if (this.isActive) {
         classNames.push('tab-slider__header-item--active')
       }
