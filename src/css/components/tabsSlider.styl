@@ -5,17 +5,18 @@
 .tab-slider__header
   display: flex
   flex-wrap wrap
+  overflow: auto;
+  max-width 100%
   @media (max-width: tablet-upper-limit)
     //display: block
     overflow: auto;
-    width: calc(100% + 40px)
+    width: 100%
     flex-wrap nowrap
     flex-shrink: 0
     position: relative;
-    left: -20px
-    right: -20px
-    padding-left: 20px
-    padding-right: 20px
+    left: 0px
+    right: 0px
+
     justify-content: space-between;
     &:after
       content ' '
@@ -23,11 +24,9 @@
       height: 10px
       background-color: transparent
       display: block
+
 .tab-slider__header-item
-  margin-right: 16px
-  margin-bottom: 16px
   border-radius 32px
-  background-color main-color005
   cursor: pointer;
   transition-timing-function ease-in-out
   transition-duration .3s
@@ -35,6 +34,7 @@
   position: relative;
   overflow: hidden
   white-space nowrap
+  height: 44px
 
 
   &:last-child
@@ -44,17 +44,24 @@
   @media (hover: hover)
     &:hover,
     &:focus
-      background-color main-color01
-
+      color b2c-orange
+.tab-slider__header-inner
+  background-color: main-color005
+  border-radius 24px
+  padding 2px
+  display: flex
+  flex-wrap nowrap
+  @media (max-width: tablet-upper-limit)
+    margin-left: 20px
 .tab-slider__header-item--active
   cursor: default;
-  background-color b2c-purple
+  background-color b2c-orange
   color white
   @media (hover: hover)
     &:hover,
     &:focus
       cursor: default;
-      background-color b2c-purple
+      background-color b2c-orange
       color white
 
 
@@ -69,7 +76,7 @@
   box-sizing content-box
   top: 0
   bottom: 0
-  background-color: b2c-purple-button-active
+  background-color: b2c-orange-button-hover
 
 .tab-slider__header-text
   position: relative;

@@ -280,7 +280,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-06-02 14:53";
+const version = "2021-06-03 13:07";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -340,6 +340,7 @@ export {
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
+  ResizeContentHeightDirective,
   Popup,
   Popover,
   LinksBlock,
