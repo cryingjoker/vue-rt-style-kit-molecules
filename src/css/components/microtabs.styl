@@ -34,6 +34,9 @@ microtabsOrangeColor = #ff4f12
       z-index 2
       &.is--active
         cursor default
+        color: #FF4F12
+        {cmp}-nav__item-opacity
+          background: rgba(255, 79, 18, 0.1);
       &.is--hidden
         color transparent !important
         position absolute
@@ -45,17 +48,17 @@ microtabsOrangeColor = #ff4f12
     &__item
       padding 0 8px
       &-tgl
-        background inherit
         margin auto
         position absolute
-        width microtabsTriangleSize
-        height microtabsTriangleSize
+        width 0
+        height 0
         left 0
         right 0
-        bottom -(microtabsTriangleSize / 2)
-        transform rotate(45deg)
+        bottom -14px
         transition transform .3s ease-in
         z-index -2
+        border: 8px solid transparent
+        border-top: 6px solid rgba(255, 79, 18, 0.1)
       // Background
       &-bg
         content: ''
