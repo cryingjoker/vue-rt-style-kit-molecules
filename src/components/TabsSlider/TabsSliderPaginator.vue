@@ -43,6 +43,10 @@ export default {
     hover: {
       type: Boolean,
       default: false
+    },
+    shadowColor:{
+      type: String,
+      default: ''
     }
   },
   components: components,
@@ -54,9 +58,16 @@ export default {
     activeItem: {},
     timeout: null,
     localPause: false,
-
+    showShadowLeft: false,
+    showShadowRight: false
   }),
   computed: {
+
+    activeIndex(){
+      return this.customSlotsSort.findIndex((id) => {
+        return this.activeItem.activeId == id
+      })
+    },
     renderPaginatiorItems() {
       return this.customSlotsSort.map((id) => {
         let isActive = this.activeItem.activeId == id
@@ -95,10 +106,31 @@ export default {
       return null
     },
   },
+  beforeDestroy() {
+    this.unbindScroll()
+  },
   watch: {
     autoplay(newWal, oldVal) {
       if (newWal != oldVal && newWal) {
         this.tick()
+      }
+    },
+    showShadowRight(newVal,oldVal){
+      if(newVal != oldVal){
+        if(newVal){
+          this.$refs.shadowRight.style.display = 'block'
+        }else {
+          this.$refs.shadowRight.style.display = 'none'
+        }
+      }
+    },
+    showShadowLeft(newVal,oldVal){
+      if(newVal != oldVal){
+        if(newVal){
+          this.$refs.shadowLeft.style.display = 'block'
+        }else {
+          this.$refs.shadowLeft.style.display = 'none'
+        }
       }
     },
 
@@ -121,11 +153,42 @@ export default {
     if (this.autoplay) {
       this.tick()
     }
-
+    this.bindScroll()
+    setTimeout(()=> {
+      this.setShowRShadow()
+    },300)
   },
 
 
   methods: {
+    setShowRShadow(){
+      const line = this.$refs.header;
+      let x = false
+      let windowWidth = window.innerWidth
+      // if(windowWidth < 1025){
+      //   this.showShadowLeft = false
+      //   this.showShadowRight = false
+      // }else {
+        if (line) {
+          const r = line.getClientRects()[0];
+          x = r.right - r.width - line.scrollLeft > 50;
+          this.showShadowLeft = line.scrollLeft > 50
+        } else {
+          setTimeout(() => {
+            this.setShowRShadow()
+          }, 100)
+        }
+
+        this.showShadowRight = x && this.activeIndex < this.customSlotsSort.length - 1
+      // }
+    },
+    bindScroll(){
+      window.addEventListener('resize',this.setShowRShadow)
+    },
+    unbindScroll(){
+      window.removeEventListener('resize',this.setShowRShadow)
+    },
+
     getViewPortPosition() {
       const scrollPos = window.pageYOffset || document.documentElement.scrollTop
       const top = this.$el.getBoundingClientRect().top
@@ -239,11 +302,28 @@ export default {
     }
   },
   render(h) {
-    return <div class="tab-slider__header" ref="header">
-      <div class="tab-slider__header-inner">
+
+    let shadowClassName = ['tab-slider__header']
+
+    let className = ['relative']
+    if(this.shadowColor.length > 0) {
+      className.push('rt-shadow-' + this.shadowColor)
+    }
+    return <rt-col class={className.join(' ')}>
+      <div class="tab-slider__header-shadows">
+         <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft"></div>
+        <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight"></div>
+      </div>
+      <div class={shadowClassName.join(' ')} ref="header" onScroll={this.setShowRShadow}>
+
+      <div class="tab-slider__header-inner" ref="line" >
+        <div class="tab-slider__header-round">
+
         {this.renderPaginatiorItems}
+        </div>
       </div>
     </div>
+    </rt-col>
 
   }
 };

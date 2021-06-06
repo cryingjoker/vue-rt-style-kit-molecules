@@ -5,12 +5,14 @@
 .tab-slider__header
   display: flex
   flex-wrap wrap
-  overflow: auto;
   max-width 100%
+  position: relative;
+  overflow: auto;
   @media (max-width: tablet-upper-limit)
     //display: block
-    overflow: auto;
-    width: 100%
+    margin-left: -20px
+    margin-right: -20px
+
     flex-wrap nowrap
     flex-shrink: 0
     position: relative;
@@ -24,8 +26,20 @@
       height: 10px
       background-color: transparent
       display: block
+.tab-slider__header-shadows
+  position: absolute;
+  left: 10px
+  right: 10px
+  bottom: 0
+  top: 0
+  z-index 10
+  pointer-events none
+.tab-slider__header-row
+  position: relative;
+  overflow: auto;
 
 .tab-slider__header-item
+  min-width fit-content
   border-radius 32px
   cursor: pointer;
   transition-timing-function ease-in-out
@@ -45,14 +59,16 @@
     &:hover,
     &:focus
       color b2c-orange
-.tab-slider__header-inner
+.tab-slider__header-round
   background-color: main-color005
   border-radius 24px
   padding 2px
   display: flex
   flex-wrap nowrap
+  overflow: auto;
   @media (max-width: tablet-upper-limit)
     margin-left: 20px
+
 .tab-slider__header-item--active
   cursor: default;
   background-color b2c-orange

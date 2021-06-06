@@ -48,6 +48,10 @@ export default {
     stopWhenNotShow: {
       type: Boolean,
       default: true
+    },
+    shadowColor:{
+      type: String,
+      default: ''
     }
   },
   components: components,
@@ -67,7 +71,8 @@ export default {
     renderMenu() {
       return <rt-tabs-slider-paginator on-click-stop-play={this.onClickStopPlay} pause={this.pause}
                                        time={this.timerDuration}
-                                       duration-time={this.scrollDuration}
+                                       shadow-color={this.shadowColor}
+                                       duration-time={this.scrollDuxration}
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
     renderTabs() {
