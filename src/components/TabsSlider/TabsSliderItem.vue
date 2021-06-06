@@ -42,7 +42,6 @@ export default {
     },
     fillTabsSliderStore() {
       if(this.$slots.label && this.$slots.label.length > 0 && this.$slots.label[0].text) {
-        console.info('this.$slots.label[0] >>>  ',this.$slots.label[0])
         tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.$slots.label, this._uid)
       }else{
         tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.label, this._uid)
