@@ -158,14 +158,16 @@ export default {
       this.scrollLength = window.pageYOffset;
       document.body.style.top = `-${this.scrollLength}px`;
       document.body.style.overflow = 'hidden';
+      document.body.style.width = '100%';
       setTimeout(()=>{
         document.body.style.position = 'fixed';
       },500);
     },
     unbindPageScroll() {
-      document.body.style.removeProperty('top');
       document.body.style.removeProperty('position');
       document.body.style.removeProperty('overflow');
+      document.body.style.removeProperty('width');
+      document.body.style.removeProperty('top');
       window.scrollTo(0, this.scrollLength);
     },
     addKeyBindind() {
