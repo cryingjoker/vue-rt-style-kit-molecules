@@ -25,6 +25,10 @@ export default {
       type: Boolean,
       default: true
     },
+    scrollLength: { // На сколько прокрутить окно после скрытия модалки
+      type: Number,
+      default: 0
+    },
     hash: {
       type: String,
       default: ''
@@ -151,10 +155,18 @@ export default {
       return false;
     },
     bindPageScroll() {
+      this.scrollLength = window.pageYOffset;
+      document.body.style.top = `-${this.scrollLength}px`;
       document.body.style.overflow = 'hidden';
+      setTimeout(()=>{
+        document.body.style.position = 'fixed';
+      },500);
     },
     unbindPageScroll() {
-      document.body.style.overflow = null;
+      document.body.style.removeProperty('top');
+      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('overflow');
+      window.scrollTo(0, this.scrollLength);
     },
     addKeyBindind() {
       window.addEventListener('keydown', this.keyPress, {passive: false});
