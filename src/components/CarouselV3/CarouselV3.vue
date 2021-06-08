@@ -428,11 +428,11 @@ export default {
         return this.slides.map((slot, slotIndex) => {
           let notActive = slotIndex  - this.activeItemIndex
           let tabletNotActive = false
-          if (notActive < 0 || notActive > 1 - 0) {
-            tabletNotActive = true
-          }
+          // if (notActive < 0 || notActive > 1 - 0) {
+          //   tabletNotActive = true
+          // }
 
-          if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0) && this.blurNotActive) {
+          if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
             notActive = true
           } else {
             notActive = false
