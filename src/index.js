@@ -239,13 +239,8 @@ const VueRtStyle = {
 
       Vue.component(CarouselV3.name, CarouselV3);
       Vue.component(CarouselV3Item.name, CarouselV3Item);
-
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
-
-
-      Vue.directive(CommentSlider.name, CommentSlider);
-      Vue.directive(CommentSliderItem.name, CommentSliderItem);
 
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
       Vue.directive(TooltipDirective.name, TooltipDirective);
