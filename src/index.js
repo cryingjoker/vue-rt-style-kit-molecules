@@ -109,9 +109,7 @@ import {
   Popover,
   CommentSlider,
   CommentSliderItem,
-  VideoBanner,
-  CarouselV3,
-  CarouselV3Item
+  VideoBanner
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -237,9 +235,6 @@ const VueRtStyle = {
       Vue.component(CardTileLayout.name, CardTileLayout);
       Vue.component(VideoBanner.name, VideoBanner);
 
-      Vue.component(CarouselV3.name, CarouselV3);
-      Vue.component(CarouselV3Item.name, CarouselV3Item);
-
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
 
@@ -280,7 +275,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-06-07 19:53";
+const version = "2021-06-08 11:18";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -340,7 +335,6 @@ export {
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
-  ResizeContentHeightDirective,
   Popup,
   Popover,
   LinksBlock,
@@ -412,7 +406,5 @@ export {
   GaClickDirective,
   CommentSlider,
   CommentSliderItem,
-  VideoBanner,
-  CarouselV3,
-  CarouselV3Item
+  VideoBanner
 }
