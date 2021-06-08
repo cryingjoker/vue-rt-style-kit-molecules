@@ -97,7 +97,6 @@
       },
       setScrollStep(data) {
         this.scrollStep = data.size;
-        this.$refs.inner.scrollLeft = 0;
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
