@@ -118,11 +118,14 @@ export default {
     }
   },
   mounted(){
-    this.$on('setActiveTab', key => {
+    this.$on('setActiveTab', (key, calculateFitItems = true) => {
       if (key !== this.activeTab) {
         this.direction = key > this.activeTab ? 'right' : 'left'
         this.activeTab = key
         this.activateParentEvent(key)
+        if (calculateFitItems) {
+            this.fitItems()
+        }
       }
     })
     this.fitItems()
@@ -146,6 +149,7 @@ export default {
         <microtabs-control
           onClick={this.navLeft}
           direction="left"
+          active-tab={this.activeTab}
           hidden={!this.allowNavLeft}
         ></microtabs-control>
 

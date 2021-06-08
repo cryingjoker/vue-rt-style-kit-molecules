@@ -34,7 +34,7 @@ export default {
   },
   methods:{
     setActive(e){
-      this.$parent.$emit('setActiveTab', this.key)
+      this.$parent.$emit('setActiveTab', this.key, false)
     }
   },
   mounted(){
