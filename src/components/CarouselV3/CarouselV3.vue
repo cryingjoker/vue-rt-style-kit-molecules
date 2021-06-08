@@ -15,6 +15,10 @@ export default {
       type: [String, Number],
       default: 3
     },
+    laptopColInRow: {
+      type: [String, Number],
+      default: 0
+    },
     scrollableOnDesktop: {
       type: Boolean,
       default: true
@@ -47,6 +51,7 @@ export default {
 
   },
   data: () => ({
+    innerWidth: 0,
     origTransformBefore: 0,
     slides: [],
     activeItemIndex: 0,
@@ -62,16 +67,13 @@ export default {
     isHover: false,
     isScrolling: false,
     xDown: 0,
-    yDown: 0
+    yDown: 0,
+    isMouseDown: false
   }),
   mounted() {
-
-    let localName = this.name;
-    if (localName.length == 0) {
-      localName = this._uid + '';
-    }
+   const localName = this.getLocalName()
     carouselV3Store.addWatcher(localName, this.getSlide)
-    carouselV3Store.setColInRow(localName, this.colInRow)
+    carouselV3Store.setColInRow(localName, this.getColInRow())
     if (this.activeIndex - 0 >= 0) {
       this.$nextTick(() => {
         carouselV3Store.setActiveIndex(localName, this.activeIndex - 0)
@@ -79,8 +81,33 @@ export default {
     }
     deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
     this.renderStyle()
+    this.bindResize()
+    this.onResize();
   },
   methods: {
+    onResize(){
+      this.innerWidth = window.innerWidth;
+    },
+    bindResize(){
+      window.addEventListener('resize',this.onResize)
+    },
+    unbindResize(){
+      window.removeEventListener('resize',this.onResize)
+    },
+
+    getColInRow(){
+      if(this.innerWidth < 1367 && this.laptopColInRow - 0 > 0){
+        return this.laptopColInRow
+      }
+      return this.colInRow
+    },
+    getLocalName(){
+      let localName = this.name;
+      if (localName.length == 0) {
+        localName = this._uid + '';
+      }
+      return localName
+    },
     rollBack() {
       this.renderStyle(0);
     },
@@ -93,7 +120,8 @@ export default {
 
     renderStyle(transform = 0) {
       let delta = 1
-      if (this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
+      const colInRow = this.getColInRow()
+      if (this.$refs.wrap && this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
         delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
       }
       const style = {}
@@ -101,8 +129,8 @@ export default {
       let activeIndex = this.activeItemIndex;
       let size = this.slides.length
 
-      if (activeIndex >= size - this.colInRow) {
-        activeIndex = size - this.colInRow
+      if (activeIndex >= size - colInRow) {
+        activeIndex = size - colInRow
       }
 
       style.marginLeft = delta * (activeIndex)
@@ -120,7 +148,7 @@ export default {
         transform = ' - ' + Math.abs(this.origTransformBefore)
       }
       if (this.activeItemIndex > 0) {
-        style.marginLeft -= delta * ((0.65) / (12 / this.colInRow))
+        style.marginLeft -= delta * ((0.65) / (12 / colInRow))
       }
 
 
@@ -153,8 +181,10 @@ export default {
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
       }
-
-      document.querySelector('.rt-carousel-v3-' + this._uid + ' style').innerText = inlineStyle
+      const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
+      if (styleTag) {
+        styleTag.innerText = inlineStyle
+      }
     },
     mouseenter() {
       this.isHover = true
@@ -163,7 +193,9 @@ export default {
     mouseleave() {
       this.isHover = false
       this.unbindKeydown()
+      this.mouseUp()
     },
+
     bindKeydown() {
       window.addEventListener('keydown', this.bindKeydownFn, {once: true})
     },
@@ -234,11 +266,11 @@ export default {
         e.preventDefault()
       }
       this.checkScrollEnd();
-
+      const colInRow = this.getColInRow()
       if (!this.wheelEventPause) {
 
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-          if (e.deltaX >= 0 && this.activeItemIndex + (this.colInRow - 0 + 1) <= this.slides.length || e.deltaX < 0 && this.activeItemIndex > 0) {
+          if (e.deltaX >= 0 && this.activeItemIndex + (colInRow - 0 + 1) <= this.slides.length || e.deltaX < 0 && this.activeItemIndex > 0) {
             this.renderStyle(e.deltaX * -1)
           }
         }
@@ -300,42 +332,131 @@ export default {
       this.xDown = null;
       this.yDown = null;
     },
+    mouseDown(e){
+      this.isMouseDown = true
+      this.mouseX = e.clientX
+    },
+    mouseUp(){
+      this.isMouseDown = false
+      this.renderStyle(0)
+    },
+    mouseMove(e){
+      if(this.isMouseDown){
+        const width = window.innerWidth
+        let activeIndex = this.activeItemIndex;
+        const colInRow = this.getColInRow()
+        const delta = (e.clientX - this.mouseX) - this.origTransformBefore
+        if(delta < 0){
+          if(activeIndex < this.slides.length - colInRow){
+            if(delta+this.origTransformBefore < width*-0.2){
+              this.renderStyle(0)
+              this.isMouseDown = false
+              this.setNextActive()
+            }else{
+              this.renderStyle(delta )
+            }
+          }
+        }else{
+          if(activeIndex > 0){
+            if(delta+this.origTransformBefore > width*0.2){
+              this.renderStyle(0)
+              this.isMouseDown = false
+              this.setPrewActive()
+            }
+            else{
+              this.renderStyle(delta )
+            }
+          }
+        }
+
+      }
+    }
+
+  },
+  beforeDestroy() {
+    this.unbindResize();
   },
   watch: {
+    colInRow(newVal, oldVal){
+      if(oldVal && newVal != oldVal){
+        const localName = this.getLocalName()
+        this.onResize()
+        carouselV3Store.setColInRow(localName, this.getColInRow())
+        this.$nextTick(()=>{this.renderStyle(1)})
+      }
+    },
+    laptopColInRow(newVal, oldVal){
+      if(oldVal && newVal != oldVal){
+        const localName = this.getLocalName()
+        carouselV3Store.setColInRow(localName, this.getColInRow())
+        this.onResize()
+        this.$nextTick(()=>{this.renderStyle(1)})
+      }
+    },
     activeItemIndex() {
       this.renderStyle()
     },
     nextShadowShow(newVal, oldVal) {
       this.$nextTick(() => {
-        if (newVal) {
-          this.$refs.shadowRight.style.marginRight = 0
-        } else {
-          this.$refs.shadowRight.style.marginRight = '-50px'
+        if (this.$refs.shadowRight) {
+          if (newVal) {
+            this.$refs.shadowRight.style.marginRight = 0
+          } else {
+            this.$refs.shadowRight.style.marginRight = '-50px'
+          }
         }
       })
     }
     ,
     prewShadowShow(newVal, oldVal) {
       this.$nextTick(() => {
-        if (newVal) {
-          this.$refs.shadowLeft.style.marginLeft = 0
-        } else {
-          this.$refs.shadowLeft.style.marginLeft = '-50px'
+        if (this.$refs.shadowLeft) {
+          if (newVal) {
+            this.$refs.shadowLeft.style.marginLeft = 0
+          } else {
+            this.$refs.shadowLeft.style.marginLeft = '-50px'
+          }
         }
       })
     }
   }
   ,
   render(h) {
-
+    const colInRow = this.getColInRow()
     const renderSlides = () => {
       if (this.slides.length > 0) {
+        return this.slides.map((slot, slotIndex) => {
+          let notActive = slotIndex  - this.activeItemIndex
+          let tabletNotActive = false
+          if (notActive < 0 || notActive > 1 - 0) {
+            tabletNotActive = true
+          }
+
+          if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0) && this.blurNotActive) {
+            notActive = true
+          } else {
+            notActive = false
+          }
+
+          if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
+            notActive = false
+          }
+          return h(CarouselV3RenderItem, {
+            props: {
+              colInRow: colInRow - 0,
+              scrollableOnDesktop: this.scrollableOnDesktop,
+              notActive: notActive,
+              tabletNotActive: tabletNotActive
+            }
+          }, slot)
+        })
+
         return this.slides.reduce((a, b) => {
           if (!Array.isArray(a) || !Array.isArray(a[0])) {
             return [[a, b]]
           } else {
             let size = a.length;
-            if (a[size - 1].length == this.colInRow - 0) {
+            if (a[size - 1].length == colInRow - 0) {
               a.push([])
               size += 1
             }
@@ -351,14 +472,14 @@ export default {
               options.class = ['sp-t-1', 'td-sp-t-none']
             }
             return h('rt-row', options, row.map((slot, slotIndex) => {
-              let notActive = slotIndex + index * (this.colInRow - 0) - this.activeItemIndex
+              let notActive = slotIndex + index * (colInRow - 0) - this.activeItemIndex
 
               let tabletNotActive = false
               if (notActive < 0 || notActive > 1 - 0) {
                 tabletNotActive = true
               }
 
-              if ((notActive < 0 || notActive - 1 >= this.colInRow - 1 - 0) && this.blurNotActive) {
+              if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
                 notActive = true
               } else {
                 notActive = false
@@ -369,7 +490,7 @@ export default {
               }
               return h(CarouselV3RenderItem, {
                 props: {
-                  colInRow: this.colInRow,
+                  colInRow: colInRow,
                   notActive: notActive,
                   tabletNotActive: tabletNotActive
                 }
@@ -391,6 +512,8 @@ export default {
       if (this.shadowColor.length > 0) {
         shadowClassList.push('rt-shadow-' + this.shadowColor)
       }
+
+
       return <div class="rt-container rt-carousel-v3-shadows-wrapper">
         <div class={shadowClassList}>
           <div ref="shadowLeft" class="rt-shadow rt-shadow-left"></div>
@@ -440,8 +563,11 @@ export default {
     if (this.background.length > 0) {
       caurouselWrapperClassList.push('color-block--' + this.background)
     }
-    // docu
-    return <div class={caurouselWrapperClassList} onWheel={this.wheelMove} onMouseenter={this.mouseenter}
+    return <div class={caurouselWrapperClassList} onWheel={this.wheelMove}
+                onMouseenter={this.mouseenter}
+                onMousedown={this.mouseDown}
+                onMouseup={this.mouseUp}
+                onMousemove={this.mouseMove}
                 onTouchstart={this.touchstart}
                 onTouchmove={this.touchmove}
                 onMouseleave={this.mouseleave}>
@@ -450,7 +576,7 @@ export default {
         <div class="rt-carousel-v3-wrap" ref="wrap">
           {arrowRender()}
           {shadowRender()}
-          {h('rt-col', {
+          {h(this.scrollableOnDesktop ? 'rt-col' : 'rt-row', {
             attrs: {rtCarouselId: this.name || this._uid},
             props: {size: this.scrollableOnDesktop ? 11 : 12, tabletSize: 5, mobileSize: 3},
             class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
@@ -466,5 +592,14 @@ export default {
   }
 
 }
+// {h('rt-col', {
+// //   attrs: {rtCarouselId: this.name || this._uid},
+// //   props: {size: this.scrollableOnDesktop ? 11 : 12, tabletSize: 5, mobileSize: 3},
+// //   class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
+// //   ref: 'caroselRow',
+// // }, [
+// {renderSlides()}
+// {this.$slots.default}
+// // ])}
 
 </script>
