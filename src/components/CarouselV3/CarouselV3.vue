@@ -166,11 +166,9 @@ export default {
 
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
-        if (activeItemIndex == size - 2) {
-          inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + (activeItemIndex - 0.2) + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
-        } else {
-          inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1 * ((100vw - 20px) / 6 * 5 - 7px) / 2 * ' + activeItemIndex + ' + ((100vw - 20px) / 6 * 5 - 7px) / 2 * 0.22 ' + transform + 'px);}}'
-        }
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((40vw - 16px) / 4 * -'+(activeItemIndex < size-2 ? 3 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (40vw - 16px) * -'+(activeItemIndex > 1 ? activeItemIndex - 1 : 0)+' + '+(activeItemIndex < size-2 ? 2 : 3)+'0px);}}'
+
+
         if (activeItemIndex == size - 1) {
           inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc(-1*(80vw) * ' + (activeItemIndex - 0.08) + ' + 7vw ' + transform + 'px);}}'
         } else {
@@ -178,7 +176,7 @@ export default {
         }
 
       } else {
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 10px;}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 0px;}}'
       }
       const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
@@ -432,6 +430,9 @@ export default {
           //   tabletNotActive = true
           // }
 
+          if(notActive > 1){
+            tabletNotActive = true
+          }
           if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
             notActive = true
           } else {
@@ -451,53 +452,7 @@ export default {
           }, slot)
         })
 
-        return this.slides.reduce((a, b) => {
-          if (!Array.isArray(a) || !Array.isArray(a[0])) {
-            return [[a, b]]
-          } else {
-            let size = a.length;
-            if (a[size - 1].length == colInRow - 0) {
-              a.push([])
-              size += 1
-            }
-            a[size - 1].push(b)
-            return a
-          }
-        }).map((row, index) => {
-            if (!Array.isArray(row)) {
-              return null
-            }
-            const options = {}
-            if (!this.scrollableOnDesktop && index > 0) {
-              options.class = ['sp-t-1', 'td-sp-t-none']
-            }
-            return h('rt-row', options, row.map((slot, slotIndex) => {
-              let notActive = slotIndex + index * (colInRow - 0) - this.activeItemIndex
 
-              let tabletNotActive = false
-              if (notActive < 0 || notActive > 1 - 0) {
-                tabletNotActive = true
-              }
-
-              if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
-                notActive = true
-              } else {
-                notActive = false
-              }
-
-              if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
-                notActive = false
-              }
-              return h(CarouselV3RenderItem, {
-                props: {
-                  colInRow: colInRow,
-                  notActive: notActive,
-                  tabletNotActive: tabletNotActive
-                }
-              }, slot)
-            }))
-          }
-        )
 
       }
       return null
