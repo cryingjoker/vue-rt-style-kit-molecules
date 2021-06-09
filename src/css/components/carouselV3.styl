@@ -128,6 +128,9 @@
 .rt-carousel-slide-v3--td-not-act
   @media(max-width tablet-upper-limit)
     opacity: 0.3
+.rt-carousel-slide-v3--md-not-act
+  @media(max-width mobile-upper-limit)
+    opacity: 0.3
 .rt-carousel-slide-item-3
   padding-left: 10px
   padding-right: 10px
@@ -135,14 +138,16 @@
     width 1440px*0.3
     min-width 1440px*0.3
   @media (max-width 1599px)
-    width: calc((100vw - 160px)*0.3)
-    min-width: calc((100vw - 160px)*0.3)
-  @media (max-width 1024px)
-    width: calc((100vw - 40px)*0.4)
-    min-width: calc((100vw - 40px)*0.4)
-  @media (max-width 360px)
-    width: calc((100vw - 40px)*0.75)
-    min-width: calc((100vw - 40px)*0.4)
+    width: calc(30vw - 48px)
+    min-width: calc(30vw - 48px)
+
+  @media (max-width tablet-upper-limit)
+    width: calc(40vw - 16px)
+    min-width: calc(40vw - 16px)
+
+  @media (max-width mobile-upper-limit)
+    width: calc(75vw - 35px)
+    min-width: calc(75vw - 35px)
   @media (max-width 320px)
     width: 235px
     min-width: 235px
@@ -155,21 +160,21 @@
   @media (max-width 1599px)
     width: calc((100vw - 160px)*0.23)
     min-width: calc((100vw - 160px)*0.23)
-  @media (max-width 1024px)
+  @media (max-width tablet-upper-limit)
     width: calc(40vw - 16px)
     min-width: calc(40vw - 16px)
-  @media (max-width 360px)
-    width: calc((100vw - 40px)*0.75)
-    min-width: calc((100vw - 40px)*0.4)
+  @media (max-width mobile-upper-limit)
+    width: calc(75vw - 35px)
+    min-width: calc(75vw - 35px)
   @media (max-width 320px)
     width: 235px
     min-width: 235px
 //.rt-carousel-slide-item-laptop-4
-//  @media (max-width 1366px) and (min-width 1024px)
+//  @media (max-width 1366px) and (min-width tablet-upper-limit)
 //    width: calc((100vw - 160px)*0.23)
 //    min-width: calc((100vw - 160px)*0.23)
 //.rt-carousel-slide-item-laptop-3
-//  @media (max-width 1366px) and (min-width 1024px)
+//  @media (max-width 1366px) and (min-width tablet-upper-limit)
 //    width: calc((100vw - 160px)*0.3)
 //    min-width: calc((100vw - 160px)*0.3)
 

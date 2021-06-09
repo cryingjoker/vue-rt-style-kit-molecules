@@ -15,6 +15,9 @@ export default {
     tabletNotActive: {
       type: Boolean
     },
+    mobileNotActive: {
+      type: Boolean
+    },
     scrollableOnDesktop:{
       type: Boolean
     }
@@ -31,6 +34,9 @@ export default {
     }
     if(this.tabletNotActive){
       classListItem.push('rt-carousel-slide-v3--td-not-act')
+    }
+    if(this.mobileNotActive){
+      classListItem.push('rt-carousel-slide-v3--md-not-act')
     }
 
     return <div class={classListItem}>{this.$slots.default}</div>
