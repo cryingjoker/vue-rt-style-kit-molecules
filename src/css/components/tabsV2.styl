@@ -327,8 +327,13 @@ for $i in colors
       .rt-tabs-v2-navigation
         background-color rgba(lookup($i))
     .{shadowClassName}
+      .rt-shadow-has-pseudo
+        &:before
+          background-color: lookup($i)
+
       .rt-shadow-left
         background-image: linear-gradient(to left, rgba(lookup($i),0) 0%, lookup($i) 90%)
+
       .rt-shadow-right
         background-image: linear-gradient(to right , rgba(lookup($i),0) 0%, lookup($i) 90%)
 
