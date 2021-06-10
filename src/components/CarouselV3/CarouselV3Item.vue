@@ -17,25 +17,27 @@ export default {
     parentName: ''
   }),
   methods: {
-    getParent(node = this.$parent) {
-
-      if (node?.$vnode?.data?.attrs?.rtCarouselId) {
-        return node.$vnode.data.attrs.rtCarouselId
+    getParent(node = this.$el.parentNode, deep = 1) {
+      if (node.getAttribute('rtcarouselid')) {
+        return node.getAttribute('rtcarouselid')
       } else {
-        if(this.$parent) {
-          return this.getParent(node.$parent)
+        if(node.parentNode && deep < 5) {
+          return this.getParent(node.parentNode, deep + 1)
         }else {
           return undefined
         }
       }
     },
     setParent() {
+
       if (this.name.length == 0) {
 
         const rtCarouselId = this.getParent()
         if (rtCarouselId) {
+
           if (this.name.length == 0 && rtCarouselId) {
             this.parentName = rtCarouselId + ''
+
           }
         } else {
           setTimeout(() => {
@@ -49,15 +51,17 @@ export default {
   },
   mounted() {
     this.setParent()
-  },
-  render() {
     let name = this.name;
     if (name.length == 0) {
       name = this.parentName
     }
-    if (name.length > 0) {
-      carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
-    }
+    carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
+  },
+  render() {
+
+
+
+
     if(this.parentName.length > 0 || this.name.length > 0){
       return null
     }

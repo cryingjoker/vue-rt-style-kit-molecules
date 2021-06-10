@@ -1,5 +1,9 @@
 .rt-carousel-v3
   position relative
+  max-width: 100%
+  width: calc(100vw - 8px)
+  width  calc(100vw - var(--scrollbarWidth))
+  overflow-x hidden
 
 .rt-carousel-v3--scroll
   display: flex
@@ -21,7 +25,7 @@
   &.rt-carousel-v3--scroll--remove-transform
     transition-property  transform, margin-left
   &>.row
-    margin-left: -10px
+    margin-left: 10px
     margin-right: 10px
 
     @media(max-width tablet-upper-limit)
@@ -42,8 +46,8 @@
 
 .rt-carousel-v3-wrap
   overflow: hidden;
-  margin-right: 10px
-  margin-left: 10px
+  margin-right: 0px
+  margin-left: 0px
   @media(max-width tablet-upper-limit)
     margin-left: 0
     margin-right: 0
@@ -61,6 +65,9 @@
   padding-left: 55px
   padding-right: 55px
   z-index 15
+  @media (min-width: 1280px)
+    padding-left: 70px;
+    padding-right: 70px;
   @media(max-width tablet-upper-limit)
     display: none
 .rt-carousel-v3-arrow
@@ -94,30 +101,55 @@
   bottom: 0
   z-index 10
   display: flex
-
+  @media (min-width 1600px)
+    padding-left: 55px
+    padding-right: 55px
+  padding-left: 30px
+  padding-right: 30px
+  .rt-shadow-has-pseudo
+    &:before
+      content ''
+      position: absolute;
+      top: 0
+      bottom: 0
+      width: 26px
+      display: block
+    &.rt-shadow-left
+      &:before
+        left -26px
+        z-index: 10
+    &.rt-shadow-right
+      &:before
+        right: -26px
+        z-index: 10
 
 .rt-carousel-v3-shadows
-  margin-left: 10px
-  margin-right: 10px
+  //margin-left: 10px
+  //margin-right: 10px
+
   position: relative;
+  left: 0
+  right: 0
   flex 1
   overflow: hidden;
+  padding-left:26px
+  padding-right:20px
   @media(max-width tablet-upper-limit)
     display: none
   .rt-shadow
     position: absolute;
     top: 0
     bottom: 0
-    width: 40px
+    width: 60px
     transition-timing-function ease-in-out
     transition-duration 0.5s
     transition-property  margin
 
   .rt-shadow-left
-    left: 0px
+    left: 26px
     margin-left: -40px
   .rt-shadow-right
-    right: 0px
+    right: 26px
     margin-right: -40px
 .rt-carousel-slide-v3
   transition-timing-function ease-in-out
@@ -158,8 +190,8 @@
     width 1440px*0.23
     min-width 1440px*0.23
   @media (max-width 1599px)
-    width: calc((100vw - 160px)*0.23)
-    min-width: calc((100vw - 160px)*0.23)
+    width: calc((23vw - 36.8px))
+    min-width: calc(23vw - 36.8px)
   @media (max-width tablet-upper-limit)
     width: calc(40vw - 16px)
     min-width: calc(40vw - 16px)
@@ -169,12 +201,3 @@
   @media (max-width 320px)
     width: 235px
     min-width: 235px
-//.rt-carousel-slide-item-laptop-4
-//  @media (max-width 1366px) and (min-width tablet-upper-limit)
-//    width: calc((100vw - 160px)*0.23)
-//    min-width: calc((100vw - 160px)*0.23)
-//.rt-carousel-slide-item-laptop-3
-//  @media (max-width 1366px) and (min-width tablet-upper-limit)
-//    width: calc((100vw - 160px)*0.3)
-//    min-width: calc((100vw - 160px)*0.3)
-

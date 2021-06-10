@@ -71,7 +71,10 @@ export default {
     isMouseDown: false
   }),
   mounted() {
-   const localName = this.getLocalName()
+    const scrollbarWidth = window.innerWidth - document.body.clientWidth
+    document.documentElement.style.setProperty("--scrollbarWidth", `${scrollbarWidth}px`)
+    this.onResize();
+    const localName = this.getLocalName()
     carouselV3Store.addWatcher(localName, this.getSlide)
     carouselV3Store.setColInRow(localName, this.getColInRow())
     if (this.activeIndex - 0 >= 0) {
@@ -82,7 +85,7 @@ export default {
     deviceTypeStore.addWatcher(this._uid, this.setDeviceType);
     this.renderStyle()
     this.bindResize()
-    this.onResize();
+
   },
   methods: {
     onResize(){
@@ -148,26 +151,40 @@ export default {
         transform = ' - ' + Math.abs(this.origTransformBefore)
       }
       if (this.activeItemIndex > 0) {
-        style.marginLeft -= delta * ((0.65) / (12 / colInRow))
+
+      //   style.marginLeft -= delta * ((0.65) / (12 / colInRow))
       }
 
 
-      if (delta * (activeIndex) < 0 || !style.marginLeft) {
-        style.marginLeft = 0
-      } else {
-        style.marginLeft = delta * (activeIndex)
-      }
-      style.marginLeft = -1 * style.marginLeft + '%'
-      inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + (style.marginLeft + transform) + 'px);'
+      // if (delta * (activeIndex) < 0 || !style.marginLeft) {
+      //   style.marginLeft = 0
+      // } else {
+      //   style.marginLeft = delta * (activeIndex)
+      // }
+      // style.marginLeft = -1 * style.marginLeft + '%'
+      // inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + (style.marginLeft + transform) + 'px);'
       if (origTransform != 0) {
         inlineStyle += 'transition-duration: 0s;'
       }
-      inlineStyle += '}'
+      // inlineStyle += '}'
 
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
+        if(this.colInRow == 3) {
+          // width: calc(30vw - 48px)
+          // min-width: calc(30vw - 48px)
+
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px * 0.3 * 0.75) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.3) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 15 : 5) + 'px '+transform+'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(20vw   * -' + (activeItemIndex < size - 3 ? 1 : 1) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (30vw - 48px) * -' + (activeItemIndex > 1 ? (activeItemIndex - 1)+0.5 : 20)+'px'  +transform+'px);}}'
+        }
+        if(this.colInRow == 4) {
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((1440px  * 0.23 / 3 * 2) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.23) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((100vw - 160px) * 0.215 * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
+        }
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((10vw - 4px) * -'+(activeItemIndex < size-2 ? 3 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (40vw - 16px) * -'+(activeItemIndex > 1 ? activeItemIndex - 1 : 0)+' + '+(activeItemIndex < size-2 ? 2 : 3)+'0px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((75vw - 35px)/6 * '+(activeItemIndex < size-1 ? 1 : -3)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (75vw - 35px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex-1  : 0)+' + '+(activeItemIndex < size-1 ? 22.5 : -5)+'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((12.5vw + 17.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (75vw - 35px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
+        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((50vw - 117.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (235px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
+
       } else {
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 10px;}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 10px;}}'
@@ -467,10 +484,10 @@ export default {
       }
 
 
-      return <div class="rt-container rt-carousel-v3-shadows-wrapper">
+      return <div class="rt-carousel-v3-shadows-wrapper">
         <div class={shadowClassList}>
-          <div ref="shadowLeft" class="rt-shadow rt-shadow-left"></div>
-          <div ref="shadowRight" class="rt-shadow rt-shadow-right"></div>
+          <div ref="shadowLeft" class="rt-shadow rt-shadow-left rt-shadow-has-pseudo"></div>
+          <div ref="shadowRight" class="rt-shadow rt-shadow-right rt-shadow-has-pseudo"></div>
         </div>
       </div>
     }
@@ -511,12 +528,16 @@ export default {
     }
 
 
-    const caurouselWrapperClassList = ['rt-carousel-v3']
-    caurouselWrapperClassList.push('rt-carousel-v3-' + this._uid)
+    const caurouselClassList = ['rt-carousel-v3']
+    caurouselClassList.push('rt-carousel-v3-' + this._uid)
     if (this.background.length > 0) {
-      caurouselWrapperClassList.push('color-block--' + this.background)
+      caurouselClassList.push('color-block--' + this.background)
     }
-    return <div class={caurouselWrapperClassList} onWheel={this.wheelMove}
+    const caurouselWrapClassList = ['rt-carousel-v3-wrap'];
+    if(!this.scrollableOnDesktop){
+      caurouselWrapClassList.push('rt-col')
+    }
+    return <div class={caurouselClassList} onWheel={this.wheelMove}
                 onMouseenter={this.mouseenter}
                 onMousedown={this.mouseDown}
                 onMouseup={this.mouseUp}
@@ -526,12 +547,11 @@ export default {
                 onMouseleave={this.mouseleave}>
       <style></style>
       <div class="rt-container td-sp-h-none relative">
-        <div class="rt-carousel-v3-wrap" ref="wrap">
+        <div class={caurouselWrapClassList} ref="wrap">
           {arrowRender()}
           {shadowRender()}
-          {h(this.scrollableOnDesktop ? 'rt-col' : 'rt-row', {
+          {h(this.scrollableOnDesktop ? 'div' : 'rt-row', {
             attrs: {rtCarouselId: this.name || this._uid},
-            props: {size: this.scrollableOnDesktop ? 11 : 12, tabletSize: 5, mobileSize: 3},
             class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
             ref: 'caroselRow',
           }, [
