@@ -100,7 +100,7 @@
       },
       smoothScroll(startPos, endPos, wrapper) {
         if (startPos < (endPos - 1) || startPos > (endPos + 1)) {
-          if(!!window.chrome) {
+          if(!!window.chrome || typeof InstallTrigger !== 'undefined') {
               wrapper.scrollTo(endPos, 0)
           } else {
             let intervalTime = !!window.safari ? 35 : 15;
