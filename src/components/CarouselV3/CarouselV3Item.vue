@@ -57,10 +57,14 @@ export default {
     }
     carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
   },
+  beforeDestroy() {
+    let name = this.name;
+    if (name.length == 0) {
+      name = this.parentName
+    }
+    carouselV3Store.removeSlide(name, this._uid)
+  },
   render() {
-
-
-
 
     if(this.parentName.length > 0 || this.name.length > 0){
       return null

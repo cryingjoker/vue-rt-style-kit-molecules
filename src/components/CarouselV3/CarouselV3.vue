@@ -252,7 +252,6 @@ export default {
       this.prewArrowShow = arrowsOpt.prew
       this.nextShadowShow = shadowOpt.next
       this.prewShadowShow = shadowOpt.prew
-      console.info('arrowsOpt',arrowsOpt)
     },
     clearTransform() {
       this.$refs.caroselRow.$el.classList.add('rt-carousel-v3--scroll--remove-transform')

@@ -94,6 +94,16 @@ class CarouselV3Store extends StorePrototype {
 
   removeSlide = (sliderName, _id) => {
 
+    const sliders = this.sliders[sliderName];
+    if (sliders.possibleIds[_id]) {
+      delete sliders.possibleIds[_id]
+      const index = sliders.ids.indexOf(_id)
+      sliders.ids.splice(index, 1)
+      sliders.slides.splice(index, 1)
+      this.setArrowProps(sliderName);
+      this.callWatcher(sliderName)
+    }
+
   }
 
   addWatcher = (sliderName, fn) => {
