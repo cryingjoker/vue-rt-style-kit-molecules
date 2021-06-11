@@ -46,6 +46,10 @@ export default {
     blurNotActive: {
       type: Boolean,
       default: true
+    },
+    activeIndexInit:{
+      type: [Number, String],
+      default: 0
     }
 
 
@@ -78,6 +82,7 @@ export default {
     const localName = this.getLocalName()
     carouselV3Store.addWatcher(localName, this.getSlide)
     carouselV3Store.setColInRow(localName, this.getColInRow())
+    this.activeIndex = this.activeIndexInit
     if (this.activeIndex - 0 >= 0) {
       this.$nextTick(() => {
         carouselV3Store.setActiveIndex(localName, this.activeIndex - 0)
@@ -89,6 +94,10 @@ export default {
 
   },
   methods: {
+    setAciveIndex(){
+      const localName = this.getLocalName()
+      carouselV3Store.setActiveIndex(localName,this.activeIndexInit)
+    },
     onResize(){
       this.innerWidth = window.innerWidth;
     },
@@ -243,6 +252,7 @@ export default {
       this.prewArrowShow = arrowsOpt.prew
       this.nextShadowShow = shadowOpt.next
       this.prewShadowShow = shadowOpt.prew
+      console.info('arrowsOpt',arrowsOpt)
     },
     clearTransform() {
       this.$refs.caroselRow.$el.classList.add('rt-carousel-v3--scroll--remove-transform')
@@ -349,11 +359,13 @@ export default {
             this.wheelEventPause = false
           },500)
           if (xDiff >= 0) {
-            this.setNextActive();
+            if (this.nextArrowShow || this.infiniteScroll) {
+              this.setNextActive();
+            }
           }else{
-            this.setPrewActive();
-
-
+            if (this.nextArrowShow || this.infiniteScroll) {
+              this.setPrewActive();
+            }
           }
         }
         else{
@@ -384,7 +396,9 @@ export default {
             if(delta+this.origTransformBefore < width*-0.1){
               this.renderStyle(0)
               this.isMouseDown = false
-              this.setNextActive()
+              if (this.nextArrowShow || this.infiniteScroll) {
+                this.setNextActive()
+              }
             }else{
               this.renderStyle(delta )
             }
@@ -394,7 +408,9 @@ export default {
             if(delta+this.origTransformBefore > width*0.2){
               this.renderStyle(0)
               this.isMouseDown = false
-              this.setPrewActive()
+              if (this.nextArrowShow || this.infiniteScroll) {
+                this.setPrewActive()
+              }
             }
             else{
               this.renderStyle(delta )
@@ -410,6 +426,11 @@ export default {
     this.unbindResize();
   },
   watch: {
+    activeIndexInit(newVal, oldVal){
+      if(!isNaN(parseInt(newVal+''+oldVal)) && newVal != this.activeIndex){
+        this.setAciveIndex(newVal)
+      }
+    },
     colInRow(newVal, oldVal){
       if(oldVal && newVal != oldVal){
         const localName = this.getLocalName()
