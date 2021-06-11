@@ -62,12 +62,12 @@
   display: flex
   align-items center
   justify-content space-between
-  padding-left: 55px
-  padding-right: 55px
+  padding-left: 15px
+  padding-right: 15px
   z-index 15
   @media (min-width: 1280px)
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 55px;
+    padding-right: 55px;
   @media(max-width tablet-upper-limit)
     display: none
 .rt-carousel-v3-arrow
@@ -172,6 +172,8 @@
   @media (max-width 1599px)
     width: calc(30vw - 48px)
     min-width: calc(30vw - 48px)
+    width: calc((100vw - var(--scrollbarWidth)) * 0.3 - 48px)
+    min-width: calc((100vw - var(--scrollbarWidth)) * 0.3 - 48px)
 
   @media (max-width tablet-upper-limit)
     width: calc(40vw - 16px)
