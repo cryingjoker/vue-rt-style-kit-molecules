@@ -363,7 +363,7 @@ export default {
               this.setNextActive();
             }
           }else{
-            if (this.nextArrowShow || this.infiniteScroll) {
+            if (this.prewArrowShow || this.infiniteScroll) {
               this.setPrewActive();
             }
           }
@@ -408,7 +408,7 @@ export default {
             if(delta+this.origTransformBefore > width*0.2){
               this.renderStyle(0)
               this.isMouseDown = false
-              if (this.nextArrowShow || this.infiniteScroll) {
+              if (this.prewArrowShow || this.infiniteScroll) {
                 this.setPrewActive()
               }
             }
