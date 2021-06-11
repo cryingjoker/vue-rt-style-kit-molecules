@@ -71,6 +71,7 @@ export default {
     isMouseDown: false
   }),
   mounted() {
+
     const scrollbarWidth = window.innerWidth - document.body.clientWidth
     document.documentElement.style.setProperty("--scrollbarWidth", `${scrollbarWidth}px`)
     this.onResize();
@@ -124,9 +125,9 @@ export default {
     renderStyle(transform = 0) {
       let delta = 1
       const colInRow = this.getColInRow()
-      if (this.$refs.wrap && this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
-        delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
-      }
+      // if (this.$refs.wrap && this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
+      //   delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
+      // }
       const style = {}
       let inlineStyle = ''
       let activeIndex = this.activeItemIndex;
@@ -135,8 +136,7 @@ export default {
       if (activeIndex >= size - colInRow) {
         activeIndex = size - colInRow
       }
-
-      style.marginLeft = delta * (activeIndex)
+      // style.marginLeft = delta * (activeIndex)
       if (this.wheelEventPause) {
         transform = 0
       }
@@ -164,30 +164,33 @@ export default {
       // style.marginLeft = -1 * style.marginLeft + '%'
       // inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + (style.marginLeft + transform) + 'px);'
       if (origTransform != 0) {
-        inlineStyle += 'transition-duration: 0s;'
+        inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ transition-duration: 0s;}'
       }
       // inlineStyle += '}'
-
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
         if(this.colInRow == 3) {
-          // width: calc(30vw - 48px)
-          // min-width: calc(30vw - 48px)
 
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px * 0.3 * 0.75) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.3) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 15 : 5) + 'px '+transform+'px);}}'
-          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(20vw   * -' + (activeItemIndex < size - 3 ? 1 : 1) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (30vw - 48px) * -' + (activeItemIndex > 1 ? (activeItemIndex - 1)+0.5 : 20)+'px'  +transform+'px);}}'
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px * 0.3 * 0.75) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.3) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? -20 : 5) + 'px '+transform+'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
+          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
+          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.7 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
+
         }
         if(this.colInRow == 4) {
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((1440px  * 0.23 / 3 * 2) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.23) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
-          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((100vw - 160px) * 0.215 * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px  * 0.23 / 3 * 2) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.23) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((23vw - 36.8px) * 0.725 * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (23vw - 36.8px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 1 : 4) + '0px '+transform+'px);}}'
         }
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((10vw - 4px) * -'+(activeItemIndex < size-2 ? 3 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (40vw - 16px) * -'+(activeItemIndex > 1 ? activeItemIndex - 1 : 0)+' + '+(activeItemIndex < size-2 ? 2 : 3)+'0px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((12.5vw + 17.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (75vw - 35px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
-        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: calc((50vw - 117.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (235px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
+
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((10vw - 4px) * -'+(activeItemIndex < size-2 ? 3 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (40vw - 16px) * -'+(activeItemIndex > 1 ? activeItemIndex - 1 : 0)+' + '+(activeItemIndex < size-2 ? 2 : 3)+'0px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((12.5vw + 17.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (75vw - 35px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
+        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 117.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (235px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
 
       } else {
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 10px;}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{ margin-left: 10px;}}'
+        inlineStyle += '@media (min-width: 1025px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
 
       }
       const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
@@ -271,7 +274,13 @@ export default {
     },
 
     wheelMove(e) {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      if (Math.abs(e.deltaX) > 0) {
+        e.stopImmediatePropagation()
+        e.preventDefault()
+      }
+
+      if (Math.abs(e.deltaX) > 0 &&  Math.abs(e.deltaY) > 0)  {
+        e.stopImmediatePropagation()
         e.preventDefault()
       }
       this.checkScrollEnd();
@@ -312,13 +321,17 @@ export default {
         e.preventDefault()
         e.stopImmediatePropagation()
       }
+      return false
     },
     touchstart(event) {
       this.xDown = event.touches[0].clientX;
       this.yDown = event.touches[0].clientY;
     },
+    touchend(event) {
+      this.renderStyle()
+    },
     touchmove(event) {
-      if (!this.xDown || !this.yDown) {
+      if (!this.xDown || !this.yDown || this.wheelEventPause) {
         return;
       }
       var xUp = event.touches[0].clientX;
@@ -330,16 +343,27 @@ export default {
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         event.preventDefault();
-        if (xDiff > 0) {
-          this.setNextActive();
+        if(Math.abs(xDiff) > this.innerWidth/5){
+          this.wheelEventPause = true
+          setTimeout(()=>{
+            this.wheelEventPause = false
+          },500)
+          if (xDiff >= 0) {
+            this.setNextActive();
+          }else{
+            this.setPrewActive();
 
-        } else {
-          this.setPrewActive();
+
+          }
         }
+        else{
+          this.renderStyle(-1*xDiff/10)
+        }
+      }else {
+        this.renderStyle(-1*xDiff/10)
       }
 
-      this.xDown = null;
-      this.yDown = null;
+
     },
     mouseDown(e){
       this.isMouseDown = true
@@ -357,7 +381,7 @@ export default {
         const delta = (e.clientX - this.mouseX) - this.origTransformBefore
         if(delta < 0){
           if(activeIndex < this.slides.length - colInRow){
-            if(delta+this.origTransformBefore < width*-0.2){
+            if(delta+this.origTransformBefore < width*-0.1){
               this.renderStyle(0)
               this.isMouseDown = false
               this.setNextActive()
@@ -544,6 +568,7 @@ export default {
                 onMousemove={this.mouseMove}
                 onTouchstart={this.touchstart}
                 onTouchmove={this.touchmove}
+                onTouchend={this.touchend}
                 onMouseleave={this.mouseleave}>
       <style></style>
       <div class="rt-container td-sp-h-none relative">

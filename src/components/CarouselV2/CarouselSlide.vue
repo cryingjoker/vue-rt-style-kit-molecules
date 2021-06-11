@@ -70,10 +70,10 @@
         if(this.$el && this.parentCarousel) {
           this.emitScrollStep();
           this.defineContainer();
-          this.calculatePosition();
+          // this.calculatePosition();
           this.parentCarousel.$on('scrolling', this.setTempStyle);
           this.parentCarousel.$on('scroll-end', this.returnStyle);
-          this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
+          // this.parentCarousel.$on('native-scroll-stopped', this.calculatePosition);
           window.addEventListener('resize', debounce(this.emitScrollStep, 25));
           window.addEventListener('resize', debounce(this.defineContainer, 25));
           // deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);
@@ -92,7 +92,7 @@
       returnStyle() {
         if(!this.isSafari) {
           if(!this.middleResolution) {
-            this.calculatePosition();
+            // this.calculatePosition();
             if(this.isCentral) {
               this.$el.style.scrollSnapAlign = 'center';
             } else {
@@ -101,7 +101,7 @@
               }, 25)
             }
           } else {
-            this.calculatePosition();
+            // this.calculatePosition();
             if(this.isCentral) {
               this.$el.style.scrollSnapAlign = 'start';
             } else {
@@ -125,7 +125,7 @@
           this.startLimit = this.parentCarousel.$refs.inner.getBoundingClientRect().left;
           this.endLimit = this.parentCarousel.$refs.inner.getBoundingClientRect().right;
           this.middleResolution = window.innerWidth < parseInt(variables['desktop-upper-limit']) && window.innerWidth > parseInt(variables['mobile-upper-limit'])
-          this.calculatePosition();
+          // this.calculatePosition();
         }
       },
       calculatePosition() {
