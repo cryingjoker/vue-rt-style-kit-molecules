@@ -65,11 +65,16 @@
   padding-left: 15px
   padding-right: 15px
   z-index 15
+  @media (max-width tablet-upper-limit)
+    padding-left: 0
+    padding-right: 0
   @media (min-width: 1280px)
     padding-left: 55px;
     padding-right: 55px;
-  @media(max-width tablet-upper-limit)
-    display: none
+
+
+
+
 .rt-carousel-v3-arrow
   width: 52px
   height: 52px
@@ -85,6 +90,22 @@
   transition-duration 0.2s
   transition-property  box-shadow
 
+  @media (max-width tablet-upper-limit)
+    width: 10vw
+    min-width: 10vw
+    min-height: 100%
+    box-shadow none
+    border-radius 0
+    background-color: rgba(255,0,0,0)
+    .rt-sys-icon
+      display: none
+  @media (max-width mobile-upper-limit)
+    width: 15vw
+    min-width: 15vw
+
+  @media (max-width 320px)
+    width: 235px
+    min-width: 235px
   @media (hover:hover)
     &:hover
       box-shadow 0px 0px 8px rgba(0, 0, 0, 0.5);
