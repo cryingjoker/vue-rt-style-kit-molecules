@@ -14,7 +14,7 @@ class OutsideClick {
       this.action = {}
 
       this.action.value = action.value.fn
-      if('workOnMobile' in action.value) {
+      if('workOnMobile' in action) {
         this.workOnMobile = action.value.workOnMobile;
       }
       if('workOnTablet' in action.value) {
