@@ -77,9 +77,10 @@ class CarouselV3Store extends StorePrototype {
       const index = slider.index;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
-      slider.showRArrow = (wWidth > 1023 ? index < size - colInRow : wWidth > 767 ? index < size - 3 : index < size - 1) ;
-      slider.showLArrow = index > 0;
       const wWidth = window?.innerWidth;
+      slider.showRArrow = (wWidth > 1023 ? index < size - colInRow  : wWidth > 767 ? index < size - 3 : index < size - 1) ;
+      slider.showLArrow = index > 0;
+
       slider.showRShadow = (wWidth > 1023 ? index < size - colInRow : wWidth > 767 ? index < size - 1 : index < size)   ;
       slider.showLShadow = index > 0;
 
