@@ -31,8 +31,22 @@
         border-radius 0
   &--is-nested
     .text-image-block__image-wrapper
-      height calc(100% * 2 / 3)
-      padding 0
+      height 0
+      padding 0 0 calc(100% * 2 / 3) 0
+      position relative
+      @media (max-width tablet-upper-limit)
+        padding-top 32px
+    .text-image-block__image
+      position absolute
+      size(100%)
+      top 0
+      left 0
+      right 0
+      bottom 0
+      object-fit cover
+      @media (max-width tablet-upper-limit)
+        top 32px
+        height calc(100% - 32px)
 
 //SKELETON
 rt-text-image-block
