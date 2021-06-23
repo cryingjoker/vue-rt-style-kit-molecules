@@ -1,5 +1,4 @@
 <script type="text/jsx">
-  import variables from "../../variables.json";
 
   export default {
     name: "RtTextImageBlock",
@@ -72,6 +71,8 @@
         let classList = '';
         if(!this.isNested) {
           classList += 'rt-container sp-v-4 td-sp-v-3 md-sp-v-2'
+        } else {
+          classList += 'row'
         }
         return classList;
       },
@@ -115,16 +116,23 @@
           return null
         }
       };
+      const titleBlock = () => {
+        if(this.title.length > 0 || this.$slots.title) {
+          return <h2 class='rt-font-h2 sp-b-1'>
+            {this.title.length > 0 ? this.title : this.$slots.title}
+          </h2>
+        } else {
+          return null
+        }
+      };
       return <div class={this.blockClass}>
         <div class={this.containerClass}>
           <div class="rt-col">
             <div class={this.wrapperClass}>
               <div class={this.contentClass}>
                 <div class="d-flex d-space-between flex-column text-image-block__content">
-                  <div class="text-image-block__content-inner">
-                    <h2 class={"rt-font-h2 " + this.isNested ? "" : "sp-t-1 td-sp-t-2 md-sp-t-1-3"}>
-                      {this.title.length > 0 ? this.title : this.$slots.title}
-                    </h2>
+                  <div class={"text-image-block__content-inner td-sp-t-2 md-sp-t-1-3" + (this.isNested ? '' : ' sp-t-1')}>
+                    {titleBlock()}
                     {this.$slots['upper-content']}
                   </div>
                   {bottomContentPart()}
