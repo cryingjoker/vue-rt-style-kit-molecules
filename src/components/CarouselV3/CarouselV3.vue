@@ -539,7 +539,7 @@ export default {
       if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
         return null
       }
-      if (this.prewArrowShow && this.nextArrowShow || this.infiniteScroll) {
+      if ((this.prewArrowShow && this.nextArrowShow) || this.infiniteScroll) {
         return <div class="rt-carousel-v3-arrows">
           <div onClick={this.setPrewActive}
                class="rt-carousel-v3-arrow rt-sys-icon-hover--orange rt-carousel-v3-arrow-left">
@@ -559,6 +559,7 @@ export default {
           </div>
         </div>
       }
+
       if (this.nextArrowShow) {
         return <div class="rt-carousel-v3-arrows">
           <div></div>
