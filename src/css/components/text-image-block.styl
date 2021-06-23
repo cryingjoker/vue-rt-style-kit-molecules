@@ -23,12 +23,16 @@
           padding-left 0
           padding-right 50px
   &__video-wrapper
-    .newAppName-youtube
+    .{newAppName}-youtube
       box-shadow none
       border-radius 8px
       overflow hidden
       &--is-fullscreen
         border-radius 0
+  &--is-nested
+    .text-image-block__image-wrapper
+      height calc(100% * 2 / 3)
+      padding 0
 
 //SKELETON
 rt-text-image-block
