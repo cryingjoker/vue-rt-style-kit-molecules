@@ -54,6 +54,9 @@
           this.backgroundColor = this.bgColor.includes('b2c-') ? this.bgColor.replace('b2c-', '') : this.bgColor;
           classList +=  ` color-block--${this.backgroundColor}`;
         }
+        if(this.isNested) {
+          classList += ' text-image-block--is-nested'
+        }
         return classList;
       },
       contentClass() {
@@ -66,9 +69,9 @@
         return classList;
       },
       containerClass() {
-        let classList = 'sp-v-4 td-sp-v-3 md-sp-v-2';
+        let classList = '';
         if(!this.isNested) {
-          classList += ' rt-container'
+          classList += 'rt-container sp-v-4 td-sp-v-3 md-sp-v-2'
         }
         return classList;
       },
@@ -119,7 +122,7 @@
               <div class={this.contentClass}>
                 <div class="d-flex d-space-between flex-column text-image-block__content">
                   <div class="text-image-block__content-inner">
-                    <h2 class="rt-font-h2 sp-t-1 td-sp-t-2 md-sp-t-1-3">
+                    <h2 class={"rt-font-h2 " + this.isNested ? "" : "sp-t-1 td-sp-t-2 md-sp-t-1-3"}>
                       {this.title.length > 0 ? this.title : this.$slots.title}
                     </h2>
                     {this.$slots['upper-content']}
