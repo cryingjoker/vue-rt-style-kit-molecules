@@ -81,7 +81,6 @@ export { default as BannerV2 } from './BannerV2/Banner.vue';
 export { default as BannerItemV2 } from './BannerV2/BannerItem.vue';
 export { default as BannerSkeleton } from './BannerV2/BannerSkeleton.vue';
 export { default as BannerItem } from './Banner/BannerItem.vue';
-export { default as BannerVideoGameControl } from './Banner/BannerVideoGameControl.vue';
 export { default as BannerPaginatorItem } from './Banner/BannerPaginatorItem.vue';
 export { default as GalleryCarousel } from './GalleryCarousel/GalleryCarousel.vue';
 export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouselItem.vue';
@@ -109,7 +108,8 @@ export {default as CommentSliderItem} from './CommentSlider/CommentSliderItem.vu
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
 export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
- export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
+export {default as ArrowBlock} from './ArrowBlock/ArrowBlock.vue';
 export {default as CardHelp} from './Card/CardHelp.vue';
 export {default as CardBanner} from './Card/CardBanner.vue';
 export {default as CardTileLayout} from './Card/CardTileLayout.vue';
+export {default as VideoBanner} from './VideoBanner/VideoBanner.vue';

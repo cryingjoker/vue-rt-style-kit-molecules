@@ -415,9 +415,7 @@
         },
         render(h) {
             const content = () => {
-                if (this.isGameBannerItem) {
-                    return <rt-banner-video-game-contron></rt-banner-video-game-contron>;
-                }
+
                 return null;
             };
             if (this.hasCustomContent) {
