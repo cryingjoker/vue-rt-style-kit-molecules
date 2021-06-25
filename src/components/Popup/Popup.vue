@@ -109,12 +109,12 @@ export default {
       }
     },
     setActive() {
-      console.log('opened')
       if (!this.isActive) {
         this.isActive = true;
         this.addKeyBindind();
         this.bindPageScroll();
         this.removeHover();
+        this.$emit('opened');
       }
 
     },
@@ -138,9 +138,9 @@ export default {
       if (this.isAntivirus) {
         this.removeActive();
       } else {
-        popupStore.setActiveId(null)
+        popupStore.setActiveId(null);
       }
-      this.$emit('closed')
+      this.$emit('closed');
     },
     keyPress(e) {
       if (e.keyCode === 27) {
