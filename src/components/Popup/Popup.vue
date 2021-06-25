@@ -109,6 +109,7 @@ export default {
       }
     },
     setActive() {
+      console.log('opened')
       if (!this.isActive) {
         this.isActive = true;
         this.addKeyBindind();
@@ -139,6 +140,7 @@ export default {
       } else {
         popupStore.setActiveId(null)
       }
+      this.$emit('closed')
     },
     keyPress(e) {
       if (e.keyCode === 27) {
