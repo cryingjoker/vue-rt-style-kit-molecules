@@ -25,7 +25,7 @@ class CarouselV3Store extends StorePrototype {
 
   }
 
-  fillSlideInfo(sliderName) {
+  fillSlideInfo = (sliderName) => {
     if (!this.sliders[sliderName]) {
       this.sliders[sliderName] = {
         index: 0,
@@ -34,12 +34,17 @@ class CarouselV3Store extends StorePrototype {
         possibleIds: {},
         watchers: [],
         colInRow: 0,
-        infinityScroll: false,
+        infiniteScroll: false,
         showLArrow: false,
         showRArrow: false,
         showLShadow: false,
         showRShadow: false,
       }
+    }
+  }
+  updateInfiniteScroll = (sliderName, infiniteScroll) => {
+    if(this.sliders[sliderName]){
+      this.sliders[sliderName].infiniteScroll = infiniteScroll
     }
   }
 
@@ -78,10 +83,11 @@ class CarouselV3Store extends StorePrototype {
       const size = slider.ids.length;
       const colInRow = slider.colInRow
       const wWidth = window?.innerWidth;
-      slider.showRArrow = (wWidth > 1023 ? index < size - colInRow  : wWidth > 767 ? index < size - 3 : index < size - 1) ;
+
+      slider.showRArrow = (wWidth > 1023 ? index < size - colInRow  : wWidth > 767 ? index < size - 2: index < size - 1 ) ;
       slider.showLArrow = index > 0;
 
-      slider.showRShadow = (wWidth > 1023 ? index < size - colInRow : wWidth > 767 ? index < size - 1 : index < size)   ;
+      slider.showRShadow = (wWidth > 1023 ? index < size - colInRow : wWidth > 767 ? index < size - 2 : index < size - 1)   ;
       slider.showLShadow = index > 0;
 
     }
@@ -118,9 +124,10 @@ class CarouselV3Store extends StorePrototype {
     this.sliders[sliderName].watchers.forEach(fn => fn.call());
   }
 
-  setNextSlide = (sliderName) => {
+  setNextSlide = (sliderName, scrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
+      const infiniteScroll = slider.infiniteScroll;
       const index = slider.index;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
@@ -128,8 +135,15 @@ class CarouselV3Store extends StorePrototype {
       if (index  == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768){
         slider.index = 0
       }else {
-        slider.index = (index + 1) % size;
+        slider.index = index + scrollStep;
       }
+      if(width > 1024){
+        if(slider.index + colInRow > size && !infiniteScroll){
+          slider.index = size - colInRow
+        }
+      }
+      slider.index = slider.index % size
+
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
@@ -143,26 +157,34 @@ class CarouselV3Store extends StorePrototype {
       this.callWatcher(sliderName);
     }
   }
-  setPrewSlide = (sliderName) => {
+  setPrewSlide = (sliderName, scrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
+      const infiniteScroll = slider.infiniteScroll;
       const size = slider.ids.length;
       const colInRow = slider.colInRow
       const width = window.innerWidth;
-      slider.index = (index - 1 + size) % size;
-      if (width > 1024) {
-        if(slider.index  > size - colInRow ) {
-          slider.index = size - colInRow
+      slider.index = (index - scrollStep);
+      if(infiniteScroll){
+        slider.index = (slider.index + size)%size
+      }else {
+        if (slider.index < 0) {
+          slider.index = 0
         }
-      }else{
-        if(width > 767 && width <= 1024 ){
-          if(slider.index  > size - 2 ) {
-            slider.index = size - 2
-          }
-        }else{
-          if(slider.index  > size - 1 ) {
-            slider.index = size
+        if (slider.index > size - colInRow) {
+          slider.index = size - colInRow
+
+
+        } else {
+          if (width > 767 && width <= 1024) {
+            if (slider.index > size - 2) {
+              slider.index = size - 2
+            }
+          } else {
+            if (slider.index > size - 1) {
+              slider.index = size
+            }
           }
         }
       }
@@ -202,6 +224,7 @@ const carouselV3StoreObject = new CarouselV3Store();
 export const carouselV3Store = Vue.observable({
 
   removeWatcher: carouselV3StoreObject.removeWatcher,
+  updateInfiniteScroll: carouselV3StoreObject.updateInfiniteScroll,
   addWatcher: carouselV3StoreObject.addWatcher,
   setColInRow: carouselV3StoreObject.setColInRow,
   setNextSlide: carouselV3StoreObject.setNextSlide,
