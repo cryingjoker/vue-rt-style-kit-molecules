@@ -23,9 +23,75 @@
           padding-left 0
           padding-right 50px
   &__video-wrapper
-    .{newAppName}-youtube
+    .newAppName-youtube
       box-shadow none
       border-radius 8px
       overflow hidden
       &--is-fullscreen
         border-radius 0
+
+//SKELETON
+rt-text-image-block
+  display block
+  padding 80px
+  max-width 1600px
+  min-height calc(160px + ((100vw - 280px) / 2 * 2 / 3))
+  margin 0 auto
+  position relative
+  &:after
+    position absolute
+    content ''
+    top 80px
+    left calc(50% + 60px)
+    height calc((100vw - 280px) / 2 * 2 / 3)
+    width calc(50vw - 80px - 50px)
+    max-height 440px
+    background gainsboro
+    background-image linear-gradient(100deg, #eee 90px, #f2f2f2 135px, #eee 180px)
+    animation shine 2.5s infinite linear
+    background-size 1000px
+    max-width calc(50% - 140px)
+  rt-template
+    display block
+    max-width 50%
+    padding-right 10px
+  rt-button
+    padding 0 28px
+    line-height 52px
+    height 52px
+    display inline-block
+    border-radius 4px
+
+@media (max-width 1024px)
+  rt-text-image-block
+    padding calc(60px + (100vw - 80px) / 3 * 2) 20px 60px
+    rt-template
+      max-width 100%
+      padding-right 0
+      padding-top 40px
+    &:after
+      width calc(100vw - 40px)
+      left 20px
+      top 60px
+      max-height none
+      height calc((100vw - 80px)/3*2)
+      max-width none
+      animation-name shine-tablet
+      background-size 1400px
+      background-image linear-gradient(100deg, #ddd 90px, #e8e8e8 180px, #ddd 270px)
+
+@media (max-width 767px)
+  rt-text-image-block
+    padding calc(40px + (100vw - 80px) / 3 * 2) 20px 40px
+
+@keyframes shine
+  0%
+    background-position -200px
+  40%, 100%
+    background-position 40vw
+
+@keyframes shine-tablet
+  0%
+    background-position -200px
+  40%, 100%
+    background-position 120vw
