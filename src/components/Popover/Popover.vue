@@ -136,57 +136,176 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize(){
-      if(this.$refs.popover) {
+        if (!this.$refs.popover) return
         let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
         let wrapperHeight = window.innerHeight
         let wrapperWidth = window.innerWidth
         let windowWidth = window.innerWidth
-        let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
-        if (x && !left) {
-          left = x
-        }
-        if (y && !top) {
-          top = y
-        }
-
+        if (x && !left) left = x
+        if (y && !top) top = y
+    
         if (this.containerId.length > 0) {
-          const wrap = document.querySelector('#' + this.containerId);
-          if (wrap) {
-            const wrapRect = wrap.getClientRects()[0];
-            top -= wrapRect.top
-            left -= wrapRect.left
-            wrapperHeight = wrap.clientHeight
-            wrapperWidth = wrap.clientWidth
-          }
+            const wrap = document.querySelector('#' + this.containerId);
+            if (wrap) {
+                const wrapRect = wrap.getClientRects()[0];
+                top -= wrapRect.top
+                left -= wrapRect.left
+                wrapperHeight = wrap.clientHeight
+                wrapperWidth = wrap.clientWidth
+            }
         }
-
-
+    
         if (windowWidth < 769 && this.stopAutoOnMd) {
-          this.setLocalValues()
+            this.setLocalValues()
         } else {
-          const xStart = left - 125 - 12
-          const xEnd = left + 125 + 12
-          if (xStart + 20 >= 0 && xEnd <= wrapperWidth - 20) {
-            this.localHorizontal = 'center'
-          } else {
-
-            if (xStart + 20 > 0) {
-              this.localHorizontal = 'left'
-            } else {
-              this.localHorizontal = 'right'
+            if (!this.$refs.popoverBody) return
+            let poBHeight = this.$refs.popoverBody.clientHeight
+            let poBWidth = this.$refs.popoverBody.clientWidth
+            let poBWidthHalf = poBWidth / 2
+            let poIcon = this.$refs.popover.clientWidth
+            let poHalf = poIcon / 2
+            let poMargin = poIcon / 6
+    
+            let resultPosition = null
+            let positions = [
+                ["top", "left"], ["top", "center"], ["top", "right"],
+                ["center", "left"], ["center", "right"],
+                ["bottom", "left"], ["bottom", "center"], ["bottom", "right"]
+            ]
+    
+            let xStart
+            let xEnd
+            let yStart
+            let yEnd
+    
+            for (const pos of positions) {
+                if (resultPosition === null) {
+                    // считаем координаты
+                    switch (pos[0]) {
+                        case "top":
+                            yEnd = top - poMargin
+                            yStart = yEnd - poBHeight
+                            if (pos[1] === "left") {
+                                xEnd = left + poIcon + poMargin
+                            } else if (pos[1] === "center") {
+                                xEnd = left + poHalf + poBWidthHalf
+                            } else if (pos[1] === "right") {
+                                xEnd = left + poIcon + poMargin + poBWidth
+                            }
+                            xStart = xEnd - poBWidth
+                            break;
+                        case "center":
+                            yEnd = top + poHalf + poBWidthHalf
+                            yStart = yEnd - poBHeight
+                            if (pos[1] === "left") {
+                                xStart = left - poMargin - poBWidth
+                            } else if (pos[1] === "right") {
+                                xStart = left + poIcon + poMargin
+                            }
+                            xEnd = xStart + poBWidth
+                            break;
+                        case "bottom":
+                            yStart = top + poIcon + poMargin
+                            yEnd = yStart + poBHeight
+                            if (pos[1] === "left") {
+                                xStart = left - poMargin - poBWidth
+                            } else if (pos[1] === "center") {
+                                xStart = left + poHalf - poBWidthHalf
+                            } else if (pos[1] === "right") {
+                                xStart = left - poMargin
+                            }
+                            xEnd = xStart + poBWidth
+                            break;
+                    }
+    
+                    // проверяем вписывается ли текущее положение в область видимости
+    
+                    // top_center
+                    if (
+                        xStart >= 0 &&
+                        xEnd <= wrapperWidth &&
+                        yStart >= 0 &&
+                        yEnd <= wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // top_left
+                    if (
+                        xStart > 0 &&
+                        xEnd > wrapperWidth &&
+                        yStart > 0 &&
+                        yEnd > wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // top_right
+                    if (
+                        xStart < 0 &&
+                        xEnd > 0 &&
+                        yStart > wrapperHeight &&
+                        yEnd < wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // center_left
+                    if (
+                        xStart > 0 &&
+                        xEnd > wrapperWidth &&
+                        yStart > 0 &&
+                        yEnd < wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // center_right
+                    if (
+                        xStart < 0 &&
+                        xEnd > 0 &&
+                        yStart > 0 &&
+                        yEnd < wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // bottom_left
+                    if (
+                        xStart > 0 &&
+                        xEnd > wrapperWidth &&
+                        yStart < 0 &&
+                        yEnd < wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // bottom_center
+                    if (
+                        xStart > 0 &&
+                        xEnd < wrapperWidth &&
+                        yStart < 0 &&
+                        yEnd < wrapperHeight
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                    // bottom_right
+                    if (
+                        xStart < 0 &&
+                        xEnd > 0 &&
+                        yStart < 0 &&
+                        yEnd > 0
+                    ) {
+                        resultPosition = pos
+                    }
+    
+                }
             }
-          }
-          if (top - bodyHeight / 2 > 0 && top + 20 + bodyHeight / 2 < wrapperHeight && this.localHorizontal != 'center') {
-            this.localVertical = 'center'
-          } else {
-            if (top > bodyHeight) {
-              this.localVertical = 'top'
-            } else {
-              this.localVertical = 'bottom'
-            }
-          }
+    
+            this.localVertical = resultPosition?.[0] || "top"
+            this.localHorizontal = resultPosition?.[1] || "center"
         }
-      }
     }
   },
   render() {
