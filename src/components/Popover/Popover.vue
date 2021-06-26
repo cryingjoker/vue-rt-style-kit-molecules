@@ -216,16 +216,6 @@ export default {
 
             // проверяем вписывается ли текущее положение в область видимости и подбираем правильное положение
             if (
-              (yEnd > wrapperHeight || yStart > 0) &&
-              xStart > 0 &&
-              xEnd < wrapperWidth
-            ) resultPosition = ["top", "center"]
-            else if (
-              yStart < 0 &&
-              xStart > 0 &&
-              xEnd < wrapperWidth
-            ) resultPosition = ["bottom", "center"]
-            else if (
               yStart > 0 &&
               xEnd > wrapperWidth &&
               yEnd < wrapperHeight &&
@@ -237,6 +227,11 @@ export default {
               yEnd < wrapperHeight &&
               xEnd + poMargin * 2 + poIcon + poBWidth < wrapperWidth
             ) resultPosition = ["center", "right"]
+            else if (
+              yStart < 0 &&
+              xStart > 0 &&
+              xEnd < wrapperWidth
+            ) resultPosition = ["bottom", "center"]
             else if (
               xEnd > wrapperWidth &&
               yEnd > wrapperHeight
