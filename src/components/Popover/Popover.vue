@@ -165,7 +165,7 @@ export default {
         let poBWidthHalf = poBWidth / 2
         let poIcon = this.$refs.popover.clientWidth
         let poHalf = poIcon / 2
-        let poMargin = poIcon / 6
+        let poMargin = 4
 
         let resultPosition = null
         let poBodyPositions = [
@@ -228,12 +228,14 @@ export default {
             else if (
               yStart > 0 &&
               xEnd > wrapperWidth &&
-              yEnd < wrapperHeight
+              yEnd < wrapperHeight &&
+              xStart - poMargin * 2 - poIcon - poBWidth > 0
             ) resultPosition = ["center", "left"]
             else if (
               xStart < 0 &&
               yStart > 0 &&
-              yEnd < wrapperHeight
+              yEnd < wrapperHeight &&
+              xEnd + poMargin * 2 + poIcon + poBWidth < wrapperWidth
             ) resultPosition = ["center", "right"]
             else if (
               xEnd > wrapperWidth &&
