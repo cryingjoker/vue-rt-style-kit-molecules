@@ -234,16 +234,18 @@ export default {
             ) resultPosition = ["bottom", "center"]
             else if (
               xEnd > wrapperWidth &&
-              yEnd > wrapperHeight
+              yEnd > wrapperHeight &&
+              xStart - poMargin * 2 - poIcon - poBWidth > 0
             ) resultPosition = ["top", "left"]
+            else if (
+              xStart < 0 &&
+              yStart > wrapperHeight &&
+              xEnd + poMargin * 2 + poIcon + poBWidth < wrapperWidth
+            ) resultPosition = ["top", "right"]
             else if (
               xStart < 0 &&
               yStart < 0
             ) resultPosition = ["bottom", "right"]
-            else if (
-              xStart < 0 &&
-              yStart > wrapperHeight
-            ) resultPosition = ["top", "right"]
             else if (
               xEnd > wrapperWidth &&
               yStart < 0
