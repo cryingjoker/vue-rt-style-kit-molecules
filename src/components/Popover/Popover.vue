@@ -170,9 +170,9 @@ export default {
         let resultPosition = null
         let poBodyPositions = [
           ["top", "center"], ["bottom", "center"],
-          ["center", "left"], ["center", "right"],
-          ["top", "left"], ["bottom", "right"],
-          ["top", "right"], ["bottom", "left"]
+          ["top", "left"], ["top", "right"],
+          ["bottom", "left"], ["bottom", "right"],
+          ["center", "left"], ["center", "right"]
         ]
 
         let xStart, xEnd, yStart, yEnd
@@ -180,6 +180,7 @@ export default {
         poBodyPositions.forEach(
           pos => {
             if (resultPosition) return
+
             // считаем координаты положения модалки
             if (pos[0] === "top") {
               yEnd = top - poMargin
@@ -214,42 +215,13 @@ export default {
               xEnd = xStart + poBWidth
             }
 
-            // проверяем вписывается ли текущее положение в область видимости и подбираем правильное положение
+            // проверяем вписывается ли текущее положение в область видимости
             if (
-              yStart > 0 &&
-              xEnd > wrapperWidth &&
-              yEnd < wrapperHeight &&
-              xStart - poMargin * 2 - poIcon - poBWidth > 0
-            ) resultPosition = ["center", "left"]
-            else if (
-              xStart < 0 &&
-              yStart > 0 &&
-              yEnd < wrapperHeight &&
-              xEnd + poMargin * 2 + poIcon + poBWidth < wrapperWidth
-            ) resultPosition = ["center", "right"]
-            else if (
-              yStart < 0 &&
               xStart > 0 &&
-              xEnd < wrapperWidth
-            ) resultPosition = ["bottom", "center"]
-            else if (
-              xEnd > wrapperWidth &&
-              yEnd > wrapperHeight &&
-              xStart - poMargin * 2 - poIcon - poBWidth > 0
-            ) resultPosition = ["top", "left"]
-            else if (
-              xStart < 0 &&
-              yStart > wrapperHeight &&
-              xEnd + poMargin * 2 + poIcon + poBWidth < wrapperWidth
-            ) resultPosition = ["top", "right"]
-            else if (
-              xStart < 0 &&
-              yStart < 0
-            ) resultPosition = ["bottom", "right"]
-            else if (
-              xEnd > wrapperWidth &&
-              yStart < 0
-            ) resultPosition = ["bottom", "left"]
+              yStart > 0 &&
+              xEnd < wrapperWidth &&
+              yEnd < wrapperHeight
+            ) resultPosition = pos
           }
         )
 
