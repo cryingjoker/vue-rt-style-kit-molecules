@@ -42,7 +42,6 @@ import {
   ResizeContentHeight,
   Popup,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -145,7 +144,6 @@ const VueRtStyle = {
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
-      Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
       Vue.component(FullscreenImage.name, FullscreenImage);
       Vue.component(RowList.name, RowList);
       Vue.component(RowListItem.name, RowListItem);
@@ -277,7 +275,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-06-28 10:27";
+const version = "2021-06-28 11:40";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -338,7 +336,6 @@ export {
   Popup,
   Popover,
   LinksBlock,
-  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
