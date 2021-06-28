@@ -42,6 +42,7 @@ import {
   ResizeContentHeight,
   Popup,
   LinksBlock,
+  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -144,6 +145,7 @@ const VueRtStyle = {
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
+      Vue.component(BannerVideoGameControl.name, BannerVideoGameControl);
       Vue.component(FullscreenImage.name, FullscreenImage);
       Vue.component(RowList.name, RowList);
       Vue.component(RowListItem.name, RowListItem);
@@ -286,11 +288,9 @@ if (typeof window !== 'undefined') {
 
 // @Deprecated
   window.RTK_STYLE_KIT_MOLECULES_VER = version;
-  if(window && window.addEventListener) {
-    window.addEventListener('getVueRtStyleVersion', function () {
-      window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
-    })
-  }
+  window.addEventListener('getVueRtStyleVersion', function () {
+    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
+  })
 }
 
 VueRtStyle.version = version;
@@ -338,6 +338,7 @@ export {
   Popup,
   Popover,
   LinksBlock,
+  BannerVideoGameControl,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
