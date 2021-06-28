@@ -27,6 +27,18 @@ export default {
       type: [String, Number],
       default: 1
     },
+    laptopScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
+    tdScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
+    mdScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
     activeIndex: {
       type: [String, Number],
       default: 0
@@ -261,14 +273,14 @@ export default {
         localName = this._uid;
       }
       // this.clearTransform()
-      carouselV3Store.setPrewSlide(localName, this.scrollStep - 0)
+      carouselV3Store.setPrewSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
     setNextActive() {
       let localName = this.name;
       if (localName.length == 0) {
         localName = this._uid;
       }
-      carouselV3Store.setNextSlide(localName, this.scrollStep - 0)
+      carouselV3Store.setNextSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
 
     wheelMove(e) {

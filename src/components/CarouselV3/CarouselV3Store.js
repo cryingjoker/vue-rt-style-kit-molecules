@@ -124,7 +124,7 @@ class CarouselV3Store extends StorePrototype {
     this.sliders[sliderName].watchers.forEach(fn => fn.call());
   }
 
-  setNextSlide = (sliderName, scrollStep = 1) => {
+  setNextSlide = (sliderName, scrollStep = 1,  laptopScrollStep = 1,tdScrollStep = 1, mdScrollStep = 1 ) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const infiniteScroll = slider.infiniteScroll;
@@ -132,10 +132,24 @@ class CarouselV3Store extends StorePrototype {
       const size = slider.ids.length;
       const colInRow = slider.colInRow
       const width = window.innerWidth;
+      let locScrollStep = 0
+      if(width > 1600){
+        locScrollStep = scrollStep
+      }else{
+        if(width < 1025){
+          if(width < 769){
+            locScrollStep = mdScrollStep
+          }else{
+            locScrollStep = tdScrollStep
+          }
+        }else{
+          locScrollStep = laptopScrollStep
+        }
+      }
       if (index  == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768){
         slider.index = 0
       }else {
-        slider.index = index + scrollStep;
+        slider.index = index + locScrollStep;
       }
       if(width > 1024){
         if(slider.index + colInRow > size && !infiniteScroll){
@@ -157,7 +171,7 @@ class CarouselV3Store extends StorePrototype {
       this.callWatcher(sliderName);
     }
   }
-  setPrewSlide = (sliderName, scrollStep = 1) => {
+  setPrewSlide = (sliderName, scrollStep = 1,  laptopScrollStep = 1,tdScrollStep = 1, mdScrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
@@ -165,7 +179,21 @@ class CarouselV3Store extends StorePrototype {
       const size = slider.ids.length;
       const colInRow = slider.colInRow
       const width = window.innerWidth;
-      slider.index = (index - scrollStep);
+      let locScrollStep = 0
+      if(width > 1600){
+        locScrollStep = scrollStep
+      }else{
+        if(width < 1025){
+          if(width < 769){
+            locScrollStep = mdScrollStep
+          }else{
+            locScrollStep = tdScrollStep
+          }
+        }else{
+          locScrollStep = laptopScrollStep
+        }
+      }
+      slider.index = (index - locScrollStep);
       if(infiniteScroll){
         slider.index = (slider.index + size)%size
       }else {
