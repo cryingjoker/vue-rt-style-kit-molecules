@@ -127,6 +127,9 @@
   @media (min-width 1600px)
     padding-left: 55px
     padding-right: 55px
+  @media (min-width 1280px)
+    padding-left: 60px
+    padding-right: 60px
   padding-left: 30px
   padding-right: 30px
   .rt-shadow-has-pseudo
@@ -155,7 +158,7 @@
   right: 0
   flex 1
   overflow: hidden;
-  padding-left:26px
+  padding-left:20px
   padding-right:20px
   @media(max-width tablet-upper-limit)
     display: none
@@ -180,8 +183,13 @@
   transition-property  opacity
   &:first-child
     margin-left: -10px
+    .rt-carousel-v3--static &
+      margin-left: 0
 .rt-carousel-slide-v3--not-act
   opacity: 0.3
+.rt-carousel-v3--static
+  margin-left: -20px
+  margin-right: 0
 .rt-carousel-slide-v3--td-not-act
   @media(max-width tablet-upper-limit)
     opacity: 0.3
