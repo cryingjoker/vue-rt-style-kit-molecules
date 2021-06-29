@@ -202,8 +202,12 @@ export default {
 
       }
       const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
-      if (styleTag) {
-        styleTag.innerText = inlineStyle
+      if(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ) {
+        if (styleTag) {
+          styleTag.innerText = inlineStyle
+        }
+      }else{
+        styleTag.innerText = ''
       }
     },
     mouseenter() {
@@ -461,7 +465,7 @@ export default {
           if (newVal) {
             this.$refs.shadowRight.style.marginRight = 0
           } else {
-            this.$refs.shadowRight.style.marginRight = '-50px'
+            this.$refs.shadowRight.style.marginRight = '-80px'
           }
         }
       })
@@ -473,7 +477,7 @@ export default {
           if (newVal) {
             this.$refs.shadowLeft.style.marginLeft = 0
           } else {
-            this.$refs.shadowLeft.style.marginLeft = '-50px'
+            this.$refs.shadowLeft.style.marginLeft = '-80px'
           }
         }
       })
@@ -509,7 +513,7 @@ export default {
           return h(CarouselV3RenderItem, {
             props: {
               colInRow: colInRow - 0,
-              scrollableOnDesktop: this.scrollableOnDesktop,
+              scrollableOnDesktop: this.scrollableOnDesktop || this.deviceType.search('desktop') < 0,
               notActive: notActive,
               tabletNotActive: tabletNotActive,
               mobileNotActive: mobileNotActive,
@@ -584,7 +588,7 @@ export default {
       caurouselClassList.push('color-block--' + this.background)
     }
     const caurouselWrapClassList = ['rt-carousel-v3-wrap'];
-    if (!this.scrollableOnDesktop) {
+    if (!this.scrollableOnDesktop && this.deviceType.search('desktop') >= 0) {
       caurouselWrapClassList.push('rt-col')
     }
     return <div class={caurouselClassList} onWheel={this.wheelMove}
@@ -602,9 +606,9 @@ export default {
         <div class={caurouselWrapClassList} ref="wrap">
           {arrowRender()}
           {shadowRender()}
-          {h(this.scrollableOnDesktop ? 'div' : 'rt-row', {
+          {h(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'div' : 'rt-row', {
             attrs: {rtCarouselId: this.name || this._uid},
-            class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
+            class: [(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'rt-carousel-v3--scroll' : 'rt-carousel-v3--static')],
             ref: 'caroselRow',
           }, [
             renderSlides(),
