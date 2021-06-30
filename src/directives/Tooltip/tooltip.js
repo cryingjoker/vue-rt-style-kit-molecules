@@ -41,7 +41,7 @@ class Tooltip {
     }
     this.timeout = setTimeout(() => {
       this.mouseenterAction()
-    }, 300)
+    }, 100)
   }
   mouseenterAction = (notAnimate) => {
     this.$el.active = true;
@@ -139,7 +139,7 @@ class Tooltip {
         this.$el.toolTip.classList.remove('rt-tooltip-active')
         setTimeout(() => {
           this.$el.toolTip.remove();
-        }, 300)
+        }, 100)
       }
     }
   }
