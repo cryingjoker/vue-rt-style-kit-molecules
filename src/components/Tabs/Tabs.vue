@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false
     },
+    wrapNavigation:{
+      type: Boolean,
+      default: false
+    },
     reverseView: {
       type: Boolean,
       default: false
@@ -338,18 +342,31 @@ export default {
       return null
     }
     if (this.version == 2) {
-      return <div id={id} class={this.tabsClassNames}>
-        <div class="rt-tabs-v2-navigation-wrapper">
 
-          <div class="rt-tabs-v2-navigation-scoller" ref="scroller" onScroll={this.onScroll}>
-            <div style={this.navigationStyle} ref="navigation" class="rt-tabs-v2-navigation">
-              {this.$slots.navigation}
-              {renderLine()}
-            </div>
-          </div>
-          {this.showShadowLeft ? <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left"></div> : null}
-          {this.showShadowRight ? <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right"></div> : null}
+      const renderScroller = () => <div class="rt-tabs-v2-navigation-scoller" ref="scroller" onScroll={this.onScroll}>
+        <div style={this.navigationStyle} ref="navigation" class="rt-tabs-v2-navigation">
+          {this.$slots.navigation}
+          {renderLine()}
         </div>
+      </div>
+
+      const renderNavigationChilds = [renderScroller()]
+      if (this.showShadowLeft) {
+        renderNavigationChilds.push(h('div', {class: "rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left"}))
+      }
+      if (this.showShadowRight) {
+        renderNavigationChilds.push(h('div', {class: "rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right"}))
+      }
+
+      let renderNavigation = h('div', {class: 'rt-tabs-v2-navigation-wrapper'}, renderNavigationChilds)
+      if(this.wrapNavigation){
+        renderNavigation = h('div',{class:'rt-col'},[renderNavigation])
+        renderNavigation = h('div',{class:'rt-container'},[renderNavigation])
+      }
+
+
+      return <div id={id} class={this.tabsClassNames}>
+        {renderNavigation}
         <div class="sp-t-1">
           {renderContent()}
         </div>

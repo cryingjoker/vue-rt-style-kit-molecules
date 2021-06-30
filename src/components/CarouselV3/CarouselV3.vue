@@ -23,6 +23,22 @@ export default {
       type: Boolean,
       default: true
     },
+    scrollStep:{
+      type: [String, Number],
+      default: 1
+    },
+    laptopScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
+    tdScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
+    mdScrollStep:{
+      type: [String, Number],
+      default: 1
+    },
     activeIndex: {
       type: [String, Number],
       default: 0
@@ -47,7 +63,7 @@ export default {
       type: Boolean,
       default: true
     },
-    activeIndexInit:{
+    activeIndexInit: {
       type: [Number, String],
       default: 0
     }
@@ -75,9 +91,6 @@ export default {
     isMouseDown: false
   }),
   mounted() {
-
-    const scrollbarWidth = window.innerWidth - document.body.clientWidth
-    document.documentElement.style.setProperty("--scrollbarWidth", `${scrollbarWidth}px`)
     this.onResize();
     const localName = this.getLocalName()
     carouselV3Store.addWatcher(localName, this.getSlide)
@@ -94,27 +107,27 @@ export default {
 
   },
   methods: {
-    setAciveIndex(){
+    setAciveIndex() {
       const localName = this.getLocalName()
-      carouselV3Store.setActiveIndex(localName,this.activeIndexInit)
+      carouselV3Store.setActiveIndex(localName, this.activeIndexInit)
     },
-    onResize(){
+    onResize() {
       this.innerWidth = window.innerWidth;
     },
-    bindResize(){
-      window.addEventListener('resize',this.onResize)
+    bindResize() {
+      window.addEventListener('resize', this.onResize)
     },
-    unbindResize(){
-      window.removeEventListener('resize',this.onResize)
+    unbindResize() {
+      window.removeEventListener('resize', this.onResize)
     },
 
-    getColInRow(){
-      if(this.innerWidth < 1367 && this.laptopColInRow - 0 > 0){
+    getColInRow() {
+      if (this.innerWidth < 1367 && this.laptopColInRow - 0 > 0) {
         return this.laptopColInRow
       }
       return this.colInRow
     },
-    getLocalName(){
+    getLocalName() {
       let localName = this.name;
       if (localName.length == 0) {
         localName = this._uid + '';
@@ -134,18 +147,15 @@ export default {
     renderStyle(transform = 0) {
       let delta = 1
       const colInRow = this.getColInRow()
-      // if (this.$refs.wrap && this.$refs.wrap.querySelector('.rt-carousel-slide-v3')) {
-      //   delta = this.$refs.wrap.querySelector('.rt-carousel-slide-v3').clientWidth / this.$refs.wrap.clientWidth * 100
-      // }
       const style = {}
       let inlineStyle = ''
       let activeIndex = this.activeItemIndex;
+      let activeItemIndex = this.activeItemIndex;
       let size = this.slides.length
 
       if (activeIndex >= size - colInRow) {
         activeIndex = size - colInRow
       }
-      // style.marginLeft = delta * (activeIndex)
       if (this.wheelEventPause) {
         transform = 0
       }
@@ -159,52 +169,46 @@ export default {
       } else {
         transform = ' - ' + Math.abs(this.origTransformBefore)
       }
-      if (this.activeItemIndex > 0) {
-
-      //   style.marginLeft -= delta * ((0.65) / (12 / colInRow))
-      }
 
 
-      // if (delta * (activeIndex) < 0 || !style.marginLeft) {
-      //   style.marginLeft = 0
-      // } else {
-      //   style.marginLeft = delta * (activeIndex)
-      // }
-      // style.marginLeft = -1 * style.marginLeft + '%'
-      // inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll.rt-col{margin-left:calc(' + (style.marginLeft + transform) + 'px);'
       if (origTransform != 0) {
         inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ transition-duration: 0s;}'
       }
-      // inlineStyle += '}'
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
-        if(this.colInRow == 3) {
+        if (this.colInRow == 3) {
 
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px * 0.3 * 0.75) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.3) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? -20 : 5) + 'px '+transform+'px);}}'
-          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
-          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
-          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
-          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.7 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px '+transform+'px));}}'
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc('+ (activeItemIndex < size - 3 ? '-360px' : '-288px' ) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 432px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ?  10 : 20) + 'px ' + transform + 'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px)   * -' + (activeItemIndex < size - 3 ? 0.25 : 0.2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.3  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 10 : 20) + 'px ' + transform + 'px));}}'
+          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px ' + transform + 'px));}}'
+          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.7 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 0 : 5) + 'px ' + transform + 'px));}}'
 
         }
-        if(this.colInRow == 4) {
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((1440px  * 0.23 / 3 * 2) * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (1440px * 0.23) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? -4 : 4) + '0px '+transform+'px);}}'
-          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((23vw - 36.8px) * 0.725 * -' + (activeItemIndex < size - 2 ? 1 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (23vw - 36.8px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 1 : 4) + '0px '+transform+'px);}}'
+        if (this.colInRow == 4) {
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc('+ (activeItemIndex < size - 4  ? '-273px' : '-215px' ) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 331px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ?  10 : 20) + 'px ' + transform + 'px);}}'
+          inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 20 : 20) + 'px ' + transform + 'px));}}'
+          inlineStyle += '@media (max-width: 1367px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 10 : 20) + 'px ' + transform + 'px));}}'
+          inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 80px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 80px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 10 : 50) + 'px ' + transform + 'px));}}'
+          // inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px ' + transform + 'px));}}'
+          // inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.23  - 140px) * -' + (activeItemIndex < size - 2 ? 0.77 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.23  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 0 : 5) + 'px ' + transform + 'px));}}'
         }
-
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((10vw - 4px) * -'+(activeItemIndex < size-2 ? 3 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (40vw - 16px) * -'+(activeItemIndex > 1 ? activeItemIndex - 1 : 0)+' + '+(activeItemIndex < size-2 ? 2 : 3)+'0px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((12.5vw + 17.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (75vw - 35px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
-        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 117.5px) * '+(activeItemIndex < size-1 ? 1 : 2)+' * '+(activeItemIndex> 0 ? 1 : 0)+' + (235px) * -'+(activeItemIndex > 0 ? activeItemIndex < size-1 ? activeItemIndex:activeItemIndex  : 0)+' + '+(activeItemIndex < size-1 ? 0 : -10)+'px);}}'
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10vw * -' + (activeItemIndex < size - 2 ? 3 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (40vw) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 2 ? 10 : 0) + 'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(12.5vw * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 75vw * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10   : 0) + 'px);}}'
+        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 127.5px) * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (255px) * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px);}}'
 
       } else {
-        inlineStyle += '@media (min-width: 1025px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10px '+transform+'px);}}'
+        inlineStyle += '@media (min-width: 1025px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(0px ' + transform + 'px);}}'
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(20px ' + transform + 'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(20px ' + transform + 'px);}}'
 
       }
       const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
-      if (styleTag) {
-        styleTag.innerText = inlineStyle
+      if(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ) {
+        if (styleTag) {
+          styleTag.innerText = inlineStyle
+        }
+      }else{
+        styleTag.innerText = ''
       }
     },
     mouseenter() {
@@ -240,6 +244,8 @@ export default {
       this.renderStyle(1);
     },
     getSlide() {
+      const scrollbarWidth = window.innerWidth - document.body.clientWidth
+      document.documentElement.style.setProperty("--scrollbarWidth", `${scrollbarWidth}px`)
       let localName = this.name;
       if (localName.length == 0) {
         localName = this._uid;
@@ -272,14 +278,14 @@ export default {
         localName = this._uid;
       }
       // this.clearTransform()
-      carouselV3Store.setPrewSlide(localName)
+      carouselV3Store.setPrewSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
     setNextActive() {
       let localName = this.name;
       if (localName.length == 0) {
         localName = this._uid;
       }
-      carouselV3Store.setNextSlide(localName)
+      carouselV3Store.setNextSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
 
     wheelMove(e) {
@@ -288,7 +294,7 @@ export default {
         e.preventDefault()
       }
 
-      if (Math.abs(e.deltaX) > 0 &&  Math.abs(e.deltaY) > 0)  {
+      if (Math.abs(e.deltaX) > 0 && Math.abs(e.deltaY) > 0) {
         e.stopImmediatePropagation()
         e.preventDefault()
       }
@@ -352,67 +358,62 @@ export default {
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         event.preventDefault();
-        if(Math.abs(xDiff) > this.innerWidth/5){
+        if (Math.abs(xDiff) > this.innerWidth / 5) {
           this.wheelEventPause = true
-          setTimeout(()=>{
+          setTimeout(() => {
             this.wheelEventPause = false
-          },500)
+          }, 500)
           if (xDiff >= 0) {
             if (this.nextArrowShow || this.infiniteScroll) {
               this.setNextActive();
             }
-          }else{
+          } else {
             if (this.prewArrowShow || this.infiniteScroll) {
               this.setPrewActive();
             }
           }
+        } else {
+          this.renderStyle(-1 * xDiff / 10)
         }
-        else{
-          this.renderStyle(-1*xDiff/10)
-        }
-      }else {
-        this.renderStyle(-1*xDiff/10)
+      } else {
+        this.renderStyle(-1 * xDiff / 10)
       }
 
 
     },
-    mouseDown(e){
+    mouseDown(e) {
       this.isMouseDown = true
       this.mouseX = e.clientX
     },
-    mouseUp(){
+    mouseUp() {
       this.isMouseDown = false
       this.renderStyle(0)
     },
-    mouseMove(e){
-      if(this.isMouseDown){
+    mouseMove(e) {
+      if (this.isMouseDown) {
         const width = window.innerWidth
         let activeIndex = this.activeItemIndex;
         const colInRow = this.getColInRow()
         const delta = (e.clientX - this.mouseX) - this.origTransformBefore
-        if(delta < 0){
-          if(activeIndex < this.slides.length - colInRow){
-            if(delta+this.origTransformBefore < width*-0.1){
+        if (delta < 0) {
+          if (this.nextArrowShow || this.infiniteScroll) {
+            if (delta + this.origTransformBefore < width * -0.1) {
               this.renderStyle(0)
               this.isMouseDown = false
-              if (this.nextArrowShow || this.infiniteScroll) {
                 this.setNextActive()
-              }
-            }else{
-              this.renderStyle(delta )
+            } else {
+              this.renderStyle(delta)
             }
           }
-        }else{
-          if(activeIndex > 0){
-            if(delta+this.origTransformBefore > width*0.2){
+        } else {
+          if (this.prewArrowShow || this.infiniteScroll) {
+            if (delta + this.origTransformBefore > width * 0.2) {
               this.renderStyle(0)
               this.isMouseDown = false
-              if (this.prewArrowShow || this.infiniteScroll) {
+
                 this.setPrewActive()
-              }
-            }
-            else{
-              this.renderStyle(delta )
+            } else {
+              this.renderStyle(delta)
             }
           }
         }
@@ -425,25 +426,35 @@ export default {
     this.unbindResize();
   },
   watch: {
-    activeIndexInit(newVal, oldVal){
-      if(!isNaN(parseInt(newVal+''+oldVal)) && newVal != this.activeIndex){
+    infiniteScroll(newVal,oldVal){
+      if(newVal != oldVal){
+        const localName = this.getLocalName()
+        carouselV3Store.updateInfiniteScroll(localName, newVal)
+      }
+    },
+    activeIndexInit(newVal, oldVal) {
+      if (!isNaN(parseInt(newVal + '' + oldVal)) && newVal != this.activeIndex) {
         this.setAciveIndex(newVal)
       }
     },
-    colInRow(newVal, oldVal){
-      if(oldVal && newVal != oldVal){
+    colInRow(newVal, oldVal) {
+      if (oldVal && newVal != oldVal) {
         const localName = this.getLocalName()
         this.onResize()
         carouselV3Store.setColInRow(localName, this.getColInRow())
-        this.$nextTick(()=>{this.renderStyle(1)})
+        this.$nextTick(() => {
+          this.renderStyle(1)
+        })
       }
     },
-    laptopColInRow(newVal, oldVal){
-      if(oldVal && newVal != oldVal){
+    laptopColInRow(newVal, oldVal) {
+      if (oldVal && newVal != oldVal) {
         const localName = this.getLocalName()
         carouselV3Store.setColInRow(localName, this.getColInRow())
         this.onResize()
-        this.$nextTick(()=>{this.renderStyle(1)})
+        this.$nextTick(() => {
+          this.renderStyle(1)
+        })
       }
     },
     activeItemIndex() {
@@ -455,7 +466,7 @@ export default {
           if (newVal) {
             this.$refs.shadowRight.style.marginRight = 0
           } else {
-            this.$refs.shadowRight.style.marginRight = '-50px'
+            this.$refs.shadowRight.style.marginRight = '-80px'
           }
         }
       })
@@ -467,7 +478,7 @@ export default {
           if (newVal) {
             this.$refs.shadowLeft.style.marginLeft = 0
           } else {
-            this.$refs.shadowLeft.style.marginLeft = '-50px'
+            this.$refs.shadowLeft.style.marginLeft = '-80px'
           }
         }
       })
@@ -479,16 +490,16 @@ export default {
     const renderSlides = () => {
       if (this.slides.length > 0) {
         return this.slides.map((slot, slotIndex) => {
-          let notActive = slotIndex  - this.activeItemIndex
+          let notActive = slotIndex - this.activeItemIndex
           let tabletNotActive = false
           // if (notActive < 0 || notActive > 1 - 0) {
           //   tabletNotActive = true
           // }
           let mobileNotActive = true
-          if(notActive > 1){
+          if (notActive > 1) {
             tabletNotActive = true
           }
-          if(notActive == 0){
+          if (notActive == 0) {
             mobileNotActive = false
           }
           if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
@@ -503,14 +514,13 @@ export default {
           return h(CarouselV3RenderItem, {
             props: {
               colInRow: colInRow - 0,
-              scrollableOnDesktop: this.scrollableOnDesktop,
+              scrollableOnDesktop: this.scrollableOnDesktop || this.deviceType.search('desktop') < 0,
               notActive: notActive,
               tabletNotActive: tabletNotActive,
               mobileNotActive: mobileNotActive,
             }
           }, slot)
         })
-
 
 
       }
@@ -579,7 +589,7 @@ export default {
       caurouselClassList.push('color-block--' + this.background)
     }
     const caurouselWrapClassList = ['rt-carousel-v3-wrap'];
-    if(!this.scrollableOnDesktop){
+    if (!this.scrollableOnDesktop && this.deviceType.search('desktop') >= 0) {
       caurouselWrapClassList.push('rt-col')
     }
     return <div class={caurouselClassList} onWheel={this.wheelMove}
@@ -593,12 +603,13 @@ export default {
                 onMouseleave={this.mouseleave}>
       <style></style>
       <div class="rt-container td-sp-h-none relative">
+
         <div class={caurouselWrapClassList} ref="wrap">
           {arrowRender()}
           {shadowRender()}
-          {h(this.scrollableOnDesktop ? 'div' : 'rt-row', {
+          {h(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'div' : 'rt-row', {
             attrs: {rtCarouselId: this.name || this._uid},
-            class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
+            class: [(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'rt-carousel-v3--scroll' : 'rt-carousel-v3--static')],
             ref: 'caroselRow',
           }, [
             renderSlides(),
@@ -611,14 +622,5 @@ export default {
   }
 
 }
-// {h('rt-col', {
-// //   attrs: {rtCarouselId: this.name || this._uid},
-// //   props: {size: this.scrollableOnDesktop ? 11 : 12, tabletSize: 5, mobileSize: 3},
-// //   class: [(this.scrollableOnDesktop ? 'rt-carousel-v3--scroll' : '')],
-// //   ref: 'caroselRow',
-// // }, [
-// {renderSlides()}
-// {this.$slots.default}
-// // ])}
 
 </script>

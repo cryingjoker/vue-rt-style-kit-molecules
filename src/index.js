@@ -275,7 +275,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-06-28 10:15";
+const version = "2021-06-30 08:55";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -286,11 +286,9 @@ if (typeof window !== 'undefined') {
 
 // @Deprecated
   window.RTK_STYLE_KIT_MOLECULES_VER = version;
-  if(window && window.addEventListener) {
-    window.addEventListener('getVueRtStyleVersion', function () {
-      window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
-    })
-  }
+  window.addEventListener('getVueRtStyleVersion', function () {
+    window.postMessage({from: "vue-rt-style-kit", type: "setVersion", label: "molecules", version: version}, "*");
+  })
 }
 
 VueRtStyle.version = version;
