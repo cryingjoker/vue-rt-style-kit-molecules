@@ -170,9 +170,9 @@ export default {
         let resultPosition = null
         let poBodyPositions = [
           ["top", "center"], ["bottom", "center"],
+          ["center", "left"], ["center", "right"],
           ["top", "left"], ["top", "right"],
-          ["bottom", "left"], ["bottom", "right"],
-          ["center", "left"], ["center", "right"]
+          ["bottom", "left"], ["bottom", "right"]
         ]
 
         let xStart, xEnd, yStart, yEnd
