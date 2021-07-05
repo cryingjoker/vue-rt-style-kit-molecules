@@ -137,9 +137,12 @@ export default {
     },
     onResize() {
       if (!this.$refs.popover) return
-      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
-      let wrapperHeight = window.innerHeight
-      let wrapperWidth = window.innerWidth
+      let iconEl = this.$refs.popover.querySelector('svg') || this.$refs.popover
+      let {top, left, x, y} = iconEl.getClientRects()[0]
+      let wrapperYStart = 0
+      let wrapperXStart = 0
+      let wrapperYEnd = window.innerHeight
+      let wrapperXEnd = window.innerWidth
       let windowWidth = window.innerWidth
       if (x && !left) left = x
       if (y && !top) top = y
@@ -148,10 +151,10 @@ export default {
         const wrap = document.querySelector('#' + this.containerId);
         if (wrap) {
           const wrapRect = wrap.getClientRects()[0];
-          top -= wrapRect.top
-          left -= wrapRect.left
-          wrapperHeight = wrap.clientHeight
-          wrapperWidth = wrap.clientWidth
+          wrapperYStart = wrapRect.top
+          wrapperXStart = wrapRect.left
+          wrapperYEnd = wrapperYStart + wrap.clientHeight
+          wrapperXEnd = wrapperXStart + wrap.clientWidth
         }
       }
 
@@ -163,16 +166,18 @@ export default {
         let poBHeightHalf = poBHeight / 2
         let poBWidth = this.$refs.popoverBody.clientWidth
         let poBWidthHalf = poBWidth / 2
-        let poIcon = this.$refs.popover.clientWidth
+        let poIcon = iconEl.clientWidth
         let poHalf = poIcon / 2
         let poMargin = 4
 
         let resultPosition = null
         let poBodyPositions = [
-          ["top", "center"], ["bottom", "center"],
+          ["bottom", "center"], ["top", "center"],
           ["center", "left"], ["center", "right"],
+          ["bottom", "left"], ["bottom", "right"],
+          ["bottom", "left-half"], ["bottom", "right-half"],
           ["top", "left"], ["top", "right"],
-          ["bottom", "left"], ["bottom", "right"]
+          ["top", "left-half"], ["top", "right-half"],
         ]
 
         let xStart, xEnd, yStart, yEnd
@@ -186,15 +191,19 @@ export default {
               yEnd = top - poMargin
               yStart = yEnd - poBHeight
               if (pos[1] === "left") {
-                xEnd = left + poIcon + poMargin
+                xEnd = left + poIcon - poMargin
+              } else if (pos[1] === "left-half") {
+                xEnd = left + poIcon - poMargin + poIcon * 2
               } else if (pos[1] === "center") {
                 xEnd = left + poHalf + poBWidthHalf
+              } else if (pos[1] === "right-half") {
+                xEnd = left + poMargin + poBWidth - poIcon * 2
               } else if (pos[1] === "right") {
-                xEnd = left - poMargin + poBWidth
+                xEnd = left + poMargin + poBWidth
               }
               xStart = xEnd - poBWidth
             } else if (pos[0] === "center") {
-              yEnd = top + poHalf + poBHeightHalf
+              yEnd = top + poIcon + poBHeightHalf
               yStart = yEnd - poBHeight
               if (pos[1] === "left") {
                 xStart = left - poMargin - poBWidth
@@ -206,21 +215,25 @@ export default {
               yStart = top + poIcon + poMargin
               yEnd = yStart + poBHeight
               if (pos[1] === "left") {
-                xStart = left + poIcon + poMargin - poBWidth
+                xStart = left + poIcon - poMargin - poBWidth
+              } else if (pos[1] === "left-half") {
+                xStart = left + poIcon - poMargin - poBWidth + poIcon * 2
               } else if (pos[1] === "center") {
                 xStart = left + poHalf - poBWidthHalf
+              } else if (pos[1] === "right-half") {
+                xStart = left + poMargin - poIcon * 2
               } else if (pos[1] === "right") {
-                xStart = left - poMargin
+                xStart = left + poMargin
               }
               xEnd = xStart + poBWidth
             }
 
             // проверяем вписывается ли текущее положение в область видимости
             if (
-              xStart > 0 &&
-              yStart > 0 &&
-              xEnd < wrapperWidth &&
-              yEnd < wrapperHeight
+              xStart > wrapperXStart &&
+              yStart > wrapperYStart &&
+              xEnd < wrapperXEnd &&
+              yEnd < wrapperYEnd
             ) resultPosition = pos
           }
         )
