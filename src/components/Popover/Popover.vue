@@ -137,8 +137,7 @@ export default {
     },
     onResize() {
       if (!this.$refs.popover) return
-      let iconEl = this.$refs.popover.querySelector('svg') || this.$refs.popover
-      let {top, left, x, y} = iconEl.getClientRects()[0]
+      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
       let wrapperYStart = 0
       let wrapperXStart = 0
       let wrapperYEnd = window.innerHeight
@@ -166,18 +165,24 @@ export default {
         let poBHeightHalf = poBHeight / 2
         let poBWidth = this.$refs.popoverBody.clientWidth
         let poBWidthHalf = poBWidth / 2
-        let poIcon = iconEl.clientWidth
+        let poIcon = this.$refs.popover.clientWidth
         let poHalf = poIcon / 2
         let poMargin = 4
 
         let resultPosition = null
         let poBodyPositions = [
-          ["bottom", "center"], ["top", "center"],
-          ["center", "left"], ["center", "right"],
-          ["bottom", "left"], ["bottom", "right"],
-          ["bottom", "left-half"], ["bottom", "right-half"],
-          ["top", "left"], ["top", "right"],
-          ["top", "left-half"], ["top", "right-half"],
+          ["top", "center"],
+          ["top", "left"],
+          ["top", "right"],
+          ["top", "left-half"],
+          ["top", "right-half"],
+          ["center", "left"],
+          ["center", "right"],
+          ["bottom", "center"],
+          ["bottom", "left"],
+          ["bottom", "right"],
+          ["bottom", "left-half"],
+          ["bottom", "right-half"],
         ]
 
         let xStart, xEnd, yStart, yEnd
