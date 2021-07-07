@@ -1,0 +1,104 @@
+
+{
+  "items" : [
+    {
+      "name" : "rt-carousel",
+      "property" :"name",
+      "type": ["String"],
+      "value": "''",
+      "description": "Название"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"col-in-row",
+      "type": ["String", "Number"],
+      "value": "3",
+      "description": "кол-во колонок в строку"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"laptop-col-in-row",
+      "type": ["String", "Number"],
+      "value": "0",
+      "description": "кол-во колонок в строку (ширина девайса < 1600)"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :":scrollable-on-desktop",
+      "type": ["Boolean"],
+      "value": "true",
+      "description": "флаг влючения карусели на десктопе"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"scroll-step",
+      "type": ["String", "Number"],
+      "value": "1",
+      "description": "шаг скрола для десктопа"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"laptop-scroll-step",
+      "type": ["String", "Number"],
+      "value": "1",
+      "description": "шаг скрола для лептопа < 1600"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"td-scroll-step",
+      "type": ["String", "Number"],
+      "value": "1",
+      "description": "шаг скрола для планшета"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"md-scroll-step",
+      "type": ["String", "Number"],
+      "value": "1",
+      "description": "шаг скрола для мобильных устройств"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"active-index",
+      "type": ["String", "Number"],
+      "value": "0",
+      "description": "индекс активной карточки"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :":show-shadow",
+      "type": ["Boolean"],
+      "value": "true",
+      "description": "флаг включения теней"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"shadow-color",
+      "type": ["String"],
+      "value": "'white'",
+      "description": "цвет теней из colors.json"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :"background",
+      "type": ["String"],
+      "description": "цвет заливки из colors.json",
+      "value": "''"
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :":infinite-scroll",
+      "type": ["Boolean"],
+      "value": "false",
+      "description": "флаг бесконечной прокрутки"
+
+    },
+    {
+      "name" : "rt-carousel",
+      "property" :":blur-not-active",
+      "type": ["Boolean"],
+      "value": "true",
+      "description": "флаг включения блюра для не актичных карточек"
+    }
+  ]
+}

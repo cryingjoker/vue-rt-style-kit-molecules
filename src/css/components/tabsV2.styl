@@ -132,12 +132,12 @@ colors = readJsonKeys('../../../color.json')
     .rt-dark-theme &
       background-color: b2c-dark-slate
 .rt-tabs--background-white
-  .rt-tabs-v2-navigation-shadow-left
+  .rt-shadow-left
     background-image: linear-gradient(to left, rgba(white,0) 0%, white 90%)
     .rt-tabs--bright &,
     .rt-dark-theme &
       background-image: linear-gradient(to left, rgba(main-color,0) 0%, main-color 90%)
-  .rt-tabs-v2-navigation-shadow-right
+  .rt-shadow-right
     background-image: linear-gradient(to right , rgba(white,0) 0%, white 90%)
     .rt-tabs--bright &,
     .rt-dark-theme &
@@ -308,18 +308,23 @@ colors = readJsonKeys('../../../color.json')
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'rt-tabs--background-'+replace($i,'b2c-','')
-    shadowClassName = 'rt-tabs--shadow-'+replace($i,'b2c-','')
+    shadowClassName = 'rt-shadow-'+replace($i,'b2c-','')
 
     .{className}
       .rt-tabs-v2-navigation
         background-color rgba(lookup($i))
     .{shadowClassName}
-      .rt-tabs-v2-navigation-shadow-left
+      .rt-shadow-has-pseudo
+        &:before
+          background-color: lookup($i)
+
+      .rt-shadow-left
         background-image: linear-gradient(to left, rgba(lookup($i),0) 0%, lookup($i) 90%)
-      .rt-tabs-v2-navigation-shadow-right
+
+      .rt-shadow-right
         background-image: linear-gradient(to right , rgba(lookup($i),0) 0%, lookup($i) 90%)
 
 @media (max-width mobile-upper-limit)
-  .rt-tabs-v2-navigation-shadow-left
-  .rt-tabs-v2-navigation-shadow-right
+  .rt-shadow-left
+  .rt-shadow-right
     display: none

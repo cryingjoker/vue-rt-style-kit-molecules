@@ -97,6 +97,8 @@ export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.v
 export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
 export {default as CarouselV2} from './CarouselV2/Carousel.vue';
 export {default as CarouselSlideV2} from './CarouselV2/CarouselSlide.vue';
+export {default as CarouselV3} from './CarouselV3/CarouselV3.vue';
+export {default as CarouselV3Item} from './CarouselV3/CarouselV3Item.vue';
 export {default as AdBanner} from './AdBanner/AdBanner.vue';
 export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
 export {default as CommentSlider} from './CommentSlider/CommentSlider.vue';
