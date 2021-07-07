@@ -203,12 +203,13 @@ export default {
 
       }
       const styleTag = document.querySelector('.rt-carousel-v3-' + this._uid + ' style');
-      if(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ) {
-        if (styleTag) {
+      if (styleTag) {
+        if (this.scrollableOnDesktop || this.deviceType.search('desktop') < 0) {
           styleTag.innerText = inlineStyle
+
+        } else {
+          styleTag.innerText = ''
         }
-      }else{
-        styleTag.innerText = ''
       }
     },
     mouseenter() {
