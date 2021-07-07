@@ -32,7 +32,7 @@ export default {
     if(this.sort - 0 > -1){
       this.index = this.sort;
     }
-    if (this.label.length > 0 && this.tabsSliderName.length > 0) {
+    if ((this.$slots.label || this.label.length > 0) && this.tabsSliderName.length > 0) {
       tabsSliderStore.runAfterInit(this.tabsSliderName, this.fillTabsSliderStore)
     }
   },
@@ -41,7 +41,12 @@ export default {
       tabsSliderStore.removeSlots(this.tabsSliderName, this._uid)
     },
     fillTabsSliderStore() {
-      tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.label, this._uid)
+      if(this.$slots.label && this.$slots.label.length > 0 && this.$slots.label[0].text) {
+        tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.$slots.label, this._uid)
+      }else{
+        tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.label, this._uid)
+      }
+
       tabsSliderStore.setSlot(this.tabsSliderName, 'content', this.$slots.content, this._uid)
       tabsSliderStore.setSlot(this.tabsSliderName, 'image', this.$slots.image, this._uid)
       if (isNaN(this.index)) {

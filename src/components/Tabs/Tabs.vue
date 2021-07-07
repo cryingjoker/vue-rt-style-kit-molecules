@@ -250,7 +250,13 @@ export default {
 
     setActiveTabName(name, hashAnchor = false) {
       tabsStore.setActiveTabName(name, hashAnchor);
-      window.dispatchEvent(new Event("resize"));
+      if (typeof(Event) === 'function') {
+        window.dispatchEvent(new Event('resize'));
+      } else {
+        var evt = window.document.createEvent('UIEvents');
+        evt.initUIEvent('resize', true, false, window, 0);
+        window.dispatchEvent(evt);
+      }
       if (hashAnchor) {
         window.history.replaceState(undefined, undefined, "#" + hashAnchor);
       }

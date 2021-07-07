@@ -60,10 +60,22 @@
                         this.isOpenLocal = !this.isOpenLocal;
                         window.getSelection().removeAllRanges();
                         setTimeout(() => {
-                            window.dispatchEvent(new Event("resize"));
-                            setTimeout(() => {
-                                window.dispatchEvent(new Event("resize"));
-                            }, 300)
+                          if (typeof(Event) === 'function') {
+                            window.dispatchEvent(new Event('resize'));
+                          } else {
+                            var evt = window.document.createEvent('UIEvents');
+                            evt.initUIEvent('resize', true, false, window, 0);
+                            window.dispatchEvent(evt);
+                          }
+                          setTimeout(() => {
+                            if (typeof(Event) === 'function') {
+                              window.dispatchEvent(new Event('resize'));
+                            } else {
+                              var evt = window.document.createEvent('UIEvents');
+                              evt.initUIEvent('resize', true, false, window, 0);
+                              window.dispatchEvent(evt);
+                            }
+                          }, 300)
                         }, 50)
                     });
                 })

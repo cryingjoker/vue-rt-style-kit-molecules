@@ -231,7 +231,13 @@ export default {
   mounted() {
     if(this.needResize > 0){
       setTimeout(()=>{
-        window.dispatchEvent(new Event("resize"));
+        if (typeof(Event) === 'function') {
+          window.dispatchEvent(new Event('resize'));
+        } else {
+          var evt = window.document.createEvent('UIEvents');
+          evt.initUIEvent('resize', true, false, window, 0);
+          window.dispatchEvent(evt);
+        }
       }, this.needResize)
     }
     deviceTypeStore.addWatcher(this._uid,this.calculateMobileOptions);

@@ -114,6 +114,7 @@ export default {
         this.addKeyBindind();
         this.bindPageScroll();
         this.removeHover();
+        this.$emit('opened');
       }
 
     },
@@ -137,8 +138,9 @@ export default {
       if (this.isAntivirus) {
         this.removeActive();
       } else {
-        popupStore.setActiveId(null)
+        popupStore.setActiveId(null);
       }
+      this.$emit('closed');
     },
     keyPress(e) {
       if (e.keyCode === 27) {
@@ -177,14 +179,13 @@ export default {
       window.removeEventListener('keydown', this.keyPress);
     },
     bindCloseButton() {
-
-      const close = this.$el.querySelector('.rt-close');
+      const close = this.$el?.querySelector('.rt-close');
       if (close) {
         close.addEventListener('click', this.triggerClose, {passive: true});
       }
     },
     unbindCloseButton() {
-      const close = this.$el.querySelector('.rt-close');
+      const close = this.$el?.querySelector('.rt-close');
       if (close) {
         close.addEventListener('click', this.triggerClose, {passive: true});
       }
