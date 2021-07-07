@@ -138,24 +138,9 @@ export default {
     onResize() {
       if (!this.$refs.popover) return
       let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
-      let wrapperYStart = 0
-      let wrapperXStart = 0
-      let wrapperYEnd = window.innerHeight
-      let wrapperXEnd = window.innerWidth
       let windowWidth = window.innerWidth
       if (x && !left) left = x
       if (y && !top) top = y
-
-      if (this.containerId.length > 0) {
-        const wrap = document.querySelector('#' + this.containerId);
-        if (wrap) {
-          const wrapRect = wrap.getClientRects()[0];
-          wrapperYStart = wrapRect.top
-          wrapperXStart = wrapRect.left
-          wrapperYEnd = wrapperYStart + wrap.clientHeight
-          wrapperXEnd = wrapperXStart + wrap.clientWidth
-        }
-      }
 
       if (windowWidth < 769 && this.stopAutoOnMd) {
         this.setLocalValues()
@@ -235,10 +220,10 @@ export default {
 
             // проверяем вписывается ли текущее положение в область видимости
             if (
-              xStart > wrapperXStart &&
-              yStart > wrapperYStart &&
-              xEnd < wrapperXEnd &&
-              yEnd < wrapperYEnd
+              xStart > 0 &&
+              yStart > 0 &&
+              xEnd < window.innerWidth &&
+              yEnd < window.innerHeight
             ) resultPosition = pos
           }
         )
