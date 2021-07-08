@@ -311,8 +311,8 @@ export default {
     }
     return <rt-col class={className.join(' ')}>
       <div class="tab-slider__header-shadows">
-         <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft"></div>
-        <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight"></div>
+         <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft" style="display:none"></div>
+        <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight" style="display:block"></div>
       </div>
       <div class={shadowClassName.join(' ')} ref="header" onScroll={this.setShowRShadow}>
 
