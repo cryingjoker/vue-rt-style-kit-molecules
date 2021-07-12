@@ -135,57 +135,101 @@ export default {
       this.resizeHasBinding = false
       document.removeEventListener('resize',this.onResize)
     },
-    onResize(){
-      if(this.$refs.popover) {
-        let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
-        let wrapperHeight = window.innerHeight
-        let wrapperWidth = window.innerWidth
-        let windowWidth = window.innerWidth
-        let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
-        if (x && !left) {
-          left = x
-        }
-        if (y && !top) {
-          top = y
-        }
+    onResize() {
+      if (!this.$refs.popover) return
+      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
+      let windowWidth = window.innerWidth
+      if (x && !left) left = x
+      if (y && !top) top = y
 
-        if (this.containerId.length > 0) {
-          const wrap = document.querySelector('#' + this.containerId);
-          if (wrap) {
-            const wrapRect = wrap.getClientRects()[0];
-            top -= wrapRect.top
-            left -= wrapRect.left
-            wrapperHeight = wrap.clientHeight
-            wrapperWidth = wrap.clientWidth
-          }
-        }
+      if (windowWidth < 769 && this.stopAutoOnMd) {
+        this.setLocalValues()
+      } else {
+        if (!this.$refs.popoverBody) return
+        let poBHeight = this.$refs.popoverBody.clientHeight
+        let poBHeightHalf = poBHeight / 2
+        let poBWidth = this.$refs.popoverBody.clientWidth
+        let poBWidthHalf = poBWidth / 2
+        let poIcon = this.$refs.popover.clientWidth
+        let poHalf = poIcon / 2
+        let poMargin = 4
 
+        let resultPosition = null
+        let poBodyPositions = [
+          ["top", "center"],
+          ["top", "left"],
+          ["top", "right"],
+          ["top", "left-half"],
+          ["top", "right-half"],
+          ["center", "left"],
+          ["center", "right"],
+          ["bottom", "center"],
+          ["bottom", "left"],
+          ["bottom", "right"],
+          ["bottom", "left-half"],
+          ["bottom", "right-half"],
+        ]
 
-        if (windowWidth < 769 && this.stopAutoOnMd) {
-          this.setLocalValues()
-        } else {
-          const xStart = left - 125 - 12
-          const xEnd = left + 125 + 12
-          if (xStart + 20 >= 0 && xEnd <= wrapperWidth - 20) {
-            this.localHorizontal = 'center'
-          } else {
+        let xStart, xEnd, yStart, yEnd
 
-            if (xStart + 20 > 0) {
-              this.localHorizontal = 'left'
-            } else {
-              this.localHorizontal = 'right'
+        poBodyPositions.forEach(
+          pos => {
+            if (resultPosition) return
+
+            // считаем координаты положения модалки
+            if (pos[0] === "top") {
+              yEnd = top - poMargin
+              yStart = yEnd - poBHeight
+              if (pos[1] === "left") {
+                xEnd = left + poIcon - poMargin
+              } else if (pos[1] === "left-half") {
+                xEnd = left + poIcon - poMargin + poIcon * 2
+              } else if (pos[1] === "center") {
+                xEnd = left + poHalf + poBWidthHalf
+              } else if (pos[1] === "right-half") {
+                xEnd = left + poMargin + poBWidth - poIcon * 2
+              } else if (pos[1] === "right") {
+                xEnd = left + poMargin + poBWidth
+              }
+              xStart = xEnd - poBWidth
+            } else if (pos[0] === "center") {
+              yEnd = top + poIcon + poBHeightHalf
+              yStart = yEnd - poBHeight
+              if (pos[1] === "left") {
+                xStart = left - poMargin - poBWidth
+              } else if (pos[1] === "right") {
+                xStart = left + poIcon + poMargin
+              }
+              xEnd = xStart + poBWidth
+            } else if (pos[0] === "bottom") {
+              yStart = top + poIcon + poMargin
+              yEnd = yStart + poBHeight
+              if (pos[1] === "left") {
+                xStart = left + poIcon - poMargin - poBWidth
+              } else if (pos[1] === "left-half") {
+                xStart = left + poIcon - poMargin - poBWidth + poIcon * 2
+              } else if (pos[1] === "center") {
+                xStart = left + poHalf - poBWidthHalf
+              } else if (pos[1] === "right-half") {
+                xStart = left + poMargin - poIcon * 2
+              } else if (pos[1] === "right") {
+                xStart = left + poMargin
+              }
+              xEnd = xStart + poBWidth
             }
+
+            // проверяем вписывается ли текущее положение в область видимости
+            if (
+              xStart > 0 &&
+              yStart > 0 &&
+              xEnd < window.innerWidth &&
+              yEnd < window.innerHeight
+            ) resultPosition = pos
           }
-          if (top - bodyHeight / 2 > 0 && top + 20 + bodyHeight / 2 < wrapperHeight && this.localHorizontal != 'center') {
-            this.localVertical = 'center'
-          } else {
-            if (top > bodyHeight) {
-              this.localVertical = 'top'
-            } else {
-              this.localVertical = 'bottom'
-            }
-          }
-        }
+        )
+
+        this.localVertical = resultPosition === null ? "top" : resultPosition[0]
+        this.localHorizontal = resultPosition === null ? "center" : resultPosition[1]
       }
     }
   },
