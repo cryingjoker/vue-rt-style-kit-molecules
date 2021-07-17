@@ -52,7 +52,6 @@ class ResizeContentHeight {
 
     this.isMobile = isMobile;
     this.isTablet = isTablet;
-    console.info('this.querySelectorsNames',this.querySelectorsNames)
     if (isMobile && this.mobileNotResize || isTablet && this.tabletNotResize || !isMobile && !isTablet && this.desktopNotResize) {
       this.querySelectorsNames.forEach((selectorName) => {
         this.$el.querySelectorAll(`${selectorName}`).forEach((node) => {
