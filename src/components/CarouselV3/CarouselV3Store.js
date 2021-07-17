@@ -43,7 +43,7 @@ class CarouselV3Store extends StorePrototype {
     }
   }
   updateInfiniteScroll = (sliderName, infiniteScroll) => {
-    if(this.sliders[sliderName]){
+    if (this.sliders[sliderName]) {
       this.sliders[sliderName].infiniteScroll = infiniteScroll
     }
   }
@@ -76,18 +76,17 @@ class CarouselV3Store extends StorePrototype {
   updateSlide = (sliderName, _id, content, isActive) => {
 
   }
-  setArrowProps = (sliderName)=>{
+  setArrowProps = (sliderName) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
       const size = slider.ids.length;
-      const colInRow = slider.colInRow
+      const colInRow = this.getColInRow(sliderName)
       const wWidth = window?.innerWidth;
-
-      slider.showRArrow = (wWidth > 1024 ? index < size - colInRow  : wWidth > 767 ? index < size - 2: index < size - 1 ) ;
+      slider.showRArrow = (wWidth > 1024 ? index < size - colInRow : wWidth > 767 ? index < size - 2 : index < size - 1);
       slider.showLArrow = index > 0;
 
-      slider.showRShadow = (wWidth > 1024 ? index < size - colInRow : wWidth > 767 ? index < size - 2 : index < size - 1)   ;
+      slider.showRShadow = (wWidth > 1024 ? index < size - colInRow : wWidth > 767 ? index < size - 2 : index < size - 1);
       slider.showLShadow = index > 0;
 
     }
@@ -124,7 +123,7 @@ class CarouselV3Store extends StorePrototype {
     this.sliders[sliderName].watchers.forEach(fn => fn.call());
   }
 
-  setNextSlide = (sliderName, scrollStep = 1,  laptopScrollStep = 1,tdScrollStep = 1, mdScrollStep = 1 ) => {
+  setNextSlide = (sliderName, scrollStep = 1, laptopScrollStep = 1, tdScrollStep = 1, mdScrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const infiniteScroll = slider.infiniteScroll;
@@ -133,26 +132,26 @@ class CarouselV3Store extends StorePrototype {
       const colInRow = slider.colInRow
       const width = window.innerWidth;
       let locScrollStep = 0
-      if(width > 1600){
+      if (width > 1600) {
         locScrollStep = scrollStep
-      }else{
-        if(width < 1025){
-          if(width < 769){
+      } else {
+        if (width < 1025) {
+          if (width < 769) {
             locScrollStep = mdScrollStep
-          }else{
+          } else {
             locScrollStep = tdScrollStep
           }
-        }else{
+        } else {
           locScrollStep = laptopScrollStep
         }
       }
-      if (index  == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768){
+      if (index == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768) {
         slider.index = 0
-      }else {
+      } else {
         slider.index = index + locScrollStep;
       }
-      if(width > 1024){
-        if(slider.index + colInRow > size && !infiniteScroll){
+      if (width > 1024) {
+        if (slider.index + colInRow > size && !infiniteScroll) {
           slider.index = size - colInRow
         }
       }
@@ -165,45 +164,72 @@ class CarouselV3Store extends StorePrototype {
   setActiveId = (sliderName, id) => {
   }
   setActiveIndex = (sliderName, index) => {
-    if(this.sliders[sliderName]){
+    if (this.sliders[sliderName]) {
       this.sliders[sliderName].index = index - 0;
       this.setArrowProps(sliderName)
       this.callWatcher(sliderName);
     }
   }
-  setPrewSlide = (sliderName, scrollStep = 1,  laptopScrollStep = 1,tdScrollStep = 1, mdScrollStep = 1) => {
+  checkActiveIndex = (sliderName)=>{
+    if (this.sliders[sliderName]) {
+      const slider = this.sliders[sliderName];
+      const index = slider.index;
+      const size = slider.ids.length;
+      let colInRow = this.getColInRow(sliderName)
+      if(index+colInRow >= size){
+        this.setActiveIndex(sliderName, size - colInRow)
+      }else{
+        this.setArrowProps(sliderName)
+        this.callWatcher(sliderName);
+      }
+    }
+  }
+  getColInRow=(sliderName)=>{
+    const slider = this.sliders[sliderName];
+    const width = window.innerWidth;
+    let colInRow = slider.colInRow
+
+    if (width <= 1024) {
+      if (width > 768) {
+        colInRow = 2
+      } else {
+        colInRow = 1
+      }
+    }
+    return colInRow
+  }
+  setPrewSlide = (sliderName, scrollStep = 1, laptopScrollStep = 1, tdScrollStep = 1, mdScrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
       const infiniteScroll = slider.infiniteScroll;
       const size = slider.ids.length;
-      const colInRow = slider.colInRow
+      let colInRow = this.getColInRow(sliderName)
       const width = window.innerWidth;
+
       let locScrollStep = 0
-      if(width > 1600){
+      if (width > 1600) {
         locScrollStep = scrollStep
-      }else{
-        if(width < 1025){
-          if(width < 769){
+      } else {
+        if (width < 1025) {
+          if (width < 769) {
             locScrollStep = mdScrollStep
-          }else{
+          } else {
             locScrollStep = tdScrollStep
           }
-        }else{
+        } else {
           locScrollStep = laptopScrollStep
         }
       }
       slider.index = (index - locScrollStep);
-      if(infiniteScroll){
-        slider.index = (slider.index + size)%size
-      }else {
+      if (infiniteScroll) {
+        slider.index = (slider.index + size) % size
+      } else {
         if (slider.index < 0) {
           slider.index = 0
         }
         if (slider.index > size - colInRow) {
           slider.index = size - colInRow
-
-
         } else {
           if (width > 767 && width <= 1024) {
             if (slider.index > size - 2) {
@@ -226,18 +252,18 @@ class CarouselV3Store extends StorePrototype {
     }
     return 0
   }
-  getArrowOptions = (sliderName)=>{
+  getArrowOptions = (sliderName) => {
     const slider = this.sliders[sliderName];
     return {
-      next : slider.showRArrow,
-      prew : slider.showLArrow
+      next: slider.showRArrow,
+      prew: slider.showLArrow
     }
   }
-  getShadowOptions = (sliderName)=>{
+  getShadowOptions = (sliderName) => {
     const slider = this.sliders[sliderName];
     return {
-      next : slider.showRShadow,
-      prew : slider.showLShadow
+      next: slider.showRShadow,
+      prew: slider.showLShadow
     }
   }
   setColInRow = (sliderName, colInRow) => {
@@ -267,5 +293,6 @@ export const carouselV3Store = Vue.observable({
   getSliderContent: carouselV3StoreObject.getSliderContent,
   getActiveIndex: carouselV3StoreObject.getActiveIndex,
   getArrowOptions: carouselV3StoreObject.getArrowOptions,
-  getShadowOptions: carouselV3StoreObject.getShadowOptions
+  getShadowOptions: carouselV3StoreObject.getShadowOptions,
+  checkActiveIndex: carouselV3StoreObject.checkActiveIndex
 });

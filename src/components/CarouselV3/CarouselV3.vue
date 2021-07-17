@@ -123,6 +123,9 @@ export default {
 
     getColInRow() {
       if (this.innerWidth < 1367 && this.laptopColInRow - 0 > 0) {
+        if(this.innerWidth < 768){
+          return 1
+        }
         return this.laptopColInRow
       }
       return this.colInRow
@@ -430,6 +433,12 @@ export default {
     this.unbindResize();
   },
   watch: {
+    deviceType(newVal,oldVal){
+      if(oldVal && newVal && oldVal != newVal){
+        const localName = this.getLocalName()
+        carouselV3Store.checkActiveIndex(localName);
+      }
+    },
     infiniteScroll(newVal,oldVal){
       if(newVal != oldVal){
         const localName = this.getLocalName()
