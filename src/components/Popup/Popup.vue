@@ -134,13 +134,13 @@ export default {
         }, 300);
       }
     },
-    triggerClose() {
+    triggerClose(e) {
       if (this.isAntivirus) {
         this.removeActive();
       } else {
         popupStore.setActiveId(null);
       }
-      this.$emit('closed');
+      this.$emit('closed',{target:e?.target});
     },
     keyPress(e) {
       if (e.keyCode === 27) {
