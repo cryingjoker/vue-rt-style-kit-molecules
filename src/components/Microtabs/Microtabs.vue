@@ -78,7 +78,7 @@ export default {
         if (
           nav.key < this.activeTab ||
           // Сравниваем по ширине, учитывая текущую позицию
-          wrapWidth < distance + nav.$el.clientWidth + offset + (this.navList.length - 1 === key ? 0 : controlWidth)
+          wrapWidth < distance + nav.$el.clientWidth + (this.navList.length - 1 === key ? 0 : (controlWidth + offset))
         ) {
           hiddens[nav.key] = true
         } else {
