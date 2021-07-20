@@ -20,6 +20,10 @@ export default {
     withCircle:{
       type: Boolean,
       default: false
+    },
+    normalizeIcon:{
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -46,6 +50,7 @@ export default {
   },
   computed: {},
   render() {
+
 
     const renderContent = () => {
       if (this.$slots.content) {
@@ -80,7 +85,7 @@ export default {
       }
 
       if (this.mobileDropdown && this.$slots.icon && this.$slots.label && this.$slots.content  && this.deviceType.search('mobile') >= 0) {
-        const dropdownClassList = ["sp-l-4", "rt-privilege-dropdown"]
+        const dropdownClassList = ["sp-l-4", "rt-privilege-dropdown sp-r-1"]
         if(this.mobileDropdownOpen){
           dropdownClassList.push('rt-privilege-dropdown-active');
         }
@@ -88,8 +93,13 @@ export default {
         if(this.mobileDropdownOpen){
           arrowClassList.push('rt-privilege-arrow--active')
         }
-        return <div onClick={this.triggerDropdown}>
-          <div class="d-flex relative">
+        const wrapClassList = ['d-flex', 'relative'];
+        if(this.normalizeIcon){
+          wrapClassList.push('rt-privilege-normalize-icon')
+        }
+        wrapClassList.push('sp-r-1')
+        return <div  onClick={this.triggerDropdown}>
+          <div class={wrapClassList}>
             <div>
               {this.$slots.icon}
             </div>
@@ -104,9 +114,11 @@ export default {
 
         </div>
       }
-      const wrapClassList = ["d-flex"]
+      const wrapClassList = ['d-flex','sp-r-1']
 
-
+      if(this.normalizeIcon){
+        wrapClassList.push('rt-privilege-normalize-icon')
+      }
       return <div class={wrapClassList}>
         <div>
           {this.$slots.icon}
@@ -121,15 +133,20 @@ export default {
     } else {
       const wrapClassList = []
       if(this.withCircle){
-
         wrapClassList.push('d-flex')
         wrapClassList.push('flex-column')
         wrapClassList.push('flex-v-center')
         wrapClassList.push('rt-font-center')
+        wrapClassList.push('sp-h-1')
         if(this.hasDotted) {
           wrapClassList.push('td-sp-t-4')
           wrapClassList.push('rt-privilege-has-dotted')
         }
+      }else{
+        wrapClassList.push('sp-r-1')
+      }
+      if(this.normalizeIcon){
+        wrapClassList.push('rt-privilege-normalize-icon')
       }
       return <div class={wrapClassList}>
         <div class="sp-b-1-1">
