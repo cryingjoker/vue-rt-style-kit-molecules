@@ -1,0 +1,55 @@
+.rt-privilege-line
+  @media (max-width: tablet-upper-limit)
+    max-width 105px
+  @media (max-width: mobile-upper-limit)
+    max-width 93px
+.rt-privilege-arrow
+  position: absolute;
+  right: 0
+  top: 0
+  bottom: 0
+  margin-top auto
+  margin-bottom auto
+  transform rotate(0)
+  transition-timing-function linear
+  transition-duration 0.4s
+  transition-property transform
+
+.rt-privilege-dropdown
+  max-height 0
+  overflow: hidden;
+  transition-timing-function linear
+  transition-duration 0.4s
+  transition-property max-height
+.rt-privilege-arrow--active
+  transform rotate(180deg)
+.rt-privilege-dropdown-active
+  max-height 25ex
+.rt-privilege-has-dotted
+  position relative
+  &:before
+    content ''
+    position: absolute;
+    width: 140px
+    border-bottom: 1px dashed main-color05
+    top: 40px
+    left: -70px
+    pointer-events none
+    @media (max-width tablet-upper-limit)
+      width: 0
+      height: 40px
+      top: 20px
+      left: 0
+      right: 0
+      margin-left: auto
+      margin-right auto
+      border-right: 1px dashed main-color05
+
+
+.rt-privilege-normalize-icon
+  .rt-icon
+    width: 80px!important
+    height: 80px!important
+    @media (max-width tablet-upper-limit)
+      width: 56px!important
+      height: 56px!important

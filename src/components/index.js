@@ -113,3 +113,4 @@ export {default as CardHelp} from './Card/CardHelp.vue';
 export {default as CardBanner} from './Card/CardBanner.vue';
 export {default as CardTileLayout} from './Card/CardTileLayout.vue';
 export {default as VideoBanner} from './VideoBanner/VideoBanner.vue';
+export {default as Privilege} from './Privilege/Privilege.vue';

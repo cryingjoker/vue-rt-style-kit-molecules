@@ -25,9 +25,9 @@ export default function () {
       res = res + ')/' + a
       return utils.parseString('calc(' + res + ')')
     })
-  
+
     style.define('callVariable', function(name) {
-    
+
       var val = options[name.val];
       switch (typeof val) {
         case 'boolean':
@@ -52,5 +52,10 @@ export default function () {
         return - 1
       return a.val.search(b.val)
     });
+    style.define('parseInt', function (a){
+      if(a.val){
+        return parseInt(a.val)
+      }
+    })
   }
 }
