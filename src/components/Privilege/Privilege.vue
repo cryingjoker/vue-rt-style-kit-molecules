@@ -81,7 +81,7 @@ export default {
     if ((this.inLine || this.deviceType.search(/desktop/g) < 0) && !this.withCircle) {
       const flexClassList = ['d-flex', 'flex-v-center']
       if (this.$slots.icon) {
-        flexClassList.push('sp-l-1-1')
+        flexClassList.push('sp-l-x6')
       }
 
       if (this.mobileDropdown && this.$slots.icon && this.$slots.label && this.$slots.content  && this.deviceType.search('mobile') >= 0) {
