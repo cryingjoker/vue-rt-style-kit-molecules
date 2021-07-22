@@ -11,10 +11,15 @@ export default {
     index: {
       type: [Number, String],
       default: -1
+    },
+    boost:{
+      type:Boolean,
+      default: false
     }
   },
   data: () => ({
-    parentName: ''
+    parentName: '',
+    oldHtml: ''
   }),
   methods: {
     getParent(node = this.$el.parentNode, deep = 1) {
@@ -27,6 +32,13 @@ export default {
           return undefined
         }
       }
+    },
+    checkHtml(){
+      const html = this.$el.innerHTML
+      const res = this.oldHtml == html
+      this.oldHtml = html
+      return res
+
     },
     setParent() {
 
@@ -47,15 +59,30 @@ export default {
 
         }
       }
+    },
+    getName(){
+      let name = this.name;
+      if (name.length == 0) {
+        name = this.parentName
+      }
+      return name
     }
   },
   mounted() {
     this.setParent()
-    let name = this.name;
-    if (name.length == 0) {
-      name = this.parentName
-    }
+    const name = this.getName()
     carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
+    this.checkHtml()
+  },
+  beforeUpdate() {
+
+  },
+  updated(a,b) {
+
+    if(!this.checkHtml()) {
+      const name = this.getName()
+      carouselV3Store.updateSlide(name, this._uid, this.$slots.default, this.index)
+    }
   },
   beforeDestroy() {
     let name = this.name;
@@ -64,12 +91,21 @@ export default {
     }
     carouselV3Store.removeSlide(name, this._uid)
   },
-  render() {
 
-    if(this.parentName.length > 0 || this.name.length > 0){
-      return null
+  render() {
+    if(!this.boost) {
+      setTimeout(() => {
+        this.$el.remove()
+      }, 10)
+
+      return <span class="d-none" id={"v-" + this._uid}>{this.$slots.default}</span>
     }
-    return <span class="d-none">slide item</span>
+      if (this.parentName.length > 0 || this.name.length > 0) {
+        return null
+      }
+
+      return <span class="d-none">slide item</span>
+
   }
 
 }

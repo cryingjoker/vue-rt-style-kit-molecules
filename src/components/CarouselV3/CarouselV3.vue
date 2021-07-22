@@ -274,8 +274,6 @@ export default {
       }
       this.clearTransformTimeout = setTimeout(() => {
         this.$refs.caroselRow.$el.style.transform = 'translateX(' + (0) + 'px)'
-
-
       }, 0)
 
     },
