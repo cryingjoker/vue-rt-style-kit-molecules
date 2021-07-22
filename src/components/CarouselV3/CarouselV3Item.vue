@@ -79,7 +79,7 @@ export default {
   },
   updated(a,b) {
 
-    if(!this.checkHtml()) {
+    if(!this.checkHtml() && !this.boost) {
       const name = this.getName()
       carouselV3Store.updateSlide(name, this._uid, this.$slots.default, this.index)
     }
