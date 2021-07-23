@@ -17,6 +17,9 @@ class PopupStore extends StorePrototype {
   setSlot = (popupUid, fn, ga,gaClose) => {
     let index = this.popupArray.indexOf(popupUid);
     if (index == -1) {
+      if(this.popupArray.length == 0){
+        this.bindWindowEvent()
+      }
       this.popupArray.push(popupUid)
       this.ga[popupUid] = ga
       this.gaClose[popupUid] = gaClose
@@ -31,11 +34,26 @@ class PopupStore extends StorePrototype {
       delete this.ga[popupUid]
       delete this.gaClose[popupUid]
     }
+    if(this.popupArray.length == 0){
+      this.unbindWindowEvent()
+    }
     if (this.bannerActiveId == popupUid) {
       this.bannerActiveId = null
     }
   }
-
+  closeAll = ()=>{
+    this.setActiveId(null)
+  }
+  bindWindowEvent = ()=>{
+    if(window){
+      window.addEventListener('closeAllPopup', this.closeAll)
+    }
+  }
+  unbindWindowEvent = ()=>{
+    if(window){
+      window.removeEventListener('closeAllPopup', this.closeAll)
+    }
+  }
   fireGa = (popupUid) => {
     if (popupUid in this.ga) {
       const data = {
