@@ -63,7 +63,7 @@ export default {
         const labelClassList = [];
         if (this.$slots.content && (!this.mobileDropdown || !this.$slots.label || !this.$slots.icon || !this.$slots.content  || this.deviceType.search('mobile') < 0)) {
 
-            labelClassList.push('sp-b-0-3')
+            labelClassList.push('sp-b-x3')
         }
         if (this.$slots.icon) {
           return <div class={labelClassList}>{this.$slots.label}</div>
@@ -81,7 +81,7 @@ export default {
     if ((this.inLine || this.deviceType.search(/desktop/g) < 0) && !this.withCircle) {
       const flexClassList = ['d-flex', 'flex-v-center']
       if (this.$slots.icon) {
-        flexClassList.push('sp-l-1-1')
+        flexClassList.push('sp-l-x6')
       }
 
       if (this.mobileDropdown && this.$slots.icon && this.$slots.label && this.$slots.content  && this.deviceType.search('mobile') >= 0) {
@@ -149,7 +149,7 @@ export default {
         wrapClassList.push('rt-privilege-normalize-icon')
       }
       return <div class={wrapClassList}>
-        <div class="sp-b-1-1">
+        <div class="sp-b-x6">
           {this.$slots.icon}
         </div>
         {renderLabel()}
