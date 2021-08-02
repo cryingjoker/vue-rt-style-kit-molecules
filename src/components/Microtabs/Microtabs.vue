@@ -72,8 +72,9 @@ export default {
       if (!this.$refs.navigationEl) return
       let shown = []
       let hiddens = []
-      let distance = controlWidth
+      let distance = 0
       let wrapWidth = this.$refs.navigationEl.clientWidth
+      let navHiddenActivated = false
       this.navList.forEach((nav, key) => {
         if (
           nav.key < this.activeTab ||
@@ -81,6 +82,10 @@ export default {
           wrapWidth < distance + nav.$el.clientWidth + (this.navList.length - 1 === key ? 0 : (controlWidth + offset))
         ) {
           hiddens[nav.key] = true
+          if (!navHiddenActivated) {
+            distance += controlWidth
+            navHiddenActivated = true
+          }
         } else {
           shown.push(nav.key)
         }
