@@ -3,7 +3,7 @@ import {Line, deviceTypeStore} from "vue-rt-style-kit-atoms";
 
 export default {
   name: "RtPrivilege",
-  components: [Line],
+  components: { Line },
   props: {
     inLine: {
       type: Boolean,
