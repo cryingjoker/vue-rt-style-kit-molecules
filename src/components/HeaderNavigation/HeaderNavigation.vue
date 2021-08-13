@@ -20,6 +20,7 @@
                 adText: '',
                 adLink: '',
                 adLinkText: '',
+                adPushData: '',
                 gaValue: [],
                 gotBanner: false,
                 expandTitle: '',
@@ -30,21 +31,6 @@
             navigationClasses() {
                 let navClass = 'header-navigation--mobile';
                 return navClass;
-            }
-        },
-        mounted() {
-            if(this.gotBanner) {
-                this.bindBannerClick()
-            }
-        },
-        beforeUpdate() {
-            if(this.gotBanner) {
-                this.unbindBannerClick();
-            }
-        },
-        updated(){
-            if(this.gotBanner) {
-                this.bindBannerClick();
             }
         },
         created() {},
@@ -86,43 +72,10 @@
                 } else if($event.target.localName == 'a') {
                     targetLink = $event.target.getAttribute('href');
                 }
-                if (!window.dataLayer) {
-                    window.dataLayer = [];
-                }
-                window.dataLayer.push({
-                    'event': window.RTK_UTILS ? window.RTK_UTILS.currentSegment : 'b2c',
-                    'type': 'main_nav',
-                    'value': this.gaValue.join(' | ')
-                });
-                // window.location.href = this.fixRegion() + targetLink;
+                this.$emit('link-click', this.gaValue.join('|'))
             },
-            bindBannerClick(){
-                this.$refs.promoBanner.$el.addEventListener('click', ($event) => {
-                    this.pushBannerData($event)
-                })
-            },
-            unbindBannerClick(){
-                this.$refs.promoBanner.$el.removeEventListener('click', ($event) => {
-                    this.pushBannerData($event)
-                })
-            },
-            pushBannerData() {
-                // $event.preventDefault();
-                // $event.stopPropagation();
-                this.gaValue.push(this.adTitle);
-                if (!window.dataLayer) {
-                    window.dataLayer = [];
-                }
-                window.dataLayer.push({
-                    'event': window.RTK_UTILS ? window.RTK_UTILS.currentSegment : 'b2c',
-                    'type': 'banner_nav',
-                    'value': this.gaValue.join(' | ')
-                });
-                // if(this.newWindow) {
-                //     window.open(this.fixRegion() + this.adLink, '_blank');
-                // } else {
-                //     window.open(this.fixRegion() + this.adLink, '_self');
-                // }
+            pushDataBanner() {
+                this.$emit('banner-link-click', this.gaValue.join('|') + String(this.adTitle))
             },
             fixRegion() {
                 let locality = document.cookie.split('; ').find( i=>
@@ -157,9 +110,6 @@
                         this.adLink = item.linkTarget;
                         this.adLinkText = item.linkText;
                         this.newWindow = item.newWindow;
-                        if (!window.dataLayer) {
-                            window.dataLayer = [];
-                        }
                         this.gaValue.push(item.label);
                         if(item.expandable) {
                             this.expandTitle = item.label;
@@ -215,7 +165,9 @@
                                                           link-target={this.adLink}
                                                           link-text={this.adLinkText}
                                                           ref="promoBanner"
-                                                          new-window={this.newWindow}>
+                                                          new-window={this.newWindow}
+                                                          onBannerLinkClick={this.pushDataBanner}
+                    >
                         <template slot="title">{this.adTitle}</template>
                         <template slot="paragraph">{this.adText}</template>
                     </rt-header-advertisement-block>
