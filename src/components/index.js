@@ -87,8 +87,6 @@ export { default as GalleryCarouselItem } from './GalleryCarousel/GalleryCarouse
 export { default as CountdownTimer } from './CountdownTimer/CountdownTimer.vue';
 export { default as FunctionItem } from './FunctionList/FunctionItem.vue';
 export { default as FunctionList } from './FunctionList/FunctionList.vue';
-export { default as HeaderAdvertisementBlock } from './HeaderAdvertisementBlock/HeaderAdvertisementBlock.vue';
-export { default as HeaderNavigation } from './HeaderNavigation/HeaderNavigation.vue';
 export { default as TextImageBlock } from './TextImageBlock/TextImageBlock.vue';
 export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 export {default as Slider} from './Slider/Slider.vue'
