@@ -63,10 +63,7 @@ export default {
       type: Boolean,
       default: true
     },
-    activeIndexInit: {
-      type: [Number, String],
-      default: 0
-    }
+
 
 
   },
@@ -95,7 +92,6 @@ export default {
     const localName = this.getLocalName()
     carouselV3Store.addWatcher(localName, this.getSlide)
     carouselV3Store.setColInRow(localName, this.getColInRow())
-    this.activeIndex = this.activeIndexInit
     if (this.activeIndex - 0 >= 0) {
       this.$nextTick(() => {
         carouselV3Store.setActiveIndex(localName, this.activeIndex - 0)
@@ -109,7 +105,7 @@ export default {
   methods: {
     setAciveIndex() {
       const localName = this.getLocalName()
-      carouselV3Store.setActiveIndex(localName, this.activeIndexInit)
+      carouselV3Store.setActiveIndex(localName, this.activeIndex)
     },
     onResize() {
       this.innerWidth = window.innerWidth;
@@ -443,9 +439,11 @@ export default {
         carouselV3Store.updateInfiniteScroll(localName, newVal)
       }
     },
-    activeIndexInit(newVal, oldVal) {
-      if (!isNaN(parseInt(newVal + '' + oldVal)) && newVal != this.activeIndex) {
-        this.setAciveIndex(newVal)
+
+    activeIndex(newVal, oldVal) {
+
+      if (!isNaN(parseInt(newVal + '' + oldVal)) && newVal != oldVal) {
+        this.setAciveIndex()
       }
     },
     colInRow(newVal, oldVal) {
@@ -603,6 +601,9 @@ export default {
     if (!this.scrollableOnDesktop && this.deviceType.search('desktop') >= 0) {
       caurouselWrapClassList.push('rt-col')
     }
+
+
+
     return <div class={caurouselClassList} onWheel={this.wheelMove}
                 onMouseenter={this.mouseenter}
                 onMousedown={this.mouseDown}
