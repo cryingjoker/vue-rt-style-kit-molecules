@@ -165,7 +165,18 @@ class CarouselV3Store extends StorePrototype {
   }
   setActiveIndex = (sliderName, index) => {
     if (this.sliders[sliderName]) {
+      const slider = this.sliders[sliderName];
+      const width = window.innerWidth;
+      let colInRow = this.getColInRow(sliderName)
+      const infiniteScroll = slider.infiniteScroll;
+      const size = slider.ids.length;
       this.sliders[sliderName].index = index - 0;
+      if (width > 1024) {
+        if (slider.index + colInRow > size && !infiniteScroll) {
+          slider.index = size - colInRow
+        }
+      }
+
       this.setArrowProps(sliderName)
       this.callWatcher(sliderName);
     }
