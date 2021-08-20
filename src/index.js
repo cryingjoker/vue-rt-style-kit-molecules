@@ -85,8 +85,6 @@ import {
   ResizeTypeStore,
   FunctionList,
   FunctionItem,
-  HeaderAdvertisementBlock,
-  HeaderNavigation,
   Slider,
   SliderItem,
   TextImageBlock,
@@ -201,8 +199,6 @@ const VueRtStyle = {
       Vue.component(CardSkeleton.name, CardSkeleton);
       Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
-      Vue.component(HeaderAdvertisementBlock.name, HeaderAdvertisementBlock);
-      Vue.component(HeaderNavigation.name, HeaderNavigation);
       Vue.component(TextImageBlock.name, TextImageBlock);
       Vue.component(PhoneNumberInput.name, PhoneNumberInput);
       Vue.component(CarouselV2.name, CarouselV2);
@@ -277,7 +273,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-08-06 22:39";
+const version = "2021-08-15 17:29";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -379,8 +375,6 @@ export {
   CheckboxTabs,
   CountdownTimer,
   StickyHeaderLine,
-  HeaderAdvertisementBlock,
-  HeaderNavigation,
   Slider,
   SliderItem,
   TextImageBlock,
