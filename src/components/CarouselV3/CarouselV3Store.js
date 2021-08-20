@@ -182,6 +182,9 @@ class CarouselV3Store extends StorePrototype {
           slider.index = size - colInRow
         }
       }
+      if(slider.index < 0){
+        slider.index = 0
+      }
 
       this.setArrowProps(sliderName)
       this.callWatcher(sliderName);
@@ -258,6 +261,9 @@ class CarouselV3Store extends StorePrototype {
             }
           }
         }
+      }
+      if(slider.index < 0){
+        slider.index = 0
       }
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
