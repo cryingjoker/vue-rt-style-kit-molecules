@@ -23,19 +23,19 @@ export default {
       type: Boolean,
       default: true
     },
-    scrollStep:{
+    scrollStep: {
       type: [String, Number],
       default: 1
     },
-    laptopScrollStep:{
+    laptopScrollStep: {
       type: [String, Number],
       default: 1
     },
-    tdScrollStep:{
+    tdScrollStep: {
       type: [String, Number],
       default: 1
     },
-    mdScrollStep:{
+    mdScrollStep: {
       type: [String, Number],
       default: 1
     },
@@ -63,8 +63,14 @@ export default {
       type: Boolean,
       default: true
     },
-
-
+    contentToResize: {
+      type: Array,
+      default: () => ([])
+    },
+    preventScroll: {
+      type: Boolean,
+      default: true
+    }
 
   },
   data: () => ({
@@ -119,7 +125,7 @@ export default {
 
     getColInRow() {
       if (this.innerWidth < 1367 && this.laptopColInRow - 0 > 0) {
-        if(this.innerWidth < 768){
+        if (this.innerWidth < 768) {
           return 1
         }
         return this.laptopColInRow
@@ -174,29 +180,28 @@ export default {
         inlineStyle += '.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ transition-duration: 0s;}'
       }
 
-
-        // laptopColInRow
+      // laptopColInRow
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
         if (colInRow === 3) {
 
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc('+ (activeItemIndex < size - 3 ? '-360px' : '-288px' ) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 432px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ?  10 : 20) + 'px ' + transform + 'px);}}'
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(' + (activeItemIndex < size - 3 ? '-360px' : '-288px') + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 432px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 10 : 20) + 'px ' + transform + 'px);}}'
           inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px)   * -' + (activeItemIndex < size - 3 ? 0.25 : 0.2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.3  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 10 : 20) + 'px ' + transform + 'px));}}'
           inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px ' + transform + 'px));}}'
           inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex < size - 2 ? 0.7 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.3  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 0 : 5) + 'px ' + transform + 'px));}}'
 
         }
-        if (colInRow === 4) {
-          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc('+ (activeItemIndex < size - 4  ? '-273px' : '-215px' ) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 331px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ?  10 : 20) + 'px ' + transform + 'px);}}'
+        if (colInRow == 4) {
+          inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(' + (activeItemIndex < size - 4 ? '-273px' : '-215px') + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 331px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 10 : 20) + 'px ' + transform + 'px);}}'
           inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 20 : 20) + 'px ' + transform + 'px));}}'
           inlineStyle += '@media (max-width: 1367px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 10 : 20) + 'px ' + transform + 'px));}}'
           inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 80px) *   -' + (activeItemIndex < size - 4 ? 0.19 : 0.175) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 80px)  * 0.23  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 10 : 50) + 'px ' + transform + 'px));}}'
           // inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((30vw - 48px) * -' + (activeItemIndex < size - 2 ? 0.8 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((30vw - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 0 : 5) + 'px ' + transform + 'px));}}'
           // inlineStyle += '@media (max-width: 1280px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(((100vw - var(--scrollbarWidth)) * 0.23  - 140px) * -' + (activeItemIndex < size - 2 ? 0.77 : 0) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (((100vw - var(--scrollbarWidth)) * 0.23  - 48px) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 4 ? 0 : 5) + 'px ' + transform + 'px));}}'
         }
-        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10vw * -' + (activeItemIndex < size - 2 ? 3 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (40vw) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 2 ? 10 : 0) + 'px);}}'
-        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(12.5vw * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 75vw * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10   : 0) + 'px);}}'
-        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 127.5px) * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (255px) * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px);}}'
+        inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10vw * -' + (activeItemIndex < size - 2 ? 3 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (40vw) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 2 ? 10 : 0) + 'px '+transform+'px);}}'
+        inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(12.5vw * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 75vw * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px '+transform+'px);}}'
+        inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 127.5px) * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (255px) * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px '+transform+'px);}}'
 
       } else {
         inlineStyle += '@media (min-width: 1025px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(0px ' + transform + 'px);}}'
@@ -279,14 +284,14 @@ export default {
         localName = this._uid;
       }
       // this.clearTransform()
-      carouselV3Store.setPrewSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
+      carouselV3Store.setPrewSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0, this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
     setNextActive() {
       let localName = this.name;
       if (localName.length == 0) {
         localName = this._uid;
       }
-      carouselV3Store.setNextSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0,this.tdScrollStep - 0, this.mdScrollStep - 0)
+      carouselV3Store.setNextSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0, this.tdScrollStep - 0, this.mdScrollStep - 0)
     },
 
     wheelMove(e) {
@@ -358,7 +363,9 @@ export default {
 
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        event.preventDefault();
+        if (event.cancelable && this.preventScroll) {
+          event.preventDefault();
+        }
         if (Math.abs(xDiff) > this.innerWidth / 5) {
           this.wheelEventPause = true
           setTimeout(() => {
@@ -374,10 +381,15 @@ export default {
             }
           }
         } else {
-          this.renderStyle(-1 * xDiff / 10)
+          if (xDiff > 0 && (this.nextArrowShow || this.infiniteScroll) || xDiff < 0 && this.prewArrowShow || this.infiniteScroll) {
+            this.renderStyle(-1 * xDiff / 10)
+          }
         }
+
+
       } else {
-        this.renderStyle(-1 * xDiff / 10)
+
+        // this.renderStyle(-1 * xDiff / 10)
       }
 
 
@@ -401,7 +413,7 @@ export default {
             if (delta + this.origTransformBefore < width * -0.1) {
               this.renderStyle(0)
               this.isMouseDown = false
-                this.setNextActive()
+              this.setNextActive()
             } else {
               this.renderStyle(delta)
             }
@@ -412,7 +424,7 @@ export default {
               this.renderStyle(0)
               this.isMouseDown = false
 
-                this.setPrewActive()
+              this.setPrewActive()
             } else {
               this.renderStyle(delta)
             }
@@ -427,14 +439,14 @@ export default {
     this.unbindResize();
   },
   watch: {
-    deviceType(newVal,oldVal){
-      if(oldVal && newVal && oldVal != newVal){
+    deviceType(newVal, oldVal) {
+      if (oldVal && newVal && oldVal != newVal) {
         const localName = this.getLocalName()
         carouselV3Store.checkActiveIndex(localName);
       }
     },
-    infiniteScroll(newVal,oldVal){
-      if(newVal != oldVal){
+    infiniteScroll(newVal, oldVal) {
+      if (newVal != oldVal) {
         const localName = this.getLocalName()
         carouselV3Store.updateInfiniteScroll(localName, newVal)
       }
@@ -603,7 +615,6 @@ export default {
     }
 
 
-
     return <div class={caurouselClassList} onWheel={this.wheelMove}
                 onMouseenter={this.mouseenter}
                 onMousedown={this.mouseDown}
@@ -615,7 +626,6 @@ export default {
                 onMouseleave={this.mouseleave}>
       <style></style>
       <div class="rt-container td-sp-h-none relative">
-
         <div class={caurouselWrapClassList} ref="wrap">
           {arrowRender()}
           {shadowRender()}
@@ -623,6 +633,7 @@ export default {
             attrs: {rtCarouselId: this.name || this._uid},
             class: [(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'rt-carousel-v3--scroll' : 'rt-carousel-v3--static')],
             ref: 'caroselRow',
+            vRtResizeContentHeight: {querySelectorsNames: this.contentToResize}
           }, [
             renderSlides(),
             this.$slots.default
