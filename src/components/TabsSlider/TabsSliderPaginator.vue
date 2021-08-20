@@ -226,7 +226,7 @@ export default {
         this.scrollTo();
         activeEl = activeEl.$el
         const header = this.$refs.header;
-        const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft)
+        const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft -  header.getBoundingClientRect().left)
         if (header.scrollLeft != left) {
           this.scrollTo(header, header.scrollLeft, left, 300)
         }
