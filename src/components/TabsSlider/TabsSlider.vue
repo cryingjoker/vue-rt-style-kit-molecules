@@ -45,9 +45,13 @@ export default {
       type: String,
       default: 'easeInOutCubic'
     },
-    stopWhenNotShow:{
+    stopWhenNotShow: {
       type: Boolean,
       default: true
+    },
+    shadowColor:{
+      type: String,
+      default: ''
     }
   },
   components: components,
@@ -67,7 +71,8 @@ export default {
     renderMenu() {
       return <rt-tabs-slider-paginator on-click-stop-play={this.onClickStopPlay} pause={this.pause}
                                        time={this.timerDuration}
-                                       duration-time={this.scrollDuration}
+                                       shadow-color={this.shadowColor}
+                                       duration-time={this.scrollDuxration}
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
     renderTabs() {
@@ -110,16 +115,16 @@ export default {
         this.pause = false
       }
     },
-    bindScroll(){
+    bindScroll() {
       if ('IntersectionObserver' in window && this.stopWhenNotShow) {
         const imageObserver = new IntersectionObserver((entries, imgObserver) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              if(this.autoplay) {
+              if (this.autoplay) {
                 tabsSliderStore.setSettings(this.name, 'autoplay', true)
               }
-            }else{
-              if(this.autoplay) {
+            } else {
+              if (this.autoplay) {
                 tabsSliderStore.setSettings(this.name, 'autoplay', false)
               }
             }
@@ -201,17 +206,22 @@ export default {
   render(h) {
     if (this.name.length > 0) {
       return <div class="tab-slider" ref="slider"
-                  style={{minHeight: this.minHeight+'px'}}
+                  style={{minHeight: this.minHeight + 'px'}}
                   onMouseenter={this.mouseenter}
                   onMouseleave={this.mouseleave}
       >
-        {this.renderMenu}
-        <div class="tab-slider__content"
-             onTouchstart={this.touchstart}
-             onTouchmove={this.touchmove}
-        >
-          {this.renderTabs}
-          {this.$slots.default}
+        <div class="rt-container td-sp-h-none">
+          {this.renderMenu}
+        </div>
+        <div class="rt-container">
+          <rt-col>
+            <div class="tab-slider__content"
+                 onTouchstart={this.touchstart}
+                 onTouchmove={this.touchmove}>
+              {this.renderTabs}
+              {this.$slots.default}
+            </div>
+          </rt-col>
         </div>
 
       </div>
