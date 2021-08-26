@@ -50,6 +50,10 @@
       width: {
         type: [Number, String],
         default: 12
+      },
+      indent: {
+        type: String,
+        default: 'small' //medium, large
       }
     },
     data: () => ({
@@ -84,7 +88,7 @@
       contentClass() {
         let classList = 'rt-col-td-6';
         if(this.localWidth == 12) {
-          if(this.tightText) {
+          if(this.tightText && this.reversed) {
             classList += ' rt-col-5'
           } else {
             classList += ' rt-col-6'
@@ -120,10 +124,19 @@
       },
       containerClass() {
         let classList = '';
-        if(!this.isNested) {
-          classList += 'rt-container sp-v-4 td-sp-v-3 md-sp-v-2'
-        } else {
+        if(this.isNested) {
           classList += 'row'
+        } else {
+          classList += 'rt-container'
+          if(this.indent == 'large') {
+            classList += ' sp-v-wine'
+          }
+          if(this.indent == 'medium') {
+            classList += ' sp-v-pink'
+          }
+          if(this.indent == 'small') {
+            classList += ' sp-v-orange'
+          }
         }
         return classList;
       },
@@ -179,7 +192,7 @@
         }
       };
       const emptyColumn = () => {
-        if(this.tightText) {
+        if(this.tightText && this.localWidth == 12 && this.reversed) {
           return <div class="rt-col-1"/>
         } else {
           return null
@@ -208,6 +221,7 @@
           <div class="rt-col">
             <div class={this.mainWrapperClass}>
               {additionalColumns()}
+              {emptyColumn()}
               <div class={this.contentClass}>
                 <div class="d-flex d-space-between flex-column text-image-block__content">
                   <div class={this.contentInnerClass}>
@@ -217,7 +231,6 @@
                   {bottomContentPart()}
                 </div>
               </div>
-              {emptyColumn()}
               <div class={this.imageWrapperClass}>
                 {visualContent()}
               </div>
