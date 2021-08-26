@@ -56,6 +56,11 @@
         default: 'small' //medium, large
       }
     },
+    watch: {
+      width(newVal){
+        this.localWidth = +newVal
+      }
+    },
     data: () => ({
       backgroundColor: null,
       localWidth: null
