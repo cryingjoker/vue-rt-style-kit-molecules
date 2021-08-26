@@ -18,7 +18,7 @@ export default {
     },
     qrCode: {
       type: String,
-      default: 'https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/qrcode.png'
+      default: 'https://rt-static.rt.ru/sites/default/files/img/ad_unit_component/qrcode.png'
     }
   },
   data: () => ({
@@ -60,7 +60,7 @@ export default {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill sp-r-0-2 md-sp-r-none">
             <rt-button class="rt-button-md--is-block" href={this.iosUrl} color="black">
-              <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/appStore.svg" alt=""/>
+              <img src="https://rt-static.rt.ru/sites/default/files/img/ad_unit_component/appStore.svg" alt=""/>
             </rt-button>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default {
         return <div class="d-flex sp-t-1-1 md-d-block">
           <div class="flex-fill">
             <rt-button class="rt-button-md--is-block" href={this.androindUrl} color="black">
-              <img src="https://static-cdn.rt.ru/sites/default/files/img/ad_unit_component/googlePlay.svg" alt=""/>
+              <img src="https://rt-static.rt.ru/sites/default/files/img/ad_unit_component/googlePlay.svg" alt=""/>
             </rt-button>
           </div>
         </div>

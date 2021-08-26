@@ -110,7 +110,8 @@ import {
   VideoBanner,
   CarouselV3,
   CarouselV3Item,
-  Privilege
+  Privilege,
+  Minibanner
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -234,6 +235,7 @@ const VueRtStyle = {
       Vue.component(CardTileLayout.name, CardTileLayout);
       Vue.component(VideoBanner.name, VideoBanner);
       Vue.component(Privilege.name, Privilege);
+      Vue.component(Minibanner.name, Minibanner);
 
       Vue.component(CarouselV3.name, CarouselV3);
       Vue.component(CarouselV3Item.name, CarouselV3Item);
@@ -403,5 +405,7 @@ export {
   VideoBanner,
   CarouselV3,
   CarouselV3Item,
-  Privilege
+  Privilege,
+  Minibanner,
+  ResizeContentHeightDirective
 }
