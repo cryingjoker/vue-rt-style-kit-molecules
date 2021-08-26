@@ -183,7 +183,7 @@ export default {
       // laptopColInRow
       if (this.activeItemIndex > 0) {
         let activeItemIndex = this.activeItemIndex;
-        if (colInRow == 3) {
+        if (colInRow === 3) {
 
           inlineStyle += '@media (min-width: 1600px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(' + (activeItemIndex < size - 3 ? '-360px' : '-288px') + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 432px * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 10 : 20) + 'px ' + transform + 'px);}}'
           inlineStyle += '@media (max-width: 1599px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((100vw - var(--scrollbarWidth) - 160px)   * -' + (activeItemIndex < size - 3 ? 0.25 : 0.2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + ((100vw - var(--scrollbarWidth) - 160px)  * 0.3  * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 3 ? 10 : 20) + 'px ' + transform + 'px));}}'
