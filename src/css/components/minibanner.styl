@@ -1,0 +1,70 @@
+.rt-minibanner
+  border-radius 8px
+  overflow: hidden;
+  .rt-shadow
+    height: 100%
+    width: 100%
+    position: absolute
+    top: 0
+  .rt-shadow-left
+    position: absolute;
+    width: 142px
+    height: 100%
+    left: 0
+  .rt-shadow-right
+    position: absolute;
+    width: 142px
+    height: 100%
+    right: 0
+
+.rt-minibanner-image
+  position: absolute;
+  left: 0
+  top: 0
+  bottom: 0
+  height: 100%
+  right: 0
+  img,
+  .rt-img-container
+    max-height 100%
+    object-fit cover
+    object-position center
+    position: absolute
+    width: 100%
+    height: 100%
+  @media (max-width mobile-upper-limit)
+    height: 52vw
+    position: relative
+    img,
+    .rt-img-container
+      border-radius 8px
+      position relative
+
+.rt-minibanner-image--block
+  @media (max-width tablet-upper-limit)
+    height: 52vw
+    position: relative
+    img,
+    .rt-img-container
+      position: relative;
+      border-radius 8px
+.rt-minibanner-image--fix
+  img,
+  .rt-img-container
+    object-fit none
+    position absolute
+    max-width 100%
+    max-height 100%
+    width: auto
+    height: auto
+    left: 0
+    right: 0
+    bottom: 0
+    top: 0
+    margin auto
+
+.rt-minibanner-image--fix-td
+  @media (max-width tablet-upper-limit)
+    img,
+    .rt-img-container
+      position: relative
