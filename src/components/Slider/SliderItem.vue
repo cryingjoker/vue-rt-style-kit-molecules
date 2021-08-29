@@ -16,8 +16,8 @@
       if(this.$slots['label']) {
         const label = this.$slots['label'];
         if(label) {
-          if (label[0].text?.length > 16) {
-            label[0].text = label[0].text.substring(0, 15) + '...'
+          if (label[0].text?.length > 25) {
+            label[0].text = label[0].text.substring(0, 24) + '...'
           }
           sliderStore.setSlot(parentId, 'label', label, itemId)
         }
@@ -31,8 +31,8 @@
       }
       if(this.$slots['text']) {
         const text = this.$slots['text'];
-        if(text[0].text?.length > 140){
-          text[0].text = text[0].text.substring(0,139)+'...'
+        if(text[0].text?.length > 150){
+          text[0].text = text[0].text.substring(0,149)+'...'
         }
         sliderStore.setSlot(parentId, 'text', text, itemId)
       }
