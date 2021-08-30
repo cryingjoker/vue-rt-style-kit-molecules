@@ -136,7 +136,7 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize() {
-      if (!this.$refs.popover) return
+      if (!this.$refs.popover || !this.autoPosition) return
       let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
       let windowWidth = window.innerWidth
       if (x && !left) left = x
