@@ -205,9 +205,9 @@
       };
       const titleBlock = () => {
         if(this.title.length > 0 || this.$slots.title) {
-          return <h2 class='rt-font-h2 sp-b-1'>
+          return <div class='rt-font-h2 sp-b-1'>
             {this.title.length > 0 ? this.title : this.$slots.title}
-          </h2>
+          </div>
         } else {
           return null
         }
