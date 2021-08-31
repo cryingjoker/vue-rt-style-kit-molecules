@@ -249,7 +249,8 @@ export default {
       const classNames = ['rt-n-banner-item', 'd-flex'];
       if (this.activeId == this.id) {
         classNames.push('rt-n-banner-item--active')
-        if (this.nextId) {
+
+        if (this.activeId) {
           if (this.orientation === 1) {
             classNames.push('rt-n-banner-item--go-left')
           }
@@ -258,7 +259,6 @@ export default {
           }
         }
       }
-
       if (this.nextId == this.id) {
         if (this.orientation === 1) {
           classNames.push('rt-n-banner-item--next-right')
