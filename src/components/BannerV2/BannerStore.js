@@ -94,15 +94,17 @@ class BannerStore extends StorePrototype {
   setActiveSlot = (bannerUid, id) =>{
     this.bannerActiveIds[bannerUid] =   id
   }
-  setActiveId = (bannerUid, id) => {
-    if (!this.bannerNextActiveIds[bannerUid]) {
+  setActiveId = (bannerUid, id, isInit) => {
+
+    if (!this.bannerNextActiveIds[bannerUid] && !isInit || isInit && !this.bannerActiveIds[bannerUid]) {
       this.bannerNextActiveIds[bannerUid] = id;
       if (this.bannersArray[bannerUid].indexOf(id) >= 0 && this.bannerActiveIds[bannerUid] != id) {
         this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
       }
       this.runWatchersById(bannerUid)
-      this.bannerActiveIds[bannerUid] = id
+
       setTimeout(() => {
+        this.bannerActiveIds[bannerUid] = id
         delete this.bannerNextActiveIds[bannerUid]
         delete this.nextOrientation[bannerUid]
         this.runWatchersById(bannerUid)

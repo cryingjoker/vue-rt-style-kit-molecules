@@ -53,7 +53,8 @@ export default {
     type: null,
     xDown: null,
     yDown: null,
-    lastDateUpdate: new Date() - 0
+    lastDateUpdate: new Date() - 0,
+    wheelPause: false
 
   }),
   watch:{
@@ -86,7 +87,30 @@ export default {
   },
 
   methods: {
+    wheelMove(e) {
+      if (Math.abs(e.deltaX) > 0) {
+        e.stopImmediatePropagation()
+        e.preventDefault()
+      }
+      if(!this.wheelPause) {
+        if (Math.abs(e.deltaX) > 30) {
+          const activeIndex = this.customSlotsSort.indexOf(this.bannerActiveId);
+          const size = this.customSlotsSort.length;
+          const prev = (activeIndex - 1 + size) % size;
+          const next = (activeIndex + 1) % size;
+          if (e.deltaX > 0) {
+            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next])
+          } else {
+            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[prev])
+          }
+          this.wheelPause = true;
+          setTimeout(() => {
+            this.wheelPause = false
+          }, 500)
+        }
+      }
 
+    },
     setDeviceType() {
       const type = deviceTypeStore.getStatus()
       if (this.type != type) {
@@ -209,6 +233,7 @@ export default {
   },
   render(h) {
     return <div class={this.bannerClass}
+                onWheel={this.wheelMove}
                 onMouseenter={this.mouseenter}
                 onMouseleave={this.mouseleave}
                 onTouchstart={this.touchstart}
