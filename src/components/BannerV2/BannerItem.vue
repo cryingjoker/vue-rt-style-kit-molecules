@@ -163,11 +163,10 @@
             }
           }
           bannerStore.setSlot(parentId, 'background', this.colorType, itemId)
-          let init = true;
-          if(this.isActive){
-            init = false
-          }
-          bannerStore.setActiveId(parentId, itemId, init)
+
+
+
+          bannerStore.setActiveId(parentId, itemId, true,this.isActive)
 
         },
         beforeMount() {
