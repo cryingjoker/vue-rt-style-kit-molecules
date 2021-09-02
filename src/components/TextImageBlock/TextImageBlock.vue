@@ -34,16 +34,48 @@
       isNested: {
         type: Boolean,
         default: false
+      },
+      imageStyle: {
+        type: String,
+        default: ''  //full-height, center
+      },
+      tabletReversed: {
+        type: Boolean,
+        default: false
+      },
+      mobileReversed: {
+        type: Boolean,
+        default: false
+      },
+      width: {
+        type: [Number, String],
+        default: 12
+      },
+      indent: {
+        type: String,
+        default: 'small' //medium, large
+      }
+    },
+    watch: {
+      width(newVal){
+        this.localWidth = +newVal
       }
     },
     data: () => ({
-      backgroundColor: null
+      backgroundColor: null,
+      localWidth: null
     }),
     computed: {
-      wrapperClass() {
+      mainWrapperClass() {
         let classList = 'row text-image-block__inner';
         if (this.reversed) {
           classList += " text-image-block__inner--reversed";
+        }
+        if (this.tabletReversed) {
+          classList += " text-image-block__inner--tablet-reversed";
+        }
+        if (this.mobileReversed) {
+          classList += " text-image-block__inner--mobile-reversed";
         }
         return classList;
       },
@@ -60,19 +92,56 @@
       },
       contentClass() {
         let classList = 'rt-col-td-6';
-        if(this.tightText) {
+        if(this.localWidth == 12) {
+          if(this.tightText && this.reversed) {
+            classList += ' rt-col-5'
+          } else {
+            classList += ' rt-col-6'
+          }
+        }
+        if(this.localWidth == 10){
           classList += ' rt-col-5'
-        } else {
-          classList += ' rt-col-6'
+        }
+        if(this.localWidth == 8){
+          classList += ' rt-col-4'
+        }
+        if(this.imageStyle == 'center') {
+          classList += ' d-f-as-c'
         }
         return classList;
       },
+      contentInnerClass() {
+        let classList = 'text-image-block__content-inner'
+        if(!this.isNested || this.imageStyle != 'center') {
+          classList += ' sp-t-1'
+        }
+        if(this.tabletReversed) {
+          classList += ' td-sp-b-2 td-sp-t-none'
+        } else {
+          classList += ' td-sp-t-2 td-sp-b-none'
+        }
+        if(this.mobileReversed) {
+          classList += ' md-sp-b-1-3 md-sp-t-none'
+        } else {
+          classList += ' md-sp-t-1-3 md-sp-b-none'
+        }
+        return classList
+      },
       containerClass() {
         let classList = '';
-        if(!this.isNested) {
-          classList += 'rt-container sp-v-4 td-sp-v-3 md-sp-v-2'
-        } else {
+        if(this.isNested) {
           classList += 'row'
+        } else {
+          classList += 'rt-container'
+          if(this.indent == 'large') {
+            classList += ' sp-v-wine'
+          }
+          if(this.indent == 'medium') {
+            classList += ' sp-v-pink'
+          }
+          if(this.indent == 'small') {
+            classList += ' sp-v-orange'
+          }
         }
         return classList;
       },
@@ -82,9 +151,27 @@
         } else {
           return this.image
         }
+      },
+      imageWrapperClass() {
+        let classList = 'rt-col-td-6';
+        if(this.localWidth == 12){
+          classList += ' rt-col-6'
+        }
+        if(this.localWidth == 10){
+          classList += ' rt-col-5'
+        }
+        if(this.localWidth == 8){
+          classList += ' rt-col-4'
+        }
+        if(this.imageStyle == 'center') {
+          classList += ' d-f-as-c'
+        }
+        return classList;
       }
     },
-    mounted(){},
+    mounted(){
+      this.localWidth = +this.width
+    },
     methods: {},
     render: function(h) {
       const bottomContentPart = () => {
@@ -104,13 +191,13 @@
             <rt-youtube video-id={ytId} disable-buttons={true} let-fullscreen={true} auto-play={true} pause-image={this.image}/>
           </div>
         } else {
-          return <div class="text-image-block__image-wrapper d-flex">
+          return <div class={"text-image-block__image-wrapper d-flex" + (this.imageStyle == 'full-height' ? " text-image-block__image-wrapper--full-height" : "")}>
             <img class="text-image-block__image" src={this.imageSrc}/>
           </div>
         }
       };
       const emptyColumn = () => {
-        if(this.tightText) {
+        if(this.tightText && this.localWidth == 12 && this.reversed) {
           return <div class="rt-col-1"/>
         } else {
           return null
@@ -125,23 +212,34 @@
           return null
         }
       };
+      const additionalColumns = () => {
+        if(this.localWidth == 10) {
+          return <div class="rt-col-1 td-d-none"/>
+        }
+        if(this.localWidth == 8) {
+          return <div class="rt-col-2 td-d-none"/>
+        }
+        return null
+      };
       return <div class={this.blockClass}>
         <div class={this.containerClass}>
           <div class="rt-col">
-            <div class={this.wrapperClass}>
+            <div class={this.mainWrapperClass}>
+              {additionalColumns()}
+              {emptyColumn()}
               <div class={this.contentClass}>
                 <div class="d-flex d-space-between flex-column text-image-block__content">
-                  <div class={"text-image-block__content-inner td-sp-t-2 md-sp-t-1-3" + (this.isNested ? '' : ' sp-t-1')}>
+                  <div class={this.contentInnerClass}>
                     {titleBlock()}
                     {this.$slots['upper-content']}
                   </div>
                   {bottomContentPart()}
                 </div>
               </div>
-              {emptyColumn()}
-              <div class="rt-col-6 rt-col-td-6">
+              <div class={this.imageWrapperClass}>
                 {visualContent()}
               </div>
+              {additionalColumns()}
             </div>
           </div>
         </div>

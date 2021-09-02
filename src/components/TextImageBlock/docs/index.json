@@ -23,7 +23,7 @@
     },
     {
       "name" : "rt-text-image-block",
-      "property" : "reversed",
+      "property" : ":reversed",
       "type" : "Boolean",
       "description" : "Флаг, указывающий, что текстовое содержимое блока и изображение меняются местами в десктопном разрешении",
       "value" : "false"
@@ -37,10 +37,38 @@
     },
     {
       "name" : "rt-text-image-block",
-      "property" : "tight-text",
+      "property" : ":tight-text",
       "type" : "Boolean",
       "description" : "Флаг указывающий на наличие дополнительного отступа шшишриной в 1 колонку между текстовым содержанием и изображением",
       "value" : "false"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "image-style",
+      "type" : "String",
+      "description" : "Задаёт выравнивание по центру, либо растягивание изображения на всю высоту блока. принимаемые значения `center` и `full-height`",
+      "value" : "''"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : ":tablet-reversed",
+      "type" : "Boolean",
+      "description" : "Флаг, указывающий на то, что в планшете изображение идёт над текстовой частью",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : ":mobile-reversed",
+      "type" : "Boolean",
+      "description" : "Флаг, указывающий на то, что в мобильном разрешении изображение идёт над текстовой частью",
+      "value" : "false"
+    },
+    {
+      "name" : "rt-text-image-block",
+      "property" : "(:)width",
+      "type" : "String | Number",
+      "description" : "Устанавливает ширину блока в десктопном разрешении",
+      "value" : "12"
     }
   ]
 }
