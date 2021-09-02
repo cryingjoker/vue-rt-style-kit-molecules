@@ -215,7 +215,6 @@
             flex-direction row
             justify-content space-around
             align-self stretch
-            width 100%
             width auto !important
             max-width 100%
             min-height fit-content
@@ -312,6 +311,19 @@
   &--columned
     .{newAppName}-table-colgroup
       display table-column-group
+      @media (max-width: mobile-upper-limit)
+        display none
+    .rt-table-body__content
+      @media (max-width mobile-upper-limit)
+        max-width calc(100% / 3)
+        flex-basis calc(100% / 3)
+    .rt-table-body__item:before
+      @media (max-width mobile-upper-limit)
+        max-width calc(100% / 3 * 2)
+        flex-basis calc(100% / 3 * 2)
+    .rt-table-body__item:first-child .rt-table-body__content
+      width 100%
+      flex-basis 100%
 
 .{newAppName}-table-body__item--has-rowspan-before
   @media (min-width: desktop-lower-limit)
