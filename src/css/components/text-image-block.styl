@@ -11,6 +11,9 @@
       @media (max-width tablet-upper-limit)
         size(100%, calc((100vw - 80px) / 3 * 2))
         max-height none
+      &--full-height
+        max-height none
+        height 100%
   &__content
     min-height 100%
   &__inner
@@ -22,6 +25,12 @@
         .text-image-block__image-wrapper
           padding-left 0
           padding-right 50px
+    &--tablet-reversed
+      @media(max-width tablet-upper-limit) and (min-width tablet-lower-limit)
+        flex-direction column
+    &--mobile-reversed
+      @media(max-width mobile-upper-limit)
+        flex-direction column
   &__video-wrapper
     .{newAppName}-youtube
       box-shadow none
@@ -47,6 +56,10 @@
       @media (max-width tablet-upper-limit)
         top 32px
         height calc(100% - 32px)
+
+.d-f-as-c
+  display flex
+  align-self center
 
 //SKELETON
 rt-text-image-block
