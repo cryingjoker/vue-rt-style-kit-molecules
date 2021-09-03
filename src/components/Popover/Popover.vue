@@ -250,7 +250,7 @@ export default {
     }
     if(!this.autoPosition) {
       if (this.mdVertical.length > 0) {
-        popoverBodyClass.push('rt-md-popover-body-v-' + this.mdHorizontal);
+        popoverBodyClass.push('rt-md-popover-body-v-' + this.mdVertical);
       }
       if (this.mdHorizontal.length > 0) {
         popoverBodyClass.push('rt-md-popover-body-h-' + this.mdHorizontal);
