@@ -11,7 +11,6 @@ import {
   Carousel,
   CarouselSlide,
   Card,
-  CardRounded,
   CardB2o,
   CardBuy,
   CardImage,
@@ -132,7 +131,6 @@ const VueRtStyle = {
       Vue.component(CommentSliderItem.name, CommentSliderItem);
       Vue.component(ScrollTabs.name, ScrollTabs);
       Vue.component(Card.name, Card);
-      Vue.component(CardRounded.name, CardRounded);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
       Vue.component(CardImageList.name, CardImageList);
@@ -273,7 +271,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-08-25 13:51";
+const version = "2021-09-03 09:55";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -301,7 +299,6 @@ export {
   Carousel,
   CarouselSlide,
   Card,
-  CardRounded,
   CardB2o,
   CardBuy,
   CardImage,
