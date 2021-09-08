@@ -96,7 +96,7 @@ export default {
       const childs = []
 
       if(this.$slots['icon']){
-        childs.push(<div class="sp-b-1-1 rt-minibanner-icon">{this.$slots['icon']}</div>)
+        childs.push(<div class="sp-b-0-4 rt-minibanner-icon">{this.$slots['icon']}</div>)
       }
       if(this.$slots['label']){
         childs.push(<p class="font-h3 sp-b-0-3 rt-minibanner-label">{this.$slots['label']}</p>)
@@ -107,7 +107,7 @@ export default {
       if(this.$slots['html']){
         childs.push(<div class="sp-t-1-1">{this.$slots['html']}</div>)
       }
-      const contentWrapperClass = ["rt-minibanner-content","sp-v-2"]
+      const contentWrapperClass = ["rt-minibanner-content-wrap","sp-v-2"]
       if(!this.tabletInLine){
         contentWrapperClass.push('td-sp-t-1-3')
         contentWrapperClass.push('td-sp-h-2')
@@ -118,8 +118,8 @@ export default {
       }
       contentWrapperClass.push('md-sp-t-1-3')
       contentWrapperClass.push('md-sp-h-1')
-
-      return  h('div',{class:contentWrapperClass},childs)
+      const inner = h('div',{class:'rt-minibanner-content-wrap-inner'},childs)
+      return  h('div',{class:contentWrapperClass}, [inner])
     }
     const rowClassList = [];
     if(this.reverse){
