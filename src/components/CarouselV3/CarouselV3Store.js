@@ -70,11 +70,14 @@ class CarouselV3Store extends StorePrototype {
 
 
   }
-  setMaxAuthorTextLength = (sliderName) => {
-
-  }
-  updateSlide = (sliderName, _id, content, isActive) => {
-
+  updateSlide = (sliderName, _id, slot, index) => {
+    const sliders = this.sliders[sliderName];
+    if (sliders) {
+      const indexSlide = sliders.ids.indexOf(_id);
+      sliders.slides[indexSlide] = slot;
+      this.setArrowProps(sliderName);
+      this.callWatcher(sliderName);
+    }
   }
   setArrowProps = (sliderName) => {
     if (this.sliders[sliderName]) {
@@ -186,21 +189,21 @@ class CarouselV3Store extends StorePrototype {
       this.callWatcher(sliderName);
     }
   }
-  checkActiveIndex = (sliderName)=>{
+  checkActiveIndex = (sliderName) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
       const size = slider.ids.length;
       let colInRow = this.getColInRow(sliderName)
-      if(index+colInRow >= size){
+      if (index + colInRow >= size) {
         this.setActiveIndex(sliderName, size - colInRow)
-      }else{
+      } else {
         this.setArrowProps(sliderName)
         this.callWatcher(sliderName);
       }
     }
   }
-  getColInRow=(sliderName)=>{
+  getColInRow = (sliderName) => {
     const slider = this.sliders[sliderName];
     const width = window.innerWidth;
     let colInRow = slider.colInRow
