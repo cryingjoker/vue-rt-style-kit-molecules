@@ -27,6 +27,21 @@ export default {
     const setTableItemRowspanIndex = this.setTableItemRowspanIndex;
     return { tableLabels, checkTableItemIndex, setTableItemRowspanIndex};
   },
+  computed: {
+    tableClasses() {
+      let classList = 'rt-table'
+      if(this.tabletListType) {
+        classList += ' rt-table--list'
+      }
+      if(this.noBorders) {
+        classList += ' rt-table--no-borders'
+      }
+      if(this.columnWidth) {
+        classList += ' rt-table--columned'
+      }
+      return classList
+    }
+  },
   methods: {
 
     checkTableItemIndex(index, rowUid) {
@@ -75,7 +90,7 @@ export default {
             {this.$slots.label}
           </p>
           {this.$slots.description}
-          <table class={"rt-table" + (this.tabletListType ? " rt-table--list" : "") + (this.noBorders ? " rt-table--no-borders" : "") + (this.columnWidth ? " rt-table--columned" : "")}>
+          <table class={this.tableClasses}>
             {columns()}
             <thead class="rt-table-head" ref="head">
               {this.$slots.header}
@@ -88,7 +103,7 @@ export default {
       );
     } else {
       return (
-        <table class={"rt-table" + (this.tabletListType ? " rt-table--list" : "") + (this.noBorders ? " rt-table--no-borders" : "")}>
+        <table class={this.tableClasses}>
           {columns()}
           <thead class="rt-table-head" ref="head">
             {this.$slots.header}
