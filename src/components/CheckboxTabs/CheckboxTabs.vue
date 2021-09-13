@@ -22,6 +22,7 @@
 
 
         mounted: function () {
+            this.isActiveLocal = this.isActive;
             this.checkCheckboxOnLoad();
         },
 
@@ -88,7 +89,7 @@
             return <div
                 class={"rt-tabs-checklist" + (this.isActiveLocal && !this.hideNotActive ? " rt-tabs-checklist--is-active" : "")}>
                 <div class="rt-tabs-checklist-input">
-                    <rt-checkbox onChange={this.onChange} ref="checkbox"
+                    <rt-checkbox checked={this.isActiveLocal} onChange={this.onChange} ref="checkbox"
                                  name={"rt-checkbox-" + this._uid}>{this.$slots.label}</rt-checkbox>
                 </div>
                 {content()}
