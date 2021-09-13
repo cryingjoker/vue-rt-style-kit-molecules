@@ -5,11 +5,6 @@ import Project from "@projectMolecules";
 
 import {
   ScrollTabs,
-  Banner,
-  BannerItem,
-  BannerPaginatorItem,
-  Carousel,
-  CarouselSlide,
   Table,
   TableCol,
   TableHeadItem,
@@ -31,7 +26,7 @@ import {
   StickyBottomLine,
   ResizeContentHeight,
   Popup,
-  LinksBlock,
+  LinksBlock, //delete?
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
@@ -50,17 +45,9 @@ import {
   Microtabs,
   MicrotabsContent,
   MicrotabsNavigation,
-  UseCase,
-  BenefitItem,
-  BenefitBlock,
-  PortraitTile,
-  PortraitTileItem,
-  Timeline,
-  TimelineItem,
   ScrollBar,
   VerticalScrollBar,
   ReplacementLink,
-  CardCarousel,
   GalleryCarousel,
   GalleryCarouselItem,
   OptionsList,
@@ -73,19 +60,11 @@ import {
   Slider,
   SliderItem,
   HelpBlock,
-  BannerV2,
-  BannerItemV2,
-  BannerSkeleton,
   Jumbotron,
-  CarouselV2,
-  CarouselSlideV2,
-  AdBanner,
   MessageBox,
   ShowOn,
   CommentSlider,
   CommentSliderItem,
-  CarouselV3,
-  CarouselV3Item,
   Privilege
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
@@ -107,12 +86,6 @@ const VueRtStyle = {
       Vue.component(CommentSlider.name, CommentSlider);
       Vue.component(CommentSliderItem.name, CommentSliderItem);
       Vue.component(ScrollTabs.name, ScrollTabs);
-      Vue.component(Banner.name, Banner);
-      Vue.component(BannerV2.name, BannerV2);
-      Vue.component(BannerSkeleton.name, BannerSkeleton);
-      Vue.component(BannerItemV2.name, BannerItemV2);
-      Vue.component(BannerItem.name, BannerItem);
-      Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
       Vue.component(Table.name, Table);
       Vue.component(TableCol.name, TableCol);
       Vue.component(TableHeadItem.name, TableHeadItem);
@@ -146,23 +119,11 @@ const VueRtStyle = {
       Vue.component(OpportunityItem.name, OpportunityItem);
       Vue.component(UnWrapper.name, UnWrapper);
       Vue.component(RealPopup.name, RealPopup);
-      Vue.component(UseCase.name, UseCase);
-      Vue.component(BenefitBlock.name, BenefitBlock);
-      Vue.component(BenefitItem.name, BenefitItem);
-      Vue.component(PortraitTile.name, PortraitTile);
-      Vue.component(PortraitTileItem.name, PortraitTileItem);
-      Vue.component(Timeline.name, Timeline);
-      Vue.component(TimelineItem.name, TimelineItem);
       Vue.component(ScrollBar.name, ScrollBar);
       Vue.component(HelpBlock.name, HelpBlock);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
       Vue.component(ReplacementLink.name, ReplacementLink);
-      Vue.component(Carousel.name, Carousel);
-      Vue.component(CarouselSlide.name, CarouselSlide);
-      Vue.component(CardCarousel.name, CardCarousel);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
-      Vue.component(CarouselV2.name, CarouselV2);
-      Vue.component(CarouselSlideV2.name, CarouselSlideV2);
 
       Vue.component(Tabs.name, Tabs);
       Vue.component(TabsSlider.name, TabsSlider);
@@ -183,30 +144,18 @@ const VueRtStyle = {
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Jumbotron.name, Jumbotron);
-      Vue.component(AdBanner.name, AdBanner);
       Vue.component(MessageBox.name, MessageBox);
       Vue.component(Privilege.name, Privilege);
 
-      Vue.component(CarouselV3.name, CarouselV3);
-      Vue.component(CarouselV3Item.name, CarouselV3Item);
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
-
       Vue.directive(ResizeContentHeightDirective.name, ResizeContentHeightDirective);
       Vue.directive(TooltipDirective.name, TooltipDirective);
       Vue.directive(GaClickDirective.name, GaClickDirective);
-
-
       Vue.directive(PopupTriggerDirective.name, PopupTriggerDirective);
       Vue.directive(OutsideClickDirective.name, OutsideClickDirective);
-      Vue.directive(
-        SlideContentVerticalDirective.name,
-        SlideContentVerticalDirective
-      );
-      Vue.directive(
-        ScrollToOnClickDirective.name,
-        ScrollToOnClickDirective
-      );
+      Vue.directive(SlideContentVerticalDirective.name, SlideContentVerticalDirective);
+      Vue.directive(ScrollToOnClickDirective.name, ScrollToOnClickDirective);
 
       Vue.RtStyle = true;
       Vue.config.test = true;
@@ -225,7 +174,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-09-09 15:49";
+const version = "2021-09-14 01:11";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -246,12 +195,6 @@ VueRtStyle.version = version;
 export default VueRtStyle;
 export {
   ScrollTabs,
-  Banner,
-  BannerItem,
-  BannerPaginatorItem,
-  BannerSkeleton,
-  Carousel,
-  CarouselSlide,
   HelpBlock,
   Table,
   TableCol,
@@ -293,17 +236,9 @@ export {
   Microtabs,
   MicrotabsContent,
   MicrotabsNavigation,
-  UseCase,
-  BenefitItem,
-  BenefitBlock,
-  PortraitTile,
-  PortraitTileItem,
-  Timeline,
-  TimelineItem,
   ScrollBar,
   VerticalScrollBar,
   ReplacementLink,
-  CardCarousel,
   GalleryCarousel,
   GalleryCarouselItem,
   OptionsList,
@@ -313,12 +248,7 @@ export {
   StickyHeaderLine,
   Slider,
   SliderItem,
-  BannerV2,
-  BannerItemV2,
   Jumbotron,
-  CarouselV2,
-  CarouselSlideV2,
-  AdBanner,
   MessageBox,
   // need to change name directives
   SwipeLeft,
@@ -329,7 +259,5 @@ export {
   GaClickDirective,
   CommentSlider,
   CommentSliderItem,
-  CarouselV3,
-  CarouselV3Item,
   Privilege
 }
