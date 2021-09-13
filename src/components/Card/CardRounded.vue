@@ -269,7 +269,7 @@ export default {
       })
     }
   },
-  render(h) {
+  render: function (h) {
     const innerContent = () => {
       return <div class={this.colorClass}>
         {this.labelIcon}
