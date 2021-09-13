@@ -44,27 +44,35 @@
       position relative
 
 .rt-minibanner-image--block
+  img,
+  .rt-img-container
+    border-radius 8px
   @media (max-width tablet-upper-limit)
     height: 52vw
     position: relative
     img,
     .rt-img-container
       position: relative;
-      border-radius 8px
 .rt-minibanner-image--fix
-  img,
+  height: 100%
   .rt-img-container
-    object-fit none
+    bottom: 24px
+    top: 24px
     position absolute
+    object-fit cover
+    height: calc(100% - 48px)
+    width: calc(100% - 20px)
     max-width 100%
     max-height 100%
-    width: auto
-    height: auto
-    left: 0
-    right: 0
-    bottom: 0
-    top: 0
     margin auto
+    border-radius 8px
+    overflow hidden
+    left: 10px
+    right: 10px
+    @media (max-width tablet-upper-limit)
+      height: 100%
+      top: 0
+      bottom: 0
 
 .rt-minibanner-image--fix-td
   @media (max-width tablet-upper-limit)
