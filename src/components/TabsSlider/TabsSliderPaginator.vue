@@ -162,20 +162,20 @@ export default {
 
   methods: {
     setShowRShadow(){
-      const line = this.$refs.header;
+      const line = this.$refs.line;
       let x = false
       let windowWidth = window.innerWidth
-      // if(windowWidth < 1025){
-      //   this.showShadowLeft = false
-      //   this.showShadowRight = false
-      // }else {
+
         if (line) {
           const r = line.getClientRects()[0];
           x = r.right - r.width - line.scrollLeft > 50;
+          console.info('line.scrollLeft',line.scrollLeft)
           this.showShadowLeft = line.scrollLeft > 50
         } else {
           setTimeout(() => {
-            this.setShowRShadow()
+            if(!this._isDestroyed) {
+              this.setShowRShadow().bind(this)
+            }
           }, 100)
         }
 
@@ -225,7 +225,7 @@ export default {
       const goToEl = () => {
         this.scrollTo();
         activeEl = activeEl.$el
-        const header = this.$refs.header;
+        const header = this.$refs.line
         const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft -  header.getBoundingClientRect().left)
         if (header.scrollLeft != left) {
           this.scrollTo(header, header.scrollLeft, left, 300)
@@ -314,12 +314,14 @@ export default {
          <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft" style="display:none"></div>
         <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight" style="display:block"></div>
       </div>
-      <div class={shadowClassName.join(' ')} ref="header" onScroll={this.setShowRShadow}>
+      <div class={shadowClassName.join(' ')} ref="header" >
 
-      <div class="tab-slider__header-inner" ref="line" >
+      <div class="tab-slider__header-inner"  >
+        <div class="tab-slider__header-round-wrapper" onScroll={()=>{this.setShowRShadow()}} ref="line">
         <div class="tab-slider__header-round">
 
         {this.renderPaginatiorItems}
+        </div>
         </div>
       </div>
     </div>

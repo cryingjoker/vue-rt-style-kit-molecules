@@ -37,6 +37,9 @@
 .tab-slider__header-row
   position: relative;
   overflow: auto;
+.tab-slider__header-inner
+  max-height 48px
+  overflow-y hidden
 
 .tab-slider__header-item
   min-width fit-content
@@ -59,13 +62,18 @@
     &:hover,
     &:focus
       color b2c-orange
+.tab-slider__header-round-wrapper
+  padding-bottom: 30px
+  overflow: auto;
 .tab-slider__header-round
   background-color: main-color005
   border-radius 24px
   padding 2px
   display: flex
   flex-wrap nowrap
-  overflow: auto;
+  width: fit-content
+
+
   @media (max-width: tablet-upper-limit)
     margin-left: 20px
 
