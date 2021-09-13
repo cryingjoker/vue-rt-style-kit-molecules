@@ -41,11 +41,7 @@ export default {
       tabsSliderStore.removeSlots(this.tabsSliderName, this._uid)
     },
     fillTabsSliderStore() {
-      if(this.$slots.label && this.$slots.label.length > 0 && this.$slots.label[0].text) {
-        tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.$slots.label, this._uid)
-      }else{
-        tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.label, this._uid)
-      }
+      tabsSliderStore.setSlot(this.tabsSliderName, 'label', this.$slots.label, this._uid)
 
       tabsSliderStore.setSlot(this.tabsSliderName, 'content', this.$slots.content, this._uid)
       tabsSliderStore.setSlot(this.tabsSliderName, 'image', this.$slots.image, this._uid)
