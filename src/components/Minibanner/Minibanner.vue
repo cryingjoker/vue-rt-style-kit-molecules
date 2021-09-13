@@ -116,6 +116,9 @@ export default {
           contentWrapperClass.push('td-sp-l-2')
         }
       }
+      if(this.reverse){
+        contentWrapperClass.push('sp-l-2')
+      }
       contentWrapperClass.push('md-sp-t-1-3')
       contentWrapperClass.push('md-sp-h-1')
       const inner = h('div',{class:'rt-minibanner-content-wrap-inner'},childs)
@@ -145,7 +148,7 @@ export default {
             <rt-col size="6" tablet-size={tabletSize} mobile-size={3}>
               {renderContent()}
             </rt-col>
-            <rt-col size="5" tablet-size={tabletSize} mobile-size={3} class="relative">
+            <rt-col size={this.fixImage ? 4 : 5} tablet-size={tabletSize} mobile-size={3} class="relative">
               {renderImage()}
             </rt-col>
           </rt-row>
