@@ -220,16 +220,6 @@
     "value": "rgba(227,232,236,0.5)"
   },
   {
-    "code_variable_name": "b2c-cool-grey03",
-    "label": "Rostelecom Cool Grey 30%",
-    "value": "rgba(227,232,236,0.3)"
-  },
-  {
-    "code_variable_name": "b2b-cool-grey05-no-opacity",
-    "label": "Rostelecom Cool Grey 50%",
-    "value": "#F1F3F5"
-  },
-  {
     "code_variable_name": "b2c-purple-high05",
     "label": "Rostelecom Purple High 50%",
     "value": "rgba(131,72,252,0.5)"
@@ -258,11 +248,6 @@
     "code_variable_name": "b2b-dark-slate",
     "label": "Rostelecom Dark Slate",
     "value": "#313A49"
-  },
-  {
-    "code_variable_name": "b2b-burgundy",
-    "label": "Rostelecom Burgundy",
-    "value": "#431625"
   },
   {
     "code_variable_name": "b2c-white",
@@ -323,11 +308,6 @@
     "code_variable_name": "disable-button-color",
     "label": "",
     "value": "#e6e6e6"
-  },
-  {
-    "code_variable_name": "disable-button-color-dark-theme",
-    "label": "",
-    "value": "rgba(255,255,255,0.1)"
   },
   {
     "code_variable_name": "card-list-border",
