@@ -44,7 +44,7 @@ export default {
       type: Boolean,
       default: false
     },
-    shadowColor:{
+    shadowColor: {
       type: String,
       default: ''
     }
@@ -63,7 +63,7 @@ export default {
   }),
   computed: {
 
-    activeIndex(){
+    activeIndex() {
       return this.customSlotsSort.findIndex((id) => {
         return this.activeItem.activeId == id
       })
@@ -115,20 +115,20 @@ export default {
         this.tick()
       }
     },
-    showShadowRight(newVal,oldVal){
-      if(newVal != oldVal){
-        if(newVal){
+    showShadowRight(newVal, oldVal) {
+      if (newVal != oldVal) {
+        if (newVal) {
           this.$refs.shadowRight.style.display = 'block'
-        }else {
+        } else {
           this.$refs.shadowRight.style.display = 'none'
         }
       }
     },
-    showShadowLeft(newVal,oldVal){
-      if(newVal != oldVal){
-        if(newVal){
+    showShadowLeft(newVal, oldVal) {
+      if (newVal != oldVal) {
+        if (newVal) {
           this.$refs.shadowLeft.style.display = 'block'
-        }else {
+        } else {
           this.$refs.shadowLeft.style.display = 'none'
         }
       }
@@ -154,39 +154,42 @@ export default {
       this.tick()
     }
     this.bindScroll()
-    setTimeout(()=> {
+    setTimeout(() => {
       this.setShowRShadow()
-    },300)
+    }, 300)
   },
 
 
   methods: {
-    setShowRShadow(){
-      const line = this.$refs.header;
+    setShowRShadow() {
+      const line = this.$refs.line;
       let x = false
       let windowWidth = window.innerWidth
-      // if(windowWidth < 1025){
-      //   this.showShadowLeft = false
-      //   this.showShadowRight = false
-      // }else {
-        if (line) {
-          const r = line.getClientRects()[0];
-          x = r.right - r.width - line.scrollLeft > 50;
-          this.showShadowLeft = line.scrollLeft > 50
-        } else {
-          setTimeout(() => {
-            this.setShowRShadow()
-          }, 100)
-        }
 
-        this.showShadowRight = x && this.activeIndex < this.customSlotsSort.length - 1
+      if (line) {
+        const r = line.getClientRects()[0];
+        if (r.width > 768) {
+          x = r.right - r.width - line.scrollLeft > 50;
+        } else {
+          x = r.right - line.scrollLeft > 86;
+        }
+        this.showShadowLeft = line.scrollLeft > 50
+      } else {
+        setTimeout(() => {
+          if (!this._isDestroyed) {
+            this.setShowRShadow().bind(this)
+          }
+        }, 100)
+      }
+
+      this.showShadowRight = x && this.activeIndex < this.customSlotsSort.length - 1
       // }
     },
-    bindScroll(){
-      window.addEventListener('resize',this.setShowRShadow)
+    bindScroll() {
+      window.addEventListener('resize', this.setShowRShadow)
     },
-    unbindScroll(){
-      window.removeEventListener('resize',this.setShowRShadow)
+    unbindScroll() {
+      window.removeEventListener('resize', this.setShowRShadow)
     },
 
     getViewPortPosition() {
@@ -225,8 +228,8 @@ export default {
       const goToEl = () => {
         this.scrollTo();
         activeEl = activeEl.$el
-        const header = this.$refs.header;
-        const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft)
+        const header = this.$refs.line
+        const left = parseInt(activeEl.getBoundingClientRect().left - 20 + header.scrollLeft - header.getBoundingClientRect().left)
         if (header.scrollLeft != left) {
           this.scrollTo(header, header.scrollLeft, left, 300)
         }
@@ -306,23 +309,31 @@ export default {
     let shadowClassName = ['tab-slider__header']
 
     let className = ['relative']
-    if(this.shadowColor.length > 0) {
+    if (this.shadowColor.length > 0) {
       className.push('rt-shadow-' + this.shadowColor)
     }
     return <rt-col class={className.join(' ')}>
       <div class="tab-slider__header-shadows">
-         <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft" style="display:none"></div>
-        <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight" style="display:block"></div>
+        <div class="rt-shadow rt-shadow-left rt-tabs-v2-navigation-shadow-left" ref="shadowLeft"
+             style="display:none"></div>
+        <div class="rt-shadow rt-shadow-right rt-tabs-v2-navigation-shadow-right" ref="shadowRight"
+             style="display:block"></div>
       </div>
-      <div class={shadowClassName.join(' ')} ref="header" onScroll={this.setShowRShadow}>
+      <div class={shadowClassName.join(' ')} ref="header">
 
-      <div class="tab-slider__header-inner" ref="line" >
-        <div class="tab-slider__header-round">
+        <div class="tab-slider__header-inner">
+          <div class="tab-slider__header-round-wrapper" onScroll={() => {
+            this.setShowRShadow()
+          }} ref="line">
+            <div class="tab-slider__header-round-outher">
+              <div class="tab-slider__header-round">
 
-        {this.renderPaginatiorItems}
+                {this.renderPaginatiorItems}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </rt-col>
 
   }
