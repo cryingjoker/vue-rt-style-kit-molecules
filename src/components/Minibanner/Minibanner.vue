@@ -104,7 +104,7 @@ export default {
         contentWrapperClass.push('td-sp-h-2')
       }else{
         if(!this.reverse){
-          contentWrapperClass.push('td-sp-l-2')
+          contentWrapperClass.push('td-sp-l-2 sp-r-1 td-sp-r-none')
         }
       }
       if(this.reverse){
