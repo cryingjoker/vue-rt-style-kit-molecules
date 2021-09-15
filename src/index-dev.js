@@ -12,7 +12,6 @@ import {
   CardB2o,
   CardBuy,
   CardImage,
-  CardImageList,
   CardSkeleton,
   FullscreenImage,
   RowList,
@@ -125,7 +124,6 @@ const VueRtStyle = {
       Vue.component(CardRounded.name, CardRounded);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
-      Vue.component(CardImageList.name, CardImageList);
       Vue.component(Popover.name, Popover);
       Vue.component(Banner.name, Banner);
       Vue.component(BannerV2.name, BannerV2);
