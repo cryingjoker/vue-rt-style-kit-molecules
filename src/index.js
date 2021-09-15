@@ -174,11 +174,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-<<<<<<< HEAD
-const version = "2021-09-13 16:48";
-=======
-const version = "2021-09-14 01:11";
->>>>>>> d5376e961de825dee299eda0a52c04f6f045dd53
+const version = "2021-09-15 11:21";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
