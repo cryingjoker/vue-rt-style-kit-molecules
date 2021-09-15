@@ -28,6 +28,7 @@ import {
   CarouselSlideV2,
   CarouselV3,
   CarouselV3Item,
+  Minibanner,
 
   ProductCard,
   VideoBanner,
@@ -68,6 +69,7 @@ export default {
   CarouselSlideV2,
   CarouselV3,
   CarouselV3Item,
+  Minibanner,
 
   VideoBanner,
   Popover,

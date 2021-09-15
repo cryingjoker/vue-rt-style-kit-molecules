@@ -146,7 +146,6 @@ const VueRtStyle = {
       Vue.component(Jumbotron.name, Jumbotron);
       Vue.component(MessageBox.name, MessageBox);
       Vue.component(Privilege.name, Privilege);
-      Vue.component(Minibanner.name, Minibanner);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
@@ -175,7 +174,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-09-15 11:28";
+const version = "2021-09-15 11:50";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
