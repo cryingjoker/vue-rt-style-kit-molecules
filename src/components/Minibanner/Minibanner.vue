@@ -30,7 +30,6 @@ export default {
       type: Boolean,
       default: true
     },
-
     reverse:{
       type: Boolean,
       default: false
@@ -69,14 +68,6 @@ export default {
       const imageContainerClassList = ['rt-minibanner-image'];
       if(this.fixImage){
         imageContainerClassList.push('rt-minibanner-image--fix')
-        if(!this.tabletInLine){
-          imageContainerClassList.push('td-sp-t-2')
-          imageContainerClassList.push('td-d-flex')
-          imageContainerClassList.push('td-flex-v-center')
-          imageContainerClassList.push('td-d-space-center')
-          imageContainerClassList.push('rt-minibanner-image--fix-td')
-
-        }
       }
 
       if(!this.tabletInLine){
@@ -85,7 +76,7 @@ export default {
         imageContainerClassList.push('td-sp-t-2')
         imageContainerClassList.push('rt-minibanner-image--round')
       }
-      imageContainerClassList.push('md-sp-t-1')
+      imageContainerClassList.push('md-sp-t-1-3')
       imageContainerClassList.push('md-sp-h-1')
 
       return h('div', {
@@ -107,7 +98,7 @@ export default {
       if(this.$slots['html']){
         childs.push(<div class="sp-t-1-1">{this.$slots['html']}</div>)
       }
-      const contentWrapperClass = ["rt-minibanner-content-wrap","sp-v-2"]
+      const contentWrapperClass = ["rt-minibanner-content-wrap","sp-v-2",'md-sp-v-1-2']
       if(!this.tabletInLine){
         contentWrapperClass.push('td-sp-t-1-3')
         contentWrapperClass.push('td-sp-h-2')
