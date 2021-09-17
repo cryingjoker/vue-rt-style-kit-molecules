@@ -120,13 +120,13 @@ export default {
       if (document.location.hash.replace(/^\#/, "") === this.anchor) {
         setTimeout(()=>{
           this.setActiveTabName();
-        },100)
+        },20)
       }
     }
     if (this.activeTab) {
       setTimeout(()=> {
         this.setActiveTabName();
-      },300)
+      },20)
     }
     setTimeout(() => {
       if (this.$parent['roundTabletView'] && this.$parent['roundTabletViewMaxWidth']) {
