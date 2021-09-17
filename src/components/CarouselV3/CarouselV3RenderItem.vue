@@ -27,7 +27,8 @@ export default {
     classListItem.push('rt-carousel-slide-item-'+this.colInRow)
     if(!this.scrollableOnDesktop){
       classListItem.push('rt-col-'+(12/this.colInRow))
-      // classListItem.push('sp-b-1')
+      classListItem.push('sp-b-1')
+      classListItem.push('td-sp-b-none')
     }
     if(this.notActive){
       classListItem.push('rt-carousel-slide-v3--not-act')
