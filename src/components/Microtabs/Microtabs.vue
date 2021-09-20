@@ -25,6 +25,10 @@ export default {
     fit:{
       type: Boolean,
       default: true
+    },
+    defaultTabIndex: {
+      type: Number,
+      default: 0
     }
   },
   data(){
@@ -77,7 +81,7 @@ export default {
       let navHiddenActivated = false
       this.navList.forEach((nav, key) => {
         if (
-          nav.key < this.activeTab ||
+          nav.key < this.activeTab &&
           // Сравниваем по ширине, учитывая текущую позицию
           wrapWidth < distance + nav.$el.clientWidth + (this.navList.length - 1 === key ? 0 : (controlWidth + offset))
         ) {
@@ -118,9 +122,13 @@ export default {
     },
     destroy(){
       let config = defaultConfig()
+      this.activeTab = this.defaultTabIndex
       Object.keys(config).forEach(param => this[param] = config[param])
       this.fitItems()
     }
+  },
+  created() {
+    this.activeTab = this.defaultTabIndex
   },
   mounted(){
     this.$on('setActiveTab', (key, calculateFitItems = true) => {
