@@ -68,7 +68,7 @@ class BannerStore extends StorePrototype {
 
     if (index == -1) {
       if (setActive) {
-        this.setActiveId(bannerUid, id)
+        this.setActiveId(bannerUid, id, true, true)
       }
       this.slots[bannerUid][id] = {}
       this.bannersArray[bannerUid].push(id)
@@ -83,7 +83,6 @@ class BannerStore extends StorePrototype {
     if(indexInArray >= 0){
       this.bannersArray[bannerUid].splice(indexInArray,1)
     }
-
     if(this.bannerActiveIds[bannerUid] == id){
       this.bannerActiveIds[bannerUid] = null
     }
@@ -94,15 +93,20 @@ class BannerStore extends StorePrototype {
   setActiveSlot = (bannerUid, id) =>{
     this.bannerActiveIds[bannerUid] =   id
   }
-  setActiveId = (bannerUid, id) => {
-    if (!this.bannerNextActiveIds[bannerUid]) {
+  setActiveId = (bannerUid, id, isInit, isActive = false) => {
+
+    if (!this.bannerNextActiveIds[bannerUid] && !isInit || isInit && !this.bannerActiveIds[bannerUid] || isActive) {
+      if(!this.bannerActiveIds[bannerUid] || isActive){
+        this.bannerActiveIds[bannerUid] = id
+      }
       this.bannerNextActiveIds[bannerUid] = id;
       if (this.bannersArray[bannerUid].indexOf(id) >= 0 && this.bannerActiveIds[bannerUid] != id) {
         this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
       }
       this.runWatchersById(bannerUid)
-      this.bannerActiveIds[bannerUid] = id
+
       setTimeout(() => {
+        this.bannerActiveIds[bannerUid] = id
         delete this.bannerNextActiveIds[bannerUid]
         delete this.nextOrientation[bannerUid]
         this.runWatchersById(bannerUid)

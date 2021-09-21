@@ -75,14 +75,15 @@
               blockWidth -= 10;
             }
             style = `${blockWidth.toFixed(2)}px`;
-          } else if (this.isMobile && this.widthInColsMobile) {
-            this.containerWidth = window.innerWidth - 20;
-            this.singleColumn = this.containerWidth / 12;
-            blockWidth = this.widthInColsMobile * this.singleColumn;
-            if (this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
-              blockWidth -= 10;
-            }
-            style = `${blockWidth.toFixed(2)}px`;
+          } else if (this.isMobile) {
+            // this.containerWidth = window.innerWidth - 20;
+            // this.singleColumn = this.containerWidth / 3;
+            // blockWidth = this.widthInColsMobile * this.singleColumn;
+            // if (this.$el === thisParent.firstChild || this.$el === thisParent.lastChild) {
+            //   blockWidth -= 10;
+            // }
+            // style = `${blockWidth.toFixed(2)}px`;
+            style = ''
           } else {
             if (!this.isMobile && !this.isTablet && this.widthInColsDesktop) {
               this.containerWidth = window.innerWidth <= 1520 ? window.innerWidth - 140 : 1320;
