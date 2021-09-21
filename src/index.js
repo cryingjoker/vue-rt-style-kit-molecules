@@ -4,67 +4,51 @@ import Global from "./variables.json";
 import Project from "@projectMolecules";
 
 import {
-  ScrollTabs,
-  Table,
-  TableCol,
-  TableHeadItem,
-  TableItem,
-  TableRow,
-  DownloadContent,
-  InlineDropdown,
-  InlineDropdownItem,
-  Tag,
-  TagsList,
   Filter,
   FilterWatcher,
   FilterCaller,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
+  LinksBlock,
+  FunctionList,
+  FunctionItem,
+  InlineDropdown,
+  InlineDropdownItem,
+  Pattern,
+
+  ScrollTabs,
+  Table,
+  TableCol,
+  TableHeadItem,
+  TableItem,
+  TableRow,
+  Tag,
+  TagsList,
   Youtube,
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
   Popup,
-  LinksBlock, //delete?
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
   Slide,
   Swiper,
-  Pattern,
-  Opportunity,
-  OpportunityItem,
-  UnWrapper,
   RealPopup,
   TabsSlider,
   TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
-  Microtabs,
-  MicrotabsContent,
-  MicrotabsNavigation,
   ScrollBar,
   VerticalScrollBar,
   ReplacementLink,
-  GalleryCarousel,
-  GalleryCarouselItem,
-  OptionsList,
-  OptionsListInfoItem,
-  CheckboxTabs,
   StickyHeaderLine,
   ResizeTypeStore,
-  FunctionList,
-  FunctionItem,
   Slider,
   SliderItem,
-  HelpBlock,
-  Jumbotron,
-  MessageBox,
   ShowOn,
-  CommentSlider,
-  CommentSliderItem,
   Privilege
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
@@ -83,15 +67,12 @@ const VueRtStyle = {
   install(Vue, config) {
     if (!Vue.RtStyle) {
 
-      Vue.component(CommentSlider.name, CommentSlider);
-      Vue.component(CommentSliderItem.name, CommentSliderItem);
       Vue.component(ScrollTabs.name, ScrollTabs);
       Vue.component(Table.name, Table);
       Vue.component(TableCol.name, TableCol);
       Vue.component(TableHeadItem.name, TableHeadItem);
       Vue.component(TableItem.name, TableItem);
       Vue.component(TableRow.name, TableRow);
-      Vue.component(DownloadContent.name, DownloadContent);
       Vue.component(InlineDropdown.name, InlineDropdown);
       Vue.component(InlineDropdownItem.name, InlineDropdownItem);
       Vue.component(Tag.name, Tag);
@@ -101,8 +82,6 @@ const VueRtStyle = {
       Vue.component(FilterV2.name, FilterV2);
       Vue.component(FilterItemV2.name, FilterItemV2);
       Vue.component(FilterSetterV2.name, FilterSetterV2);
-      Vue.component(OptionsList.name, OptionsList);
-      Vue.component(OptionsListInfoItem.name, OptionsListInfoItem);
       Vue.component(FilterCaller.name, FilterCaller);
       Vue.component(Sticky.name, Sticky);
       Vue.component(StickyBottomLine.name, StickyBottomLine);
@@ -115,12 +94,8 @@ const VueRtStyle = {
       Vue.component(ShowOn.name, ShowOn);
       Vue.component(Slide.name, Slide);
       Vue.component(Pattern.name, Pattern);
-      Vue.component(Opportunity.name, Opportunity);
-      Vue.component(OpportunityItem.name, OpportunityItem);
-      Vue.component(UnWrapper.name, UnWrapper);
       Vue.component(RealPopup.name, RealPopup);
       Vue.component(ScrollBar.name, ScrollBar);
-      Vue.component(HelpBlock.name, HelpBlock);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
       Vue.component(ReplacementLink.name, ReplacementLink);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
@@ -128,14 +103,8 @@ const VueRtStyle = {
       Vue.component(Tabs.name, Tabs);
       Vue.component(TabsSlider.name, TabsSlider);
       Vue.component(TabsSliderItem.name, TabsSliderItem);
-      Vue.component(CheckboxTabs.name, CheckboxTabs);
       Vue.component(TabsContentItem.name, TabsContentItem);
       Vue.component(TabsNavigationItem.name, TabsNavigationItem);
-      Vue.component(Microtabs.name, Microtabs)
-      Vue.component(MicrotabsContent.name, MicrotabsContent)
-      Vue.component(MicrotabsNavigation.name, MicrotabsNavigation)
-      Vue.component(GalleryCarousel.name, GalleryCarousel);
-      Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(Slider.name, Slider);
       Vue.component(SliderItem.name, SliderItem);
       Vue.component(SlideContent.name, SlideContent);
@@ -143,8 +112,6 @@ const VueRtStyle = {
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
-      Vue.component(Jumbotron.name, Jumbotron);
-      Vue.component(MessageBox.name, MessageBox);
       Vue.component(Privilege.name, Privilege);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
@@ -174,7 +141,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-09-15 11:21";
+const version = "2021-09-21 12:04";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -195,20 +162,18 @@ VueRtStyle.version = version;
 export default VueRtStyle;
 export {
   ScrollTabs,
-  HelpBlock,
   Table,
   TableCol,
   TableHeadItem,
   TableItem,
   TableRow,
-  DownloadContent,
   InlineDropdown,
   InlineDropdownItem,
   Tag,
   TagsList,
   Filter,
-  FilterWatcher,
   FilterCaller,
+  FilterWatcher,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
@@ -224,32 +189,19 @@ export {
   Slide,
   Swiper,
   Pattern,
-  Opportunity,
-  OpportunityItem,
-  UnWrapper,
   RealPopup,
   TabsSlider,
   TabsSliderItem,
   Tabs,
   TabsNavigationItem,
   TabsContentItem,
-  Microtabs,
-  MicrotabsContent,
-  MicrotabsNavigation,
   ScrollBar,
   VerticalScrollBar,
   ReplacementLink,
-  GalleryCarousel,
-  GalleryCarouselItem,
-  OptionsList,
   ShowOn,
-  OptionsListInfoItem,
-  CheckboxTabs,
   StickyHeaderLine,
   Slider,
   SliderItem,
-  Jumbotron,
-  MessageBox,
   // need to change name directives
   SwipeLeft,
   SwipeRight,
@@ -258,7 +210,5 @@ export {
   OutsideClickDirective,
   ResizeTypeStore,
   GaClickDirective,
-  CommentSlider,
-  CommentSliderItem,
   Privilege
 }
