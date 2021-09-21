@@ -3,7 +3,7 @@ import CarouselV3RenderItem from "./CarouselV3RenderItem.vue"
 import {carouselV3Store} from "./CarouselV3Store";
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 import {bannerStore} from "../BannerV2/BannerStore";
-
+import './CarouselV3.styl'
 export default {
   name: "RtCarouselV3",
   props: {
