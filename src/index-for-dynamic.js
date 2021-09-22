@@ -51,6 +51,7 @@ import {
   TextImageBlock,
   RowList,
   RowListItem,
+  Minibanner
 
 } from "./components"
 
@@ -102,4 +103,5 @@ export default {
   RowListItem,
   TextImageBlock,
   VideoBanner,
+  Minibanner
 }
