@@ -97,3 +97,4 @@ export {default as TagsList} from './Tag/TagsList.vue';
 
 //game-arrow, gallery-carousel, opportunity deleted
 
+export {default as Minibanner} from './Minibanner/Minibanner.vue';

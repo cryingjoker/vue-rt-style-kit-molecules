@@ -50,7 +50,8 @@ import {
   SliderItem,
   ShowOn,
   Privilege,
-  TextImageBlock
+  TextImageBlock,
+  VideoBanner
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -114,6 +115,7 @@ const VueRtStyle = {
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Privilege.name, Privilege);
+      Vue.component(Minibanner.name, Minibanner);
       Vue.component(TextImageBlock.name, TextImageBlock);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
@@ -212,5 +214,12 @@ export {
   OutsideClickDirective,
   ResizeTypeStore,
   GaClickDirective,
-  Privilege
+  CommentSlider,
+  CommentSliderItem,
+  VideoBanner,
+  CarouselV3,
+  CarouselV3Item,
+  Privilege,
+  Minibanner,
+  ResizeContentHeightDirective
 }
