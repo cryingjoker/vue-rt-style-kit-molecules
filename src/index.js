@@ -49,7 +49,8 @@ import {
   Slider,
   SliderItem,
   ShowOn,
-  Privilege
+  Privilege,
+  TextImageBlock
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
@@ -113,6 +114,7 @@ const VueRtStyle = {
       Vue.component(FunctionItem.name, FunctionItem);
       Vue.component(FunctionList.name, FunctionList);
       Vue.component(Privilege.name, Privilege);
+      Vue.component(TextImageBlock.name, TextImageBlock);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);

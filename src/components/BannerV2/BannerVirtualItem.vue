@@ -246,7 +246,7 @@ export default {
       }
     },
     bannerClass() {
-      const classNames = ['rt-n-banner-item', 'd-flex'];
+      const classNames = ['rt-n-banner-item'];
       if (this.activeId == this.id) {
         classNames.push('rt-n-banner-item--active')
 

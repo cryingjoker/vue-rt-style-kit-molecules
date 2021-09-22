@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+  import './Benefit.styl'
   import variables from "../../variables.json";
 
   const componentsList = {};

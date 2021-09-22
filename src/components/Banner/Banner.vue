@@ -3,7 +3,7 @@
     // import debounce from "debounce";
     import variables from "../../variables.json";
     import {deviceTypeStore} from "vue-rt-style-kit-atoms";
-
+    import './Banners.styl'
     const componentsList = {};
 
 

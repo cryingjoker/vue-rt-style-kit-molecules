@@ -2,6 +2,7 @@
 
 // import debounce from "debounce";
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import './BannersV2.styl'
 import {bannerStore} from "./BannerStore";
 import RtBannerVirtualItemV2 from './BannerVirtualItem.vue'
 import BannerPaginator from "./BannerPaginator.vue";

@@ -1,4 +1,6 @@
 <script type="text/jsx">
+import './arrowBlock.styl'
+
 export default {
   name: "RtArrowBlock",
   props: {
