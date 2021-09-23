@@ -136,6 +136,7 @@ import Mobile from '../../utils/mobile'
 import Animate from '../../utils/animate'
 import StylesUtil from '../../utils/styles'
 import debounce from "debounce"
+import './Carousel.styl'
 
 const name = 'RtCarousel'
 const autoScrollingTimeout = 100 // Длительность задержки автоскроллинга

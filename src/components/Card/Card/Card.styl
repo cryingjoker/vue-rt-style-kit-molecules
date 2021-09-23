@@ -1,3 +1,352 @@
+.browser-IE .rt-card,
+.rt-card__content
+  min-height inherit
+
+.rt-card
+  display flex
+  z-index: 1
+  flex 1
+  flex-direction column
+  align-self stretch
+  width 100%
+  min-height min-content
+  overflow hidden
+  transform: translate3d(0, 0, 0)
+  backface-visibility: hidden
+  color main-color
+  background-position-x center
+  background-position-y center
+  background-repeat no-repeat
+  border-radius 10px
+  position relative
+  box-shadow card-shadow--before-hovered
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property box-shadow
+  &:hover
+    @media (hover: hover) {
+      box-shadow card-shadow--hovered
+    }
+
+  &--custom-height
+    min-height initial
+
+  &--has-discount
+    margin-top: 50px
+    max-height calc(100% - 50px)
+
+  &__border-content
+    border-top 1px solid main-color01
+    padding-top vertical-space * .5
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &--has-bg-cover
+    background-color transparent
+
+  &--transparent
+    background-color transparent
+
+  @media (max-width: mobile-upper-limit)
+    flex-direction column
+
+  @media (min-width: tablet-lower-limit)
+    min-height 364px
+
+  &--has-white-color
+    color #fff
+
+  &--has-smoke
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .5)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &--has-smoke03
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .3)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &--has-smoke02
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .2)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &__background
+    background-color white
+    background-position-x center
+    background-position-y center
+    background-repeat no-repeat
+    border-radius 10px
+    position absolute
+    top -20px
+    bottom -20px
+    left -20px
+    right -20px
+    z-index 1
+
+    .rt-card-purple &
+      background-color b2c-purple
+
+    .rt-card-purple-low &
+      background-color b2c-purple-low
+
+    .rt-card-purple-high &
+      background-color b2c-purple-high
+
+    .rt-card-red &
+      background-color b2c-red
+
+    .rt-card-red-low &
+      background-color b2c-red-low
+
+    .rt-card-red-high &
+      background-color b2c-red-high
+
+    .rt-card-dark-blue &
+      background-color b2c-dark-blue
+
+    .rt-card-dark-blue-low &
+      background-color b2c-dark-blue-low
+
+    .rt-card-dark-blue-high &
+      background-color b2c-dark-blue-high
+
+    .rt-card-light-blue &
+      background-color b2c-light-blue
+
+    .rt-card-light-blue-low &
+      background-color b2c-light-blue-low
+
+    .rt-card-light-blue-high &
+      background-color b2c-light-blue-high
+
+    .rt-card-yellow &
+      background-color b2c-yellow
+
+    .rt-card-yellow-low &
+      background-color b2c-yellow-low
+
+    .rt-card-yellow-high &
+      background-color b2c-yellow-high
+
+    .rt-card-orange &
+      background-color b2c-orange
+
+    .rt-card-orange-low &
+      background-color b2c-orange-low
+
+    .rt-card-orange-high &
+      background-color b2c-orange-high
+
+    .rt-card-pink &
+      background-color b2c-pink
+
+    .rt-card-pink-low &
+      background-color b2c-pink-low
+
+    .rt-card-pink-high &
+      background-color b2c-pink-high
+
+    .rt-card-green &
+      background-color b2c-green
+
+    .rt-card-green-low &
+      background-color b2c-green-low
+
+    .rt-card-green-high &
+      background-color b2c-green-high
+
+    .rt-card-black &
+      background-color dark-card-background
+
+    .rt-card-slate &
+      background-color b2c-slate
+
+    .rt-card-dark-slate &
+      background-color b2c-dark-slate
+
+    .rt-card-light-grey &
+      background-color light-grey
+
+    &--position-background-top
+      background-position-x center
+      background-position-y top
+
+    &--position-background-right
+      background-position-x calc(100% - 40px)
+      background-position-y center
+
+    &--position-background-bottom
+      background-position-x center
+      background-position-y bottom
+
+    &--position-background-left
+      background-position-x 40px
+      background-position-y center
+
+    &--position-background-top-right
+      background-position-x calc(100% - 40px)
+      background-position-y top
+
+    &--position-background-bottom-right
+      background-position-x calc(100% - 40px)
+      background-position-y bottom
+
+    &--position-background-bottom-left
+      background-position-x 40px
+      background-position-y bottom
+
+    &--position-background-top-left
+      background-position-x 40px
+      background-position-y top
+
+    .rt-card--has-bg-repeat &
+      background-repeat repeat
+
+    .rt-card--has-bg-cover &
+      background-size cover
+
+    @media (max-width: mobile-upper-limit)
+      .rt-card--hide-background-on-mobile &
+        background-image inherit !important
+
+  &__stand-alone-background
+    background-size cover
+    background-repeat no-repeat
+    position absolute
+    top 0
+    bottom 0
+    right 0
+    z-index 2
+
+    @media (max-width: mobile-upper-limit)
+      width 100% !important
+      height 100% !important
+      max-height 40vw !important
+      background-position center center
+      background-size contain
+      margin-top vertical-space
+      position relative
+      top 0 !important
+      bottom 0 !important
+      left 0 !important
+      right 0 !important
+
+  &__content
+    display flex
+    flex-direction column
+    width 100%
+    min-width 100%
+    min-height auto
+    padding vertical-space 0
+    position relative
+    z-index 3
+
+    @media (min-width: tablet-lower-limit)
+      min-height 364px
+
+    &--has-custom-height
+      @media (max-width: mobile-upper-limit)
+        display flex
+        min-height auto
+
+    .rt-col-6 &
+      min-width 50%
+
+    &--has-offset-top
+      padding-top vertical-space * 9
+
+  &__body
+    flex 1 0 auto
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+    &--is-empty
+      @media (max-width: mobile-upper-limit)
+        display none
+
+    &--is-static
+      flex 0
+      flex-grow 0 !important
+
+  &__footer
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &__header
+    flex 0 0 auto
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+    &__image
+      max-width 100%
+
+    &>*
+      hyphens auto
+
+  &__bottom-list
+    border-top 1px solid main-color01
+    margin-top vertical-space * 1.5
+    padding-top vertical-space
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &-img
+    max-width 100%
+
+  &-text
+    letter-spacing .18px
+
+  &-list
+    &__item
+      display flex
+      flex-direction row
+
+      & + &
+        padding-top vertical-space
+
+    &__icon
+      width 56px
+
+    &__name
+      display flex
+      flex 1 0 auto
+      flex-direction row
+      align-items center
+      width calc(100% - 56px)
+      padding-left horizontal-space * .5
+
+  &__popup-benefits,
+  &__popup-costs
+    display none
+  &--no-shadow
+    box-shadow none
+    border 2px solid #F3F3F4
+    &:hover
+      box-shadow none
+
+
 .{b2bAppName}-card
   min-height 184px
   box-sizing border-box
@@ -50,17 +399,17 @@
     &__value,
     &__info
       color inherit
-      //font-size inherit
+  //font-size inherit
 
   &__cost
     .{b2bAppName}-price
-      &__value,
-      &__info
-        font-size 36px
-        line-height 40px
-        @media (max-width: tablet-upper-limit)
-          font-size 32px
-          line-height 32px
+    &__value,
+    &__info
+      font-size 36px
+      line-height 40px
+      @media (max-width: tablet-upper-limit)
+        font-size 32px
+        line-height 32px
 
   &__section
     padding 10px 0
@@ -74,7 +423,6 @@
   &__links-block
     display inline-block
     max-width calc(32px * 6) //calc(100% - 36px)
-    //max-height 35px
     min-height 28px
     overflow hidden
     vertical-align middle
@@ -86,10 +434,6 @@
       & + .rtb-card__expand-button
         display none
 
-      //.{b2bAppName}-card__social-link
-      //  &:nth-child(5+n)
-      //    display inline-block
-
     &__footnote
       margin-top 5px
 
@@ -99,8 +443,6 @@
     height 24px
     display inline-block
     vertical-align middle
-    //&+&
-    //  margin-left 6px
     margin-right 12px
 
     img
@@ -114,7 +456,6 @@
     color b2c-purple
     font-size 14px
     line-height 28px
-    //margin-left 5px
     vertical-align middle
     cursor pointer
     min-width 41px
@@ -528,12 +869,12 @@
       width 100%
       padding-top vertical-space * 2
 
-    .{b2bAppName}-category__mobile-header
-      display block !important
-      background-size 100%
+  .{b2bAppName}-category__mobile-header
+    display block !important
+    background-size 100%
 
-    .{b2bAppName}-category__content-top--cut
-      max-height 258px
+  .{b2bAppName}-category__content-top--cut
+    max-height 258px
   &__title
     z-index 2
     @media (max-width: tablet-upper-limit)
@@ -765,22 +1106,6 @@
     .{b2bAppName}-category__triangle
       fill error-color
 
-.{newAppName}-rotating-card-gallery
-  display flex
-  flex-wrap wrap
-  height auto!important
-  @media (max-width: mobile-upper-limit)
-    flex-wrap nowrap
-    overflow-x auto
-    padding-bottom vertical-space
-  &>*
-    &:nth-child(n+3)
-      margin-top vertical-space
-    @media (max-width: mobile-upper-limit)
-      margin-top vertical-space
-      width: 85vw
-      flex: 0 0 85%
-
 .rt-container--mobile-full-width
   @media (max-width: tablet-upper-limit)
     padding 0
@@ -817,8 +1142,6 @@
       flex-basis 50%
   &-layout-8
     width calc(100% / 3 * 2)
-    //@media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
-    //  width auto
     .rt-col-3
       max-width calc(100% / 3)
       flex-basis calc(100% / 3)
@@ -830,8 +1153,6 @@
     @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
       min-width 75%
       width calc(322px * 3)
-  //.rt-card
-  //  min-width calc(275px + 10px)
 
 .rt-col-ld-12
   @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
@@ -843,8 +1164,6 @@
   display flex
   width 100%
   flex-wrap wrap
-  //.rtk-carousel-slide
-  //  padding-top 20px
   .card-layout__slide
     @media (max-width: laptop-upper-limit) and (min-width: laptop-lower-limit)
       width calc(275px + 20px)

@@ -1,6 +1,6 @@
 <script type="text/jsx">
+  import './CardB2o.styl'
   const componentsList = {};
-
 
   export default {
     name: "RtCardB2o",

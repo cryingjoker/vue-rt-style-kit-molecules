@@ -1,10 +1,10 @@
 <script type="text/jsx">
   import {viewportPositionStore} from "vue-rt-style-kit-atoms";
+  import './Card.styl'
+  import browser from '../../../utils/browser'
+  import variables from "../../../variables.json";
 
   const componentsList = {};
-  import browser from '../../utils/browser'
-  import variables from "../../variables.json";
-
 
   export default {
     name: "RtCard",
@@ -557,8 +557,8 @@
       } else {
           // for IE and other old browsers
           // causes deprecation warning on modern browsers
-          var evt = window.document.createEvent('UIEvents'); 
-          evt.initUIEvent('resize', true, false, window, 0); 
+          var evt = window.document.createEvent('UIEvents');
+          evt.initUIEvent('resize', true, false, window, 0);
           window.dispatchEvent(evt);
       }
 

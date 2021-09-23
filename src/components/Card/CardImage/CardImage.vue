@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './CardImage.styl'
 export default {
   name: "RtCardImage",
   props: {

@@ -1,7 +1,5 @@
 <script type="text/jsx">
 
-    // import debounce from "debounce";
-    import {deviceTypeStore} from "vue-rt-style-kit-atoms";
     import {bannerStore} from "./BannerStore";
 
     const componentsList = {};

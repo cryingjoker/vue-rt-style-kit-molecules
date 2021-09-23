@@ -1,11 +1,9 @@
 <script type="text/jsx">
     import BannerPaginatorItem from "./BannerPaginatorItem.vue";
-    // import debounce from "debounce";
-    import variables from "../../variables.json";
     import {deviceTypeStore} from "vue-rt-style-kit-atoms";
     import './Banners.styl'
+    import './B2bBanner.styl'
     const componentsList = {};
-
 
     componentsList[BannerPaginatorItem.name] = BannerPaginatorItem;
 
@@ -65,10 +63,6 @@
                 type: String,
                 default: null
             },
-//            justify: {
-//                type: String,
-//                default: ''
-//            },
             contentMinHeight: {
                 type: [Number, String],
                 default: null
@@ -93,10 +87,6 @@
                 type: String,
                 default: ""
             },
-//            isWhiteColor: {
-//                type: Boolean,
-//                default: false
-//            },
             sleepTime: {
                 type: Number,
                 default: 5000
@@ -113,10 +103,6 @@
                 type: Boolean,
                 default: false
             },
-//            bannerItemsWithCustomContent: {
-//                type: Boolean,
-//                default: false
-//            },
             mobileImageHeight: {
                 type: String,
                 default: ''
@@ -232,9 +218,6 @@
 
                     if (this.isFullscreenImage) {
                         className.push("rt-banner--full-screen");
-//                        if (this.justify) {
-//                            className.push("justify-" + this.justify);
-//                        }
                     }
 
                     if (this.RtBanners.items[activeIndex].isWhiteColor) {

@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './BannerSkeleton.styl'
 export default {
   name: 'RtBannerSkeleton',
   functional: true,
