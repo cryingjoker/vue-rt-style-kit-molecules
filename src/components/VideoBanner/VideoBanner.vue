@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import {tabsSliderStore} from "../TabsSlider/TabsSliderStore";
+import './VideoBanner.styl'
 
 const componentsList = {};
 

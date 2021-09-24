@@ -1,4 +1,5 @@
 <script type="text/jsx">
+  import './PhoneNumberInput.styl'
   const componentsList = {};
   import variables from "../../variables.json";
   import './PhoneNumberInput.styl'

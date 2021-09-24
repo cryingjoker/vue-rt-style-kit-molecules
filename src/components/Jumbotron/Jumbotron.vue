@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+import './Jumbotron.styl'
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 import './Jumbotron.styl'
 
