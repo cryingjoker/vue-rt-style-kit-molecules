@@ -1,5 +1,6 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
+  import './ProductCard.styl'
   export default {
   name: "RtProductCard",
       props: {

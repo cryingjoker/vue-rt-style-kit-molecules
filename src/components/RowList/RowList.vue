@@ -1,4 +1,5 @@
 <script type="text/jsx">
+  import './RowList.styl'
   export default {
     name: "RtRowList",
     props: {},
