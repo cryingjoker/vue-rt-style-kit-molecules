@@ -1,7 +1,6 @@
 <script type="text/jsx">
 const componentsList = {};
-import browser from '../../utils/browser'
-import variables from "../../variables.json";
+import './CardRounded.styl'
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 
 export default {

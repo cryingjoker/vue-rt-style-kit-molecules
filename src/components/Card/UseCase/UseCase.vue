@@ -1,6 +1,6 @@
 <script type="text/jsx">
 const componentsList = {};
-import variables from "../../variables.json";
+import variables from "../../../variables.json";
 import debounce from "debounce";
 
 

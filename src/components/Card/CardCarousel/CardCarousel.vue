@@ -1,6 +1,7 @@
 <script type="text/jsx">
     const componentsList = {};
-    import variables from "../../variables.json";
+    import variables from "../../../variables.json";
+    import './CardCarousel.styl'
 
     export default {
         name: "RtCardCarousel",
@@ -22,10 +23,6 @@
                 type: Array,
                 default: () => ['.rt-card__content']
             },
-//            carouselItemActiveClass: {
-//                type: String,
-//                default: '.carousel-card--active'
-//            },
             carouselItemClass: {
                 type: String,
                 default: '.carousel-card'
@@ -122,10 +119,6 @@
                 let slideWidth = document.querySelector(this.carouselItemClass).offsetWidth;
                 let carouselWrapperPadding = +window.getComputedStyle(document.querySelector('.custom-carousel')).paddingLeft.replace('px', '');
 
-                // for (let i = 0; i <  this.itemsLength; i++) {
-                //     carouselPaginatorWrapper.children[i].classList.remove('custom-carousel__paginator-item--active');
-                // } todo зачем?
-                // carouselPaginatorWrapper.children[index].classList.add('custom-carousel__paginator-item--active');
                 let endScrollPosition = parseInt(slideWidth * index + (20 * index + 30) - ((window.innerWidth - Math.round(slideWidth)) / 2) + carouselWrapperPadding);
                 let cardGallery = this.$el;
                 let currentScroll = cardGallery.scrollLeft;
@@ -228,7 +221,7 @@
                     }
                 }
             },
-            pushGa() {     
+            pushGa() {
                 let ga = this.ga || this.gaB2b
                 if (!ga) return
                 let typeEvent = this.ga ? 'b2c' : 'b2b'
@@ -279,7 +272,7 @@
                     return <div class="custom-carousel" ref="carousel">
                             {this.$slots.default}
                             <div class="custom-carousel__nav">
-                                < div class="custom-carousel__paginator"></div>
+                                <div class="custom-carousel__paginator"></div>
                             </div>
                         </div>
                 } else {

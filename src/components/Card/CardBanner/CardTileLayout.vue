@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import variables from "../../variables.json";
+import variables from "../../../variables.json";
 import debounce from "debounce";
 const componentsList = {};
 export default {

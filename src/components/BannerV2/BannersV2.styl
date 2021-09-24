@@ -271,12 +271,12 @@ renderColorClass(classname, var, media)
           -webkit-mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
           mask-image: linear-gradient(to left , lookup(var) 0%, lookup(var) 75%, transparent 100%)
 
+colors = readJsonKeys('../../../color.json')
 
 for $i in colors
   if search($i,'b2c') >= 0 || search($i,'main-color') >= 0
     className = 'color-block--'+replace($i,'b2c-','')+'.rt-n-banner-wrapper'
     renderColorClass(className, $i, $type)
-
 
 
 .rt-n-banner-item-url

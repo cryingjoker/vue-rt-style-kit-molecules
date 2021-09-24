@@ -1,10 +1,8 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
-  // import VirtualCarouselSlide from './VirtualCarouselSlide.vue'
-  // import {carouselStore} from "./CarouselStore";
+  import './CarouselV2.styl'
 
   const componentsList = {};
-  // componentsList[VirtualCarouselSlide.name] = VirtualCarouselSlide;
 
   export default {
     name: "RtCarouselV2",

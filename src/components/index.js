@@ -7,15 +7,17 @@ export {default as BannerItemV2} from './BannerV2/BannerItem.vue';
 export {default as BannerSkeleton} from './BannerV2/BannerSkeleton.vue';
 export {default as BenefitBlock} from './BenefitBlock/BenefitBlock.vue';
 export {default as BenefitItem} from './BenefitBlock/BenefitItem.vue';
-export {default as Card} from './Card/Card.vue';
-export {default as CardB2o} from './Card/CardB2o.vue';
-export {default as CardBuy} from './Card/CardBuy.vue';
-export {default as CardCarousel} from './Card/CardCarousel.vue';
-export {default as CardImage} from './Card/CardImage.vue';
-export {default as CardRounded} from './Card/CardRounded.vue';
-export {default as CardSkeleton} from './Card/CardSkeleton.vue';
-export {default as CardTileLayout} from './Card/CardTileLayout.vue';
-export {default as UseCase} from './Card/UseCase.vue';
+export {default as Card} from './Card/Card/Card.vue';
+export {default as CardB2o} from './Card/CardB2o/CardB2o.vue';
+export {default as CardBanner} from './Card/CardBanner/CardBanner.vue';
+export {default as CardBuy} from './Card/CardBuy/CardBuy.vue';
+export {default as CardHelp} from './Card/CardHelp/CardHelp.vue';
+export {default as CardCarousel} from './Card/CardCarousel/CardCarousel.vue';
+export {default as CardImage} from './Card/CardImage/CardImage.vue';
+export {default as CardRounded} from './Card/CardRounded/CardRounded.vue';
+export {default as CardSkeleton} from './Card/CardSkeleton/CardSkeleton.vue';
+export {default as CardTileLayout} from './Card/CardBanner/CardTileLayout.vue';
+export {default as UseCase} from './Card/UseCase/UseCase.vue';
 export {default as Carousel} from './Carousel/Carousel.vue';
 export {default as CarouselSlide} from './Carousel/CarouselSlide.vue';
 export {default as CarouselV2} from './CarouselV2/Carousel.vue';
@@ -69,11 +71,12 @@ export {default as StickyBottomLine} from './StickyBottomLine/StickyBottomLine.v
 export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
 export {default as VideoBanner} from './VideoBanner/VideoBanner.vue';
 export {default as Privilege} from './Privilege/Privilege.vue';
+export {default as Minibanner} from './Minibanner/Minibanner.vue';
 export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 
 
 // delete?
-export {default as LinksBlock} from './Card/LinksBlock.vue';
+export {default as LinksBlock} from './Card/Card/LinksBlock.vue';
 export {default as Filter} from './Filter/Filter.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
 export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
@@ -97,4 +100,3 @@ export {default as TagsList} from './Tag/TagsList.vue';
 
 //game-arrow, gallery-carousel, opportunity deleted
 
-export {default as Minibanner} from './Minibanner/Minibanner.vue';

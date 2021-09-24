@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+  import './CardSkeleton.styl'
   export default {
     name: 'RtCardSkeleton',
     data () {
