@@ -1,6 +1,7 @@
 <script type="text/jsx">
   const componentsList = {};
   import variables from "../../variables.json";
+  import './PhoneNumberInput.styl'
   export default {
     name: "RtPhoneNumberInput",
     components: componentsList,

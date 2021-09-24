@@ -1,5 +1,6 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
+  import './Pattern.styl'
 
   export default {
     name: "RtPattern",

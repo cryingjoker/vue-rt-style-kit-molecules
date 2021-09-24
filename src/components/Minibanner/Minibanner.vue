@@ -1,6 +1,7 @@
 <script type="text/jsx">
 
 import Global from '../../variables.json'
+import './Minibanner.styl'
 
 export default {
   name: 'RtMinibanner',

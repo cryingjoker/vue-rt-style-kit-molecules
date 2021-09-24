@@ -4,18 +4,12 @@ import Global from "./variables.json";
 import Project from "@projectMolecules";
 
 import {
-  Filter,
-  FilterWatcher,
-  FilterCaller,
-  FilterV2,
-  FilterItemV2,
-  FilterSetterV2,
+
   LinksBlock,
   FunctionList,
   FunctionItem,
   InlineDropdown,
   InlineDropdownItem,
-  Pattern,
 
   ScrollTabs,
   Table,
@@ -29,13 +23,11 @@ import {
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
-  Popup,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
   Slide,
   Swiper,
-  RealPopup,
   TabsSlider,
   TabsSliderItem,
   Tabs,
@@ -79,24 +71,15 @@ const VueRtStyle = {
       Vue.component(InlineDropdownItem.name, InlineDropdownItem);
       Vue.component(Tag.name, Tag);
       Vue.component(TagsList.name, TagsList);
-      Vue.component(Filter.name, Filter);
-      Vue.component(FilterWatcher.name, FilterWatcher);
-      Vue.component(FilterV2.name, FilterV2);
-      Vue.component(FilterItemV2.name, FilterItemV2);
-      Vue.component(FilterSetterV2.name, FilterSetterV2);
-      Vue.component(FilterCaller.name, FilterCaller);
       Vue.component(Sticky.name, Sticky);
       Vue.component(StickyBottomLine.name, StickyBottomLine);
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
       Vue.component(Youtube.name, Youtube);
-      Vue.component(Popup.name, Popup);
 
       Vue.component(LinksBlock.name, LinksBlock);
       Vue.component(Swiper.name, Swiper);
       Vue.component(ShowOn.name, ShowOn);
       Vue.component(Slide.name, Slide);
-      Vue.component(Pattern.name, Pattern);
-      Vue.component(RealPopup.name, RealPopup);
       Vue.component(ScrollBar.name, ScrollBar);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
       Vue.component(ReplacementLink.name, ReplacementLink);
@@ -145,7 +128,7 @@ const VueRtStyle = {
  * с названием из Global.globalSettingsKey и положите перед подключением либы
  */
 const settingsKey = Global.globalSettingsKey;
-const version = "2021-09-21 12:04";
+const version = "2021-09-22 23:46";
 if (typeof window !== 'undefined') {
 
   if (settingsKey) {
@@ -175,25 +158,16 @@ export {
   InlineDropdownItem,
   Tag,
   TagsList,
-  Filter,
-  FilterCaller,
-  FilterWatcher,
-  FilterV2,
-  FilterItemV2,
-  FilterSetterV2,
   Youtube,
   Sticky,
   StickyBottomLine,
   ResizeContentHeight,
-  Popup,
   LinksBlock,
   SlideContent,
   SlideContentDottedContent,
   SlideContentDottedHeader,
   Slide,
   Swiper,
-  Pattern,
-  RealPopup,
   TabsSlider,
   TabsSliderItem,
   Tabs,

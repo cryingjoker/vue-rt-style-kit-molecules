@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './Popover.styl'
 
 export default {
   name: "RtPopover",

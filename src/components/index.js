@@ -29,7 +29,17 @@ export {default as CommentSlider} from './CommentSlider/CommentSlider.vue';
 export {default as CommentSliderItem} from './CommentSlider/CommentSliderItem.vue';
 export {default as CountdownTimer} from './CountdownTimer/CountdownTimer.vue';
 export {default as DownloadContent} from './DownloadContent/DownloadContent.vue';
+export {default as Filter} from './Filter/Filter.vue';
+export {default as FilterCaller} from './Filter/FilterCaller.vue';
+export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
+export {default as FilterV2} from './FilterV2/Filter.vue';
+export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
+export {default as FilterSetterV2} from './FilterV2/FilterSetter.vue';
+export {default as FunctionList} from './FunctionList/FunctionList.vue';
+export {default as FunctionItem} from './FunctionList/FunctionItem.vue';
 export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
+export {default as InlineDropdown} from './InlineDropdown/InlineDropdown.vue';
+export {default as InlineDropdownItem} from './InlineDropdown/InlineDropdownItem.vue';
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
 export {default as Microtabs} from './Microtabs/Microtabs.vue';
@@ -38,8 +48,11 @@ export {default as MicrotabsNavigation} from './Microtabs/MicrotabsNavigation.vu
 export {default as UnWrapper} from './MobileExpandWrapper/UnWrapper.vue';
 export {default as OptionsList} from './OptionsList/OptionsList.vue';
 export {default as OptionsListInfoItem} from './OptionsList/OptionsListInfoItem.vue';
+export {default as Pattern} from './Pattern/Pattern.vue';
 export {default as PhoneNumberInput} from './PhoneNumberInput/PhoneNumberInput.vue';
 export {default as Popover} from './Popover/Popover.vue';
+export {default as Popup} from './Popup/Popup.vue';
+export {default as RealPopup} from './Popup/RealPopup.vue';
 
 
 export {default as ProductCard} from './ProductCard/ProductCard.vue';
@@ -60,9 +73,7 @@ export {default as ShowOn} from './ShowOn/ShowOn.vue';
 export {default as Youtube} from './Youtube/Youtube.vue';
 export {default as Sticky} from './Sticky/Sticky.vue';
 export {default as ResizeContentHeight} from './ResizeContentHeight/ResizeContentHeight.vue';
-export {default as Popup} from './Popup/Popup.vue';
 export {default as StickyHeaderLine} from './StickyHeaderLine/StickyHeaderLine.vue';
-export {default as RealPopup} from './Popup/RealPopup.vue';
 export {default as ReplacementLink} from './ReplacementLinkWrapper/ReplacementLink.vue';
 export {default as TextImageBlock} from './TextImageBlock/TextImageBlock.vue';
 export {default as Slider} from './Slider/Slider.vue'
@@ -77,17 +88,6 @@ export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 
 // delete?
 export {default as LinksBlock} from './Card/Card/LinksBlock.vue';
-export {default as Filter} from './Filter/Filter.vue';
-export {default as FilterCaller} from './Filter/FilterCaller.vue';
-export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
-export {default as FilterV2} from './FilterV2/Filter.vue';
-export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
-export {default as FilterSetterV2} from './FilterV2/FilterSetter.vue';
-export {default as FunctionList} from './FunctionList/FunctionList.vue';
-export {default as FunctionItem} from './FunctionList/FunctionItem.vue';
-export {default as InlineDropdown} from './InlineDropdown/InlineDropdown.vue';
-export {default as InlineDropdownItem} from './InlineDropdown/InlineDropdownItem.vue';
-export {default as Pattern} from './Pattern/Pattern.vue';
 export {default as ScrollBar} from './ScrollBar/ScrollBar.vue';
 export {default as VerticalScrollBar} from './ScrollBar/VerticalScrollBar.vue';
 export {default as Swiper} from './Swiper/Swiper.vue';

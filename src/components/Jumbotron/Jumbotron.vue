@@ -1,6 +1,7 @@
 <script type="text/jsx">
 
 import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import './Jumbotron.styl'
 
 const componentsList = {};
 

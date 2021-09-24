@@ -1,5 +1,6 @@
 <script type="text/jsx">
   import { optionsListStore } from "./OptionsListStore.js";
+  import './OptionsList.styl'
 
   export default {
     name: "RtOptionsList",

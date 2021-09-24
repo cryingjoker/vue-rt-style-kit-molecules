@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import { cmpName, resizeHandler, resizeHandlerDestroy } from './common.js'
 import MicrotabsControl from './MicrotabsControl.vue'
+import './Microtabs.styl'
 const offset = 8
 const controlWidth = 32
 

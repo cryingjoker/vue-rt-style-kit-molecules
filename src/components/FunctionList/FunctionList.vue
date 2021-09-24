@@ -8,6 +8,7 @@
 
 <script>
   import FunctionItem from './FunctionItem.vue'
+  import './FunctionList.styl'
 
   export default {
     name: 'functionList',
