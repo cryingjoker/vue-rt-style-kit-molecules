@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+import './MessageBox.styl'
 import Global from '../../variables.json'
 
 export default {
