@@ -1,4 +1,5 @@
 <script type="text/jsx">
+  import './HelpBlock.styl'
   export default {
     name: "RtHelpBlock",
     props: {

@@ -41,12 +41,17 @@ import {
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
+  FunctionList,
+  FunctionItem,
   HelpBlock,
+  InlineDropdown,
+  InlineDropdownItem,
   Jumbotron,
   MessageBox,
   Microtabs,
   MicrotabsContent,
   MicrotabsNavigation,
+  Minibanner,
   UnWrapper,
   OptionsList,
   OptionsListInfoItem,
@@ -55,14 +60,14 @@ import {
   Popover,
   Popup,
   RealPopup,
-
-  ProductCard,
-  VideoBanner,
   PreviewBanner,
+  ProductCard,
+  ReplacementLink,
+
+  VideoBanner,
   TextImageBlock,
   RowList,
-  RowListItem,
-  Minibanner
+  RowListItem
 
 } from "./components"
 
@@ -104,12 +109,17 @@ export default {
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
+  FunctionList,
+  FunctionItem,
   HelpBlock,
+  InlineDropdown,
+  InlineDropdownItem,
   Jumbotron,
   MessageBox,
   Microtabs,
   MicrotabsContent,
   MicrotabsNavigation,
+  Minibanner,
   UnWrapper,
   OptionsList,
   OptionsListInfoItem,
@@ -118,12 +128,11 @@ export default {
   Popover,
   Popup,
   RealPopup,
+  PreviewBanner,
 
   ProductCard,
-  PreviewBanner,
   RowList,
   RowListItem,
   TextImageBlock,
-  VideoBanner,
-  Minibanner
+  VideoBanner
 }

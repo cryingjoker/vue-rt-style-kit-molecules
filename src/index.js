@@ -6,10 +6,6 @@ import Project from "@projectMolecules";
 import {
 
   LinksBlock,
-  FunctionList,
-  FunctionItem,
-  InlineDropdown,
-  InlineDropdownItem,
 
   ScrollTabs,
   Table,
@@ -35,7 +31,6 @@ import {
   TabsContentItem,
   ScrollBar,
   VerticalScrollBar,
-  ReplacementLink,
   StickyHeaderLine,
   ResizeTypeStore,
   Slider,
@@ -67,8 +62,6 @@ const VueRtStyle = {
       Vue.component(TableHeadItem.name, TableHeadItem);
       Vue.component(TableItem.name, TableItem);
       Vue.component(TableRow.name, TableRow);
-      Vue.component(InlineDropdown.name, InlineDropdown);
-      Vue.component(InlineDropdownItem.name, InlineDropdownItem);
       Vue.component(Tag.name, Tag);
       Vue.component(TagsList.name, TagsList);
       Vue.component(Sticky.name, Sticky);
@@ -82,7 +75,6 @@ const VueRtStyle = {
       Vue.component(Slide.name, Slide);
       Vue.component(ScrollBar.name, ScrollBar);
       Vue.component(VerticalScrollBar.name, VerticalScrollBar);
-      Vue.component(ReplacementLink.name, ReplacementLink);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
 
       Vue.component(Tabs.name, Tabs);
@@ -95,8 +87,6 @@ const VueRtStyle = {
       Vue.component(SlideContent.name, SlideContent);
       Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
-      Vue.component(FunctionItem.name, FunctionItem);
-      Vue.component(FunctionList.name, FunctionList);
       Vue.component(Privilege.name, Privilege);
 
       Vue.component(TextImageBlock.name, TextImageBlock);
@@ -154,8 +144,6 @@ export {
   TableHeadItem,
   TableItem,
   TableRow,
-  InlineDropdown,
-  InlineDropdownItem,
   Tag,
   TagsList,
   Youtube,
@@ -175,7 +163,6 @@ export {
   TabsContentItem,
   ScrollBar,
   VerticalScrollBar,
-  ReplacementLink,
   ShowOn,
   StickyHeaderLine,
   Slider,
