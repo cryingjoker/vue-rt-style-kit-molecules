@@ -1,10 +1,9 @@
 <script type="text/jsx">
-
-
   import {sliderStore} from "./SliderStore";
   import SlideContent from "./SliderContent.vue";
   import SliderImage from "./SliderImage.vue";
   import debounce from "debounce";
+  import './Slider.styl'
 
   const componentList = [];
   componentList[SlideContent.name] = SlideContent;

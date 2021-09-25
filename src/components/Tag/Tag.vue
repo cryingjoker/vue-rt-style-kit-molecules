@@ -1,5 +1,6 @@
 <script type="text/jsx">
 const componentsList = {};
+import './Tag.styl'
 
 export default {
   name: "RtTag",

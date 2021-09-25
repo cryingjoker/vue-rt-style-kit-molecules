@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import './Navigation.styl'
 export default {
   name: "RtNavigation",
   props: {

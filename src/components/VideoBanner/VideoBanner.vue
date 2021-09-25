@@ -1,11 +1,15 @@
 <script type="text/jsx">
 import './VideoBanner.styl'
+import RtPopup from '../Popup/Popup.vue'
 
 const componentsList = {};
 
 export default {
   name: "RtVideoBanner",
-  components: componentsList,
+  components: {
+    componentsList,
+    RtPopup
+  },
   props: {
     filterOpacity: {
       type: [Number, String],
