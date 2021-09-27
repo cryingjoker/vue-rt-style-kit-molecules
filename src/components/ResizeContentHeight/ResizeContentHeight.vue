@@ -18,18 +18,6 @@ export default {
       type: Number,
       default: null
     },
-//    desktopItem: {
-//      type: Number,
-//      default: null
-//    },
-//    tabletItem: {
-//      type: Number,
-//      default: null
-//    },
-//    mobileItem: {
-//      type: Number,
-//      default: null
-//    },
     mobileNotResize: {
       type: Boolean,
       default: false
@@ -52,9 +40,6 @@ export default {
           groupSize: this.groupSize,
           tabletGroupSize: this.tabletGroupSize,
           mobileGroupSize: this.mobileGroupSize,
-//          desktopItem: this.desktopItem,
-//          tabletItem: this.tabletItem,
-//          mobileItem: this.mobileItem,
           mobileNotResize: this.mobileNotResize,
           desktopNotResize: this.desktopNotResize,
           tabletNotResize: this.tabletNotResize,

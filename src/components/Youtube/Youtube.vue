@@ -2,6 +2,7 @@
 import YoutubeVolume from './YoutubeVolume.vue';
 import YoutubeFraction from './YoutubeFraction.vue';
 import debounce from "debounce";
+import './Youtube.styl'
 
 const components = {};
 components[YoutubeVolume.name] = YoutubeVolume;

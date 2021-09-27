@@ -7,12 +7,9 @@
         getBackgroundClassByProps,
         getBackgroundClass
     } from "vue-rt-style-kit-atoms";
+    import './StickyHeaderLine.styl'
 
     const localComponentProps = {
-//        isActive: {
-//            type: Boolean,
-//            default: true
-//        },
         zIndex: {
             type: Number,
             default: 2
@@ -70,7 +67,6 @@
         name: "RtStickyHeaderLine",
         props: componentProps,
         data: () => ({
-//            active: false,
             pointsStart: [],
             pointsEnd: [],
             activeIndex: -1,
@@ -80,11 +76,6 @@
             showSecondHeaderContentAfterIsActive: false,
             stockIdIndex: 0
         }),
-//        watch: {
-//            isActive: function () {
-//                this.active = this.isActive;
-//            }
-//        },
         mounted() {
             if (this.startStopPoints.length > 0) {
                 backgroundColorPropsNames

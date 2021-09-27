@@ -1,6 +1,7 @@
 <script type="text/jsx">
     import debounce from 'debounce';
     import {scrollIt} from "../../utils";
+    import './ScrollTabs.styl'
 
     export default {
         name: "RtScrollTabs",

@@ -1,9 +1,8 @@
 <script type="text/jsx">
-import {Line, deviceTypeStore} from "vue-rt-style-kit-atoms";
+import {deviceTypeStore} from "vue-rt-style-kit-atoms";
 import './Privilege.styl'
 export default {
   name: "RtPrivilege",
-  components: { Line },
   props: {
     inLine: {
       type: Boolean,

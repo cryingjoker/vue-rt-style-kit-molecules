@@ -2,10 +2,14 @@
     const componentsList = {};
     import variables from "../../../variables.json";
     import './CardCarousel.styl'
+    import RtResizeContentHeight from '../../ResizeContentHeight/ResizeContentHeight.vue'
 
     export default {
         name: "RtCardCarousel",
-        components: componentsList,
+        components: {
+          componentsList,
+          RtResizeContentHeight
+        },
         props: {
             resizeCardsOnDesktop:{
                 type: Boolean,

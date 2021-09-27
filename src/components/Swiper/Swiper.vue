@@ -45,6 +45,7 @@
 <script>
 import Navigation from "./Navigation.vue";
 import variables from "../../variables.json";
+import './Swiper.styl'
 
 const autoScrollingTimeout = 100; // Длительность задержки автоскроллинга
 // const swipeFriction = 0.95

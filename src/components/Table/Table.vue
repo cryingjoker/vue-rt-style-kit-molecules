@@ -1,4 +1,5 @@
 <script type="text/jsx">
+import './Table.styl'
 export default {
   name: "RtTable",
   components: {},
