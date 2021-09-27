@@ -97,9 +97,10 @@ export default {
       if(this.$slots['html']){
         childs.push(<div class="sp-t-1-1">{this.$slots['html']}</div>)
       }
-      const contentWrapperClass = ["rt-minibanner-content-wrap","sp-v-2",'md-sp-v-1-2']
+      const contentWrapperClass = ["rt-minibanner-content-wrap",'d-flex',"sp-v-2",'md-sp-v-1-2','md-d-block']
       if(!this.tabletInLine){
         contentWrapperClass.push('td-sp-t-1-3')
+        contentWrapperClass.push('td-d-block')
         contentWrapperClass.push('td-sp-h-2')
       }else{
         if(!this.reverse){

@@ -18,7 +18,6 @@
     right: 0
 .rt-minibanner-content-wrap
   min-height 200px
-  display: flex
   align-items center
   @media (max-width tablet-upper-limit)
     min-height inherit
@@ -29,6 +28,7 @@
   bottom: 0
   height: 100%
   right: 10px
+
   img,
   .rt-img-container
     max-height 100%
@@ -46,6 +46,7 @@
     object-fit cover
     object-position center
   @media (max-width tablet-upper-limit)
+    left: 0
     .rt-shadow
       display: none
     //height: 52vw
