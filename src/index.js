@@ -4,13 +4,6 @@ import Global from "./variables.json";
 import Project from "@projectMolecules";
 
 import {
-  Table,
-  TableCol,
-  TableHeadItem,
-  TableItem,
-  TableRow,
-  TabsSlider,
-  TabsSliderItem,
   ResizeTypeStore
 } from "./components";
 import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
@@ -24,18 +17,12 @@ import {GaClickDirective} from "./directives/GaClick";
 // import 'element-closest-polyfill';
 // import 'nodelist-foreach-polyfill';
 // import 'element-remove';
-
 const VueRtStyle = {
   install(Vue, config) {
     if (!Vue.RtStyle) {
 
-      Vue.component(TabsSlider.name, TabsSlider);
-      Vue.component(TabsSliderItem.name, TabsSliderItem);
-      Vue.component(Table.name, Table);
-      Vue.component(TableCol.name, TableCol);
-      Vue.component(TableHeadItem.name, TableHeadItem);
-      Vue.component(TableItem.name, TableItem);
-      Vue.component(TableRow.name, TableRow);
+      // Vue.component(TabsSlider.name, TabsSlider);
+      // Vue.component(TabsSliderItem.name, TabsSliderItem);
 
       Vue.directive(SwipeLeft.name, SwipeLeft);
       Vue.directive(SwipeRight.name, SwipeRight);
@@ -84,13 +71,7 @@ VueRtStyle.version = version;
 
 export default VueRtStyle;
 export {
-  Table,
-  TableCol,
-  TableHeadItem,
-  TableItem,
-  TableRow,
-  TabsSlider,
-  TabsSliderItem,
+
   // need to change name directives
   SwipeLeft,
   SwipeRight,

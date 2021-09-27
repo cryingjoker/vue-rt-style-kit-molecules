@@ -87,7 +87,14 @@ import {
   TagsList,
   TextImageBlock,
   VideoBanner,
-  Youtube
+  Youtube,
+  Table,
+  TableCol,
+  TableHeadItem,
+  TableItem,
+  TableRow,
+  TabsSlider,
+  TabsSliderItem
 } from "./components"
 
 export default {
@@ -174,6 +181,13 @@ export default {
   TagsList,
   TextImageBlock,
   VideoBanner,
-  Youtube
+  Youtube,
+  Table,
+  TableCol,
+  TableHeadItem,
+  TableItem,
+  TableRow,
+  TabsSlider,
+  TabsSliderItem
 
 }
