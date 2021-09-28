@@ -46,7 +46,8 @@ export default {
   data() {
     return {
       isActive: false,
-      isAntivirus: false
+      isAntivirus: false,
+      backScroll: 0
     };
   },
   mounted() {
@@ -154,8 +155,8 @@ export default {
     },
     bindPageScroll() {
       const style = document.body.style;
-      style.backScroll = `${window.pageYOffset}`;
-      style.top = `-${window.pageYOffset}px`;
+      this.backScroll = window.pageYOffset;
+      style.top = `-${this.backScroll}px`;
       style.overflow = 'hidden';
       style.width = '100%';
       setTimeout(() => {
@@ -165,7 +166,7 @@ export default {
     unbindPageScroll() {
       const style = document.body.style;
       ['position', 'overflow', 'width', 'top'].forEach(i => style.removeProperty(i));
-      window.scrollTo(0, +style.backScroll);
+      window.scrollTo(0, this.backScroll);
     },
     addKeyBindind() {
       window.addEventListener('keydown', this.keyPress, {passive: false});
