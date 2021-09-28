@@ -9,19 +9,19 @@
  * @param {*} cmpDecorator - Название кастомного тэга для инициализации компонента
  * @param {*} file - Путь к загружаемому компоненту
  */
-const load = (cmpDecorator, fileLocation) => {
+const load = (cmpDecorator, fileLocation, path = 'components/') => {
   return {
-    [cmpDecorator]: () => import(`./components/${fileLocation}`)
+    [cmpDecorator]: () => import(`./${path}${fileLocation}`)
       // .then(cmp => { // @TODO Custom-events
       //   console.log('Hello there!', cmp)
       //   return cmp
       // })
-      .catch(e => console.error(e))
+      .catch(e => console.error('-->>', e))
   }
 }
 
 export default { // Сортировака по принадлежности, как в pages
-  // Main
+                 // Main
 
   // Form
   ...load('RtTag', 'Tag/Tag.vue'),
@@ -114,14 +114,32 @@ export default { // Сортировака по принадлежности, к
   ...load('RtTextImageBlock', 'TextImageBlock/TextImageBlock.vue'),
   ...load('RtVideoBanner', 'VideoBanner/VideoBanner.vue'),
   ...load('RtYoutube', 'Youtube/Youtube.vue'),
-
+  ...load('RtResizeContentHeight', 'ResizeContentHeight/ResizeContentHeight.vue'),
   // Other
 
 
   ...load('RtShowOn', 'ShowOn/ShowOn.vue'),
   ...load('RtUnWrapper', 'MobileExpandWrapper/UnWrapper.vue'), // @TODO - del him!
 }
+import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
+import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
+import {TooltipDirective} from "./directives/Tooltip/tooltip";
+import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
+import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
+import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
+import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
+import {GaClickDirective} from "./directives/GaClick";
 
 export const directives = {
-  ...load('RtResizeContentHeight', 'ResizeContentHeight/ResizeContentHeight.vue'),
+  PopupTriggerDirective,
+  SwipeLeft,
+  SwipeRight,
+  TooltipDirective,
+  ResizeContentHeightDirective,
+  OutsideClickDirective,
+  SlideContentVerticalDirective,
+  ScrollToOnClickDirective,
+  GaClickDirective
+  // ...load('RtResizeContentHeight', 'ResizeContentHeight.js','directives/')
+
 }
