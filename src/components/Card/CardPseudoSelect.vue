@@ -83,10 +83,10 @@
 
       chooseCategory(e) {
         e.preventDefault();
-        var button = e.target;
-        var targetLink = button.closest('.category-link').getAttribute('href');
-        var categoryFullTitle = button.closest('.rt-card').querySelector('.category-title').innerText;
-        var chosenCategory = categoryFullTitle.slice(0, categoryFullTitle.indexOf(' '));
+        const button = e.target
+        const targetLink = button.closest('.category-link').getAttribute('href')
+        const categoryFullTitle = button.closest('.rt-card').querySelector('.category-title').innerText
+        const chosenCategory = categoryFullTitle.slice(0, categoryFullTitle.indexOf(' '))
         localStorage.setItem('chosenCategory', chosenCategory);
         window.location.href = targetLink;
       }

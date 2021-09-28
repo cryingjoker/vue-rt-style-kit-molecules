@@ -158,12 +158,11 @@ export default {
       if (!this.xDown || !this.yDown) {
         return;
       }
-      var xUp = event.touches[0].clientX;
-      var yUp = event.touches[0].clientY;
+      const xUp = event.touches[0].clientX
+      const yUp = event.touches[0].clientY
 
-      var xDiff = this.xDown - xUp;
-      var yDiff = this.yDown - yUp;
-
+      const xDiff = this.xDown - xUp
+      const yDiff = this.yDown - yUp
 
       const activeIndex = this.customSlotsSort.indexOf(this.bannerActiveId);
       const size = this.customSlotsSort.length;

@@ -33,11 +33,7 @@
     computed:{},
     mounted() {
       const toggleComponentView = () => {
-        if(window.innerWidth <= parseInt(variables["mobile-upper-limit"])) {
-          this.isMobileView = true;
-        } else {
-          this.isMobileView = false;
-        }
+        this.isMobileView = window.innerWidth <= parseInt(variables["mobile-upper-limit"]);
         if(this.includingDesktop) {
           this.isMobileView = true;
         }

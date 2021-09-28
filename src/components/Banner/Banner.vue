@@ -477,11 +477,9 @@
                 this.calculateScroll();
             },
             calculateMobileOptions() {
-                const type = deviceTypeStore.getStatus();
-                this.deviceType = type;
+                this.deviceType = deviceTypeStore.getStatus();
             },
             calculateScroll() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const el = this.$el;
                 const deltaY = Math.max(window.innerHeight, el.offsetHeight);
                 if (

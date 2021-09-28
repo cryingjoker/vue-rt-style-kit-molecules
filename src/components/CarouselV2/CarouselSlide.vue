@@ -114,16 +114,8 @@
         }
       },
       calculatePosition() {
-        if(Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit) {
-          this.isOutsideContainer = true;
-        } else {
-          this.isOutsideContainer = false;
-        }
-        if(this.$el.getBoundingClientRect().right < ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10) && this.$el.getBoundingClientRect().left > (window.innerWidth - ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10))) {
-          this.isCentral = true;
-        } else {
-          this.isCentral = false;
-        }
+        this.isOutsideContainer = Math.floor(this.$el.getBoundingClientRect().right) > this.endLimit || this.$el.getBoundingClientRect().left < this.startLimit;
+        this.isCentral = this.$el.getBoundingClientRect().right < ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10) && this.$el.getBoundingClientRect().left > (window.innerWidth - ((window.innerWidth + this.$el.getBoundingClientRect().width) / 2 + 10));
       },
     },
     render(h) {

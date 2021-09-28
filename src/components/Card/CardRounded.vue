@@ -234,7 +234,7 @@ export default {
         if (typeof(Event) === 'function') {
           window.dispatchEvent(new Event('resize'));
         } else {
-          var evt = window.document.createEvent('UIEvents');
+          const evt = window.document.createEvent('UIEvents')
           evt.initUIEvent('resize', true, false, window, 0);
           window.dispatchEvent(evt);
         }
