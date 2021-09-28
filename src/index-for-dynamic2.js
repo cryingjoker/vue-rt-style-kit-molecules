@@ -61,13 +61,10 @@ export default { // Сортировака по принадлежности, к
   ...load('RtCountdownTimer', 'CountdownTimer/CountdownTimer.vue'), // @TODO create demo
   ...load('RtDownloadContent', 'DownloadContent/DownloadContent.vue'),
   ...load('RtHelpBlock', 'HelpBlock/HelpBlock.vue'),
-  ...load('RtInlineDropdown', 'InlineDropdown/InlineDropdown.vue'), // @TODO - del him!
-  ...load('RtInlineDropdownItem', 'InlineDropdown/InlineDropdownItem.vue'),
   ...load('RtMessageBox', 'MessageBox/MessageBox.vue'),
   ...load('RtPattern', 'Pattern/Pattern.vue'), // @TODO - del him!
   ...load('RtPopup', 'Popup/Popup.vue'),
   ...load('RtRealPopup', 'Popup/RealPopup.vue'),
-  ...load('RtReplacementLink', 'ReplacementLinkWrapper/ReplacementLink.vue'), // @TODO - del him!
   ...load('RtSlideContent', 'SlideContent/SlideContent.vue'),
   ...load('RtSlideContentDottedContent', 'SlideContent/SlideContentDottedContent.vue'),
   ...load('RtSlideContentDottedHeader', 'SlideContent/SlideContentDottedHeader.vue'),
@@ -100,8 +97,6 @@ export default { // Сортировака по принадлежности, к
   ...load('RtFilterN', 'FilterV2/Filter.vue'),
   ...load('RtFilterNItem', 'FilterV2/FilterItem.vue'),
   ...load('RtFilterNSetter', 'FilterV2/FilterSetter.vue'),
-  ...load('FunctionList', 'FunctionList/FunctionList.vue'), // @TODO - del him!
-  ...load('FunctionItem', 'FunctionList/FunctionItem.vue'),
   ...load('RtJumbotron', 'Jumbotron/Jumbotron.vue'),
   ...load('RtMinibanner', 'Minibanner/Minibanner.vue'),
   ...load('RtPhoneNumberInput', 'PhoneNumberInput/PhoneNumberInput.vue'),
@@ -111,12 +106,13 @@ export default { // Сортировака по принадлежности, к
   ...load('RtSliderItem', 'Slider/SliderItem.vue'),
   ...load('RtSwiper', 'Swiper/Swiper.vue'),
   ...load('RtSlide', 'Swiper/Slide.vue'),
+  ...load('RtTabsSlider', 'TabsSlider/TabsSlider.vue'),
+  ...load('RtTabsSliderItem', 'TabsSlider/TabsSliderItem.vue'),
   ...load('RtTextImageBlock', 'TextImageBlock/TextImageBlock.vue'),
   ...load('RtVideoBanner', 'VideoBanner/VideoBanner.vue'),
   ...load('RtYoutube', 'Youtube/Youtube.vue'),
   ...load('RtResizeContentHeight', 'ResizeContentHeight/ResizeContentHeight.vue'),
   // Other
-
 
   ...load('RtShowOn', 'ShowOn/ShowOn.vue'),
   ...load('RtUnWrapper', 'MobileExpandWrapper/UnWrapper.vue'), // @TODO - del him!

@@ -36,11 +36,7 @@ export {default as FilterWatcher} from './Filter/FilterWatcher.vue';
 export {default as FilterV2} from './FilterV2/Filter.vue';
 export {default as FilterItemV2} from './FilterV2/FilterItem.vue';
 export {default as FilterSetterV2} from './FilterV2/FilterSetter.vue';
-export {default as FunctionList} from './FunctionList/FunctionList.vue';
-export {default as FunctionItem} from './FunctionList/FunctionItem.vue';
 export {default as HelpBlock} from './HelpBlock/HelpBlock.vue';
-export {default as InlineDropdown} from './InlineDropdown/InlineDropdown.vue';
-export {default as InlineDropdownItem} from './InlineDropdown/InlineDropdownItem.vue';
 export {default as Jumbotron} from './Jumbotron/Jumbotron.vue';
 export {default as MessageBox} from './MessageBox/MessageBox.vue'
 export {default as Microtabs} from './Microtabs/Microtabs.vue';
@@ -58,7 +54,6 @@ export {default as RealPopup} from './Popup/RealPopup.vue';
 export {default as PreviewBanner} from './PreviewBanner/PreviewBanner.vue';
 export {default as Privilege} from './Privilege/Privilege.vue';
 export {default as ProductCard} from './ProductCard/ProductCard.vue';
-export {default as ReplacementLink} from './ReplacementLinkWrapper/ReplacementLink.vue';
 export {default as ResizeContentHeight} from './ResizeContentHeight/ResizeContentHeight.vue';
 export {default as RowList} from './RowList/RowList.vue';
 export {default as RowListItem} from './RowList/RowListItem.vue';
@@ -95,5 +90,5 @@ export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 export {default as Swiper} from './Swiper/Swiper.vue';
 export {default as Slide} from './Swiper/Slide.vue';
 
-//game-arrow, gallery-carousel, opportunity, scroll-bar, vertical-scroll-bar deleted
+//game-arrow, gallery-carousel, opportunity, scroll-bar, vertical-scroll-bar, function-list, inline-dropdown, replacement-link deleted
 
