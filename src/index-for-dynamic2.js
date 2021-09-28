@@ -116,7 +116,12 @@ export default { // Сортировака по принадлежности, к
   ...load('RtYoutube', 'Youtube/Youtube.vue'),
 
   // Other
-  ...load('RtResizeContentHeight', 'ResizeContentHeight/ResizeContentHeight.vue'),
+
+
   ...load('RtShowOn', 'ShowOn/ShowOn.vue'),
   ...load('RtUnWrapper', 'MobileExpandWrapper/UnWrapper.vue'), // @TODO - del him!
+}
+
+export const directives = {
+  ...load('RtResizeContentHeight', 'ResizeContentHeight/ResizeContentHeight.vue'),
 }
