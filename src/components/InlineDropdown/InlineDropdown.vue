@@ -1,10 +1,10 @@
 <script type="text/jsx">
 
-import {Select} from "vue-rt-style-kit-atoms";
+// import {Select} from "vue-rt-style-kit-atoms";
 import './InlineDropdown.styl'
 
 const componentsList = {};
-componentsList[Select.name] = Select;
+// componentsList[Select.name] = Select;
 export default {
   name: "RtInlineDropdown",
   components: {},
