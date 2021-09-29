@@ -30,9 +30,9 @@ export const directives = {
  * @param {*} cmpDecorator - Название кастомного тэга для инициализации компонента
  * @param {*} file - Путь к загружаемому компоненту
  */
-const load = (cmpDecorator, fileLocation, path = 'components/') => {
+const load = (cmpDecorator, fileLocation) => {
   return {
-    [cmpDecorator]: () => import(`./${path}${fileLocation}`)
+    [cmpDecorator]: () => import(`./components/${fileLocation}`)
       // .then(cmp => { // @TODO Custom-events
       //   console.log('Hello there!', cmp)
       //   return cmp
