@@ -1,9 +1,8 @@
 /**
- * Данный список компонентов подключается динамически на страницу
+ * Данный список используется для динамического подключения компонентов
  * @see RTRU-11155
- * @info использовать через Vue.component(cmpDecorator, cmp), без use метода
  */
-// Список директив
+// Список директив всегда статический
 import { GaClickDirective } from './directives/GaClick'
 import { OutsideClickDirective } from './directives/OutsideClick/OutsideClick'
 import { PopupTriggerDirective } from './components/Popup/PopupTrigger'
@@ -13,6 +12,9 @@ import { SlideContentVerticalDirective } from './directives/SlideContent/SlideCo
 import { SwipeLeft, SwipeRight } from './directives/Swipe/swipe'
 import { TooltipDirective } from './directives/Tooltip/tooltip'
  
+/**
+ * @info использовать через Vue.directive(directive.name, directive)
+ */
 export const directives = {
   GaClickDirective,
   OutsideClickDirective,
@@ -41,7 +43,10 @@ const load = (cmpDecorator, fileLocation) => {
   }
 }
 
-export default { // Сортировака по принадлежности, как в pages
+/**
+ * @info использовать через Vue.component(cmpDecorator, cmp), без use метода
+ */
+export default { // Сортировака по группам, как в pages
   // Main
 
   // Form
