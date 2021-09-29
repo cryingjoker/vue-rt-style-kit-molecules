@@ -28,7 +28,6 @@ export {default as CarouselV3Item} from './CarouselV3/CarouselV3Item.vue';
 export {default as CheckboxTabs} from './CheckboxTabs/CheckboxTabs.vue';
 export {default as CommentSlider} from './CommentSlider/CommentSlider.vue';
 export {default as CommentSliderItem} from './CommentSlider/CommentSliderItem.vue';
-export {default as CountdownTimer} from './CountdownTimer/CountdownTimer.vue';
 export {default as DownloadContent} from './DownloadContent/DownloadContent.vue';
 export {default as Filter} from './Filter/Filter.vue';
 export {default as FilterCaller} from './Filter/FilterCaller.vue';
@@ -90,5 +89,14 @@ export { ResizeTypeStore } from './ResizeTypeStore/ResizeTypeStore.js';
 export {default as Swiper} from './Swiper/Swiper.vue';
 export {default as Slide} from './Swiper/Slide.vue';
 
-//game-arrow, gallery-carousel, opportunity, scroll-bar, vertical-scroll-bar, function-list, inline-dropdown, replacement-link deleted
+/**DELETED:
+ game-arrow,
+ gallery-carousel,
+ opportunity,
+ scroll-bar,
+ function-list,
+ inline-dropdown,
+ replacement-link,
+ countdown-timer
+ */
 

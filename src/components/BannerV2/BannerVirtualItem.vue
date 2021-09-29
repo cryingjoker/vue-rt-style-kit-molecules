@@ -114,7 +114,7 @@ export default {
     },
     googleAn(bind){
       if(bind && this.$el.tagName) {
-        this.$el.querySelector('a, button').addEventListener('click', (e)=> {
+        this.$el.querySelector('a, button')?.addEventListener('click', (e)=> {
           if (!e.target.getAttribute('data-ga-pushed')) {
             e.preventDefault();
             this.fireGoogleAn()

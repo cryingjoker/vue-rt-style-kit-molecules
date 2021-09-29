@@ -11,7 +11,7 @@ import { ScrollToOnClickDirective } from './directives/ScrollToOnClick/ScrollToO
 import { SlideContentVerticalDirective } from './directives/SlideContent/SlideContentVertical'
 import { SwipeLeft, SwipeRight } from './directives/Swipe/swipe'
 import { TooltipDirective } from './directives/Tooltip/tooltip'
- 
+
 /**
  * @info использовать через Vue.directive(directive.name, directive)
  */
@@ -84,7 +84,6 @@ export default { // Сортировака по группам, как в pages
   ...load('RtPopover', 'Popover/Popover.vue'),
   ...load('RtUseCase', 'Card/UseCase/UseCase.vue'),
   ...load('RtCheckboxTabs', 'CheckboxTabs/CheckboxTabs.vue'), // @TODO move to Form group
-  ...load('RtCountdownTimer', 'CountdownTimer/CountdownTimer.vue'), // @TODO create demo
   ...load('RtDownloadContent', 'DownloadContent/DownloadContent.vue'),
   ...load('RtHelpBlock', 'HelpBlock/HelpBlock.vue'),
   ...load('RtMessageBox', 'MessageBox/MessageBox.vue'),
