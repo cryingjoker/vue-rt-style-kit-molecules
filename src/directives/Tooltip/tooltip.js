@@ -146,7 +146,7 @@ class Tooltip {
 
 }
 
-export const TooltipDirective = {
+export default {
   name: "Tooltip",
   bind(el, bindings, vnode) {
     el.tooltip = new Tooltip(vnode.elm, bindings, vnode);

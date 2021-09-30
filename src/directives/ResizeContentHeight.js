@@ -143,7 +143,7 @@ var emit = (vnode, name, data) => {
     handlers[name].fns(data);
   }
 }
-export const ResizeContentHeightDirective = {
+export default {
   name: "RtResizeContentHeight",
   bind(el, bindings, vnode) {
     vnode.context.ResizeContentHeight = new ResizeContentHeight(vnode.elm, bindings, vnode);

@@ -1,6 +1,6 @@
 import {popupStore} from "./PopupStore";
 
-export const PopupTriggerDirective = {
+export default {
   name: "PopupTrigger",
   isFn: true,
   bind(el, bindings, vnode) {

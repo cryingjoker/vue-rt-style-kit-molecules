@@ -1,11 +1,9 @@
 <script type="text/jsx">
-import {OutsideClickDirective} from "../../../directives/OutsideClick/OutsideClick";
-import {scrollIt} from "../../../utils";
 import './CardBuy.styl'
-import debounce from "debounce";
-const componentsList = {};
-const directives = {};
-directives[OutsideClickDirective.name] = OutsideClickDirective;
+import { scrollIt } from '../../../utils'
+
+const componentsList = {}
+
 export default {
   name: "RtCardBuy",
   components: componentsList,

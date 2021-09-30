@@ -3,28 +3,13 @@
  * @see RTRU-11155
  */
 // Список директив всегда статический
-import { GaClickDirective } from './directives/GaClick'
-import { OutsideClickDirective } from './directives/OutsideClick/OutsideClick'
-import { PopupTriggerDirective } from './components/Popup/PopupTrigger'
-import { ResizeContentHeightDirective } from './directives/ResizeContentHeight'
-import { ScrollToOnClickDirective } from './directives/ScrollToOnClick/ScrollToOnClick'
-import { SlideContentVerticalDirective } from './directives/SlideContent/SlideContentVertical'
-import { SwipeLeft, SwipeRight } from './directives/Swipe/swipe'
-import { TooltipDirective } from './directives/Tooltip/tooltip'
-
+import * as directivesFromMolecules from './directives'
+ 
 /**
  * @info использовать через Vue.directive(directive.name, directive)
  */
 export const directives = {
-  GaClickDirective,
-  OutsideClickDirective,
-  PopupTriggerDirective,
-  ResizeContentHeightDirective,
-  ScrollToOnClickDirective,
-  SlideContentVerticalDirective,
-  SwipeLeft,
-  SwipeRight,
-  TooltipDirective,
+  ...directivesFromMolecules
 }
 
 /**

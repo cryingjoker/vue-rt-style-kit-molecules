@@ -1,6 +1,6 @@
 import variables from "../variables.json";
 
-export const GaClickDirective = {
+export default {
   name: "GaClick",
   bind(el, bindings, vnode) {
     if(bindings.value.data) {
