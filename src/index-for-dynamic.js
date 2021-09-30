@@ -66,6 +66,7 @@ export default { // Сортировака по группам, как в pages
   ...load('RtTabsContentItem', 'Tabs/TabsContentItem.vue'),
 
   // Simple
+  ...load('RtCountdownTimer', 'CountdownTimer/CountdownTimer.vue'), // @TODO create demo
   ...load('RtPopover', 'Popover/Popover.vue'),
   ...load('RtUseCase', 'Card/UseCase/UseCase.vue'),
   ...load('RtCheckboxTabs', 'CheckboxTabs/CheckboxTabs.vue'), // @TODO move to Form group
