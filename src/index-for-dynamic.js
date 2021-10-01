@@ -2,6 +2,7 @@
  * Данный список используется для динамического подключения компонентов
  * @see RTRU-11155
  */
+import variables from 'vue-rt-style-kit-atoms/src/variables'
 // Список директив всегда статический
 import * as directivesFromMolecules from './directives'
  
@@ -17,14 +18,35 @@ export const directives = {
  * @param {*} cmpDecorator - Название кастомного тэга для инициализации компонента
  * @param {*} file - Путь к загружаемому компоненту
  */
-const load = (cmpDecorator, fileLocation) => {
+const load = (cmpDecorator, fileLocation, loader = null) => {
   return {
-    [cmpDecorator]: () => import(`./components/${fileLocation}`)
-      // .then(cmp => { // @TODO Custom-events
-      //   console.log('Hello there!', cmp)
-      //   return cmp
-      // })
-      .catch(e => console.error('-->>', e))
+    [cmpDecorator]: () => ({
+      component: import(`./components/${fileLocation}`)
+        // .then(cmp => { // @TODO Custom-events
+        //   console.log('Hello there!', cmp)
+        //   return cmp
+        // })
+        .catch(e => console.error('-->>', e)),
+      loading: loader,
+      delay: 0
+    })
+  }
+}
+/**
+ * Экспериментальный компонент скелета
+ * @param {Array} heights - список высот для точек слома (md, td, dd)
+ */
+const skeleton = heights => {
+  const normalizeBpSize = bp => parseInt(variables[bp], 10)
+  const breakpoints = [
+    normalizeBpSize('tablet-lower-limit'),
+    normalizeBpSize('laptop-lower-limit')
+  ]
+  const bpKey = breakpoints.find(bp => window.innerWidth <= bp) || 2
+  return {
+    render (h) {
+      return <div style={`height: ${heights[bpKey]}px`}></div>
+    }
   }
 }
 
@@ -105,7 +127,7 @@ export default { // Сортировака по группам, как в pages
   ...load('RtFilterN', 'FilterV2/Filter.vue'),
   ...load('RtFilterNItem', 'FilterV2/FilterItem.vue'),
   ...load('RtFilterNSetter', 'FilterV2/FilterSetter.vue'),
-  ...load('RtJumbotron', 'Jumbotron/Jumbotron.vue'),
+  ...load('RtJumbotron', 'Jumbotron/Jumbotron.vue', skeleton([450,380,520])),
   ...load('RtMinibanner', 'Minibanner/Minibanner.vue'),
   ...load('RtPhoneNumberInput', 'PhoneNumberInput/PhoneNumberInput.vue'),
   ...load('RtPreviewBanner', 'PreviewBanner/PreviewBanner.vue'),
