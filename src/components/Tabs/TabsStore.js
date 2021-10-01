@@ -71,7 +71,7 @@ const addTabUuid = (parentId, tabsName) => {
       tabsStore.tabsParents[parentId].index = 0
     }
   } else {
-    if(Object.keys(tabsStore.tabsParents[parentId]).length > 2 ) {
+    if(Object.keys(tabsStore.tabsParents[parentId]).length > 1 ) {
       tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
     }else{
       tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
