@@ -61,9 +61,6 @@ export default { // Сортировака по группам, как в pages
   ...load('RtRowList', 'RowList/RowList.vue'),
   ...load('RtRowListItem', 'RowList/RowListItem.vue'),
   ...load('RtScrollTabs', 'ScrollTabs/ScrollTabs.vue'),
-  ...load('RtTabs', 'Tabs/Tabs.vue'),
-  ...load('RtTabsNavItem', 'Tabs/TabsNavigationItem.vue'),
-  ...load('RtTabsContentItem', 'Tabs/TabsContentItem.vue'),
 
   // Simple
   ...load('RtCountdownTimer', 'CountdownTimer/CountdownTimer.vue'), // @TODO create demo

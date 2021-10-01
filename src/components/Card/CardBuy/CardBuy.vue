@@ -7,7 +7,6 @@ const componentsList = {}
 export default {
   name: "RtCardBuy",
   components: componentsList,
-  directives: directives,
   props: {
     isHorizontalCard:{
       type: Boolean,
