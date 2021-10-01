@@ -49,10 +49,15 @@ const getActiveIndexes = (parentId)=>{
   const parentArray = tabsStore.tabsParents[parentId]
   return {index: parentArray.index, indexBefore: parentArray.indexBefore}
 }
-const setVersion = (parentId,version)=>{
+const setVersion = (parentId, version) => {
   if (tabsStore.tabsParents[parentId]) {
     tabsStore.tabsParents[parentId].version = version
     runWatchers(parentId);
+  } else {
+    tabsStore.tabsParents[parentId] = {
+      version: 2,
+      index: 0
+    };
   }
 }
 const addTabUuid = (parentId, tabsName) => {
@@ -64,22 +69,27 @@ const addTabUuid = (parentId, tabsName) => {
     } else {
       tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
       tabsStore.tabsParents[parentId].index = 0
-
     }
   } else {
-    tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
+    if(Object.keys(tabsStore.tabsParents[parentId]).length > 2 ) {
+      tabsStore.tabsParents[parentId][tabsName] = {isActive: false};
+    }else{
+      tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
+      tabsStore.tabsParents[parentId].index = 0
+    }
+
   }
   tabsStore.tabsNames[tabsName] = parentId;
 
   runWatchers(parentId);
 };
-const clearStore = (parentId)=>{
+const clearStore = (parentId) => {
   if (tabsStore.tabsParents[parentId]) {
     delete tabsStore.tabsParents[parentId]
     removeWatchers();
   }
 }
-const getActiveTabs = (parentUid)=>{
+const getActiveTabs = (parentUid) => {
   return tabsStore.tabsParents[parentUid]
 }
 const addWatcher = (parentUid,fn) => {
@@ -129,11 +139,11 @@ export const tabsStore = Vue.observable({
   tabsNames: {},
   addWatcher: addWatcher,
   watcherFunction: {},
-  clearStore:clearStore,
+  clearStore: clearStore,
   setVersion: setVersion,
-  getActiveIndexes:getActiveIndexes,
+  getActiveIndexes: getActiveIndexes,
   setTabWidth: setTabWidth,
-  getActiveTabs:getActiveTabs,
+  getActiveTabs: getActiveTabs,
   globalAnalyticsSegment: '',
   setGlobalAnalyticsSegment: setGlobalAnalyticsSegment,
 
