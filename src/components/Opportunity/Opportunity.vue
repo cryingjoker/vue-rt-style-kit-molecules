@@ -18,11 +18,7 @@
 
       reRenderOnResize(){
         window.addEventListener('resize', () => {
-          if(window.innerWidth <= parseInt(variables["tablet-upper-limit"])) {
-            this.mobileLayout = true;
-          } else {
-            this.mobileLayout = false;
-          }
+          this.mobileLayout = window.innerWidth <= parseInt(variables["tablet-upper-limit"]);
         })
       }
     },

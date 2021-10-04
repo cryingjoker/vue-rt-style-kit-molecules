@@ -23,7 +23,7 @@
         outerWidth: null,
         innerWidth: null,
         visibleIcons: null,
-        isIE: /*@cc_on!@*/false || !!document.documentMode
+        isIE: /*@cc_on!@*/!!document.documentMode
       }
     },
 

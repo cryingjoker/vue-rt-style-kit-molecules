@@ -69,7 +69,7 @@ const scrollIt = (destination, duration = 200, easing = "linear", callback) => {
       : destinationOffset
   );
 
-  if ("requestAnimationFrame" in window === false) {
+  if (!("requestAnimationFrame" in window)) {
     window.scroll(0, destinationOffsetToScroll);
     if (callback) {
       callback();

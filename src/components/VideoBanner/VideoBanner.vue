@@ -48,7 +48,7 @@ export default {
     pause() {
       const video = this.$refs.video;
       if (video) {
-        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
+        const isPlaying = video.currentTime > 0 && !video.paused && !video.ended
         if (isPlaying) {
           video.pause()
         }
@@ -56,7 +56,7 @@ export default {
     },
     play() {
       const video = this.$refs.video;
-      var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
+      const isPlaying = video.currentTime > 0 && !video.paused && !video.ended
       if (!isPlaying && video) {
         video.play()
       }
@@ -67,8 +67,8 @@ export default {
         video.volume = 0;
         video.pause();
         setTimeout(() => {
-          var isPlaying = video.currentTime > 0 && !video.paused && !video.ended
-            && video.readyState > 2;
+          const isPlaying = video.currentTime > 0 && !video.paused && !video.ended
+            && video.readyState > 2
           if (!isPlaying) {
             video.play();
           }

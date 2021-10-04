@@ -105,11 +105,7 @@ export default {
           let utmPrefix = utm.split('_')[0];
           if(this.utmSources && this.utmSources.length > 0 ){
             let activePlaylistIndex = this.utmSources.findIndex((utmSourcesItem)=>{
-              if(utmSourcesItem === utmPrefix){
-                return true;
-              }else{
-                return false;
-              }
+              return utmSourcesItem === utmPrefix;
             });
             if(activePlaylistIndex >= 0){
               this.activePlaylistIndex = activePlaylistIndex;
