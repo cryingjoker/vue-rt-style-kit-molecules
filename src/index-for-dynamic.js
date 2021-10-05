@@ -58,7 +58,7 @@ export default { // Сортировака по группам, как в pages
 
   // Form
   ...load('RtTag', 'Tag/Tag.vue'),
-  ...load('RtTagsList', 'Tag/TagsList.vue'),
+  ...load('RtTagList', 'Tag/TagsList.vue'),
 
   // Group
   ...load('RtArrowBlock', 'ArrowBlock/ArrowBlock.vue'),
