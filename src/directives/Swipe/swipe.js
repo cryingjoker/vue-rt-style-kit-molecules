@@ -57,7 +57,7 @@ export const SwipeLeft = {
     }
   }
 };
-export default {
+export const SwipeRight ={
   name: 'rt-swipe-right',
   bind (el, bindings, vnode) {
     vnode.Swipe = new Swipe('right',el,bindings);
