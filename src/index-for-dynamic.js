@@ -5,7 +5,7 @@
 import variables from 'vue-rt-style-kit-atoms/src/variables'
 // Список директив всегда статический
 import * as directivesFromMolecules from './directives'
- 
+
 /**
  * @info использовать через Vue.directive(directive.name, directive)
  */
