@@ -55,13 +55,11 @@ const setVersion = (parentId, version) => {
     runWatchers(parentId);
   } else {
     tabsStore.tabsParents[parentId] = {
-      version: 2,
-      index: 0
+      version: 2
     };
   }
 }
 const addTabUuid = (parentId, tabsName) => {
-
   if (!tabsStore.tabsParents[parentId]) {
     tabsStore.tabsParents[parentId] = {};
     if (tabsStore.tabsParents[parentId][tabsName]) {
@@ -77,10 +75,9 @@ const addTabUuid = (parentId, tabsName) => {
       tabsStore.tabsParents[parentId][tabsName] = {isActive: true};
       tabsStore.tabsParents[parentId].index = 0
     }
-
   }
   tabsStore.tabsNames[tabsName] = parentId;
-
+  const tabsParent = tabsStore.tabsParents[parentId];
   runWatchers(parentId);
 };
 const clearStore = (parentId) => {
