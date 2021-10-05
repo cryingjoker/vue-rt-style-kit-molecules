@@ -28,9 +28,6 @@ import {
   // InlineDropdownItem,
   Tag,
   TagsList,
-  Filter,
-  FilterWatcher,
-  FilterCaller,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
@@ -151,14 +148,11 @@ const VueRtStyle = {
       // Vue.component(InlineDropdownItem.name, InlineDropdownItem);
       Vue.component(Tag.name, Tag);
       Vue.component(TagsList.name, TagsList);
-      Vue.component(Filter.name, Filter);
-      Vue.component(FilterWatcher.name, FilterWatcher);
       Vue.component(FilterV2.name, FilterV2);
       Vue.component(FilterItemV2.name, FilterItemV2);
       Vue.component(FilterSetterV2.name, FilterSetterV2);
       Vue.component(OptionsList.name, OptionsList);
       Vue.component(OptionsListInfoItem.name, OptionsListInfoItem);
-      Vue.component(FilterCaller.name, FilterCaller);
       Vue.component(Sticky.name, Sticky);
       Vue.component(StickyBottomLine.name, StickyBottomLine);
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
@@ -316,9 +310,6 @@ export {
   // InlineDropdownItem,
   Tag,
   TagsList,
-  Filter,
-  FilterWatcher,
-  FilterCaller,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
