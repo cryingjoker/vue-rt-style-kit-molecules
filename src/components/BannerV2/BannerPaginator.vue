@@ -97,7 +97,7 @@
       setNextSlide(){
         const activeIndex = this.items.indexOf(this.activeId)
         const nextIndex = (activeIndex+1)%this.items.length;
-        bannerStore.setActiveId(this.bannerName,this.items[nextIndex])
+        bannerStore.setActiveId(this.bannerName,this.items[nextIndex], false, false, 1)
         setTimeout(()=>{
           this.tick()
         },500)
@@ -113,8 +113,9 @@
       getSlotSort() {
         this.customSlots = bannerStore.getSlot(this.bannerName)
       },
-      setActive(itemId){
-        bannerStore.setActiveId(this.bannerName,itemId)
+      setActive(itemId, orientation = 0){
+
+        bannerStore.setActiveId(this.bannerName,itemId, false, false, orientation)
       }
     },
     computed: {
@@ -159,10 +160,10 @@
         const prev = (activeIndex - 1 + size) %size;
         const next = (activeIndex + 1) %size;
         const setPrevActive = () => {
-          this.setActive(this.items[prev])
+          this.setActive(this.items[prev],-1)
         }
         const setNextActive = () => {
-          this.setActive(this.items[next])
+          this.setActive(this.items[next],1)
         }
         const lineClassList = ['rt-n-banner-paginator-line']
         if(this.color == 'orange'){

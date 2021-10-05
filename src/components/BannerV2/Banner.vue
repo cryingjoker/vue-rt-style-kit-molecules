@@ -100,9 +100,9 @@ export default {
           const prev = (activeIndex - 1 + size) % size;
           const next = (activeIndex + 1) % size;
           if (e.deltaX > 0) {
-            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next])
+            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next], false, false, 1)
           } else {
-            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[prev])
+            bannerStore.setActiveId(this.bannerName, this.customSlotsSort[prev], false, false, -1)
           }
           this.wheelPause = true;
           setTimeout(() => {
@@ -176,10 +176,11 @@ export default {
           event.preventDefault();
         }
         if (xDiff > 0) {
-          bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next])
+
+          bannerStore.setActiveId(this.bannerName, this.customSlotsSort[next], false, false, 1)
 
         } else {
-          bannerStore.setActiveId(this.bannerName, this.customSlotsSort[prev])
+          bannerStore.setActiveId(this.bannerName, this.customSlotsSort[prev], false, false, -1)
         }
       }
 
