@@ -149,6 +149,6 @@ export default { // Сортировака по группам, как в pages
   ...load('RtYoutube', 'Youtube/Youtube.vue'),
 
   // Other
-  ...load('RtShowOn', 'ShowOn/ShowOn.vue'),
+  ...load('ShowOn', 'ShowOn/ShowOn.vue'),
   ...load('RtUnWrapper', 'MobileExpandWrapper/UnWrapper.vue'), // @TODO - del him!
 }
