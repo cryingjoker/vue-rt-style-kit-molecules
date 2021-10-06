@@ -1,0 +1,42 @@
+.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
+  font-size 14px
+  background-color main-color003
+  border-radius 25px
+  margin-top 10px
+  margin-bottom 10px
+  margin-left 10px
+  margin-right 10px
+  padding-top 6px
+  padding-bottom 4px
+  padding-left 15px
+  padding-right 15px
+  cursor pointer
+  transition-timing-function ease-in-out
+  transition-duration .4s
+  transition-property background-color, color
+  .rt-dark-theme &
+    color b2c-white
+  &:hover,
+  &--is-active
+    color b2c-white
+    background-color b2c-purple
+    .rt-dark-theme &
+      color b2c-white
+      background-color b2c-orange
+
+.rt-tabs--tag-mode .rt-tabs-navigation__item--is-active .rt-tabs-navigation__item-name
+  color b2c-white
+  background-color b2c-purple
+  .rt-dark-theme &
+    color b2c-white
+    background-color b2c-orange
+.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
+  margin-left: 0
+.rt-tabs--tag-mode .rt-tabs-navigation
+  &:after
+    display: none
+.rt-tabs--tag-mode .rt-tabs-navigation__item+.rt-tabs-navigation__item
+  margin-left: 0
+.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
+  &:before
+    display: none!important
