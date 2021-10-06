@@ -36,19 +36,19 @@ const load = (cmpDecorator, fileLocation, loader = null) => {
  * Экспериментальный компонент скелета
  * @param {Array} heights - список высот для точек слома (md, td, dd)
  */
-const skeleton = heights => {
-  const normalizeBpSize = bp => parseInt(variables[bp], 10)
-  const breakpoints = [
-    normalizeBpSize('tablet-lower-limit'),
-    normalizeBpSize('laptop-lower-limit')
-  ]
-  const bpKey = breakpoints.find(bp => window.innerWidth <= bp) || 2
-  return {
-    render (h) {
-      return <div style={`height: ${heights[bpKey]}px`}></div>
-    }
-  }
-}
+// const skeleton = heights => {
+//   const normalizeBpSize = bp => parseInt(variables[bp], 10)
+//   const breakpoints = [
+//     normalizeBpSize('tablet-lower-limit'),
+//     normalizeBpSize('laptop-lower-limit')
+//   ]
+//   const bpKey = breakpoints.find(bp => window.innerWidth <= bp) || 2
+//   return {
+//     render (h) {
+//       return <div style={`height: ${heights[bpKey]}px`}></div>
+//     }
+//   }
+// }
 
 /**
  * @info использовать через Vue.component(cmpDecorator, cmp), без use метода
@@ -132,7 +132,7 @@ export default { // Сортировака по группам, как в pages
   ...load('RtFilterN', 'FilterV2/Filter.vue'),
   ...load('RtFilterNItem', 'FilterV2/FilterItem.vue'),
   ...load('RtFilterNSetter', 'FilterV2/FilterSetter.vue'),
-  ...load('RtJumbotron', 'Jumbotron/Jumbotron.vue', skeleton([450,380,520])),
+  ...load('RtJumbotron', 'Jumbotron/Jumbotron.vue'),
   ...load('RtMinibanner', 'Minibanner/Minibanner.vue'),
   ...load('RtPhoneNumberInput', 'PhoneNumberInput/PhoneNumberInput.vue'),
   ...load('RtPreviewBanner', 'PreviewBanner/PreviewBanner.vue'),
