@@ -7,8 +7,8 @@
         name: "RtScrollTabs",
         props: {
             hasFixedJsNode: {
-                type: String,
-                default: ''
+                type: Boolean,
+                default: false
             },
             removeBaseTag: {
                 type: Boolean,
@@ -162,7 +162,6 @@
             setFixedJsScroll() {
 
                 if (!this.hasFixedJsNode) {
-
                     return false;
                 }
                 const resizeSize = debounce(() => {

@@ -2,6 +2,7 @@
 import { tabsStore } from "./TabsStore";
 import variables from "../../variables.json";
 import smoothscroll from 'smoothscroll-polyfill';
+import './Tabs.styl'
 
 const componentsList = {};
 

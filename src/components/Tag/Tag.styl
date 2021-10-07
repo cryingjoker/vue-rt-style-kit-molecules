@@ -1,6 +1,7 @@
 .rt-tag
   .{newAppName}-dark-theme &
     background-color b2c-white01
+
 .{newAppName}-tag-list
   &--color-purple
     .{newAppName}-tag--is-active,
@@ -227,8 +228,7 @@
         .rt-dark-theme &, &
           background main-color
 
-.{newAppName}-tag,
-.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
+.rt-tag
   font-size 14px
   background-color main-color003
   border-radius 25px
@@ -244,73 +244,12 @@
   transition-timing-function ease-in-out
   transition-duration .4s
   transition-property background-color, color
-
-
   .{newAppName}-dark-theme &
     color b2c-white
-
   &:hover,
   &--is-active
-    //.{newAppName}-dark-theme &
-    //  color b2c-white
-    //  background-color b2c-purple
-
     color b2c-white
     background-color b2c-purple
     .{newAppName}-dark-theme &
       color b2c-white
       background-color b2c-orange
-
-.rt-tabs--tag-mode .rt-tabs-navigation__item--is-active .rt-tabs-navigation__item-name
-  .{newAppName}-dark-theme &
-    color b2c-white
-    background-color b2c-orange
-
-  color b2c-white
-  background-color b2c-purple
-.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
-  margin-left: 0
-.rt-tabs--tag-mode .rt-tabs-navigation
-  &:after
-    display: none
-.rt-tabs--tag-mode .rt-tabs-navigation__item+.rt-tabs-navigation__item
-  margin-left: 0px
-.rt-tabs--tag-mode .rt-tabs-navigation__item .rt-tabs-navigation__item-name
-  &:before
-    display: none!important
-
-.rt-tag-n-wrapper
-  display flex
-  flex-wrap nowrap
-  overflow: auto;
-
-.rt-tag-n
-  padding-top: 8px
-  padding-bottom: 8px
-  padding-left: 32px
-  padding-right: 32px
-  border 1px solid disable-button-color
-  transition-timing-function ease-in-out
-  transition-duration .4s
-  transition-property border, color
-  display: inline-block
-  border-radius 40px
-  cursor: pointer;
-  white-space nowrap
-  &+.rt-tag-n
-    margin-left: 12px
-
-  @media(hover: hover)
-    &:hover
-      color b2c-orange
-.rt-tag-n-active
-  border 1px solid b2c-orange
-
-
-
-.rt-tag-n--purple
-  @media(hover: hover)
-    &:hover
-      color b2c-purple
-  &.rt-tag-n-active
-    border 1px solid b2c-purple

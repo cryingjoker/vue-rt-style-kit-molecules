@@ -13,10 +13,10 @@
                 type: Boolean,
                 default: false
             },
-//            needBorder: {
-//                type: Boolean,
-//                default: true
-//            },
+           needBorder: {
+               type: Boolean,
+               default: true
+           },
             dottedView: {
                 type: Boolean,
                 default: false
@@ -45,7 +45,6 @@
         methods: {
             toggleOpen() {
                 this.isOpenLocal = !this.isOpenLocal;
-                console.log(this.isOpenLocal)
                 if(this.isOpenLocal){
                     this.openCallback()
                 }else{
@@ -60,7 +59,6 @@
                 this.isOpenLocal = this.isOpen;
             }
             if (this.dottedView || this.revertDottedView) {
-
                 const header = this.$refs.header
                 header.$el.querySelectorAll('.rt-slide-content-trigger').forEach((el) => {
                     el.addEventListener('click', () => {
@@ -113,9 +111,9 @@
             let slideArrowClass = `rt-slide__arrow rt-slide__arrow--${this.arrowPosition}`;
             let slideClass = `rt-slide`;
 
-//            if (!this.needBorder) {
-//                slideClass += ' rt-slide--without-border';
-//            }
+           if (!this.needBorder) {
+               slideClass += ' rt-slide--without-border';
+           }
             if (this.isOpenLocal) {
                 slideClass += ' rt-slide--is-active';
             }

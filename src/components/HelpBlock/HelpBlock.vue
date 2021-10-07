@@ -5,7 +5,7 @@
     props: {
       onClick: {
         type: Function,
-        default: null
+        default: () => ({})
       },
       hideIcon: {
         type: Boolean,
