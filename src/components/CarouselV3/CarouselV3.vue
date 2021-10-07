@@ -261,6 +261,7 @@ export default {
         localName = this._uid;
       }
       this.slides = [...carouselV3Store.getSliderContent(localName)]
+      this.slidesIds = [...carouselV3Store.getSliderCustomIds(localName)]
       this.activeItemIndex = carouselV3Store.getActiveIndex(localName)
       const arrowsOpt = carouselV3Store.getArrowOptions(localName);
       const shadowOpt = carouselV3Store.getShadowOptions(localName);
@@ -536,6 +537,7 @@ export default {
           }
           return h(CarouselV3RenderItem, {
             props: {
+              customIds: this.slidesIds[slotIndex],
               colInRow: colInRow - 0,
               scrollableOnDesktop: this.scrollableOnDesktop || this.deviceType.search('desktop') < 0,
               notActive: notActive,
