@@ -81,7 +81,7 @@ export default {
       let navHiddenActivated = false
       this.navList.forEach((nav, key) => {
         if (
-          nav.key < this.activeTab &&
+          nav.key < this.activeTab ||
           // Сравниваем по ширине, учитывая текущую позицию
           wrapWidth < distance + nav.$el.clientWidth + (this.navList.length - 1 === key ? 0 : (controlWidth + offset))
         ) {
