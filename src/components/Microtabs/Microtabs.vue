@@ -25,6 +25,10 @@ export default {
     fit:{
       type: Boolean,
       default: true
+    },
+    defaultTabIndex: {
+      type: Number,
+      default: 0
     }
   },
   data(){
@@ -118,9 +122,13 @@ export default {
     },
     destroy(){
       let config = defaultConfig()
+      this.activeTab = this.defaultTabIndex
       Object.keys(config).forEach(param => this[param] = config[param])
       this.fitItems()
     }
+  },
+  created() {
+    this.activeTab = this.defaultTabIndex
   },
   mounted(){
     this.$on('setActiveTab', (key, calculateFitItems = true) => {
