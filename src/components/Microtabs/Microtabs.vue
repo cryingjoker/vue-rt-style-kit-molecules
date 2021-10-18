@@ -124,6 +124,7 @@ export default {
     }
   },
   mounted(){
+    this.$emit('onReady', true) // Используется для выравнивания группы карточек
     this.$on('setActiveTab', (key, calculateFitItems = true) => {
       if (key !== this.activeTab) {
         this.direction = key > this.activeTab ? 'right' : 'left'
