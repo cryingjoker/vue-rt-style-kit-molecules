@@ -38,6 +38,22 @@ export default {
     stopOpacity:{
       type: Boolean,
       default: false
+    },
+    enableGaPush:{
+      default: true,
+      type: Boolean
+    },
+    gaEvent:{
+      type:String,
+      default: 'b2с'
+    },
+    gaType:{
+      type: String,
+      default: 'popover_click',
+    },
+    gaValue:{
+      type: String,
+      default: '',
     }
   },
   data: () => ({
@@ -114,6 +130,16 @@ export default {
     activate() {
       this.isActive = true
       this.hover = true
+      if(this.enableGaPush && this.gaValue.length > 0){
+        if (!window.dataLayer) {
+          window.dataLayer = [];
+        }
+        window.dataLayer.push({
+          event: this.gaEvent,
+          type: this.gaType,
+          value: this.gaValue,
+        });
+      }
       this.$nextTick(() => {
         this.onResize()
         this.bindClick();
