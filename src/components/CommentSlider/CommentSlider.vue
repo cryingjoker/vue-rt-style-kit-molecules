@@ -78,11 +78,7 @@ export default {
 
     checkWindowWidth() {
 
-      if (window.innerWidth < 768) {
-        this.isMobile = true
-      } else {
-        this.isMobile = false
-      }
+      this.isMobile = window.innerWidth < 768;
 
     },
     bindResize() {
@@ -147,11 +143,11 @@ export default {
         return;
       }
       // this.touchmovex = event.touches[0].pageX
-      var xUp = event.touches[0].clientX;
-      var yUp = event.touches[0].clientY;
+      const xUp = event.touches[0].clientX;
+      const yUp = event.touches[0].clientY;
 
-      var xDiff = xUp - this.touchstartX;
-      var yDiff = this.touchstartY - yUp;
+      const xDiff = xUp - this.touchstartX;
+      const yDiff = this.touchstartY - yUp;
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
         if (this.preventScroll) {
@@ -261,7 +257,7 @@ export default {
   computed: {
     renderPseudoText() {
       let a = []
-      for (var i = 0; i < this.maxLength; i++) {
+      for (let i = 0; i < this.maxLength; i++) {
         a.push('ш')
       }
       return a.join('')

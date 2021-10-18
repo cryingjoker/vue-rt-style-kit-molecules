@@ -54,11 +54,7 @@ export default {
         return this.activeTags.indexOf(tag) < 0
       })
 
-      if (notFoundTag) {
-        return false
-      } else {
-        return true
-      }
+      return !notFoundTag;
     },
     classList() {
       const classList = ['rt-tag-n'];

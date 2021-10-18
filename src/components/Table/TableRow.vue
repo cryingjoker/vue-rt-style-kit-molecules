@@ -33,12 +33,7 @@ export default {
             counter++;
           }
           // if(, )
-          if(this.checkTableItemIndex(indexNode, this._uid)){
-              slotVNode.componentOptions.propsData.hasRowSpanBefore = true;
-          }else{
-
-              slotVNode.componentOptions.propsData.hasRowSpanBefore = false;
-          }
+          slotVNode.componentOptions.propsData.hasRowSpanBefore = !!this.checkTableItemIndex(indexNode, this._uid);
           if(slotVNode.componentOptions.propsData.rowspan) {
             this.setTableItemRowspanIndex(indexNode, parseInt(slotVNode.componentOptions.propsData.rowspan), this._uid)
           }

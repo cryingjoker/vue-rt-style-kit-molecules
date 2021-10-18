@@ -350,8 +350,7 @@
         },
         methods: {
             calculateMobileOptions() {
-                const type = deviceTypeStore.getStatus();
-                this.deviceType = type;
+                this.deviceType = deviceTypeStore.getStatus();
             },
             computedBackgroundImageFn() {
                 let result
