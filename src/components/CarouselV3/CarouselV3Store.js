@@ -158,7 +158,6 @@ class CarouselV3Store extends StorePrototype {
           locScrollStep = laptopScrollStep
         }
       }
-      console.info('index == size - colInRow',index ,size - colInRow);
       if (index == size - colInRow && width > 1024 || index == size - 2 && width > 767 && width <= 1024 || index == size - 1 && width < 768) {
         slider.index = 0
       } else {
@@ -170,7 +169,6 @@ class CarouselV3Store extends StorePrototype {
         }
       }
       slider.index = slider.index % size
-      console.info('slider.index',slider.index);
       if(slider.index < 0){
         slider.index = 0
       }
