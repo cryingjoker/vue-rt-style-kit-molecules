@@ -1,4 +1,3 @@
-
 .rt-jumbotron
   overflow hidden
   position: relative;
@@ -7,15 +6,6 @@
     height 380px
   @media (min-width laptop-lower-limit)
     height: 520px
-
-rt-jumbotron
-  @media (min-width tablet-lower-limit)
-    height 380px
-  @media (min-width laptop-lower-limit)
-    height: 520px
-  img
-    opacity: 0
-    color transparent
 .rt-jumbotron-wrapper
   overflow: hidden;
   position: relative;
@@ -196,4 +186,28 @@ for $i in colors
 
 
 
+// First view-placeholder
+rt-jumbotron
+  background #f3f3f4
+  display block
+  rt-template
+    display none
+  rt-template[slot="label"],
+  rt-template[slot="description"]
+    display block
+  @media (min-width tablet-lower-limit)
+    height 380px
+  @media (min-width laptop-lower-limit)
+    display flex
+    height 520px
+    flex-flow column
+    justify-content center
+    padding-left 80px
+    padding-right 80px
+    rt-template[slot="label"],
+    rt-template[slot="description"]
+      width 50%
+    rt-template[slot="description"]
+      padding-top 16px
+      padding-bottom 108px
 
