@@ -358,12 +358,11 @@ export default {
       if (!this.xDown || !this.yDown || this.wheelEventPause) {
         return;
       }
-      var xUp = event.touches[0].clientX;
-      var yUp = event.touches[0].clientY;
+      const xUp = event.touches[0].clientX;
+      const yUp = event.touches[0].clientY;
 
-      var xDiff = this.xDown - xUp;
-      var yDiff = this.yDown - yUp;
-
+      const xDiff = this.xDown - xUp;
+      const yDiff = this.yDown - yUp;
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         if (event.cancelable && this.preventScroll) {
@@ -526,11 +525,7 @@ export default {
           if (notActive == 0) {
             mobileNotActive = false
           }
-          if ((notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive) {
-            notActive = true
-          } else {
-            notActive = false
-          }
+          notActive = (notActive < 0 || notActive - 1 >= colInRow - 1 - 0) && this.blurNotActive;
 
           if (this.deviceType.search('desktop') >= 0 && !this.scrollableOnDesktop) {
             notActive = false

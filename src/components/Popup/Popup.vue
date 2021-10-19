@@ -26,10 +26,6 @@ export default {
       type: Boolean,
       default: true
     },
-    scrollLength: { // На сколько прокрутить окно после скрытия модалки
-      type: Number,
-      default: 0
-    },
     hash: {
       type: String,
       default: ''
@@ -51,7 +47,8 @@ export default {
   data() {
     return {
       isActive: false,
-      isAntivirus: false
+      isAntivirus: false,
+      backScroll: 0
     };
   },
   mounted() {
@@ -158,20 +155,19 @@ export default {
       return false;
     },
     bindPageScroll() {
-      this.scrollLength = window.pageYOffset;
-      document.body.style.top = `-${this.scrollLength}px`;
-      document.body.style.overflow = 'hidden';
-      document.body.style.width = '100%';
-      setTimeout(()=>{
-        document.body.style.position = 'fixed';
+      const style = document.body.style;
+      this.backScroll = window.pageYOffset;
+      style.top = `-${this.backScroll}px`;
+      style.overflow = 'hidden';
+      style.width = '100%';
+      setTimeout(() => {
+        style.position = 'fixed';
       },500);
     },
     unbindPageScroll() {
-      document.body.style.removeProperty('position');
-      document.body.style.removeProperty('overflow');
-      document.body.style.removeProperty('width');
-      document.body.style.removeProperty('top');
-      window.scrollTo(0, this.scrollLength);
+      const style = document.body.style;
+      ['position', 'overflow', 'width', 'top'].forEach(i => style.removeProperty(i));
+      window.scrollTo(0, this.backScroll);
     },
     addKeyBindind() {
       window.addEventListener('keydown', this.keyPress, {passive: false});

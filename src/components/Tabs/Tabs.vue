@@ -217,17 +217,9 @@ export default {
         const navigationWidth = this.$refs.navigation.offsetWidth
         if (scrollLeft > 0) {
           this.showShadowLeft = true
-          if (scrollLeft + scrollerWidth < navigationWidth - 20) {
-            this.showShadowRight = true
-          } else {
-            this.showShadowRight = false
-          }
+          this.showShadowRight = scrollLeft + scrollerWidth < navigationWidth - 20;
         } else {
-          if (scrollLeft + scrollerWidth < navigationWidth) {
-            this.showShadowRight = true
-          } else {
-            this.showShadowRight = false
-          }
+          this.showShadowRight = scrollLeft + scrollerWidth < navigationWidth;
           this.showShadowLeft = false
         }
       }
@@ -235,7 +227,7 @@ export default {
 
     },
     checkDeviceType() {
-      var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window["MSStream"];
+      const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window['MSStream']
       const width = (iOS) ? screen.width : window.innerWidth;
       if (width <= this.mobileSize) {
         this.deviceType = "mobile";
@@ -253,7 +245,7 @@ export default {
       if (typeof(Event) === 'function') {
         window.dispatchEvent(new Event('resize'));
       } else {
-        var evt = window.document.createEvent('UIEvents');
+        const evt = window.document.createEvent('UIEvents')
         evt.initUIEvent('resize', true, false, window, 0);
         window.dispatchEvent(evt);
       }
@@ -262,7 +254,7 @@ export default {
       }
     },
     onUpdateTabsStore() {
-      var data = tabsStore.tabsParents[this._uid]
+      const data = tabsStore.tabsParents[this._uid]
       if (data) {
         if(data.index != data.indexBefore && data.indexBefore != -1){
           this.$emit('change',{

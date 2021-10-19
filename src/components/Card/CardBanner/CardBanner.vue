@@ -55,11 +55,7 @@ export default {
   updated() {},
   methods: {
     isDesktop() {
-      if(window.innerWidth <= parseInt(variables["tablet-upper-limit"])) {
-        this.desktop = false
-      } else {
-        this.desktop = true
-      }
+      this.desktop = window.innerWidth > parseInt(variables["tablet-upper-limit"]);
       this.$forceUpdate()
     },
     pushGA() {
