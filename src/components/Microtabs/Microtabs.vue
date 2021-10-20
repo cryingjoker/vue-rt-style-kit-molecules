@@ -87,13 +87,15 @@ export default {
             start: endXBefore
           }
           let margin = 0
-          endXBefore += rect.width
-          if (index > 0 && window.getComputedStyle) {
-            margin = parseInt(window.getComputedStyle(this.navList[index - 1].$el).marginRight)
-            endXBefore += margin
+          if(rect) {
+            endXBefore += rect.width
+            if (index > 0 && window.getComputedStyle) {
+              margin = parseInt(window.getComputedStyle(this.navList[index - 1].$el).marginRight)
+              endXBefore += margin
+            }
+            positionObj.end = endXBefore
+            positions.push(positionObj)
           }
-          positionObj.end = endXBefore
-          positions.push(positionObj)
           nav.$el.removeAttribute('style')
         })
 
