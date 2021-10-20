@@ -16,7 +16,7 @@ const defaultConfig = () => {
     direction: 'right',
     wheelPause: false,
     xDown:0,
-    yDown:0
+    yDown:0,
   }
 }
 
@@ -74,74 +74,79 @@ export default {
       )
     },
     fitItems(twice = true) {
-
-      if (!this.$refs.navigationEl) return
-      let shown = []
-      let hiddens = []
-      let distance = 0
-      let wrapWidth = this.$refs.wrapper.clientWidth - 40;
-      let navHiddenActivated = false
-
-      let endXBefore = 0
-      if (this.allowNavLeft) {
-        endXBefore += controlWidth + offset
-      }
-      this.navList.forEach((nav, index) => {
-        nav.$el.style.transform = 'none'
-        const rect = nav.$el.getClientRects()[0];
-        let endX = rect.width + endXBefore;
-        let margin = 0
-        if (index > 0 && window.getComputedStyle) {
-          margin = parseInt(window.getComputedStyle(this.navList[index - 1].$el).marginRight)
-          endX += margin
-        }
-        endXBefore += rect.width + margin
-        nav.$el.removeAttribute('style');
-
-        if (
-          wrapWidth < endX + controlWidth * (this.allowNavLeft && this.allowNavRight ? 2 : this.allowNavLeft || this.allowNavRight ? 1 : 0)
-        ) {
-
-          hiddens[nav.key] = true
-          if (!navHiddenActivated) {
-            distance += controlWidth
+      if(this.$refs.wrapper) {
+        let wrapWidth = this.$refs.wrapper.clientWidth;
+        let positions = []
+        this.allowNavLeft = false
+        this.allowNavRight = false
+        let endXBefore = 0
+        this.navList.forEach((nav, index) => {
+          nav.$el.style.transform = 'none'
+          const rect = nav.$el.getClientRects()[0];
+          const positionObj = {
+            start: endXBefore
           }
-        } else {
-          shown.push(nav.key)
-        }
-        if (nav.key >= this.activeTab) {
-          distance += nav.$el.clientWidth + offset
-        }
-      })
-      this.navList.forEach(nav => nav.hidden = !!hiddens[nav.key])
-
-      // Если активный таб остался "за бортом"
-      let nextAfterActive = this.activeTab - 0;
-      let startStartDelta = this.activeTab - 0
-      if (startStartDelta != this.navList.length - 1) {
-        nextAfterActive = parseInt(nextAfterActive) + 1
-      }
-      if (startStartDelta > 0 && this.navList[startStartDelta - 1] && this.navList[startStartDelta - 1].hidden) {
-        startStartDelta -= 1
-      }
-      if (this.navList[nextAfterActive] && this.navList[nextAfterActive].hidden) {
-
-        let lastShowedIndex = this.navList.findIndex(i => i.hidden) - 0;
-
-        let delta = nextAfterActive - lastShowedIndex
-        Array.from(Array(delta + 1).keys()).forEach((index) => {
-          this.navList[index].hidden = true
-          if (this.navList[lastShowedIndex + index]) {
-            this.navList[lastShowedIndex + index].hidden = false
+          let margin = 0
+          endXBefore += rect.width
+          if (index > 0 && window.getComputedStyle) {
+            margin = parseInt(window.getComputedStyle(this.navList[index - 1].$el).marginRight)
+            endXBefore += margin
           }
+          positionObj.end = endXBefore
+          positions.push(positionObj)
+          nav.$el.removeAttribute('style')
         })
 
-      };
-      this.allowNavLeft = this.navList[0].hidden
-      this.allowNavRight = this.navList[this.navList.length - 1].hidden
-      this.navList.splice(0, 0)
-      if (twice) {
-        this.fitItems(false)
+        let beforeActive = this.activeTab;
+        let nextActive = this.activeTab;
+        if(this.activeTab > 0){
+          beforeActive -= 1
+        }
+        if(this.activeTab < this.navList.length -1){
+          nextActive += 1
+        }
+        const getItemWidth = (index)=>{
+          return positions[index].end-positions[index].start
+        }
+        let visibleWidth = getItemWidth(this.activeTab)
+        this.navList[this.activeTab].hidden = false
+        const stepR = (index)=>{
+          if(index+1 < this.navList.length ){
+            index = index+1
+            const itemWidth = getItemWidth(index)
+            if(visibleWidth+itemWidth +controlWidth*2 > wrapWidth  || this.navList[index-1].hidden){
+              this.navList[index].hidden = true
+              if(!this.allowNavRight) {
+                this.allowNavRight = true
+              }
+            }else{
+              this.navList[index].hidden = false
+
+              visibleWidth+=itemWidth
+            }
+          }
+        }
+        const stepL = (index)=>{
+          if(index > 0){
+
+            index = index-1
+            const itemWidth = getItemWidth(index)
+
+            if(visibleWidth+itemWidth + controlWidth*2 > wrapWidth || this.navList[index+1].hidden){
+              this.navList[index].hidden = true
+              if(!this.allowNavLeft) {
+                this.allowNavLeft = true
+              }
+            }else{
+              this.navList[index].hidden = false
+              visibleWidth+=itemWidth
+            }
+          }
+        }
+        for(var i = 0; i < this.navList.length; i++) {
+          stepR(this.activeTab + i);
+          stepL(this.activeTab - i);
+        }
       }
     },
     navLeft() {
@@ -263,8 +268,9 @@ export default {
     }
 
 
-
-    return <div class={this.cmpClasses} ref="wrapper" onWheel={this.wheelMove} onTouchstart={this.touchstart} onTouchmove={this.touchmove}>
+    //onWheel={this.wheelMove} onTouchstart={this.touchstart} onTouchmove={this.touchmove}
+    //todo посмотреть как превентить вверх евент
+    return <div class={this.cmpClasses} ref="wrapper" >
       <div class={`${this.cmpName}-nav`} ref="navigationEl">
         <microtabs-control
           onClick={this.navLeft}
