@@ -108,23 +108,29 @@ export default {
           nextActive += 1
         }
         const getItemWidth = (index)=>{
-          return positions[index].end-positions[index].start
+          if(positions[index]) {
+            return positions[index].end - positions[index].start
+          }
+          return 0
         }
         let visibleWidth = getItemWidth(this.activeTab)
         this.navList[this.activeTab].hidden = false
         const stepR = (index)=>{
           if(index+1 < this.navList.length ){
             index = index+1
+            i
             const itemWidth = getItemWidth(index)
-            if(visibleWidth+itemWidth +controlWidth*2 > wrapWidth  || this.navList[index-1].hidden){
-              this.navList[index].hidden = true
-              if(!this.allowNavRight) {
-                this.allowNavRight = true
-              }
-            }else{
-              this.navList[index].hidden = false
+            if(itemWidth > 0) {
+              if (visibleWidth + itemWidth + controlWidth * 2 > wrapWidth || this.navList[index - 1].hidden) {
+                this.navList[index].hidden = true
+                if (!this.allowNavRight) {
+                  this.allowNavRight = true
+                }
+              } else {
+                this.navList[index].hidden = false
 
-              visibleWidth+=itemWidth
+                visibleWidth += itemWidth
+              }
             }
           }
         }
