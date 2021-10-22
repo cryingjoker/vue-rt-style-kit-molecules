@@ -19,8 +19,6 @@ export default {
   },
   computed:{
     cmpClasses(){
-      if(!this.key)
-        return null
       return [
         this.cmpName,
         this.key !== this.activeTab ? `is--from-${this.key > this.activeTab ? 'right' : 'left'}` : null,
