@@ -49,8 +49,6 @@ export default {
     this.$parent.destroy()
   },
   render(h){
-    if(!this.key)
-      return null
     return <a class={this.cmpClasses} data-key={this.key} onClick={this.setActive}>
       {this.$slots.default}
       <div class={`${this.cmpName}-opacity`}>
