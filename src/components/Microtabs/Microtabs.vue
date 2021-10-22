@@ -75,7 +75,7 @@ export default {
     },
     fitItems(twice = true) {
       if(this.$refs.wrapper) {
-        let wrapWidth = this.$refs.wrapper.clientWidth;
+        let wrapWidth = this.$refs.wrapper.clientWidth - 40;
         let positions = []
         this.allowNavLeft = false
         this.allowNavRight = false
@@ -130,8 +130,11 @@ export default {
             index = index+1
 
             const itemWidth = getItemWidth(index)
+            console.info('visibleWidth + itemWidth + controlWidth * 2 + offset * 3 > wrapWidth || navList[index - 1].hidden',visibleWidth + itemWidth + controlWidth * 2 + offset * 3 > wrapWidth || navList[index - 1].hidden);
+            console.info(wrapWidth)
+            console.info(navList[index])
             if(itemWidth > 0) {
-              if (visibleWidth + itemWidth + controlWidth * 2 > wrapWidth || navList[index - 1].hidden) {
+              if (visibleWidth + itemWidth + controlWidth * 2 + offset * 3 > wrapWidth || navList[index - 1].hidden) {
                 navList[index].hidden = true
                 if (!this.allowNavRight) {
                   this.allowNavRight = true
