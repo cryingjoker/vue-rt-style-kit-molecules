@@ -80,24 +80,34 @@ export default {
         this.allowNavLeft = false
         this.allowNavRight = false
         let endXBefore = 0
-        this.navList.forEach((nav, index) => {
-          nav.$el.style.transform = 'none'
-          const rect = nav.$el.getClientRects()[0];
-          const positionObj = {
-            start: endXBefore
-          }
-          let margin = 0
-          if(rect) {
-            endXBefore += rect.width
-            if (index > 0 && window.getComputedStyle) {
-              margin = parseInt(window.getComputedStyle(this.navList[index - 1].$el).marginRight)
-              endXBefore += margin
+        const navList = this.navList
+        navList.forEach((nav, index) => {
+
+
+          navList[index].hidden = false
+          if(nav.$el.style){
+            nav.$el.style.transform = 'none'
+
+            const rect = nav.$el.getClientRects()[0];
+            const positionObj = {
+              start: endXBefore
             }
-            positionObj.end = endXBefore
-            positions.push(positionObj)
+            let margin = 0
+            if (rect) {
+              endXBefore += rect.width
+              if (index > 0) {
+                endXBefore += offset
+              }
+              positionObj.end = endXBefore
+              positions.push(positionObj)
+            }
+            nav.$el.removeAttribute('style')
+          }else{
+            positions.push({start:endXBefore, end:endXBefore})
           }
-          nav.$el.removeAttribute('style')
         })
+
+
 
         let beforeActive = this.activeTab;
         let nextActive = this.activeTab;
@@ -114,20 +124,21 @@ export default {
           return 0
         }
         let visibleWidth = getItemWidth(this.activeTab)
-        this.navList[this.activeTab].hidden = false
+        navList[this.activeTab].hidden = false
         const stepR = (index)=>{
-          if(index+1 < this.navList.length ){
+          if(index+1 < navList.length ){
             index = index+1
-            i
+
             const itemWidth = getItemWidth(index)
             if(itemWidth > 0) {
-              if (visibleWidth + itemWidth + controlWidth * 2 > wrapWidth || this.navList[index - 1].hidden) {
-                this.navList[index].hidden = true
+              if (visibleWidth + itemWidth + controlWidth * 2 > wrapWidth || navList[index - 1].hidden) {
+                navList[index].hidden = true
                 if (!this.allowNavRight) {
                   this.allowNavRight = true
+                  const itemWidthBefore = getItemWidth(index-1)
                 }
               } else {
-                this.navList[index].hidden = false
+                navList[index].hidden = false
 
                 visibleWidth += itemWidth
               }
@@ -140,21 +151,22 @@ export default {
             index = index-1
             const itemWidth = getItemWidth(index)
 
-            if(visibleWidth+itemWidth + controlWidth*2 > wrapWidth || this.navList[index+1].hidden){
-              this.navList[index].hidden = true
+            if(visibleWidth+itemWidth + controlWidth*2 > wrapWidth || navList[index+1].hidden){
+              navList[index].hidden = true
               if(!this.allowNavLeft) {
                 this.allowNavLeft = true
               }
             }else{
-              this.navList[index].hidden = false
+              navList[index].hidden = false
               visibleWidth+=itemWidth
             }
           }
         }
-        for(var i = 0; i < this.navList.length; i++) {
+        for(var i = 0; i < navList.length; i++) {
           stepR(this.activeTab + i);
           stepL(this.activeTab - i);
         }
+        this.navList = [...navList]
       }
     },
     navLeft() {
@@ -258,7 +270,9 @@ export default {
         // }
       }
     })
-    this.fitItems()
+    this.$nextTick(()=> {
+      this.fitItems()
+    })
     resizeHandler(this, this.fitItems)
   },
   destroyed() {

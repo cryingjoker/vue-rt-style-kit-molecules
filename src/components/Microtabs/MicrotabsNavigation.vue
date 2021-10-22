@@ -13,11 +13,14 @@ export default {
     return {
       key: null,
       themeLocal: null,
-      cmpName: `${cmpName}-nav__item`
+      cmpName: `${cmpName}-nav__item`,
+      hidden: false
     }
   },
   computed:{
     cmpClasses(){
+      if(!this.key)
+        return null
       return [
         this.cmpName,
         this.key !== this.activeTab ? `is--from-${this.key > this.activeTab ? 'right' : 'left'}` : null,
@@ -46,6 +49,8 @@ export default {
     this.$parent.destroy()
   },
   render(h){
+    if(!this.key)
+      return null
     return <a class={this.cmpClasses} data-key={this.key} onClick={this.setActive}>
       {this.$slots.default}
       <div class={`${this.cmpName}-opacity`}>
