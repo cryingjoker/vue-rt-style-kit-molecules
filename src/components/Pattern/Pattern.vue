@@ -1,6 +1,6 @@
 <script type="text/jsx">
   import variables from "../../variables.json";
-  import './Pattern.styl'
+  // @info Стили подключены в глобальном бандле
 
   export default {
     name: "RtPattern",
