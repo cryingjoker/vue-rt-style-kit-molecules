@@ -389,7 +389,7 @@
         if (this.backgroundPosition) {
           if (
               this.backgroundPosition.search(
-                  /(top)|(left)|(bottom)|(right)|(bottom-left)|(top-right)|(bottom-left)|(bottom-right)/
+                  /(top)|(left)|(bottom)|(right)|(bottom-left)|(top-right)|(bottom-right)/
               ) === 0
           ) {
             switch (this.backgroundPosition) {
@@ -448,16 +448,14 @@
                 backgroundSizeWidth + " " + backgroundSizeHeight;
           } else {
             if (this.backgroundSizeWidth) {
-              const backgroundSizeWidth = this.normalizeSize(
-                  this.backgroundSizeWidth
+              styles.backgroundSize = this.normalizeSize(
+                this.backgroundSizeWidth
               );
-              styles.backgroundSize = backgroundSizeWidth;
             }
             if (this.backgroundSizeHeight) {
-              const backgroundSizeHeight = this.normalizeSize(
-                  this.backgroundSizeHeight
+              styles.backgroundSize = this.normalizeSize(
+                this.backgroundSizeHeight
               );
-              styles.backgroundSize = backgroundSizeHeight;
             }
           }
           if (this.backgroundImage) {
@@ -557,8 +555,8 @@
       } else {
           // for IE and other old browsers
           // causes deprecation warning on modern browsers
-          var evt = window.document.createEvent('UIEvents');
-          evt.initUIEvent('resize', true, false, window, 0);
+        const evt = window.document.createEvent('UIEvents')
+        evt.initUIEvent('resize', true, false, window, 0);
           window.dispatchEvent(evt);
       }
 

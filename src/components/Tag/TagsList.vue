@@ -67,10 +67,8 @@ export default {
   render(h){
 
     this.$slots.default.filter((vNode)=>{
-      if(vNode.tag){
-        return true;
-      }
-      return false;
+      return !!vNode.tag;
+
     }).forEach((vNode, index)=>{
       if(vNode.componentInstance) {
         vNode.componentInstance = vNode.componentInstance || {};

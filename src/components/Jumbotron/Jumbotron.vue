@@ -1,7 +1,6 @@
 <script type="text/jsx">
-import './Jumbotron.styl'
-import {deviceTypeStore} from "vue-rt-style-kit-atoms";
-import './Jumbotron.styl'
+// @info Стили подключены в глобальном бандле
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms'
 
 const componentsList = {};
 

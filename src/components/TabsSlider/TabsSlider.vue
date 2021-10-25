@@ -141,10 +141,10 @@ export default {
       if (!this.xDown || !this.yDown) {
         return;
       }
-      var xUp = evt.touches[0].clientX;
-      var yUp = evt.touches[0].clientY;
-      var xDiff = this.xDown - xUp;
-      var yDiff = this.yDown - yUp;
+      const xUp = evt.touches[0].clientX
+      const yUp = evt.touches[0].clientY
+      const xDiff = this.xDown - xUp
+      const yDiff = this.yDown - yUp
       const activeIndex = this.customSlotsSort.indexOf(this.activeItem.activeId);
       const size = this.customSlotsSort.length;
       const prev = (activeIndex - 1 + size) % size;

@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import './BannerSkeleton.styl'
+// @info Стили подключены в глобальном бандле
 export default {
   name: 'RtBannerSkeleton',
   functional: true,

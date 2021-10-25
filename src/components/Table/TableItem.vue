@@ -49,7 +49,7 @@ export default {
       let tableBorder = document.createElement("div");
       tableBorder.classList.add('border-element');
       this.$el.appendChild(tableBorder);
-    };
+    }
   },
   render: function(h) {
     const style = {};

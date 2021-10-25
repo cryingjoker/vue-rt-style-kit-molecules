@@ -228,11 +228,7 @@
                         }
                         this.activeIndex = index;
                         if (this.showSecondHeaderContentAfter > 0) {
-                            if ((this.showSecondHeaderContentAfter < top - startPoint || this.activeIndex > 0) && this.stockIdIndex !== this.activeIndex) {
-                                this.showSecondHeaderContentAfterIsActive = true;
-                            } else {
-                                this.showSecondHeaderContentAfterIsActive = false;
-                            }
+                            this.showSecondHeaderContentAfterIsActive = (this.showSecondHeaderContentAfter < top - startPoint || this.activeIndex > 0) && this.stockIdIndex !== this.activeIndex;
                         }
                         return true;
                     }
