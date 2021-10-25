@@ -131,7 +131,7 @@ export default {
 
             const itemWidth = getItemWidth(index)
             if(itemWidth > 0) {
-              if (visibleWidth + itemWidth + controlWidth * 2 + offset * 1 > wrapWidth || navList[index - 1].hidden) {
+              if (visibleWidth + itemWidth + controlWidth * (this.activeTab == 0 || this.activeTab  == navList.length - 1 ? 1 : 2)  + offset > wrapWidth || navList[index - 1].hidden) {
                 navList[index].hidden = true
                 if (!this.allowNavRight) {
                   this.allowNavRight = true
