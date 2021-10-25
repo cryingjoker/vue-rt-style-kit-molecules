@@ -20,6 +20,13 @@
       "type": "String",
       "description": "Ссылка на файл для скачивания",
       "value": ""
+    },
+    {
+      "name": "rt-download-content",
+      "property": "has-border",
+      "type": "Boolean",
+      "description": "флаг включения фиолетового бордера",
+      "value": ""
     }
   ]
 }

@@ -3,6 +3,10 @@ import './DownloadContent.styl'
 export default {
   name: "RtDownloadContent",
   props: {
+    hasBorder:{
+      type: Boolean,
+      default: false
+    },
     expansion: {
       type: String,
       default: ''
@@ -28,8 +32,13 @@ export default {
     }
   },
   render: function(h) {
+    const downloadContentClassWrapper = ['download-content']
+    if(this.hasBorder) {
+      downloadContentClassWrapper.push('download-content--has-border')
+    }
+
     return (
-      <div class="download-content">
+      <div class={downloadContentClassWrapper}>
         <div class="download-content__icon">
           <svg width="17px" height="22px" viewBox="0 0 17 22" xmlns="http://www.w3.org/2000/svg" class="download-content__icon-svg">
             <g stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
