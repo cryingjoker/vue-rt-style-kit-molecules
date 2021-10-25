@@ -1,6 +1,6 @@
 <script type="text/jsx">
 import {commentSliderStore} from "./CommentSliderStore";
-import {bannerStore} from "../BannerV2/BannerStore";
+import './CommentSlider.styl'
 
 export default {
   name: "RtCommentSlider",

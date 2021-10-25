@@ -1,4 +1,5 @@
 <script type="text/jsx">
+// @info Стили подключены в глобальном бандле
 export default {
   name: 'RtBannerSkeleton',
   functional: true,

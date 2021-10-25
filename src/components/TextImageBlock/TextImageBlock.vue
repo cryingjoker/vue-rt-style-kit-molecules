@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+  import './TextImageBlock.styl'
   export default {
     name: "RtTextImageBlock",
     props: {

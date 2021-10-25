@@ -1,7 +1,4 @@
 <script type="text/jsx">
-
-  import variables from "../../variables.json";
-
   export default {
     name: "RtBenefitItem",
     props: {

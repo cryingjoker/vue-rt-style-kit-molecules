@@ -30,8 +30,9 @@ class SliderStore extends StorePrototype{
     if(index < 5) {
       this.slots[sliderUid][id][name] = slot;
     }
+    this.runWatchersById(sliderUid)
   }
-  getSlotSort= (sliderUid)=>{
+  getSlotSort = (sliderUid)=>{
     return this.slidesArray[sliderUid]
   }
 }
@@ -43,4 +44,5 @@ export const sliderStore = Vue.observable({
   getSlotSort: sliderStoreObject.getSlotSort,
   removeWatcher: sliderStoreObject.removeWatcher,
   addWatcher: sliderStoreObject.addWatcher,
+  runWatchersById: sliderStoreObject.runWatchersById,
 });

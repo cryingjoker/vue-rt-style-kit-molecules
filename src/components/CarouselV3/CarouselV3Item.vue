@@ -15,6 +15,10 @@ export default {
     boost:{
       type:Boolean,
       default: false
+    },
+    id: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -71,7 +75,7 @@ export default {
   mounted() {
     this.setParent()
     const name = this.getName()
-    carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index)
+    carouselV3Store.createSlide(name, this._uid, this.$slots.default, this.index, this.id)
     this.checkHtml()
   },
   beforeUpdate() {
@@ -81,7 +85,7 @@ export default {
 
     if(!this.checkHtml() && !this.boost) {
       const name = this.getName()
-      carouselV3Store.updateSlide(name, this._uid, this.$slots.default, this.index)
+      carouselV3Store.updateSlide(name, this._uid, this.$slots.default, this.index, this.id)
     }
   },
   beforeDestroy() {

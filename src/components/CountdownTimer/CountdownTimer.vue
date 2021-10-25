@@ -1,4 +1,6 @@
 <script type="text/jsx">
+import './countdown-timer.styl'
+
   export default {
     name: "RtCountdownTimer",
     props: {

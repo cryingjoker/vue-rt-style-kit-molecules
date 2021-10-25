@@ -1,6 +1,7 @@
 <script type="text/jsx">
 
 import {filterStore} from "./FitlerStore";
+import './Filter.styl'
 
 export default {
   name: "RtFilterNItem",

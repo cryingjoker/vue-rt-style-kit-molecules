@@ -1,10 +1,10 @@
 <script type="text/jsx">
-import {tabsStore} from "./TabsStore";
+import { tabsStore } from "./TabsStore";
 import variables from "../../variables.json";
 import smoothscroll from 'smoothscroll-polyfill';
+import './Tabs.styl'
 
 const componentsList = {};
-
 
 export default {
   name: "RtTabs",

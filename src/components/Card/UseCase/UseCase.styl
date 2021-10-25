@@ -1,0 +1,15 @@
+.{newAppName}-rotating-card-gallery
+  display flex
+  flex-wrap wrap
+  height auto!important
+  @media (max-width: mobile-upper-limit)
+    flex-wrap nowrap
+    overflow-x auto
+    padding-bottom vertical-space
+  &>*
+    &:nth-child(n+3)
+      margin-top vertical-space
+    @media (max-width: mobile-upper-limit)
+      margin-top vertical-space
+      width: 85vw
+      flex: 0 0 85%

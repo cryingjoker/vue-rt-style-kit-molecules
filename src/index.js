@@ -1,7 +1,5 @@
-import Vue from "vue";
 import "./css/vue-rt-style-kit-molecules.styl";
 import Global from "./variables.json";
-import Project from "@projectMolecules";
 
 import {
   ScrollTabs,
@@ -15,9 +13,9 @@ import {
   CardB2o,
   CardBuy,
   CardImage,
-  CardImageList,
+  // CardImageList,
   CardSkeleton,
-  FullscreenImage,
+  // FullscreenImage,
   RowList,
   RowListItem,
   Table,
@@ -26,13 +24,10 @@ import {
   TableItem,
   TableRow,
   DownloadContent,
-  InlineDropdown,
-  InlineDropdownItem,
+  // InlineDropdown,
+  // InlineDropdownItem,
   Tag,
   TagsList,
-  Filter,
-  FilterWatcher,
-  FilterCaller,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
@@ -48,8 +43,8 @@ import {
   Slide,
   Swiper,
   Pattern,
-  Opportunity,
-  OpportunityItem,
+  // Opportunity,
+  // OpportunityItem,
   UnWrapper,
   RealPopup,
   TabsSlider,
@@ -62,29 +57,29 @@ import {
   MicrotabsNavigation,
   UseCase,
   ProductCard,
-  TariffCard,
+  // TariffCard,
   BenefitItem,
   BenefitBlock,
-  PortraitTile,
-  PortraitTileItem,
-  Timeline,
-  TimelineItem,
-  ScrollBar,
-  VerticalScrollBar,
-  ReplacementLink,
+  // PortraitTile,
+  // PortraitTileItem,
+  // Timeline,
+  // TimelineItem,
+  // ScrollBar,
+  // VerticalScrollBar,
+  // ReplacementLink,
   CardCarousel,
-  CardLayout,
-  GalleryCarousel,
-  GalleryCarouselItem,
+  // CardLayout,
+  // GalleryCarousel,
+  // GalleryCarouselItem,
   OptionsList,
   OptionsListInfoItem,
-  GameArrow,
+  // GameArrow,
   CheckboxTabs,
-  CountdownTimer,
+  // CountdownTimer,
   StickyHeaderLine,
   ResizeTypeStore,
-  FunctionList,
-  FunctionItem,
+  // FunctionList,
+  // FunctionItem,
   Slider,
   SliderItem,
   TextImageBlock,
@@ -96,7 +91,7 @@ import {
   Jumbotron,
   CarouselV2,
   CarouselSlideV2,
-  AdBanner,
+  // AdBanner,
   MessageBox,
   PreviewBanner,
   ArrowBlock,
@@ -112,17 +107,14 @@ import {
   CarouselV3Item,
   Privilege
 } from "./components";
-import {PopupTriggerDirective} from './components/Popup/PopupTrigger';
+import {default as PopupTriggerDirective} from './components/Popup/PopupTrigger';
 import {SwipeLeft, SwipeRight} from "./directives/Swipe/swipe";
-import {TooltipDirective} from "./directives/Tooltip/tooltip";
-import {ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
-import {OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
-import {SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
-import {ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
-import {GaClickDirective} from "./directives/GaClick";
-// import 'element-closest-polyfill';
-// import 'nodelist-foreach-polyfill';
-// import 'element-remove';
+import {default as TooltipDirective} from "./directives/Tooltip/tooltip";
+import {default as ResizeContentHeightDirective} from "./directives/ResizeContentHeight";
+import {default as OutsideClickDirective} from "./directives/OutsideClick/OutsideClick";
+import {default as SlideContentVerticalDirective} from "./directives/SlideContent/SlideContentVertical";
+import {default as ScrollToOnClickDirective} from "./directives/ScrollToOnClick/ScrollToOnClick";
+import {default as GaClickDirective} from "./directives/GaClick";
 
 const VueRtStyle = {
   install(Vue, config) {
@@ -135,7 +127,7 @@ const VueRtStyle = {
       Vue.component(CardRounded.name, CardRounded);
       Vue.component(CardBuy.name, CardBuy);
       Vue.component(CardImage.name, CardImage);
-      Vue.component(CardImageList.name, CardImageList);
+      // Vue.component(CardImageList.name, CardImageList);
       Vue.component(Popover.name, Popover);
       Vue.component(Banner.name, Banner);
       Vue.component(BannerV2.name, BannerV2);
@@ -143,7 +135,7 @@ const VueRtStyle = {
       Vue.component(BannerItemV2.name, BannerItemV2);
       Vue.component(BannerItem.name, BannerItem);
       Vue.component(BannerPaginatorItem.name, BannerPaginatorItem);
-      Vue.component(FullscreenImage.name, FullscreenImage);
+      // Vue.component(FullscreenImage.name, FullscreenImage);
       Vue.component(RowList.name, RowList);
       Vue.component(RowListItem.name, RowListItem);
       Vue.component(Table.name, Table);
@@ -152,18 +144,15 @@ const VueRtStyle = {
       Vue.component(TableItem.name, TableItem);
       Vue.component(TableRow.name, TableRow);
       Vue.component(DownloadContent.name, DownloadContent);
-      Vue.component(InlineDropdown.name, InlineDropdown);
-      Vue.component(InlineDropdownItem.name, InlineDropdownItem);
+      // Vue.component(InlineDropdown.name, InlineDropdown);
+      // Vue.component(InlineDropdownItem.name, InlineDropdownItem);
       Vue.component(Tag.name, Tag);
       Vue.component(TagsList.name, TagsList);
-      Vue.component(Filter.name, Filter);
-      Vue.component(FilterWatcher.name, FilterWatcher);
       Vue.component(FilterV2.name, FilterV2);
       Vue.component(FilterItemV2.name, FilterItemV2);
       Vue.component(FilterSetterV2.name, FilterSetterV2);
       Vue.component(OptionsList.name, OptionsList);
       Vue.component(OptionsListInfoItem.name, OptionsListInfoItem);
-      Vue.component(FilterCaller.name, FilterCaller);
       Vue.component(Sticky.name, Sticky);
       Vue.component(StickyBottomLine.name, StickyBottomLine);
       Vue.component(ResizeContentHeight.name, ResizeContentHeight);
@@ -171,33 +160,33 @@ const VueRtStyle = {
       Vue.component(Popup.name, Popup);
 
       Vue.component(LinksBlock.name, LinksBlock);
-      Vue.component(GameArrow.name, GameArrow);
+      // Vue.component(GameArrow.name, GameArrow);
       Vue.component(Swiper.name, Swiper);
       Vue.component(ShowOn.name, ShowOn);
       Vue.component(Slide.name, Slide);
       Vue.component(Pattern.name, Pattern);
-      Vue.component(Opportunity.name, Opportunity);
-      Vue.component(OpportunityItem.name, OpportunityItem);
+      // Vue.component(Opportunity.name, Opportunity);
+      // Vue.component(OpportunityItem.name, OpportunityItem);
       Vue.component(UnWrapper.name, UnWrapper);
       Vue.component(RealPopup.name, RealPopup);
       Vue.component(UseCase.name, UseCase);
       Vue.component(BenefitBlock.name, BenefitBlock);
       Vue.component(BenefitItem.name, BenefitItem);
-      Vue.component(PortraitTile.name, PortraitTile);
-      Vue.component(PortraitTileItem.name, PortraitTileItem);
-      Vue.component(Timeline.name, Timeline);
-      Vue.component(TimelineItem.name, TimelineItem);
-      Vue.component(ScrollBar.name, ScrollBar);
+      // Vue.component(PortraitTile.name, PortraitTile);
+      // Vue.component(PortraitTileItem.name, PortraitTileItem);
+      // Vue.component(Timeline.name, Timeline);
+      // Vue.component(TimelineItem.name, TimelineItem);
+      // Vue.component(ScrollBar.name, ScrollBar);
       Vue.component(HelpBlock.name, HelpBlock);
-      Vue.component(VerticalScrollBar.name, VerticalScrollBar);
-      Vue.component(ReplacementLink.name, ReplacementLink);
+      // Vue.component(VerticalScrollBar.name, VerticalScrollBar);
+      // Vue.component(ReplacementLink.name, ReplacementLink);
       Vue.component(Carousel.name, Carousel);
       Vue.component(CarouselSlide.name, CarouselSlide);
       Vue.component(CardCarousel.name, CardCarousel);
       Vue.component(CardB2o.name, CardB2o);
-      Vue.component(CardLayout.name, CardLayout);
+      // Vue.component(CardLayout.name, CardLayout);
       Vue.component(CardSkeleton.name, CardSkeleton);
-      Vue.component(CountdownTimer.name, CountdownTimer);
+      // Vue.component(CountdownTimer.name, CountdownTimer);
       Vue.component(StickyHeaderLine.name, StickyHeaderLine);
       Vue.component(TextImageBlock.name, TextImageBlock);
       Vue.component(PhoneNumberInput.name, PhoneNumberInput);
@@ -213,19 +202,19 @@ const VueRtStyle = {
       Vue.component(Microtabs.name, Microtabs)
       Vue.component(MicrotabsContent.name, MicrotabsContent)
       Vue.component(MicrotabsNavigation.name, MicrotabsNavigation)
-      Vue.component(GalleryCarousel.name, GalleryCarousel);
-      Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
+      // Vue.component(GalleryCarousel.name, GalleryCarousel);
+      // Vue.component(GalleryCarouselItem.name, GalleryCarouselItem);
       Vue.component(ProductCard.name, ProductCard);
-      Vue.component(TariffCard.name, TariffCard);
+      // Vue.component(TariffCard.name, TariffCard);
       Vue.component(Slider.name, Slider);
       Vue.component(SliderItem.name, SliderItem);
       Vue.component(SlideContent.name, SlideContent);
       Vue.component(SlideContentDottedContent.name, SlideContentDottedContent);
       Vue.component(SlideContentDottedHeader.name, SlideContentDottedHeader);
-      Vue.component(FunctionItem.name, FunctionItem);
-      Vue.component(FunctionList.name, FunctionList);
+      // Vue.component(FunctionItem.name, FunctionItem);
+      // Vue.component(FunctionList.name, FunctionList);
       Vue.component(Jumbotron.name, Jumbotron);
-      Vue.component(AdBanner.name, AdBanner);
+      // Vue.component(AdBanner.name, AdBanner);
       Vue.component(PreviewBanner.name, PreviewBanner);
       Vue.component(ArrowBlock.name, ArrowBlock);
       Vue.component(MessageBox.name, MessageBox);
@@ -305,9 +294,9 @@ export {
   CardB2o,
   CardBuy,
   CardImage,
-  CardImageList,
+  // CardImageList,
   CardSkeleton,
-  FullscreenImage,
+  // FullscreenImage,
   RowList,
   HelpBlock,
   RowListItem,
@@ -317,13 +306,10 @@ export {
   TableItem,
   TableRow,
   DownloadContent,
-  InlineDropdown,
-  InlineDropdownItem,
+  // InlineDropdown,
+  // InlineDropdownItem,
   Tag,
   TagsList,
-  Filter,
-  FilterWatcher,
-  FilterCaller,
   FilterV2,
   FilterItemV2,
   FilterSetterV2,
@@ -340,8 +326,8 @@ export {
   Slide,
   Swiper,
   Pattern,
-  Opportunity,
-  OpportunityItem,
+  // Opportunity,
+  // OpportunityItem,
   UnWrapper,
   RealPopup,
   TabsSlider,
@@ -354,26 +340,26 @@ export {
   MicrotabsNavigation,
   UseCase,
   ProductCard,
-  TariffCard,
+  // TariffCard,
   BenefitItem,
   BenefitBlock,
-  PortraitTile,
-  PortraitTileItem,
-  Timeline,
-  TimelineItem,
-  ScrollBar,
-  VerticalScrollBar,
-  ReplacementLink,
+  // PortraitTile,
+  // PortraitTileItem,
+  // Timeline,
+  // TimelineItem,
+  // ScrollBar,
+  // VerticalScrollBar,
+  // ReplacementLink,
   CardCarousel,
-  CardLayout,
-  GalleryCarousel,
-  GalleryCarouselItem,
+  // CardLayout,
+  // GalleryCarousel,
+  // GalleryCarouselItem,
   OptionsList,
   ShowOn,
   OptionsListInfoItem,
-  GameArrow,
+  // GameArrow,
   CheckboxTabs,
-  CountdownTimer,
+  // CountdownTimer,
   StickyHeaderLine,
   Slider,
   SliderItem,
@@ -384,7 +370,7 @@ export {
   Jumbotron,
   CarouselV2,
   CarouselSlideV2,
-  AdBanner,
+  // AdBanner,
   MessageBox,
   PreviewBanner,
   ArrowBlock,

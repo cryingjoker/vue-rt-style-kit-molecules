@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import {popupStore} from "./PopupStore";
+import './Popup.styl'
 
 export default {
   name: "RtPopup",

@@ -79,7 +79,7 @@ class ScrollToOnClick {
   };
 }
 
-export const ScrollToOnClickDirective = {
+export default {
   name: "RtScrollToOnClick",
   isFn: true,
   bind(el, bindings, vnode) {

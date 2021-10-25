@@ -82,7 +82,7 @@ class SlideContentVertical {
   };
 }
 
-export const SlideContentVerticalDirective = {
+export default {
   name: "RtSlideContentVertical",
   bind(el, bindings, vnode) {
     vnode.context.SlideContentVertical = new SlideContentVertical(vnode.elm, bindings, vnode);

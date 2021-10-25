@@ -71,7 +71,7 @@ class OutsideClick {
   }
 }
 
-export const OutsideClickDirective = {
+export default {
   name: 'RtOutSideClick',
   isFn: true,
   bind (el, bindings, vnode) {

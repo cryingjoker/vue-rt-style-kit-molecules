@@ -2,6 +2,7 @@
 import TabsSliderVirtualItem from './TabsSliderVirtualItem.vue'
 import TabsSliderPaginator from './TabsSliderPaginator.vue'
 import {tabsSliderStore} from "./TabsSliderStore";
+import './TabsSlider.styl'
 
 const components = {}
 components[TabsSliderVirtualItem.name] = TabsSliderVirtualItem;
@@ -65,14 +66,13 @@ export default {
     pause: false,
     hover: false,
     minHeight: 0
-
   }),
   computed: {
     renderMenu() {
       return <rt-tabs-slider-paginator on-click-stop-play={this.onClickStopPlay} pause={this.pause}
                                        time={this.timerDuration}
                                        shadow-color={this.shadowColor}
-                                       duration-time={this.scrollDuxration}
+                                       duration-time={this.scrollDuration}
                                        slider-name={this.name}></rt-tabs-slider-paginator>
     },
     renderTabs() {

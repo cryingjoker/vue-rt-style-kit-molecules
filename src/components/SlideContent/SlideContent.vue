@@ -1,16 +1,22 @@
 <script type="text/jsx">
-
+    import './SlideContent.styl'
+    import RtSlideContentDottedHeader from './SlideContentDottedHeader.vue'
+    import RtSlideContentDottedContent from './SlideContentDottedContent.vue'
     export default {
         name: "RtSlideContent",
+        components: {
+          RtSlideContentDottedHeader,
+          RtSlideContentDottedContent
+        },
         props: {
             isOpen: {
                 type: Boolean,
                 default: false
             },
-//            needBorder: {
-//                type: Boolean,
-//                default: true
-//            },
+           needBorder: {
+               type: Boolean,
+               default: true
+           },
             dottedView: {
                 type: Boolean,
                 default: false
@@ -52,8 +58,7 @@
             if (this.isOpen) {
                 this.isOpenLocal = this.isOpen;
             }
-            if (this.dottedView) {
-
+            if (this.dottedView || this.revertDottedView) {
                 const header = this.$refs.header
                 header.$el.querySelectorAll('.rt-slide-content-trigger').forEach((el) => {
                     el.addEventListener('click', () => {
@@ -79,7 +84,6 @@
                         }, 50)
                     });
                 })
-
             }
         },
         render(h) {
@@ -107,9 +111,9 @@
             let slideArrowClass = `rt-slide__arrow rt-slide__arrow--${this.arrowPosition}`;
             let slideClass = `rt-slide`;
 
-//            if (!this.needBorder) {
-//                slideClass += ' rt-slide--without-border';
-//            }
+           if (!this.needBorder) {
+               slideClass += ' rt-slide--without-border';
+           }
             if (this.isOpenLocal) {
                 slideClass += ' rt-slide--is-active';
             }
@@ -117,8 +121,7 @@
             let slideContentClass = `rt-slide__content rt-slide__content--${this.arrowPosition.split('-')[0]}`;
             return <div class={slideClass}>
                 <div class={slideHeaderClass} onClick={this.toggleOpen}>
-                    <svg class={slideArrowClass} width="8px" height="13px" viewBox="0 0 8 13" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg">
+                    <svg class={slideArrowClass} width="8px" height="13px" viewBox="0 0 8 13" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g id="new-abonent" transform="translate(-202.000000, -2087.000000)" fill="#101828">
                                 <g id="primechania" transform="translate(0.000000, 1885.000000)">

@@ -2,22 +2,18 @@
 
   const componentsList = {};
 
-
   export default {
     name: "RtBannerVirtualImageV2",
     components: componentsList,
     props: {
       image: {
         type: Array,
-
       },
       imageX2:{
         type: Array,
-
       },
       imageTablet:{
         type: Array,
-
       },
       imageMobile:{
         type: Array,
@@ -26,20 +22,11 @@
         type: Boolean
       }
     },
-
-
-    mounted: function () {
-
-    },
-    beforeMount() {
-
-    },
-    beforeUpdate() {
-    },
-    updated() {
-    },
-    beforeDestroy: function () {
-    },
+    mounted: function () {},
+    beforeMount() {},
+    beforeUpdate() {},
+    updated() {},
+    beforeDestroy: function () {},
     methods: {},
     computed: {
       gradient(){
@@ -78,7 +65,6 @@
         return null
       },
       imageTabletRender(){
-
         if(this.imageTablet){
           const classList = ['rt-n-banner-image-container', 'td-d-block', 'd-none'];
           if(this.imageMobile){
@@ -91,7 +77,6 @@
       imageMobileRender(){
         if(this.imageMobile){
           const classList = ['rt-n-banner-image-container', 'md-d-block', 'd-none'];
-
           return <div class={classList.join(' ')}>{this.imageMobile}</div>
         }
         return null

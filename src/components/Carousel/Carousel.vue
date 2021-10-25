@@ -136,6 +136,8 @@ import Mobile from '../../utils/mobile'
 import Animate from '../../utils/animate'
 import StylesUtil from '../../utils/styles'
 import debounce from "debounce"
+import RtCardSkeleton from '../Card/CardSkeleton/CardSkeleton.vue'
+import './Carousel.styl'
 
 const name = 'RtCarousel'
 const autoScrollingTimeout = 100 // Длительность задержки автоскроллинга
@@ -147,7 +149,8 @@ let boostedIndex = 0
 export default {
   name: name,
   components: {
-    [Navigation.name]: Navigation
+    [Navigation.name]: Navigation,
+    RtCardSkeleton
   },
   props: {
     loaded: {

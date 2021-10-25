@@ -1,13 +1,14 @@
 <script type="text/jsx">
     import debounce from 'debounce';
     import {scrollIt} from "../../utils";
+    import './ScrollTabs.styl'
 
     export default {
         name: "RtScrollTabs",
         props: {
             hasFixedJsNode: {
-                type: String,
-                default: ''
+                type: Boolean,
+                default: false
             },
             removeBaseTag: {
                 type: Boolean,
@@ -161,7 +162,6 @@
             setFixedJsScroll() {
 
                 if (!this.hasFixedJsNode) {
-
                     return false;
                 }
                 const resizeSize = debounce(() => {

@@ -114,7 +114,7 @@ export default {
     },
     googleAn(bind){
       if(bind && this.$el.tagName) {
-        this.$el.querySelector('a, button').addEventListener('click', (e)=> {
+        this.$el.querySelector('a, button')?.addEventListener('click', (e)=> {
           if (!e.target.getAttribute('data-ga-pushed')) {
             e.preventDefault();
             this.fireGoogleAn()
@@ -246,7 +246,7 @@ export default {
       }
     },
     bannerClass() {
-      const classNames = ['rt-n-banner-item', 'd-flex'];
+      const classNames = ['rt-n-banner-item'];
       if (this.activeId == this.id) {
         classNames.push('rt-n-banner-item--active')
 

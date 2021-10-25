@@ -1,0 +1,39 @@
+.download-content
+  display inline-block
+  padding-left 24px
+  position relative
+  cursor pointer
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property color
+
+  &:hover
+    color main-color05
+
+  &__icon
+    position absolute
+    left 0
+
+    &-svg
+      transition-timing-function ease-in-out
+      transition-duration .2s
+      transition-property stroke
+      stroke main-color
+
+      .download-content:hover &
+        stroke main-color05
+
+  &__text,
+  &__info
+    color main-color05
+    padding-top 4px
+
+.download-content--has-border
+  padding-left: 44px
+  padding-top: 20px
+  padding-bottom: 20px
+  padding-right: 20px
+  border: 2px dashed #7800ff;
+  border-radius 5px
+  .download-content__icon
+    left: 20px

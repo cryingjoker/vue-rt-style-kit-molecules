@@ -1,5 +1,7 @@
 <script type="text/jsx">
+    import './CheckboxTabs.styl'
     import {tabsStore} from "../Tabs/TabsStore.js";
+
 
 
     export default {

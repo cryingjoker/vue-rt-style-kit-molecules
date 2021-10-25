@@ -1,5 +1,5 @@
 <script type="text/jsx">
-
+import './PreviewBanner.styl'
 
 const componentsList = {};
 

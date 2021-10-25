@@ -31,6 +31,7 @@ class CarouselV3Store extends StorePrototype {
         index: 0,
         slides: [],
         ids: [],
+        slidesCustomId: [],
         possibleIds: {},
         watchers: [],
         colInRow: 0,
@@ -48,33 +49,37 @@ class CarouselV3Store extends StorePrototype {
     }
   }
 
-  createSlide = (sliderName, _id, slot, index) => {
+  createSlide = (sliderName, _id, slot, index, slideId) => {
     this.fillSlideInfo(sliderName)
     const sliders = this.sliders[sliderName];
     if (!sliders.possibleIds[_id]) {
       sliders.possibleIds[_id] = 1
       if (index < 0) {
         sliders.slides.push(slot)
+        sliders.slidesCustomId.push(slideId)
         sliders.ids.push(_id)
 
       } else {
+        sliders.slidesCustomId.splice(index, 0, slideId)
         sliders.slides.splice(index, 0, slot)
         sliders.ids.splice(index, 0, splice)
       }
     } else {
       const index = sliders.ids.indexOf(_id)
       sliders.slides[index] = slot;
+      sliders.slidesCustomId[index] = slideId;
     }
     this.setArrowProps(sliderName);
     this.callWatcher(sliderName)
 
 
   }
-  updateSlide = (sliderName, _id, slot, index) => {
+  updateSlide = (sliderName, _id, slot, index, slideId) => {
     const sliders = this.sliders[sliderName];
     if (sliders) {
       const indexSlide = sliders.ids.indexOf(_id);
       sliders.slides[indexSlide] = slot;
+      sliders.slidesCustomId[indexSlide] = slideId
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName);
     }
@@ -97,6 +102,12 @@ class CarouselV3Store extends StorePrototype {
   getSliderContent = (sliderName) => {
     if (this.sliders[sliderName]) {
       return this.sliders[sliderName].slides
+    }
+  }
+
+  getSliderCustomIds = (sliderName) => {
+    if (this.sliders[sliderName]) {
+      return this.sliders[sliderName].slidesCustomId
     }
   }
 
@@ -313,6 +324,7 @@ export const carouselV3Store = Vue.observable({
   updateSlide: carouselV3StoreObject.updateSlide,
   removeSlide: carouselV3StoreObject.removeSlide,
   getSliderContent: carouselV3StoreObject.getSliderContent,
+  getSliderCustomIds: carouselV3StoreObject.getSliderCustomIds,
   getActiveIndex: carouselV3StoreObject.getActiveIndex,
   getArrowOptions: carouselV3StoreObject.getArrowOptions,
   getShadowOptions: carouselV3StoreObject.getShadowOptions,

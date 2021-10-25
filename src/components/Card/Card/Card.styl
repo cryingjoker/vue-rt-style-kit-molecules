@@ -1,0 +1,1310 @@
+.browser-IE .rt-card,
+.rt-card__content
+  min-height inherit
+
+.rt-card
+  display flex
+  z-index: 1
+  flex 1
+  flex-direction column
+  align-self stretch
+  width 100%
+  min-height min-content
+  overflow hidden
+  transform: translate3d(0, 0, 0)
+  backface-visibility: hidden
+  color main-color
+  background-position-x center
+  background-position-y center
+  background-repeat no-repeat
+  border-radius 10px
+  position relative
+  box-shadow card-shadow--before-hovered
+  transition-timing-function ease-in-out
+  transition-duration .2s
+  transition-property box-shadow
+  &:hover
+    @media (hover: hover) {
+      box-shadow card-shadow--hovered
+    }
+
+  &--custom-height
+    min-height initial
+
+  &--has-discount
+    margin-top: 50px
+    max-height calc(100% - 50px)
+
+  &__border-content
+    border-top 1px solid main-color01
+    padding-top vertical-space * .5
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &--has-bg-cover
+    background-color transparent
+
+  &--transparent
+    background-color transparent
+
+  @media (max-width: mobile-upper-limit)
+    flex-direction column
+
+  @media (min-width: tablet-lower-limit)
+    min-height 364px
+
+  &--has-white-color
+    color #fff
+
+  &--has-smoke
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .5)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &--has-smoke03
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .3)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &--has-smoke02
+    &:before
+      content ""
+      background-color rgba(0, 0, 0, .2)
+      border-radius 10px
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      z-index 2
+
+  &__background
+    background-color white
+    background-position-x center
+    background-position-y center
+    background-repeat no-repeat
+    border-radius 10px
+    position absolute
+    top -20px
+    bottom -20px
+    left -20px
+    right -20px
+    z-index 1
+
+    .rt-card-purple &
+      background-color b2c-purple
+
+    .rt-card-purple-low &
+      background-color b2c-purple-low
+
+    .rt-card-purple-high &
+      background-color b2c-purple-high
+
+    .rt-card-red &
+      background-color b2c-red
+
+    .rt-card-red-low &
+      background-color b2c-red-low
+
+    .rt-card-red-high &
+      background-color b2c-red-high
+
+    .rt-card-dark-blue &
+      background-color b2c-dark-blue
+
+    .rt-card-dark-blue-low &
+      background-color b2c-dark-blue-low
+
+    .rt-card-dark-blue-high &
+      background-color b2c-dark-blue-high
+
+    .rt-card-light-blue &
+      background-color b2c-light-blue
+
+    .rt-card-light-blue-low &
+      background-color b2c-light-blue-low
+
+    .rt-card-light-blue-high &
+      background-color b2c-light-blue-high
+
+    .rt-card-yellow &
+      background-color b2c-yellow
+
+    .rt-card-yellow-low &
+      background-color b2c-yellow-low
+
+    .rt-card-yellow-high &
+      background-color b2c-yellow-high
+
+    .rt-card-orange &
+      background-color b2c-orange
+
+    .rt-card-orange-low &
+      background-color b2c-orange-low
+
+    .rt-card-orange-high &
+      background-color b2c-orange-high
+
+    .rt-card-pink &
+      background-color b2c-pink
+
+    .rt-card-pink-low &
+      background-color b2c-pink-low
+
+    .rt-card-pink-high &
+      background-color b2c-pink-high
+
+    .rt-card-green &
+      background-color b2c-green
+
+    .rt-card-green-low &
+      background-color b2c-green-low
+
+    .rt-card-green-high &
+      background-color b2c-green-high
+
+    .rt-card-black &
+      background-color dark-card-background
+
+    .rt-card-slate &
+      background-color b2c-slate
+
+    .rt-card-dark-slate &
+      background-color b2c-dark-slate
+
+    .rt-card-light-grey &
+      background-color light-grey
+
+    &--position-background-top
+      background-position-x center
+      background-position-y top
+
+    &--position-background-right
+      background-position-x calc(100% - 40px)
+      background-position-y center
+
+    &--position-background-bottom
+      background-position-x center
+      background-position-y bottom
+
+    &--position-background-left
+      background-position-x 40px
+      background-position-y center
+
+    &--position-background-top-right
+      background-position-x calc(100% - 40px)
+      background-position-y top
+
+    &--position-background-bottom-right
+      background-position-x calc(100% - 40px)
+      background-position-y bottom
+
+    &--position-background-bottom-left
+      background-position-x 40px
+      background-position-y bottom
+
+    &--position-background-top-left
+      background-position-x 40px
+      background-position-y top
+
+    .rt-card--has-bg-repeat &
+      background-repeat repeat
+
+    .rt-card--has-bg-cover &
+      background-size cover
+
+    @media (max-width: mobile-upper-limit)
+      .rt-card--hide-background-on-mobile &
+        background-image inherit !important
+
+  &__stand-alone-background
+    background-size cover
+    background-repeat no-repeat
+    position absolute
+    top 0
+    bottom 0
+    right 0
+    z-index 2
+
+    @media (max-width: mobile-upper-limit)
+      width 100% !important
+      height 100% !important
+      max-height 40vw !important
+      background-position center center
+      background-size contain
+      margin-top vertical-space
+      position relative
+      top 0 !important
+      bottom 0 !important
+      left 0 !important
+      right 0 !important
+
+  &__content
+    display flex
+    flex-direction column
+    width 100%
+    min-width 100%
+    min-height auto
+    padding vertical-space 0
+    position relative
+    z-index 3
+
+    @media (min-width: tablet-lower-limit)
+      min-height 364px
+
+    &--has-custom-height
+      @media (max-width: mobile-upper-limit)
+        display flex
+        min-height auto
+
+    .rt-col-6 &
+      min-width 50%
+
+    &--has-offset-top
+      padding-top vertical-space * 9
+
+  &__body
+    flex 1 0 auto
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+    &--is-empty
+      @media (max-width: mobile-upper-limit)
+        display none
+
+    &--is-static
+      flex 0
+      flex-grow 0 !important
+
+  &__footer
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &__header
+    flex 0 0 auto
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+    &__image
+      max-width 100%
+
+    &>*
+      hyphens auto
+
+  &__bottom-list
+    border-top 1px solid main-color01
+    margin-top vertical-space * 1.5
+    padding-top vertical-space
+    padding-left horizontal-space
+    padding-right horizontal-space
+
+  &-img
+    max-width 100%
+
+  &-text
+    letter-spacing .18px
+
+  &-list
+    &__item
+      display flex
+      flex-direction row
+
+      & + &
+        padding-top vertical-space
+
+    &__icon
+      width 56px
+
+    &__name
+      display flex
+      flex 1 0 auto
+      flex-direction row
+      align-items center
+      width calc(100% - 56px)
+      padding-left horizontal-space * .5
+
+  &__popup-benefits,
+  &__popup-costs
+    display none
+  &--no-shadow
+    box-shadow none
+    border 2px solid #F3F3F4
+    &:hover
+      box-shadow none
+
+
+.{b2bAppName}-card
+  min-height 184px
+  box-sizing border-box
+  overflow visible
+  color main-color
+  background-color b2c-white
+  background-repeat no-repeat
+  border-radius 10px
+  padding 20px
+  z-index 1
+
+  &--package
+    padding vertical-space * 1.5
+    @media (max-width: mobile-upper-limit)
+      padding vertical-space
+
+  &__subtitle
+    height 18px
+    box-sizing unset
+    font-size 14px
+    text-transform uppercase
+    opacity .25
+    letter-spacing .9px
+
+  &__description
+    margin-bottom 60px
+    vertical-align middle
+
+    &__item
+      vertical-align middle
+
+      &+&
+        margin-bottom 12px
+
+      &__footnote
+        color main-color05
+
+      &--disabled
+        opacity .25
+
+      &--purple
+        color b2c-purple
+
+    &__row
+      margin-bottom vertical-space * .5
+
+  .{b2bAppName}-price
+    display inline-block
+
+    &__value,
+    &__info
+      color inherit
+  //font-size inherit
+
+  &__cost
+    .{b2bAppName}-price
+    &__value,
+    &__info
+      font-size 36px
+      line-height 40px
+      @media (max-width: tablet-upper-limit)
+        font-size 32px
+        line-height 32px
+
+  &__section
+    padding 10px 0
+
+    &+&
+      border-top 1px solid main-color02
+
+    .{b2bAppName}-card__description__row:last-child
+      margin-bottom 0
+
+  &__links-block
+    display inline-block
+    max-width calc(32px * 6) //calc(100% - 36px)
+    min-height 28px
+    overflow hidden
+    vertical-align middle
+
+    &--expanded
+      max-height none
+      max-width 224px!important
+
+      & + .rtb-card__expand-button
+        display none
+
+    &__footnote
+      margin-top 5px
+
+  &__social-link
+    margin-bottom 8px
+    width 24px
+    height 24px
+    display inline-block
+    vertical-align middle
+    margin-right 12px
+
+    img
+      width: 24px
+      height: 24px
+
+    &--hidden
+      display none
+
+  &__expand-button
+    color b2c-purple
+    font-size 14px
+    line-height 28px
+    vertical-align middle
+    cursor pointer
+    min-width 41px
+    margin-top -10px
+    @media (min-width laptop-lower-limit)
+      margin-left 5px
+
+  .{newAppName}-card__content
+    min-height auto
+    padding 0
+
+  .{newAppName}-card__body
+    padding 0
+
+  &__discount
+    width 100%
+    height 10px
+    position absolute
+    top 0
+    left 0
+    z-index 2
+
+    &-line
+      height 30px
+      border-radius 10px 10px 0 0
+      position absolute
+
+      &__flag
+        width 30px
+        height 29px
+        position absolute
+        top 30px
+        right 0
+        z-index -1
+
+        &-text
+          width 100%
+          color b2c-white
+          font-size 16px
+          line-height 30px
+          text-align center
+          display: inline-block
+          position relative
+          z-index 1
+
+        &-text-2
+          top 5px
+
+  &__discount-line-1
+    width 90%
+    background-color b2c-green
+    top -30px
+    left 5%
+    &:after
+      content ''
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
+      background-color rgba(main-color, .15)
+      border-radius 10px 10px 0 0
+
+    &:last-child
+      background-color b2c-yellow-high
+
+  &__discount-line-2
+    width 81%
+    background-color b2c-red
+    top -40px
+    left 9.5%
+    z-index -1
+
+  &__discount-line-3
+    width 72.9%
+    background-color b2c-purple
+    top -50px
+    left 13.95%
+    z-index -2
+
+  .{newAppName}-card__background
+    top 0
+    bottom 0
+    left 0
+    right 0
+
+  .{newAppName}-card__header,
+  .{newAppName}-card__footer
+    padding 0
+
+  &__vertical
+    display flex
+    flex-direction row
+
+    &__left-column
+      max-width 64px
+      text-align center
+      margin-right 20px
+
+  &__icon
+    max-width 64px
+    max-height 64px
+
+
+  &__label
+    width 80px
+    height 49px
+    box-sizing border-box
+    color b2c-white
+    text-align center
+    background-repeat no-repeat
+    padding-top 4px
+    position absolute
+    top 20px
+    right -13px
+    z-index 3
+    &-content
+      position relative
+      top 0
+      width 100%
+      line-height 32px
+    &-hover
+      display:none
+    &-text
+      white-space nowrap
+      position absolute
+      right 12px
+      top 0
+      padding-left 10px
+      z-index 2
+      &>*
+        line-height 31px
+
+  &__product-image,
+  &__product-icon
+    position: relative
+    height 180px
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-size cover
+    border-radius 0
+    & + .rt-card__content
+      padding-top: 20px
+      min-height auto
+  &__product-icon
+    background-size 80px
+    background-position 20px 100%
+  &--product
+    height 580px
+    display block
+    @media (max-width: tablet-upper-limit)
+      height 510px
+    @media (max-width: mobile-upper-limit)
+      min-height 400px
+      height auto
+    .{newAppName}-card__content
+      height 400px
+      @media (max-width: tablet-upper-limit)
+        min-height 330px
+        height auto
+    .color-block
+      color b2c-white
+    .color-block--white
+      color main-color
+  &--double-sided
+    perspective 2000px
+    transform-style: flat
+    transition transform 1s, right 1s
+    backface-visibility visible
+    @media(max-width: mobile-upper-limit)
+      min-height 338px
+      max-height 358px
+    .{newAppName}-card__background
+      &:after
+        position absolute
+        top 20px
+        left 20px
+        right 20px
+        bottom 20px
+        content ''
+        background linear-gradient(rgba(main-color, 0) 0%,rgba(main-color, .67) 50%, main-color 100%)
+    .{newAppName}-card__content
+      height 100%
+      padding-top: 310px
+      padding-right 55px
+      box-sizing border-box
+      position absolute
+      top 0
+      left 0
+      visibility visible
+      z-index 2
+      transition visibility 0s .3s cubic-bezier(0, 1, 1, 0)
+      background-size: cover
+      background-position: 50% 50%
+      &:after
+        position absolute
+        content: ''
+        top 0
+        left 0
+        rigth 0
+        bottom 0
+        background linear-gradient(to bottom, rgba(main-color,0) 0%, rgba(main-color, .67) 50%, main-color 100%)
+        width 100%
+        height 100%
+        z-index -1
+      @media (max-width: tablet-upper-limit)
+        max-height none
+        padding-top 100px
+      @media (max-width: mobile-upper-limit)
+        padding-right 0
+        padding-top 50px
+    .{newAppName}-card__background
+      visibility visible
+      transition visibility 0s .3s cubic-bezier(0, 1, 1, 0)
+    &.is-flipped
+      @media (min-width: laptop-lower-limit)
+        transform rotateY(180deg)
+
+  &:hover &__label-hover
+    display block
+
+  &__reverse
+    position absolute
+    transform: rotateY(180deg)
+    background-color b2c-white
+    padding 40px 40px 20px
+    visibility hidden
+    transition visibility 0s .3s cubic-bezier(0, 1, 1, 0)
+    backface-visibility visible
+    @media (max-width: tablet-upper-limit)
+      padding 20px
+    @media (max-width: mobile-upper-limit)
+      padding-top: 40px
+    .{newAppName}-font-bold
+      &:nth-child(n+2)
+        margin-top vertical-space
+
+  &-close
+    top 20px
+    right 20px
+    position absolute
+    cursor pointer
+    @media (max-width: tablet-upper-limit)
+      display none
+
+  &__underlined-section
+    border-bottom 1px solid rgba(16, 24, 40, .1)
+
+  &__expanding-content
+    overflow: hidden
+    height: 0
+    transition: height 0.2s linear
+    .with-icon:before
+      top -1px
+
+  &__expanding-button
+    width 100%
+    cursor pointer
+    &--active+.rtb-card__expanding-content
+      height auto
+
+  &--img-full-width
+    padding 0
+    .rt-card__header
+      padding 0
+    .rt-card__body,
+    .rt-card__footer
+      padding 0 20px
+
+  &__image-wrapper
+    width 100%
+    position relative
+    border-top-left-radius 10px
+    border-top-right-radius 10px
+    overflow hidden
+    &--has-gradient
+      &:after
+        position absolute
+        content: ''
+        top 0
+        left 0
+        right 0
+        bottom 0
+        background linear-gradient(to bottom, rgba(b2c-white, 0), rgba(b2c-white, 0.16) 26%, rgba(b2c-white, 0.25) 47%, rgba(b2c-white, 0.65) 68%, rgba(b2c-white, 0.9) 87%, #fff);
+    .additional-possibilities__card-image
+      width 100%
+
+.is-flipped
+  @media (min-width: laptop-lower-limit)
+    .{b2bAppName}-card__reverse
+      z-index 3
+      visibility visible
+    .{newAppName}-card__content
+      visibility hidden
+
+.{b2bAppName}-product__triangle
+  position absolute
+  top 1px
+  left 0
+  right 0
+  transform translateY(-97%)
+  &-image
+    display block
+
+.{b2bAppName}-category
+  height 364px
+  box-sizing border-box
+
+  @media (max-width: mobile-upper-limit)
+    height 420px
+
+  &__content
+    display flex
+    flex-direction row
+    height 100%
+    @media (max-width: mobile-upper-limit)
+      flex 1 0 100%
+
+    &-top
+      overflow hidden
+
+  &__triangle
+    width 76px
+    height 100%
+    position absolute
+    top 0
+    bottom 0
+    left calc(((100% - 77px) / 2))
+    right calc(((100% - 74px) / 2))
+
+    @media (max-width: tablet-upper-limit)
+      display none
+
+  &__image
+    width calc(((100% + 76px) / 2))
+    background-position 50% 50%
+    background-size cover
+    background-repeat no-repeat
+
+    @media (max-width: tablet-upper-limit)
+      display none
+
+  &__text-content
+    display flex
+    flex-direction column
+    justify-content space-between
+    width calc(((100% - 76px) / 2))
+    padding vertical-space
+    min-height 364px
+
+    @media (max-width: tablet-upper-limit)
+      width 100%
+      padding-top vertical-space * 2
+    @media (max-width: mobile-upper-limit)
+      flex 1 0 100%
+
+  &__mobile-header
+    width 60px
+    height 60px
+    background-position 50% 50%
+    background-repeat no-repeat
+    margin-bottom vertical-space
+
+    @media (min-width: desktop-lower-limit)
+      display none
+
+  &--large
+    @media (max-width: mobile-upper-limit)
+      height auto
+      min-height 420px
+
+    .{b2bAppName}-category__image
+      display block !important
+
+      @media (max-width: mobile-upper-limit)
+        width 100%
+        height 168px
+        background-size cover
+
+    .{b2bAppName}-category__text-content
+      padding vertical-space * 1.5
+
+      @media (max-width: tablet-upper-limit)
+        width calc(((100% - 76px) / 2))
+
+      @media (max-width: mobile-upper-limit)
+        width 100%
+        height auto
+
+    .{b2bAppName}-category__content
+      @media (max-width: mobile-upper-limit)
+        flex-direction column-reverse
+
+    .{b2bAppName}-category__text-content
+      @media (max-width: tablet-upper-limit)
+        padding vertical-space
+
+    .{b2bAppName}-category__triangle
+      @media (min-width: tablet-lower-limit)
+        display block
+
+  &--medium
+    .{b2bAppName}-category__mobile-header
+      @media (min-width: laptop-lower-limit)
+        display none
+
+  &--small
+    .{b2bAppName}-category__text-content
+      width 100%
+      padding-top vertical-space * 2
+
+  .{b2bAppName}-category__mobile-header
+    display block !important
+    background-size 100%
+
+  .{b2bAppName}-category__content-top--cut
+    max-height 258px
+  &__title
+    z-index 2
+    @media (max-width: tablet-upper-limit)
+      font-size 18px
+      line-height 26px
+
+  .{newAppName}-price
+    opacity 1 !important
+
+.triple
+  .{b2bAppName}-card
+    &__discount-line-1
+      background-color b2c-light-blue-high
+
+    &__discount-line-2
+      background-color b2c-orange
+
+.mb5
+  margin-bottom 5px
+
+.{b2bAppName}-category
+  &.{newAppName}-card-purple
+    .{b2bAppName}-category__text-content
+      background-color b2c-purple
+
+    .{b2bAppName}-category__triangle
+      fill b2c-purple
+
+  &.{newAppName}-card-purple-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-purple-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-purple-low
+
+  &.{newAppName}-card-purple-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-purple-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-purple-high
+
+  &.{newAppName}-card-red
+    .{b2bAppName}-category__text-content
+      background-color b2c-red
+
+    .{b2bAppName}-category__triangle
+      fill b2c-red
+
+  &.{newAppName}-card-red-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-red-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-red-low
+
+  &.{newAppName}-card-red-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-red-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-red-high
+
+  &.{newAppName}-card-dark-blue
+    .{b2bAppName}-category__text-content
+      background-color b2c-dark-blue
+
+    .{b2bAppName}-category__triangle
+      fill b2c-dark-blue
+
+  &.{newAppName}-card-dark-blue-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-dark-blue-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-dark-blue-low
+
+  &.{newAppName}-card-dark-blue-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-dark-blue-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-dark-blue-high
+
+  &.{newAppName}-card-light-blue
+    .{b2bAppName}-category__text-content
+      background-color b2c-light-blue
+
+    .{b2bAppName}-category__triangle
+      fill b2c-light-blue
+
+  &.{newAppName}-card-light-blue-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-light-blue-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-light-blue-low
+
+  &.{newAppName}-card-light-blue-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-light-blue-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-light-blue-high
+
+  &.{newAppName}-card-yellow
+    .{b2bAppName}-category__text-content
+      background-color b2c-yellow
+
+    .{b2bAppName}-category__triangle
+      fill b2c-yellow
+
+  &.{newAppName}-card-yellow-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-yellow-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-yellow-low
+
+  &.{newAppName}-card-yellow-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-yellow-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-yellow-high
+
+  &.{newAppName}-card-orange
+    .{b2bAppName}-category__text-content
+      background-color b2c-orange
+
+    .{b2bAppName}-category__triangle
+      fill b2c-orange
+
+  &.{newAppName}-card-orange-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-orange-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-orange-low
+
+  &.{newAppName}-card-orange-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-orange-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-orange-high
+
+  &.{newAppName}-card-pink
+    .{b2bAppName}-category__text-content
+      background-color b2c-pink
+
+    .{b2bAppName}-category__triangle
+      fill b2c-pink
+
+  &.{newAppName}-card-pink-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-pink-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-pink-low
+
+  &.{newAppName}-card-pink-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-pink-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-pink-high
+
+  &.{newAppName}-card-green
+    .{b2bAppName}-category__text-content
+      background-color b2c-green
+
+    .{b2bAppName}-category__triangle
+      fill b2c-green
+
+  &.{newAppName}-card-green-low
+    .{b2bAppName}-category__text-content
+      background-color b2c-green-low
+
+    .{b2bAppName}-category__triangle
+      fill b2c-green-low
+
+  &.{newAppName}-card-green-high
+    .{b2bAppName}-category__text-content
+      background-color b2c-green-high
+
+    .{b2bAppName}-category__triangle
+      fill b2c-green-high
+
+  &.{newAppName}-card-main-color
+    .{b2bAppName}-category__text-content
+      background-color main-color
+
+    .{b2bAppName}-category__triangle
+      fill main-color
+
+  &.{newAppName}-card-cool-grey
+    .{b2bAppName}-category__text-content
+      background-color b2c-cool-grey
+
+    .{b2bAppName}-category__triangle
+      fill b2c-cool-grey
+
+  &.{newAppName}-card-slate
+    .{b2bAppName}-category__text-content
+      background-color b2c-slate
+
+    .{b2bAppName}-category__triangle
+      fill b2c-slate
+
+  &.{newAppName}-card-burgundy
+    .{b2bAppName}-category__text-content
+      background-color b2c-burgundy
+
+    .{b2bAppName}-category__triangle
+      fill b2c-burgundy
+
+  &.{newAppName}-card-dark-slate
+    .{b2bAppName}-category__text-content
+      background-color b2c-dark-slate
+
+    .{b2bAppName}-category__triangle
+      fill b2c-dark-slate
+
+  &.{newAppName}-card-error-color
+    .{b2bAppName}-category__text-content
+      background-color error-color
+
+    .{b2bAppName}-category__triangle
+      fill error-color
+
+.rt-container--mobile-full-width
+  @media (max-width: tablet-upper-limit)
+    padding 0
+
+.rtk-carousel-slide
+  .{b2bAppName}-card,
+  .{newAppName}-card__content
+    height 100%
+
+.card-pattern
+  position absolute
+  top -30px
+  left -20px
+
+.card
+  &-layout
+    .rt-col-3
+      max-width calc(100% / 3)
+      flex-basis calc(100% / 3)
+    .rt-col-4
+      max-width calc(100% / 9 * 4)
+      flex-basis calc(100% / 9 * 4)
+  &-layout-12
+    width 100%
+  &-layout--nowrap
+    .row
+      flex-wrap nowrap
+  &-layout-6
+    width 50%
+    @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
+      width auto
+    .rt-col-3
+      max-width 50%
+      flex-basis 50%
+  &-layout-8
+    width calc(100% / 3 * 2)
+    .rt-col-3
+      max-width calc(100% / 3)
+      flex-basis calc(100% / 3)
+    .rt-col-4
+      max-width calc(50%)
+      flex-basis calc(50%)
+  &-layout-9
+    width 75%
+    @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
+      min-width 75%
+      width calc(322px * 3)
+
+.rt-col-ld-12
+  @media (min-width laptop-lower-limit) and (max-width laptop-upper-limit)
+    max-width calc(100% / 3 * 2)
+    flex-basis calc(100% / 3 * 2)
+
+.specified-card-layout
+  justify-content space-between
+  display flex
+  width 100%
+  flex-wrap wrap
+  .card-layout__slide
+    @media (max-width: laptop-upper-limit) and (min-width: laptop-lower-limit)
+      width calc(275px + 20px)
+      flex-basis calc(275px + 20px)!important
+      max-width calc(275px + 20px)!important
+    @media (max-width: tablet-upper-limit)
+      width calc(35vw + 20px)
+      flex-basis calc(35vw + 20px)!important
+      max-width calc(35vw + 20px)!important
+    @media (max-width: mobile-upper-limit)
+      width calc(75vw + 20px)
+      flex-basis calc(75vw + 20px)!important
+      max-width calc(75vw + 20px)!important
+
+.links-block
+  display flex
+  justify-content space-between
+  @media (min-width laptop-lower-limit)
+    display flex
+    justify-content flex-start
+
+.equipment
+  display flex
+  flex-direction row
+  border-bottom 1px solid b2c-cool-grey
+  @media (max-width tablet-upper-limit)
+    flex-direction column
+  @media (max-width mobile-upper-limit)
+    margin-bottom: 20px
+  &__short-description,
+  &__image
+    flex-basis 50%
+  &__short-description
+    display flex
+    flex-direction column
+    justify-content space-between
+    @media (max-width tablet-upper-limit)
+      flex-basis 140px
+    &__top-part,
+    &__bottom-part
+      flex-basis 50%
+  &__full-description
+    @media (max-width mobile-upper-limit)
+      height 0
+      overflow auto
+      &--shown
+        height auto
+    &-line
+      display flex
+      justify-content space-between
+      padding 15px 0
+      @media (max-width tablet-upper-limit)
+        flex-direction column
+      &+.equipment__full-description-line
+        border-top 1px solid b2c-cool-grey
+      &__title
+        color main-color05
+  &__unfold-button
+    position relative
+    &-arrow
+      position absolute
+      top 3px
+      right 20px
+      width 20px
+      height 20px
+      transition transform .2s linear
+      &--reverse
+        transform rotate(180deg)
+
+.pseudo-select
+  z-index 2
+  overflow hidden
+  position absolute
+  top 0
+  left 0
+  transition height 0.3s ease-out
+  height 80px
+  width 100%
+  padding 5px 0
+  background-color #fff
+  &:before,
+  &:after
+    position absolute
+    content ''
+    left 0
+    right 0
+    height 1px
+    background-color #e3e8ec
+  &:before
+    top 0
+  &:after
+    bottom 0
+  &--opened
+    box-shadow 0 5px 4px -2px rgba(16,24,40,0.2)
+    height 240px
+    .pseudo-select__arrow
+      transform rotate(0deg)
+  &__title
+    position absolute
+    top 35px
+    left 20px
+  &__option
+    padding 15px 20px
+    cursor pointer
+    &:hover
+      background-color #8348fc
+      color #fff
+    &--chosen
+      background-color #fff
+      padding-bottom 45px
+      padding-top 5px
+      &:hover
+        background-color #fff
+        color #101828
+    &--clicked
+      background-color #70f
+      color #fff
+  &__arrow
+    position absolute
+    top 15px
+    right 10px
+    width 20px
+    height 20px
+    cursor pointer
+    z-index 2
+    transform rotate(180deg)
+    transition transform 0.3s linear
+  &-wrapper
+    height 80px
+    position relative
+.rt-card--body-no-padding .rt-card__body
+  padding 0
+
+.color-block--main-color
+  background-color main-color
+  .{b2bAppName}-product__triangle-image
+    fill main-color
+
+.color-block--light-grey
+  background-color light-grey
+  .{b2bAppName}-product__triangle-image
+    fill light-grey
+  .{b2bAppName}-product__triangle-image
+    fill #272F3D

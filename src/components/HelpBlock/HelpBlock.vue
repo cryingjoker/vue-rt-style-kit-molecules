@@ -1,10 +1,11 @@
 <script type="text/jsx">
+  import './HelpBlock.styl'
   export default {
     name: "RtHelpBlock",
     props: {
       onClick: {
         type: Function,
-        default: null
+        default: () => ({})
       },
       hideIcon: {
         type: Boolean,

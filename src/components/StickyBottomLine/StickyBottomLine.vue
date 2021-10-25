@@ -1,14 +1,11 @@
 <script type="text/jsx">
   import debounce from "debounce";
   import variables from "../../variables.json";
+  import './StickyBottomLine.styl'
 
   export default {
     name: "RtStickyBottomLine",
     props: {
-//      isActive: {
-//        type: Boolean,
-//        default: true
-//      },
       zIndex: {
         type: Number,
         default: 2
@@ -35,17 +32,11 @@
       }
     },
     data: () => ({
-//      active: false,
       pointsStart: [],
       pointsEnd: [],
       activeIndex: -1,
       deviceType: ""
     }),
-//    watch: {
-//      isActive: function() {
-//        this.active = this.isActive;
-//      }
-//    },
     mounted() {
       if (this.startStopPoints.length > 0) {
         this.setStartStopPoints();
@@ -118,8 +109,6 @@
         arrB = arrB.filter((i) => {
           return !i;
         });
-
-
       },
       setStartStopPoints() {
         this.pointsStart = [];
@@ -132,14 +121,11 @@
             const { top, height } = el.getBoundingClientRect();
             this.pointsStart.push(top - bodyRect.top);
             this.pointsEnd.push(top + height - bodyRect.top);
-
-
           }
         });
         this.sort(this.pointsStart);
         this.sort(this.pointsEnd);
         this.compareArr(this.pointsStart, this.pointsEnd, windowHeight);
-
       },
       detectActiveIndex() {
         const doc = document.documentElement;
@@ -182,7 +168,6 @@
             this.$refs["line"].style.bottom = offset + "px";
           }
         }
-
       }
     },
     computed: {},
@@ -201,8 +186,6 @@
           </div>
         </div>;
       }
-
-
       return null;
     }
   };

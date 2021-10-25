@@ -1,10 +1,9 @@
 <script type="text/jsx">
-
-
   import {sliderStore} from "./SliderStore";
   import SlideContent from "./SliderContent.vue";
   import SliderImage from "./SliderImage.vue";
   import debounce from "debounce";
+  import './Slider.styl'
 
   const componentList = [];
   componentList[SlideContent.name] = SlideContent;
@@ -49,13 +48,13 @@
     mounted() {
       sliderStore.addWatcher(this._uid, this.updateSlots)
       window.addEventListener("resize", debounce(this.getMathHeight, 1));
+      sliderStore.runWatchersById(this._uid)
     },
     updated() {
       setTimeout(() => {
         this.getMaxContentHeight()
         this.getMaxImageHeight()
       })
-
     },
     methods: {
       updateSlots() {
@@ -181,31 +180,40 @@
         }
         return style
       },
-
     },
 
     render(h) {
 
-
+      const sliderContent = () => {
+        if(this.customSlotsSort && this.customSlots) {
+          return this.customSlotsSort.map((key, index) => {
+            return <rt-slider-content index={index}
+                                      active-index={this.activeIndexLocal}
+                                      data={this.customSlots[key]}></rt-slider-content>
+          })
+        }
+      }
+      const sliderImage = () => {
+        if(this.customSlotsSort && this.customSlots) {
+          return this.customSlotsSort.map((key, index) => {
+            return <rt-slider-image index={index}
+                                    active-index={this.activeIndexLocal}
+                                    data={this.customSlots[key]}></rt-slider-image>
+          })
+        }
+      }
       return <rt-row class={this.spaceClasses} mobile-reverse-direction={true} ref="slider"
                      onTouchstart={this.touchstart} onTouchmove={this.touchmove}>
-
         {this.$slots.default}
         <rt-col size="1" t-hide={true}></rt-col>
         <rt-col size="4" tablet-size="3" mobile-size="3" class="d-flex flex-v-center">
           <div class="slider-body">
             <div class="slider-content" style={this.contentStyle}>
-              {this.customSlotsSort.map((key, index) => {
-                return <rt-slider-content index={index}
-                                          active-index={this.activeIndexLocal}
-                                          data={this.customSlots[key]}></rt-slider-content>
-              })}
+              {sliderContent()}
             </div>
             <div class="slider-arrow d-flex sp-t-2-2 td-sp-t-2 md-sp-t-1-3">
               <div class="slider-arrow-icon slider-arrow-icon__prev" onClick={this.setPreviusSlide}>
-
-                <svg class="slider-arrow-svg" width="9px" height="16px" viewBox="0 0 9 16" version="1.1"
-                     xmlns="http://www.w3.org/2000/svg">
+                <svg class="slider-arrow-svg" width="9px" height="16px" viewBox="0 0 9 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g transform="translate(30, -18)">
                     <polygon id="Path" fill="#101828" fill-rule="nonzero"
                              transform="scale(-1, 1)"
@@ -214,8 +222,7 @@
                 </svg>
               </div>
               <div class="slider-arrow-icon slider-arrow-icon__next" onClick={this.setNextSlide}>
-                <svg class="slider-arrow-svg" width="9px" height="16px" viewBox="0 0 9 16" version="1.1"
-                     xmlns="http://www.w3.org/2000/svg">
+                <svg class="slider-arrow-svg" width="9px" height="16px" viewBox="0 0 9 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <g transform="translate(-21, -18.000000)">
                     <polygon id="Path" fill="#101828" fill-rule="nonzero"
                              points="21 19.0586108 22.0460529 18 30 26 22.0460529 34 21 32.9413892 27.9009314 25.9993262"></polygon>
@@ -229,11 +236,7 @@
         <rt-col size="5" tablet-size="3" mobile-size="2" class="md-sp-b-1-1">
           <div class="slider-image" style={this.imageStyle}>
             <div class="slider-image-inner">
-              {this.customSlotsSort.map((key, index) => {
-                return <rt-slider-image index={index}
-                                        active-index={this.activeIndexLocal}
-                                        data={this.customSlots[key]}></rt-slider-image>
-              })}
+              {sliderImage()}
             </div>
           </div>
         </rt-col>

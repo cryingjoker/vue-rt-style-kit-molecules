@@ -1,6 +1,7 @@
 <script type="text/jsx">
-
+import './MessageBox.styl'
 import Global from '../../variables.json'
+import './MessageBox.styl'
 
 export default {
   name: 'RtMessageBox',

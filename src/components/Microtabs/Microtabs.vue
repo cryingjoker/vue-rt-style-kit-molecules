@@ -1,6 +1,7 @@
 <script type="text/jsx">
 import { cmpName, resizeHandler, resizeHandlerDestroy } from './common.js'
 import MicrotabsControl from './MicrotabsControl.vue'
+import './Microtabs.styl'
 const offset = 8
 const controlWidth = 32
 
@@ -131,6 +132,7 @@ export default {
     this.activeTab = this.defaultTabIndex
   },
   mounted(){
+    this.$emit('onReady', true) // Используется для выравнивания группы карточек
     this.$on('setActiveTab', (key, calculateFitItems = true) => {
       if (key !== this.activeTab) {
         this.direction = key > this.activeTab ? 'right' : 'left'
