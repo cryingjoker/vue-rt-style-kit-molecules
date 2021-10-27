@@ -115,6 +115,7 @@ export default { // Сортировака по группам, как в pages
   ...load('RtBannerItemV2', 'BannerV2/BannerItem.vue'),
   ...load('RtBannerSkeleton', 'BannerV2/BannerSkeleton.vue'),
   ...load('RtCard', 'Card/Card/Card.vue'),
+  ...load('RtCardBuy', 'Card/CardBuy/CardBuy.vue'),
   ...load('RtCardB2o', 'Card/CardB2o/CardB2o.vue'),
   ...load('RtCardBanner', 'Card/CardBanner/CardBanner.vue'),
   ...load('RtCardTileLayout', 'Card/CardBanner/CardTileLayout.vue'),
