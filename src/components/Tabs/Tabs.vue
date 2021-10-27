@@ -101,6 +101,10 @@ export default {
     bottomLineWhite:{
       type: Boolean,
       default: false
+    },
+    gaType: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({

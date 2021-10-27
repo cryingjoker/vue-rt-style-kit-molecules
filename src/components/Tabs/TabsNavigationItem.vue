@@ -56,7 +56,6 @@ export default {
         setTimeout(()=>this.setActiveTabName,100)
       }
       tabsStore.setActiveTabName(this.name, this.anchor, thisIndex);
-
     },
     onUpdateTabsStore() {
       const data = tabsStore.tabsParents[this.$parent._uid]
@@ -70,7 +69,6 @@ export default {
         this.version = data.version
         this.isActive = data[this.name]?.isActive
       }
-
       if(indexActive <= indexThis && indexThis <= indexBefore || indexActive >= indexThis && indexThis >= indexBefore){
         this.fireAnimate(indexBefore,indexActive,indexThis)
       }
@@ -78,13 +76,13 @@ export default {
     fireAnimate(before,active,index){
     },
     setGlobalAnalytics() {
-      if (tabsStore.globalAnalyticsSegment) {
+      if (tabsStore.globalAnalyticsSegment || this.$parent.gaType) {
         if (!window.dataLayer) {
           window.dataLayer = [];
         }
         window.dataLayer.push({
           event: tabsStore.globalAnalyticsSegment,
-          type: 'main_tab',
+          type: this.$parent.gaType.length > 0 ? this.$parent.gaType : 'main_tab',
           value: this.name
         });
       }
