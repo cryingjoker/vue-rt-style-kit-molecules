@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import './CardBuy.styl'
+import '../Card/Card.styl'
 import { scrollIt } from '../../../utils'
 
 const componentsList = {}
