@@ -299,12 +299,12 @@ export default {
 
     wheelMove(e) {
       if (Math.abs(e.deltaX) > 0) {
-        e.stopImmediatePropagation()
+        // e.stopImmediatePropagation()
         e.preventDefault()
       }
 
       if (Math.abs(e.deltaX) > 0 && Math.abs(e.deltaY) > 0) {
-        e.stopImmediatePropagation()
+        // e.stopImmediatePropagation()
         e.preventDefault()
       }
       this.checkScrollEnd();
@@ -343,7 +343,7 @@ export default {
         }
       } else {
         e.preventDefault()
-        e.stopImmediatePropagation()
+        // e.stopImmediatePropagation()
       }
       return false
     },

@@ -63,55 +63,67 @@
 .rt-popover-body-v-top
     bottom: 100%
     margin-bottom: 4px
+    &.rt-popover-appended
+      transform translateY(calc(-100% - 5px)) translateX(-80px)
     &.rt-popover-body-h-left
-      transform translateX(24px)
+      transform  translateX(24px)
+      &.rt-popover-appended
+        transform translateY(calc(-100% - 5px)) translateX(-200px)
     &.rt-popover-body-h-right
       transform translateX(-24px)
+      &.rt-popover-appended
+        transform translateY(calc(-100% - 5px)) translateX(25px)
 
 
-  .rt-popover-body-v-bottom
+.rt-popover-body-v-bottom
+  top: 100%
+  margin-top: 4px
+  &.rt-popover-appended
+    transform translateY( 30px) translateX(-80px)
+  &.rt-popover-body-h-left
+    transform translateX(24px)
+    &.rt-popover-appended
+      transform translateY(30px) translateX(-200px)
+  &.rt-popover-body-h-right
+    transform translateX(-24px)
+    &.rt-popover-appended
+      transform translateY(30px) translateX(25px)
+
+
+.rt-popover-body-v-center
+  top: 50%
+  transform translateY(-50%)
+
+.rt-popover-body-v-center.rt-popover-body-h-center
+  top: 50%
+  transform translateY(-50%) translateX(-50%)
+@media (max-width mobile-upper-limit)
+  .rt-md-popover-body-h-center
+    transform translateX(-50%)
+    left: 50%
+
+  .rt-md-popover-body-h-right
+    left: 100%
+    margin-left: 16px
+  .rt-md-popover-body-h-left
+    right: 100%
+    margin-right: 16px
+
+  .rt-md-popover-body-v-top
+    bottom: 100%
+    margin-bottom: 9px
+
+  .rt-md-popover-body-v-bottom
     top: 100%
-    margin-top: 4px
-    &.rt-popover-body-h-left
-      transform translateX(24px)
-    &.rt-popover-body-h-right
-      transform translateX(-24px)
+    margin-top: 9px
 
-
-  .rt-popover-body-v-center
+  .rt-md-popover-body-v-center
     top: 50%
     transform translateY(-50%)
 
-  .rt-popover-body-v-center.rt-popover-body-h-center
+  .rt-md-popover-body-v-center.md-popover-body-h-center
     top: 50%
     transform translateY(-50%) translateX(-50%)
-  @media (max-width mobile-upper-limit)
-    .rt-md-popover-body-h-center
-      transform translateX(-50%)
-      left: 50%
-
-    .rt-md-popover-body-h-right
-      left: 100%
-      margin-left: 16px
-    .rt-md-popover-body-h-left
-      right: 100%
-      margin-right: 16px
-
-    .rt-md-popover-body-v-top
-      bottom: 100%
-      margin-bottom: 9px
-
-    .rt-md-popover-body-v-bottom
-      top: 100%
-      margin-top: 9px
-
-    .rt-md-popover-body-v-center
-      top: 50%
-      transform translateY(-50%)
-
-    .rt-md-popover-body-v-center.md-popover-body-h-center
-      top: 50%
-      transform translateY(-50%) translateX(-50%)
 
 .rt-popover-close
   position: absolute;
@@ -140,3 +152,9 @@
     opacity 1
   100%
     opacity 0
+.rt-popover-appended
+  opacity: 1
+  z-index: 100
+  display: inline-table
+  pointer-events auto
+  //min-height: fit-content

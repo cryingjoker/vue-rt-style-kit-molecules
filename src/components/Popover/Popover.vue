@@ -38,14 +38,27 @@ export default {
     stopOpacity:{
       type: Boolean,
       default: false
+    },
+    enableHorizontalValueCalculation:{
+      type: Boolean,
+      default: false
+    },
+    enableAppendToBody:{
+      type: Boolean,
+      default: false
     }
+
   },
   data: () => ({
     isActive: false,
     close: false,
     localVertical: '',
     localHorizontal: '',
-    resizeHasBinding: false
+    resizeHasBinding: false,
+    calculationX: 0,
+    pageX: 0,
+    pageY: 0,
+
   }),
   watch:{
     vertical(newVal,oldVal){
@@ -76,10 +89,12 @@ export default {
 
   mounted: function () {
     this.setLocalValues()
-    if(this.autoPosition){
-      this.bindResize()
-      this.onResize()
-    }
+    // if(this.autoPosition){
+    //   this.$nextTick(()=> {
+    //     this.bindResize()
+    //     this.onResize()
+    //   })
+    // }
   },
   beforeDestroy() {
     if(this.autoPosition){
@@ -87,6 +102,17 @@ export default {
     }
   },
   methods: {
+    appendToBody(){
+      this.$nextTick(()=> {
+        const popover = this.$refs.popoverBody;
+        popover.classList.add('rt-popover-active')
+        popover.classList.add('rt-popover-appended')
+        popover.style.left = this.pageX + 'px'
+        popover.style.top = this.pageY  + window.scrollY + 'px'
+        popover.setAttribute('id', 'popover-' + this._uid)
+        document.body.append(popover);
+      })
+    },
     setLocalValues(){
       this.localVertical = this.vertical
       this.localHorizontal = this.horizontal
@@ -98,6 +124,16 @@ export default {
         } else {
           this.deactivate();
         }
+      }, {once: true})
+    },
+    bindSwipe(){
+      document.addEventListener('touchend', () => {
+          this.deactivate();
+      }, {once: true})
+    },
+    bindScroll(){
+      window.addEventListener('wheel', () => {
+          this.deactivate();
       }, {once: true})
     },
     clickFn() {
@@ -117,14 +153,29 @@ export default {
       this.$nextTick(() => {
         this.onResize()
         this.bindClick();
+        this.bindScroll()
+        this.bindSwipe()
+        if(this.enableAppendToBody){
+          this.appendToBody()
+        }
       })
     },
     deactivate() {
       this.close = true
+      let popover;
+      if(this.enableAppendToBody){
+        popover = document.querySelector('#popover-'+this._uid)
+        if(popover) {
+          popover.classList.remove('rt-popover-active')
+        }
+      }
       setTimeout(() => {
         this.close = false
         this.isActive = false
         this.hover = false
+        if(this.enableAppendToBody && popover){
+          popover.remove()
+        }
       }, 100)
     },
     bindResize(){
@@ -136,106 +187,79 @@ export default {
       document.removeEventListener('resize',this.onResize)
     },
     onResize() {
-      if (!this.$refs.popover) return
-      let {top, left, x, y} = this.$refs.popover.getClientRects()[0]
-      let windowWidth = window.innerWidth
-      if (x && !left) left = x
-      if (y && !top) top = y
+      const rects = this.$refs.popover.getClientRects();
 
-      if (windowWidth < 769 && this.stopAutoOnMd) {
-        this.setLocalValues()
-      } else {
-        if (!this.$refs.popoverBody) return
-        let poBHeight = this.$refs.popoverBody.clientHeight
-        let poBHeightHalf = poBHeight / 2
-        let poBWidth = this.$refs.popoverBody.clientWidth
-        let poBWidthHalf = poBWidth / 2
-        let poIcon = this.$refs.popover.clientWidth
-        let poHalf = poIcon / 2
-        let poMargin = 4
-
-        let resultPosition = null
-        let poBodyPositions = [
-          ["top", "center"],
-          ["top", "left"],
-          ["top", "right"],
-          ["top", "left-half"],
-          ["top", "right-half"],
-          ["center", "left"],
-          ["center", "right"],
-          ["bottom", "center"],
-          ["bottom", "left"],
-          ["bottom", "right"],
-          ["bottom", "left-half"],
-          ["bottom", "right-half"],
-        ]
-
-        let xStart, xEnd, yStart, yEnd
-
-        poBodyPositions.forEach(
-          pos => {
-            if (resultPosition) return
-
-            // считаем координаты положения модалки
-            if (pos[0] === "top") {
-              yEnd = top - poMargin
-              yStart = yEnd - poBHeight
-              if (pos[1] === "left") {
-                xEnd = left + poIcon - poMargin
-              } else if (pos[1] === "left-half") {
-                xEnd = left + poIcon - poMargin + poIcon * 2
-              } else if (pos[1] === "center") {
-                xEnd = left + poHalf + poBWidthHalf
-              } else if (pos[1] === "right-half") {
-                xEnd = left + poMargin + poBWidth - poIcon * 2
-              } else if (pos[1] === "right") {
-                xEnd = left + poMargin + poBWidth
-              }
-              xStart = xEnd - poBWidth
-            } else if (pos[0] === "center") {
-              yEnd = top + poIcon + poBHeightHalf
-              yStart = yEnd - poBHeight
-              if (pos[1] === "left") {
-                xStart = left - poMargin - poBWidth
-              } else if (pos[1] === "right") {
-                xStart = left + poIcon + poMargin
-              }
-              xEnd = xStart + poBWidth
-            } else if (pos[0] === "bottom") {
-              yStart = top + poIcon + poMargin
-              yEnd = yStart + poBHeight
-              if (pos[1] === "left") {
-                xStart = left + poIcon - poMargin - poBWidth
-              } else if (pos[1] === "left-half") {
-                xStart = left + poIcon - poMargin - poBWidth + poIcon * 2
-              } else if (pos[1] === "center") {
-                xStart = left + poHalf - poBWidthHalf
-              } else if (pos[1] === "right-half") {
-                xStart = left + poMargin - poIcon * 2
-              } else if (pos[1] === "right") {
-                xStart = left + poMargin
-              }
-              xEnd = xStart + poBWidth
+      if (rects.length > 0) {
+        let {top, left, x, y} = rects[0]
+        this.pageX = x
+        this.pageY = y
+        let wrapperHeight = window.innerHeight
+        let wrapperWidth = window.innerWidth
+        let windowWidth = window.innerWidth
+        let bodyHeight = this.$refs.popoverBody ? this.$refs.popoverBody.clientHeight : 0
+        if (x && !left) {
+          left = x
+        }
+        if (y && !top) {
+          top = y
+        }
+        let wrapRect = []
+        if (this.containerId.length > 0) {
+          const wrap = document.querySelector('#' + this.containerId);
+          if (wrap) {
+            wrapRect = wrap.getClientRects();
+            if(wrapRect.length > 0) {
+              top -= wrapRect[0].top
+              // left -= wrapRect[0].left
             }
-
-            // проверяем вписывается ли текущее положение в область видимости
-            if (
-              xStart > 0 &&
-              yStart > 0 &&
-              xEnd < window.innerWidth &&
-              yEnd < window.innerHeight
-            ) resultPosition = pos
+            wrapperHeight = wrap.clientHeight
+            wrapperWidth = wrap.clientWidth
           }
-        )
+        }
 
-        this.localVertical = resultPosition === null ? "top" : resultPosition[0]
-        this.localHorizontal = resultPosition === null ? "center" : resultPosition[1]
+
+        if (windowWidth < 769 && this.stopAutoOnMd) {
+          this.setLocalValues()
+        } else {
+          let xStart = left - 125 - 12
+          if(wrapRect.length > 0){
+            xStart -= wrapRect[0].left
+          }
+          let xEnd = left + 250 + 12
+          if(wrapRect.length > 0){
+            xEnd -= wrapRect[0].left;
+          }
+          if(xStart < 0 && xEnd > wrapperWidth && this.enableHorizontalValueCalculation && wrapRect){
+            this.calculationX = wrapRect[0].left - this.$refs.popover.getClientRects()[0].left
+          }
+
+
+          if (xStart + 20 > 0 && xEnd - 20 < wrapperWidth) {
+            this.localHorizontal = 'center'
+          } else {
+            if (xStart > 0) {
+              this.localHorizontal = 'left'
+            } else {
+              this.localHorizontal = 'right'
+            }
+          }
+          if (top > bodyHeight) {
+            this.localVertical = 'top'
+          } else {
+            if (top - bodyHeight / 2 > 0 && this.localHorizontal != 'center') {
+              this.localVertical = 'center'
+
+            } else {
+              this.localVertical = 'bottom'
+            }
+          }
+        }
       }
     }
   },
-  render() {
-    const renderIcon = ()=>{
-      if(this.$slots.customIcon){
+  render(h) {
+    const renderIcon = () => {
+      if (this.$slots.customIcon) {
         return this.$slots.customIcon[0]
       }
       return <rt-system-icons class="rt-popover-icon" name={this.iconName}></rt-system-icons>
@@ -245,10 +269,10 @@ export default {
     popoverBodyClass.push('rt-popover-body-h-' + this.localHorizontal);
 
     const popoverClass = ['rt-popover']
-    if(this.stopOpacity){
+    if (this.stopOpacity) {
       popoverClass.push('rt-popover--stop-opacity')
     }
-    if(!this.autoPosition) {
+    if (!this.autoPosition) {
       if (this.mdVertical.length > 0) {
         popoverBodyClass.push('rt-md-popover-body-v-' + this.mdHorizontal);
       }
@@ -256,30 +280,56 @@ export default {
         popoverBodyClass.push('rt-md-popover-body-h-' + this.mdHorizontal);
       }
     }
-    if (this.isActive) {
-      popoverClass.push('rt-popover-active')
+    if (this.isActive || this.enableAppendToBody) {
+      if(this.isActive && !this.enableAppendToBody) {
+        popoverClass.push('rt-popover-active')
+      }
       if (this.close) {
         popoverClass.push('rt-popover-closing')
       }
-      return <div class={popoverClass.join(' ')} onMouseenter={this.mouseenter} onMousemove={this.mouseenter}
-                  onMouseleave={this.mouseleave} ref="popover">
-        <button type="button" onClick={this.activate} class="popover-icon-button">
-          {renderIcon()}
-        </button>
-        <div class={popoverBodyClass.join(' ')} ref="popoverBody">
+      const renderButtonClose = () => {
+        const style = {}
+        if (this.calculationX && this.enableHorizontalValueCalculation) {
+          style.transform = 'translateX('+this.calculationX+'px)'
+        }
+        // style: style,
+        return <div style={style} class={popoverBodyClass.join(' ')} ref="popoverBody">
           <button class="rt-popover-close" type="button" onClick={this.deactivate}>
             <rt-system-icons name="close small"></rt-system-icons>
           </button>
           {this.$slots.content || this.$slots.default}
         </div>
-      </div>;
-    }
-    return <div class={popoverClass.join(' ')} ref="popover">
-      <button type="button" onClick={this.activate} class="rt-popover-icon-button">
-        {renderIcon()}
+      }
+        const renderButtonIcon = () => {
+          return <button type="button" onClick={this.activate} class="popover-icon-button">
+            {renderIcon()}
+          </button>
 
-      </button>
-    </div>;
+        }
+
+        return h('div', {
+            class: popoverClass,
+            on: {
+              mouseenter: this.mouseenter,
+              mousemove: this.mouseenter,
+              mouseleave: this.mouseleave,
+            },
+            ref: "popover"
+          },
+          [renderButtonIcon(), renderButtonClose()
+
+          ]
+        )
+
+
+    }
+      return <div class={popoverClass.join(' ')} ref="popover">
+        <button type="button" onClick={this.activate} class="rt-popover-icon-button">
+          {renderIcon()}
+
+        </button>
+      </div>;
+
   }
 };
 </script>
