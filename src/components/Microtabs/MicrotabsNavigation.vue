@@ -13,7 +13,8 @@ export default {
     return {
       key: null,
       themeLocal: null,
-      cmpName: `${cmpName}-nav__item`
+      cmpName: `${cmpName}-nav__item`,
+      hidden: false
     }
   },
   computed:{
