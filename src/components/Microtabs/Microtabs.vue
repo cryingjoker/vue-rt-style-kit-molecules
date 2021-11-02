@@ -15,8 +15,8 @@ const defaultConfig = () => {
     allowNavRight: false,
     direction: 'right',
     wheelPause: false,
-    xDown:0,
-    yDown:0,
+    xDown: 0,
+    yDown: 0,
   }
 }
 
@@ -78,25 +78,29 @@ export default {
       )
     },
     fitItems(twice = true) {
-      if(this.$refs.wrapper) {
-        let wrapWidth = this.$refs.wrapper.clientWidth - 40;
+      if (this.$refs.wrapper) {
+        const wrapper = this.$refs.wrapper
+        let wrapWidth = wrapper.clientWidth;
+        if (window.getComputedStyle) {
+          let {paddingLeft, paddingRight} = window.getComputedStyle(wrapper)
+          paddingLeft = parseInt(paddingLeft);
+          paddingRight = parseInt(paddingRight);
+          wrapWidth -= (paddingLeft + paddingRight)
+        }
         let positions = []
         this.allowNavLeft = false
         this.allowNavRight = false
         let endXBefore = 0
         const navList = this.navList
         navList.forEach((nav, index) => {
-
-
           navList[index].hidden = false
-          if(nav.$el.style){
+          if (nav.$el.style) {
             nav.$el.style.transform = 'none'
 
             const rect = nav.$el.getClientRects()[0];
             const positionObj = {
               start: endXBefore
             }
-            let margin = 0
             if (rect) {
               endXBefore += rect.width
               if (index > 0) {
@@ -106,69 +110,86 @@ export default {
               positions.push(positionObj)
             }
             nav.$el.removeAttribute('style')
-          }else{
-            positions.push({start:endXBefore, end:endXBefore})
+          } else {
+            positions.push({start: endXBefore, end: endXBefore})
           }
         })
 
 
-
         let beforeActive = this.activeTab;
         let nextActive = this.activeTab;
-        if(this.activeTab > 0){
+        if (this.activeTab > 0) {
           beforeActive -= 1
         }
-        if(this.activeTab < this.navList.length -1){
+        if (this.activeTab < this.navList.length - 1) {
           nextActive += 1
         }
-        const getItemWidth = (index)=>{
-          if(positions[index]) {
-            return positions[index].end - positions[index].start
+        const getItemWidth = (index) => {
+          if (positions[index]) {
+            let controlsWidth = 0
+            if (this.allowNavRight) {
+              controlsWidth += controlWidth
+            }
+            if (this.allowNavLeft) {
+              controlsWidth += controlWidth
+            }
+            console.info('controlsWidth', controlsWidth,positions[index].end - positions[index].start,index)
+            return positions[index].end - positions[index].start + controlsWidth
           }
           return 0
         }
         let visibleWidth = getItemWidth(this.activeTab)
         navList[this.activeTab].hidden = false
-        const stepR = (index)=>{
-          if(index+1 < navList.length ){
-            index = index+1
-
+        const stepR = (index) => {
+          if (index + 1 < navList.length) {
+            index = index + 1
             const itemWidth = getItemWidth(index)
-            if(itemWidth > 0) {
-              if (visibleWidth + itemWidth + controlWidth * (this.activeTab == 0 || this.activeTab  == navList.length - 1 ? 1 : 2)  + offset > wrapWidth || navList[index - 1].hidden) {
-                navList[index].hidden = true
-                if (!this.allowNavRight) {
-                  this.allowNavRight = true
-                  const itemWidthBefore = getItemWidth(index-1)
-                }
-              } else {
-                navList[index].hidden = false
+            let widthWidthEl = visibleWidth + itemWidth;
+            let hideEl = false;
+            console.info('widthWidthEl > wrapWidth',index, this.allowNavRight, visibleWidth, widthWidthEl, wrapWidth, navList[index - 1].hidden,positions[index])
+            if (this.allowNavRight || (widthWidthEl > wrapWidth) || navList[index - 1].hidden) {
+              hideEl = true
+            }
 
-                visibleWidth += itemWidth
+            if (hideEl) {
+              navList[index].hidden = true
+              if (!this.allowNavRight) {
+                this.allowNavRight = true
               }
+            } else {
+              navList[index].hidden = false
+              visibleWidth += itemWidth
             }
           }
         }
-        const stepL = (index)=>{
-          if(index > 0){
+        const stepL = (index) => {
+          if (index > 0) {
 
-            index = index-1
+            index = index - 1
             const itemWidth = getItemWidth(index)
 
-            if(visibleWidth+itemWidth + controlWidth*2 > wrapWidth || navList[index+1].hidden){
+            let widthWidthEl = visibleWidth + itemWidth;
+            let hideEl = false;
+            if (this.allowNavLeft || index > 0 && widthWidthEl + controlWidth > wrapWidth || navList[index + 1].hidden) {
+              hideEl = true
+            }
+
+            if (hideEl) {
               navList[index].hidden = true
-              if(!this.allowNavLeft) {
+              if (!this.allowNavLeft) {
                 this.allowNavLeft = true
               }
-            }else{
+            } else {
               navList[index].hidden = false
-              visibleWidth+=itemWidth
+              visibleWidth += itemWidth
             }
+
           }
         }
-        for(var i = 0; i < navList.length; i++) {
-          stepR(this.activeTab + i);
+        for (var i = 0; i < navList.length; i++) {
           stepL(this.activeTab - i);
+          stepR(this.activeTab + i);
+
         }
         this.navList = [...navList]
       }
@@ -194,7 +215,7 @@ export default {
       this.fitItems()
     },
     wheelMove(e) {
-      if(!this.wheelPause) {
+      if (!this.wheelPause) {
         if (Math.abs(e.deltaX) > 0) {
           e.stopImmediatePropagation()
           e.preventDefault()
@@ -205,15 +226,15 @@ export default {
           const prev = (activeIndex - 1 + size) % size;
           const next = (activeIndex + 1) % size;
           this.wheelPause = true;
-          setTimeout(()=>{
+          setTimeout(() => {
             this.wheelPause = false;
-          },300)
+          }, 300)
           if (e.deltaX > 0) {
-            if(next != 0) {
+            if (next != 0) {
               this.activeTab = next
             }
           } else {
-            if(prev != size - 1) {
+            if (prev != size - 1) {
               this.activeTab = prev
             }
           }
@@ -222,11 +243,11 @@ export default {
         return false
       }
     },
-    touchstart(event){
+    touchstart(event) {
       this.xDown = event.touches[0].clientX;
       this.yDown = event.touches[0].clientY;
     },
-    touchmove(event){
+    touchmove(event) {
       if (!this.xDown || !this.yDown) {
         return;
       }
@@ -248,12 +269,12 @@ export default {
 
 
         if (xDiff > 0) {
-          if(next != 0) {
+          if (next != 0) {
             this.activeTab = next
           }
 
         } else {
-          if(prev != size - 1) {
+          if (prev != size - 1) {
             this.activeTab = prev
           }
         }
@@ -267,7 +288,7 @@ export default {
   created() {
     this.activeTab = this.defaultTabIndex
   },
-  mounted(){
+  mounted() {
     this.$emit('onReady', true) // Используется для выравнивания группы карточек
     this.$on('setActiveTab', (key, calculateFitItems = true) => {
       if (key !== this.activeTab) {
@@ -279,7 +300,7 @@ export default {
         // }
       }
     })
-    this.$nextTick(()=> {
+    this.$nextTick(() => {
       this.fitItems()
     })
     resizeHandler(this, this.fitItems)
@@ -301,7 +322,7 @@ export default {
 
     //onWheel={this.wheelMove} onTouchstart={this.touchstart} onTouchmove={this.touchmove}
     //todo посмотреть как превентить вверх евент
-    return <div class={this.cmpClasses} ref="wrapper" >
+    return <div class={this.cmpClasses} ref="wrapper">
       <div class={`${this.cmpName}-nav`} ref="navigationEl">
         <microtabs-control
           onClick={this.navLeft}
