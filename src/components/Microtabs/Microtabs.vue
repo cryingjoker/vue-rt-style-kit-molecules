@@ -133,7 +133,6 @@ export default {
             if (this.allowNavLeft) {
               controlsWidth += controlWidth
             }
-            console.info('controlsWidth', controlsWidth,positions[index].end - positions[index].start,index)
             return positions[index].end - positions[index].start + controlsWidth
           }
           return 0
@@ -146,7 +145,6 @@ export default {
             const itemWidth = getItemWidth(index)
             let widthWidthEl = visibleWidth + itemWidth;
             let hideEl = false;
-            console.info('widthWidthEl > wrapWidth',index, this.allowNavRight, visibleWidth, widthWidthEl, wrapWidth, navList[index - 1].hidden,positions[index])
             if (this.allowNavRight || (widthWidthEl > wrapWidth) || navList[index - 1].hidden) {
               hideEl = true
             }
