@@ -1,7 +1,6 @@
 <script type="text/jsx">
 
-import Global from '../../variables.json'
-
+import './Minibanner.styl'
 export default {
   name: 'RtMinibanner',
   data() {
@@ -98,7 +97,7 @@ export default {
       if(this.$slots['html']){
         childs.push(<div class="sp-t-1-1">{this.$slots['html']}</div>)
       }
-      const contentWrapperClass = ["rt-minibanner-content-wrap","sp-v-2",'md-sp-v-1-2']
+      const contentWrapperClass = ["rt-minibanner-content-wrap",'d-flex',"sp-v-2",'md-sp-t-1-2','md-sp-b-1-3','md-d-block','md-sp-h-1']
       if(!this.tabletInLine){
         contentWrapperClass.push('td-sp-t-1-3')
         contentWrapperClass.push('td-sp-h-2')
@@ -110,8 +109,6 @@ export default {
       if(this.reverse){
         contentWrapperClass.push('sp-l-2')
       }
-      contentWrapperClass.push('md-sp-t-1-3')
-      contentWrapperClass.push('md-sp-h-1')
       const inner = h('div',{class:'rt-minibanner-content-wrap-inner'},childs)
       return  h('div',{class:contentWrapperClass}, [inner])
     }
