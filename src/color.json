@@ -75,7 +75,6 @@
   "b2c-cool-grey": "#E3E8EC",
   "b2c-cool-grey07": "rgba(227,232,236,0.7)",
   "b2c-cool-grey05": "rgba(227,232,236,0.5)",
-  "b2c-cool-grey03": "rgba(227,232,236,0.3)",
   "b2c-cool-grey05-no-opacity": "#F1F3F5",
 
   "b2c-purple-high05": "rgba(131,72,252,0.5)",
@@ -104,7 +103,6 @@
 
   "dark-card-background": "rgba(0,0,0,0.8)",
   "disable-button-color": "#e6e6e6",
-  "disable-button-color-dark-theme": "rgba(255,255,255,0.1)",
   "card-list-border": "#E5E5E5",
   "default-wive-color": "#808080",
   "error-color": "#eb3728",
