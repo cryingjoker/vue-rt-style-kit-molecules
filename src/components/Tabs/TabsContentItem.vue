@@ -17,8 +17,6 @@
     }),
     mounted() {
       this.addWatcher();
-
-
     },
     methods: {
       addWatcher(step = 0){
