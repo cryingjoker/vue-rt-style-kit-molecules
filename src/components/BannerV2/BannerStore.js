@@ -93,7 +93,7 @@ class BannerStore extends StorePrototype {
   setActiveSlot = (bannerUid, id) =>{
     this.bannerActiveIds[bannerUid] =   id
   }
-  setActiveId = (bannerUid, id, isInit, isActive = false) => {
+  setActiveId = (bannerUid, id, isInit, isActive = false, orientation = 0) => {
 
     if (!this.bannerNextActiveIds[bannerUid] && !isInit || isInit && !this.bannerActiveIds[bannerUid] || isActive) {
       if(!this.bannerActiveIds[bannerUid] || isActive){
@@ -101,7 +101,11 @@ class BannerStore extends StorePrototype {
       }
       this.bannerNextActiveIds[bannerUid] = id;
       if (this.bannersArray[bannerUid].indexOf(id) >= 0 && this.bannerActiveIds[bannerUid] != id) {
-        this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
+        if(orientation == 0) {
+          this.nextOrientation[bannerUid] = this.bannersArray[bannerUid].indexOf(this.bannerActiveIds[bannerUid]) < this.bannersArray[bannerUid].indexOf(id) ? 1 : -1
+        }else{
+          this.nextOrientation[bannerUid] = orientation;
+        }
       }
       this.runWatchersById(bannerUid)
 
