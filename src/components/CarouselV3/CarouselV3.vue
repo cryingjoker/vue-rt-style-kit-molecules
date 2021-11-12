@@ -547,6 +547,7 @@ export default {
               notActive: notActive,
               tabletNotActive: tabletNotActive,
               mobileNotActive: mobileNotActive,
+              index: slotIndex
             }
           }, slot)
         })
