@@ -168,7 +168,7 @@ export default {
 
             let widthWidthEl = visibleWidth + itemWidth;
             let hideEl = false;
-            if (this.allowNavLeft || index > 0 && widthWidthEl + controlWidth > wrapWidth || navList[index + 1].hidden) {
+            if (this.allowNavLeft  || widthWidthEl + controlWidth > wrapWidth || navList[index + 1].hidden) {
               hideEl = true
             }
 
