@@ -145,6 +145,7 @@ export default {
             const itemWidth = getItemWidth(index)
             let widthWidthEl = visibleWidth + itemWidth;
             let hideEl = false;
+            const lastIndex = navList.length - 1;
             if (this.allowNavRight || (index == lastIndex ? (widthWidthEl > wrapWidth) : (widthWidthEl + offset + controlWidth > wrapWidth)) || navList[index - 1].hidden) {
               hideEl = true
             }
