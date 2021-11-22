@@ -146,9 +146,16 @@ export default {
             let widthWidthEl = visibleWidth + itemWidth;
             let hideEl = false;
             const lastIndex = navList.length - 1;
-            if (this.allowNavRight || (index == lastIndex ? (widthWidthEl > wrapWidth) : (widthWidthEl + offset + controlWidth > wrapWidth)) || navList[index - 1].hidden) {
+            if(index != lastIndex){
+              widthWidthEl+=controlWidth+offset
+            }
+            if(index > 0 && navList[index - 1].hidden){
+              widthWidthEl+=controlWidth+offset
+            }
+            if (this.allowNavRight || widthWidthEl > wrapWidth || index > 0 && navList[index - 1].hidden) {
               hideEl = true
             }
+
 
             if (hideEl) {
               navList[index].hidden = true
@@ -169,7 +176,14 @@ export default {
 
             let widthWidthEl = visibleWidth + itemWidth;
             let hideEl = false;
-            if (this.allowNavLeft  || (index == 0 ? widthWidthEl  > wrapWidth : widthWidthEl + controlWidth > wrapWidth) || navList[index + 1].hidden) {
+            if(index != 0){
+              widthWidthEl+=controlWidth+offset
+            }
+            if(index < navList.length - 1 && navList[index + 1].hidden){
+              widthWidthEl+=controlWidth+offset
+            }
+
+            if (this.allowNavLeft  || ( widthWidthEl > wrapWidth) || navList[index + 1].hidden) {
               hideEl = true
             }
 
