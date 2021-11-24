@@ -638,7 +638,7 @@ export default {
         <div class={caurouselWrapClassList} ref="wrap">
           {arrowRender()}
           {shadowRender()}
-          {h(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'div' : 'rt-row', {
+          {h(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'section' : 'rt-row', {
             attrs: {rtCarouselId: this.name || this._uid},
             class: [(this.scrollableOnDesktop || this.deviceType.search('desktop') < 0 ? 'rt-carousel-v3--scroll' : 'rt-carousel-v3--static')],
             ref: 'caroselRow',
