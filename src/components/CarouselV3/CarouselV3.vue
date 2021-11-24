@@ -252,32 +252,27 @@ export default {
           styleTag.innerText = ''
         }
       }
-    }
-    ,
+    },
     mouseenter()
     {
       this.isHover = true
       this.bindKeydown()
-    }
-    ,
+    },
     mouseleave()
     {
       this.isHover = false
       this.unbindKeydown()
       this.mouseUp()
-    }
-    ,
+    },
 
     bindKeydown()
     {
       window.addEventListener('keydown', this.bindKeydownFn, {once: true})
-    }
-    ,
+    },
     unbindKeydown()
     {
       window.removeEventListener('keydown', this.bindKeydownFn)
-    }
-    ,
+    },
     bindKeydownFn(e)
     {
       if (this.isHover) {
@@ -290,14 +285,12 @@ export default {
         }
         this.bindKeydown()
       }
-    }
-    ,
+    },
     setDeviceType()
     {
       this.deviceType = deviceTypeStore.getStatus();
       this.renderStyle(1);
-    }
-    ,
+    },
     getSlide()
     {
       const scrollbarWidth = window.innerWidth - document.body.clientWidth
@@ -315,8 +308,7 @@ export default {
       this.prewArrowShow = arrowsOpt.prew
       this.nextShadowShow = shadowOpt.next
       this.prewShadowShow = shadowOpt.prew
-    }
-    ,
+    },
     clearTransform()
     {
       this.$refs.caroselRow.$el.classList.add('rt-carousel-v3--scroll--remove-transform')
@@ -328,8 +320,7 @@ export default {
         this.$refs.caroselRow.$el.style.transform = 'translateX(' + (0) + 'px)'
       }, 0)
 
-    }
-    ,
+    },
     setPrewActive()
     {
       let localName = this.name;
@@ -338,8 +329,7 @@ export default {
       }
       // this.clearTransform()
       carouselV3Store.setPrewSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0, this.tdScrollStep - 0, this.mdScrollStep - 0)
-    }
-    ,
+    },
     setNextActive()
     {
       let localName = this.name;
@@ -347,8 +337,7 @@ export default {
         localName = this._uid;
       }
       carouselV3Store.setNextSlide(localName, this.scrollStep - 0, this.laptopScrollStep - 0, this.tdScrollStep - 0, this.mdScrollStep - 0)
-    }
-    ,
+    },
 
     wheelMove(e)
     {
@@ -400,19 +389,16 @@ export default {
         // e.stopImmediatePropagation()
       }
       return false
-    }
-    ,
+    },
     touchstart(event)
     {
       this.xDown = event.touches[0].clientX;
       this.yDown = event.touches[0].clientY;
-    }
-    ,
+    },
     touchend(event)
     {
       this.renderStyle()
-    }
-    ,
+    },
     touchmove(event)
     {
       if (!this.xDown || !this.yDown || this.wheelEventPause) {
@@ -455,20 +441,17 @@ export default {
       }
 
 
-    }
-    ,
+    },
     mouseDown(e)
     {
       this.isMouseDown = true
       this.mouseX = e.clientX
-    }
-    ,
+    },
     mouseUp()
     {
       this.isMouseDown = false
       this.renderStyle(0)
-    }
-    ,
+    },
     mouseMove(e)
     {
       if (this.isMouseDown) {
@@ -511,6 +494,7 @@ export default {
       if (oldVal && newVal && oldVal != newVal) {
         const localName = this.getLocalName()
         carouselV3Store.checkActiveIndex(localName);
+        carouselV3Store.setColInRow(localName, this.getColInRow())
       }
     },
     infiniteScroll(newVal, oldVal) {
@@ -559,8 +543,7 @@ export default {
           }
         }
       })
-    }
-    ,
+    },
     prewShadowShow(newVal, oldVal) {
       this.$nextTick(() => {
         if (this.$refs.shadowLeft) {
