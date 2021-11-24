@@ -230,7 +230,7 @@ export default {
         inlineStyle += '@media (max-width: 1024px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(10vw * -' + (activeItemIndex < size - 2 ? 3 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (40vw) * -' + (activeItemIndex > 1 ? activeItemIndex - 1 : 0) + ' + ' + (activeItemIndex < size - 2 ? 10 : 0) + 'px ' + transform + 'px);}}'
         inlineStyle += '@media (max-width: 767px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc(12.5vw * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + 75vw * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px ' + transform + 'px);}}'
         inlineStyle += '@media (max-width: 360px){.rt-carousel-v3-' + this._uid + ' .rt-col, .rt-carousel-v3-' + this._uid + ' .rt-carousel-v3--scroll{ margin-left: calc((50vw - 127.5px) * ' + (activeItemIndex < size - 1 ? 1 : 2) + ' * ' + (activeItemIndex > 0 ? 1 : 0) + ' + (255px) * -' + (activeItemIndex > 0 ? activeItemIndex < size - 1 ? activeItemIndex : activeItemIndex : 0) + ' + ' + (activeItemIndex < size - 1 ? 10 : 0) + 'px ' + transform + 'px);}}'
-        //
+
       }
       else
       {
@@ -493,8 +493,8 @@ export default {
     deviceType(newVal, oldVal) {
       if (oldVal && newVal && oldVal != newVal) {
         const localName = this.getLocalName()
-        carouselV3Store.checkActiveIndex(localName);
         carouselV3Store.setColInRow(localName, this.getColInRow())
+        carouselV3Store.checkActiveIndex(localName);
       }
     },
     infiniteScroll(newVal, oldVal) {
