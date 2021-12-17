@@ -207,7 +207,7 @@ class CarouselV3Store extends StorePrototype {
       const size = slider.ids.length;
       let colInRow = this.getColInRow(sliderName)
       if (index + colInRow >= size) {
-        this.setActiveIndex(sliderName, size - colInRow)
+        this.setActiveIndex(sliderName, size - colInRow - 1)
       } else {
         this.setArrowProps(sliderName)
         this.callWatcher(sliderName);
