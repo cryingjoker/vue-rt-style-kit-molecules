@@ -1,0 +1,38 @@
+image: node:lts-alpine
+
+stages:
+  - build
+  - deploy
+  - check_sonarcube
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+  only:
+    - stage
+
+sonarcube:
+  stage: check_sonarcube
+  image: newtmitch/sonar-scanner:alpine
+  script:
+    - sonar-scanner -Dsonar.host.url=http://sonarqube.south.rt.ru:9000
+  only:
+    - stage
+
+nexus:
+  stage: deploy
+  script:
+    - npm run build
+    - node ./nexus-login.js
+    - npm publish
+  only:
+    - stage

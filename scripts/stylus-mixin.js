@@ -5,6 +5,8 @@ import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
+const resolve = src => path.resolve(__dirname, src)
+
 export default function useMixin(style) {
   //style
   // style.use()
@@ -13,5 +15,7 @@ export default function useMixin(style) {
   style.options.use.push(plugins())
 
   style.options.imports.push(path.resolve(__dirname, '../', 'node_modules/nib/lib/nib/index.styl'))
+  style.options.imports.push(resolve('../../stylekit-atoms/src/css/config.styl'))
+
   return style
 }
