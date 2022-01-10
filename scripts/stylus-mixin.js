@@ -15,7 +15,7 @@ export default function useMixin(style) {
   style.options.use.push(plugins())
 
   style.options.imports.push(path.resolve(__dirname, '../', 'node_modules/nib/lib/nib/index.styl'))
-  style.options.imports.push(resolve('../../stylekit-atoms/src/css/config.styl'))
+  style.options.imports.push(resolve('../includes/stylekit-atoms/src/css/config.styl'))
 
   return style
 }
