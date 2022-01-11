@@ -22,6 +22,9 @@
     "type": "git",
     "url": "git+http://gitlab.south.rt.ru/rt-ru/stylekit-atoms.git"
   },
+  "publishConfig": {
+    "registry": "http://nexus.south.rt.ru:8081/repository/npm-local/"
+  },
   "keywords": [],
   "author": "Alex Nikolaev / cryingjoker",
   "license": "MIT",
