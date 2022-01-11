@@ -31,7 +31,7 @@ install_dependencies:
 nexus:
   stage: publish
   script:
-    - node ./prepublish.js
+    - node ./prepublish.cjs
     - npm run build
     - npm publish
   only:
