@@ -26,7 +26,7 @@ install_dependencies:
       - node_modules/
     expire_in: 1 hour
   only:
-    - stage
+    - RTRU-12171-2
 
 nexus:
   stage: publish
@@ -35,4 +35,4 @@ nexus:
     - npm run build
     - npm publish
   only:
-    - stage
+    - RTRU-12171-2
