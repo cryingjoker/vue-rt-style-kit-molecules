@@ -31,6 +31,7 @@ install_dependencies:
 nexus:
   stage: publish
   script:
+    - node ./nexus-login.cjs
     - node ./prepublish.cjs
     - npm run build
     - npm publish
