@@ -7,7 +7,7 @@ const formatLeadZero = d => ('0' + d).slice(-2)
 const cDate = new Date()
 const cdVersion = `${cDate.getFullYear()}${formatLeadZero(cDate.getMonth()+1)}${formatLeadZero(cDate.getDate())}${formatLeadZero(cDate.getHours())}`
 
-const packageSrc = resolve('./package.json')
+const packageSrc = resolve('../package.json')
 const packageCoding = 'utf8'
 const pkg = JSON.parse(fs.readFileSync(packageSrc, packageCoding))
 if (pkg.version.indexOf('-') === -1) pkg.version+='-'
