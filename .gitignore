@@ -10,7 +10,8 @@ node_modules/
 
 # Compiled output
 tmp/
-# dist/
+dist/
+lib/
 server/
 # e2e
 e2e/*.js

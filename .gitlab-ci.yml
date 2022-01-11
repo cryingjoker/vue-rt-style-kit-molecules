@@ -1,0 +1,39 @@
+image: nexus-docker-hub.south.rt.ru/library/node:14.18.0
+
+stages:
+  - install
+  - publish
+
+variables:
+  APP_NAME: stylekit-molecules
+  APP_DEVELOPER: Viktor.Sidorets
+  APP_LANG: NodeJS
+  APP_LANG_VERSION: "14.18.0"
+  APP_PROJECT: rtru
+
+  GIT_SUBMODULE_STRATEGY: normal
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: install
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+  only:
+    - stage
+
+compile_and_publish:
+  stage: publish
+  script:
+    - node ./scripts/prepublish.cjs
+    - npm run build
+    - node ./scripts/nexus-login.cjs
+    - npm publish
+  only:
+    - stage

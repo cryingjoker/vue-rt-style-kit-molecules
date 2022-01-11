@@ -1,12 +1,11 @@
 {
-  "name": "vue-rt-style-kit-molecules",
-  "version": "3.0.0",
-  "description": "",
+  "name": "@rtru/vue-rt-style-kit-molecules",
+  "version": "3.1.1",
+  "description": "RT.RU библиотека комплексных элементов",
   "main": "lib/vue-rt-style-kit-molecules.js",
+  "style": "lib/vue-rt-style-kit-molecules.css",
   "scripts": {
-    "start": "node bin/local/index.js",
-    "build": "cross-env NODE_ENV=production node scripts/build.js",
-    "build:development": "cross-env NODE_ENV=development node scripts/build.js"
+    "build": "cross-env NODE_ENV=production node scripts/build.js"
   },
   "lint-staged": {
     "*.styl": [
@@ -21,15 +20,15 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vue-rt-style/vue-rt-style-kit-molecules.git"
+    "url": "git+http://gitlab.south.rt.ru/rt-ru/stylekit-atoms.git"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.south.rt.ru:8081/repository/npm-local/"
   },
   "keywords": [],
   "author": "Alex Nikolaev / cryingjoker",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vue-rt-style/vue-rt-style-kit-molecules/issues"
-  },
-  "homepage": "https://github.com/vue-rt-style/vue-rt-style-kit-molecules",
+  "homepage": "https://vue-rt-style.github.io/vue-rt-style-kit-pages/",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.5.5",

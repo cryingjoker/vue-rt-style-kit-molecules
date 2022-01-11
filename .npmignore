@@ -10,6 +10,11 @@ docs/*
 .vscode/
 example-pages/*
 src/example-pages/*
+includes/*
+bin/*
+.gitlab-ci.yml
+.npmrc
+scripts/*
 gulpfile.js
 
 # Node modules directory

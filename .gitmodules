@@ -1,0 +1,4 @@
+[submodule "stylekit-atoms"]
+	path = includes/stylekit-atoms
+	url = ../stylekit-atoms.git
+	branch = .
