@@ -31,9 +31,9 @@ install_dependencies:
 nexus:
   stage: publish
   script:
-    - node ./nexus-login.cjs
     - node ./prepublish.cjs
     - npm run build
+    - node ./nexus-login.cjs
     - npm publish
   only:
     - RTRU-12171-2
