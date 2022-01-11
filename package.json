@@ -1,5 +1,5 @@
 {
-  "name": "vue-rt-style-kit-molecules",
+  "name": "@rtru/vue-rt-style-kit-molecules",
   "version": "3.1.0",
   "description": "RT.RU библиотека комплексных элементов",
   "main": "lib/vue-rt-style-kit-molecules.js",

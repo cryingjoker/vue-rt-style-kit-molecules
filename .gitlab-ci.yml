@@ -1,16 +1,24 @@
-image: node:lts-alpine
+image: nexus-docker-hub.south.rt.ru/library/node:14.18.0
 
 stages:
-  - build
-  - deploy
-  - check_sonarcube
+  - install
+  - publish
+
+variables:
+  APP_NAME: stylekit-molecules
+  APP_DEVELOPER: Viktor.Sidorets
+  APP_LANG: NodeJS
+  APP_LANG_VERSION: "14.18.0"
+  APP_PROJECT: rtru
+
+  GIT_SUBMODULE_STRATEGY: normal
 
 cache:
   paths:
     - node_modules/
 
 install_dependencies:
-  stage: build
+  stage: install
   script:
     - npm install
   artifacts:
@@ -20,19 +28,11 @@ install_dependencies:
   only:
     - stage
 
-sonarcube:
-  stage: check_sonarcube
-  image: newtmitch/sonar-scanner:alpine
-  script:
-    - sonar-scanner -Dsonar.host.url=http://sonarqube.south.rt.ru:9000
-  only:
-    - stage
-
 nexus:
-  stage: deploy
+  stage: publish
   script:
+    - node ./prepublish.js
     - npm run build
-    - node ./nexus-login.js
     - npm publish
   only:
     - stage
