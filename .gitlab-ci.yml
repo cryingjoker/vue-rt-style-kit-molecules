@@ -2,6 +2,7 @@ image: nexus-docker-hub.south.rt.ru/library/node:14.18.0
 
 stages:
   - install
+  - build
   - publish
 
 variables:
@@ -28,11 +29,17 @@ install_dependencies:
   only:
     - RTRU-12171-2
 
-nexus:
-  stage: publish
+compile:
+  stage: build
   script:
     - node ./prepublish.cjs
     - npm run build
+  only:
+    - RTRU-12171-2
+
+nexus:
+  stage: publish
+  script:
     - node ./nexus-login.cjs
     - npm publish
   only:
