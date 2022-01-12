@@ -1,7 +1,7 @@
 <script type="text/jsx">
 
   // import debounce from "debounce";
-  import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+  import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
   import {bannerStore} from "./BannerStore";
 
   const componentsList = {};

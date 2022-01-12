@@ -1,7 +1,7 @@
 <script type="text/jsx">
 const componentsList = {};
 import './CardRounded.styl'
-import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 
 export default {
   name: "RtCardRounded",

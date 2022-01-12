@@ -1,6 +1,6 @@
 <script type="text/jsx">
     import BannerPaginatorItem from "./BannerPaginatorItem.vue";
-    import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+    import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
     import './Banners.styl'
     import './B2bBanner.styl'
     const componentsList = {};

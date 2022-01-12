@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import {StorePrototype} from "vue-rt-style-kit-atoms";
+import { StorePrototype } from 'vue-rt-style-kit-atoms/src/stores/storePrototype.class.js'
 
 class CarouselV3Store extends StorePrototype {
 

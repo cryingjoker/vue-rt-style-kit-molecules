@@ -6,7 +6,7 @@
         backgroundColorProps,
         getBackgroundClassByProps,
         getBackgroundClass
-    } from "vue-rt-style-kit-atoms";
+    } from 'vue-rt-style-kit-atoms/src/mixins/backgroundColorTextClassMixin.js'
     import './StickyHeaderLine.styl'
 
     const localComponentProps = {

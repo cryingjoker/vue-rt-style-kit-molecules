@@ -1,5 +1,5 @@
 <script type="text/jsx">
-import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 import './Privilege.styl'
 export default {
   name: "RtPrivilege",

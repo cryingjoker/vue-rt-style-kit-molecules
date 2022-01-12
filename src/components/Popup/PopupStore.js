@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import {StorePrototype} from "vue-rt-style-kit-atoms";
+import { StorePrototype } from 'vue-rt-style-kit-atoms/src/stores/storePrototype.class.js'
 import variables from "../../variables.json";
 
 class PopupStore extends StorePrototype {

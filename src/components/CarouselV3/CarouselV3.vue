@@ -1,7 +1,7 @@
 <script type="text/jsx">
 import CarouselV3RenderItem from "./CarouselV3RenderItem.vue"
 import {carouselV3Store} from "./CarouselV3Store";
-import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 import {bannerStore} from "../BannerV2/BannerStore";
 import './CarouselV3.styl'
 

@@ -1,5 +1,5 @@
 <script type="text/jsx">
-  import {viewportPositionStore} from "vue-rt-style-kit-atoms";
+  import { viewportPositionStore } from 'vue-rt-style-kit-atoms/src/stores/viewportPositionStoreMixin.js'
   import './Card.styl'
   import browser from '../../../utils/browser'
   import variables from "../../../variables.json";

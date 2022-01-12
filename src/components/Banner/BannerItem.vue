@@ -1,7 +1,7 @@
 <script type="text/jsx">
     import variables from "../../variables.json";
     import browser from "../../utils/browser";
-    import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+    import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 
     const componentsList = {};
 

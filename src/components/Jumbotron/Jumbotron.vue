@@ -1,6 +1,6 @@
 <script type="text/jsx">
 // @info Стили подключены в глобальном бандле
-import { deviceTypeStore } from 'vue-rt-style-kit-atoms'
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 
 const componentsList = {};
 

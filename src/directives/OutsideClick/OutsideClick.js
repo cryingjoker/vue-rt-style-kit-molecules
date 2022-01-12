@@ -1,5 +1,5 @@
 import variables from "../../variables.json";
-import {deviceTypeStore} from "vue-rt-style-kit-atoms";
+import { deviceTypeStore } from 'vue-rt-style-kit-atoms/src/stores/deviceTypeStoreMixin.js'
 class OutsideClick {
   constructor(element, action, vnode){
     this.$el = element;
