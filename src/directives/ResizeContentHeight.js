@@ -1,5 +1,5 @@
 import debounce from "debounce";
-import { getVariable } from 'vue-rt-style-kit-atoms/src/mixins/variablesMixin.js'
+import getVariable from 'vue-rt-style-kit-atoms/src/mixins/variablesMixin.js'
 class ResizeContentHeight {
   constructor(element, data, vnode){
     this.$el = element;
