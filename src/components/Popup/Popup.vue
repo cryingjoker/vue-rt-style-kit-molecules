@@ -41,6 +41,10 @@ export default {
     size:{
       type: Number,
       default: 8
+    },
+    openByEvent: {
+      type: Boolean,
+      default: false
     }
 
   },
@@ -51,11 +55,16 @@ export default {
       backScroll: 0
     };
   },
+  computed: {
+    isOpenableByEvent () {
+      return this.openByEvent || this.isAntivirus
+    }
+  },
   mounted() {
     if (location.href.search('/homeinternet/antiviruses') > 0) {
       this.isAntivirus = true;
     }
-    if (this.isAntivirus) {
+    if (this.isOpenableByEvent) {
       this.addEventListener();
       this.bindCloseButton();
     } else {
@@ -64,7 +73,7 @@ export default {
     }
   },
   updated() {
-    if (this.isAntivirus) {
+    if (this.isOpenableByEvent) {
       this.removeEventListener();
       this.addEventListener();
       this.unbindCloseButton();
@@ -72,7 +81,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (this.isAntivirus) {
+    if (this.isOpenableByEvent) {
       this.removeEventListener();
     } else {
       this.unbindStore();
@@ -133,7 +142,7 @@ export default {
       }
     },
     triggerClose(e) {
-      if (this.isAntivirus) {
+      if (this.isOpenableByEvent) {
         this.removeActive();
       } else {
         popupStore.setActiveId(null);
@@ -176,13 +185,13 @@ export default {
       window.removeEventListener('keydown', this.keyPress);
     },
     bindCloseButton() {
-      const close = this.$el?.querySelector('.rt-close');
+      const close = this.$el?.innerHTML && this.$el.querySelector('.rt-close');
       if (close) {
         close.addEventListener('click', this.triggerClose, {passive: true});
       }
     },
     unbindCloseButton() {
-      const close = this.$el?.querySelector('.rt-close');
+      const close = this.$el?.innerHTML && this.$el.querySelector('.rt-close');
       if (close) {
         close.addEventListener('click', this.triggerClose, {passive: true});
       }
