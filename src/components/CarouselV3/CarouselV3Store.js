@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import { StorePrototype } from 'vue-rt-style-kit-atoms/src/stores/storePrototype.class.js'
+import {StorePrototype} from 'vue-rt-style-kit-atoms/src/stores/storePrototype.class.js'
 
 class CarouselV3Store extends StorePrototype {
 
@@ -11,19 +11,11 @@ class CarouselV3Store extends StorePrototype {
     this.arraySize = 5;
     this.animationDuration = 500;
   }
+  createContainer = (name) => {}
 
+  removeContainer = (name) => {}
 
-  createContainer = (name) => {
-
-  }
-
-  removeContainer = (name) => {
-
-  }
-
-  setActiveItems(sliderName, activeIndex) {
-
-  }
+  setActiveItems(sliderName, activeIndex) {}
 
   fillSlideInfo = (sliderName) => {
     if (!this.sliders[sliderName]) {
@@ -58,7 +50,6 @@ class CarouselV3Store extends StorePrototype {
         sliders.slides.push(slot)
         sliders.slidesCustomId.push(slideId)
         sliders.ids.push(_id)
-
       } else {
         sliders.slidesCustomId.splice(index, 0, slideId)
         sliders.slides.splice(index, 0, slot)
@@ -71,8 +62,6 @@ class CarouselV3Store extends StorePrototype {
     }
     this.setArrowProps(sliderName);
     this.callWatcher(sliderName)
-
-
   }
   updateSlide = (sliderName, _id, slot, index, slideId) => {
     const sliders = this.sliders[sliderName];
@@ -95,7 +84,6 @@ class CarouselV3Store extends StorePrototype {
       slider.showLArrow = index > 0;
       slider.showRShadow = (wWidth > 1024 ? index < size - colInRow : wWidth > 767 ? index < size - 2 : index < size - 1);
       slider.showLShadow = index > 0;
-
     }
   }
 
@@ -112,7 +100,6 @@ class CarouselV3Store extends StorePrototype {
   }
 
   removeSlide = (sliderName, _id) => {
-
     const sliders = this.sliders[sliderName];
     if (sliders.possibleIds[_id]) {
       delete sliders.possibleIds[_id]
@@ -122,7 +109,6 @@ class CarouselV3Store extends StorePrototype {
       this.setArrowProps(sliderName);
       this.callWatcher(sliderName)
     }
-
   }
 
   addWatcher = (sliderName, fn) => {
@@ -169,7 +155,7 @@ class CarouselV3Store extends StorePrototype {
         }
       }
       slider.index = slider.index % size
-      if(slider.index < 0){
+      if (slider.index < 0) {
         slider.index = 0
       }
 
@@ -192,7 +178,7 @@ class CarouselV3Store extends StorePrototype {
           slider.index = size - colInRow
         }
       }
-      if(slider.index < 0){
+      if (slider.index < 0) {
         slider.index = 0
       }
 
@@ -228,7 +214,7 @@ class CarouselV3Store extends StorePrototype {
     }
     return colInRow
   }
-  setPrewSlide = (sliderName, scrollStep = 1, laptopScrollStep = 1, tdScrollStep = 1, mdScrollStep = 1) => {
+  setPrevSlide = (sliderName, scrollStep = 1, laptopScrollStep = 1, tdScrollStep = 1, mdScrollStep = 1) => {
     if (this.sliders[sliderName]) {
       const slider = this.sliders[sliderName];
       const index = slider.index;
@@ -272,7 +258,7 @@ class CarouselV3Store extends StorePrototype {
           }
         }
       }
-      if(slider.index < 0){
+      if (slider.index < 0) {
         slider.index = 0
       }
       this.setArrowProps(sliderName);
@@ -289,14 +275,14 @@ class CarouselV3Store extends StorePrototype {
     const slider = this.sliders[sliderName];
     return {
       next: slider.showRArrow,
-      prew: slider.showLArrow
+      prev: slider.showLArrow
     }
   }
   getShadowOptions = (sliderName) => {
     const slider = this.sliders[sliderName];
     return {
       next: slider.showRShadow,
-      prew: slider.showLShadow
+      prev: slider.showLShadow
     }
   }
   setColInRow = (sliderName, colInRow) => {
@@ -315,7 +301,7 @@ export const carouselV3Store = Vue.observable({
   addWatcher: carouselV3StoreObject.addWatcher,
   setColInRow: carouselV3StoreObject.setColInRow,
   setNextSlide: carouselV3StoreObject.setNextSlide,
-  setPrewSlide: carouselV3StoreObject.setPrewSlide,
+  setPrevSlide: carouselV3StoreObject.setPrevSlide,
   setActiveId: carouselV3StoreObject.setActiveId,
   setActiveIndex: carouselV3StoreObject.setActiveIndex,
   createContainer: carouselV3StoreObject.createContainer,
